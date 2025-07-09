@@ -27,8 +27,13 @@ const schemaData = {
 
 const data = await getReviews(); // data is an object with docs array: data { docs[] }
 //const {docs} = data; // docs is an array []
-const topRatedBrokers = await data.docs
-console.log("Data from the API:", topRatedBrokers)
+const topRatedBrokers = await data
+//const {regulation} = topRatedBrokers
+
+// Post-process to keep only name and slug:
+
+
+console.info("Data from the API:", topRatedBrokers)
 
 const topBrokers = [
   {
