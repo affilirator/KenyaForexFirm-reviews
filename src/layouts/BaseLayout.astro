@@ -1,6 +1,7 @@
 ---
 import { SEO } from "astro-seo";
 import { site } from "@data/site";
+import { organizationSchema } from "@data/organizationSchema"
 
 export interface Props {
   title: string;
@@ -75,8 +76,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     {schemaData && (
       <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
     )}
-
-    <!-- Organization Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <!-- Organization Schema 
     <script type="application/ld+json">
     //import {site} from '@/data/site';
       {
@@ -102,6 +103,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         ]
       }
     </script>
+    -->
   </head>
 
   <body class="bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 text-neutral-100 min-h-screen">

@@ -1,3 +1,5 @@
+import { organizationSchema } from "./organizationSchema";
+
 const siteUrl = 'https://fx.kenyaforexfirm.com';
 const siteName = "Kenya Forex Firm";
 export const site = {
@@ -9,16 +11,22 @@ export const site = {
     currentYear: new Date().getFullYear(),
     canonicalURL: window.location.href,
     logoPath: "/favicon.svg",
-    socialMedia: {
-        Facebook: "https://twitter.com/kenyaforexfirm",
-        Twitter: "https://facebook.com/kenyaforexfirm",
+    profiles: [
+        {
+            facebook: "https://twitter.com/kenyaforexfirm"
+        },
+        {
+            twitter: "https://facebook.com/kenyaforexfirm"
+        },
 
-    },
+],
 
 
     address: {
-        emailAddress: "support@kenyaforexfirm.com",
+        email: "support@kenyaforexfirm.com",
         city: "Nairobi",
+        addressLocality: "Nairobi",
+
         state: "Nairobi",
         country: "Kenya",
         countryShortName: "KE",
@@ -26,4 +34,6 @@ export const site = {
         streetAddress: "123 Industrial Drive",
         phone: "+254710251380",
     }
+    
 }
+//export const email= site.address.emailAddress
