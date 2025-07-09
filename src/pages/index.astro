@@ -7,17 +7,17 @@ import { getReviews } from '~/lib/qs-esm';
 
 //import { organizationSchema } from '~/data/organizationSchema';
 
-interface Regulation {
+type Regulation = {
   name: string;
   shortName: string;
   country: string;
 }
 
-interface BrokerProps {
+type BrokerProps = {
   name: string;
   rating: number;
   features: string[];
-  regulation: Array<Regulation>;
+  regulation: Array<Regulation> | Regulation[];
   minDeposit: number;
   spread: string;
   logo: string;
