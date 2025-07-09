@@ -501,11 +501,11 @@ const brokers = [
     const selectedBrokers = new Set();
 
     function filterBrokers() {
-      const searchTerm = searchInput.value.toLowerCase();
-      const regulation = regulationFilter.value;
-      const deposit = depositFilter.value;
-      const platform = platformFilter.value;
-      const features = featuresFilter.value;
+      const searchTerm = searchInput?.value.toLowerCase();
+      const regulation = regulationFilter?.value;
+      const deposit = depositFilter?.value;
+      const platform = platformFilter?.value;
+      const features = featuresFilter?.value;
 
       let visibleCount = 0;
 
@@ -514,11 +514,11 @@ const brokers = [
 
         // Search filter
         if (searchTerm) {
-          const brokerName = card.querySelector('h3').textContent.toLowerCase();
+          const brokerName = card.querySelector('h3')?.textContent?.toLowerCase();
           const brokerFeatures = card.dataset.features.toLowerCase();
           const brokerRegulation = card.dataset.regulation.toLowerCase();
 
-          if (!brokerName.includes(searchTerm) &&
+          if (!brokerName?.includes(searchTerm) &&
               !brokerFeatures.includes(searchTerm) &&
               !brokerRegulation.includes(searchTerm)) {
             show = false;
@@ -573,7 +573,7 @@ const brokers = [
     }
 
     function sortBrokers() {
-      const sortBy = sortFilter.value;
+      const sortBy = sortFilter?.value;
       const container = document.getElementById('brokerGrid');
       const cards = Array.from(brokerCards);
 
@@ -598,12 +598,12 @@ const brokers = [
     }
 
     // Event listeners
-    searchInput.addEventListener('input', filterBrokers);
-    regulationFilter.addEventListener('change', filterBrokers);
-    depositFilter.addEventListener('change', filterBrokers);
-    platformFilter.addEventListener('change', filterBrokers);
-    featuresFilter.addEventListener('change', filterBrokers);
-    sortFilter.addEventListener('change', () => {
+    searchInput?.addEventListener('input', filterBrokers);
+    regulationFilter?.addEventListener('change', filterBrokers);
+    depositFilter?.addEventListener('change', filterBrokers);
+    platformFilter?.addEventListener('change', filterBrokers);
+    featuresFilter?.addEventListener('change', filterBrokers);
+    sortFilter?.addEventListener('change', () => {
       sortBrokers();
       filterBrokers();
     });
@@ -682,14 +682,14 @@ const brokers = [
       selectedBrokersDisplay.textContent = `${count} broker${count !== 1 ? 's' : ''} selected`;
 
       if (count > 0) {
-        comparisonTool.classList.remove('translate-y-full', 'opacity-0');
+        comparisonTool?.classList.remove('translate-y-full', 'opacity-0');
         compareNowBtn.disabled = count < 2;
       } else {
-        comparisonTool.classList.add('translate-y-full', 'opacity-0');
+        comparisonTool?.classList.add('translate-y-full', 'opacity-0');
       }
     }
 
-    document.getElementById('closeComparison').addEventListener('click', () => {
+    document.getElementById('closeComparison')?.addEventListener('click', () => {
       selectedBrokers.clear();
       compareButtons.forEach(button => {
         button.textContent = 'Compare';
@@ -699,7 +699,7 @@ const brokers = [
       updateComparisonTool();
     });
 
-    compareNowBtn.addEventListener('click', () => {
+    compareNowBtn?.addEventListener('click', () => {
       const brokerIds = Array.from(selectedBrokers).join(',');
       window.location.href = `/compare?brokers=${brokerIds}`;
     });
