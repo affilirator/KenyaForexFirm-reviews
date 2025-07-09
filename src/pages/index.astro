@@ -23,6 +23,10 @@ const schemaData = {
   }
 };
 
+const response = await fetch('https://api.kenyaforexfirm.com/api/broker-reviews/')
+const data = await response.json()
+console.log("Data from the API:", data)
+
 const topBrokers = [
   {
     name: "XM Group",
