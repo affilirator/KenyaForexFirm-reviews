@@ -3,6 +3,7 @@ import { site } from "@data/site";
 export const organizationSchema = {
         "@context": "https://schema.org",
         "@type": "Organization",
+        "@id": `${site.url}/#Organization`,
         "name": site.name,
         "url": site.url,
         "logo": site.logoPath ,
@@ -10,7 +11,7 @@ export const organizationSchema = {
         "address": {
           "@type": "PostalAddress",
           "addressCountry": site.address.countryShortName,
-          "addressRegion": site.address.country
+          "addressRegion": site.address.country,
         },
         "contactPoint": {
           "@type": "ContactPoint",
@@ -26,4 +27,4 @@ export const organizationSchema = {
             }
             }).filter(Boolean)
 
-      }
+      };

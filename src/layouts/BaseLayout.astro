@@ -1,13 +1,14 @@
 ---
 import { SEO } from "astro-seo";
 import { site } from "@data/site";
-import { organizationSchema } from "@data/organizationSchema"
+//import { organizationSchema } from "@data/organizationSchema"
 
 export interface Props {
   title: string;
   description: string;
   image?: string;
   noindex?: boolean;
+  nofollow?: boolean;
   schemaData?: any;
 }
 
@@ -16,10 +17,40 @@ const {
   description = "Comprehensive forex broker reviews and rankings for Kenyan traders. Expert analysis, regulatory information, and unbiased comparisons to help you choose the best forex broker.",
   image = "/og-image.jpg",
   noindex = false,
+  nofollow = false,
   schemaData
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const organizationSchema = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": `${site.url}/#Organization`,
+        "name": site.name,
+        "url": site.url,
+        "logo": site.logoPath ,
+        "description": site.description,
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": site.address.countryShortName,
+          "addressRegion": site.address.country,
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": site.address.email
+        },
+        "sameAs": site.profiles.map(profile => {
+            if ('facebook' in profile) {
+                return profile.facebook;
+            }
+            if ('twitter' in profile) {
+                return profile.twitter;
+            }
+            }).filter(Boolean)
+
+      };
 ---
 
 <!DOCTYPE html>
@@ -60,6 +91,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         meta: [
           { name: "author", content: site.siteName },
           { name: "robots", content: noindex ? "noindex, nofollow" : "index, follow" },
+          { name: "robots", content: nofollow ? "noindex, nofollow" : "index, follow" },
           { name: "geo.region", content: site.address.countryShortName },
           { name: "geo.country", content: site.address.country },
           { name: "dcterms.type", content: "Service" },
