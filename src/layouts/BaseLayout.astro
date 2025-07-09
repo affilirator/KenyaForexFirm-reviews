@@ -1,5 +1,6 @@
 ---
 import { SEO } from "astro-seo";
+import { site } from "@data/site";
 
 export interface Props {
   title: string;
@@ -10,7 +11,7 @@ export interface Props {
 }
 
 const {
-  title = "Forex Broker Reviews Kenya - Expert Analysis & Rankings",
+  title = `${site.name} ${site.currentYear} - Expert Forex Broker Analysis & Rankings"`,
   description = "Comprehensive forex broker reviews and rankings for Kenyan traders. Expert analysis, regulatory information, and unbiased comparisons to help you choose the best forex broker.",
   image = "/og-image.jpg",
   noindex = false,
@@ -41,27 +42,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         },
         optional: {
           description: description,
-          siteName: "Forex Broker Reviews Kenya",
+          siteName: site.name,
         },
       }}
       twitter={{
-        creator: "@forexkenyareview",
-        site: "@forexkenyareview",
+        creator: "@kenyaforexfirm",
+        site: "@kenyaforexfirm",
         card: "summary_large_image",
       }}
       extend={{
         link: [
           { rel: "sitemap", href: "/sitemap-index.xml" },
           { rel: "preconnect", href: "https://fonts.googleapis.com" },
-          { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: true },
+          { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "anonymous" },
         ],
         meta: [
-          { name: "author", content: "Forex Broker Reviews Kenya" },
+          { name: "author", content: site.siteName },
           { name: "robots", content: noindex ? "noindex, nofollow" : "index, follow" },
-          { name: "geo.region", content: "KE" },
-          { name: "geo.country", content: "Kenya" },
+          { name: "geo.region", content: site.address.countryShortName },
+          { name: "geo.country", content: site.address.country },
           { name: "dcterms.type", content: "Service" },
-          { name: "dcterms.audience", content: "Forex Traders" },
+          { name: "dcterms.audience", content: site.audience},
           { name: "theme-color", content: "#0ea5e9" },
         ],
       }}
@@ -77,13 +78,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <!-- Organization Schema -->
     <script type="application/ld+json">
+    //import {site} from '@/data/site';
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Forex Broker Reviews Kenya",
-        "url": "https://forex-broker-kenya.netlify.app",
-        "logo": "https://forex-broker-kenya.netlify.app/logo.png",
-        "description": "Expert forex broker reviews and analysis for Kenyan traders",
+        "name": site.name,
+        "url": site.url,
+        "logo": site.logoPath ,
+        "description": site.description,
         "address": {
           "@type": "PostalAddress",
           "addressCountry": "KE",
@@ -92,11 +94,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer service",
-          "email": "info@forexbrokerkenya.com"
+          "email": "support@kenyaforexfirm"
         },
         "sameAs": [
-          "https://twitter.com/forexkenyareview",
-          "https://facebook.com/forexbrokerkenya"
+          "https://twitter.com/kenyaforexfirm",
+          "https://facebook.com/kenyaforexfirm"
         ]
       }
     </script>
