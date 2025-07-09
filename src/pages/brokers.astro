@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
+import { site } from '../data/site';
 
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "Forex Broker Reviews - Kenya",
   "description": "Comprehensive reviews and rankings of forex brokers available to Kenyan traders",
-  "url": "https://forex-broker-kenya.netlify.app/brokers",
+  "url": new URL(Astro.request.url),
   "mainEntity": {
     "@type": "ItemList",
     "numberOfItems": 15,
@@ -146,8 +147,8 @@ const brokers = [
 ---
 
 <BaseLayout
-  title="Best Forex Brokers in Kenya 2024 - Expert Reviews & Rankings"
-  description="Compare the top forex brokers available to Kenyan traders. Expert reviews, regulation info, spreads, and features to help you choose the best broker for trading."
+  title={`Best Forex Brokers in ${site.address.country} (${site.currentYear}) - Expert Reviews & Rankings`}
+  description={`Compare the top forex brokers available to ${site.address.country}n traders. Expert reviews, regulation info, spreads, and features to help you choose the best broker for trading.`}
   schemaData={schemaData}
 >
   <Navigation />
