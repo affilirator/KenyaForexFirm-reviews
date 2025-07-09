@@ -1,0 +1,45 @@
+# Prevent indexing for specific paths and environments
+
+https://kenyaforexfirm.com/*
+    X-Content-Type-Options: nosniff
+    X-Robots-Tag: index, follow, archive
+    Referrer-Policy: strict-origin-when-cross-origin
+    Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=(), autoplay=self, fullscreen=self
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+/api/*
+    X-Robots-Tag: noindex, nofollow, noarchive
+/preview/*
+X-Robots-Tag: noindex, nofollow, noarchive
+/lp/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+/search/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+/category/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+/goto/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+
+https://*.pages.dev/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+https://*.netlify.app/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+https://*.vercel.app/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+https://*.workers.dev/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+https://*.dev/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+
+/*goto/*
+    X-Content-Type-Options: nosniff
+    Content-Security-Policy: script-src 'self' 'unsafe-inline'
+    Referrer-Policy: strict-origin
+    Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=(), autoplay=(), fullscreen=()
+    X-Frame-Options: DENY
+
+/*.(png|jpg|jpeg|gif|svg|webp|avif)
+  ! Content-Security-Policy
