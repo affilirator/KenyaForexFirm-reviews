@@ -19,6 +19,7 @@
     "astro": "^5.11.0",
     "astro-icon": "^1.1.5",
     "astro-seo": "^0.8.4",
+    "qs-esm": "^7.0.2",
     "schema-dts": "^1.1.5"
   },
   "devDependencies": {

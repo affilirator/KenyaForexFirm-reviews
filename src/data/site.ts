@@ -16,7 +16,7 @@ export const site = {
     description: 'Kenya Forex Firm brings you all the reviews that matter from the forex trading industry.',
     url: siteUrl,
     currentYear: new Date().getFullYear(),
-    canonicalURL: window.location.href,
+    canonicalURL: typeof window !== 'undefined' ? window.location.href : siteUrl,
     logoPath: "/favicon.svg",
     profiles: [
         {

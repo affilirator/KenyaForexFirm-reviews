@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Hero from '../components/Hero.astro';
 import { site } from '~/data/site';
+import { getReviews } from '~/lib/qs-esm';
 //import { organizationSchema } from '~/data/organizationSchema';
 
 const schemaData = {
@@ -23,9 +24,11 @@ const schemaData = {
   }
 };
 
-const response = await fetch('https://api.kenyaforexfirm.com/api/broker-reviews/')
-const data = await response.json()
-console.log("Data from the API:", data)
+
+const data = await getReviews(); // data is an object with docs array: data { docs[] }
+//const {docs} = data; // docs is an array []
+const topRatedBrokers = await data.docs
+console.log("Data from the API:", topRatedBrokers)
 
 const topBrokers = [
   {
