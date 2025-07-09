@@ -1,5 +1,3 @@
-import { organizationSchema } from "./organizationSchema";
-
 const siteUrl = 'https://fx.kenyaforexfirm.com';
 const siteName = "Kenya Forex Firm";
 export const site = {
