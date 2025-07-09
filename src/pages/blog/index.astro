@@ -1,0 +1,396 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Forex Trading Blog - Kenya",
+  "description": "Latest forex news, analysis, and trading guides for Kenyan traders",
+  "url": "https://forex-broker-kenya.netlify.app/blog",
+  "author": {
+    "@type": "Organization",
+    "name": "Forex Broker Reviews Kenya"
+  }
+};
+
+const articles = [
+  {
+    id: 1,
+    title: "Best Forex Trading Strategies for Kenyan Beginners",
+    excerpt: "Learn the most effective forex trading strategies specifically designed for new Kenyan traders. From scalping to swing trading, discover which approach suits your style and risk tolerance.",
+    author: "James Kimani",
+    authorRole: "Senior Trading Analyst",
+    publishDate: "2024-12-15",
+    readTime: "8 min read",
+    category: "Trading Guides",
+    tags: ["Beginner", "Strategy", "Kenya"],
+    featured: true,
+    image: "gradient-from-primary-500-to-accent-500"
+  },
+  {
+    id: 2,
+    title: "KES Performance Against Major Currencies This Week",
+    excerpt: "Comprehensive analysis of the Kenyan Shilling's performance against USD, EUR, and GBP. What it means for forex traders and import/export businesses.",
+    author: "Sarah Wanjiku",
+    authorRole: "Market Analyst",
+    publishDate: "2024-12-12",
+    readTime: "6 min read",
+    category: "Market Analysis",
+    tags: ["KES", "Currency", "Analysis"],
+    featured: true,
+    image: "gradient-from-accent-500-to-primary-500"
+  },
+  {
+    id: 3,
+    title: "New CMA Regulations: What Traders Need to Know",
+    excerpt: "Important updates from the Capital Markets Authority affecting forex trading in Kenya. New compliance requirements and how they protect traders.",
+    author: "David Ochieng",
+    authorRole: "Regulatory Expert",
+    publishDate: "2024-12-10",
+    readTime: "10 min read",
+    category: "Regulation",
+    tags: ["CMA", "Regulation", "Compliance"],
+    featured: true,
+    image: "gradient-from-primary-500-to-accent-500"
+  },
+  {
+    id: 4,
+    title: "M-Pesa Integration: How to Fund Your Forex Account",
+    excerpt: "Step-by-step guide on using M-Pesa to deposit and withdraw funds from your forex trading account. Compare fees and processing times across brokers.",
+    author: "Grace Mutua",
+    authorRole: "Financial Technology Writer",
+    publishDate: "2024-12-08",
+    readTime: "5 min read",
+    category: "How-To Guides",
+    tags: ["M-Pesa", "Deposits", "Kenya"],
+    featured: false,
+    image: "gradient-from-green-500-to-blue-500"
+  },
+  {
+    id: 5,
+    title: "Risk Management for Kenyan Forex Traders",
+    excerpt: "Essential risk management techniques every Kenyan trader should know. Position sizing, stop losses, and portfolio diversification strategies.",
+    author: "Peter Mwangi",
+    authorRole: "Risk Management Specialist",
+    publishDate: "2024-12-05",
+    readTime: "12 min read",
+    category: "Education",
+    tags: ["Risk Management", "Safety", "Education"],
+    featured: false,
+    image: "gradient-from-red-500-to-orange-500"
+  },
+  {
+    id: 6,
+    title: "Economic Calendar: Key Events Affecting KES",
+    excerpt: "Monthly economic calendar highlighting events that typically impact the Kenyan Shilling. GDP releases, inflation data, and central bank decisions.",
+    author: "Ann Nyokabi",
+    authorRole: "Economic Analyst",
+    publishDate: "2024-12-03",
+    readTime: "7 min read",
+    category: "Market Analysis",
+    tags: ["Economic Calendar", "KES", "Central Bank"],
+    featured: false,
+    image: "gradient-from-purple-500-to-pink-500"
+  },
+  {
+    id: 7,
+    title: "Comparing MT4 vs MT5 for Kenyan Traders",
+    excerpt: "Detailed comparison of MetaTrader 4 and MetaTrader 5 platforms. Which one is better for Kenyan forex traders and why?",
+    author: "Joseph Karanja",
+    authorRole: "Platform Specialist",
+    publishDate: "2024-11-30",
+    readTime: "9 min read",
+    category: "Platforms",
+    tags: ["MT4", "MT5", "Platforms"],
+    featured: false,
+    image: "gradient-from-blue-500-to-cyan-500"
+  },
+  {
+    id: 8,
+    title: "Tax Implications of Forex Trading in Kenya",
+    excerpt: "Understanding your tax obligations as a forex trader in Kenya. KRA requirements, record keeping, and how to stay compliant.",
+    author: "Lucy Wanjiru",
+    authorRole: "Tax Consultant",
+    publishDate: "2024-11-28",
+    readTime: "15 min read",
+    category: "Legal & Tax",
+    tags: ["Tax", "KRA", "Legal"],
+    featured: false,
+    image: "gradient-from-yellow-500-to-red-500"
+  }
+];
+
+const categories = [
+  { name: "Trading Guides", count: 12 },
+  { name: "Market Analysis", count: 18 },
+  { name: "Broker Reviews", count: 8 },
+  { name: "Education", count: 15 },
+  { name: "Regulation", count: 6 },
+  { name: "How-To Guides", count: 10 },
+  { name: "Platforms", count: 7 },
+  { name: "Legal & Tax", count: 4 }
+];
+
+const featuredArticles = articles.filter(article => article.featured);
+const regularArticles = articles.filter(article => !article.featured);
+---
+
+<BaseLayout
+  title="Forex Trading Blog - Latest News & Analysis for Kenyan Traders"
+  description="Stay updated with the latest forex news, market analysis, and trading guides specifically for Kenyan traders. Expert insights on currency markets, broker reviews, and trading strategies."
+  schemaData={schemaData}
+>
+  <Navigation />
+
+  <!-- Header Section -->
+  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+          Forex Trading
+          <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
+            Blog
+          </span>
+        </h1>
+        <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
+          Stay informed with the latest forex market insights, trading strategies, and regulatory
+          updates specifically curated for Kenyan traders.
+        </p>
+      </div>
+
+      <!-- Search and Filter -->
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-gradient-to-r from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="md:col-span-2">
+              <input
+                type="text"
+                placeholder="Search articles..."
+                class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-3 text-white placeholder-neutral-400 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+              >
+            </div>
+            <div>
+              <select class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+                <option value="">All Categories</option>
+                {categories.map(category => (
+                  <option value={category.name.toLowerCase().replace(/\s+/g, '-')}>{category.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Articles -->
+  <section class="py-16 bg-gradient-to-b from-neutral-950 to-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-display font-bold text-white mb-8">
+        Featured Articles
+      </h2>
+
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        {featuredArticles.map((article, index) => (
+          <article class={`group cursor-pointer ${index === 0 ? 'lg:col-span-2 lg:row-span-2' : ''}`}>
+            <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500 h-full">
+              <div class={`bg-${article.image} relative overflow-hidden ${index === 0 ? 'h-64 lg:h-80' : 'h-48'}`}>
+                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="absolute top-4 left-4">
+                  <span class="bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    {article.category}
+                  </span>
+                </div>
+                {article.featured && (
+                  <div class="absolute top-4 right-4">
+                    <span class="bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                      Featured
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <div class={`p-6 ${index === 0 ? 'lg:p-8' : ''}`}>
+                <h3 class={`font-bold text-white mb-3 group-hover:text-primary-400 transition-colors duration-300 ${index === 0 ? 'text-2xl lg:text-3xl' : 'text-xl'}`}>
+                  {article.title}
+                </h3>
+
+                <p class={`text-neutral-400 mb-4 ${index === 0 ? 'text-lg' : ''}`}>
+                  {article.excerpt}
+                </p>
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <div class="w-10 h-10 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full flex items-center justify-center mr-3">
+                      <span class="text-white font-semibold text-sm">
+                        {article.author.split(' ').map(n => n[0]).join('')}
+                      </span>
+                    </div>
+                    <div>
+                      <div class="text-white font-medium text-sm">{article.author}</div>
+                      <div class="text-neutral-400 text-xs">{article.authorRole}</div>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-neutral-400 text-sm">{new Date(article.publishDate).toLocaleDateString()}</div>
+                    <div class="text-neutral-500 text-xs">{article.readTime}</div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-neutral-700/50">
+                  <div class="flex flex-wrap gap-2">
+                    {article.tags.map(tag => (
+                      <span class="bg-neutral-700/50 text-neutral-300 px-2 py-1 rounded text-xs">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Area -->
+  <section class="py-16 bg-gradient-to-b from-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-4 gap-8">
+        <!-- Articles List -->
+        <div class="lg:col-span-3">
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-display font-bold text-white">
+              Latest Articles
+            </h2>
+            <div class="flex items-center space-x-4">
+              <select class="bg-neutral-800/50 border border-neutral-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary-500">
+                <option>Latest First</option>
+                <option>Oldest First</option>
+                <option>Most Popular</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="space-y-8">
+            {regularArticles.map(article => (
+              <article class="group cursor-pointer">
+                <div class="bg-gradient-to-r from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
+                  <div class="grid md:grid-cols-3 gap-6 p-6">
+                    <div class="md:col-span-1">
+                      <div class={`bg-${article.image} h-48 md:h-full rounded-xl relative overflow-hidden`}>
+                        <div class="absolute inset-0 bg-black/30"></div>
+                        <div class="absolute top-3 left-3">
+                          <span class="bg-black/70 text-white px-2 py-1 rounded-full text-xs font-medium">
+                            {article.category}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="md:col-span-2">
+                      <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary-400 transition-colors duration-300">
+                        {article.title}
+                      </h3>
+
+                      <p class="text-neutral-400 mb-4">
+                        {article.excerpt}
+                      </p>
+
+                      <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                          <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-white font-semibold text-xs">
+                              {article.author.split(' ').map(n => n[0]).join('')}
+                            </span>
+                          </div>
+                          <div>
+                            <div class="text-white font-medium text-sm">{article.author}</div>
+                            <div class="text-neutral-400 text-xs">{article.authorRole}</div>
+                          </div>
+                        </div>
+                        <div class="text-right">
+                          <div class="text-neutral-400 text-sm">{new Date(article.publishDate).toLocaleDateString()}</div>
+                          <div class="text-neutral-500 text-xs">{article.readTime}</div>
+                        </div>
+                      </div>
+
+                      <div class="flex flex-wrap gap-2">
+                        {article.tags.map(tag => (
+                          <span class="bg-neutral-700/50 text-neutral-300 px-2 py-1 rounded text-xs">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <!-- Load More -->
+          <div class="text-center mt-12">
+            <button class="bg-gradient-to-r from-neutral-800 to-neutral-700 hover:from-neutral-700 hover:to-neutral-600 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 border border-neutral-600 hover:border-primary-500">
+              Load More Articles
+            </button>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1">
+          <!-- Categories -->
+          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 mb-8">
+            <h3 class="text-xl font-semibold text-white mb-4">Categories</h3>
+            <ul class="space-y-2">
+              {categories.map(category => (
+                <li>
+                  <a href={`/blog/category/${category.name.toLowerCase().replace(/\s+/g, '-')}`}
+                     class="flex items-center justify-between py-2 text-neutral-300 hover:text-primary-400 transition-colors duration-300">
+                    <span>{category.name}</span>
+                    <span class="bg-neutral-700/50 text-neutral-400 px-2 py-1 rounded-full text-xs">
+                      {category.count}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Newsletter Signup -->
+          <div class="bg-gradient-to-br from-primary-900/30 to-accent-900/30 backdrop-blur-sm rounded-2xl p-6 border border-primary-700/30 mb-8">
+            <h3 class="text-xl font-semibold text-white mb-4">Stay Updated</h3>
+            <p class="text-neutral-300 mb-4 text-sm">
+              Get the latest forex news and analysis delivered to your inbox weekly.
+            </p>
+            <form class="space-y-3">
+              <input
+                type="email"
+                placeholder="Your email address"
+                class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-3 py-2 text-white placeholder-neutral-400 text-sm focus:outline-none focus:border-primary-500"
+              >
+              <button class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 text-sm">
+                Subscribe
+              </button>
+            </form>
+          </div>
+
+          <!-- Popular Tags -->
+          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+            <h3 class="text-xl font-semibold text-white mb-4">Popular Tags</h3>
+            <div class="flex flex-wrap gap-2">
+              {['Forex', 'Kenya', 'Trading', 'Strategy', 'KES', 'Beginner', 'Analysis', 'CMA', 'M-Pesa', 'Regulation', 'Education', 'Risk'].map(tag => (
+                <a href={`/blog/tag/${tag.toLowerCase()}`}
+                   class="bg-neutral-700/50 hover:bg-primary-600 text-neutral-300 hover:text-white px-3 py-1 rounded-full text-xs transition-colors duration-300">
+                  {tag}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

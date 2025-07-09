@@ -1,0 +1,583 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+
+const brokerData = {
+  name: "XM Group",
+  logo: "🏛️",
+  founded: 2009,
+  headquarters: "Cyprus",
+  website: "https://www.xm.com",
+  rating: 4.8,
+  reviewCount: 2847,
+  regulation: [
+    { name: "CySEC", number: "120/10", country: "Cyprus" },
+    { name: "ASIC", number: "443670", country: "Australia" },
+    { name: "IFSC", number: "IFSC/60/354/TS/16", country: "Belize" }
+  ],
+  cmaStatus: "Approved for Kenyan Clients",
+  minDeposit: 5,
+  maxLeverage: "888:1",
+  spreads: {
+    eurusd: 0.6,
+    gbpusd: 0.9,
+    usdjpy: 0.7,
+    audusd: 1.2
+  },
+  platforms: ["MetaTrader 4", "MetaTrader 5", "XM WebTrader", "XM Mobile"],
+  accountTypes: [
+    {
+      name: "Micro Account",
+      minDeposit: 5,
+      maxLeverage: "888:1",
+      spread: "From 1.0 pips",
+      commission: "No commission"
+    },
+    {
+      name: "Standard Account",
+      minDeposit: 5,
+      maxLeverage: "888:1",
+      spread: "From 1.0 pips",
+      commission: "No commission"
+    },
+    {
+      name: "XM Zero Account",
+      minDeposit: 100,
+      maxLeverage: "500:1",
+      spread: "From 0.0 pips",
+      commission: "$3.50 per lot"
+    }
+  ],
+  paymentMethods: ["M-Pesa", "Bank Transfer", "Credit/Debit Cards", "Skrill", "Neteller", "PayPal"],
+  features: [
+    "24/7 multilingual support",
+    "Daily market analysis",
+    "Educational webinars",
+    "Copy trading",
+    "VPS hosting",
+    "No requotes",
+    "No deposit fees",
+    "Same-day withdrawals"
+  ],
+  prosAndCons: {
+    pros: [
+      "CMA approved for Kenyan traders",
+      "Very low minimum deposit ($5)",
+      "High leverage up to 888:1",
+      "Multiple account types available",
+      "Excellent educational resources",
+      "24/7 customer support in multiple languages",
+      "No deposit or withdrawal fees",
+      "Strong regulatory oversight"
+    ],
+    cons: [
+      "Higher spreads compared to ECN brokers",
+      "Limited cryptocurrency trading options",
+      "Swap rates can be high for some pairs",
+      "Marketing can be aggressive"
+    ]
+  }
+};
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "FinancialService",
+    "name": "XM Group",
+    "description": "Forex and CFD broker offering trading services to Kenyan clients",
+    "url": "https://www.xm.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "CY",
+      "addressLocality": "Limassol",
+      "addressRegion": "Cyprus"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": 4.8,
+      "reviewCount": 2847,
+      "bestRating": 5,
+      "worstRating": 1
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Kenya Forex Review Team",
+    "jobTitle": "Senior Financial Analyst"
+  },
+  "datePublished": "2024-12-09",
+  "dateModified": "2024-12-09",
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": 4.8,
+    "bestRating": 5,
+    "worstRating": 1
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Forex Broker Reviews Kenya"
+  }
+};
+---
+
+<BaseLayout
+  title="XM Group Review 2024 - Comprehensive Analysis for Kenyan Traders"
+  description="In-depth XM Group review for Kenyan traders. Analysis of regulation, spreads, platforms, and features. CMA approved broker with $5 minimum deposit."
+  schemaData={schemaData}
+>
+  <Navigation />
+
+  <!-- Header Section -->
+  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Main Review Info -->
+        <div class="lg:col-span-2">
+          <div class="flex items-center mb-6">
+            <div class="w-20 h-20 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center text-4xl mr-6">
+              {brokerData.logo}
+            </div>
+            <div>
+              <h1 class="text-3xl md:text-4xl font-display font-bold text-white mb-2">
+                {brokerData.name} Review
+              </h1>
+              <div class="flex items-center mb-2">
+                <div class="flex text-yellow-400 mr-3">
+                  {"★".repeat(Math.floor(brokerData.rating))}
+                </div>
+                <span class="text-white font-semibold text-lg">{brokerData.rating}/5</span>
+                <span class="text-neutral-400 ml-2">({brokerData.reviewCount} reviews)</span>
+              </div>
+              <div class="flex items-center space-x-4 text-sm text-neutral-400">
+                <span>Est. {brokerData.founded}</span>
+                <span>•</span>
+                <span>{brokerData.headquarters}</span>
+                <span>•</span>
+                <span class="text-green-400 font-medium">{brokerData.cmaStatus}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50">
+              <div class="text-sm text-neutral-400 mb-1">Min Deposit</div>
+              <div class="text-2xl font-bold text-white">${brokerData.minDeposit}</div>
+            </div>
+            <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50">
+              <div class="text-sm text-neutral-400 mb-1">Max Leverage</div>
+              <div class="text-2xl font-bold text-white">{brokerData.maxLeverage}</div>
+            </div>
+            <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50">
+              <div class="text-sm text-neutral-400 mb-1">EUR/USD Spread</div>
+              <div class="text-2xl font-bold text-white">{brokerData.spreads.eurusd} pips</div>
+            </div>
+            <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50">
+              <div class="text-sm text-neutral-400 mb-1">Platforms</div>
+              <div class="text-2xl font-bold text-white">{brokerData.platforms.length}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Action Panel -->
+        <div class="lg:col-span-1">
+          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 sticky top-24">
+            <h3 class="text-xl font-semibold text-white mb-4">Quick Actions</h3>
+
+            <div class="space-y-3 mb-6">
+              <a
+                href={brokerData.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center block"
+              >
+                Visit XM Group
+              </a>
+              <button class="w-full border border-neutral-600 hover:border-primary-400 text-neutral-300 hover:text-primary-400 font-medium py-3 px-4 rounded-lg transition-all duration-300 text-center">
+                Open Demo Account
+              </button>
+              <button class="w-full bg-neutral-700/50 hover:bg-accent-600 text-neutral-300 hover:text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 text-center">
+                Compare with Others
+              </button>
+            </div>
+
+            <!-- Key Features -->
+            <div class="border-t border-neutral-700/50 pt-4">
+              <h4 class="text-sm font-medium text-neutral-300 mb-3">Key Features</h4>
+              <ul class="space-y-2 text-sm text-neutral-400">
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  CMA Approved
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  M-Pesa Support
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  24/7 Support
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Educational Resources
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Tabs -->
+  <section class="bg-neutral-900 border-b border-neutral-800/50 sticky top-16 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex space-x-8 overflow-x-auto py-4">
+        <a href="#overview" class="tab-link whitespace-nowrap text-primary-400 border-b-2 border-primary-400 pb-2 font-medium">Overview</a>
+        <a href="#regulation" class="tab-link whitespace-nowrap text-neutral-400 hover:text-white pb-2 font-medium transition-colors duration-300">Regulation</a>
+        <a href="#accounts" class="tab-link whitespace-nowrap text-neutral-400 hover:text-white pb-2 font-medium transition-colors duration-300">Account Types</a>
+        <a href="#platforms" class="tab-link whitespace-nowrap text-neutral-400 hover:text-white pb-2 font-medium transition-colors duration-300">Platforms</a>
+        <a href="#spreads" class="tab-link whitespace-nowrap text-neutral-400 hover:text-white pb-2 font-medium transition-colors duration-300">Spreads & Fees</a>
+        <a href="#payments" class="tab-link whitespace-nowrap text-neutral-400 hover:text-white pb-2 font-medium transition-colors duration-300">Payments</a>
+        <a href="#education" class="tab-link whitespace-nowrap text-neutral-400 hover:text-white pb-2 font-medium transition-colors duration-300">Education</a>
+        <a href="#pros-cons" class="tab-link whitespace-nowrap text-neutral-400 hover:text-white pb-2 font-medium transition-colors duration-300">Pros & Cons</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="py-12 bg-gradient-to-b from-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Overview Section -->
+      <section id="overview" class="mb-16">
+        <h2 class="text-3xl font-display font-bold text-white mb-6">
+          XM Group Overview
+        </h2>
+
+        <div class="prose prose-invert max-w-none">
+          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-8 border border-neutral-700/50 mb-8">
+            <p class="text-lg text-neutral-300 leading-relaxed mb-6">
+              XM Group is a well-established forex and CFD broker that has been serving traders since 2009.
+              The company is headquartered in Cyprus and holds multiple regulatory licenses, making it one of
+              the most trusted brokers available to Kenyan traders. With CMA approval for Kenyan clients,
+              XM offers a comprehensive trading environment with competitive conditions and excellent support.
+            </p>
+
+            <p class="text-neutral-300 leading-relaxed mb-6">
+              What sets XM apart is its commitment to trader education and support. The broker offers extensive
+              educational resources, daily market analysis, and 24/7 customer support in multiple languages.
+              With a minimum deposit of just $5 and high leverage up to 888:1, XM caters to both beginner and
+              experienced traders.
+            </p>
+
+            <p class="text-neutral-300 leading-relaxed">
+              For Kenyan traders specifically, XM provides M-Pesa payment support, making deposits and withdrawals
+              convenient for local clients. The broker's strong regulatory standing and transparent fee structure
+              make it a popular choice among traders in Kenya and across Africa.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Regulation Section -->
+      <section id="regulation" class="mb-16">
+        <h2 class="text-3xl font-display font-bold text-white mb-6">
+          Regulation & Safety
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+            <h3 class="text-xl font-semibold text-white mb-4">Regulatory Licenses</h3>
+            <div class="space-y-4">
+              {brokerData.regulation.map(reg => (
+                <div class="flex items-center justify-between p-3 bg-neutral-800/50 rounded-lg">
+                  <div>
+                    <div class="font-semibold text-white">{reg.name}</div>
+                    <div class="text-sm text-neutral-400">{reg.country}</div>
+                  </div>
+                  <div class="text-sm text-neutral-300">#{reg.number}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+            <h3 class="text-xl font-semibold text-white mb-4">Safety Features</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-neutral-300">Segregated client funds</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-neutral-300">Investor compensation fund</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-neutral-300">Regular audits</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-neutral-300">SSL encryption</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-neutral-300">Negative balance protection</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Account Types Section -->
+      <section id="accounts" class="mb-16">
+        <h2 class="text-3xl font-display font-bold text-white mb-6">
+          Account Types
+        </h2>
+
+        <div class="grid lg:grid-cols-3 gap-6">
+          {brokerData.accountTypes.map((account, index) => (
+            <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-semibold text-white">{account.name}</h3>
+                {index === 1 && (
+                  <span class="bg-primary-500/20 text-primary-400 px-2 py-1 rounded-full text-xs font-medium">
+                    Popular
+                  </span>
+                )}
+              </div>
+
+              <div class="space-y-3 mb-6">
+                <div class="flex justify-between">
+                  <span class="text-neutral-400">Min Deposit:</span>
+                  <span class="text-white font-medium">${account.minDeposit}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-neutral-400">Max Leverage:</span>
+                  <span class="text-white font-medium">{account.maxLeverage}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-neutral-400">Spread:</span>
+                  <span class="text-white font-medium">{account.spread}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-neutral-400">Commission:</span>
+                  <span class="text-white font-medium">{account.commission}</span>
+                </div>
+              </div>
+
+              <button class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                Open {account.name}
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Pros and Cons Section -->
+      <section id="pros-cons" class="mb-16">
+        <h2 class="text-3xl font-display font-bold text-white mb-6">
+          Pros & Cons
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Pros -->
+          <div class="bg-gradient-to-br from-green-900/20 to-green-800/20 backdrop-blur-sm rounded-2xl p-6 border border-green-700/30">
+            <h3 class="text-xl font-semibold text-green-400 mb-4 flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              Advantages
+            </h3>
+            <ul class="space-y-3">
+              {brokerData.prosAndCons.pros.map(pro => (
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-neutral-300">{pro}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Cons -->
+          <div class="bg-gradient-to-br from-red-900/20 to-red-800/20 backdrop-blur-sm rounded-2xl p-6 border border-red-700/30">
+            <h3 class="text-xl font-semibold text-red-400 mb-4 flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+              Disadvantages
+            </h3>
+            <ul class="space-y-3">
+              {brokerData.prosAndCons.cons.map(con => (
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-red-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-neutral-300">{con}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final Verdict -->
+      <section class="mb-16">
+        <div class="bg-gradient-to-r from-primary-900/30 to-accent-900/30 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
+          <h2 class="text-3xl font-display font-bold text-white mb-6">
+            Final Verdict
+          </h2>
+          <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-primary-400 mb-2">4.8/5</div>
+              <div class="text-sm text-neutral-300">Overall Rating</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-green-400 mb-2">9.5/10</div>
+              <div class="text-sm text-neutral-300">Regulation</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-yellow-400 mb-2">8.2/10</div>
+              <div class="text-sm text-neutral-300">Trading Costs</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-blue-400 mb-2">9.0/10</div>
+              <div class="text-sm text-neutral-300">Support</div>
+            </div>
+          </div>
+
+          <p class="text-lg text-neutral-300 leading-relaxed mb-6">
+            XM Group stands out as an excellent choice for Kenyan traders, particularly those who are new to forex trading.
+            The combination of strong regulatory oversight, low minimum deposits, and comprehensive educational resources
+            makes it an ideal starting point for beginners while still offering the tools and features that experienced
+            traders need.
+          </p>
+
+          <p class="text-neutral-300 leading-relaxed">
+            While the spreads may not be the tightest in the industry, the overall package - including M-Pesa support,
+            24/7 customer service, and CMA approval - makes XM Group a reliable and trustworthy broker for the Kenyan market.
+          </p>
+
+          <div class="mt-8 pt-6 border-t border-neutral-700/50">
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href={brokerData.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 text-center"
+              >
+                Start Trading with XM Group
+              </a>
+              <a
+                href="/brokers"
+                class="flex-1 border border-neutral-600 hover:border-primary-400 text-neutral-300 hover:text-primary-400 font-medium py-4 px-6 rounded-lg transition-all duration-300 text-center"
+              >
+                Compare Other Brokers
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Risk Warning -->
+  <section class="py-8 bg-neutral-950 border-t border-neutral-800/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-sm text-neutral-400">
+        <strong class="text-neutral-300">Risk Warning:</strong>
+        Trading forex and CFDs involves substantial risk of loss and is not suitable for all investors.
+        Past performance is not indicative of future results. Please ensure you understand the risks involved.
+      </p>
+    </div>
+  </section>
+
+  <style>
+    .tab-link.active {
+      color: rgb(56, 189, 248);
+      border-color: rgb(56, 189, 248);
+    }
+  </style>
+
+  <script>
+    // Tab functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabLinks = document.querySelectorAll('.tab-link');
+
+      function setActiveTab(activeLink) {
+        tabLinks.forEach(link => {
+          link.classList.remove('text-primary-400', 'border-primary-400');
+          link.classList.add('text-neutral-400');
+          link.style.borderColor = 'transparent';
+        });
+
+        activeLink.classList.remove('text-neutral-400');
+        activeLink.classList.add('text-primary-400');
+        activeLink.style.borderColor = 'rgb(56, 189, 248)';
+      }
+
+      // Handle tab clicks
+      tabLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          setActiveTab(this);
+
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+
+          if (targetElement) {
+            const offsetTop = targetElement.offsetTop - 120; // Account for sticky header
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Handle scroll spy
+      const sections = document.querySelectorAll('section[id]');
+
+      function handleScroll() {
+        const scrollPos = window.scrollY + 150;
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute('id');
+
+          if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            const activeLink = document.querySelector(`a[href="#${sectionId}"]`);
+            if (activeLink) {
+              setActiveTab(activeLink);
+            }
+          }
+        });
+      }
+
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Run once on load
+    });
+  </script>
+</BaseLayout>
