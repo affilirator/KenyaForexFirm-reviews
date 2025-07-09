@@ -7,8 +7,13 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "target": "esnext",
+    "esModuleInterop": true,
     "allowJs": true,
+    "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "incremental": true,
+    "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"],

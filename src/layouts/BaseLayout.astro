@@ -26,9 +26,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const organizationSchema = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "@id": `${site.url}/#Organization`,
+        "@id": `${site.organization.id}`,
         "name": site.name,
-        "url": site.url,
+        "url": site.organization.url,
         "logo": site.logoPath ,
         "description": site.description,
         "address": {
@@ -109,33 +109,7 @@ const organizationSchema = {
       <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
     )}
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
-    <!-- Organization Schema 
-    <script type="application/ld+json">
-    //import {site} from '@/data/site';
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": site.name,
-        "url": site.url,
-        "logo": site.logoPath ,
-        "description": site.description,
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "KE",
-          "addressRegion": "Kenya"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "customer service",
-          "email": "support@kenyaforexfirm"
-        },
-        "sameAs": [
-          "https://twitter.com/kenyaforexfirm",
-          "https://facebook.com/kenyaforexfirm"
-        ]
-      }
-    </script>
-    -->
+    
   </head>
 
   <body class="bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 text-neutral-100 min-h-screen">

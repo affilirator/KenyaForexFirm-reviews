@@ -2,16 +2,23 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Hero from '../components/Hero.astro';
+import { site } from '~/data/site';
+//import { organizationSchema } from '~/data/organizationSchema';
 
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Forex Broker Reviews Kenya",
-  "url": "https://forex-broker-kenya.netlify.app",
-  "description": "Expert forex broker reviews and analysis for Kenyan traders",
+  "@id": site.schemaId,
+  "name": site.name,
+  "url": site.url,
+  "description": site.description,
+  Publisher: {
+    "@type": "Organization",
+    "@id": site.organization.id,
+  },
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://forex-broker-kenya.netlify.app/search?q={search_term_string}",
+    "target": `${site.url}/search?q={search_term_string}`,
     "query-input": "required name=search_term_string"
   }
 };
@@ -48,7 +55,7 @@ const topBrokers = [
 ---
 
 <BaseLayout
-  title="Forex Broker Reviews Kenya - Expert Analysis & Rankings"
+  title=`Best Forex Broker Reviews in ${site.address.country} (${site.currentYear}) - Expert Analysis & Rankings`
   description="Comprehensive forex broker reviews and rankings for Kenyan traders. Expert analysis, regulatory information, and unbiased comparisons to help you choose the best forex broker."
   schemaData={schemaData}
 >
