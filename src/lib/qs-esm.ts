@@ -7,6 +7,12 @@ const select = {
   brokerName: true,
   quickVerdict: true,
   brokerRating: true,
+  regulation: [
+    {
+      name: true,
+      shortName: true,
+    }
+  ]
   // This query could be much more complex
   // and QS would handle it beautifully
 }
