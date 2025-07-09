@@ -1,0 +1,10 @@
+{
+    "name": "kff-reviews",
+    "compatibility_date": "2025-06-19",
+    "compatibility_flags": [
+        
+    ],
+    "assets": {
+        "directory": "./dist"
+    }
+}
