@@ -237,13 +237,14 @@ const topBrokers: BrokerProps = topRatedBrokers.map((broker: { brokerName: any; 
               <!-- CTA buttons -->
               <div class="space-y-2">
                 <a
-                  href={`/brokers/${broker.slug}`}
+                  href={`/brokers/${broker.slug}/`}
                   class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center block"
                 >
                   Full Review
                 </a>
                 <a
-                  href="#"
+                  href={`${site.organization.url}/goto/${broker.slug}/`}
+                  rel="nofollow, noreferrer"
                   class="w-full border border-neutral-600 hover:border-primary-400 text-neutral-300 hover:text-primary-400 font-medium py-2 px-4 rounded-lg transition-all duration-300 text-center block text-sm"
                 >
                   Visit Broker

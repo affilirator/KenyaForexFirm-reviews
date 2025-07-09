@@ -5,9 +5,6 @@ const organization =
         name: "Kenya Forex Firm",
         url: "https://kenyaforexfirm.com",
     }
-
-
-
 export const site = {
     name: 'Best Forex Broker Reviews in Kenya',
     siteName: organization.name,
@@ -15,6 +12,7 @@ export const site = {
     audience: "Forex Traders",
     description: 'Kenya Forex Firm brings you all the reviews that matter from the forex trading industry.',
     url: siteUrl,
+    affiliateSlug: "goto",
     currentYear: new Date().getFullYear(),
     canonicalURL: typeof window !== 'undefined' ? window.location.href : siteUrl,
     logoPath: "/favicon.svg",
