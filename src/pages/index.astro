@@ -16,6 +16,7 @@ type Regulation = {
 type BrokerProps = {
   brokerName: string;
   brokerRating: number;
+  slug: string;
   features?: string[];
   regulation?: Array<Regulation> | Regulation[];
   minDeposit?: number;
@@ -43,7 +44,7 @@ const schemaData = {
 
 
 const data = await getReviews(); // data is an object with docs array: data { docs[] }
-const {docs} = data; // docs is an array []
+const {docs} = await data; // docs is an array []
 const topRatedBrokers = await docs
 //const {catRatings} = topRatedBrokers
 
@@ -70,8 +71,7 @@ const topBrokers: BrokerProps = topRatedBrokers.map((broker: { brokerName: any; 
     
   };
 })
-//const [one, two, three] = topRatedBrokers
-console.info("Forex Broker One Data", topBrokers)
+
 
 /*const defaultBrokers = [
   {
@@ -175,7 +175,7 @@ console.info("Forex Broker One Data", topBrokers)
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {topRatedBrokers?.map((broker, index: any) => (
+        {topRatedBrokers?.map((broker: BrokerProps, index: any) => (
           <div class="group relative bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500 hover:transform hover:scale-105">
             <!-- Glow effect on hover -->
             <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary-500/10 to-accent-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -191,8 +191,14 @@ console.info("Forex Broker One Data", topBrokers)
                     <h3 class="text-xl font-semibold text-white">{broker.brokerName}</h3>
                     <div class="flex items-center mt-1">
                       <div class="flex text-yellow-400">
-                        {"★".repeat(Math.round(broker.brokerRating / 2))}
+                        {(() => {
+                          const rating = broker.brokerRating / 2;
+                          const fullStars = Math.floor(rating);
+                          const hasHalfStar = rating % 1 >= 0.5;
+                          return "★".repeat(fullStars) + (hasHalfStar ? "☆" : "");
+                        })()}
                       </div>
+
                       <span class="text-neutral-400 ml-2 text-sm">{broker.brokerRating}</span>
                     </div>
                   </div>
@@ -231,7 +237,7 @@ console.info("Forex Broker One Data", topBrokers)
               <!-- CTA buttons -->
               <div class="space-y-2">
                 <a
-                  href={`/brokers/${broker.brokerName.toLowerCase().replace(/\s+/g, '-')}`}
+                  href={`/brokers/${broker.slug}`}
                   class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center block"
                 >
                   Full Review
