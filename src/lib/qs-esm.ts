@@ -23,5 +23,3 @@ export const getReviews = async () => {
   const reviews = await response.json()
   return reviews
 }
-
-//export default getReviews
