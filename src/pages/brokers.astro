@@ -515,12 +515,14 @@ const brokers = [
         // Search filter
         if (searchTerm) {
           const brokerName = card.querySelector('h3')?.textContent?.toLowerCase();
-          const brokerFeatures = card.dataset.features.toLowerCase();
-          const brokerRegulation = card.dataset.regulation.toLowerCase();
+          // Assuming 'card' is an HTMLElement
+          const brokerFeatures = (card as HTMLElement).dataset.features?.toLowerCase();
+          const brokerRegulation = (card as HTMLElement).dataset.regulation?.toLowerCase();
+
 
           if (!brokerName?.includes(searchTerm) &&
-              !brokerFeatures.includes(searchTerm) &&
-              !brokerRegulation.includes(searchTerm)) {
+              !brokerFeatures?.includes(searchTerm) &&
+              !brokerRegulation?.includes(searchTerm)) {
             show = false;
           }
         }
@@ -546,11 +548,13 @@ const brokers = [
         }
 
         // Platform filter
+        // Assuming 'card' is an HTMLElement
         if (platform && show) {
-          if (!card.dataset.platforms.includes(platform)) {
+          if (!(card as HTMLElement).dataset.platforms?.includes(platform)) {
             show = false;
           }
         }
+
 
         // Features filter
         if (features && show) {
@@ -569,7 +573,11 @@ const brokers = [
         }
       });
 
-      resultsCount.textContent = visibleCount;
+      if (resultsCount) {
+  resultsCount.textContent = visibleCount.toString();
+} else {
+  console.error("Element with the specified ID was not found.");
+}
     }
 
     function sortBrokers() {
@@ -587,14 +595,14 @@ const brokers = [
             return parseFloat(a.dataset.deposit) - parseFloat(b.dataset.deposit);
           case 'leverage':
             // Simple leverage comparison (this could be improved)
-            return b.querySelector('[data-leverage]')?.textContent.localeCompare(a.querySelector('[data-leverage]')?.textContent) || 0;
+            return b.querySelector('[data-leverage]')?.textContent?.localeCompare(a.querySelector('[data-leverage]')?.textContent) || 0;
           default:
             return 0;
         }
       });
 
       // Re-append sorted cards
-      cards.forEach(card => container.appendChild(card));
+      cards.forEach(card => container?.appendChild(card));
     }
 
     // Event listeners
