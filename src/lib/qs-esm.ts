@@ -7,6 +7,7 @@ const select = {
   brokerName: true,
   quickVerdict: true,
   brokerRating: true,
+  minDeposit: true,
   regulation: [
     {
       name: true,
