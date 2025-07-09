@@ -1,6 +1,7 @@
 //import * as qs from 'qs-esm'
 //   'https://localhost:3000/api/posts?select[color]=true&select[group][number]=true'
 import { stringify } from 'qs-esm'
+import { parse } from 'qs-esm';
 
 const PAYLOAD_API_URL = "https://api.kenyaforexfirm.com"
 
@@ -17,16 +18,21 @@ const populate = {
 
 const query = {
   status: {
-    equals: 'published'
+    equals: 'published'}
+}
+
+const regulation = {
+select: {
+  regulation: {
+    name: true,
+    shortName: true,
+    }
 }
 }
 
 const select = {
-  brokerName: true,
-  quickVerdict: true,
-  brokerRating: true,
-  minDeposit: true,
-  regulation: true,
+  content: false,
+  blog: false,
   
  
   
@@ -42,9 +48,10 @@ export const getReviews = async () => {
       //populate,
       select,
       where: query,
-      //depth:2,
+      depth:3,
       sort: '-brokerRating',
-      //status: 'published',
+      limit:3,
+      
     },
     { addQueryPrefix: true,
     // allowDots: true,

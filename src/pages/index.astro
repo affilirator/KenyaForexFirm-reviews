@@ -4,7 +4,24 @@ import Navigation from '../components/Navigation.astro';
 import Hero from '../components/Hero.astro';
 import { site } from '~/data/site';
 import { getReviews } from '~/lib/qs-esm';
+
 //import { organizationSchema } from '~/data/organizationSchema';
+
+interface Regulation {
+  name: string;
+  shortName: string;
+  country: string;
+}
+
+interface BrokerProps {
+  name: string;
+  rating: number;
+  features: string[];
+  regulation: Array<Regulation>;
+  minDeposit: number;
+  spread: string;
+  logo: string;
+}
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -26,20 +43,42 @@ const schemaData = {
 
 
 const data = await getReviews(); // data is an object with docs array: data { docs[] }
-//const {docs} = data; // docs is an array []
-const topRatedBrokers = await data
-//const {regulation} = topRatedBrokers
+const {docs} = data; // docs is an array []
+const topRatedBrokers = await docs
+//const {catRatings} = topRatedBrokers
 
-// Post-process to keep only name and slug:
+const brokers = topRatedBrokers.map(broker => { //Single broker object
+  const {
+    fxAssetsOffered: {
+      forex,
+      stocks,
+      commodities,
+      energies,
+      metals
+    } = {},
+    selectedAssets = [],
+    id, 
+    brokerRating
+  } = broker;
+
+  return {
+    id,
+    selectedAssets,
+    brokerRating,
+    assets: { forex, stocks, commodities, energies, metals }
+  };
+})
+const [one, two, three] = topRatedBrokers
+console.info("Forex Broker One Data", one.assetsOffered)
 
 
-console.info("Data from the API:", topRatedBrokers)
+//console.info("Data from the API:", topRatedBrokers )
 
 const topBrokers = [
   {
     name: "XM Group",
     rating: 4.8,
-    regulation: "CySEC, ASIC",
+    regulation: ["CySEC", "ASIC"],
     minDeposit: "$5",
     spread: "0.6 pips",
     features: ["CMA Approved", "Kenyan Support", "Mobile Trading"],
@@ -48,7 +87,7 @@ const topBrokers = [
   {
     name: "AvaTrade",
     rating: 4.6,
-    regulation: "CBI, ASIC",
+    regulation: ["CBI", "ASIC"],
     minDeposit: "$100",
     spread: "0.9 pips",
     features: ["Copy Trading", "Demo Account", "Educational Tools"],
@@ -57,7 +96,7 @@ const topBrokers = [
   {
     name: "HotForex",
     rating: 4.5,
-    regulation: "CySEC, FCA",
+    regulation: ["CySEC", "FCA"],
     minDeposit: "$5",
     spread: "1.0 pips",
     features: ["Zero Spread", "Bonus Programs", "Local Payment"],
@@ -91,7 +130,7 @@ const topBrokers = [
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {topBrokers.map((broker, index) => (
+        {topBrokers?.map((broker, index) => (
           <div class="group relative bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500 hover:transform hover:scale-105">
             <!-- Glow effect on hover -->
             <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary-500/10 to-accent-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -122,7 +161,7 @@ const topBrokers = [
               <div class="space-y-3 mb-6">
                 <div class="flex justify-between text-sm">
                   <span class="text-neutral-400">Regulation:</span>
-                  <span class="text-white font-medium">{broker.regulation}</span>
+                  <span class="text-white font-medium">{broker.regulation?.join(", ")}</span>
                 </div>
                 <div class="flex justify-between text-sm">
                   <span class="text-neutral-400">Min Deposit:</span>
