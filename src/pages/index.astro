@@ -11,6 +11,7 @@ type Regulation = {
   name: string;
   shortName: string;
   country: string;
+  id: string;
 }
 
 type BrokerProps = {
@@ -48,30 +49,36 @@ const {docs} = await data; // docs is an array []
 const topRatedBrokers = await docs
 //const {catRatings} = topRatedBrokers
 
-const topBrokers: BrokerProps = topRatedBrokers.map((broker: { brokerName: any; brokerRating: any; slug: string; minDeposit: any; regulation?: never[] | undefined; fxAssetsOffered?: {} | undefined; selectedAssets?: never[] | undefined; id: any; })  => { //Single broker object
+const topBrokersArray: BrokerProps = topRatedBrokers.map((broker: { brokerName: any; brokerRating: any; slug: string; minDeposit: any; regulation?: Regulation[] | undefined; fxAssetsOffered?: {} | undefined; selectedAssets?: never[] | undefined; id: any; })  => { //Single broker object
   const {
     brokerName: name,
     brokerRating: rating,
     minDeposit,
     slug,
-    regulation = [],
-    
-    selectedAssets = [],
+    regulation,
     id, 
   } = broker;
+
+  
+
+  // If you need to process regulation data further
+  const processedRegulation = regulation?.map(reg => ({
+    name: reg.name,
+    shortName: reg.shortName,
+    country: reg.country,
+    id: reg.id
+  }));
 
   return {
     id,
     minDeposit,
-    selectedAssets,
     rating,
     name,
     slug,
-    regulation,
+    regulation: processedRegulation, // or just use regulation directly
     
   };
 })
-
 
 /*const defaultBrokers = [
   {
