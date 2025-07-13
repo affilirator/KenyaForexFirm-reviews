@@ -7,7 +7,8 @@ export const staticBrokers: BrokerProps[] = [
     brokerName: "XM Group",
     logo: "🏛️",
     brokerRating: 4.8,
-    regulation: [
+    regulation: [ // an array of regulation objects
+      { name: "Financial Conduct Authority", shortName: "FCA", country: "United Kingdom", id: "fca" },
       { name: "Cyprus Securities and Exchange Commission", shortName: "CySEC", country: "Cyprus", id: "cysec" },
       { name: "Australian Securities and Investments Commission", shortName: "ASIC", country: "Australia", id: "asic" },
       { name: "International Financial Services Commission", shortName: "IFSC", country: "Belize", id: "ifsc" }

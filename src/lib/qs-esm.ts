@@ -2,6 +2,8 @@
 //   'https://localhost:3000/api/posts?select[color]=true&select[group][number]=true'
 import { stringify } from 'qs-esm'
 import { parse } from 'qs-esm';
+import type { BrokerProps } from '../types';
+
 
 const PAYLOAD_API_URL = "https://api.kenyaforexfirm.com"
 
@@ -42,7 +44,7 @@ const select = {
 }
 
 
-export const getReviews = async () => {
+export const getReviews = async (): Promise<{ docs: BrokerProps[] }> => {
   const stringifiedQuery = stringify(
     {
       //populate,

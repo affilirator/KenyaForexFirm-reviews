@@ -41,6 +41,13 @@ export type BrokerReview = {
   logo?: string;
 }
 
+export type Logo =  {
+  filename: string;
+  id: string;
+  url: string;
+
+}
+
 export type BrokerProps = {
   id: string;
   brokerName: string;
@@ -58,7 +65,7 @@ export type BrokerProps = {
   bonusAvailable?: boolean;
   islamicAccount?: boolean;
   category?: string;
-  logo?: string;
+  logo?: string | Logo;
   review?: BrokerReview;
   regulation?: Array<Regulation> | Regulation[];
   minDeposit?: number;
