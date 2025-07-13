@@ -30,3 +30,40 @@ export const getReviews = async (): Promise<{ docs: BrokerProps[] }> => {
     return { docs: [] };
   }
 };
+export const getReviewById = async (id: string): Promise<BrokerProps | null> => {
+  try {
+    const response = await fetch(`${PAYLOAD_API_URL}/api/broker-reviews/${id}`);
+    
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error(`Failed to fetch review with ID ${id}:`, error);
+    return null;
+  }
+};
+export const getReviewBySlug = async (slug: string): Promise<BrokerProps | null> => {
+  try {
+    const queryString = stringify({
+      where: {
+        slug: { equals: slug },
+        status: { equals: 'published' }
+      },
+      depth: 3
+    }, { addQueryPrefix: true });
+    
+    const response = await fetch(`${PAYLOAD_API_URL}/api/broker-reviews${queryString}`);
+    
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data.docs?.[0] || null;
+  } catch (error) {
+    console.error(`Failed to fetch review with slug ${slug}:`, error);
+    return null;
+  }
+};

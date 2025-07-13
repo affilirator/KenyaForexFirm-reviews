@@ -1,0 +1,44 @@
+---
+import type { BrokerProps } from '~/types';
+
+interface Props {
+  broker: BrokerProps;
+  content?: string;
+}
+
+const { broker, content } = Astro.props;
+---
+
+<section id="overview" class="mb-16">
+  <h2 class="text-3xl font-display font-bold text-white mb-6">
+    {broker.brokerName} Overview
+  </h2>
+
+  <div class="prose prose-invert max-w-none">
+    <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-8 border border-neutral-700/50 mb-8">
+      {content ? (
+        <div set:html={content} class="text-lg text-neutral-300 leading-relaxed" />
+      ) : (
+        <>
+          <p class="text-lg text-neutral-300 leading-relaxed mb-6">
+            {broker.brokerName} is a {broker.category || 'forex and CFD'} broker {broker.founded ? `established in ${broker.founded}` : 'serving traders globally'}.
+            {broker.headquarters && ` The company is headquartered in ${broker.headquarters}`} and offers comprehensive trading services
+            {broker.cmaApproved ? ' with CMA approval for Kenyan clients' : ' to international clients'}.
+          </p>
+
+          <p class="text-neutral-300 leading-relaxed mb-6">
+            What sets {broker.brokerName} apart is its commitment to providing {broker.minDeposit && broker.minDeposit <= 100 ? 'accessible trading with low minimum deposits' : 'professional trading services'}
+            {broker.platforms && broker.platforms.length > 0 && ` across ${broker.platforms.length} trading platforms`}.
+            {broker.regulation && broker.regulation.length > 0 && ` The broker maintains strong regulatory compliance with ${broker.regulation.length} regulatory licenses`}.
+          </p>
+
+          <p class="text-neutral-300 leading-relaxed">
+            For Kenyan traders specifically, {broker.brokerName} provides 
+            {broker.paymentMethods?.includes('M-Pesa') ? 'M-Pesa payment support, making deposits and withdrawals convenient for local clients' : 'various payment methods suitable for international clients'}.
+            {broker.islamicAccount && ' The broker also offers Islamic accounts for traders following Shariah principles'}.
+          </p>
+        </>
+      )}
+    </div>
+  </div>
+</section>

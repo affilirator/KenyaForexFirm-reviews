@@ -1,0 +1,310 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrokerHeader from '../../components/review/BrokerHeader.astro';
+import BrokerNavigation from '../../components/review/BrokerNavigation.astro';
+import BrokerOverview from '../../components/review/BrokerOverview.astro';
+import BrokerRegulation from '../../components/review/BrokerRegulation.astro';
+import BrokerProsAndCons from '../../components/review/BrokerProsAndCons.astro';
+import BrokerVerdict from '../../components/review/BrokerVerdict.astro';
+import RiskWarning from '../../components/review/RiskWarning.astro';
+import { getReviews, getReviewBySlug } from '../../lib/qs-esm';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const { docs: brokers } = await getReviews();
+  
+  return brokers.map((broker) => ({
+    params: { slug: broker.slug },
+    props: { broker }
+  }));
+}
+
+const { slug } = Astro.params;
+const { broker } = Astro.props;
+
+if (!broker) {
+  return Astro.redirect('/404');
+}
+
+const logoUrl = typeof broker.logo === 'string' ? broker.logo : broker.logo?.url;
+const currentYear = new Date().getFullYear();
+
+// SEO optimized title and description
+const title = `${broker.brokerName} Review ${currentYear} - Expert Analysis for Kenyan Traders`;
+const description = `Comprehensive ${broker.brokerName} review for Kenyan traders. Expert analysis of regulation, spreads, platforms, and features. ${broker.cmaApproved ? 'CMA approved broker' : 'International broker'} with ${broker.minDeposit ? `$${broker.minDeposit} minimum deposit` : 'competitive conditions'}.`;
+
+// Schema.org structured data for EEAT
+const reviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "FinancialService",
+    "@id": `${site.url}/brokers/${broker.slug}/#FinancialService`,
+    "name": broker.brokerName,
+    "description": `${broker.brokerName} is a ${broker.category || 'forex and CFD'} broker offering trading services${broker.cmaApproved ? ' with CMA approval for Kenyan clients' : ' to international clients'}.`,
+    "url": `${site.url}/brokers/${broker.slug}/`,
+    "logo": logoUrl,
+    "address": broker.headquarters ? {
+      "@type": "PostalAddress",
+      "addressLocality": broker.headquarters
+    } : undefined,
+    "foundingDate": broker.founded ? `${broker.founded}-01-01` : undefined,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": broker.brokerRating,
+      "bestRating": 10,
+      "worstRating": 1,
+      "ratingCount": 1
+    },
+    "offers": broker.minDeposit ? {
+      "@type": "Offer",
+      "name": "Trading Account",
+      "price": broker.minDeposit,
+      "priceCurrency": "USD",
+      "description": `Minimum deposit of $${broker.minDeposit}`
+    } : undefined
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Kenya Forex Review Team",
+    "jobTitle": "Senior Financial Analyst",
+    "worksFor": {
+      "@type": "Organization",
+      "name": site.siteName,
+      "url": site.url
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": site.siteName,
+    "url": site.url,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${site.url}${site.logoPath}`
+    }
+  },
+  "datePublished": new Date().toISOString().split('T')[0],
+  "dateModified": new Date().toISOString().split('T')[0],
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": broker.brokerRating,
+    "bestRating": 10,
+    "worstRating": 1
+  },
+  "reviewBody": `Our comprehensive review of ${broker.brokerName} covers all aspects important to Kenyan traders including regulation, trading costs, platform features, and customer support.`
+};
+
+// Breadcrumb schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": site.url
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Broker Reviews",
+      "item": `${site.url}/brokers/`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": `${broker.brokerName} Review`,
+      "item": `${site.url}/brokers/${broker.slug}/`
+    }
+  ]
+};
+
+// FAQ Schema for EEAT
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `Is ${broker.brokerName} regulated?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": broker.regulation && broker.regulation.length > 0 
+          ? `Yes, ${broker.brokerName} is regulated by ${broker.regulation.map(reg => reg.name).join(', ')}.`
+          : `${broker.brokerName} regulatory information is not fully available in our database.`
+      }
+    },
+    {
+      "@type": "Question", 
+      "name": `What is the minimum deposit for ${broker.brokerName}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": broker.minDeposit 
+          ? `The minimum deposit for ${broker.brokerName} is $${broker.minDeposit}.`
+          : `Minimum deposit information for ${broker.brokerName} varies by account type.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Is ${broker.brokerName} suitable for Kenyan traders?`,
+      "acceptedAnswer": {
+        "@type": "Answer", 
+        "text": broker.cmaApproved
+          ? `Yes, ${broker.brokerName} is CMA approved and specifically caters to Kenyan traders with local payment methods.`
+          : `${broker.brokerName} accepts international clients, though specific Kenyan regulatory approval may vary.`
+      }
+    }
+  ]
+};
+
+const combinedSchema = [reviewSchema, breadcrumbSchema, faqSchema];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={logoUrl}
+  schemaData={combinedSchema}
+>
+  <BrokerHeader broker={broker} />
+  <BrokerNavigation />
+  
+  <main class="py-12 bg-gradient-to-b from-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <BrokerOverview broker={broker} />
+      <BrokerRegulation broker={broker} />
+      
+      <!-- Account Types Section -->
+      {broker.accountTypes && broker.accountTypes.length > 0 && (
+        <section id="accounts" class="mb-16">
+          <h2 class="text-3xl font-display font-bold text-white mb-6">
+            Account Types
+          </h2>
+          <div class="grid lg:grid-cols-3 gap-6">
+            {broker.accountTypes.map((accountType, index) => (
+              <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-xl font-semibold text-white">{accountType}</h3>
+                  {index === 1 && (
+                    <span class="bg-primary-500/20 text-primary-400 px-2 py-1 rounded-full text-xs font-medium">
+                      Popular
+                    </span>
+                  )}
+                </div>
+                <button class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                  Open {accountType}
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Platforms Section -->
+      {broker.platforms && broker.platforms.length > 0 && (
+        <section id="platforms" class="mb-16">
+          <h2 class="text-3xl font-display font-bold text-white mb-6">
+            Trading Platforms
+          </h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {broker.platforms.map(platform => (
+              <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+                <h3 class="text-xl font-semibold text-white mb-4">{platform}</h3>
+                <div class="space-y-3">
+                  <div class="flex items-center">
+                    <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-neutral-300">Advanced charting</span>
+                  </div>
+                  <div class="flex items-center">
+                    <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-neutral-300">Expert advisors</span>
+                  </div>
+                  <div class="flex items-center">
+                    <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-neutral-300">Mobile trading</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Spreads & Fees Section -->
+      <section id="spreads" class="mb-16">
+        <h2 class="text-3xl font-display font-bold text-white mb-6">
+          Spreads & Fees
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+            <h3 class="text-xl font-semibold text-white mb-4">Typical Spreads</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between">
+                <span class="text-neutral-400">EUR/USD:</span>
+                <span class="text-white font-medium">{typeof broker.spread === 'number' ? `${broker.spread} pips` : broker.spread || 'Variable'}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-neutral-400">GBP/USD:</span>
+                <span class="text-white font-medium">Variable</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-neutral-400">USD/JPY:</span>
+                <span class="text-white font-medium">Variable</span>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+            <h3 class="text-xl font-semibold text-white mb-4">Fees</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between">
+                <span class="text-neutral-400">Commission:</span>
+                <span class="text-white font-medium">{broker.commission || 'Varies by account'}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-neutral-400">Deposit Fee:</span>
+                <span class="text-white font-medium">Usually Free</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-neutral-400">Withdrawal Fee:</span>
+                <span class="text-white font-medium">Varies</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Payment Methods Section -->
+      {broker.paymentMethods && broker.paymentMethods.length > 0 && (
+        <section id="payments" class="mb-16">
+          <h2 class="text-3xl font-display font-bold text-white mb-6">
+            Payment Methods
+          </h2>
+          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {broker.paymentMethods.map(method => (
+                <div class="flex items-center p-3 bg-neutral-800/50 rounded-lg">
+                  <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-white font-medium">{method}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <BrokerProsAndCons broker={broker} />
+      <BrokerVerdict broker={broker} />
+    </div>
+  </main>
+
+  <RiskWarning />
+</BaseLayout>

@@ -1,0 +1,18 @@
+---
+interface Props {
+  customWarning?: string;
+}
+
+const { customWarning } = Astro.props;
+
+const defaultWarning = "Trading forex and CFDs involves substantial risk of loss and is not suitable for all investors. Past performance is not indicative of future results. Please ensure you understand the risks involved.";
+---
+
+<section class="py-8 bg-neutral-950 border-t border-neutral-800/50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p class="text-sm text-neutral-400">
+      <strong class="text-neutral-300">Risk Warning:</strong>
+      {customWarning || defaultWarning}
+    </p>
+  </div>
+</section>

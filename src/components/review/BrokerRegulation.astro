@@ -1,0 +1,79 @@
+---
+import type { BrokerProps } from '~/types';
+
+interface Props {
+  broker: BrokerProps;
+}
+
+const { broker } = Astro.props;
+const regulations = Array.isArray(broker.regulation) ? broker.regulation : broker.regulation ? [broker.regulation] : [];
+---
+
+<section id="regulation" class="mb-16">
+  <h2 class="text-3xl font-display font-bold text-white mb-6">
+    Regulation & Safety
+  </h2>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+      <h3 class="text-xl font-semibold text-white mb-4">Regulatory Licenses</h3>
+      {regulations.length > 0 ? (
+        <div class="space-y-4">
+          {regulations.map(reg => (
+            <div class="flex items-center justify-between p-3 bg-neutral-800/50 rounded-lg">
+              <div>
+                <div class="font-semibold text-white">{reg.name}</div>
+                <div class="text-sm text-neutral-400">{reg.country}</div>
+              </div>
+              <div class="text-sm text-neutral-300">{reg.shortName}</div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="text-neutral-400 text-center py-8">
+          <p>Regulatory information not available</p>
+        </div>
+      )}
+    </div>
+
+    <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+      <h3 class="text-xl font-semibold text-white mb-4">Safety Features</h3>
+      <ul class="space-y-3">
+        <li class="flex items-center">
+          <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          <span class="text-neutral-300">Segregated client funds</span>
+        </li>
+        {regulations.length > 0 && (
+          <li class="flex items-center">
+            <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-neutral-300">Regulatory oversight</span>
+          </li>
+        )}
+        <li class="flex items-center">
+          <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          <span class="text-neutral-300">SSL encryption</span>
+        </li>
+        <li class="flex items-center">
+          <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          <span class="text-neutral-300">Negative balance protection</span>
+        </li>
+        {broker.cmaApproved && (
+          <li class="flex items-center">
+            <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-neutral-300">CMA approved for Kenya</span>
+          </li>
+        )}
+      </ul>
+    </div>
+  </div>
+</section>
