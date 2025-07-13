@@ -1,24 +1,25 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
 
-//import cloudflare from '@astrojs/cloudflare';
-
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://fx.kenyaforexfirm.com',
-
   integrations: [
-    tailwind(),
-    mdx(),
-    sitemap()
+    tailwind({
+      applyBaseStyles: false,
+    })
   ],
-
-  //server: {
-    //host: '0.0.0.0'
-  //},
-  output: 'static',
-  //adapter: cloudflare()
+  build: {
+    inlineStylesheets: 'auto',
+  },
+  vite: {
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['astro-seo'],
+          },
+        },
+      },
+    },
+  },
 });

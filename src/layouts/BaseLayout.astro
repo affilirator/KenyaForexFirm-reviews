@@ -3,14 +3,12 @@ import { SEO } from "astro-seo";
 import { site } from "@data/site";
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-//import { organizationSchema } from "@data/organizationSchema"
 
 export interface Props {
   title: string;
   description: string;
   image?: string;
   noindex?: boolean;
-  nofollow?: boolean;
   schemaData?: any;
 }
 
@@ -19,40 +17,10 @@ const {
   description = "Comprehensive forex broker reviews and rankings for Kenyan traders. Expert analysis, regulatory information, and unbiased comparisons to help you choose the best forex broker.",
   image = "/og-image.jpg",
   noindex = false,
-  nofollow = false,
   schemaData
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-const organizationSchema = {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "@id": `${site.organization.id}`,
-        "name": site.name,
-        "url": site.organization.url,
-        "logo": site.logoPath ,
-        "description": site.description,
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": site.address.countryShortName,
-          "addressRegion": site.address.country,
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "customer service",
-          "email": site.address.email
-        },
-        "sameAs": site.profiles.map(profile => {
-            if ('facebook' in profile) {
-                return profile.facebook;
-            }
-            if ('twitter' in profile) {
-                return profile.twitter;
-            }
-            }).filter(Boolean)
-
-      };
 ---
 
 <!DOCTYPE html>
@@ -69,15 +37,8 @@ const organizationSchema = {
       canonical={canonicalURL.href}
       noindex={noindex}
       openGraph={{
-        basic: {
-          title: title,
-          type: "website",
-          image: image,
-        },
-        optional: {
-          description: description,
-          siteName: site.name,
-        },
+        basic: { title, type: "website", image },
+        optional: { description, siteName: site.name },
       }}
       twitter={{
         creator: "@kenyaforexfirm",
@@ -86,108 +47,41 @@ const organizationSchema = {
       }}
       extend={{
         link: [
-          { rel: "sitemap", href: "/sitemap-index.xml" },
           { rel: "preconnect", href: "https://fonts.googleapis.com" },
           { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "anonymous" },
         ],
         meta: [
-          { name: "author", content: site.siteName },
-          { name: "robots", content: noindex ? "noindex, nofollow" : "index, follow" },
-          { name: "robots", content: nofollow ? "noindex, nofollow" : "index, follow" },
-          { name: "geo.region", content: site.address.countryShortName },
-          { name: "geo.country", content: site.address.country },
-          { name: "dcterms.type", content: "Service" },
-          { name: "dcterms.audience", content: site.audience},
           { name: "theme-color", content: "#0ea5e9" },
         ],
       }}
     />
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-    <!-- Schema.org structured data -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+    
     {schemaData && (
       <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
     )}
-    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
-    
   </head>
 
   <body class="bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 text-neutral-100 min-h-screen">
-    <!-- Animated background grid -->
     <div class="fixed inset-0 bg-cyber-grid opacity-20 pointer-events-none" style="background-size: 50px 50px;"></div>
-
-    <!-- Gradient overlay for depth -->
     <div class="fixed inset-0 bg-gradient-to-t from-neutral-950/50 via-transparent to-neutral-950/50 pointer-events-none"></div>
 
-    <!-- Main content wrapper -->
     <div class="relative z-10">
       <Navigation />
       <slot />
       <Footer />
     </div>
 
-    <!-- Floating geometric shapes for visual interest -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden">
       <div class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-primary-500/10 to-accent-500/10 rounded-full blur-xl animate-float"></div>
       <div class="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-xl animate-float" style="animation-delay: -2s;"></div>
-      <div class="absolute bottom-40 left-20 w-40 h-40 bg-gradient-to-r from-primary-500/5 to-accent-500/5 rounded-full blur-xl animate-float" style="animation-delay: -4s;"></div>
     </div>
 
-    <!-- Global JavaScript for enhanced UX -->
-    <script>
-      // Smooth scroll behavior
-      document.documentElement.style.scrollBehavior = 'smooth';
-
-      // Add loading animation class removal
-      document.addEventListener('DOMContentLoaded', () => {
-        document.body.classList.add('loaded');
-      });
-    </script>
-
     <style>
-      /* Custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: #171717;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: linear-gradient(to bottom, #0ea5e9, #d946ef);
-        border-radius: 4px;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(to bottom, #0284c7, #c026d3);
-      }
-
-      /* Loading animation */
-      body:not(.loaded) {
-        overflow: hidden;
-      }
-
-      body:not(.loaded)::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #0a0a0a;
-        z-index: 9999;
-        animation: fadeOut 0.5s ease-out 1s forwards;
-      }
-
-      @keyframes fadeOut {
-        to {
-          opacity: 0;
-          visibility: hidden;
-        }
-      }
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #171717; }
+      ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #0ea5e9, #d946ef); border-radius: 4px; }
     </style>
   </body>
 </html>
