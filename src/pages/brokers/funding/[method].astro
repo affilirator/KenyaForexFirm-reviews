@@ -1,0 +1,57 @@
+---
+// Dynamic page for brokers filtered by payment method
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BrokerList from '../../../components/BrokerList.astro';
+import { getReviews } from '../../../lib/qs-esm';
+import { filterByPaymentMethod, getUniquePaymentMethods } from '../../../utils/brokerFilters';
+import { site } from '../../../data/site';
+
+export async function getStaticPaths() {
+  const { docs: brokers } = await getReviews();
+  const methods = getUniquePaymentMethods(brokers);
+  
+  return methods.map(method => ({
+    params: { method },
+    props: { 
+      brokers: filterByPaymentMethod(brokers, method.replace('-', ' ')),
+      method: method.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())
+    }
+  }));
+}
+
+const { brokers, method } = Astro.props;
+
+// SEO optimization
+const title = `Best Forex Brokers with ${method} ${new Date().getFullYear()} - Kenya`;
+const description = `Find top forex brokers accepting ${method} payments in Kenya. Compare spreads, features, and reviews of ${method} supported brokers for Kenyan traders.`;
+
+// Schema markup
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": title,
+  "description": description,
+  "url": `${site.url}/brokers/funding/${method.toLowerCase().replace(' ', '-')}/`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": brokers.length,
+    "itemListElement": brokers.map((broker, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "FinancialService",
+        "name": broker.brokerName,
+        "url": `${site.url}/brokers/${broker.slug}/`
+      }
+    }))
+  }
+};
+---
+
+<BaseLayout title={title} description={description} schemaData={schemaData}>
+  <BrokerList 
+    brokers={brokers}
+    title={`Best Brokers with ${method}`}
+    description={`Discover forex brokers that accept ${method} payments. Perfect for Kenyan traders looking for convenient funding options.`}
+  />
+</BaseLayout>

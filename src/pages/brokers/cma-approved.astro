@@ -1,0 +1,50 @@
+---
+// Static page for CMA approved brokers
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrokerList from '../../components/BrokerList.astro';
+import { getReviews } from '../../lib/qs-esm';
+import { site } from '../../data/site';
+
+// Filter CMA approved brokers
+const { docs: allBrokers } = await getReviews();
+const brokers = allBrokers.filter(broker => broker.cmaApproved);
+
+// SEO optimization
+const title = `CMA Approved Forex Brokers ${new Date().getFullYear()} - Kenya`;
+const description = `Discover CMA approved forex brokers in Kenya. Trade safely with Capital Markets Authority licensed brokers offering secure trading for Kenyan investors.`;
+
+// Schema markup
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": title,
+  "description": description,
+  "url": `${site.url}/brokers/cma-approved/`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": brokers.length,
+    "itemListElement": brokers.map((broker, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "FinancialService",
+        "name": broker.brokerName,
+        "url": `${site.url}/brokers/${broker.slug}/`,
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": broker.brokerRating,
+          "bestRating": 10
+        }
+      }
+    }))
+  }
+};
+---
+
+<BaseLayout title={title} description={description} schemaData={schemaData}>
+  <BrokerList 
+    brokers={brokers}
+    title="CMA Approved Forex Brokers"
+    description="Trade with confidence using CMA approved forex brokers. These brokers are licensed by Kenya's Capital Markets Authority, ensuring regulatory compliance and trader protection."
+  />
+</BaseLayout>

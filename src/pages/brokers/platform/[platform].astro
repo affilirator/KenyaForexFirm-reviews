@@ -1,0 +1,57 @@
+---
+// Dynamic page for brokers filtered by trading platform
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BrokerList from '../../../components/BrokerList.astro';
+import { getReviews } from '../../../lib/qs-esm';
+import { filterByPlatform, getUniquePlatforms } from '../../../utils/brokerFilters';
+import { site } from '../../../data/site';
+
+export async function getStaticPaths() {
+  const { docs: brokers } = await getReviews();
+  const platforms = getUniquePlatforms(brokers);
+  
+  return platforms.map(platform => ({
+    params: { platform },
+    props: { 
+      brokers: filterByPlatform(brokers, platform.replace('-', ' ')),
+      platform: platform.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())
+    }
+  }));
+}
+
+const { brokers, platform } = Astro.props;
+
+// SEO optimization
+const title = `Best ${platform} Forex Brokers ${new Date().getFullYear()} - Kenya`;
+const description = `Compare top forex brokers offering ${platform} trading platform in Kenya. Expert reviews, spreads comparison, and features analysis for ${platform} traders.`;
+
+// Schema markup
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": title,
+  "description": description,
+  "url": `${site.url}/brokers/platform/${platform.toLowerCase().replace(' ', '-')}/`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": brokers.length,
+    "itemListElement": brokers.map((broker, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "FinancialService",
+        "name": broker.brokerName,
+        "url": `${site.url}/brokers/${broker.slug}/`
+      }
+    }))
+  }
+};
+---
+
+<BaseLayout title={title} description={description} schemaData={schemaData}>
+  <BrokerList 
+    brokers={brokers}
+    title={`Best ${platform} Brokers`}
+    description={`Find top-rated forex brokers offering ${platform} trading platform. Compare features, spreads, and user reviews from Kenyan traders.`}
+  />
+</BaseLayout>
