@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Hero from '../components/Hero.astro';
 import TopBrokers from '../components/sections/TopBrokers.astro';
-import Footer from '../components/Footer.astro';
 import { site } from '~/data/site';
 import { getReviews } from '~/lib/qs-esm';
 
@@ -199,5 +198,5 @@ const topRatedBrokers = data?.docs || [];
     </div>
   </section>
 
-  <Footer />
+
 </BaseLayout>
