@@ -14,7 +14,8 @@ const logoUrl = typeof broker.logo === 'string' ? broker.logo : broker.logo?.url
 <div class="broker-card group bg-gradient-to-r from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500 overflow-hidden"
      data-broker-id={broker.id}
      data-rating={broker.brokerRating}
-     data-spread={broker.spread}
+     
+     data-spread={typeof broker.spread === 'number' ? broker.spread.toString() : broker.spread}
      data-deposit={broker.minDeposit}
      data-regulation={broker.regulation?.map(r => r.shortName).join(' ').toLowerCase()}
      data-cma={broker.cmaApproved}
@@ -62,8 +63,9 @@ const logoUrl = typeof broker.logo === 'string' ? broker.logo : broker.logo?.url
       </div>
       <div class="bg-neutral-800/30 rounded-lg p-3 text-center">
         <div class="text-sm text-neutral-400 mb-1">Avg Spread</div>
-        <div class="text-lg font-semibold text-white">{broker.spread} pips</div>
-      </div>
+        <div class="text-lg font-semibold text-white">
+  {typeof broker.spread === 'number' ? `${broker.spread} pips` : broker.spread}
+</div>
       <div class="bg-neutral-800/30 rounded-lg p-3 text-center">
         <div class="text-sm text-neutral-400 mb-1">Max Leverage</div>
         <div class="text-lg font-semibold text-white">{broker.maxLeverage}</div>

@@ -69,6 +69,8 @@ export type BrokerProps = {
   review?: BrokerReview;
   regulation?: Array<Regulation> | Regulation[];
   minDeposit?: number;
-  spread?: string;
+  spread?: string | number;
+  commission?: string | number;
+  leverage?: string;
   
 }
