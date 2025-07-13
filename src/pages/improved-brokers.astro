@@ -1,5 +1,5 @@
 ---
-// src/pages/brokers-refactored.astro
+// src/pages/improved-brokers.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import BrokerCard from '../components/review/BrokerCard.astro';
@@ -23,7 +23,8 @@ const schemaData = {
 
 // Fetch dynamic data and merge with static data
 const dynamicData = await getReviews();
-const brokers = dynamicData?.docs?.length > 0 ? dynamicData.docs : staticBrokers;
+//const brokers = dynamicData?.docs?.length > 0 ? dynamicData.docs : staticBrokers;
+const brokers =  staticBrokers;
 ---
 
 <BaseLayout
@@ -33,7 +34,6 @@ const brokers = dynamicData?.docs?.length > 0 ? dynamicData.docs : staticBrokers
   
   <Navigation />
 
-  <!-- Header Section -->
   <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
@@ -44,22 +44,17 @@ const brokers = dynamicData?.docs?.length > 0 ? dynamicData.docs : staticBrokers
           Compare the top-rated forex brokers available to Kenyan traders. Our expert analysis covers regulation, spreads, platforms, and features to help you make informed decisions.
         </p>
       </div>
-
       <FilterControls />
     </div>
   </section>
 
-  <!-- Broker Listings -->
   <section class="py-12 bg-gradient-to-b from-neutral-950 to-neutral-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Results Summary -->
       <div class="mb-8">
         <p class="text-neutral-400">
           <span id="resultsCount">{brokers.length}</span> brokers found
         </p>
       </div>
-
-      <!-- Broker Cards -->
       <div id="brokerGrid" class="space-y-6">
         {brokers.map((broker, index) => (
           <BrokerCard broker={broker} index={index} />
@@ -69,149 +64,102 @@ const brokers = dynamicData?.docs?.length > 0 ? dynamicData.docs : staticBrokers
   </section>
 
   <style>
-    .broker-card.hidden {
-      display: none;
-    }
+    .broker-card.hidden { display: none; }
   </style>
 
   <script>
-    import { filterBrokers, sortBrokers } from '../utils/brokerFilters';
+  class BrokerFilter {
+    brokerCards;
     
-    // Initialize filtering system
-    class BrokerFilter {
-      constructor() {
-        this.brokerCards = document.querySelectorAll('.broker-card');
-        this.selectedBrokers = new Set();
-        this.initializeEventListeners();
-      }
-
-      initializeEventListeners() {
-        const searchInput = document.getElementById('brokerSearch');
-        const regulationFilter = document.getElementById('regulationFilter');
-        const depositFilter = document.getElementById('depositFilter');
-        const sortFilter = document.getElementById('sortFilter');
-        const quickFilters = document.querySelectorAll('.quick-filter');
-
-        searchInput?.addEventListener('input', () => this.applyFilters());
-        regulationFilter?.addEventListener('change', () => this.applyFilters());
-        depositFilter?.addEventListener('change', () => this.applyFilters());
-        sortFilter?.addEventListener('change', () => this.applySorting());
-
-        quickFilters.forEach(button => {
-          button.addEventListener('click', (e) => this.handleQuickFilter(e));
-        });
-      }
-
-      applyFilters() {
-        const searchTerm = document.getElementById('brokerSearch')?.value;
-        const regulation = document.getElementById('regulationFilter')?.value;
-        const deposit = document.getElementById('depositFilter')?.value;
-
-        let visibleCount = 0;
-
-        this.brokerCards.forEach(card => {
-          const shouldShow = this.shouldShowCard(card, { searchTerm, regulation, deposit });
-          
-          if (shouldShow) {
-            card.classList.remove('hidden');
-            visibleCount++;
-          } else {
-            card.classList.add('hidden');
-          }
-        });
-
-        document.getElementById('resultsCount').textContent = visibleCount;
-      }
-
-      shouldShowCard(card, filters) {
-        // Search filter
-        if (filters.searchTerm) {
-          const brokerName = card.querySelector('h3')?.textContent?.toLowerCase();
-          const searchLower = filters.searchTerm.toLowerCase();
-          if (!brokerName?.includes(searchLower)) return false;
-        }
-
-        // Regulation filter
-        if (filters.regulation) {
-          if (filters.regulation === 'cma-approved' && card.dataset.cma !== 'true') return false;
-          if (filters.regulation !== 'cma-approved' && !card.dataset.regulation?.includes(filters.regulation)) return false;
-        }
-
-        // Deposit filter
-        if (filters.deposit) {
-          const minDeposit = parseFloat(card.dataset.deposit);
-          const ranges = {
-            '0-10': [0, 10],
-            '10-100': [10, 100],
-            '100-500': [100, 500],
-            '500+': [500, Infinity]
-          };
-          const [min, max] = ranges[filters.deposit] || [0, Infinity];
-          if (minDeposit < min || minDeposit > max) return false;
-        }
-
-        return true;
-      }
-
-      applySorting() {
-        const sortBy = document.getElementById('sortFilter')?.value;
-        const container = document.getElementById('brokerGrid');
-        const cards = Array.from(this.brokerCards);
-
-        cards.sort((a, b) => {
-          switch (sortBy) {
-            case 'rating':
-              return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
-            case 'spread':
-              return parseFloat(a.dataset.spread) - parseFloat(b.dataset.spread);
-            case 'deposit':
-              return parseFloat(a.dataset.deposit) - parseFloat(b.dataset.deposit);
-            default:
-              return 0;
-          }
-        });
-
-        cards.forEach(card => container?.appendChild(card));
-        this.applyFilters();
-      }
-
-      handleQuickFilter(e) {
-        const button = e.target;
-        const filter = button.dataset.filter;
-        
-        button.classList.toggle('active');
-        
-        // Reset other quick filters
-        document.querySelectorAll('.quick-filter').forEach(otherButton => {
-          if (otherButton !== button) {
-            otherButton.classList.remove('active');
-          }
-        });
-
-        // Apply quick filter logic
-        if (button.classList.contains('active')) {
-          switch (filter) {
-            case 'cma-approved':
-              document.getElementById('regulationFilter').value = 'cma-approved';
-              break;
-            case 'low-deposit':
-              document.getElementById('depositFilter').value = '0-10';
-              break;
-            case 'islamic':
-              // Custom logic for Islamic accounts
-              break;
-          }
-        } else {
-          // Reset filters
-          document.getElementById('regulationFilter').value = '';
-          document.getElementById('depositFilter').value = '';
-        }
-
-        this.applyFilters();
-      }
+    constructor() {
+      this.brokerCards = document.querySelectorAll('.broker-card');
+      this.initializeEventListeners();
     }
 
-    // Initialize the filter system
-    new BrokerFilter();
-  </script>
+    initializeEventListeners() {
+      document.getElementById('brokerSearch')?.addEventListener('input', () => this.applyFilters());
+      document.getElementById('regulationFilter')?.addEventListener('change', () => this.applyFilters());
+      document.getElementById('depositFilter')?.addEventListener('change', () => this.applyFilters());
+      document.getElementById('sortFilter')?.addEventListener('change', () => this.applySorting());
+      document.querySelectorAll('.quick-filter').forEach(button => {
+        button.addEventListener('click', (e) => this.handleQuickFilter(e));
+      });
+    }
+
+    applyFilters() {
+  const searchTerm = (document.getElementById('brokerSearch') as HTMLInputElement)?.value?.toLowerCase();
+  const regulation = (document.getElementById('regulationFilter') as HTMLSelectElement)?.value;
+  const deposit = (document.getElementById('depositFilter') as HTMLSelectElement)?.value;
+  let visibleCount = 0;
+
+      this.brokerCards.forEach(card => {
+        const htmlCard = card as HTMLElement;
+        let show = true;
+
+        if (searchTerm && !card.querySelector('h3')?.textContent?.toLowerCase().includes(searchTerm)) show = false;
+        if (regulation === 'cma-approved' && htmlCard.dataset.cma !== 'true') show = false;
+        if (regulation && regulation !== 'cma-approved' && !htmlCard.dataset.regulation?.includes(regulation)) show = false;
+        
+        if (deposit) {
+          const minDeposit = parseFloat(htmlCard.dataset.deposit || '0');
+          const ranges: Record<string, number[]> = { '0-10': [0, 10], '10-100': [10, 100], '100-500': [100, 500], '500+': [500, Infinity] };
+          const [min, max] = ranges[deposit] || [0, Infinity];
+          if (minDeposit < min || minDeposit > max) show = false;
+        }
+
+        card.classList.toggle('hidden', !show);
+        if (show) visibleCount++;
+      });
+
+      document.getElementById('resultsCount')!.textContent = visibleCount.toString();
+    }
+
+    applySorting() {
+  const sortBy = (document.getElementById('sortFilter') as HTMLSelectElement)?.value;
+      const container = document.getElementById('brokerGrid');
+      const cards = Array.from(this.brokerCards);
+
+      cards.sort((a, b) => {
+        const htmlA = a as HTMLElement;
+        const htmlB = b as HTMLElement;
+        switch (sortBy) {
+          case 'rating': return parseFloat(htmlB.dataset.rating || '0') - parseFloat(htmlA.dataset.rating || '0');
+          case 'spread': return parseFloat(htmlA.dataset.spread || '0') - parseFloat(htmlB.dataset.spread || '0');
+          case 'deposit': return parseFloat(htmlA.dataset.deposit || '0') - parseFloat(htmlB.dataset.deposit || '0');
+          default: return 0;
+        }
+      });
+
+      cards.forEach(card => container?.appendChild(card));
+      this.applyFilters();
+    }
+
+    handleQuickFilter(e: Event) {
+      const button = e.target as HTMLElement;
+      const filter = button.dataset.filter;
+      
+      button.classList.toggle('active');
+      document.querySelectorAll('.quick-filter').forEach(b => b !== button && b.classList.remove('active'));
+
+      
+  if (button.classList.contains('active')) {
+    switch (filter) {
+      case 'cma-approved': 
+        (document.getElementById('regulationFilter') as HTMLSelectElement).value = 'cma-approved'; 
+        break;
+      case 'low-deposit': 
+        (document.getElementById('depositFilter') as HTMLSelectElement).value = '0-10'; 
+        break;
+    }
+  } else {
+    (document.getElementById('regulationFilter') as HTMLSelectElement).value = '';
+    (document.getElementById('depositFilter') as HTMLSelectElement).value = '';
+  }
+  this.applyFilters();
+}
+  }
+
+  new BrokerFilter();
+</script>
+
 </BaseLayout>
