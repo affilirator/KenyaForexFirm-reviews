@@ -23,8 +23,8 @@ const schemaData = {
 
 // Fetch dynamic data and merge with static data
 const dynamicData = await getReviews();
-//const brokers = dynamicData?.docs?.length > 0 ? dynamicData.docs : staticBrokers;
-const brokers =  staticBrokers;
+const brokers = dynamicData?.docs?.length > 0 ? dynamicData.docs : staticBrokers;
+//const brokers =  staticBrokers;
 ---
 
 <BaseLayout
