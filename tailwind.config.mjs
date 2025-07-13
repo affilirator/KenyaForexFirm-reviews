@@ -25,8 +25,10 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Orbitron', 'system-ui', 'sans-serif'],
+        sans: ['Source Sans 3', 'system-ui', 'sans-serif'],
+        display: ['Playfair Display', 'serif'],
+        ui: ['Roboto', 'system-ui', 'sans-serif'],
+        serif: ['EB Garamond', 'serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

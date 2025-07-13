@@ -2,20 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Critical CSS - Above the fold */
 @layer base {
   html { scroll-behavior: smooth; }
-  body { @apply bg-neutral-950 text-neutral-100 antialiased; }
+  body { 
+    @apply bg-neutral-950 text-neutral-100 antialiased font-sans;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+  h1, h2, h3, h4, h5, h6 { 
+    @apply font-display font-medium;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'dlig' 1;
+  }
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl leading-tight; }
+  h2 { @apply text-3xl md:text-4xl leading-tight; }
+  h3 { @apply text-2xl md:text-3xl leading-snug; }
+  p { @apply leading-relaxed; }
 }
 
-/* Component optimizations */
 @layer components {
-  .btn-primary { @apply bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105; }
-  .card-glass { @apply bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50; }
-  .text-gradient { @apply bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent; }
+  .btn-primary { 
+    @apply bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-ui font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105; 
+  }
+  .card-glass { 
+    @apply bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50; 
+  }
+  .text-gradient { 
+    @apply bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent font-display font-medium; 
+  }
+  .prose-custom {
+    @apply font-serif text-lg leading-relaxed;
+  }
+  .ui-text {
+    @apply font-ui;
+  }
 }
 
-/* Performance optimizations */
 @layer utilities {
   .will-change-transform { will-change: transform; }
   .gpu-accelerated { transform: translateZ(0); }

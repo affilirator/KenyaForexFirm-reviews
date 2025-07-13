@@ -31,6 +31,7 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
 
     <SEO
       title={title}
@@ -47,17 +48,11 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
         card: "summary_large_image",
       }}
       extend={{
-        link: [
-          { rel: "preconnect", href: "https://fonts.googleapis.com" },
-          { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "anonymous" },
-        ],
         meta: [
           { name: "theme-color", content: "#0ea5e9" },
         ],
       }}
     />
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
     
     {schemaData && (
       <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
