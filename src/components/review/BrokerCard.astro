@@ -1,0 +1,104 @@
+---
+// src/components/BrokerCard.astro
+import type { BrokerProps } from '~/types';
+
+interface Props {
+  broker: BrokerProps;
+  index: number;
+}
+
+const { broker, index } = Astro.props;
+---
+
+<div class="broker-card group bg-gradient-to-r from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500 overflow-hidden"
+     data-broker-id={broker.id}
+     data-rating={broker.brokerRating}
+     data-spread={broker.spread}
+     data-deposit={broker.minDeposit}
+     data-regulation={broker.regulation?.map(r => r.shortName).join(' ').toLowerCase()}
+     data-cma={broker.cmaApproved}
+     data-bonus={broker.bonusAvailable}
+     data-islamic={broker.islamicAccount}>
+
+  <div class="p-6">
+    <!-- Header -->
+    <div class="flex items-start justify-between mb-6">
+      <div class="flex items-center">
+        <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center text-3xl mr-4 group-hover:scale-110 transition-transform duration-300">
+          {broker.logo}
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold text-white mb-1">{broker.brokerName}</h3>
+          <div class="flex items-center mb-2">
+            <div class="flex text-yellow-400 mr-2">
+              {"★".repeat(Math.floor(broker.brokerRating))}
+            </div>
+            <span class="text-neutral-400 text-sm">{broker.brokerRating}/5</span>
+            {broker.cmaApproved && (
+              <span class="ml-3 bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs font-medium">
+                CMA Approved
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+      <div class="text-right">
+        <div class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm font-medium mb-2">
+          #{index + 1}
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Stats -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="bg-neutral-800/30 rounded-lg p-3 text-center">
+        <div class="text-sm text-neutral-400 mb-1">Min Deposit</div>
+        <div class="text-lg font-semibold text-white">${broker.minDeposit}</div>
+      </div>
+      <div class="bg-neutral-800/30 rounded-lg p-3 text-center">
+        <div class="text-sm text-neutral-400 mb-1">Avg Spread</div>
+        <div class="text-lg font-semibold text-white">{broker.spread} pips</div>
+      </div>
+      <div class="bg-neutral-800/30 rounded-lg p-3 text-center">
+        <div class="text-sm text-neutral-400 mb-1">Max Leverage</div>
+        <div class="text-lg font-semibold text-white">{broker.maxLeverage}</div>
+      </div>
+    </div>
+
+    <!-- Regulation & Features -->
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <h4 class="text-sm font-medium text-neutral-300 mb-2">Regulation</h4>
+        <div class="flex flex-wrap gap-1">
+          {broker.regulation?.map(reg => (
+            <span class="bg-neutral-700/50 text-neutral-300 px-2 py-1 rounded text-xs">
+              {reg.shortName}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div>
+        <h4 class="text-sm font-medium text-neutral-300 mb-2">Key Features</h4>
+        <div class="flex flex-wrap gap-1">
+          {broker.features?.slice(0, 4).map(feature => (
+            <span class="bg-primary-500/20 text-primary-400 px-2 py-1 rounded text-xs">
+              {feature}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-col sm:flex-row gap-3">
+      <a href={`/brokers/${broker.slug}/`}
+         class="flex-1 bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center">
+        Full Review
+      </a>
+      <button class="compare-btn bg-neutral-700/50 hover:bg-accent-600 text-neutral-300 hover:text-white font-medium py-3 px-4 rounded-lg transition-all duration-300"
+              data-broker-id={broker.id}>
+        Compare
+      </button>
+    </div>
+  </div>
+</div>

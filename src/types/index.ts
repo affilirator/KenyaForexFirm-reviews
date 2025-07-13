@@ -48,8 +48,20 @@ export type BrokerProps = {
   brokerRating: number;
   slug: string;
   features?: string[];
+  platforms?: string[];
+  accountTypes?: string[];
+  paymentMethods?: string[];
+  languages?: string[];
+  founded?: number;
+  headquarters?: string;
+  cmaApproved?: boolean;
+  bonusAvailable?: boolean;
+  islamicAccount?: boolean;
+  category?: string;
+  logo?: string;
+  review?: BrokerReview;
   regulation?: Array<Regulation> | Regulation[];
   minDeposit?: number;
   spread?: string;
-  logo?: string;
+  
 }
