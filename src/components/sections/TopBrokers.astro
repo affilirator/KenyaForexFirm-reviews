@@ -1,0 +1,53 @@
+---
+import BrokerCard from '../review/BrokerCard.astro';
+import type { BrokerProps } from '~/types';
+
+interface Props {
+  brokers: BrokerProps[];
+  title?: string;
+  subtitle?: string;
+  showViewAll?: boolean;
+}
+
+const { 
+  brokers, 
+  title = "Top Rated Forex Brokers",
+  subtitle = "Discover the highest-rated forex brokers available to Kenyan traders, carefully evaluated for regulation, features, and user experience.",
+  showViewAll = true 
+} = Astro.props;
+---
+
+<section class="py-20 bg-gradient-to-b from-neutral-950 to-neutral-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+        <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
+          {title}
+        </span>
+      </h2>
+      <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="space-y-6">
+      {brokers.map((broker, index) => (
+        <BrokerCard broker={broker} index={index} />
+      ))}
+    </div>
+
+    {showViewAll && (
+      <div class="text-center mt-12">
+        <a
+          href="/brokers/"
+          class="inline-flex items-center bg-gradient-to-r from-neutral-800 to-neutral-700 hover:from-neutral-700 hover:to-neutral-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 border border-neutral-600 hover:border-primary-500"
+        >
+          View All Brokers
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    )}
+  </div>
+</section>
