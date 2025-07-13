@@ -51,7 +51,7 @@ export type Logo =  {
 export type BrokerProps = {
   id: string;
   brokerName: string;
-  maxLeverage: string;
+  maxLeverage?: string;
   brokerRating: number;
   slug: string;
   features?: string[];
