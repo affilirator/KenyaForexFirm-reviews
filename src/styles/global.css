@@ -29,7 +29,7 @@
     @apply bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent font-display font-medium; 
   }
   .prose-custom {
-    @apply font-serif text-lg leading-relaxed;
+    @apply font-sans text-lg leading-relaxed;
   }
   .ui-text {
     @apply font-ui;
