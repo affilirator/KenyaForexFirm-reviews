@@ -4,9 +4,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://fx.kenyaforexfirm.com',
   integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    })
+    tailwind()
   ],
   build: {
     inlineStylesheets: 'auto',

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Critical CSS - Above the fold */
 @layer base {
   html { scroll-behavior: smooth; }
