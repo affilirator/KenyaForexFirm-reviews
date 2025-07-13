@@ -4,26 +4,9 @@ import Navigation from '../components/Navigation.astro';
 import Hero from '../components/Hero.astro';
 import { site } from '~/data/site';
 import { getReviews } from '~/lib/qs-esm';
+import type { BrokerProps } from '~/types';
 
 //import { organizationSchema } from '~/data/organizationSchema';
-
-type Regulation = {
-  name: string;
-  shortName: string;
-  country: string;
-  id: string;
-}
-
-type BrokerProps = {
-  brokerName: string;
-  brokerRating: number;
-  slug: string;
-  features?: string[];
-  regulation?: Array<Regulation> | Regulation[];
-  minDeposit?: number;
-  spread?: string;
-  logo?: string;
-}
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -45,40 +28,23 @@ const schemaData = {
 
 
 const data = await getReviews(); // data is an object with docs array: data { docs[] }
-const {docs} = await data; // docs is an array []
-const topRatedBrokers = await docs
+const {docs} =  data; // docs is an array []
+const topRatedBrokers = docs
 //const {catRatings} = topRatedBrokers
 
-const topBrokersArray: BrokerProps = topRatedBrokers.map((broker: { brokerName: any; brokerRating: any; slug: string; minDeposit: any; regulation?: Regulation[] | undefined; fxAssetsOffered?: {} | undefined; selectedAssets?: never[] | undefined; id: any; })  => { //Single broker object
-  const {
-    brokerName: name,
-    brokerRating: rating,
-    minDeposit,
-    slug,
-    regulation,
-    id, 
-  } = broker;
-
+// Fix the array type declaration
+const topBrokersArray: BrokerProps[] = topRatedBrokers.map((broker: any) => ({
+  id: broker.id,
+  brokerName: broker.brokerName,
+  brokerRating: broker.brokerRating,
+  slug: broker.slug,
+  minDeposit: broker.minDeposit,
+  spread: broker.spread,
+  regulation: broker.regulation,
+  features: broker.features,
+  logo: broker.logo
+}));
   
-
-  // If you need to process regulation data further
-  const processedRegulation = regulation?.map(reg => ({
-    name: reg.name,
-    shortName: reg.shortName,
-    country: reg.country,
-    id: reg.id
-  }));
-
-  return {
-    id,
-    minDeposit,
-    rating,
-    name,
-    slug,
-    regulation: processedRegulation, // or just use regulation directly
-    
-  };
-})
 
 /*const defaultBrokers = [
   {
