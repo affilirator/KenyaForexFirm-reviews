@@ -1,3 +1,5 @@
+import type { ReviewContentAuthor } from "./author";
+
 interface BrokerRegulation {
   name: string;
   shortName: string;
@@ -48,25 +50,66 @@ export type Logo =  {
 
 }
 
+export type BrokerPros = {
+  id: string;
+  pro: string;
+}
+
+export type BrokerCons = {
+  id: string;
+  con: string;
+}
+
+export type BrokerRatings = {
+  feesAndCommissions: number;
+  safetyAndRegulation: number;
+  tradingPlatforms: number;
+  customerService: number;
+  researchEducation: number;
+  userReviewsTrust: number;
+  overallExperience: number;
+  mobileTrading: number;
+  marketAccess: number;
+}
+
+export type BrokerBaseDetails = {
+  founded?: number;
+  country?: string;
+  city?: string;
+  phone?: string;
+  email?: string;
+  website?: string;
+  address?: string;
+  headquarters?: string;
+}
+
 export type BrokerProps = {
   id: string;
   brokerName: string;
   maxLeverage?: string;
   brokerRating: number;
   slug: string;
+  brokerWebsite?: string;
+  baseDetails?: BrokerBaseDetails;
+  ratings?: BrokerRatings;
+  pros?: BrokerPros[];
+  cons?: BrokerCons[];
   features?: string[];
   platforms?: string[];
   accountTypes?: string[];
   paymentMethods?: string[];
+  quickVerdict?: string;
   languages?: string[];
   founded?: number;
   headquarters?: string;
-  cmaApproved?: boolean;
+  cmaApproved: boolean;
   bonusAvailable?: boolean;
-  islamicAccount?: boolean;
+  islamicAccount: boolean;
+  acceptsMpesa: boolean;
   category?: string;
   logo?: string | Logo;
   review?: BrokerReview;
+  author: ReviewContentAuthor[];
   regulation?: Array<Regulation> | Regulation[];
   minDeposit?: number;
   spread?: string | number;
