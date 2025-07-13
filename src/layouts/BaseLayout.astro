@@ -20,7 +20,7 @@ const {
   schemaData
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = `${site.url}${Astro.url.pathname}`;
 ---
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <SEO
       title={title}
       description={description}
-      canonical={canonicalURL.href}
+      canonical={canonicalURL}
       noindex={noindex}
       openGraph={{
         basic: { title, type: "website", image },
