@@ -1,0 +1,96 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  showViewAll?: boolean;
+}
+
+const { 
+  title = "Latest Insights",
+  subtitle = "Stay updated with the latest forex market trends, broker news, and trading strategies tailored for Kenyan traders.",
+  showViewAll = true
+} = Astro.props;
+
+const articles = [
+  {
+    category: "Trading Guide",
+    title: "Best Forex Trading Strategies for Kenyan Beginners",
+    description: "Learn the most effective forex trading strategies specifically designed for new Kenyan traders.",
+    date: "Dec 15, 2024",
+    href: "/blog/forex-strategies-kenya",
+    gradient: "from-primary-500 to-accent-500"
+  },
+  {
+    category: "Market News", 
+    title: "KES Performance Against Major Currencies This Week",
+    description: "Analysis of the Kenyan Shilling's performance and what it means for forex traders.",
+    date: "Dec 12, 2024",
+    href: "/blog/kes-performance-analysis",
+    gradient: "from-accent-500 to-primary-500"
+  },
+  {
+    category: "Broker Review",
+    title: "New CMA Regulations: What Traders Need to Know", 
+    description: "Important updates from the Capital Markets Authority affecting forex trading in Kenya.",
+    date: "Dec 10, 2024",
+    href: "/blog/cma-regulations-update",
+    gradient: "from-primary-500 to-accent-500"
+  }
+];
+---
+
+<section class="py-20 bg-gradient-to-b from-neutral-950 to-neutral-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+        <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
+          {title}
+        </span>
+      </h2>
+      <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {articles.map(article => (
+        <article class="group bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
+          <div class={`h-48 bg-gradient-to-r ${article.gradient} relative overflow-hidden`}>
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="absolute bottom-4 left-4 text-white">
+              <span class="text-sm font-medium bg-black/50 px-2 py-1 rounded">{article.category}</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-primary-400 transition-colors duration-300">
+              {article.title}
+            </h3>
+            <p class="text-neutral-400 mb-4">
+              {article.description}
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-neutral-500">{article.date}</span>
+              <a href={article.href} class="text-primary-400 hover:text-primary-300 text-sm font-medium">
+                Read More →
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    {showViewAll && (
+      <div class="text-center mt-12">
+        <a
+          href="/blog"
+          class="inline-flex items-center bg-gradient-to-r from-neutral-800 to-neutral-700 hover:from-neutral-700 hover:to-neutral-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 border border-neutral-600 hover:border-primary-500"
+        >
+          View All Articles
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    )}
+  </div>
+</section>

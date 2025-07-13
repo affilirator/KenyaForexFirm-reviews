@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
 import Hero from '../components/Hero.astro';
 import TopBrokers from '../components/sections/TopBrokers.astro';
+import WhyTrustUs from '../components/sections/WhyTrustUs.astro';
+import LatestInsights from '../components/sections/LatestInsights.astro';
 import { site } from '~/data/site';
 import { getReviews } from '~/lib/qs-esm';
 
@@ -33,170 +34,10 @@ const topRatedBrokers = data?.docs || [];
   description="Comprehensive forex broker reviews and rankings for Kenyan traders. Expert analysis, regulatory information, and unbiased comparisons to help you choose the best forex broker."
   schemaData={schemaData}
 >
-  <Navigation />
   <Hero />
   <TopBrokers brokers={topRatedBrokers} />
-
-  <!-- Why Choose Us Section -->
-  <section class="py-20 bg-gradient-to-b from-neutral-900 to-neutral-950">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-          Why Trust Our
-          <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
-            Reviews?
-          </span>
-        </h2>
-        <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
-          Our expert team conducts thorough analysis using rigorous testing methodologies
-          to provide you with unbiased, data-driven broker reviews.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="text-center group">
-          <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-white mb-2">CMA Compliant</h3>
-          <p class="text-neutral-400">All reviewed brokers are verified for Kenya regulatory compliance</p>
-        </div>
-
-        <div class="text-center group">
-          <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-white mb-2">Real Testing</h3>
-          <p class="text-neutral-400">Live account testing with real money deposits and trades</p>
-        </div>
-
-        <div class="text-center group">
-          <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-white mb-2">Data Driven</h3>
-          <p class="text-neutral-400">Comprehensive analysis using 50+ evaluation criteria</p>
-        </div>
-
-        <div class="text-center group">
-          <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-white mb-2">Local Focus</h3>
-          <p class="text-neutral-400">Specialized knowledge of the Kenyan trading landscape</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Latest Articles Section -->
-  <section class="py-20 bg-gradient-to-b from-neutral-950 to-neutral-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-          Latest
-          <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
-            Insights
-          </span>
-        </h2>
-        <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
-          Stay updated with the latest forex market trends, broker news, and trading strategies
-          tailored for Kenyan traders.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <article class="group bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
-          <div class="h-48 bg-gradient-to-r from-primary-500 to-accent-500 relative overflow-hidden">
-            <div class="absolute inset-0 bg-black/20"></div>
-            <div class="absolute bottom-4 left-4 text-white">
-              <span class="text-sm font-medium bg-black/50 px-2 py-1 rounded">Trading Guide</span>
-            </div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-primary-400 transition-colors duration-300">
-              Best Forex Trading Strategies for Kenyan Beginners
-            </h3>
-            <p class="text-neutral-400 mb-4">
-              Learn the most effective forex trading strategies specifically designed for new Kenyan traders.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-neutral-500">Dec 15, 2024</span>
-              <a href="/blog/forex-strategies-kenya" class="text-primary-400 hover:text-primary-300 text-sm font-medium">
-                Read More →
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <article class="group bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
-          <div class="h-48 bg-gradient-to-r from-accent-500 to-primary-500 relative overflow-hidden">
-            <div class="absolute inset-0 bg-black/20"></div>
-            <div class="absolute bottom-4 left-4 text-white">
-              <span class="text-sm font-medium bg-black/50 px-2 py-1 rounded">Market News</span>
-            </div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-primary-400 transition-colors duration-300">
-              KES Performance Against Major Currencies This Week
-            </h3>
-            <p class="text-neutral-400 mb-4">
-              Analysis of the Kenyan Shilling's performance and what it means for forex traders.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-neutral-500">Dec 12, 2024</span>
-              <a href="/blog/kes-performance-analysis" class="text-primary-400 hover:text-primary-300 text-sm font-medium">
-                Read More →
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <article class="group bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
-          <div class="h-48 bg-gradient-to-r from-primary-500 to-accent-500 relative overflow-hidden">
-            <div class="absolute inset-0 bg-black/20"></div>
-            <div class="absolute bottom-4 left-4 text-white">
-              <span class="text-sm font-medium bg-black/50 px-2 py-1 rounded">Broker Review</span>
-            </div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-primary-400 transition-colors duration-300">
-              New CMA Regulations: What Traders Need to Know
-            </h3>
-            <p class="text-neutral-400 mb-4">
-              Important updates from the Capital Markets Authority affecting forex trading in Kenya.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-neutral-500">Dec 10, 2024</span>
-              <a href="/blog/cma-regulations-update" class="text-primary-400 hover:text-primary-300 text-sm font-medium">
-                Read More →
-              </a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="text-center mt-12">
-        <a
-          href="/blog"
-          class="inline-flex items-center bg-gradient-to-r from-neutral-800 to-neutral-700 hover:from-neutral-700 hover:to-neutral-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 border border-neutral-600 hover:border-primary-500"
-        >
-          View All Articles
-          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </section>
+  <WhyTrustUs title="Why Trust Our Reviews?" />
+  <LatestInsights />
 
 
 </BaseLayout>

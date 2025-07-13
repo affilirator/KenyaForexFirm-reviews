@@ -1,6 +1,7 @@
 ---
 import { SEO } from "astro-seo";
 import { site } from "@data/site";
+import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 //import { organizationSchema } from "@data/organizationSchema"
 
@@ -122,6 +123,7 @@ const organizationSchema = {
 
     <!-- Main content wrapper -->
     <div class="relative z-10">
+      <Navigation />
       <slot />
       <Footer />
     </div>
