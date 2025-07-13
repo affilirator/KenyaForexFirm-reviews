@@ -1,0 +1,62 @@
+---
+// Dynamic page for brokers filtered by regulator
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BrokerList from '../../../components/BrokerList.astro';
+import { getReviews } from '../../../lib/qs-esm';
+import { filterByRegulation, getUniqueRegulators } from '../../../utils/brokerFilters';
+import { site } from '../../../data/site';
+
+export async function getStaticPaths() {
+  const { docs: brokers } = await getReviews();
+  const regulators = getUniqueRegulators(brokers);
+  
+  return regulators.map(regulator => ({
+    params: { regulator },
+    props: { 
+      brokers: filterByRegulation(brokers, regulator),
+      regulator: regulator.toUpperCase()
+    }
+  }));
+}
+
+const { brokers, regulator } = Astro.props;
+
+// SEO optimization
+const title = `Best ${regulator} Regulated Forex Brokers ${new Date().getFullYear()} - Kenya`;
+const description = `Discover top ${regulator} regulated forex brokers for Kenyan traders. Compare spreads, platforms, and features of ${regulator} licensed brokers with expert reviews.`;
+
+// Schema markup for filtered broker list
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": title,
+  "description": description,
+  "url": `${site.url}/brokers/regulator/${regulator.toLowerCase()}/`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": brokers.length,
+    "itemListElement": brokers.map((broker, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "FinancialService",
+        "name": broker.brokerName,
+        "url": `${site.url}/brokers/${broker.slug}/`,
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": broker.brokerRating,
+          "bestRating": 10
+        }
+      }
+    }))
+  }
+};
+---
+
+<BaseLayout title={title} description={description} schemaData={schemaData}>
+  <BrokerList 
+    brokers={brokers}
+    title={`Best ${regulator} Regulated Brokers`}
+    description={`Compare ${regulator} regulated forex brokers trusted by Kenyan traders. All brokers listed are licensed and regulated by ${regulator} for your security.`}
+  />
+</BaseLayout>

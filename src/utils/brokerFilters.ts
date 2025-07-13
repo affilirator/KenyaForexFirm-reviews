@@ -1,62 +1,60 @@
-// src/utils/brokerFilters.ts
-import type { BrokerProps } from '~/types';
+import type { BrokerProps } from '../types';
 
-export interface FilterOptions {
-  searchTerm?: string;
-  regulation?: string;
-  deposit?: string;
-  platform?: string;
-  features?: string;
+// Filter brokers by regulation
+export function filterByRegulation(brokers: BrokerProps[], regulator: string): BrokerProps[] {
+  return brokers.filter(broker => 
+    broker.regulation?.some(reg => 
+      reg.shortName.toLowerCase() === regulator.toLowerCase() ||
+      reg.name.toLowerCase().includes(regulator.toLowerCase())
+    )
+  );
 }
 
-export function filterBrokers(brokers: BrokerProps[], filters: FilterOptions): BrokerProps[] {
-  return brokers.filter(broker => {
-    // Search filter
-    if (filters.searchTerm) {
-      const searchLower = filters.searchTerm.toLowerCase();
-      const matchesName = broker.brokerName.toLowerCase().includes(searchLower);
-      const matchesFeatures = broker.features?.some(f => f.toLowerCase().includes(searchLower));
-      const matchesRegulation = broker.regulation?.some(r => 
-        r.name.toLowerCase().includes(searchLower) || r.shortName.toLowerCase().includes(searchLower)
-      );
-      
-      if (!matchesName && !matchesFeatures && !matchesRegulation) return false;
-    }
-
-    // Regulation filter
-    if (filters.regulation) {
-      if (filters.regulation === 'cma-approved' && !broker.cmaApproved) return false;
-      if (filters.regulation !== 'cma-approved' && 
-          !broker.regulation?.some(r => r.shortName.toLowerCase() === filters.regulation)) return false;
-    }
-
-    // Deposit filter
-    if (filters.deposit && broker.minDeposit) {
-      const ranges = {
-        '0-10': [0, 10],
-        '10-100': [10, 100],
-        '100-500': [100, 500],
-        '500+': [500, Infinity]
-      };
-      const [min, max] = ranges[filters.deposit as keyof typeof ranges] || [0, Infinity];
-      if (broker.minDeposit < min || broker.minDeposit > max) return false;
-    }
-
-    return true;
-  });
+// Filter brokers by payment method
+export function filterByPaymentMethod(brokers: BrokerProps[], method: string): BrokerProps[] {
+  return brokers.filter(broker =>
+    broker.paymentMethods?.some(payment =>
+      payment.toLowerCase().includes(method.toLowerCase())
+    )
+  );
 }
 
-export function sortBrokers(brokers: BrokerProps[], sortBy: string): BrokerProps[] {
-  return [...brokers].sort((a, b) => {
-    switch (sortBy) {
-      case 'rating':
-        return b.brokerRating - a.brokerRating;
-      case 'spread':
-        return parseFloat(a.spread || '0') - parseFloat(b.spread || '0');
-      case 'deposit':
-        return (a.minDeposit || 0) - (b.minDeposit || 0);
-      default:
-        return 0;
-    }
+// Filter brokers by platform
+export function filterByPlatform(brokers: BrokerProps[], platform: string): BrokerProps[] {
+  return brokers.filter(broker =>
+    broker.platforms?.some(p =>
+      p.toLowerCase().includes(platform.toLowerCase())
+    )
+  );
+}
+
+// Get unique values for generating static paths
+export function getUniqueRegulators(brokers: BrokerProps[]): string[] {
+  const regulators = new Set<string>();
+  brokers.forEach(broker => {
+    broker.regulation?.forEach(reg => {
+      regulators.add(reg.shortName.toLowerCase());
+    });
   });
+  return Array.from(regulators);
+}
+
+export function getUniquePaymentMethods(brokers: BrokerProps[]): string[] {
+  const methods = new Set<string>();
+  brokers.forEach(broker => {
+    broker.paymentMethods?.forEach(method => {
+      methods.add(method.toLowerCase().replace(/[^a-z0-9]/g, '-'));
+    });
+  });
+  return Array.from(methods);
+}
+
+export function getUniquePlatforms(brokers: BrokerProps[]): string[] {
+  const platforms = new Set<string>();
+  brokers.forEach(broker => {
+    broker.platforms?.forEach(platform => {
+      platforms.add(platform.toLowerCase().replace(/[^a-z0-9]/g, '-'));
+    });
+  });
+  return Array.from(platforms);
 }
