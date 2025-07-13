@@ -83,6 +83,17 @@ export type BrokerBaseDetails = {
   headquarters?: string;
 }
 
+export type MetaImage = {
+  url: string;
+  alt: string;
+}
+
+export type BrokerMeta = {
+  title?: string;
+  description?: string;
+  image?: MetaImage;
+}
+
 export type BrokerProps = {
   id: string;
   brokerName: string;
@@ -90,6 +101,7 @@ export type BrokerProps = {
   brokerRating: number;
   slug: string;
   brokerWebsite?: string;
+  meta?: BrokerMeta;
   baseDetails?: BrokerBaseDetails;
   ratings?: BrokerRatings;
   pros?: BrokerPros[];
@@ -99,10 +111,12 @@ export type BrokerProps = {
   accountTypes?: string[];
   paymentMethods?: string[];
   quickVerdict?: string;
+  countriesNotAllowed?: string[];
   languages?: string[];
   founded?: number;
   headquarters?: string;
   cmaApproved: boolean;
+  copytrading?: boolean;
   bonusAvailable?: boolean;
   islamicAccount: boolean;
   acceptsMpesa: boolean;
