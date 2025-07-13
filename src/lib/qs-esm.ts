@@ -1,74 +1,32 @@
-//import * as qs from 'qs-esm'
-//   'https://localhost:3000/api/posts?select[color]=true&select[group][number]=true'
-import { stringify } from 'qs-esm'
-import { parse } from 'qs-esm';
+import { stringify } from 'qs-esm';
 import type { BrokerProps } from '../types';
 
+const PAYLOAD_API_URL = "https://api.kenyaforexfirm.com";
 
-const PAYLOAD_API_URL = "https://api.kenyaforexfirm.com"
-
-const populate = {
-  tradingPlatforms: {
-    name: true,
-    slug: true
+const queryConfig = {
+  select: {
+    content: false,
+    blog: false
   },
-  regulation: {
-    name: true,
-    shortName: true,
-    }
+  where: {
+    status: { equals: 'published' }
+  },
+  depth: 3,
+  sort: '-brokerRating'
 };
 
-const query = {
-  status: {
-    equals: 'published'}
-}
-
-const regulation = {
-select: {
-  regulation: {
-    name: true,
-    shortName: true,
-    }
-}
-}
-
-const select = {
-  content: false,
-  blog: false,
-  
- 
-  
-  
-  // This query could be much more complex
-  // and QS would handle it beautifully
-}
-
-
 export const getReviews = async (): Promise<{ docs: BrokerProps[] }> => {
-  const stringifiedQuery = stringify(
-    {
-      //populate,
-      select,
-      where: query,
-      depth:3,
-      sort: '-brokerRating',
-      limit:3,
-      
-    },
-    { addQueryPrefix: true,
-    // allowDots: true,
-      
-
-      //allowDots: true,
-      //encodeValuesOnly: true,
-      //arrayFormat: 'repeat', // encode: false,
-     
-     },
-     
+  try {
+    const queryString = stringify(queryConfig, { addQueryPrefix: true });
+    const response = await fetch(`${PAYLOAD_API_URL}/api/broker-reviews${queryString}`);
     
-  )
-  console.log("The stringified query is:", stringifiedQuery)
-  const response = await fetch(`${PAYLOAD_API_URL}/api/broker-reviews${stringifiedQuery}`)
-  const reviews = await response.json()
-  return reviews
-}
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch reviews:', error);
+    return { docs: [] };
+  }
+};
