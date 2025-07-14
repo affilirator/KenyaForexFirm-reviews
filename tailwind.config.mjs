@@ -25,10 +25,10 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Source Sans 3', 'system-ui', 'sans-serif'],
-        display: ['Playfair Display', 'serif'],
+        sans: ['"Source Sans 3"', 'system-ui', 'sans-serif'],
+        display: ['"Playfair Display"', 'serif'],
         ui: ['Roboto', 'system-ui', 'sans-serif'],
-        serif: ['EB Garamond', 'serif'],
+        serif: ['"EB Garamond"', 'serif'],
       },
       backgroundImage: {
         'cyber-grid': 'linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)',
