@@ -1,0 +1,57 @@
+---
+interface TeamMember {
+  name: string;
+  role: string;
+  credentials: string;
+  education: string;
+  experience: string;
+  bio: string;
+  expertise: string[];
+  avatar: string;
+}
+
+interface Props {
+  team: TeamMember[];
+}
+
+const { team } = Astro.props;
+---
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+  {team.map(member => (
+    <div class="card-glass p-6 flex flex-col h-full">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full flex items-center justify-center text-2xl">
+          {member.avatar}
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-white">{member.name}</h3>
+          <p class="text-primary-400 text-sm">{member.role}</p>
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <div class="text-sm text-neutral-300 mb-1">Credentials</div>
+        <p class="text-white">{member.credentials}</p>
+      </div>
+      
+      <div class="mb-4">
+        <div class="text-sm text-neutral-300 mb-1">Experience</div>
+        <p class="text-white">{member.experience}</p>
+      </div>
+      
+      <p class="text-neutral-400 mb-4 flex-grow">{member.bio}</p>
+      
+      <div>
+        <div class="text-sm text-neutral-300 mb-2">Expertise</div>
+        <div class="flex flex-wrap gap-2">
+          {member.expertise.map(skill => (
+            <span class="bg-primary-500/20 text-primary-300 px-2 py-1 rounded-full text-xs">
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  ))}
+</div>

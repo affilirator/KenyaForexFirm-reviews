@@ -1,0 +1,27 @@
+---
+interface MethodologyItem {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  items: MethodologyItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+  {items.map(item => (
+    <div class="card-glass p-6">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center text-xl">
+          {item.icon}
+        </div>
+        <h3 class="text-lg font-semibold text-white">{item.title}</h3>
+      </div>
+      <p class="text-neutral-400">{item.description}</p>
+    </div>
+  ))}
+</div>
