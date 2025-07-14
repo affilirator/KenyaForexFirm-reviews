@@ -78,6 +78,9 @@ export const schemaData = {
   }),
   "lastReviewed": disclaimerHero.lastUpdated,
   "specialty": "Risk Disclaimer",
+  isPartOf: {
+    "@id": `${site.url}/#website`
+  },
   "mainContentOfPage": {
     "@type": "WebPageElement",
     "isPartOf": {
