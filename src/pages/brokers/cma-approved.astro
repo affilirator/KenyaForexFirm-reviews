@@ -7,7 +7,7 @@ import { site } from '../../data/site';
 
 // Filter CMA approved brokers
 const { docs: allBrokers } = await getReviews();
-const brokers = allBrokers.filter(broker => broker.cmaApproved);
+const brokers = allBrokers.filter(broker => broker.cmaRegulated);
 
 // SEO optimization
 const title = `CMA Approved Forex Brokers ${new Date().getFullYear()} - Kenya`;
