@@ -3,11 +3,7 @@ import { site } from './site';
 export const disclaimerHero = {
   title: "Risk Disclaimer",
   subtitle: "Important information about forex trading risks and our website content",
-  lastUpdated: new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
+  lastUpdated: "July 15, 2025"
 };
 
 export const disclaimerSections = [
@@ -73,6 +69,13 @@ export const schemaData = {
   "name": "Risk Disclaimer - Kenya Forex Firm",
   "description": "Important risk disclaimer and legal information about forex trading risks, investment advice, and website content accuracy for Kenya Forex Firm users.",
   "url": `${site.url}/disclaimer/`,
+  "datePublished": "2025-07-15",
+  "dateCreated": "2024-01-01",
+  "dateModified": new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }),
   "lastReviewed": disclaimerHero.lastUpdated,
   "specialty": "Risk Disclaimer",
   "mainContentOfPage": {
