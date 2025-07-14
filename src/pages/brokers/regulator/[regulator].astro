@@ -2,6 +2,7 @@
 // Dynamic page for brokers filtered by regulator
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BrokerList from '../../../components/BrokerList.astro';
+import BrokerDetails from '../../../components/BrokerDetails.astro';
 import SEOContent from '../../../components/SEOContent.astro';
 import { getReviews } from '../../../lib/qs-esm';
 import { filterByRegulation, getUniqueRegulators } from '../../../utils/brokerFilters';
@@ -74,6 +75,8 @@ const schemaData = {
     title={`${brokers.length} ${regulator} Regulated Brokers`}
     description={`All brokers below are verified as ${regulator} regulated and suitable for Kenyan traders.`}
   />
+
+  <BrokerDetails brokers={brokers} filterType="regulator" filterName={regulator} />
 
   <SEOContent type="regulator" name={regulator} brokerCount={brokers.length} />
 </BaseLayout>

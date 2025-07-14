@@ -2,6 +2,7 @@
 // Dynamic page for brokers filtered by payment method
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BrokerList from '../../../components/BrokerList.astro';
+import BrokerDetails from '../../../components/BrokerDetails.astro';
 import SEOContent from '../../../components/SEOContent.astro';
 import { getReviews } from '../../../lib/qs-esm';
 import { filterByPaymentMethod, getUniquePaymentMethods } from '../../../utils/brokerFilters';
@@ -69,6 +70,8 @@ const schemaData = {
     title={`${brokers.length} Brokers Supporting ${method}`}
     description={`All brokers below accept ${method} for deposits and withdrawals.`}
   />
+
+  <BrokerDetails brokers={brokers} filterType="payment" filterName={method} />
 
   <SEOContent type="payment" name={method} brokerCount={brokers.length} />
 </BaseLayout>

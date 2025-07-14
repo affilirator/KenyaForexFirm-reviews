@@ -1,0 +1,182 @@
+---
+import type { BrokerProps } from '~/types';
+
+interface Props {
+  brokers: BrokerProps[];
+  filterType: string;
+  filterName: string;
+}
+
+const { brokers, filterType, filterName } = Astro.props;
+---
+
+<section class="py-16 bg-neutral-950">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-display font-bold text-white mb-8 text-center">
+      Detailed {filterName} Broker Analysis
+    </h2>
+    
+    <div class="space-y-8">
+      {brokers.map((broker, index) => (
+        <div class="card-glass p-8">
+          <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Broker Header -->
+            <div class="lg:w-1/3">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center">
+                  {typeof broker.logo === 'string' ? (
+                    <img src={broker.logo} alt={`${broker.brokerName} logo`} class="w-full h-full object-contain rounded-2xl" />
+                  ) : broker.logo?.url ? (
+                    <img src={broker.logo.url} alt={`${broker.brokerName} logo`} class="w-full h-full object-contain rounded-2xl" />
+                  ) : (
+                    <span class="text-white font-bold text-xl">{broker.brokerName.charAt(0)}</span>
+                  )}
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold text-white">{broker.brokerName}</h3>
+                  <div class="flex items-center gap-2 mt-1">
+                    <div class="flex text-yellow-400">
+                      {"★".repeat(Math.floor(broker.brokerRating / 2))}
+                    </div>
+                    <span class="text-neutral-300 text-sm">{broker.brokerRating.toFixed(1)}/10</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="space-y-2">
+                {broker.cmaApproved && (
+                  <span class="inline-block bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-sm">
+                    CMA Approved
+                  </span>
+                )}
+                {broker.founded && (
+                  <p class="text-neutral-400 text-sm">Founded: {broker.founded}</p>
+                )}
+                {broker.headquarters && (
+                  <p class="text-neutral-400 text-sm">Headquarters: {broker.headquarters}</p>
+                )}
+              </div>
+            </div>
+
+            <!-- Broker Details -->
+            <div class="lg:w-2/3">
+              <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <!-- Trading Conditions -->
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-3">Trading Conditions</h4>
+                  <div class="space-y-2 text-sm">
+                    <div class="flex justify-between">
+                      <span class="text-neutral-400">Min Deposit:</span>
+                      <span class="text-white">${broker.minDeposit || 'Not specified'}</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-neutral-400">Spread:</span>
+                      <span class="text-white">{broker.spread || 'Variable'}</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-neutral-400">Max Leverage:</span>
+                      <span class="text-white">{broker.maxLeverage || broker.leverage || 'Not specified'}</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-neutral-400">Commission:</span>
+                      <span class="text-white">{broker.commission || 'Varies by account'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Features -->
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-3">Key Features</h4>
+                  <div class="space-y-2 text-sm">
+                    {broker.islamicAccount && (
+                      <div class="flex items-center">
+                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-neutral-300">Islamic Account Available</span>
+                      </div>
+                    )}
+                    {broker.bonusAvailable && (
+                      <div class="flex items-center">
+                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-neutral-300">Welcome Bonus Available</span>
+                      </div>
+                    )}
+                    {broker.copytrading && (
+                      <div class="flex items-center">
+                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-neutral-300">Copy Trading Available</span>
+                      </div>
+                    )}
+                    {broker.acceptsMpesa && (
+                      <div class="flex items-center">
+                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-neutral-300">M-Pesa Support</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Regulation & Platforms -->
+              <div class="grid md:grid-cols-2 gap-6 mb-6">
+                {broker.regulation && broker.regulation.length > 0 && (
+                  <div>
+                    <h4 class="text-lg font-semibold text-white mb-3">Regulation</h4>
+                    <div class="space-y-1">
+                      {broker.regulation.slice(0, 3).map(reg => (
+                        <span class="inline-block bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-xs mr-2 mb-1">
+                          {reg.shortName}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {broker.platforms && broker.platforms.length > 0 && (
+                  <div>
+                    <h4 class="text-lg font-semibold text-white mb-3">Trading Platforms</h4>
+                    <div class="space-y-1">
+                      {broker.platforms.slice(0, 4).map(platform => (
+                        <span class="inline-block bg-primary-500/20 text-primary-300 px-2 py-1 rounded text-xs mr-2 mb-1">
+                          {platform}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <!-- Quick Verdict -->
+              <div class="bg-neutral-800/30 rounded-lg p-4 mb-4">
+                <h4 class="text-lg font-semibold text-white mb-2">Quick Verdict</h4>
+                <p class="text-neutral-300 text-sm">
+                  {broker.quickVerdict || 
+                   `${broker.brokerName} offers ${broker.cmaApproved ? 'CMA-approved ' : ''}forex trading with ${broker.minDeposit ? `$${broker.minDeposit} minimum deposit` : 'competitive conditions'}. ${broker.regulation && broker.regulation.length > 0 ? `Regulated by ${broker.regulation[0].shortName}.` : ''}`}
+                </p>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="flex gap-3">
+                <a href={`/brokers/${broker.slug}/`} class="btn-primary flex-1 text-center">
+                  Read Full Review
+                </a>
+                {broker.brokerWebsite && (
+                  <a href={broker.brokerWebsite} target="_blank" rel="noopener noreferrer" class="bg-neutral-700/50 hover:bg-neutral-600/50 text-neutral-200 hover:text-white font-semibold py-3 px-6 rounded-lg flex-1 text-center">
+                    Visit Website
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -2,6 +2,7 @@
 // Dynamic page for brokers filtered by trading platform
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BrokerList from '../../../components/BrokerList.astro';
+import BrokerDetails from '../../../components/BrokerDetails.astro';
 import SEOContent from '../../../components/SEOContent.astro';
 import { getReviews } from '../../../lib/qs-esm';
 import { filterByPlatform, getUniquePlatforms } from '../../../utils/brokerFilters';
@@ -69,6 +70,8 @@ const schemaData = {
     title={`${brokers.length} Brokers Offering ${platform}`}
     description={`All brokers below provide access to ${platform} trading platform.`}
   />
+
+  <BrokerDetails brokers={brokers} filterType="platform" filterName={platform} />
 
   <SEOContent type="platform" name={platform} brokerCount={brokers.length} />
 </BaseLayout>
