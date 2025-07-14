@@ -1,115 +1,173 @@
 ---
+import { site } from '~/data/site';
+
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Broker Reviews', href: '/brokers' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Trading Guides', href: '/guides' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' }
+  { label: 'Home', href: '/', description: 'Homepage' },
+  { 
+    label: 'Brokers', 
+    href: '/brokers', 
+    description: 'Forex broker reviews',
+    submenu: [
+      { label: 'All Brokers', href: '/brokers' },
+      { label: 'CMA Approved', href: '/brokers/cma-approved' },
+      { label: 'M-Pesa Brokers', href: '/brokers/funding/m-pesa' },
+      { label: 'MT4 Brokers', href: '/brokers/platform/metatrader-4' }
+    ]
+  },
+  { label: 'About', href: '/about', description: 'About our team' },
+  { label: 'Contact', href: '/contact', description: 'Get in touch' }
 ];
+
+const currentPath = Astro.url.pathname;
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-800/50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <!-- Logo -->
-      <div class="flex-shrink-0">
-        <a href="/" class="flex items-center space-x-2 group">
-          <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2L2 7v10c0 5.55 3.84 10 10 10s10-4.45 10-10V7l-10-5z"/>
-            </svg>
-          </div>
-          <span class="text-xl font-display font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
-            ForexKenya
-          </span>
-        </a>
-      </div>
+<header>
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-neutral-950/90 backdrop-blur-md border-b border-neutral-800/50" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <a href="/" class="flex items-center space-x-2 group" aria-label={`${site.siteName} homepage`}>
+            <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2L2 7v10c0 5.55 3.84 10 10 10s10-4.45 10-10V7l-10-5z"/>
+              </svg>
+            </div>
+            <span class="text-xl font-display font-bold text-gradient">
+              {site.siteName}
+            </span>
+          </a>
+        </div>
 
-      <!-- Desktop Navigation -->
-      <div class="hidden md:block">
-        <div class="ml-10 flex items-baseline space-x-4">
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-1">
           {navItems.map(item => (
-            <a
-              href={item.href}
-              class="px-3 py-2 rounded-md text-sm font-medium text-neutral-300 hover:text-primary-400 hover:bg-neutral-800/30 transition-all duration-300 relative group"
-            >
-              {item.label}
-              <span class="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-            </a>
+            <div class="relative group">
+              <a
+                href={item.href}
+                class={`px-4 py-2 rounded-lg text-sm font-medium relative ${
+                  currentPath === item.href || currentPath.startsWith(item.href + '/') 
+                    ? 'text-primary-400 bg-primary-500/10' 
+                    : 'text-neutral-300 hover:text-primary-400 hover:bg-neutral-800/30'
+                }`}
+                aria-current={currentPath === item.href ? 'page' : undefined}
+              >
+                {item.label}
+                {item.submenu && (
+                  <svg class="w-4 h-4 ml-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                )}
+              </a>
+              
+              {item.submenu && (
+                <div class="absolute top-full left-0 mt-1 w-48 bg-neutral-900/95 backdrop-blur-md rounded-lg border border-neutral-700/50 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible">
+                  <div class="py-2">
+                    {item.submenu.map(subItem => (
+                      <a
+                        href={subItem.href}
+                        class="block px-4 py-2 text-sm text-neutral-300 hover:text-primary-400 hover:bg-neutral-800/50"
+                      >
+                        {subItem.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
         </div>
-      </div>
 
-      <!-- CTA Button -->
-      <div class="hidden md:block">
-        <a
-          href="/brokers"
-          class="bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-primary-500/25"
-        >
-          Find Best Broker
-        </a>
-      </div>
+        <!-- CTA Button -->
+        <div class="hidden md:block">
+          <a
+            href="/brokers"
+            class="bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white px-6 py-2 rounded-lg font-medium"
+          >
+            Find Broker
+          </a>
+        </div>
 
-      <!-- Mobile menu button -->
-      <div class="md:hidden">
+        <!-- Mobile menu button -->
         <button
           type="button"
-          class="bg-neutral-800 inline-flex items-center justify-center p-2 rounded-md text-neutral-400 hover:text-white hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+          class="md:hidden bg-neutral-800 p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-700"
           aria-controls="mobile-menu"
           aria-expanded="false"
-          onclick="toggleMobileMenu()"
+          id="mobile-menu-button"
         >
           <span class="sr-only">Open main menu</span>
-          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
       </div>
     </div>
-  </div>
 
-  <!-- Mobile menu -->
-  <div class="md:hidden hidden" id="mobile-menu">
-    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-neutral-900/95 backdrop-blur-md border-t border-neutral-800/50">
-      {navItems.map(item => (
+    <!-- Mobile menu -->
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="px-4 pt-2 pb-3 space-y-1 bg-neutral-900/95 backdrop-blur-md border-t border-neutral-800/50">
+        {navItems.map(item => (
+          <div>
+            <a
+              href={item.href}
+              class={`block px-3 py-2 rounded-lg text-base font-medium ${
+                currentPath === item.href 
+                  ? 'text-primary-400 bg-primary-500/10' 
+                  : 'text-neutral-300 hover:text-primary-400 hover:bg-neutral-800/50'
+              }`}
+              aria-current={currentPath === item.href ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+            {item.submenu && (
+              <div class="ml-4 mt-1 space-y-1">
+                {item.submenu.map(subItem => (
+                  <a
+                    href={subItem.href}
+                    class="block px-3 py-1 text-sm text-neutral-400 hover:text-primary-400"
+                  >
+                    {subItem.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
         <a
-          href={item.href}
-          class="text-neutral-300 hover:text-primary-400 hover:bg-neutral-800/50 block px-3 py-2 rounded-md text-base font-medium transition-all duration-300"
+          href="/brokers"
+          class="block bg-gradient-to-r from-primary-600 to-accent-600 text-white px-3 py-2 rounded-lg text-base font-medium mt-4 text-center"
         >
-          {item.label}
+          Find Broker
         </a>
-      ))}
-      <a
-        href="/brokers"
-        class="bg-gradient-to-r from-primary-600 to-accent-600 text-white block px-3 py-2 rounded-md text-base font-medium mt-4 text-center"
-      >
-        Find Best Broker
-      </a>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>
 
 <script>
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    if (menu) {
-      menu.classList.toggle('hidden');
-    }
-  }
+  const button = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+
+  button?.addEventListener('click', () => {
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', (!isExpanded).toString());
+    menu?.classList.toggle('hidden');
+  });
 
   // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
-    const menu = document.getElementById('mobile-menu');
-
-    // Use a type guard to check if e.target is an instance of Element
-    if (e.target instanceof Element) {
-        const button = e.target.closest('[aria-controls="mobile-menu"]');
-
-        if (!button && menu && !menu.contains(e.target)) {
-            // Your logic here
+    if (menu && !menu.contains(e.target as Node) && !button?.contains(e.target as Node)) {
       menu.classList.add('hidden');
+      button?.setAttribute('aria-expanded', 'false');
     }
-  }
+  });
+
+  // Close mobile menu on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu?.classList.contains('hidden')) {
+      menu?.classList.add('hidden');
+      button?.setAttribute('aria-expanded', 'false');
+    }
   });
 </script>
