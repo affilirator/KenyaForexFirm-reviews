@@ -18,6 +18,12 @@ const schemaData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": title,
+  "dateCreated": "2025-07-07",
+  "dateModified": new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }),
   "description": description,
   "url": `${site.url}/brokers/cma-approved/`,
   "mainEntity": {
