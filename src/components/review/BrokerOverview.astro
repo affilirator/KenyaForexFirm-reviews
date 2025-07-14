@@ -14,7 +14,7 @@ const { broker, content } = Astro.props;
     {broker.brokerName} Overview
   </h2>
 
-  <div class="prose prose-invert max-w-5xl mx-auto">
+  <div class="prose prose-invert max-w-5xl">
     <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-8 border border-neutral-700/50 mb-8">
       {content ? (
         <div set:html={content} class="text-lg text-neutral-300 leading-relaxed" />
@@ -26,13 +26,13 @@ const { broker, content } = Astro.props;
             {broker.cmaRegulated ? ' with CMA approval for Kenyan clients' : ' to international clients'}.
           </p>
 
-          <p class="text-neutral-300 leading-relaxed mb-6">
+          <p class="text-lg text-neutral-300 leading-relaxed mb-6">
             What sets {broker.brokerName} apart is its commitment to providing {broker.minDeposit && broker.minDeposit <= 100 ? 'accessible forex trading services with low minimum deposits' : 'professional trading services'}
             {broker.platforms && broker.platforms.length > 0 && ` across ${broker.platforms.length} trading platforms`}.
             {broker.regulation && broker.regulation.length > 0 && ` ${broker.brokerName} maintains strong regulatory compliance with ${broker.regulation.length} regulatory licenses`}.
           </p>
 
-          <p class="text-neutral-300 leading-relaxed">
+          <p class="text-lg text-neutral-300 leading-relaxed">
             For Kenyan traders specifically, {broker.brokerName} provides 
             {broker.paymentMethods?.includes('mpesa') ? 'M-Pesa payment support, making deposits and withdrawals convenient for local clients' : 'various payment methods suitable for international clients'}.
             {broker.islamicAccount && ' The broker also offers swap-free Islamic accounts for traders following Shariah principles'}.
