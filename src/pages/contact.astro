@@ -14,6 +14,7 @@ const formspreeId = "xrgwlkpz";
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": `${site.organization.url}/#organization`,
   "name": site.siteName,
   "image": `${site.url}${site.logoPath}`,
   "telephone": contactInfo.phone,
