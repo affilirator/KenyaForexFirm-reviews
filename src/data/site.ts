@@ -16,6 +16,7 @@ export const site = {
     currentYear: new Date().getFullYear(),
     canonicalURL: typeof window !== 'undefined' ? window.location.href : siteUrl,
     logoPath: "/favicon.svg",
+    reviewsIndexSlug: 'brokers',
     profiles: [
         {
             facebook: "https://twitter.com/kenyaforexfirm"

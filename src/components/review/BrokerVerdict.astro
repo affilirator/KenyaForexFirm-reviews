@@ -1,4 +1,5 @@
 ---
+import { site } from '~/data/site';
 import type { BrokerProps } from '~/types';
 
 interface Props {
@@ -20,27 +21,27 @@ const {
 } = Astro.props;
 
 const defaultVerdict = `${broker.brokerName} ${
-  broker.cmaApproved ? 'stands out as an excellent choice for Kenyan traders' : 'offers competitive trading services'
+  broker.cmaRegulated ? 'stands out as an excellent choice for Kenyan traders' : 'offers competitive trading services'
 }, particularly those who are ${
-  broker.minDeposit && broker.minDeposit <= 100 ? 'new to forex trading' : 'looking for professional trading conditions'
+  broker.minDeposit && broker.minDeposit <= 99 ? 'new to forex trading' : 'looking for professional trading conditions'
 }. The combination of ${
   broker.regulation && broker.regulation.length > 0 ? 'strong regulatory oversight' : 'trading features'
-}${broker.minDeposit ? `, ${broker.minDeposit <= 100 ? 'low minimum deposits' : 'accessible account options'}` : ''}${
+}${broker.minDeposit ? `, ${broker.minDeposit <= 99 ? 'low minimum deposits' : 'accessible account options'}` : ''}${
   broker.features && broker.features.length > 0 ? ', and comprehensive trading features' : ''
 } makes it ${
-  broker.cmaApproved ? 'an ideal choice for the Kenyan market' : 'a solid option for international traders'
+  broker.cmaRegulated ? 'an ideal choice for the Kenyan market' : 'a solid option for international traders'
 }.`;
 ---
 
 <section class="mb-16">
   <div class="bg-gradient-to-r from-primary-900/30 to-accent-900/30 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
     <h2 class="text-3xl font-display font-bold text-white mb-6">
-      Final Verdict
+      {broker.brokerName} Final Verdict
     </h2>
     
     <div class="grid md:grid-cols-4 gap-6 mb-8">
       <div class="text-center">
-        <div class="text-3xl font-bold text-primary-400 mb-2">{overallRating.toFixed(1)}/5</div>
+        <div class="text-3xl font-bold text-primary-400 mb-2">{overallRating.toFixed(1)}/10</div>
         <div class="text-sm text-neutral-300">Overall Rating</div>
       </div>
       <div class="text-center">
@@ -67,10 +68,10 @@ const defaultVerdict = `${broker.brokerName} ${
 
     <div class="mt-8 pt-6 border-t border-neutral-700/50">
       <div class="flex flex-col sm:flex-row gap-4">
-        <a href="#" class="flex-1 bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 text-center">
+        <a href={`${site.organization.url}/${site.affiliateSlug}/${broker.slug}/`} class="flex-1 bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 text-center">
           Start Trading with {broker.brokerName}
         </a>
-        <a href="/brokers" class="flex-1 border border-neutral-600 hover:border-primary-400 text-neutral-300 hover:text-primary-400 font-medium py-4 px-6 rounded-lg transition-all duration-300 text-center">
+        <a href={site.reviewsIndexSlug} class="flex-1 border border-neutral-600 hover:border-primary-400 text-neutral-300 hover:text-primary-400 font-medium py-4 px-6 rounded-lg transition-all duration-300 text-center">
           Compare Other Brokers
         </a>
       </div>
