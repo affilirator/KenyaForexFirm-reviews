@@ -65,7 +65,9 @@ export const schemaData = {
   "name": "Privacy Policy - Kenya Forex Firm",
   "description": "Learn how Kenya Forex Firm collects, uses, and protects your personal information in compliance with data protection regulations.",
   "url": `${site.url}/privacy/`,
-  "lastReviewed": privacyHero.lastUpdated,
+  "datePublished": "2025-07-15",
+  "dateModified": new Date().toISOString(),
+  "lastReviewed": new Date().toISOString(),
   "specialty": "Privacy Policy",
   "mainContentOfPage": {
     "@type": "WebPageElement",
