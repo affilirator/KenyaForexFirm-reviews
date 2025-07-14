@@ -111,6 +111,7 @@ export type BrokerProps = {
   platforms?: string[];
   accountTypes?: string[];
   paymentMethods?: string[];
+  selectedAssets?: string[];
   quickVerdict?: string;
   countriesNotAllowed?: string[];
   languages?: string[];
