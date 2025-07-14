@@ -12,10 +12,10 @@ interface Props {
 
 const { 
   broker, 
-  overallRating = broker.brokerRating / 2,
-  regulationScore = broker.regulation && broker.regulation.length > 0 ? 9.0 : 6.0,
-  costScore = broker.minDeposit && broker.minDeposit <= 100 ? 8.5 : 7.0,
-  supportScore = 8.0,
+  overallRating = broker.brokerRating,
+  regulationScore = broker.ratings?.safetyAndRegulation || broker.regulation && broker.regulation.length > 0 ? 9.0 : 6.0,
+  costScore = broker.ratings?.feesAndCommissions || broker.minDeposit && broker.minDeposit <= 100 ? 8.5 : 7.0,
+  supportScore = broker.ratings?.customerService ||  8.0,
   verdict
 } = Astro.props;
 
