@@ -26,32 +26,32 @@ export const coreValues = [
 
 export const team = [
   {
-    name: "James Kimani",
+    name: "Patrick Mahinge",
     role: "Chief Financial Analyst & Founder",
     credentials: "CFA, FRM",
-    education: "University of Nairobi - Bachelor of Commerce (Finance)",
+    education: "Masinde Muliro University - Bachelor of Journalism and Mass Communication",
     experience: "12+ years in financial markets analysis",
-    bio: "James has over 12 years of experience in financial markets, specializing in forex and derivatives trading. He holds the Chartered Financial Analyst (CFA) and Financial Risk Manager (FRM) designations. Previously worked at Standard Bank Kenya and Citibank as a senior analyst.",
+    bio: "Patrick Mahinge has over 12 years of experience in financial markets, specializing in forex and derivatives trading. He holds the Chartered Financial Analyst (CFA) and Financial Risk Manager (FRM) designations. Previously worked at Standard Bank Kenya and Citibank as a senior analyst.",
     expertise: ["Forex Analysis", "Risk Management", "Market Research", "Financial Modeling"],
     avatar: "👨🏾‍💼"
   },
   {
-    name: "Sarah Wanjiku",
+    name: "Sylvia Muchai",
     role: "Senior Market Analyst",
     credentials: "CPA, CFE",
     education: "Strathmore University - Bachelor of Commerce (Accounting)",
     experience: "8+ years in market analysis and forex trading",
-    bio: "Sarah brings extensive experience in market analysis and currency trading. As a Certified Public Accountant (CPA) and Certified Fraud Examiner (CFE), she specializes in broker financial analysis and regulatory compliance. Former senior analyst at KCB Bank.",
+    bio: "Sylvia brings extensive experience in market analysis and currency trading. As a Certified Public Accountant (CPA) and Certified Fraud Examiner (CFE), she specializes in broker financial analysis and regulatory compliance. Former senior analyst at KCB Bank.",
     expertise: ["Market Analysis", "Currency Trading", "Financial Reporting", "Compliance"],
     avatar: "👩🏾‍💼"
   },
   {
-    name: "David Ochieng",
+    name: "Edwin Kamau",
     role: "Regulatory Affairs Specialist",
     credentials: "LLB, CMA License",
     education: "University of Nairobi School of Law - Bachelor of Laws",
     experience: "10+ years in financial regulation and compliance",
-    bio: "David is our regulatory expert with deep knowledge of Kenyan financial laws and CMA regulations. He holds a Law degree from University of Nairobi and is licensed by the Capital Markets Authority. Previously worked at CMA Kenya as a compliance officer.",
+    bio: "Edwin Kamau is our regulatory expert with deep knowledge of Kenyan financial laws and CMA regulations. He holds a Law degree from University of Nairobi and is licensed by the Capital Markets Authority. Previously worked at CMA Kenya as a compliance officer.",
     expertise: ["Financial Law", "Regulatory Compliance", "CMA Regulations", "Legal Analysis"],
     avatar: "👨🏾‍⚖️"
   },
@@ -136,11 +136,11 @@ export const schemaData = {
   "mainEntity": {
     "@type": "Organization",
     "name": site.siteName,
-    "foundingDate": "2022",
+    "foundingDate": "2014",
     "founders": [
       {
         "@type": "Person",
-        "name": "James Kimani",
+        "name": "Patrick Mahinge",
         "jobTitle": "Chief Financial Analyst"
       }
     ],
