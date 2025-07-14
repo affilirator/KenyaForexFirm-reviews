@@ -64,6 +64,7 @@ export const schemaData = {
   "url": `${site.url}/contact/`,
   "mainEntity": {
     "@type": "Organization",
+    "@id": `${site.organization.url}/#organization`,
     "name": site.siteName,
     "url": site.organization.url,
     "logo": `${site.url}${site.logoPath}`,

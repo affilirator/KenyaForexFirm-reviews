@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LegalHero from '../components/legal/LegalHero.astro';
+import LegalSection from '../components/legal/LegalSection.astro';
+import TableOfContents from '../components/legal/TableOfContents.astro';
+import ContactInfo from '../components/legal/ContactInfo.astro';
+import { disclaimerHero, disclaimerSections, contactInfo, schemaData } from '../data/disclaimerData';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Risk Disclaimer - Kenya Forex Firm | Trading Risks & Legal Information"
+  description="Important risk disclaimer and legal information about forex trading risks, investment advice, and website content accuracy for Kenya Forex Firm users."
+  schemaData={schemaData}
+>
+  <!-- Hero Section -->
+  <LegalHero 
+    title={disclaimerHero.title}
+    subtitle={disclaimerHero.subtitle}
+    lastUpdated={disclaimerHero.lastUpdated}
+  />
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- Table of Contents -->
+    <TableOfContents sections={disclaimerSections} />
+
+    <!-- General Disclaimer -->
+    <LegalSection title="General Disclaimer" id="general-disclaimer">
+      <p class="disclaimer-intro">
+        The information provided on {site.siteName} (the "Website") is for general informational and educational purposes only. This disclaimer applies to all content, reviews, analysis, and recommendations provided on our Website.
+      </p>
+      <p>
+        By accessing and using this Website, you acknowledge that you have read, understood, and agree to be bound by this disclaimer. If you do not agree with any part of this disclaimer, you should not use our Website.
+      </p>
+      <p>
+        The content on this Website does not constitute financial, investment, trading, or any other form of professional advice. You should not rely on any information on this Website as a substitute for professional financial advice from a qualified financial advisor.
+      </p>
+    </LegalSection>
+
+    <!-- Forex Trading Risks -->
+    <LegalSection title="Forex Trading Risks" id="trading-risks">
+      <div class="bg-red-900/20 border border-red-700/30 rounded-lg p-6 mb-6">
+        <h3 class="text-xl font-bold text-red-400 mb-3">⚠️ HIGH RISK WARNING</h3>
+        <p class="text-white font-medium">
+          FOREX AND CFD TRADING INVOLVES SUBSTANTIAL RISK OF LOSS AND IS NOT SUITABLE FOR ALL INVESTORS. YOU COULD LOSE MORE THAN YOUR INITIAL INVESTMENT.
+        </p>
+      </div>
+      
+      <p>
+        Forex (foreign exchange) and CFD (Contract for Difference) trading carry a high level of risk and may not be suitable for all investors. The high degree of leverage can work against you as well as for you. Before deciding to trade forex or CFDs, you should carefully consider your investment objectives, level of experience, and risk appetite.
+      </p>
+      
+      <h3 class="text-xl font-medium text-white mb-2 mt-6">Key Risks Include:</h3>
+      <ul class="list-disc pl-6 mb-4">
+        <li><strong>Market Risk:</strong> Currency values can fluctuate rapidly due to economic, political, and market factors.</li>
+        <li><strong>Leverage Risk:</strong> High leverage can amplify both profits and losses significantly.</li>
+        <li><strong>Liquidity Risk:</strong> Some currency pairs may have limited liquidity, especially during certain market hours.</li>
+        <li><strong>Counterparty Risk:</strong> Risk that your broker may default on their obligations.</li>
+        <li><strong>Operational Risk:</strong> Technical failures, system outages, or communication breakdowns.</li>
+        <li><strong>Regulatory Risk:</strong> Changes in regulations may affect your trading activities.</li>
+        <li><strong>Currency Risk:</strong> If your account is denominated in a different currency than your base currency.</li>
+      </ul>
+      
+      <p>
+        <strong>You should never trade with money you cannot afford to lose.</strong> Past performance is not indicative of future results. The possibility exists that you could sustain a loss of some or all of your initial investment and therefore you should not invest money that you cannot afford to lose.
+      </p>
+    </LegalSection>
+
+    <!-- No Investment Advice -->
+    <LegalSection title="No Investment Advice" id="no-investment-advice">
+      <p>
+        The content on this Website, including broker reviews, comparisons, analysis, and educational materials, is provided for informational purposes only and should not be construed as investment advice, trading recommendations, or solicitation to buy or sell any financial instruments.
+      </p>
+      <p>
+        We do not provide personalized investment advice or recommendations tailored to your individual financial situation, investment objectives, or risk tolerance. Any trading decisions you make are solely your responsibility.
+      </p>
+      <p>
+        Before making any investment decisions, you should:
+      </p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Conduct your own research and due diligence</li>
+        <li>Consult with qualified financial advisors</li>
+        <li>Consider your financial situation and risk tolerance</li>
+        <li>Read all relevant terms and conditions from brokers</li>
+        <li>Understand the risks involved in forex trading</li>
+      </ul>
+    </LegalSection>
+
+    <!-- Information Accuracy -->
+    <LegalSection title="Information Accuracy" id="accuracy-disclaimer">
+      <p>
+        While we strive to provide accurate and up-to-date information, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on the Website.
+      </p>
+      <p>
+        The forex market is dynamic and constantly changing. Broker terms, conditions, spreads, leverage, and other trading conditions may change without notice. We recommend verifying all information directly with the respective brokers before making any trading decisions.
+      </p>
+      <p>
+        We are not responsible for any errors, omissions, or inaccuracies in the content, nor for any actions taken in reliance on the information provided on this Website.
+      </p>
+    </LegalSection>
+
+    <!-- Third-Party Content -->
+    <LegalSection title="Third-Party Content" id="third-party-content">
+      <p>
+        Our Website may contain links to third-party websites, including forex brokers, trading platforms, and other financial service providers. These links are provided for convenience and informational purposes only.
+      </p>
+      <p>
+        We do not endorse, guarantee, or assume responsibility for the content, products, services, or practices of any third-party websites. The inclusion of any link does not imply our endorsement of the linked site or service.
+      </p>
+      <p>
+        When you access third-party websites, you do so at your own risk. We encourage you to review the terms of service and privacy policies of any third-party websites you visit.
+      </p>
+    </LegalSection>
+
+    <!-- Affiliate Disclosure -->
+    <LegalSection title="Affiliate Disclosure" id="affiliate-disclosure">
+      <p>
+        <strong>IMPORTANT DISCLOSURE:</strong> {site.siteName} may receive compensation from some of the brokers and financial service providers featured on our Website through affiliate partnerships.
+      </p>
+      <p>
+        This compensation may influence the ranking, placement, or presentation of broker reviews and comparisons on our Website. However, our editorial integrity remains independent, and we strive to provide honest, unbiased reviews based on our evaluation criteria.
+      </p>
+      <p>
+        Affiliate relationships do not:
+      </p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Influence our review methodology or scoring system</li>
+        <li>Guarantee positive reviews for partner brokers</li>
+        <li>Affect our commitment to providing accurate information</li>
+        <li>Change our obligation to disclose risks and limitations</li>
+      </ul>
+      <p>
+        We are committed to transparency and will clearly identify any sponsored content or paid partnerships when they occur.
+      </p>
+    </LegalSection>
+
+    <!-- Regulatory Information -->
+    <LegalSection title="Regulatory Information" id="regulatory-disclaimer">
+      <p>
+        {site.siteName} is an informational website and is not a licensed financial advisor, broker, or investment company. We do not provide regulated financial services and are not authorized to give investment advice in any jurisdiction.
+      </p>
+      <p>
+        The brokers featured on our Website may be regulated by various financial authorities including but not limited to:
+      </p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Capital Markets Authority (CMA) of Kenya</li>
+        <li>Financial Conduct Authority (FCA) of the United Kingdom</li>
+        <li>Cyprus Securities and Exchange Commission (CySEC)</li>
+        <li>Australian Securities and Investments Commission (ASIC)</li>
+        <li>Other international regulatory bodies</li>
+      </ul>
+      <p>
+        Regulatory status can change, and we recommend verifying the current regulatory status of any broker directly with the relevant regulatory authority before opening an account.
+      </p>
+      <p>
+        Different jurisdictions have different levels of investor protection. Kenyan residents should prioritize brokers regulated by the CMA or other reputable international regulators.
+      </p>
+    </LegalSection>
+
+    <!-- Past Performance -->
+    <LegalSection title="Past Performance" id="past-performance">
+      <p>
+        Any references to past performance, historical data, or hypothetical performance results presented on this Website are not indicative of future results. Past performance does not guarantee future performance.
+      </p>
+      <p>
+        Trading results may vary significantly between individuals due to factors including but not limited to:
+      </p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Different market conditions</li>
+        <li>Varying levels of experience and skill</li>
+        <li>Different risk management strategies</li>
+        <li>Emotional factors affecting trading decisions</li>
+        <li>Different capital amounts and leverage used</li>
+        <li>Timing of market entry and exit</li>
+      </ul>
+      <p>
+        Hypothetical or simulated performance results have inherent limitations and do not represent actual trading. They are designed with the benefit of hindsight and may not reflect the impact of material economic and market factors.
+      </p>
+    </LegalSection>
+
+    <!-- Limitation of Liability -->
+    <LegalSection title="Limitation of Liability" id="liability-limitation">
+      <p>
+        TO THE FULLEST EXTENT PERMITTED BY LAW, {site.siteName.toUpperCase()}, ITS OWNERS, EMPLOYEES, AGENTS, AND AFFILIATES SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, OR OTHER INTANGIBLE LOSSES, RESULTING FROM:
+      </p>
+      <ol class="list-decimal pl-6 mb-4">
+        <li>Your use or inability to use our Website</li>
+        <li>Any trading decisions made based on information from our Website</li>
+        <li>Any errors, omissions, or inaccuracies in our content</li>
+        <li>Any interruption or cessation of transmission to or from our Website</li>
+        <li>Any bugs, viruses, or similar harmful components</li>
+        <li>Any loss or damage incurred as a result of the use of any content posted by third parties</li>
+      </ol>
+      <p>
+        This limitation of liability applies whether the alleged liability is based on contract, tort, negligence, strict liability, or any other basis, even if we have been advised of the possibility of such damage.
+      </p>
+    </LegalSection>
+
+    <!-- Jurisdiction -->
+    <LegalSection title="Jurisdiction" id="jurisdiction">
+      <p>
+        This disclaimer shall be governed by and construed in accordance with the laws of Kenya. Any disputes arising from or relating to this disclaimer or your use of our Website shall be subject to the exclusive jurisdiction of the courts of Kenya.
+      </p>
+      <p>
+        If any provision of this disclaimer is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that this disclaimer shall otherwise remain in full force and effect.
+      </p>
+    </LegalSection>
+
+    <!-- Contact Information -->
+    <LegalSection title="Contact Information" id="contact">
+      <p>
+        If you have any questions about this disclaimer or need clarification on any of the information provided, please contact us:
+      </p>
+    </LegalSection>
+
+    <!-- Contact Information -->
+    <ContactInfo 
+      email={contactInfo.email}
+      companyName={contactInfo.companyName}
+      address={contactInfo.address}
+    />
+
+    <!-- Final Warning -->
+    <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-6 mt-8">
+      <h3 class="text-xl font-bold text-yellow-400 mb-3">⚠️ FINAL REMINDER</h3>
+      <p class="text-white">
+        Trading forex and CFDs involves significant risk of loss. Only trade with money you can afford to lose. 
+        Seek independent financial advice if you have any doubts about the suitability of forex trading for your circumstances.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

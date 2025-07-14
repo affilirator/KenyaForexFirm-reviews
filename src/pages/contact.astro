@@ -1,19 +1,20 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactHero from '../components/contact/ContactHero.astro';
-import ContactForm from '../components/contact/ContactForm.astro';
-import ContactInfo from '../components/contact/ContactInfo.astro';
-import ContactFAQ from '../components/contact/ContactFAQ.astro';
-import PartnershipCTA from '../components/contact/PartnershipCTA.astro';
-import { contactHero, contactInfo, brokerCTA, traderCTA, contactFAQs, schemaData } from '../data/contactData';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ContactHero from '~/components/contact/ContactHero.astro';
+import ContactForm from '~/components/contact/ContactForm.astro';
+import ContactInfo from '~/components/contact/ContactInfo.astro';
+import ContactFAQ from '~/components/contact/ContactFAQ.astro';
+import PartnershipCTA from '~/components/contact/PartnershipCTA.astro';
+import { contactHero, contactInfo, brokerCTA, traderCTA, contactFAQs, schemaData } from '~/data/contactData';
+import { site } from '~/data/site';
 
 // Formspree form ID - replace with your actual ID
 const formspreeId = "xrgwlkpz";
 ---
 
 <BaseLayout
-  title="Contact Us - Kenya Forex Firm | Broker Partnerships & Trader Support"
-  description="Contact Kenya Forex Firm for broker partnerships, review requests, or trading assistance. We help connect Kenyan traders with reliable forex brokers."
+  title=`Contact Us - ${site.siteName} | Broker Partnerships & Trader Support`
+  description=`Contact ${site.siteName} for broker partnerships, review requests, or trading assistance. We help connect Kenyan traders with reliable forex brokers.`
   schemaData={schemaData}
 >
   <!-- Hero Section -->

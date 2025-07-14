@@ -1,0 +1,30 @@
+---
+interface Section {
+  id: string;
+  title: string;
+}
+
+interface Props {
+  sections: Section[];
+}
+
+const { sections } = Astro.props;
+---
+
+<div class="card-glass p-6 mb-8">
+  <h2 class="text-xl font-display font-bold text-white mb-4">Table of Contents</h2>
+  <nav aria-label="Table of contents">
+    <ol class="space-y-2">
+      {sections.map((section) => (
+        <li>
+          <a 
+            href={`#${section.id}`} 
+            class="text-primary-400 hover:text-primary-300"
+          >
+            {section.title}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+</div>

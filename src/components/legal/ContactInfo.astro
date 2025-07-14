@@ -1,0 +1,32 @@
+---
+interface Props {
+  email: string;
+  companyName: string;
+  address?: {
+    street?: string;
+    city?: string;
+    country?: string;
+  };
+}
+
+const { email, companyName, address } = Astro.props;
+---
+
+<div class="card-glass p-6 mb-8">
+  <h2 class="text-xl font-display font-bold text-white mb-4">Contact Information</h2>
+  <p class="text-neutral-300 mb-2">
+    If you have any questions about this Privacy Policy, please contact us:
+  </p>
+  <ul class="space-y-2 text-neutral-300">
+    <li><strong>Company:</strong> {companyName}</li>
+    <li><strong>Email:</strong> <a href={`mailto:${email}`} class="text-primary-400 hover:underline">{email}</a></li>
+    {address && (
+      <li>
+        <strong>Address:</strong> 
+        {address.street && `${address.street}, `}
+        {address.city && `${address.city}, `}
+        {address.country && address.country}
+      </li>
+    )}
+  </ul>
+</div>
