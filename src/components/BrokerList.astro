@@ -2,6 +2,7 @@
 // Component to display filtered list of brokers
 import type { BrokerProps } from '~/types';
 import BrokerCard from './review/BrokerCard.astro';
+import { site } from '~/data/site';
 
 interface Props {
   brokers: BrokerProps[];
@@ -43,7 +44,7 @@ const { brokers, title, description } = Astro.props;
         <div class="text-6xl mb-4">🔍</div>
         <h3 class="text-2xl font-display font-medium text-white mb-4">No Brokers Found</h3>
         <p class="text-neutral-400 mb-8">No brokers match the current criteria.</p>
-        <a href="/brokers" class="btn-primary">
+        <a href={site.reviewsIndexSlug} class="btn-primary">
           View All Brokers
         </a>
       </div>

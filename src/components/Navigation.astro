@@ -101,10 +101,15 @@ const navItems = [
   // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
     const menu = document.getElementById('mobile-menu');
-    const button = e.target.closest('[aria-controls="mobile-menu"]');
 
-    if (!button && menu && !menu.contains(e.target)) {
+    // Use a type guard to check if e.target is an instance of Element
+    if (e.target instanceof Element) {
+        const button = e.target.closest('[aria-controls="mobile-menu"]');
+
+        if (!button && menu && !menu.contains(e.target)) {
+            // Your logic here
       menu.classList.add('hidden');
     }
+  }
   });
 </script>
