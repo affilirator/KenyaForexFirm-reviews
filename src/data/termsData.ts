@@ -125,6 +125,7 @@ export const schemaData = {
   },
   "publisher": {
     "@type": "Organization",
+    "@id": `${site.organization.url}/#organization`,
     "name": site.siteName,
     "logo": {
       "@type": "ImageObject",
