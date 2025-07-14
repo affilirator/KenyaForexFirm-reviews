@@ -10,6 +10,23 @@ import { site } from '~/data/site';
 
 // Formspree form ID - replace with your actual ID
 const formspreeId = "xrgwlkpz";
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": site.siteName,
+  "image": `${site.url}${site.logoPath}`,
+  "telephone": contactInfo.phone,
+  "email": contactInfo.email,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": contactInfo.address.street,
+    "addressLocality": contactInfo.address.city,
+    "addressCountry": contactInfo.address.country
+  },
+  "openingHours": "Mo,Tu,We,Th,Fr 09:00-17:00",
+  "url": site.url
+};
 ---
 
 <BaseLayout
@@ -40,24 +57,7 @@ const formspreeId = "xrgwlkpz";
         />
 
         <!-- Structured Data for Local Business -->
-        <script type="application/ld+json">
-          {
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Kenya Forex Firm",
-            "image": "https://fx.kenyaforexfirm.com/favicon.svg",
-            "telephone": contactInfo.phone,
-            "email": contactInfo.email,
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": contactInfo.address.street,
-              "addressLocality": contactInfo.address.city,
-              "addressCountry": contactInfo.address.country
-            },
-            "openingHours": "Mo,Tu,We,Th,Fr 09:00-17:00",
-            "url": "https://fx.kenyaforexfirm.com"
-          }
-        </script>
+        <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)}></script>
       </div>
     </div>
 
@@ -88,20 +88,18 @@ const formspreeId = "xrgwlkpz";
       <ContactFAQ faqs={contactFAQs} />
 
       <!-- FAQ Schema -->
-      <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": contactFAQs.map(faq => ({
-            "@type": "Question",
-            "name": faq.question,
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": faq.answer
-            }
-          }))
-        }
-      </script>
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": contactFAQs.map(faq => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
+      })}></script>
     </div>
 
     <!-- Map Section -->
