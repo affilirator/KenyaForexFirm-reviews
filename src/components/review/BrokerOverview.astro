@@ -14,7 +14,7 @@ const { broker, content } = Astro.props;
     {broker.brokerName} Overview
   </h2>
 
-  <div class="prose prose-invert max-w-none">
+  <div class="prose prose-invert max-w-5xl mx-auto">
     <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-8 border border-neutral-700/50 mb-8">
       {content ? (
         <div set:html={content} class="text-lg text-neutral-300 leading-relaxed" />
