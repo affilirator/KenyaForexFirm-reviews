@@ -1,0 +1,84 @@
+---
+interface Props {
+  type: 'regulator' | 'payment' | 'platform';
+  name: string;
+  brokerCount: number;
+}
+
+const { type, name, brokerCount } = Astro.props;
+
+const contentMap = {
+  regulator: {
+    title: `Why Choose ${name} Regulated Brokers?`,
+    benefits: [
+      { title: 'Regulatory Protection', desc: `${name} regulated brokers operate under strict oversight with segregated client funds and investor protection schemes.` },
+      { title: 'Compliance Standards', desc: `${name} requires brokers to meet high capital adequacy and operational standards for trader safety.` },
+      { title: 'Dispute Resolution', desc: `Access formal complaint procedures and regulatory support through ${name} oversight.` },
+      { title: 'Regular Audits', desc: `${name} licensed brokers undergo regular financial audits and compliance reviews.` }
+    ],
+    faq: [
+      { q: `What does ${name} regulation mean?`, a: `${name} regulation means the broker operates under strict regulatory oversight with investor protection and compliance requirements.` },
+      { q: `Are ${name} brokers safe?`, a: `${name} regulated brokers must meet stringent safety standards including segregated funds and regular audits.` }
+    ]
+  },
+  payment: {
+    title: `Benefits of ${name} Forex Brokers`,
+    benefits: [
+      { title: 'Convenient Funding', desc: `Easy deposits and withdrawals using ${name} for seamless trading experience.` },
+      { title: 'Local Payment Support', desc: `${name} integration provides familiar payment methods for Kenyan traders.` },
+      { title: 'Fast Transactions', desc: `Quick processing times for ${name} deposits and withdrawals.` },
+      { title: 'Lower Fees', desc: `Reduced transaction costs when using ${name} compared to international methods.` }
+    ],
+    faq: [
+      { q: `How do I deposit with ${name}?`, a: `Most brokers supporting ${name} offer direct integration in their client portal for easy deposits.` },
+      { q: `Are ${name} withdrawals fast?`, a: `${name} withdrawals are typically processed within 24 hours by most brokers.` }
+    ]
+  },
+  platform: {
+    title: `Why Trade on ${name}?`,
+    benefits: [
+      { title: 'Advanced Features', desc: `${name} offers comprehensive charting tools, technical indicators, and automated trading capabilities.` },
+      { title: 'User-Friendly Interface', desc: `${name} provides intuitive navigation suitable for both beginners and experienced traders.` },
+      { title: 'Mobile Trading', desc: `${name} mobile apps allow trading on-the-go with full platform functionality.` },
+      { title: 'Expert Advisors', desc: `${name} supports automated trading through Expert Advisors and custom indicators.` }
+    ],
+    faq: [
+      { q: `Is ${name} good for beginners?`, a: `${name} offers user-friendly interfaces and educational resources making it suitable for new traders.` },
+      { q: `Can I use ${name} on mobile?`, a: `Yes, ${name} offers mobile apps for iOS and Android with full trading functionality.` }
+    ]
+  }
+};
+
+const content = contentMap[type];
+---
+
+<section class="py-16 bg-neutral-900">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="prose prose-invert max-w-none">
+      <h2 class="text-3xl font-display font-bold text-white mb-8">{content.title}</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        {content.benefits.map(benefit => (
+          <div class="card-glass p-6">
+            <h3 class="text-xl font-semibold text-white mb-3">{benefit.title}</h3>
+            <p class="text-neutral-300">{benefit.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="text-3xl font-display font-bold text-white mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {content.faq.map(item => (
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-2">{item.q}</h3>
+            <p class="text-neutral-300">{item.a}</p>
+          </div>
+        ))}
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-2">How many {name} brokers are available?</h3>
+          <p class="text-neutral-300">We have reviewed {brokerCount} brokers that support {name}, all vetted for reliability and regulatory compliance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
