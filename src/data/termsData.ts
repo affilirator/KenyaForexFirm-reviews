@@ -3,11 +3,7 @@ import { site } from './site';
 export const termsHero = {
   title: "Terms of Service",
   subtitle: "Please read these terms carefully before using our website",
-  lastUpdated: new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
+  lastUpdated: "July 15, 2025"
 };
 
 export const termsSections = [
@@ -99,6 +95,13 @@ export const schemaData = {
   "name": "Terms of Service - Kenya Forex Firm",
   "description": "Terms and conditions governing the use of Kenya Forex Firm's website and services. Read our legal terms before using our forex broker review platform.",
   "url": `${site.url}/terms/`,
+  "datePublished": "2023-10-01",
+  "dateCreated": "2023-10-01",
+  "dateModified": new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }),
   "lastReviewed": termsHero.lastUpdated,
   "specialty": "Terms of Service",
   "mainContentOfPage": {

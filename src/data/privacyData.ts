@@ -3,11 +3,7 @@ import { site } from './site';
 export const privacyHero = {
   title: "Privacy Policy",
   subtitle: "How we collect, use, and protect your personal information",
-  lastUpdated: new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
+  lastUpdated: 'July 15, 2025'
 };
 
 export const privacySections = [
@@ -71,7 +67,11 @@ export const schemaData = {
   "description": "Learn how Kenya Forex Firm collects, uses, and protects your personal information in compliance with data protection regulations.",
   "url": `${site.url}/privacy/`,
   "datePublished": "2025-07-15",
-  "dateModified": new Date().toISOString(),
+  "dateModified": new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }),
   "lastReviewed": new Date().toISOString(),
   "specialty": "Privacy Policy",
   "mainContentOfPage": {
