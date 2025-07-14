@@ -116,7 +116,6 @@ export type BrokerProps = {
   languages?: string[];
   founded?: number;
   headquarters?: string;
-  cmaApproved: boolean;
   copytrading?: boolean;
   bonusAvailable?: boolean;
   islamicAccount: boolean;

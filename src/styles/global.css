@@ -20,7 +20,7 @@
 
 @layer components {
   .btn-primary { 
-    @apply bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-ui font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105; 
+    @apply bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-ui font-semibold py-3 px-6 rounded-lg; 
   }
   .card-glass { 
     @apply bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50; 
@@ -37,8 +37,6 @@
 }
 
 @layer utilities {
-  .will-change-transform { will-change: transform; }
-  .gpu-accelerated { transform: translateZ(0); }
   .contain-layout { contain: layout; }
   .contain-paint { contain: paint; }
 }
