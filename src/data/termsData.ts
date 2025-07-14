@@ -3,7 +3,11 @@ import { site } from './site';
 export const termsHero = {
   title: "Terms of Service",
   subtitle: "Please read these terms carefully before using our website",
-  lastUpdated: "January 15, 2024"
+  lastUpdated: new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
 };
 
 export const termsSections = [

@@ -3,7 +3,11 @@ import { site } from './site';
 export const disclaimerHero = {
   title: "Risk Disclaimer",
   subtitle: "Important information about forex trading risks and our website content",
-  lastUpdated: "January 15, 2024"
+  lastUpdated: new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
 };
 
 export const disclaimerSections = [
