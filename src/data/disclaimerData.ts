@@ -86,10 +86,6 @@ export const schemaData = {
     "isPartOf": {
       "@id": `${site.url}/#website`
     },
-    "speakable": {
-      "@type": "SpeakableSpecification",
-      "cssSelector": ["h1", ".disclaimer-intro"]
-    }
   },
   "about": {
     "@type": "Thing",
