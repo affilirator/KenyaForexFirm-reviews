@@ -63,11 +63,7 @@ export const schemaData = {
   "name": "Contact Kenya Forex Firm",
   "description": "Contact our team for broker partnerships, review requests, or trading assistance. We're here to help Kenyan forex traders and international brokers.",
   "url": `${site.url}/contact/`,
-  "potentialAction": {
-    "@type": "ContactAction",
-    "target": `${site.url}/contact/`,
-    "query-input": "required name email message"
-  },
+  
   "publisher": {
     "@type": "Organization",
     "@id": `${site.organization.url}/#organization`,
