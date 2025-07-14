@@ -90,6 +90,8 @@ export const contactInfo = {
 export const schemaData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
+  "@id": `${site.url}/terms/`,
+  "headline": "Terms of Service - Kenya Forex Firm",
   "name": "Terms of Service - Kenya Forex Firm",
   "description": "Terms and conditions governing the use of Kenya Forex Firm's website and services. Read our legal terms before using our forex broker review platform.",
   "url": `${site.url}/terms/`,

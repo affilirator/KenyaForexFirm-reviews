@@ -59,6 +59,7 @@ export const contactFAQs = [
 export const schemaData = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
+  "@id": `${site.url}/contact/`,
   "name": "Contact Kenya Forex Firm",
   "description": "Contact our team for broker partnerships, review requests, or trading assistance. We're here to help Kenyan forex traders and international brokers.",
   "url": `${site.url}/contact/`,

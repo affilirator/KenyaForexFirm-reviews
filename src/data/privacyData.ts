@@ -62,6 +62,7 @@ export const contactInfo = {
 export const schemaData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
+  "@id": `${site.url}/privacy/`,
   "name": "Privacy Policy - Kenya Forex Firm",
   "description": "Learn how Kenya Forex Firm collects, uses, and protects your personal information in compliance with data protection regulations.",
   "url": `${site.url}/privacy/`,
