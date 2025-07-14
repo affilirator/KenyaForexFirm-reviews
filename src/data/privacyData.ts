@@ -3,7 +3,11 @@ import { site } from './site';
 export const privacyHero = {
   title: "Privacy Policy",
   subtitle: "How we collect, use, and protect your personal information",
-  lastUpdated: "January 15, 2024"
+  lastUpdated: new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
 };
 
 export const privacySections = [
