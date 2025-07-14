@@ -1,0 +1,25 @@
+---
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  faqs: FAQ[];
+}
+
+const { faqs } = Astro.props;
+---
+
+<div class="card-glass p-8">
+  <h2 class="text-2xl font-display font-bold text-white mb-6">Frequently Asked Questions</h2>
+  
+  <div class="space-y-6">
+    {faqs.map((faq, index) => (
+      <div class="border-b border-neutral-700/50 pb-6 last:border-0 last:pb-0">
+        <h3 class="text-lg font-medium text-white mb-2">{faq.question}</h3>
+        <p class="text-neutral-300">{faq.answer}</p>
+      </div>
+    ))}
+  </div>
+</div>

@@ -19,6 +19,10 @@ const schemaData = {
   "@type": "WebPage",
   "name": title,
   "description": description,
+  "Publisher": {
+    "@type": "Organization",
+    "@id": `${site.organization.url}/#organization`
+  },
   "breadcrumb": {
     "@type": "BreadcrumbList",
     "itemListElement": [

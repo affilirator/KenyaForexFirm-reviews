@@ -1,0 +1,130 @@
+---
+interface Props {
+  recipientEmail: string;
+}
+
+const { recipientEmail } = Astro.props;
+---
+
+<form id="contactForm" class="card-glass p-8" action={`https://formspree.io/f/${recipientEmail}`} method="POST">
+  <div class="mb-8">
+    <h2 class="text-2xl font-display font-bold text-white mb-2">Send Us a Message</h2>
+    <p class="text-neutral-400">We'll get back to you within 24 hours</p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6 mb-6">
+    <!-- Name -->
+    <div>
+      <label for="name" class="block text-sm font-medium text-neutral-300 mb-2">Your Name *</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        class="w-full bg-neutral-800/50 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500"
+        placeholder="John Doe"
+      />
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="email" class="block text-sm font-medium text-neutral-300 mb-2">Email Address *</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        class="w-full bg-neutral-800/50 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500"
+        placeholder="john@example.com"
+      />
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6 mb-6">
+    <!-- Organization -->
+    <div>
+      <label for="organization" class="block text-sm font-medium text-neutral-300 mb-2">Organization</label>
+      <input
+        type="text"
+        id="organization"
+        name="organization"
+        class="w-full bg-neutral-800/50 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500"
+        placeholder="Your company or broker name"
+      />
+    </div>
+
+    <!-- Inquiry Type -->
+    <div>
+      <label for="inquiryType" class="block text-sm font-medium text-neutral-300 mb-2">Inquiry Type *</label>
+      <select
+        id="inquiryType"
+        name="inquiryType"
+        required
+        class="w-full bg-neutral-800/50 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500"
+      >
+        <option value="" disabled selected>Select an option</option>
+        <option value="broker-partnership">Broker Partnership</option>
+        <option value="review-request">Review Request</option>
+        <option value="advertising">Advertising Inquiry</option>
+        <option value="trader-support">Trader Support</option>
+        <option value="general">General Inquiry</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Message -->
+  <div class="mb-6">
+    <label for="message" class="block text-sm font-medium text-neutral-300 mb-2">Your Message *</label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows="5"
+      class="w-full bg-neutral-800/50 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500"
+      placeholder="How can we help you?"
+    ></textarea>
+  </div>
+
+  <!-- Privacy Policy -->
+  <div class="mb-6">
+    <label class="flex items-start">
+      <input
+        type="checkbox"
+        required
+        name="privacy"
+        class="mt-1 bg-neutral-800 border-neutral-700 text-primary-500 focus:ring-primary-500"
+      />
+      <span class="ml-2 text-sm text-neutral-400">
+        I agree to the <a href="/privacy" class="text-primary-400 hover:underline">Privacy Policy</a> and consent to having my data processed.
+      </span>
+    </label>
+  </div>
+
+  <!-- Submit Button -->
+  <div>
+    <button
+      type="submit"
+      class="bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-3 px-6 rounded-lg w-full md:w-auto"
+    >
+      Send Message
+    </button>
+  </div>
+</form>
+
+<script>
+  // Simple form validation
+  const form = document.getElementById('contactForm');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Basic validation passed, show loading state
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.textContent = 'Sending...';
+      submitButton.disabled = true;
+    }
+    
+    // Submit the form
+    form.submit();
+  });
+</script>

@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactHero from '../components/contact/ContactHero.astro';
+import ContactForm from '../components/contact/ContactForm.astro';
+import ContactInfo from '../components/contact/ContactInfo.astro';
+import ContactFAQ from '../components/contact/ContactFAQ.astro';
+import PartnershipCTA from '../components/contact/PartnershipCTA.astro';
+import { contactHero, contactInfo, brokerCTA, traderCTA, contactFAQs, schemaData } from '../data/contactData';
+
+// Formspree form ID - replace with your actual ID
+const formspreeId = "xrgwlkpz";
+---
+
+<BaseLayout
+  title="Contact Us - Kenya Forex Firm | Broker Partnerships & Trader Support"
+  description="Contact Kenya Forex Firm for broker partnerships, review requests, or trading assistance. We help connect Kenyan traders with reliable forex brokers."
+  schemaData={schemaData}
+>
+  <!-- Hero Section -->
+  <ContactHero 
+    title={contactHero.title}
+    subtitle={contactHero.subtitle}
+  />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid lg:grid-cols-2 gap-8 mb-16">
+      <!-- Contact Form -->
+      <div>
+        <ContactForm recipientEmail={formspreeId} />
+      </div>
+
+      <!-- Contact Information -->
+      <div class="space-y-8">
+        <ContactInfo 
+          email={contactInfo.email}
+          phone={contactInfo.phone}
+          address={contactInfo.address}
+          socialLinks={contactInfo.socialLinks}
+        />
+
+        <!-- Structured Data for Local Business -->
+        <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Kenya Forex Firm",
+            "image": "https://fx.kenyaforexfirm.com/favicon.svg",
+            "telephone": contactInfo.phone,
+            "email": contactInfo.email,
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": contactInfo.address.street,
+              "addressLocality": contactInfo.address.city,
+              "addressCountry": contactInfo.address.country
+            },
+            "openingHours": "Mo,Tu,We,Th,Fr 09:00-17:00",
+            "url": "https://fx.kenyaforexfirm.com"
+          }
+        </script>
+      </div>
+    </div>
+
+    <!-- Target Audience CTAs -->
+    <div class="grid md:grid-cols-2 gap-8 mb-16">
+      <!-- Broker CTA -->
+      <PartnershipCTA 
+        title={brokerCTA.title}
+        description={brokerCTA.description}
+        buttonText={brokerCTA.buttonText}
+        buttonLink={brokerCTA.buttonLink}
+      />
+
+      <!-- Trader CTA -->
+      <PartnershipCTA 
+        title={traderCTA.title}
+        description={traderCTA.description}
+        buttonText={traderCTA.buttonText}
+        buttonLink={traderCTA.buttonLink}
+      />
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mb-16">
+      <h2 class="text-3xl font-display font-bold text-white mb-8 text-center">
+        Frequently Asked Questions
+      </h2>
+      <ContactFAQ faqs={contactFAQs} />
+
+      <!-- FAQ Schema -->
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": contactFAQs.map(faq => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq.answer
+            }
+          }))
+        }
+      </script>
+    </div>
+
+    <!-- Map Section -->
+    <div class="card-glass p-4 overflow-hidden rounded-2xl">
+      <div class="aspect-w-16 aspect-h-9">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.347059868733!2d36.81711!3d-1.28333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d62d4fccdd%3A0xb88a4487a56c8c1d!2sNairobi%20City%2C%20Kenya!5e0!3m2!1sen!2sus!4v1656520247684!5m2!1sen!2sus" 
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Kenya Forex Firm Office Location"
+          class="contact-map"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Aspect ratio for map */
+  .aspect-w-16 {
+    position: relative;
+    padding-bottom: 56.25%;
+  }
+  .aspect-w-16 iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+</style>
