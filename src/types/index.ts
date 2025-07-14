@@ -101,6 +101,7 @@ export type BrokerProps = {
   brokerRating: number;
   slug: string;
   brokerWebsite?: string;
+  cmaRegulated?: boolean;
   meta?: BrokerMeta;
   baseDetails?: BrokerBaseDetails;
   ratings?: BrokerRatings;

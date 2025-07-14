@@ -21,21 +21,21 @@ const { broker, content } = Astro.props;
       ) : (
         <>
           <p class="text-lg text-neutral-300 leading-relaxed mb-6">
-            {broker.brokerName} is a {broker.category || 'forex and CFD'} broker {broker.founded ? `established in ${broker.founded}` : 'serving traders globally'}.
-            {broker.headquarters && ` The company is headquartered in ${broker.headquarters}`} and offers comprehensive trading services
-            {broker.cmaApproved ? ' with CMA approval for Kenyan clients' : ' to international clients'}.
+            {broker.brokerName} is a {broker.category || 'forex and CFD'} broker {broker.baseDetails?.founded ? `established in ${broker.baseDetails?.founded}` : 'serving traders globally'}.
+            {broker.baseDetails?.headquarters && ` The company is headquartered in ${broker.baseDetails?.headquarters}`} and offers comprehensive trading services
+            {broker.cmaRegulated ? ' with CMA approval for Kenyan clients' : ' to international clients'}.
           </p>
 
           <p class="text-neutral-300 leading-relaxed mb-6">
-            What sets {broker.brokerName} apart is its commitment to providing {broker.minDeposit && broker.minDeposit <= 100 ? 'accessible trading with low minimum deposits' : 'professional trading services'}
+            What sets {broker.brokerName} apart is its commitment to providing {broker.minDeposit && broker.minDeposit <= 100 ? 'accessible forex trading services with low minimum deposits' : 'professional trading services'}
             {broker.platforms && broker.platforms.length > 0 && ` across ${broker.platforms.length} trading platforms`}.
-            {broker.regulation && broker.regulation.length > 0 && ` The broker maintains strong regulatory compliance with ${broker.regulation.length} regulatory licenses`}.
+            {broker.regulation && broker.regulation.length > 0 && ` ${broker.brokerName} maintains strong regulatory compliance with ${broker.regulation.length} regulatory licenses`}.
           </p>
 
           <p class="text-neutral-300 leading-relaxed">
             For Kenyan traders specifically, {broker.brokerName} provides 
-            {broker.paymentMethods?.includes('M-Pesa') ? 'M-Pesa payment support, making deposits and withdrawals convenient for local clients' : 'various payment methods suitable for international clients'}.
-            {broker.islamicAccount && ' The broker also offers Islamic accounts for traders following Shariah principles'}.
+            {broker.paymentMethods?.includes('mpesa') ? 'M-Pesa payment support, making deposits and withdrawals convenient for local clients' : 'various payment methods suitable for international clients'}.
+            {broker.islamicAccount && ' The broker also offers swap-free Islamic accounts for traders following Shariah principles'}.
           </p>
         </>
       )}
