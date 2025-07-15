@@ -67,3 +67,19 @@ export const getReviewBySlug = async (slug: string): Promise<BrokerProps | null>
     return null;
   }
 };
+
+export const getHighLeverageBrokers = async (): Promise<{ docs: BrokerProps[] }> => {
+  try {
+    const allBrokers = await getReviews();
+    const highLeverageBrokers = allBrokers.docs.filter(broker => {
+      // Extract the leverage value from maxLeverage (format: "1:XXX")
+      const leverageValue = broker.maxLeverage ? parseInt(broker.maxLeverage.split(':')[1]) : 0;
+      return leverageValue > 400;
+    });
+    
+    return { docs: highLeverageBrokers };
+  } catch (error) {
+    console.error('Failed to fetch high leverage brokers:', error);
+    return { docs: [] };
+  }
+};

@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import BrokerCard from '../../components/review/BrokerCard.astro';
+import FilterControls from '../../components/review/FilterControls.astro';
+import { site } from '../../data/site';
+import { getHighLeverageBrokers } from '~/lib/qs-esm';
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": `High Leverage Forex Brokers - ${site.name}`,
+  "description": `Top high leverage forex brokers offering leverage above 1:400 for ${site.address.country} traders`,
+  "url": new URL(Astro.request.url),
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": 15,
+    "itemListElement": []
+  }
+};
+
+// Fetch high leverage brokers
+const brokersData = await getHighLeverageBrokers();
+const brokers = brokersData?.docs || [];
+---
+
+<BaseLayout
+  title={`High Leverage Forex Brokers in ${site.address.country} (${site.currentYear}) - Leverage Above 1:400`}
+  description={`Compare the best high leverage forex brokers available to ${site.address.country}n traders. Find brokers offering leverage above 1:400 with expert reviews and rankings.`}
+  schemaData={schemaData}>
+  
+  <Navigation />
+
+  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+          High <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Leverage Brokers</span> in Kenya
+        </h1>
+        <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
+          Compare forex brokers offering leverage above 1:400 for Kenyan traders. High leverage can amplify both profits and losses, so trade responsibly.
+        </p>
+      </div>
+      <FilterControls />
+    </div>
+  </section>
+
+  <section class="py-12 bg-gradient-to-b from-neutral-950 to-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <p class="text-neutral-400">
+          <span id="resultsCount">{brokers.length}</span> high leverage brokers found
+        </p>
+      </div>
+      <div id="brokerGrid" class="space-y-6">
+        {brokers.map((broker, index) => (
+          <BrokerCard broker={broker} index={index} />
+        ))}
+      </div>
+      
+      {brokers.length === 0 && (
+        <div class="text-center py-12">
+          <p class="text-xl text-neutral-300">No high leverage brokers found at the moment.</p>
+          <p class="text-neutral-400 mt-2">Please check back later or explore our <a href="/brokers" class="text-primary-400 hover:underline">full list of brokers</a>.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="py-12 bg-neutral-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white mb-6">Understanding High Leverage Trading</h2>
+      <div class="prose prose-invert max-w-none">
+        <p>
+          High leverage brokers offer trading with leverage ratios above 1:400, allowing traders to control larger positions with a relatively small amount of capital. While this can amplify potential profits, it also significantly increases risk.
+        </p>
+        <h3>Benefits of High Leverage</h3>
+        <ul>
+          <li>Access to larger market positions with limited capital</li>
+          <li>Potential for higher returns on successful trades</li>
+          <li>Ability to diversify trading across multiple instruments</li>
+        </ul>
+        <h3>Risks of High Leverage</h3>
+        <ul>
+          <li>Increased potential for significant losses</li>
+          <li>Higher margin requirements and risk of margin calls</li>
+          <li>Emotional trading decisions due to amplified price movements</li>
+        </ul>
+        <p>
+          <strong>Important:</strong> High leverage trading is suitable for experienced traders with proper risk management strategies. Always use stop-loss orders and never risk more than you can afford to lose.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .broker-card.hidden { display: none; }
+  </style>
+
+  <script>
+  class BrokerFilter {
+    brokerCards;
+    
+    constructor() {
+      this.brokerCards = document.querySelectorAll('.broker-card');
+      this.initializeEventListeners();
+    }
+
+    initializeEventListeners() {
+      document.getElementById('brokerSearch')?.addEventListener('input', () => this.applyFilters());
+      document.getElementById('regulationFilter')?.addEventListener('change', () => this.applyFilters());
+      document.getElementById('depositFilter')?.addEventListener('change', () => this.applyFilters());
+      document.getElementById('sortFilter')?.addEventListener('change', () => this.applySorting());
+      document.querySelectorAll('.quick-filter').forEach(button => {
+        button.addEventListener('click', (e) => this.handleQuickFilter(e));
+      });
+    }
+
+    applyFilters() {
+      const searchTerm = (document.getElementById('brokerSearch') as HTMLInputElement)?.value?.toLowerCase();
+      const regulation = (document.getElementById('regulationFilter') as HTMLSelectElement)?.value;
+      const deposit = (document.getElementById('depositFilter') as HTMLSelectElement)?.value;
+      let visibleCount = 0;
+
+      this.brokerCards.forEach(card => {
+        const htmlCard = card as HTMLElement;
+        let show = true;
+
+        if (searchTerm && !card.querySelector('h3')?.textContent?.toLowerCase().includes(searchTerm)) show = false;
+        if (regulation === 'cma-approved' && htmlCard.dataset.cma !== 'true') show = false;
+        if (regulation && regulation !== 'cma-approved' && !htmlCard.dataset.regulation?.includes(regulation)) show = false;
+        
+        if (deposit) {
+          const minDeposit = parseFloat(htmlCard.dataset.deposit || '0');
+          const ranges: Record<string, number[]> = { '0-10': [0, 10], '10-100': [10, 100], '100-500': [100, 500], '500+': [500, Infinity] };
+          const [min, max] = ranges[deposit] || [0, Infinity];
+          if (minDeposit < min || minDeposit > max) show = false;
+        }
+
+        card.classList.toggle('hidden', !show);
+        if (show) visibleCount++;
+      });
+
+      document.getElementById('resultsCount')!.textContent = visibleCount.toString();
+    }
+
+    applySorting() {
+      const sortBy = (document.getElementById('sortFilter') as HTMLSelectElement)?.value;
+      const container = document.getElementById('brokerGrid');
+      const cards = Array.from(this.brokerCards);
+
+      cards.sort((a, b) => {
+        const htmlA = a as HTMLElement;
+        const htmlB = b as HTMLElement;
+        switch (sortBy) {
+          case 'rating': return parseFloat(htmlB.dataset.rating || '0') - parseFloat(htmlA.dataset.rating || '0');
+          case 'spread': return parseFloat(htmlA.dataset.spread || '0') - parseFloat(htmlB.dataset.spread || '0');
+          case 'deposit': return parseFloat(htmlA.dataset.deposit || '0') - parseFloat(htmlB.dataset.deposit || '0');
+          default: return 0;
+        }
+      });
+
+      cards.forEach(card => container?.appendChild(card));
+      this.applyFilters();
+    }
+
+    handleQuickFilter(e: Event) {
+      const button = e.target as HTMLElement;
+      const filter = button.dataset.filter;
+      
+      button.classList.toggle('active');
+      document.querySelectorAll('.quick-filter').forEach(b => b !== button && b.classList.remove('active'));
+      
+      if (button.classList.contains('active')) {
+        switch (filter) {
+          case 'cma-approved': 
+            (document.getElementById('regulationFilter') as HTMLSelectElement).value = 'cma-approved'; 
+            break;
+          case 'low-deposit': 
+            (document.getElementById('depositFilter') as HTMLSelectElement).value = '0-10'; 
+            break;
+        }
+      } else {
+        (document.getElementById('regulationFilter') as HTMLSelectElement).value = '';
+        (document.getElementById('depositFilter') as HTMLSelectElement).value = '';
+      }
+      this.applyFilters();
+    }
+  }
+
+  new BrokerFilter();
+  </script>
+</BaseLayout>
