@@ -1,0 +1,45 @@
+---
+// src/components/RatingBar.astro
+
+// Define the props type for strong typing
+export type Props = {
+  /** Category name (e.g., "Research Education") */
+  category: string;
+  /** Score value (e.g., 7) */
+  score: number;
+  /** Maximum possible score (default = 10) */
+  max?: number;
+};
+
+// Destructure props from Astro.props and apply defaults
+const { category, score, max = 10 } = Astro.props as Props;
+
+// Calculate percentage for the bar fill
+const percentage = Math.min(Math.max((score / max) * 100, 0), 100);
+---
+
+<style>
+.rating-container {
+  @apply my-4;
+}
+.label {
+  @apply font-medium mb-1;
+}
+.bar {
+  @apply w-full h-4 bg-gray-200 rounded overflow-hidden;
+}
+.fill {
+  @apply h-full bg-blue-500;
+}
+.score {
+  @apply text-sm text-gray-700 mt-1;
+}
+</style>
+
+<div class="rating-container">
+  <div class="label">{category}</div>
+  <div class="bar">
+    <div class="fill" style={`width: ${percentage}%`} />
+  </div>
+  <div class="score">{score} / {max}</div>
+</div>

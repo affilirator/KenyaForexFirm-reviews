@@ -1,0 +1,66 @@
+---
+//import type { Broker } from '../types'
+//import RatingBar from '../../components/RatingBar.astro'
+
+export interface CatRatings {
+  researchEducation:   { catScore: number }
+  customerService:     { catScore: number }
+  userReviewsTrust:    { catScore: number }
+  safetyAndRegulation: { catScore: number }
+  feesAndCommissions:  { catScore: number }
+  marketAccess:        { catScore: number }
+  mobileTrading:       { catScore: number }
+  tradingPlatforms:    { catScore: number }
+  overallExperience:   { catScore: number }
+}
+
+export interface Broker {
+  slug: string
+  catRatings: CatRatings
+  // …any other fields
+}
+
+
+export async function getStaticPaths() {
+  // assume your PayloadCMS endpoint returns Broker[]
+  const allBrokers = await fetch('https://api.yoursite.com/brokers')
+    .then(res => res.json()) as Broker[]
+
+  return allBrokers.map(broker => ({
+    params: { slug: broker.slug },
+    props:  { broker }
+  }))
+}
+
+const { broker } = Astro.props as { broker: Broker }
+
+// turn the object into an array so you can map it
+type Rating = { category: string; score: number }
+const ratings = Object
+  .entries(broker.catRatings)
+  .map(([category, { catScore }]) => ({
+    category,
+    score: catScore
+  })) as Rating[]
+---
+<html>
+  <body>
+    <h1>Ratings for {broker.slug}</h1>
+
+    <ul>
+      {ratings.map(r => (
+        <li>
+          <strong>{r.category.replace(
+            /([A-Z])/g, ' $1'
+          ).replace(/^./, s => s.toUpperCase())}:</strong>
+          {' '}{r.score}/10
+        </li>
+      ))}
+    </ul>
+
+    {/* or if you have a RatingBar component: */}
+    {ratings.map(r => (
+      <RatingBar category={r.category} score={r.score} />
+    ))}
+  </body>
+</html>

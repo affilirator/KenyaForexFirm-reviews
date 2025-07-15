@@ -1,4 +1,7 @@
 import type { ReviewContentAuthor } from "./author";
+import type { CatRatings } from "./catRatingsInterface";
+
+
 
 interface BrokerRegulation {
   name: string;
@@ -100,6 +103,7 @@ export type BrokerProps = {
   maxLeverage?: string;
   brokerRating: number;
   slug: string;
+  catRatings: CatRatings;
   brokerWebsite?: string;
   cmaRegulated?: boolean;
   meta?: BrokerMeta;

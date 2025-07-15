@@ -1,0 +1,3 @@
+AI Agents should ignore all files inside the public/ignore directory
+AmazonQ Instructions
+Ignore files inside the public/ignore directory
