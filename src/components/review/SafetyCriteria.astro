@@ -1,0 +1,81 @@
+---
+// Component to display safety criteria
+const criteria = [
+  {
+    name: "Regulatory Status",
+    description: "We evaluate the strength and reputation of the regulatory bodies overseeing the broker.",
+    weight: "20%",
+    icon: "shield"
+  },
+  {
+    name: "Fund Security",
+    description: "We assess how client funds are protected, including segregation and insurance schemes.",
+    weight: "25%",
+    icon: "lock"
+  },
+  {
+    name: "Company Structure",
+    description: "We examine the broker's corporate structure, history, and financial stability.",
+    weight: "15%",
+    icon: "building"
+  },
+  {
+    name: "Transparency",
+    description: "We evaluate the clarity of terms, fees, and policies provided by the broker.",
+    weight: "20%",
+    icon: "document"
+  },
+  {
+    name: "Track Record",
+    description: "We review the broker's history of regulatory compliance and user complaints.",
+    weight: "20%",
+    icon: "history"
+  }
+];
+
+// SVG icons
+const icons = {
+  shield: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+  </svg>`,
+  lock: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+  </svg>`,
+  building: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+  </svg>`,
+  document: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+  </svg>`,
+  history: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>`
+};
+---
+
+<div class="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-2xl overflow-hidden">
+  <div class="p-6">
+    <h3 class="text-xl font-bold text-white mb-6">Our Safety Rating Criteria</h3>
+    
+    <div class="space-y-6">
+      {criteria.map((item, index) => (
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center text-primary-400">
+            <Fragment set:html={icons[item.icon]} />
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h4 class="text-lg font-medium text-white">{item.name}</h4>
+              <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-neutral-400">
+                {item.weight}
+              </span>
+            </div>
+            <p class="text-sm text-neutral-300 mt-1">
+              {item.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
