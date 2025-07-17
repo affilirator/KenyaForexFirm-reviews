@@ -1,9 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
+import RegulatorCard from '../../components/regulators/RegulatorCard.astro';
+import RegulatorTiers from '../../components/regulators/RegulatorTiers.astro';
 import { site } from '../../data/site';
 import { getReviews } from '~/lib/qs-esm';
+import { getRegulators } from '~/lib/regulators-api';
 import type { BrokerProps } from '../../types';
+import type { Regulator } from '../../types/regulator';
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -28,6 +32,13 @@ const rankedBrokers = [...brokers].sort((a, b) => {
   const bScore = b.catRatings?.safetyAndRegulation?.catScore || 0;
   return bScore - aScore; // Sort in descending order
 });
+
+// Fetch regulators data
+const regulatorsData = await getRegulators();
+const regulators = regulatorsData?.docs || [];
+
+// Sort regulators by trust score
+const sortedRegulators = [...regulators].sort((a, b) => b.trustScore - a.trustScore);
 ---
 
 <BaseLayout
@@ -181,16 +192,48 @@ const rankedBrokers = [...brokers].sort((a, b) => {
           <li>Dispute resolution mechanisms</li>
           <li>Regular audits and compliance checks</li>
         </ul>
-        <h3>Key Regulatory Bodies</h3>
-        <ul>
-          <li><strong>CMA (Capital Markets Authority)</strong> - Kenya's financial regulator</li>
-          <li><strong>FCA (Financial Conduct Authority)</strong> - UK regulator known for strict standards</li>
-          <li><strong>ASIC (Australian Securities and Investments Commission)</strong> - Australia's financial regulator</li>
-          <li><strong>CySEC (Cyprus Securities and Exchange Commission)</strong> - EU-based regulator</li>
-        </ul>
         <p>
           <strong>Important:</strong> Always verify a broker's regulatory status directly with the relevant authority before depositing funds.
         </p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Regulatory Authorities Section -->
+  <section class="py-12 bg-gradient-to-b from-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+          Understanding <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Regulatory Authorities</span>
+        </h2>
+        <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
+          Learn about the different regulatory bodies that oversee forex brokers and how they protect traders.
+        </p>
+      </div>
+      
+      <!-- Regulator Tiers -->
+      <RegulatorTiers regulators={sortedRegulators} />
+    </div>
+  </section>
+  
+  <!-- Featured Regulators Section -->
+  <section class="py-12 bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-white mb-8">Featured Regulatory Authorities</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedRegulators.slice(0, 3).map(regulator => (
+          <RegulatorCard regulator={regulator} />
+        ))}
+      </div>
+      
+      <div class="mt-8 text-center">
+        <a 
+          href="/regulators" 
+          class="inline-block bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 rounded-lg text-sm font-medium transition-colors"
+        >
+          View All Regulatory Authorities
+        </a>
       </div>
     </div>
   </section>

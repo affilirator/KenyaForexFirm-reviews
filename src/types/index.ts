@@ -1,7 +1,5 @@
 import type { ReviewContentAuthor } from "./author";
-import type { CatRatings } from "./catRatingsInterface";
-
-
+import type { CatRatings, CategoryReference } from "./catRatingsInterface";
 
 interface BrokerRegulation {
   name: string;
@@ -20,9 +18,8 @@ export interface IndexBrokerProps {
 }
 
 export type AccountType = {
-    minDeposit: number;
-    accountName: string;
-
+  minDeposit: number;
+  accountName: string;
 }
 
 export type Regulation = {
@@ -46,11 +43,10 @@ export type BrokerReview = {
   logo?: string;
 }
 
-export type Logo =  {
+export type Logo = {
   filename: string;
   id: string;
   url: string;
-
 }
 
 export type BrokerPros = {
@@ -88,13 +84,66 @@ export type BrokerBaseDetails = {
 
 export type MetaImage = {
   url: string;
-  alt: string;
+  alt?: string;
+  filename?: string;
+  id?: string;
 }
 
 export type BrokerMeta = {
   title?: string;
   description?: string;
   image?: MetaImage;
+}
+
+export type BrokerPlatform = {
+  name: string;
+  slug: string;
+  id: string;
+}
+
+export type ImageSizes = {
+  small: ImageSize;
+  tablet: ImageSize;
+  large: ImageSize;
+}
+
+export type ImageSize = {
+  width: number;
+  height: number;
+  mimeType: string;
+  filesize: number;
+  filename: string;
+  url: string;
+}
+
+export type BrokerImage = {
+  createdAt?: string;
+  updatedAt?: string;
+  status?: string;
+  alt?: string;
+  blog?: string;
+  sizes?: ImageSizes;
+  tenant?: string;
+  url: string;
+  thumbnailURL?: string | null;
+  filename: string;
+  mimeType: string;
+  filesize: number;
+  width: number;
+  height: number;
+  focalX?: number;
+  focalY?: number;
+  id: string;
+  slug?: string;
+  caption?: string;
+}
+
+export type ReviewContent = {
+  docs: Array<{
+    slug: string;
+    id: string;
+  }>;
+  hasNextPage: boolean;
 }
 
 export type BrokerProps = {
@@ -113,9 +162,12 @@ export type BrokerProps = {
   cons?: BrokerCons[];
   features?: string[];
   platforms?: string[];
+  brokerPlatforms?: BrokerPlatform[];
   accountTypes?: string[];
   paymentMethods?: string[];
+  fundingMethods?: string[];
   selectedAssets?: string[];
+  brokerAssets?: string[];
   quickVerdict?: string;
   countriesNotAllowed?: string[];
   languages?: string[];
@@ -126,13 +178,24 @@ export type BrokerProps = {
   islamicAccount: boolean;
   acceptsMpesa: boolean;
   category?: string;
-  logo?: string | Logo;
+  logo?: string | Logo | BrokerImage;
+  image?: BrokerImage;
+  gallery?: BrokerImage[];
   review?: BrokerReview;
   author: ReviewContentAuthor[];
   regulation?: Array<Regulation> | Regulation[];
+  regulations?: string[];
+  regulators?: string[];
+  isRegulated?: boolean;
   minDeposit?: number;
   spread?: string | number;
   commission?: string | number;
   leverage?: string;
-  
+  description?: string;
+  keywords?: string[];
+  faqs?: any[];
+  reviewContent?: ReviewContent;
+  categoryRating?: any[];
+  contactDetails?: any[];
+  restrictedCountries?: string[];
 }

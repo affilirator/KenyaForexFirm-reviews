@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import RegulatorCard from '../../components/regulators/RegulatorCard.astro';
+import { site } from '../../data/site';
+import { getRegulators } from '~/lib/regulators-api';
+import type { Regulator } from '../../types/regulator';
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": `Forex Regulatory Authorities - ${site.name}`,
+  "description": `Comprehensive guide to forex regulatory authorities worldwide for ${site.address.country} traders`,
+  "url": new URL(Astro.request.url),
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": 15,
+    "itemListElement": []
+  }
+};
+
+// Fetch regulators data
+const regulatorsData = await getRegulators();
+const regulators = regulatorsData?.docs || [];
+
+// Group regulators by region
+const regulatorsByRegion = regulators.reduce((acc, regulator) => {
+  const region = regulator.region || 'Other';
+  if (!acc[region]) {
+    acc[region] = [];
+  }
+  acc[region].push(regulator);
+  return acc;
+}, {} as Record<string, Regulator[]>);
+
+// Sort regions alphabetically
+const sortedRegions = Object.keys(regulatorsByRegion).sort();
+---
+
+<BaseLayout
+  title={`Forex Regulatory Authorities - Complete Guide (${site.currentYear})`}
+  description={`Learn about forex regulatory bodies worldwide. Compare trust scores, jurisdiction details, and how they protect traders in ${site.address.country}.`}
+  schemaData={schemaData}>
+  
+  <Navigation />
+
+  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+          Forex <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Regulatory Authorities</span>
+        </h1>
+        <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
+          Comprehensive guide to financial regulators that oversee forex brokers worldwide. Learn about their jurisdiction, trust scores, and how they protect traders.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gradient-to-b from-neutral-950 to-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <p class="text-neutral-400">
+          <span>{regulators.length}</span> regulatory authorities found
+        </p>
+      </div>
+      
+      {sortedRegions.map(region => (
+        <div class="mb-12">
+          <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+            <span class="bg-primary-500/20 text-primary-400 p-2 rounded-lg mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </span>
+            {region} Regulators
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {regulatorsByRegion[region].map(regulator => (
+              <RegulatorCard regulator={regulator} />
+            ))}
+          </div>
+        </div>
+      ))}
+      
+      {regulators.length === 0 && (
+        <div class="text-center py-12">
+          <p class="text-xl text-neutral-300">No regulatory authorities found at the moment.</p>
+          <p class="text-neutral-400 mt-2">Please check back later.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="py-12 bg-neutral-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white mb-6">Understanding Regulatory Oversight</h2>
+      <div class="prose prose-invert max-w-none">
+        <p>
+          Regulatory authorities play a crucial role in the forex market by establishing rules and standards that brokers must follow. These organizations help ensure fair trading practices, protect traders from fraud, and maintain the integrity of the financial markets.
+        </p>
+        
+        <h3>What Makes a Strong Regulator?</h3>
+        <ul>
+          <li><strong>Strict Capital Requirements</strong> - Higher capital requirements for brokers ensure they have sufficient funds to operate.</li>
+          <li><strong>Segregated Client Funds</strong> - Client money must be kept separate from the broker's operational funds.</li>
+          <li><strong>Compensation Schemes</strong> - Protection for traders in case a broker becomes insolvent.</li>
+          <li><strong>Dispute Resolution</strong> - Clear processes for handling complaints and resolving disputes.</li>
+          <li><strong>Regular Audits</strong> - Frequent checks to ensure brokers comply with regulations.</li>
+          <li><strong>Enforcement Powers</strong> - Ability to penalize non-compliant brokers and revoke licenses.</li>
+        </ul>
+        
+        <h3>Tier System Explained</h3>
+        <p>
+          Our trust score system categorizes regulators into three tiers based on their regulatory framework, enforcement capabilities, and trader protections:
+        </p>
+        
+        <ul>
+          <li><strong>Tier 1 (85-100)</strong> - Top-tier regulators with the strictest requirements and strongest trader protections.</li>
+          <li><strong>Tier 2 (70-84)</strong> - Mid-tier regulators with solid oversight but less stringent requirements than Tier 1.</li>
+          <li><strong>Tier 3 (Below 70)</strong> - Basic regulatory oversight with fewer protections for traders.</li>
+        </ul>
+        
+        <p>
+          <strong>Important:</strong> When choosing a forex broker, prioritize those regulated by Tier 1 authorities for maximum protection. Multiple regulations from different jurisdictions can provide additional security.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,124 @@
+---
+import type { Regulator } from '../../types/regulator';
+
+interface Props {
+  regulators: Regulator[];
+}
+
+const { regulators } = Astro.props;
+
+// Group regulators by tier based on trust score
+const topTier = regulators.filter(reg => reg.trustScore >= 85);
+const midTier = regulators.filter(reg => reg.trustScore >= 70 && reg.trustScore < 85);
+const standardTier = regulators.filter(reg => reg.trustScore < 70);
+---
+
+<div class="space-y-12">
+  <!-- Top Tier Regulators -->
+  <div>
+    <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+      <span class="bg-yellow-500/20 text-yellow-400 p-2 rounded-lg mr-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+      </span>
+      Tier 1 - Top-Tier Regulators (85-100)
+    </h3>
+    <p class="text-neutral-300 mb-6">
+      These are the most respected financial authorities with the strictest regulatory frameworks, offering the highest level of investor protection.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {topTier.map(regulator => (
+        <div class="bg-neutral-800/50 border border-yellow-500/20 rounded-xl p-4 flex items-center gap-3">
+          {regulator.logo && (
+            <img src={regulator.logo.url} alt={regulator.name} class="w-12 h-12 object-contain bg-white rounded-lg p-1" />
+          )}
+          <div>
+            <div class="font-bold text-white">{regulator.shortName}</div>
+            <div class="text-sm text-neutral-400">{regulator.country}</div>
+            <div class="text-yellow-400 text-sm font-medium mt-1">Score: {regulator.trustScore}/100</div>
+          </div>
+        </div>
+      ))}
+      
+      {topTier.length === 0 && (
+        <div class="col-span-full text-center py-6 bg-neutral-800/30 rounded-xl">
+          <p class="text-neutral-400">No top-tier regulators found</p>
+        </div>
+      )}
+    </div>
+  </div>
+  
+  <!-- Mid Tier Regulators -->
+  <div>
+    <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+      <span class="bg-blue-500/20 text-blue-400 p-2 rounded-lg mr-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      </span>
+      Tier 2 - Mid-Tier Regulators (70-84)
+    </h3>
+    <p class="text-neutral-300 mb-6">
+      These regulators provide solid oversight and reasonable investor protection, though with less stringent requirements than top-tier authorities.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {midTier.map(regulator => (
+        <div class="bg-neutral-800/50 border border-blue-500/20 rounded-xl p-4 flex items-center gap-3">
+          {regulator.logo && (
+            <img src={regulator.logo.url} alt={regulator.name} class="w-12 h-12 object-contain bg-white rounded-lg p-1" />
+          )}
+          <div>
+            <div class="font-bold text-white">{regulator.shortName}</div>
+            <div class="text-sm text-neutral-400">{regulator.country}</div>
+            <div class="text-blue-400 text-sm font-medium mt-1">Score: {regulator.trustScore}/100</div>
+          </div>
+        </div>
+      ))}
+      
+      {midTier.length === 0 && (
+        <div class="col-span-full text-center py-6 bg-neutral-800/30 rounded-xl">
+          <p class="text-neutral-400">No mid-tier regulators found</p>
+        </div>
+      )}
+    </div>
+  </div>
+  
+  <!-- Standard Tier Regulators -->
+  <div>
+    <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+      <span class="bg-neutral-500/20 text-neutral-400 p-2 rounded-lg mr-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </span>
+      Tier 3 - Standard Regulators (Below 70)
+    </h3>
+    <p class="text-neutral-300 mb-6">
+      These regulators provide basic oversight but may have less stringent requirements or enforcement capabilities compared to higher-tier authorities.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {standardTier.map(regulator => (
+        <div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl p-4 flex items-center gap-3">
+          {regulator.logo && (
+            <img src={regulator.logo.url} alt={regulator.name} class="w-12 h-12 object-contain bg-white rounded-lg p-1" />
+          )}
+          <div>
+            <div class="font-bold text-white">{regulator.shortName}</div>
+            <div class="text-sm text-neutral-400">{regulator.country}</div>
+            <div class="text-neutral-400 text-sm font-medium mt-1">Score: {regulator.trustScore}/100</div>
+          </div>
+        </div>
+      ))}
+      
+      {standardTier.length === 0 && (
+        <div class="col-span-full text-center py-6 bg-neutral-800/30 rounded-xl">
+          <p class="text-neutral-400">No standard-tier regulators found</p>
+        </div>
+      )}
+    </div>
+  </div>
+</div>

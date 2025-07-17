@@ -1,0 +1,277 @@
+{
+  "docs": [
+    {
+      "createdAt": "2025-07-11T10:30:54.668Z",
+      "updatedAt": "2025-07-11T10:31:42.381Z",
+      "generateData": false,
+      "name": "Jordan Securities Commission (JSC)",
+      "shortName": "JSC",
+      "description": "The Jordan Securities Commission is the primary financial regulator overseeing securities and forex markets in Jordan, ensuring transparency, investor protection, and market integrity.",
+      "country": "Jordan",
+      "region": "Middle East",
+      "established": 1997,
+      "keywords": [],
+      "maxLeverage": "1:100",
+      "assetLeverageMapping": [],
+      "minDepositRequirement": 100000,
+      "website": "https://www.jsc.gov.jo",
+      "faqs": [],
+      "trustScore": 75,
+      "betterTrustScore": {
+
+      },
+      "brokerRequirements": [],
+      "investorProtection": [],
+      "pubDate": "2025-07-11T10:30:26.761Z",
+      "lastmod": "2025-07-11T10:30:26.761Z",
+      "relatedLinks": [],
+      "tableData": [],
+      "slug": "jsc-jordan",
+      "blog": {
+        "blogTitle": "Kenya Forex Firm",
+        "slug": "kenya-forex-firm",
+        "tenant": "683f46937e7deb35fd6bca89",
+        "githubBranch": "main",
+        "id": "684042e245e28e4550cbd4e6"
+      },
+      "status": "draft",
+      "tenant": "683f46937e7deb35fd6bca89",
+      "standoutFeatures": [],
+      "meta": {
+
+      },
+      "logo": {
+        "createdAt": "2025-07-11T10:31:39.686Z",
+        "updatedAt": "2025-07-11T10:31:39.686Z",
+        "status": "published",
+        "alt": "Jordan Securities Commission (JSC)",
+        "blog": "684042e245e28e4550cbd4e6",
+        "sizes": {
+          "small": {
+            "width": 180,
+            "height": 180,
+            "mimeType": "image/webp",
+            "filesize": 10976,
+            "filename": "Jordan_Securities_Commission_logo-775.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/small/Jordan_Securities_Commission_logo-775.webp"
+          },
+          "tablet": {
+            "width": 180,
+            "height": 180,
+            "mimeType": "image/webp",
+            "filesize": 10976,
+            "filename": "Jordan_Securities_Commission_logo-1020.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/tablet/Jordan_Securities_Commission_logo-1020.webp"
+          },
+          "large": {
+            "width": 180,
+            "height": 180,
+            "mimeType": "image/webp",
+            "filesize": 10976,
+            "filename": "Jordan_Securities_Commission_logo-1627.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/large/Jordan_Securities_Commission_logo-1627.webp"
+          }
+        },
+        "tenant": "683f46937e7deb35fd6bca89",
+        "url": "https://api.kenyaforexfirm.com/api/media/file/Jordan_Securities_Commission_logo.jpg",
+        "thumbnailURL": null,
+        "filename": "Jordan_Securities_Commission_logo.jpg",
+        "mimeType": "image/jpeg",
+        "filesize": 18721,
+        "width": 180,
+        "height": 180,
+        "focalX": 50,
+        "focalY": 50,
+        "id": "6870e80bc1d9c8abe1522b16",
+        "slug": "jordan-securities-commission-(jsc)",
+        "caption": "jordan-securities-commission-(jsc)"
+      },
+      "id": "6870e7dec1d9c8abe1522af4"
+    },
+    {
+      "createdAt": "2025-07-11T10:28:17.219Z",
+      "updatedAt": "2025-07-11T10:29:13.741Z",
+      "generateData": false,
+      "name": "British Virgin Islands Financial Services Commission",
+      "shortName": "FSC",
+      "description": "The British Virgin Islands Financial Services Commission (BVI FSC) is the statutory body responsible for the regulation, supervision, and inspection of all non-bank financial services conducted in or from within the British Virgin Islands.",
+      "country": "British Virgin Islands",
+      "region": "Caribbean",
+      "established": 2001,
+      "keywords": [],
+      "maxLeverage": "1:200",
+      "assetLeverageMapping": [],
+      "minDepositRequirement": 50000,
+      "website": "https://www.bvifsc.vg",
+      "faqs": [],
+      "trustScore": 70,
+      "betterTrustScore": {
+
+      },
+      "brokerRequirements": [],
+      "investorProtection": [],
+      "pubDate": "2025-07-11T10:22:44.778Z",
+      "lastmod": "2025-07-11T10:22:44.778Z",
+      "relatedLinks": [],
+      "tableData": [],
+      "slug": "fsc-british-virgin-islands",
+      "blog": {
+        "blogTitle": "Kenya Forex Firm",
+        "slug": "kenya-forex-firm",
+        "tenant": "683f46937e7deb35fd6bca89",
+        "githubBranch": "main",
+        "id": "684042e245e28e4550cbd4e6"
+      },
+      "status": "draft",
+      "tenant": "683f46937e7deb35fd6bca89",
+      "standoutFeatures": [],
+      "meta": {
+
+      },
+      "logo": {
+        "createdAt": "2025-07-11T10:29:09.682Z",
+        "updatedAt": "2025-07-11T10:29:09.682Z",
+        "status": "published",
+        "alt": "British Virgin Islands Financial Services Commission",
+        "blog": "684042e245e28e4550cbd4e6",
+        "sizes": {
+          "small": {
+            "width": 448,
+            "height": 284,
+            "mimeType": "image/webp",
+            "filesize": 17414,
+            "filename": "BritishVirginIslandsFinancial-services-commission-775.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/small/BritishVirginIslandsFinancial-services-commission-775.webp"
+          },
+          "tablet": {
+            "width": 448,
+            "height": 284,
+            "mimeType": "image/webp",
+            "filesize": 17414,
+            "filename": "BritishVirginIslandsFinancial-services-commission-1020.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/tablet/BritishVirginIslandsFinancial-services-commission-1020.webp"
+          },
+          "large": {
+            "width": 448,
+            "height": 284,
+            "mimeType": "image/webp",
+            "filesize": 17414,
+            "filename": "BritishVirginIslandsFinancial-services-commission-1627.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/large/BritishVirginIslandsFinancial-services-commission-1627.webp"
+          }
+        },
+        "tenant": "683f46937e7deb35fd6bca89",
+        "url": "https://api.kenyaforexfirm.com/api/media/file/BritishVirginIslandsFinancial-services-commission.jpeg",
+        "thumbnailURL": null,
+        "filename": "BritishVirginIslandsFinancial-services-commission.jpeg",
+        "mimeType": "image/jpeg",
+        "filesize": 115564,
+        "width": 448,
+        "height": 284,
+        "focalX": 50,
+        "focalY": 50,
+        "id": "6870e775c1d9c8abe1522ac8",
+        "slug": "british-virgin-islands-financial-services-commission",
+        "caption": "british-virgin-islands-financial-services-commission"
+      },
+      "id": "6870e741c1d9c8abe1522aa6"
+    },
+    {
+      "createdAt": "2025-07-11T10:24:10.551Z",
+      "updatedAt": "2025-07-11T10:25:38.793Z",
+      "generateData": false,
+      "name": "Central Bank of Curaçao and Sint Maarten",
+      "shortName": "CBCS",
+      "description": "The Central Bank of Curaçao and Sint Maarten is the monetary authority responsible for maintaining monetary and financial stability, supervising financial institutions, and promoting the integrity of Curaçao and Sint Maarten’s financial system.",
+      "country": "Curaçao and Sint Maarten",
+      "region": "Caribbean",
+      "established": 2010,
+      "keywords": [],
+      "maxLeverage": "1:200",
+      "assetLeverageMapping": [],
+      "minDepositRequirement": 50000,
+      "website": "https://www.centralbank.cw",
+      "faqs": [],
+      "trustScore": 65,
+      "betterTrustScore": {
+
+      },
+      "brokerRequirements": [],
+      "investorProtection": [],
+      "pubDate": "2025-07-11T10:22:44.778Z",
+      "lastmod": "2025-07-11T10:22:44.778Z",
+      "relatedLinks": [],
+      "tableData": [],
+      "slug": "cbcs-cura-ao-and-sint-maarten",
+      "blog": {
+        "blogTitle": "Kenya Forex Firm",
+        "slug": "kenya-forex-firm",
+        "tenant": "683f46937e7deb35fd6bca89",
+        "githubBranch": "main",
+        "id": "684042e245e28e4550cbd4e6"
+      },
+      "status": "draft",
+      "tenant": "683f46937e7deb35fd6bca89",
+      "standoutFeatures": [],
+      "meta": {
+
+      },
+      "logo": {
+        "createdAt": "2025-07-11T10:25:32.783Z",
+        "updatedAt": "2025-07-11T10:25:32.783Z",
+        "status": "published",
+        "alt": "Curaçao and Sint Maarten regulatory authority",
+        "blog": "684042e245e28e4550cbd4e6",
+        "sizes": {
+          "small": {
+            "width": 775,
+            "height": 259,
+            "mimeType": "image/webp",
+            "filesize": 4956,
+            "filename": "CuracaoandSintMaarten-775.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/small/CuracaoandSintMaarten-775.webp"
+          },
+          "tablet": {
+            "width": 961,
+            "height": 321,
+            "mimeType": "image/webp",
+            "filesize": 6214,
+            "filename": "CuracaoandSintMaarten-1020.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/tablet/CuracaoandSintMaarten-1020.webp"
+          },
+          "large": {
+            "width": 961,
+            "height": 321,
+            "mimeType": "image/webp",
+            "filesize": 6214,
+            "filename": "CuracaoandSintMaarten-1627.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/large/CuracaoandSintMaarten-1627.webp"
+          }
+        },
+        "tenant": "683f46937e7deb35fd6bca89",
+        "url": "https://api.kenyaforexfirm.com/api/media/file/CuracaoandSintMaarten.png",
+        "thumbnailURL": null,
+        "filename": "CuracaoandSintMaarten.png",
+        "mimeType": "image/png",
+        "filesize": 43992,
+        "width": 961,
+        "height": 321,
+        "focalX": 50,
+        "focalY": 50,
+        "id": "6870e69cc1d9c8abe1522a7a",
+        "slug": "curaçao-and-sint-maarten-regulatory-authority",
+        "caption": "curaçao-and-sint-maarten-regulatory-authority"
+      },
+      "id": "6870e64ac1d9c8abe1522a58"
+    }
+  ],
+  "totalDocs": 14,
+  "limit": 3,
+  "totalPages": 5,
+  "page": 1,
+  "pagingCounter": 1,
+  "hasPrevPage": false,
+  "hasNextPage": true,
+  "prevPage": null,
+  "nextPage": 2
+}
