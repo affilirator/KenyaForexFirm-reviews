@@ -1,0 +1,219 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import AuthorExpertise from '../../components/authors/AuthorExpertise.astro';
+import AuthorCredentials from '../../components/authors/AuthorCredentials.astro';
+import AuthorReviewsList from '../../components/authors/AuthorReviewsList.astro';
+import AuthorSocial from '../../components/authors/AuthorSocial.astro';
+import { site } from '../../data/site';
+import { getAuthorBySlug, getAuthors } from '../../lib/api-service';
+import type { Author } from '../../types/author';
+
+export async function getStaticPaths() {
+  const authorsData = await getAuthors();
+  const authors = authorsData?.docs || [];
+  
+  return authors.map(author => ({
+    params: { slug: author.slug },
+    props: { author }
+  }));
+}
+
+interface Props {
+  author: Author;
+}
+
+const { author } = Astro.props;
+
+// Format author name for meta title
+const authorName = author.name;
+const authorTitle = author.jobTitle || 'Financial Expert';
+
+// Create schema data for SEO
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": author.name,
+  "jobTitle": author.jobTitle,
+  "description": author.bio,
+  "image": author.authorImage?.url,
+  "url": new URL(Astro.request.url).href,
+  "sameAs": [
+    author.socialMediaProfiles?.facebookUrl,
+    author.socialMediaProfiles?.twitterUrl,
+    ...(author.socialMediaProfiles?.additionalProfiles?.map(p => p.profileUrl) || [])
+  ].filter(Boolean),
+  "knowsAbout": author.knowsAbout?.map(item => ({
+    "@type": "Thing",
+    "name": item.fieldName,
+    "description": item.description,
+    "url": item.fieldUrl
+  })) || [],
+  "alumniOf": author.education?.map(edu => ({
+    "@type": "EducationalOrganization",
+    "name": edu.institution,
+    "url": edu.url
+  })) || [],
+  "worksFor": {
+    "@type": "Organization",
+    "name": site.name,
+    "url": site.url
+  }
+};
+
+// Add awards if available
+if (author.awards && author.awards.length > 0) {
+  schemaData.award = author.awards.map(award => award.name);
+}
+
+// Add location if available
+if (author.location) {
+  schemaData.homeLocation = {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": author.location.city,
+      "addressCountry": author.location.country
+    }
+  };
+}
+
+// Meta title and description
+const metaTitle = author.meta?.title || `${authorName} - ${authorTitle} | ${site.name}`;
+const metaDescription = author.meta?.description || `Learn about ${authorName}, ${authorTitle.toLowerCase()} at ${site.name}. Read expert forex broker reviews and financial insights.`;
+---
+
+<BaseLayout
+  title={metaTitle}
+  description={metaDescription}
+  schemaData={schemaData}>
+  
+  <Navigation />
+
+  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row gap-8 items-center md:items-start">
+        <!-- Author Image -->
+        <div class="flex-shrink-0">
+          {author.authorImage ? (
+            <img 
+              src={author.authorImage.url} 
+              alt={author.authorImage.alt || author.name} 
+              width="200"
+              height="200"
+              class="w-40 h-40 md:w-48 md:h-48 object-cover rounded-full border-4 border-neutral-700/50 shadow-lg"
+            />
+          ) : (
+            <div class="w-40 h-40 md:w-48 md:h-48 bg-neutral-800 rounded-full flex items-center justify-center border-4 border-neutral-700/50">
+              <span class="text-4xl font-bold text-neutral-500">{author.name.substring(0, 2)}</span>
+            </div>
+          )}
+        </div>
+        
+        <!-- Author Info -->
+        <div class="flex-grow text-center md:text-left">
+          <div class="mb-2">
+            {author.credentials && (
+              <span class="inline-block bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm font-medium mb-2">
+                {author.credentials}
+              </span>
+            )}
+          </div>
+          
+          <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">{author.name}</h1>
+          
+          {author.jobTitle && (
+            <div class="text-xl text-neutral-300 mb-4">{author.jobTitle}</div>
+          )}
+          
+          <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-neutral-400">
+            {author.location && (
+              <div class="flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>{author.location.city}, {author.location.country}</span>
+              </div>
+            )}
+            
+            {author.yearsExperience && (
+              <div class="flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>{author.yearsExperience}+ Years Experience</span>
+              </div>
+            )}
+            
+            {author.reviews && (
+              <div class="flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>{author.reviews.docs.length} Broker Reviews</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gradient-to-b from-neutral-950 to-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main Content -->
+        <div class="lg:col-span-2">
+          <!-- Bio -->
+          <div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden mb-8">
+            <div class="p-6">
+              <h2 class="text-xl font-bold text-white mb-4">About {author.name}</h2>
+              <div class="prose prose-invert max-w-none">
+                <p class="text-neutral-300">{author.bio}</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Reviews -->
+          {author.reviews && author.reviews.docs.length > 0 && (
+            <div class="mb-8">
+              <AuthorReviewsList reviews={author.reviews.docs} />
+            </div>
+          )}
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="space-y-8">
+          <!-- Expertise -->
+          {author.knowsAbout && author.knowsAbout.length > 0 && (
+            <AuthorExpertise expertise={author.knowsAbout} />
+          )}
+          
+          <!-- Credentials -->
+          <AuthorCredentials 
+            education={author.education}
+            workHistory={author.workHistory}
+            awards={author.awards}
+            yearsExperience={author.yearsExperience}
+          />
+          
+          <!-- Social Media -->
+          {author.socialMediaProfiles && (
+            <AuthorSocial socialMedia={{...author.socialMediaProfiles, name: author.name}} />
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- All Reviews Section (if many reviews) -->
+  {author.reviews && author.reviews.docs.length > 6 && (
+    <section id="all-reviews" class="py-12 bg-neutral-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-white mb-8">All Reviews by {author.name}</h2>
+        <AuthorReviewsList reviews={author.reviews.docs} showAll={true} />
+      </div>
+    </section>
+  )}
+</BaseLayout>
