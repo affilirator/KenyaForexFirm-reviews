@@ -34,7 +34,7 @@ const schemaData = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
   "dateCreated": author.createdAt || new Date().toISOString(),
-  "dateModified": author.updatedAt || new Date().toISOString(),
+  "dateModified": new Date().toISOString(),
   "mainEntity": {
     "@type": "Person",
     "name": author.name,
@@ -60,8 +60,8 @@ const schemaData = {
     })) || [],
     "worksFor": {
       "@type": "Organization",
-      "name": site.name,
-      "url": site.url
+      "name": site.organization.name,
+      "url": site.organization.url
     },
     "interactionStatistic": [
       {

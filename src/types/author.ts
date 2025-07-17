@@ -1,3 +1,6 @@
+/**
+ * The Author interface as fetched from the API ebdpoint
+ */
 export type ReviewContentAuthor = {
     id: string;
     name: string;
@@ -94,6 +97,8 @@ export interface Author {
     name: string;
     slug: string;
     publishingName: string;
+    createdAt: Date;
+    updatedAt: Date;
     jobTitle?: string;
     credentials?: string;
     bio: string;

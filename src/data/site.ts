@@ -6,7 +6,7 @@ const organization =
         url: "https://kenyaforexfirm.com",
     }
 export const site = {
-    name: 'Best Forex Broker Reviews in Kenya',
+    name: 'Best Forex Broker Reviews in Kenya | By Kenya Forex Firm',
     siteName: organization.name,
     schemaId: `${siteUrl}/#Website`,
     audience: "Forex Traders",
