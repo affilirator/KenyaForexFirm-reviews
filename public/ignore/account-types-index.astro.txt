@@ -1,0 +1,95 @@
+---
+// src/pages/account-types/index.astro
+import Layout from '../../layouts/Layout.astro';
+import AccountTypeCard from '../../components/AccountTypeCard.astro';
+
+// --- Placeholder for your actual Payload API call ---
+// In a real scenario, you'd fetch this from your Payload CMS API
+// Example: const response = await fetch('YOUR_PAYLOAD_API_URL/forex-account-types');
+// const data = await response.json();
+// const accountTypes = data.docs; // Assuming 'docs' array from Payload
+
+const mockAccountTypes = [
+  {
+    id: 'stp-1',
+    title: 'STP Standard Account',
+    type: 'stp',
+    shortDescription: 'Ideal for beginners, offering transparent execution without a dealing desk and minimal markups.',
+    spreads: 'Slightly wider than ECN (broker adds markup)',
+    revenueModel: 'Markup on spreads or small commission',
+    suitableFor: [{ targetAudience: 'Beginners' }, { targetAudience: 'Intermediate Traders' }],
+    description: { html: '<p>A straightforward execution model where client orders are sent directly to liquidity providers.</p>' },
+    keyFeatures: [{ feature: 'No dealing desk' }, { feature: 'Transparent pricing' }],
+    liquiditySource: 'Pool of liquidity providers',
+    executionSpeed: 'Fast',
+    dealingDeskPresence: 'ndd',
+    transparencyLevel: 'high',
+    pros: [{ advantage: 'No requotes' }, { advantage: 'Reduced conflict of interest' }],
+    cons: [{ disadvantage: 'Spreads not as tight as ECN' }],
+    comparisonNotes: { html: '<p>Good entry point for new traders.</p>' }
+  },
+  {
+    id: 'ecn-1',
+    title: 'ECN Pro Account',
+    type: 'ecn',
+    shortDescription: 'Designed for advanced traders and scalpers, offering raw interbank spreads and direct market access.',
+    spreads: 'Very tight, raw interbank spreads (can be 0 pips)',
+    revenueModel: 'Commission per trade',
+    suitableFor: [{ targetAudience: 'Experienced Traders' }, { targetAudience: 'Scalpers' }, { targetAudience: 'High-Frequency Traders' }],
+    description: { html: '<p>Provides direct access to an electronic network where various market participants trade.</p>' },
+    keyFeatures: [{ feature: 'Direct Market Access' }, { feature: 'Depth of Market (DOM)' }],
+    liquiditySource: 'Aggregated from multiple market participants',
+    executionSpeed: 'Very fast',
+    dealingDeskPresence: 'ndd',
+    transparencyLevel: 'very_high',
+    pros: [{ advantage: 'Tightest spreads' }, { advantage: 'Deep liquidity' }],
+    cons: [{ disadvantage: 'Commission charged' }, { disadvantage: 'Requires more understanding of market' }],
+    comparisonNotes: { html: '<p>Offers superior pricing but involves commissions.</p>' }
+  },
+  {
+    id: 'dma-1',
+    title: 'DMA Institutional Account',
+    type: 'dma',
+    shortDescription: 'For institutional and high-volume traders seeking direct access to exchange order books.',
+    spreads: 'Very tight, raw spreads, with visibility of market depth',
+    revenueModel: 'Commission per trade',
+    suitableFor: [{ targetAudience: 'Institutional Traders' }, { targetAudience: 'Professional Traders' }],
+    description: { html: '<p>Broadly refers to the ability for traders to place orders directly onto an exchange\'s order book.</p>' },
+    keyFeatures: [{ feature: 'Full order book visibility' }, { feature: 'Advanced order types' }],
+    liquiditySource: 'Direct access to the underlying market',
+    executionSpeed: 'Extremely fast',
+    dealingDeskPresence: 'ndd',
+    transparencyLevel: 'full',
+    pros: [{ advantage: 'Full market transparency' }, { advantage: 'Maximum control over orders' }],
+    cons: [{ disadvantage: 'Higher capital requirements' }, { disadvantage: 'More complex to manage' }],
+    comparisonNotes: { html: '<p>While ECN is a form of DMA, this refers to broader direct access beyond just forex.</p>' }
+  }
+];
+
+const accountTypes = mockAccountTypes;
+---
+
+<Layout title="Forex Account Types Comparison">
+  <main class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl lg:text-5xl font-extrabold text-center text-gray-900 mb-8">
+      Explore Forex Account Types
+    </h1>
+    <p class="text-xl text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+      Understand the differences between STP, ECN, and DMA accounts to find the best fit for your trading style.
+    </p>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {accountTypes.map((account) => (
+        <AccountTypeCard account={account} />
+      ))}
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Detailed Comparison</h2>
+      <p class="text-lg text-center text-gray-600 mb-10 max-w-3xl mx-auto">
+        Get a comprehensive side-by-side view of all the features.
+      </p>
+      <AccountTypeComparisonTable accounts={accountTypes} />
+    </section>
+  </main>
+</Layout>

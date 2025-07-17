@@ -1,0 +1,1018 @@
+{
+  "docs": [
+    {
+      "createdAt": "2025-07-15T14:23:25.222Z",
+      "updatedAt": "2025-07-16T04:15:03.996Z",
+      "brokerWebsite": "superforex",
+      "bonusInfo": {
+        "typeOfBonus": [
+          "noDepositBonus",
+          "depositBonus",
+          "topUpBonus"
+        ]
+      },
+      "minDeposit": 1,
+      "tenant": "683f46937e7deb35fd6bca89",
+      "slug": "superforex",
+      "author": [
+        {
+          "slug": "patrick-mahinge",
+          "name": "Patrick Mahinge",
+          "id": "6850b776788b53611ad7ae0d"
+        }
+      ],
+      "acceptsMpesa": true,
+      "cmaRegulated": false,
+      "copytrading": true,
+      "islamicAccount": true,
+      "bonusAvailable": true,
+      "maxLeverage": "1:2000",
+      "brokerRating": 6.6,
+      "pubDate": "2025-07-15T13:06:26.509Z",
+      "blog": {
+        "blogTitle": "Kenya Forex Firm",
+        "slug": "kenya-forex-firm",
+        "tenant": "683f46937e7deb35fd6bca89",
+        "githubBranch": "main",
+        "id": "684042e245e28e4550cbd4e6"
+      },
+      "status": "published",
+      "brokerName": "SuperForex",
+      "title": "SuperForex",
+      "quickVerdict": "SuperForex offers a broad range of trading instruments and accessible account options, making it suitable for new and experienced traders alike. While its global reach is appealing, prospective clients should review regulatory protections and trading conditions before committing.",
+      "description": "Explore our SuperForex review tailored for Kenyan traders. Uncover insights and make informed decisions on your forex journey in Kenya today!",
+      "keywords": [
+        {
+          "keyword": "SuperForex Kenya Review",
+          "id": "687688091c280b5184dcdd4a"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Is SuperForex Regulated in Kenya",
+          "answer": "No, SuperForex is not regulated by the Capital Markets Authority of Kenya. The information about SuperForex's regulation is scanty and best. Traders should tread carefully when trading with this forex broker.",
+          "id": "687688191c280b5184dcdd4b"
+        }
+      ],
+      "ratings": {
+        "researchEducation": 6,
+        "feesAndCommissions": 7,
+        "safetyAndRegulation": 6,
+        "tradingPlatforms": 7,
+        "userReviewsTrust": 6,
+        "overallExperience": 6,
+        "customerService": 7,
+        "mobileTrading": 7,
+        "marketAccess": 7
+      },
+      "catRatings": {
+        "researchEducation": {
+          "catScore": 6,
+          "categoryName": "researchEducation",
+          "relatedCat": {
+            "slug": "researchEducation",
+            "id": "6856500410b577cab072db0c"
+          },
+          "catWeight": 0.15,
+          "description": "",
+          "relatedCatSlug": "researchEducation"
+        },
+        "customerService": {
+          "catScore": 7,
+          "categoryName": "customerService",
+          "relatedCat": {
+            "slug": "customerService",
+            "id": "68564bc5bbe9ee6c5ca527dc"
+          },
+          "catWeight": 0.2,
+          "description": "",
+          "relatedCatSlug": "customerService"
+        },
+        "userReviewsTrust": {
+          "catScore": 6,
+          "categoryName": "userReviewsTrust",
+          "relatedCat": {
+            "slug": "userReviewsTrust",
+            "id": "68564ef210b577cab072daec"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "relatedCatSlug": "userReviewsTrust"
+        },
+        "safetyAndRegulation": {
+          "catScore": 6,
+          "categoryName": "safetyAndRegulation",
+          "relatedCat": {
+            "slug": "safetyAndRegulation",
+            "id": "68564ea910b577cab072dae0"
+          },
+          "catWeight": 0.2,
+          "description": "",
+          "relatedCatSlug": "safetyAndRegulation"
+        },
+        "feesAndCommissions": {
+          "catScore": 7,
+          "categoryName": "feesAndCommissions",
+          "relatedCat": {
+            "slug": "feesAndCommissions",
+            "id": "68564e5f10b577cab072dad4"
+          },
+          "catWeight": 0.1,
+          "description": "",
+          "relatedCatSlug": "feesAndCommissions"
+        },
+        "marketAccess": {
+          "catScore": 7,
+          "categoryName": "marketAccess",
+          "relatedCat": {
+            "slug": "marketAccess",
+            "id": "68564dde68db50fcb7543dba"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "relatedCatSlug": "marketAccess"
+        },
+        "mobileTrading": {
+          "catScore": 7,
+          "categoryName": "mobileTrading",
+          "relatedCat": {
+            "slug": "mobileTrading",
+            "id": "68564d7d68db50fcb7543dae"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "relatedCatSlug": "mobileTrading"
+        },
+        "tradingPlatforms": {
+          "catScore": 7,
+          "categoryName": "tradingPlatforms",
+          "relatedCat": {
+            "slug": "tradingPlatforms",
+            "id": "68564d4668db50fcb7543da2"
+          },
+          "catWeight": 0.15,
+          "description": "",
+          "relatedCatSlug": "tradingPlatforms"
+        },
+        "overallExperience": {
+          "catScore": 6,
+          "categoryName": "overallExperience",
+          "relatedCat": {
+            "slug": "overallExperience",
+            "id": "68564cfe84f2ec189e5e9a4a"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "relatedCatSlug": "overallExperience"
+        }
+      },
+      "fundingMethods": [],
+      "features": [
+        "cryptoTrading",
+        "mpesaSupport",
+        "contests",
+        "centAccounts",
+        "mobileTrading",
+        "multipleAccountTypes"
+      ],
+      "regulators": [],
+      "markets": [
+        "currencies",
+        "forex",
+        "cryptocurrencies",
+        "indices",
+        "commodities",
+        "energies"
+      ],
+      "countriesNotAllowed": [
+        "Information Unavailable"
+      ],
+      "brokerPaymentMethods": [
+        "mPesa",
+        "bankTransfer",
+        "visa",
+        "skrill",
+        "mastercard",
+        "unionPay",
+        "airtelMoney",
+        "neteller",
+        "fasaPay",
+        "vodacomMPesa",
+        "mtnMobileMoney",
+        "bitcoin",
+        "litecoin"
+      ],
+      "tradingPlatforms": [
+        "proprietary"
+      ],
+      "spread": 2,
+      "commission": 0.5,
+      "brokerAssets": [
+        {
+          "assetClass": {
+            "slug": "forex",
+            "id": "6850280e6e631d1843e9a381"
+          },
+          "numberOfAssets": 12,
+          "name": "forex",
+          "marginCallLevel": 40,
+          "stopOutLevel": 20,
+          "leverage": "1:3000",
+          "specialMR": "SuperForex charges fixed spread on most of their accounts and assets. The information on spreads charged is very scarce.",
+          "averageSpread": [
+            {
+              "assetName": "EURUSD",
+              "assetSpread": "2",
+              "id": "687685801c280b5184dcdd48"
+            }
+          ],
+          "description": "",
+          "id": "687683711c280b5184dcdd47"
+        }
+      ],
+      "baseDetails": {
+        "country": "Not Listed",
+        "headquarters": "Not Listed",
+        "phone": "442045771579",
+        "email": "support@superforex.com",
+        "founded": 2012,
+        "website": "https://superforex.com/",
+        "city": "Not Listed",
+        "address": "Not Listed"
+      },
+      "pros": [
+        {
+          "pro": "Wide range of account types and trading instruments",
+          "id": "6876645d4e12520004a80831"
+        },
+        {
+          "pro": "Low minimum deposit requirement (as low as $1)",
+          "id": "6876645d4e12520004a80832"
+        },
+        {
+          "pro": "Supports multiple deposit and withdrawal methods, including cryptocurrencies",
+          "id": "6876645d4e12520004a80833"
+        },
+        {
+          "pro": "Offers bonuses and promotions for traders",
+          "id": "6876645d4e12520004a80834"
+        },
+        {
+          "pro": "Availability of Islamic (swap-free) accounts",
+          "id": "6876645d4e12520004a80835"
+        },
+        {
+          "pro": "24/5 multilingual customer support",
+          "id": "6876645d4e12520004a80836"
+        }
+      ],
+      "cons": [
+        {
+          "con": "Largely unregulated or has scarce information on regulation status.",
+          "id": "6876645d4e12520004a80837"
+        },
+        {
+          "con": "Limited educational resources compared to major brokers",
+          "id": "6876645d4e12520004a80838"
+        },
+        {
+          "con": "Mixed user reviews about withdrawal speed and process",
+          "id": "6876645d4e12520004a80839"
+        },
+        {
+          "con": "High spreads on some account types",
+          "id": "6876645d4e12520004a8083a"
+        },
+        {
+          "con": "No MetaTrader 5 (MT5) platform support",
+          "id": "6876645d4e12520004a8083b"
+        }
+      ],
+      "regulations": [],
+      "gallery": [],
+      "meta": {
+        "title": "SuperForex Review - Can SuperForex Be Trusted?",
+        "description": "Explore our SuperForex review tailored for Kenyan traders. Uncover insights and make informed decisions on your forex journey in Kenya today!",
+        "image": {
+          "filename": "roboforexlogo.webp",
+          "id": "687508f69f5d4a322b956a3f",
+          "url": "https://api.kenyaforexfirm.com/api/r2media/file/roboforexlogo.webp"
+        }
+      },
+      "account": [
+        {
+          "accountName": "SuperForex STP Accounts",
+          "minDeposit": 1,
+          "spread": 2,
+          "commission": 0,
+          "id": "687682372dcc0742dff61d99"
+        }
+      ],
+      "image": {
+        "createdAt": "2025-07-15T16:34:12.683Z",
+        "updatedAt": "2025-07-15T16:34:12.683Z",
+        "status": "published",
+        "alt": "A screenshot of the SuperForex Website",
+        "blog": "684042e245e28e4550cbd4e6",
+        "sizes": {
+          "small": {
+            "width": 775,
+            "height": 425,
+            "mimeType": "image/webp",
+            "filesize": 19496,
+            "filename": "superForex-screen-grab-775.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/small/superForex-screen-grab-775.webp"
+          },
+          "tablet": {
+            "width": 1020,
+            "height": 560,
+            "mimeType": "image/webp",
+            "filesize": 28254,
+            "filename": "superForex-screen-grab-1020.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/tablet/superForex-screen-grab-1020.webp"
+          },
+          "large": {
+            "width": 1627,
+            "height": 893,
+            "mimeType": "image/webp",
+            "filesize": 48368,
+            "filename": "superForex-screen-grab-1627.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/large/superForex-screen-grab-1627.webp"
+          }
+        },
+        "tenant": "683f46937e7deb35fd6bca89",
+        "url": "https://api.kenyaforexfirm.com/api/media/file/superForex-screen-grab.jpeg",
+        "thumbnailURL": null,
+        "filename": "superForex-screen-grab.jpeg",
+        "mimeType": "image/jpeg",
+        "filesize": 347881,
+        "width": 2676,
+        "height": 1468,
+        "focalX": 50,
+        "focalY": 50,
+        "id": "6876830497182d0a01d5f26b",
+        "slug": "a-screenshot-of-the-superforex-website",
+        "caption": "a-screenshot-of-the-superforex-website"
+      },
+      "brokerPlatforms": [
+        {
+          "name": "Proprietary",
+          "slug": "proprietary",
+          "id": "6872dc3a5e2998fe24c9e4b0"
+        }
+      ],
+      "isRegulated": false,
+      "categoryRating": [
+        {
+          "catScore": 7,
+          "categoryName": "marketAccess",
+          "relatedCat": {
+            "slug": "marketAccess",
+            "id": "68564dde68db50fcb7543dba"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "id": "6877274747418a000450bd8a"
+        },
+        {
+          "catScore": 7,
+          "categoryName": "mobileTrading",
+          "relatedCat": {
+            "slug": "mobileTrading",
+            "id": "68564d7d68db50fcb7543dae"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "id": "6877274747418a000450bd8b"
+        },
+        {
+          "catScore": 7,
+          "categoryName": "customerService",
+          "relatedCat": {
+            "slug": "customerService",
+            "id": "68564bc5bbe9ee6c5ca527dc"
+          },
+          "catWeight": 0.2,
+          "description": "",
+          "id": "6877274747418a000450bd8c"
+        },
+        {
+          "catScore": 6,
+          "categoryName": "userReviewsTrust",
+          "relatedCat": {
+            "slug": "userReviewsTrust",
+            "id": "68564ef210b577cab072daec"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "id": "6877274747418a000450bd8d"
+        },
+        {
+          "catScore": 7,
+          "categoryName": "tradingPlatforms",
+          "relatedCat": {
+            "slug": "tradingPlatforms",
+            "id": "68564d4668db50fcb7543da2"
+          },
+          "catWeight": 0.15,
+          "description": "",
+          "id": "6877274747418a000450bd8e"
+        },
+        {
+          "catScore": 6,
+          "categoryName": "researchEducation",
+          "relatedCat": {
+            "slug": "researchEducation",
+            "id": "6856500410b577cab072db0c"
+          },
+          "catWeight": 0.15,
+          "description": "",
+          "id": "6877274747418a000450bd8f"
+        },
+        {
+          "catScore": 6,
+          "categoryName": "overallExperience",
+          "relatedCat": {
+            "slug": "overallExperience",
+            "id": "68564cfe84f2ec189e5e9a4a"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "id": "6877274747418a000450bd90"
+        },
+        {
+          "catScore": 7,
+          "categoryName": "feesAndCommissions",
+          "relatedCat": {
+            "slug": "feesAndCommissions",
+            "id": "68564e5f10b577cab072dad4"
+          },
+          "catWeight": 0.1,
+          "description": "",
+          "id": "6877274747418a000450bd91"
+        },
+        {
+          "catScore": 6,
+          "categoryName": "safetyAndRegulation",
+          "relatedCat": {
+            "slug": "safetyAndRegulation",
+            "id": "68564ea910b577cab072dae0"
+          },
+          "catWeight": 0.2,
+          "description": "",
+          "id": "6877274747418a000450bd92"
+        }
+      ],
+      "reviewContent": {
+        "docs": [],
+        "hasNextPage": false
+      },
+      "id": "6876645d3bcfeb06fcd2c685",
+      "contactDetails": [],
+      "restrictedCountries": []
+    },
+    {
+      "createdAt": "2025-07-15T13:07:53.091Z",
+      "updatedAt": "2025-07-16T01:20:38.102Z",
+      "brokerWebsite": "justmarkets",
+      "bonusInfo": {
+        "typeOfBonus": []
+      },
+      "minDeposit": 5,
+      "tenant": "683f46937e7deb35fd6bca89",
+      "slug": "justmarkets",
+      "author": [
+        {
+          "slug": "patrick-mahinge",
+          "name": "Patrick Mahinge",
+          "id": "6850b776788b53611ad7ae0d"
+        }
+      ],
+      "acceptsMpesa": true,
+      "cmaRegulated": false,
+      "copytrading": true,
+      "islamicAccount": true,
+      "bonusAvailable": true,
+      "maxLeverage": "1:3000",
+      "brokerRating": 7.7,
+      "pubDate": "2025-07-15T13:06:26.509Z",
+      "blog": {
+        "blogTitle": "Kenya Forex Firm",
+        "slug": "kenya-forex-firm",
+        "tenant": "683f46937e7deb35fd6bca89",
+        "githubBranch": "main",
+        "id": "684042e245e28e4550cbd4e6"
+      },
+      "status": "draft",
+      "brokerName": "JustMarkets",
+      "title": "JustMarkets",
+      "quickVerdict": "JustMarkets offers a straightforward trading experience, catering to both beginners and experienced traders with user-friendly platforms and a broad range of currency pairs. Competitive spreads and flexible account types make it an appealing choice for those seeking efficient forex trading solutions.",
+      "description": "Explore our comprehensive JustMarkets review tailored for forex traders in Kenya. Discover insights that could transform your trading journey today!",
+      "keywords": [],
+      "faqs": [],
+      "ratings": {
+        "researchEducation": 7,
+        "feesAndCommissions": 8,
+        "safetyAndRegulation": 7,
+        "tradingPlatforms": 8,
+        "userReviewsTrust": 7,
+        "overallExperience": 8,
+        "customerService": 8,
+        "mobileTrading": 8,
+        "marketAccess": 8
+      },
+      "catRatings": {
+        "researchEducation": {
+          "catScore": 7,
+          "relatedCat": {
+            "slug": "researchEducation",
+            "id": "6856500410b577cab072db0c"
+          },
+          "catWeight": 0.15,
+          "description": "",
+          "relatedCatSlug": "researchEducation"
+        },
+        "customerService": {
+          "catScore": 8,
+          "relatedCat": {
+            "slug": "customerService",
+            "id": "68564bc5bbe9ee6c5ca527dc"
+          },
+          "description": "",
+          "relatedCatSlug": "customerService"
+        },
+        "userReviewsTrust": {
+          "catScore": 7,
+          "relatedCat": {
+            "slug": "userReviewsTrust",
+            "id": "68564ef210b577cab072daec"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "relatedCatSlug": "userReviewsTrust"
+        },
+        "safetyAndRegulation": {
+          "catScore": 7,
+          "relatedCat": {
+            "slug": "safetyAndRegulation",
+            "id": "68564ea910b577cab072dae0"
+          },
+          "catWeight": 0.2,
+          "description": "",
+          "relatedCatSlug": "safetyAndRegulation"
+        },
+        "feesAndCommissions": {
+          "catScore": 8,
+          "relatedCat": {
+            "slug": "feesAndCommissions",
+            "id": "68564e5f10b577cab072dad4"
+          },
+          "catWeight": 0.1,
+          "description": "",
+          "relatedCatSlug": "feesAndCommissions"
+        },
+        "marketAccess": {
+          "catScore": 8,
+          "relatedCat": {
+            "slug": "marketAccess",
+            "id": "68564dde68db50fcb7543dba"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "relatedCatSlug": "marketAccess"
+        },
+        "mobileTrading": {
+          "catScore": 8,
+          "relatedCat": {
+            "slug": "mobileTrading",
+            "id": "68564d7d68db50fcb7543dae"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "relatedCatSlug": "mobileTrading"
+        },
+        "tradingPlatforms": {
+          "catScore": 8,
+          "relatedCat": {
+            "slug": "tradingPlatforms",
+            "id": "68564d4668db50fcb7543da2"
+          },
+          "catWeight": 0.15,
+          "description": "",
+          "relatedCatSlug": "tradingPlatforms"
+        },
+        "overallExperience": {
+          "catScore": 8,
+          "relatedCat": {
+            "slug": "overallExperience",
+            "id": "68564cfe84f2ec189e5e9a4a"
+          },
+          "catWeight": 0.05,
+          "description": "",
+          "relatedCatSlug": "overallExperience"
+        }
+      },
+      "fundingMethods": [],
+      "features": [
+        "centAccounts"
+      ],
+      "regulators": [],
+      "markets": [],
+      "countriesNotAllowed": [],
+      "brokerPaymentMethods": [],
+      "tradingPlatforms": [],
+      "spread": 0.1,
+      "commission": 0,
+      "brokerAssets": [],
+      "baseDetails": {
+        "phone": "+230 529 70 330",
+        "email": "support@justmarkets.com",
+        "founded": 0,
+        "website": "justmarkets"
+      },
+      "pros": [
+        {
+          "pro": "Low minimum deposit requirement (as low as $1)",
+          "id": "687652a93614c00004bb474b"
+        },
+        {
+          "pro": "Multiple account types to suit different traders",
+          "id": "687652a93614c00004bb474c"
+        },
+        {
+          "pro": "Competitive spreads and leverage up to 1:3000",
+          "id": "687652a93614c00004bb474d"
+        },
+        {
+          "pro": "Supports MetaTrader 4 and MetaTrader 5 platforms",
+          "id": "687652a93614c00004bb474e"
+        },
+        {
+          "pro": "Wide range of tradable instruments including forex, indices, metals, and crypto",
+          "id": "687652a93614c00004bb474f"
+        },
+        {
+          "pro": "Fast account opening and verification process",
+          "id": "687652a93614c00004bb4750"
+        }
+      ],
+      "cons": [
+        {
+          "con": "Not regulated by top-tier authorities (regulated by FSA Seychelles)",
+          "id": "687652a93614c00004bb4751"
+        },
+        {
+          "con": "Limited educational resources for beginners",
+          "id": "687652a93614c00004bb4752"
+        },
+        {
+          "con": "No US clients accepted",
+          "id": "687652a93614c00004bb4753"
+        },
+        {
+          "con": "Withdrawal fees on some payment methods",
+          "id": "687652a93614c00004bb4754"
+        },
+        {
+          "con": "Mixed customer reviews regarding withdrawal speed",
+          "id": "687652a93614c00004bb4755"
+        }
+      ],
+      "regulations": [],
+      "gallery": [],
+      "meta": {
+        "description": "Explore our comprehensive JustMarkets review tailored for forex traders in Kenya. Discover insights that could transform your trading journey today!"
+      },
+      "brokerPlatforms": [
+        {
+          "name": "MetaTrader 4 (MT4)",
+          "slug": "metatrader-4-mt4-",
+          "id": "685007f01c48aa81f030b751"
+        },
+        {
+          "name": "MetaTrader 5 (MT5)",
+          "slug": "metatrader-5-mt5-",
+          "id": "6850089cc45b8e161ba56487"
+        },
+        {
+          "name": "Proprietary",
+          "slug": "proprietary",
+          "id": "6872dc3a5e2998fe24c9e4b0"
+        }
+      ],
+      "isRegulated": true,
+      "reviewContent": {
+        "docs": [],
+        "hasNextPage": false
+      },
+      "id": "687652a9b308da7fea5b4be8",
+      "categoryRating": [],
+      "contactDetails": [],
+      "restrictedCountries": []
+    },
+    {
+      "createdAt": "2025-07-12T20:24:20.461Z",
+      "updatedAt": "2025-07-16T01:21:10.570Z",
+      "brokerWebsite": "roboforex",
+      "bonusInfo": {
+        "typeOfBonus": []
+      },
+      "minDeposit": 5,
+      "tenant": "683f46937e7deb35fd6bca89",
+      "slug": "roboforex",
+      "acceptsMpesa": true,
+      "cmaRegulated": false,
+      "copytrading": true,
+      "islamicAccount": false,
+      "bonusAvailable": false,
+      "brokerRating": 7.4,
+      "pubDate": "2025-07-12T20:23:27.668Z",
+      "blog": {
+        "blogTitle": "Kenya Forex Firm",
+        "slug": "kenya-forex-firm",
+        "tenant": "683f46937e7deb35fd6bca89",
+        "githubBranch": "main",
+        "id": "684042e245e28e4550cbd4e6"
+      },
+      "status": "published",
+      "brokerName": "RoboForex",
+      "title": "RoboForex",
+      "quickVerdict": "RoboForex stands out for its wide range of trading platforms and competitive account options, appealing to both beginners and experienced traders. Fast execution speeds and diverse asset offerings make it a strong choice, though traders should review specific fees and regulations before signing up.",
+      "description": "Explore our in-depth RoboForex review tailored for Kenya's forex traders. Discover insights and make informed decisions in the Kenyan forex market.",
+      "keywords": [],
+      "faqs": [],
+      "brokerPlatforms": [
+        {
+          "name": "MetaTrader 4 (MT4)",
+          "slug": "metatrader-4-mt4-",
+          "id": "685007f01c48aa81f030b751"
+        },
+        {
+          "name": "MetaTrader 5 (MT5)",
+          "slug": "metatrader-5-mt5-",
+          "id": "6850089cc45b8e161ba56487"
+        }
+      ],
+      "ratings": {
+        "researchEducation": 7,
+        "feesAndCommissions": 8,
+        "safetyAndRegulation": 6,
+        "tradingPlatforms": 8,
+        "userReviewsTrust": 7,
+        "overallExperience": 7,
+        "customerService": 7,
+        "mobileTrading": 8,
+        "marketAccess": 9
+      },
+      "catRatings": {
+        "researchEducation": {
+          "catScore": 7,
+          "relatedCat": {
+            "slug": "researchEducation",
+            "id": "6856500410b577cab072db0c"
+          },
+          "description": "",
+          "relatedCatSlug": "researchEducation"
+        },
+        "customerService": {
+          "catScore": 7,
+          "relatedCat": {
+            "slug": "customerService",
+            "id": "68564bc5bbe9ee6c5ca527dc"
+          },
+          "description": "",
+          "relatedCatSlug": "customerService"
+        },
+        "userReviewsTrust": {
+          "catScore": 7,
+          "relatedCat": {
+            "slug": "userReviewsTrust",
+            "id": "68564ef210b577cab072daec"
+          },
+          "description": "",
+          "relatedCatSlug": "userReviewsTrust"
+        },
+        "safetyAndRegulation": {
+          "catScore": 6,
+          "relatedCat": {
+            "slug": "safetyAndRegulation",
+            "id": "68564ea910b577cab072dae0"
+          },
+          "description": "",
+          "relatedCatSlug": "safetyAndRegulation"
+        },
+        "feesAndCommissions": {
+          "catScore": 8,
+          "relatedCat": {
+            "slug": "feesAndCommissions",
+            "id": "68564e5f10b577cab072dad4"
+          },
+          "description": "",
+          "relatedCatSlug": "feesAndCommissions"
+        },
+        "marketAccess": {
+          "catScore": 9,
+          "relatedCat": {
+            "slug": "marketAccess",
+            "id": "68564dde68db50fcb7543dba"
+          },
+          "description": "",
+          "relatedCatSlug": "marketAccess"
+        },
+        "mobileTrading": {
+          "catScore": 8,
+          "relatedCat": {
+            "slug": "mobileTrading",
+            "id": "68564d7d68db50fcb7543dae"
+          },
+          "description": "",
+          "relatedCatSlug": "mobileTrading"
+        },
+        "tradingPlatforms": {
+          "catScore": 8,
+          "relatedCat": {
+            "slug": "tradingPlatforms",
+            "id": "68564d4668db50fcb7543da2"
+          },
+          "description": "",
+          "relatedCatSlug": "tradingPlatforms"
+        },
+        "overallExperience": {
+          "catScore": 7,
+          "relatedCat": {
+            "slug": "overallExperience",
+            "id": "68564cfe84f2ec189e5e9a4a"
+          },
+          "description": "",
+          "relatedCatSlug": "overallExperience"
+        }
+      },
+      "features": [],
+      "regulators": [
+        "IFSC"
+      ],
+      "countriesNotAllowed": [
+        "United States",
+        "Canada",
+        "United Kingdom",
+        "South Sudan",
+        "Japan",
+        "Australia"
+      ],
+      "spread": 0.1,
+      "commission": 3.5,
+      "baseDetails": {
+        "country": "Belize",
+        "headquarters": "Belize",
+        "phone": "+593 964 256 286",
+        "founded": 2009,
+        "website": "roboforex",
+        "city": "Belize City",
+        "address": "2118 Guava Street, Belama Phase 1, Belize City, Belize."
+      },
+      "pros": [
+        {
+          "pro": "Low minimum deposit requirement (as low as $10)",
+          "id": "6872c4741247ad0004299152"
+        },
+        {
+          "pro": "Wide range of trading instruments (forex, stocks, indices, cryptocurrencies, commodities)",
+          "id": "6872c4741247ad0004299153"
+        },
+        {
+          "pro": "Multiple account types including ECN, Prime, and Cent accounts",
+          "id": "6872c4741247ad0004299154"
+        },
+        {
+          "pro": "Leverage up to 1:2000 for certain account types",
+          "id": "6872c4741247ad0004299155"
+        },
+        {
+          "pro": "Quick account opening process and negative balance protection",
+          "id": "6872c4741247ad0004299156"
+        },
+        {
+          "pro": "Access to MetaTrader 4, MetaTrader 5, and proprietary R Trader platforms",
+          "id": "6872c4741247ad0004299157"
+        }
+      ],
+      "cons": [
+        {
+          "con": "Not regulated by top-tier authorities (regulated by IFSC Belize)",
+          "id": "6872c4741247ad0004299158"
+        },
+        {
+          "con": "Withdrawal fees apply to several payment methods",
+          "id": "6872c4741247ad0004299159"
+        },
+        {
+          "con": "Inactivity fees charged after 12 months of no trading",
+          "id": "6872c4741247ad000429915a"
+        },
+        {
+          "con": "Limited educational resources compared to industry leaders",
+          "id": "6872c4741247ad000429915b"
+        },
+        {
+          "con": "Some complaints about slow customer support response times",
+          "id": "6872c4741247ad000429915c"
+        }
+      ],
+      "meta": {
+        "title": "RoboForex",
+        "description": "Explore our in-depth RoboForex review tailored for Kenya's forex traders. Discover insights and make informed decisions in the Kenyan forex market.",
+        "image": {
+          "filename": "roboforexlogo.webp",
+          "id": "687508f69f5d4a322b956a3f",
+          "url": "https://api.kenyaforexfirm.com/api/r2media/file/roboforexlogo.webp"
+        }
+      },
+      "fundingMethods": [],
+      "maxLeverage": "1:2000",
+      "author": [
+        {
+          "slug": "patrick-mahinge",
+          "name": "Patrick Mahinge",
+          "id": "6850b776788b53611ad7ae0d"
+        }
+      ],
+      "brokerAssets": [],
+      "logo": {
+        "filename": "roboforexlogo.webp",
+        "id": "687508f69f5d4a322b956a3f",
+        "url": "https://api.kenyaforexfirm.com/api/r2media/file/roboforexlogo.webp"
+      },
+      "image": {
+        "createdAt": "2025-07-14T14:30:10.797Z",
+        "updatedAt": "2025-07-14T14:30:10.797Z",
+        "status": "published",
+        "alt": "roboforex",
+        "blog": "684042e245e28e4550cbd4e6",
+        "sizes": {
+          "small": {
+            "width": 225,
+            "height": 225,
+            "mimeType": "image/webp",
+            "filesize": 3362,
+            "filename": "roboforexlogo-775.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/small/roboforexlogo-775.webp"
+          },
+          "tablet": {
+            "width": 225,
+            "height": 225,
+            "mimeType": "image/webp",
+            "filesize": 3362,
+            "filename": "roboforexlogo-1020.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/tablet/roboforexlogo-1020.webp"
+          },
+          "large": {
+            "width": 225,
+            "height": 225,
+            "mimeType": "image/webp",
+            "filesize": 3362,
+            "filename": "roboforexlogo-1627.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/large/roboforexlogo-1627.webp"
+          }
+        },
+        "tenant": "683f46937e7deb35fd6bca89",
+        "url": "https://api.kenyaforexfirm.com/api/media/file/roboforexlogo.jpeg",
+        "thumbnailURL": null,
+        "filename": "roboforexlogo.jpeg",
+        "mimeType": "image/jpeg",
+        "filesize": 6417,
+        "width": 225,
+        "height": 225,
+        "focalX": 50,
+        "focalY": 50,
+        "id": "687514728a4d10c4bb10f097",
+        "slug": "roboforex",
+        "caption": "roboforex"
+      },
+      "gallery": [],
+      "isRegulated": true,
+      "regulations": [],
+      "reviewContent": {
+        "docs": [
+          {
+            "slug": "roboforex",
+            "id": "6872c4f97edb8c00dad62893"
+          }
+        ],
+        "hasNextPage": false
+      },
+      "id": "6872c4747edb8c00dad6286b",
+      "categoryRating": [],
+      "contactDetails": [],
+      "restrictedCountries": []
+    }
+  ],
+  "hasNextPage": true,
+  "hasPrevPage": false,
+  "limit": 3,
+  "nextPage": 2,
+  "page": 1,
+  "pagingCounter": 1,
+  "prevPage": null,
+  "totalDocs": 10,
+  "totalPages": 4
+}

@@ -1,0 +1,41 @@
+---
+// src/components/ui/InfoPill.astro
+interface Props {
+  text: string;
+  type?: 'primary' | 'secondary' | 'success' | 'danger' | 'info'; // Optional styling variant
+  colorClass?: string; // Directly pass a Tailwind color class if type isn't enough
+}
+
+const { text, type = 'info', colorClass } = Astro.props;
+
+let baseClasses = 'px-3 py-1 rounded-full text-xs font-semibold';
+let typeClasses = '';
+
+if (colorClass) {
+  baseClasses += ` ${colorClass}`;
+} else {
+  switch (type) {
+    case 'primary':
+      typeClasses = 'bg-blue-100 text-blue-800';
+      break;
+    case 'secondary':
+      typeClasses = 'bg-gray-100 text-gray-800';
+      break;
+    case 'success':
+      typeClasses = 'bg-green-100 text-green-800';
+      break;
+    case 'danger':
+      typeClasses = 'bg-red-100 text-red-800';
+      break;
+    case 'info':
+    default:
+      typeClasses = 'bg-yellow-100 text-yellow-800';
+      break;
+  }
+  baseClasses += ` ${typeClasses}`;
+}
+---
+
+<span class={baseClasses}>
+  {text}
+</span>

@@ -1,0 +1,95 @@
+---
+// src/pages/account-types/[id].astro
+import Layout from '../../layouts/Layout.astro';
+import AccountTypeDetail from '../../components/AccountTypeDetail.astro';
+
+// Placeholder data (replace with actual Payload API fetch)
+const mockAccountTypes = [
+  {
+    id: 'stp-1',
+    title: 'STP Standard Account',
+    type: 'stp',
+    shortDescription: 'Ideal for beginners, offering transparent execution without a dealing desk and minimal markups.',
+    spreads: 'Slightly wider than ECN (broker adds markup)',
+    revenueModel: 'Markup on spreads or small commission',
+    suitableFor: [{ targetAudience: 'Beginners' }, { targetAudience: 'Intermediate Traders' }],
+    description: { html: '<p>A straightforward execution model where client orders are sent directly to liquidity providers. The broker makes money from a small markup on the spread or a tiny commission.</p><p>This model is popular for its simplicity and reduced conflict of interest.</p>' },
+    keyFeatures: [{ feature: 'No dealing desk' }, { feature: 'Transparent pricing' }, { feature: 'No requotes' }],
+    liquiditySource: 'Pool of liquidity providers',
+    executionSpeed: 'Fast',
+    dealingDeskPresence: 'ndd',
+    transparencyLevel: 'high',
+    pros: [{ advantage: 'Simple and straightforward' }, { advantage: 'No broker intervention' }, { advantage: 'Good for new traders' }],
+    cons: [{ disadvantage: 'Spreads not as tight as ECN' }, { disadvantage: 'Less control over liquidity provider choice' }],
+    comparisonNotes: { html: '<p>STP is often the first step towards true market access for retail traders, acting as a gateway to liquidity providers.</p>' }
+  },
+  {
+    id: 'ecn-1',
+    title: 'ECN Pro Account',
+    type: 'ecn',
+    shortDescription: 'Designed for advanced traders and scalpers, offering raw interbank spreads and direct market access.',
+    spreads: 'Very tight, raw interbank spreads (can be 0 pips)',
+    revenueModel: 'Commission per trade',
+    suitableFor: [{ targetAudience: 'Experienced Traders' }, { targetAudience: 'Scalpers' }, { targetAudience: 'High-Frequency Traders' }],
+    description: { html: '<p>Provides direct access to an electronic communication network where various market participants (banks, other brokers, hedge funds) post their buy and sell orders. The ECN system matches compatible orders, resulting in very tight spreads.</p><p>Traders using ECN accounts typically pay a commission per trade instead of a wider spread.</p>' },
+    keyFeatures: [{ feature: 'Direct Market Access (DMA)' }, { feature: 'Depth of Market (DOM) visibility' }, { feature: 'Anonymous trading' }],
+    liquiditySource: 'Aggregated from multiple market participants (interbank market)',
+    executionSpeed: 'Very fast',
+    dealingDeskPresence: 'ndd',
+    transparencyLevel: 'very_high',
+    pros: [{ advantage: 'Tightest possible spreads' }, { advantage: 'Deep liquidity and efficient fills' }, { advantage: 'Full transparency of market depth' }],
+    cons: [{ disadvantage: 'Commissions add to trading cost' }, { disadvantage: 'May require higher minimum deposits' }, { disadvantage: 'Not always suitable for very small trades due to commission structure' }],
+    comparisonNotes: { html: '<p>While both STP and ECN are NDD, ECN offers a more direct connection to the interbank market, often with superior pricing, at the cost of explicit commissions.</p>' }
+  },
+  {
+    id: 'dma-1',
+    title: 'DMA Institutional Account',
+    type: 'dma',
+    shortDescription: 'For institutional and high-volume traders seeking direct access to exchange order books.',
+    spreads: 'Very tight, raw spreads, with visibility of market depth',
+    revenueModel: 'Commission per trade',
+    suitableFor: [{ targetAudience: 'Institutional Traders' }, { targetAudience: 'Professional Traders' }],
+    description: { html: '<p>Direct Market Access (DMA) is a broad term referring to the ability to place orders directly onto an exchange\'s order book, bypassing traditional intermediaries. In forex, ECN is a specific type of DMA.</p><p>DMA accounts offer the highest level of control and transparency, allowing traders to see the full order book and potentially interact directly with the market.</p>' },
+    keyFeatures: [{ feature: 'Full order book visibility' }, { feature: 'Advanced order types (e.g., Iceberg)' }, { feature: 'Potential for price improvement' }],
+    liquiditySource: 'Direct access to the underlying market (exchange or interbank)',
+    executionSpeed: 'Extremely fast',
+    dealingDeskPresence: 'ndd',
+    transparencyLevel: 'full',
+    pros: [{ advantage: 'Unparalleled market transparency' }, { advantage: 'Ultimate control over order placement and execution' }, { advantage: 'Best possible pricing due to direct interaction' }],
+    cons: [{ disadvantage: 'Highest capital requirements' }, { disadvantage: 'More complex platforms and interfaces' }, { disadvantage: 'Primarily for very experienced or institutional traders' }],
+    comparisonNotes: { html: '<p>DMA is the most encompassing term for direct access, with ECN being its most common retail manifestation. True DMA typically implies even deeper market interaction and control than standard ECN.</p>' }
+  }
+];
+
+export async function getStaticPaths() {
+  // In a real scenario, fetch all account types from Payload and generate paths
+  // const response = await fetch('YOUR_PAYLOAD_API_URL/forex-account-types?limit=100');
+  // const data = await response.json();
+  // const accountTypes = data.docs;
+
+  return mockAccountTypes.map(account => ({
+    params: { id: account.id },
+    props: { account },
+  }));
+}
+
+const { account } = Astro.props;
+---
+
+<Layout title={`${account.title} - Forex Account Type`}>
+  <main class="container mx-auto px-4 py-12">
+    <AccountTypeDetail account={account} />
+    <div class="mt-12 text-center">
+      <a href="/account-types" class="
+        inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm
+        text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500
+        transition-colors duration-200
+      ">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        Back to All Account Types
+      </a>
+    </div>
+  </main>
+</Layout>

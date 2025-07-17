@@ -1,0 +1,26 @@
+---
+// src/components/ui/FeatureList.astro
+interface Props {
+  items: Array<{ [key: string]: string } | string>; // Can be array of objects or strings
+  keyName?: string; // If items are objects, specify the key to display
+  listStyle?: 'disc' | 'decimal' | 'none'; // Tailwind list style
+  itemClasses?: string; // Additional classes for each list item
+}
+
+const { items, keyName, listStyle = 'disc', itemClasses = 'text-gray-700' } = Astro.props;
+
+const getDisplayValue = (item: any) => {
+  if (typeof item === 'string') {
+    return item;
+  }
+  return keyName && item[keyName] ? item[keyName] : item; // Fallback to item itself if keyName not found
+};
+---
+
+<ul class={`list-${listStyle} list-inside space-y-2`}>
+  {items.map((item) => (
+    <li class={itemClasses}>
+      {getDisplayValue(item)}
+    </li>
+  ))}
+</ul>

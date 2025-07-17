@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import { site } from '../../data/site';
+import { getReviews } from '~/lib/qs-esm';
+import type { BrokerProps } from '../../types';
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": `Safest Forex Brokers - ${site.name}`,
+  "description": `Top forex brokers ranked by safety and regulation for ${site.address.country} traders`,
+  "url": new URL(Astro.request.url),
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": 15,
+    "itemListElement": []
+  }
+};
+
+// Fetch all brokers
+const brokersData = await getReviews();
+const brokers = brokersData?.docs || [];
+
+// Sort brokers by safety and regulation rating
+const rankedBrokers = [...brokers].sort((a, b) => {
+  const aScore = a.catRatings?.safetyAndRegulation?.catScore || 0;
+  const bScore = b.catRatings?.safetyAndRegulation?.catScore || 0;
+  return bScore - aScore; // Sort in descending order
+});
+---
+
+<BaseLayout
+  title={`Safest Forex Brokers in ${site.address.country} (${site.currentYear}) - Safety & Regulation Rankings`}
+  description={`Compare the safest and most regulated forex brokers for ${site.address.country}n traders. Expert rankings based on regulatory compliance, fund security, and risk management.`}
+  schemaData={schemaData}>
+  
+  <Navigation />
+
+  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+          <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Safest</span> Forex Brokers in Kenya
+        </h1>
+        <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
+          Compare forex brokers ranked by safety and regulatory compliance. Find the most secure brokers for your trading needs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gradient-to-b from-neutral-950 to-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <p class="text-neutral-400">
+          <span>{rankedBrokers.length}</span> brokers ranked by safety and regulation
+        </p>
+      </div>
+      
+      <div class="space-y-6">
+        {rankedBrokers.map((broker, index) => {
+          const safetyScore = broker.catRatings?.safetyAndRegulation?.catScore || 0;
+          const author = broker.author?.[0];
+          
+          return (
+            <div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-primary-500/50 transition-all">
+              <div class="p-6 flex flex-col md:flex-row gap-6">
+                <div class="flex-shrink-0 flex items-center justify-center md:w-24">
+                  <div class="text-4xl font-bold text-primary-400">#{index + 1}</div>
+                </div>
+                
+                <div class="flex-grow">
+                  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                    <div class="flex items-center gap-4">
+                      {typeof broker.logo === 'object' && broker.logo?.url ? (
+                        <img 
+                          src={broker.logo.url} 
+                          alt={`${broker.brokerName} logo`} 
+                          class="w-12 h-12 object-contain rounded-lg bg-white p-1"
+                        />
+                      ) : typeof broker.logo === 'string' ? (
+                        <img 
+                          src={broker.logo} 
+                          alt={`${broker.brokerName} logo`} 
+                          class="w-12 h-12 object-contain rounded-lg bg-white p-1"
+                        />
+                      ) : null}
+                      
+                      <div>
+                        <h3 class="text-xl font-bold text-white">
+                          <a href={`/brokers/${broker.slug}`} class="hover:text-primary-400">
+                            {broker.brokerName}
+                          </a>
+                        </h3>
+                        <div class="flex items-center mt-1">
+                          {broker.regulation && broker.regulation.length > 0 && (
+                            <div class="flex items-center text-sm text-neutral-400">
+                              <span class="mr-2">Regulated by:</span>
+                              <div class="flex flex-wrap gap-1">
+                                {Array.isArray(broker.regulation) && broker.regulation.map((reg) => (
+                                  <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs">
+                                    {reg.shortName || reg.name}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                      <div class="text-3xl font-bold text-white">{safetyScore.toFixed(1)}</div>
+                      <div class="text-sm text-neutral-400">Safety<br/>Score</div>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-4">
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      {broker.features && broker.features.slice(0, 3).map((feature) => (
+                        <span class="bg-neutral-700/30 text-neutral-300 px-3 py-1 rounded-full text-xs">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row justify-between gap-4 mt-4">
+                      <div class="flex items-center gap-4">
+                        {author && (
+                          <div class="flex items-center text-sm text-neutral-400">
+                            <span>Reviewed by:</span>
+                            <a href={`/authors/${author.slug}`} class="ml-1 text-primary-400 hover:underline">
+                              {author.name}
+                            </a>
+                            {author.jobTitle && (
+                              <span class="ml-1 text-xs">({author.jobTitle})</span>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div>
+                        <a 
+                          href={`/brokers/${broker.slug}`}
+                          class="inline-block bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                        >
+                          Read Full Review
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      {rankedBrokers.length === 0 && (
+        <div class="text-center py-12">
+          <p class="text-xl text-neutral-300">No brokers found at the moment.</p>
+          <p class="text-neutral-400 mt-2">Please check back later or explore our <a href="/brokers" class="text-primary-400 hover:underline">full list of brokers</a>.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="py-12 bg-neutral-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white mb-6">Why Safety and Regulation Matter</h2>
+      <div class="prose prose-invert max-w-none">
+        <p>
+          When choosing a forex broker, safety and regulation should be top priorities. Regulated brokers are supervised by financial authorities that enforce rules designed to protect traders and maintain market integrity.
+        </p>
+        <h3>Benefits of Trading with Regulated Brokers</h3>
+        <ul>
+          <li>Fund security through segregated accounts</li>
+          <li>Compensation schemes in case of broker insolvency</li>
+          <li>Fair trading practices and transparent pricing</li>
+          <li>Dispute resolution mechanisms</li>
+          <li>Regular audits and compliance checks</li>
+        </ul>
+        <h3>Key Regulatory Bodies</h3>
+        <ul>
+          <li><strong>CMA (Capital Markets Authority)</strong> - Kenya's financial regulator</li>
+          <li><strong>FCA (Financial Conduct Authority)</strong> - UK regulator known for strict standards</li>
+          <li><strong>ASIC (Australian Securities and Investments Commission)</strong> - Australia's financial regulator</li>
+          <li><strong>CySEC (Cyprus Securities and Exchange Commission)</strong> - EU-based regulator</li>
+        </ul>
+        <p>
+          <strong>Important:</strong> Always verify a broker's regulatory status directly with the relevant authority before depositing funds.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
