@@ -3,11 +3,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import RegulatorCard from '../../components/regulators/RegulatorCard.astro';
 import RegulatorTiers from '../../components/regulators/RegulatorTiers.astro';
+import RegulatoryCompliance from '../../components/regulators/RegulatoryCompliance.astro';
+import RegulatoryNews from '../../components/regulators/RegulatoryNews.astro';
+import RegulatoryComparison from '../../components/regulators/RegulatoryComparison.astro';
+import AuthorCard from '../../components/authors/AuthorCard.astro';
 import { site } from '../../data/site';
 import { getReviews } from '~/lib/qs-esm';
 import { getRegulators } from '~/lib/regulators-api';
+import { getAuthors } from '~/lib/api-service';
 import type { BrokerProps } from '../../types';
 import type { Regulator } from '../../types/regulator';
+import type { Author } from '../../types/author';
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -39,6 +45,18 @@ const regulators = regulatorsData?.docs || [];
 
 // Sort regulators by trust score
 const sortedRegulators = [...regulators].sort((a, b) => b.trustScore - a.trustScore);
+
+// Fetch authors data
+const authorsData = await getAuthors();
+const authors = authorsData?.docs || [];
+
+// Find authors with expertise in regulation
+const regulationExperts = authors.filter(author => 
+  author.knowsAbout?.some(expertise => 
+    expertise.fieldName.toLowerCase().includes('regulation') || 
+    expertise.fieldName.toLowerCase().includes('regulatory')
+  )
+);
 ---
 
 <BaseLayout
@@ -67,6 +85,38 @@ const sortedRegulators = [...regulators].sort((a, b) => b.trustScore - a.trustSc
         <p class="text-neutral-400">
           <span>{rankedBrokers.length}</span> brokers ranked by safety and regulation
         </p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+        <div class="lg:col-span-2">
+          <div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-white mb-4">Understanding Our Safety Ratings</h3>
+            <p class="text-neutral-300 mb-4">
+              Our safety and regulation ratings are based on a comprehensive assessment of each broker's regulatory status, fund security measures, and compliance history. Brokers with higher ratings typically offer stronger investor protections and operate under stricter regulatory oversight.            
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="bg-neutral-700/30 p-3 rounded-lg">
+                <div class="text-xs text-neutral-400">Top Rating</div>
+                <div class="text-lg font-bold text-white">8.0+</div>
+                <div class="text-xs text-green-400">Excellent Protection</div>
+              </div>
+              <div class="bg-neutral-700/30 p-3 rounded-lg">
+                <div class="text-xs text-neutral-400">Average Rating</div>
+                <div class="text-lg font-bold text-white">6.0-7.9</div>
+                <div class="text-xs text-yellow-400">Good Protection</div>
+              </div>
+              <div class="bg-neutral-700/30 p-3 rounded-lg">
+                <div class="text-xs text-neutral-400">Low Rating</div>
+                <div class="text-lg font-bold text-white">Below 6.0</div>
+                <div class="text-xs text-red-400">Limited Protection</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <RegulatoryCompliance regulators={regulators} />
+        </div>
       </div>
       
       <div class="space-y-6">
@@ -178,23 +228,32 @@ const sortedRegulators = [...regulators].sort((a, b) => b.trustScore - a.trustSc
   </section>
 
   <section class="py-12 bg-neutral-900">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-white mb-6">Why Safety and Regulation Matter</h2>
-      <div class="prose prose-invert max-w-none">
-        <p>
-          When choosing a forex broker, safety and regulation should be top priorities. Regulated brokers are supervised by financial authorities that enforce rules designed to protect traders and maintain market integrity.
-        </p>
-        <h3>Benefits of Trading with Regulated Brokers</h3>
-        <ul>
-          <li>Fund security through segregated accounts</li>
-          <li>Compensation schemes in case of broker insolvency</li>
-          <li>Fair trading practices and transparent pricing</li>
-          <li>Dispute resolution mechanisms</li>
-          <li>Regular audits and compliance checks</li>
-        </ul>
-        <p>
-          <strong>Important:</strong> Always verify a broker's regulatory status directly with the relevant authority before depositing funds.
-        </p>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+          <div class="prose prose-invert max-w-none">
+            <p>
+              When choosing a forex broker, safety and regulation should be top priorities. Regulated brokers are supervised by financial authorities that enforce rules designed to protect traders and maintain market integrity.
+            </p>
+            <h3>Benefits of Trading with Regulated Brokers</h3>
+            <ul>
+              <li>Fund security through segregated accounts</li>
+              <li>Compensation schemes in case of broker insolvency</li>
+              <li>Fair trading practices and transparent pricing</li>
+              <li>Dispute resolution mechanisms</li>
+              <li>Regular audits and compliance checks</li>
+            </ul>
+            <p>
+              <strong>Important:</strong> Always verify a broker's regulatory status directly with the relevant authority before depositing funds.
+            </p>
+          </div>
+        </div>
+        
+        <div>
+          <RegulatoryComparison />
+        </div>
       </div>
     </div>
   </section>
@@ -211,8 +270,17 @@ const sortedRegulators = [...regulators].sort((a, b) => b.trustScore - a.trustSc
         </p>
       </div>
       
-      <!-- Regulator Tiers -->
-      <RegulatorTiers regulators={sortedRegulators} />
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+        <div class="lg:col-span-2">
+          <!-- Regulator Tiers -->
+          <RegulatorTiers regulators={sortedRegulators} />
+        </div>
+        
+        <div>
+          <!-- Regulatory News -->
+          <RegulatoryNews />
+        </div>
+      </div>
     </div>
   </section>
   
@@ -237,4 +305,26 @@ const sortedRegulators = [...regulators].sort((a, b) => b.trustScore - a.trustSc
       </div>
     </div>
   </section>
+  
+  <!-- Regulation Experts Section -->
+  {regulationExperts.length > 0 && (
+    <section class="py-12 bg-gradient-to-b from-neutral-950 to-neutral-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">
+            Meet Our <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Regulation Experts</span>
+          </h2>
+          <p class="text-neutral-300 max-w-3xl mx-auto">
+            Our team of financial regulation specialists provides expert analysis and insights on broker safety and regulatory compliance.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {regulationExperts.slice(0, 3).map(author => (
+            <AuthorCard author={author} showReviews={true} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 </BaseLayout>

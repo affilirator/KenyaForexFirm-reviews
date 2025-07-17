@@ -1,0 +1,2 @@
+The .json files in src/sampleApiData are named after the api endpoints they represent. For instace authors.json has an api endpoint
+at https://api.kenyaforexfirm.com/api/authors

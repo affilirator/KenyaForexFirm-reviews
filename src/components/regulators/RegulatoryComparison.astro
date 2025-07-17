@@ -1,0 +1,70 @@
+---
+// This component displays a comparison of different regulatory frameworks
+
+// Sample comparison data - in production, this would come from an API or database
+const regulatoryComparison = [
+  {
+    feature: "Client Fund Protection",
+    tierOne: "Segregated accounts with additional insurance",
+    tierTwo: "Segregated accounts required",
+    tierThree: "Basic requirements"
+  },
+  {
+    feature: "Leverage Limits",
+    tierOne: "Strict limits (e.g., 1:30 for retail)",
+    tierTwo: "Moderate limits (e.g., 1:200)",
+    tierThree: "Few or no limits (up to 1:2000+)"
+  },
+  {
+    feature: "Reporting Requirements",
+    tierOne: "Extensive daily/weekly reporting",
+    tierTwo: "Regular monthly reporting",
+    tierThree: "Minimal reporting"
+  },
+  {
+    feature: "Capital Requirements",
+    tierOne: "$10M+ for brokers",
+    tierTwo: "$1M-$10M for brokers",
+    tierThree: "Under $1M for brokers"
+  },
+  {
+    feature: "Dispute Resolution",
+    tierOne: "Independent ombudsman services",
+    tierTwo: "Formal complaint procedures",
+    tierThree: "Basic complaint handling"
+  }
+];
+---
+
+<div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden">
+  <div class="p-6">
+    <h3 class="text-xl font-bold text-white mb-4">Regulatory Framework Comparison</h3>
+    
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr>
+            <th class="text-left py-2 px-3 text-neutral-300 font-medium">Feature</th>
+            <th class="text-left py-2 px-3 text-yellow-400 font-medium">Tier 1 (85-100)</th>
+            <th class="text-left py-2 px-3 text-blue-400 font-medium">Tier 2 (70-84)</th>
+            <th class="text-left py-2 px-3 text-neutral-400 font-medium">Tier 3 (Below 70)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {regulatoryComparison.map((item, index) => (
+            <tr class={index % 2 === 0 ? "bg-neutral-800/30" : ""}>
+              <td class="py-2 px-3 text-white font-medium">{item.feature}</td>
+              <td class="py-2 px-3 text-neutral-300">{item.tierOne}</td>
+              <td class="py-2 px-3 text-neutral-300">{item.tierTwo}</td>
+              <td class="py-2 px-3 text-neutral-300">{item.tierThree}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="mt-4 text-xs text-neutral-400">
+      <p>Note: This is a general comparison. Specific requirements may vary between individual regulatory authorities within each tier.</p>
+    </div>
+  </div>
+</div>

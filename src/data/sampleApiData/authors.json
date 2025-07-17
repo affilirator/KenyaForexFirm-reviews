@@ -1,0 +1,1812 @@
+{
+  "docs": [
+    {
+      "createdAt": "2025-06-17T00:31:50.690Z",
+      "updatedAt": "2025-07-17T04:57:04.368Z",
+      "tenant": "683f46937e7deb35fd6bca89",
+      "user": {
+        "firstName": "Patrick",
+        "lastName": "Mahinge",
+        "fullName": "Patrick Mahinge",
+        "role": "author",
+        "id": "683f46927e7deb35fd6bca83"
+      },
+      "knowsAbout": [
+        {
+          "fieldName": "Forex Trading",
+          "fieldUrl": "https://wikipedia.org",
+          "description": "About forex trading in Kenya",
+          "id": "685b53f7e2469325a8da398f"
+        },
+        {
+          "fieldName": "Forex Trading",
+          "fieldUrl": "https://wikipedia.org/forex_trading",
+          "description": "Forex trading (short for \"foreign exchange trading\") is the process of buying and selling currencies to profit from changes in their exchange rates. You're essentially speculating on how one currency will move against another.",
+          "id": "6878743d92ff0c22c1d416d2"
+        },
+        {
+          "fieldName": "Forex regulatory authorities",
+          "fieldUrl": "https://wikipedia.org/forex_regulation",
+          "description": "Forex regulation refers to the oversight and control of forex trading activities by official financial authorities or regulators to ensure fairness, transparency, and the protection of traders like you.\n\n",
+          "id": "6878749d92ff0c22c1d416d3"
+        },
+        {
+          "fieldName": "Forex Brokers",
+          "fieldUrl": "https://wikipedia.org/forex_brokers",
+          "description": "A forex broker is a financial services company that gives you access to a platform for buying and selling currencies in the foreign exchange (forex) market.",
+          "id": "687874dd92ff0c22c1d416d4"
+        }
+      ],
+      "meta": {
+        "title": "Patrick Mahinge - Author and Financial Analyst at Kenya Forex Firm",
+        "description": "Patrick Mahinge is a prominent figure in Kenya’s forex and financial education space, known for both his trading expertise and digital entrepreneurship.",
+        "image": {
+          "filename": "patrick-mahinge.svg",
+          "id": "6878757ca2d3b3ac9fe37cba",
+          "url": "https://api.kenyaforexfirm.com/api/r2media/file/patrick-mahinge.svg"
+        }
+      },
+      "bio": "Patrick Mahinge is a seasoned forex trader and market analyst with over 15 years of experience in the financial markets. As a Chartered Market Technician (CMT), he combines technical analysis with fundamental research to provide actionable forex trading insights.",
+      "location": {
+        "city": "Nairobi",
+        "country": "Kenya"
+      },
+      "publishingName": "Patrick Mahinge",
+      "slug": "patrick-mahinge",
+      "name": "Patrick Mahinge",
+      "blog": {
+        "blogTitle": "Kenya Forex Firm",
+        "slug": "kenya-forex-firm",
+        "tenant": "683f46937e7deb35fd6bca89",
+        "githubBranch": "main",
+        "id": "684042e245e28e4550cbd4e6"
+      },
+      "socialMediaProfiles": {
+        "facebookUrl": "https://facebook.com/patric-mahinge",
+        "twitterUrl": "https://twitter.com/kenyaforexfirm/",
+        "additionalProfiles": [
+          {
+            "profileName": "Slack",
+            "profileUrl": "https://slack.com",
+            "id": "685b4def9bb8b6baebd7912a"
+          }
+        ]
+      },
+      "jobTitle": "Senior Financial Analyst and CMT® Charterholder",
+      "alumniOf": [],
+      "authorBio": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Patrick Mahinge is a seasoned forex trader and market analyst with over 15 years of experience in the financial markets. As a Chartered Market Technician (CMT), he combines technical analysis with fundamental research to provide actionable forex trading insights.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Patrick Mahinge completed his Bachelor's degree in Journalism and Mass Communication from Masinde Muliro University between 2007 and 2012.Upon graduation, he actively sought employment as a journalist, applying to numerous media companies.However, during this period, his primary accomplishment remained his personal ambition to achieve financial independence on his own terms.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "This initial period, characterized by a determined pursuit of traditional journalism roles that did not immediately materialize, appears to have played a pivotal role in shaping his subsequent career. The challenges in securing conventional employment, despite his academic background, likely fueled his intrinsic motivation for self-reliance. This circumstance served as a significant catalyst, redirecting his ambition towards alternative, unconventional pathways for income generation. His resilience and capacity to identify and pursue new avenues when traditional routes proved challenging are defining characteristics that would come to mark his entire professional trajectory.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Serial Webpreneur and Financial Market Expert",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h3"
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Patrick Mahinge is widely recognized as a Kenyan blogger and a serial webpreneur. He has demonstrated a remarkable aptitude for building profitable online businesses directly from his home, particularly through the strategic utilization of platforms like WordPress.This early mastery of digital tools laid the groundwork for his extensive ventures.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "His professional scope broadened considerably to include deep expertise as a successful forex trader, a path that ultimately led to the establishment of Kenya Forex Firm.Within this domain, he holds the distinguished titles of Senior Forex Market Analyst and a Chartered Market Technician (CMT® Charterholder), underscoring his formal qualifications and practical experience in financial markets.Beyond his entrepreneurial and trading endeavors, Mahinge is also a seasoned speaker and author, actively sharing his extensive knowledge in both digital marketing and financial trading. His engagements span various prominent forums, including WordCamp Nairobi and appearances on significant financial media outlets.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "The evolution of Patrick's career exemplifies the modern \"portfolio career\" or \"multi-hyphenate\" professional. His ability to excel across seemingly disparate online domains—from content creation and digital marketing to financial trading and education—highlights a profound understanding of the digital economy's multifaceted opportunities. This adaptability and strategic approach to building diversified income streams have enabled him to forge a robust and resilient professional identity. This convergence of roles is not merely coincidental; it represents a deliberate diversification strategy. In dynamic markets, particularly in emerging economies like Kenya, relying on a single income stream can carry significant risks. Patrick's success in cultivating expertise and generating income from both content-driven online businesses and financial trading demonstrates a sophisticated grasp of leveraging digital tools for economic resilience. His model of a multi-faceted entrepreneur, who also actively empowers communities, offers a compelling blueprint for navigating and thriving in the contemporary digital landscape.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "2. Pioneering Online Entrepreneurship: Blogging and Webpreneurship",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h2"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Patrick Mahinge's journey into online entrepreneurship is a cornerstone of his professional identity, showcasing his ability to transform personal interests into significant financial success and community impact.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "2.1 The Genesis of a Digital Journey",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h3"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Patrick's initial foray into the online business world began as a personal hobby, which he adeptly cultivated and transformed into a full-time, sustainable source of income.His proficiency in leveraging WordPress proved instrumental, enabling him to build profitable online businesses directly from the comfort of his home. This early adoption and mastery of digital tools were crucial for his commercial success.His foundational experience in blogging dates back to 2012, marking the critical period when he began to lay the groundwork for his extensive digital ventures. This early engagement with content creation and online platforms established the practical skills that would underpin his future successes.  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "2.2 Blogscheme.com: A Resource for Aspiring Bloggers",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h3"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Driven by a strong passion for blogging and a genuine desire to empower young people to engage in online entrepreneurship, Patrick established Blogscheme.com.This platform was specifically designed as a resourceful blog, dedicated to outlining the fundamental principles of blogging and providing practical strategies for scaling these activities into income-generating ventures.This initiative highlights his early commitment to knowledge sharing and fostering community development within the nascent digital space in Kenya, positioning him as an educator and advocate for digital literacy.  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "2.3 Scaling Online Ventures to Six-Figure Success",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h3"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "A significant achievement in his early webpreneurship was the remarkable feat of transforming a niche blog on WordPress into a full-time, six-figure business in an impressive six months.This rapid and substantial financial success quickly cemented his reputation as a highly effective and innovative online entrepreneur.  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "The astonishing speed with which Patrick transformed a hobby into a six-figure business in just half a year is a powerful indication of his exceptional business acumen, strategic foresight, and strong execution capabilities in the digital domain. This accomplishment suggests a deep understanding of market opportunities, efficient content creation, and highly effective monetization strategies, particularly within the niche and affiliate marketing landscape. Achieving such a significant income from a niche blog in a short timeframe implies not just diligent effort, but a strategic mastery of several key areas: identifying profitable niches, implementing effective content strategies (including product reviews and backlink building, as mentioned in his later work), optimizing for search engines, and efficiently monetizing through channels like affiliate marketing. This rapid success is more than a personal triumph; it provides a compelling, real-world case study that validates the practical efficacy of his methods, lending immense credibility to his educational initiatives and demonstrating a replicable path to financial independence online.  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "3. Mastering Affiliate Marketing and Niche Websites",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h2"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Patrick Mahinge's expertise extends deeply into the realm of affiliate marketing and the strategic development of niche websites, areas where he has not only achieved personal success but also cultivated a significant community.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "3.1 Leadership in the Affiliate Marketing Space",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h3"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Over a period of three years leading up to 2018, Patrick Mahinge solidified his position as a prominent leader in the affiliate marketing space.This continuous evolution demonstrates his ability to adapt and thrive within the dynamic internet marketing landscape. He is actively involved in helping \"hundreds of interested youths\" enhance their online authority through the application of strategic and effective affiliate marketing techniques.His dedication to this role underscores his commitment to fostering a new generation of digital entrepreneurs.  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "3.2 The 5,000+ Member Facebook Community",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h3"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "A significant testament to his influence and commitment to knowledge sharing is the Facebook group he founded and actively manages. This community, dedicated to supporting aspiring affiliate marketers, boasts a substantial membership of over 5,000 individuals.The establishment and successful growth of such a large community underscore Patrick's effectiveness as a community builder and mentor. This engaged group not only extends his reach and influence but also positions him as a central and trusted figure within the Kenyan affiliate marketing ecosystem, fostering a collaborative and supportive learning environment. The sheer scale of this community suggests that Patrick has successfully tapped into a significant demand for practical online entrepreneurship education, particularly among Kenyan youth. It is not merely about disseminating information but about creating a vibrant, interactive ecosystem where members can learn, share, and grow together. This community also serves as a powerful platform for validating his expertise and potentially generating leads for his other ventures, such as Kenya Forex Firm, demonstrating a synergistic approach to his various business interests and highlighting his role as a practical educator and a catalyst for digital economic empowerment.  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "3.3 Strategies for Profitable Niche Websites",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h3"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "His hands-on engagement in affiliate marketing is evident through his active involvement in writing product reviews and building backlinks for his various niche sites.This practical application highlights his deep expertise in content marketing and search engine optimization (SEO), crucial components for online visibility and monetization. Patrick has openly shared his knowledge through presentations such as \"The Insider Secrets to Making Money with Affiliate Niche Websites\" at WordCamp Nairobi 2018. In this session, he provided detailed guidance on how to build a six-figure affiliate/niche website from the ground up.This demonstrates his commitment to transparency and empowering others with actionable strategies for online monetization, reinforcing his role as a practical and results-oriented educator.  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "4. Expertise in Forex Trading and Financial Markets",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h2"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Beyond his significant contributions to online entrepreneurship, Patrick Mahinge has established himself as a formidable expert in the foreign exchange market, leading a successful firm and serving as a key educator.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "4.1 Entry into the Foreign Exchange Market",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h3"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Patrick's venture into foreign exchange (FX) trading was initiated following a friend's recommendation. This path was pursued as a strategic means to improve his financial prospects, particularly after his initial challenges in securing a journalism career.This illustrates his proactive approach to identifying and capitalizing on new opportunities for financial independence. Since embracing FX trading, he has evolved into a highly successful trader, extending his expertise by providing guidance and mentorship to other aspiring traders through his Kenya Forex Firm.This transition from personal trading success to a mentorship role underscores his commitment to sharing knowledge and fostering growth within the financial community.  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "4.2 Kenya Forex Firm: Leadership and Services",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h3"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Patrick Mahinge is the recognized founder of Kenya Forex Firm.Within the firm, he holds the significant position of Senior Forex Market Analyst.Kenya Forex Firm provides a comprehensive suite of services designed to support forex traders in Kenya:  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "detail": 0,
+                      "format": 1,
+                      "mode": "normal",
+                      "style": "",
+                      "text": "Portfolio Management:",
+                      "type": "text",
+                      "version": 1
+                    },
+                    {
+                      "detail": 0,
+                      "format": 0,
+                      "mode": "normal",
+                      "style": "",
+                      "text": " Offering clients a selection of diverse trading accounts tailored to various investment needs.",
+                      "type": "text",
+                      "version": 1
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0,
+                  "type": "listitem",
+                  "version": 1,
+                  "textFormat": 1,
+                  "value": 1
+                },
+                {
+                  "children": [
+                    {
+                      "detail": 0,
+                      "format": 1,
+                      "mode": "normal",
+                      "style": "",
+                      "text": "Signal Service:",
+                      "type": "text",
+                      "version": 1
+                    },
+                    {
+                      "detail": 0,
+                      "format": 0,
+                      "mode": "normal",
+                      "style": "",
+                      "text": " Delivering precise and timely FX trading signals to guide client decisions.",
+                      "type": "text",
+                      "version": 1
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0,
+                  "type": "listitem",
+                  "version": 1,
+                  "textFormat": 1,
+                  "value": 2
+                },
+                {
+                  "children": [
+                    {
+                      "detail": 0,
+                      "format": 1,
+                      "mode": "normal",
+                      "style": "",
+                      "text": "Forex Trade Training:",
+                      "type": "text",
+                      "version": 1
+                    },
+                    {
+                      "detail": 0,
+                      "format": 0,
+                      "mode": "normal",
+                      "style": "",
+                      "text": " Providing expert-led educational programs where clients are thoroughly taught the intricacies of forex trading, with Patrick himself contributing to the curriculum. ",
+                      "type": "text",
+                      "version": 1
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0,
+                  "type": "listitem",
+                  "version": 1,
+                  "textFormat": 1,
+                  "value": 3
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "list",
+              "version": 1,
+              "listType": "bullet",
+              "start": 1,
+              "tag": "ul"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "4.3 Professional Qualifications and Extensive Experience",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h3"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "A testament to his formal expertise, Patrick is a Chartered Market Technician (CMT® Charterholder), a prestigious professional certification he obtained in 2016.This credential underscores his advanced proficiency in technical analysis of financial markets. He is described as a seasoned forex trader and market analyst possessing over 15 years of experience in the financial markets.While his university graduation date (2012) and the narrative of his initial entry into FX suggest a more concentrated period of professional trading, this figure likely encompasses his profound and continuous engagement with financial market dynamics, including extensive self-study, practical application, and active trading that preceded and followed his formal certification. ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "This demonstrates a deep, long-term commitment to the field. Based in Nairobi, Kenya, Patrick has been instrumental in developing trading strategies that are particularly effective within emerging markets.This specialized regional focus adds significant practical value to his expertise, making his insights highly relevant to the local and broader African financial landscape.  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "The strategic decision to pursue and obtain the CMT® Charterholder designation in 2016, coupled with his role in a firm offering professional training and portfolio management, signifies a deliberate and successful move to formalize and monetize his expertise in forex. This transition from a personal successful trader to a recognized analyst and educator indicates a deeper, more institutional commitment to the financial sector, moving beyond individual trading to leadership in financial education and advisory services.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "His journey from an informal entry into FX to achieving a prestigious certification and founding a professional firm demonstrates a clear strategic intent to build a credible and scalable business in the financial sector. This professionalization adds immense weight to his advice and services, distinguishing him from casual traders.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "It implies that he recognized the need for formal validation and structured service delivery to serve a wider audience and build a sustainable enterprise, rather than just relying on personal trading success. This transition underscores his entrepreneurial vision and commitment to long-term impact in the financial education space.  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "4.4 Specialized Areas of Expertise",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h3"
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Patrick Mahinge's expertise encompasses several critical and nuanced areas within the financial markets, demonstrating a holistic and advanced understanding:  ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "detail": 0,
+                      "format": 1,
+                      "mode": "normal",
+                      "style": "",
+                      "text": "Technical Analysis:",
+                      "type": "text",
+                      "version": 1
+                    },
+                    {
+                      "detail": 0,
+                      "format": 0,
+                      "mode": "normal",
+                      "style": "",
+                      "text": " He possesses advanced knowledge of chart patterns, indicators, and price action analysis, crucial for predicting market movements.",
+                      "type": "text",
+                      "version": 1
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0,
+                  "type": "listitem",
+                  "version": 1,
+                  "textFormat": 1,
+                  "value": 1
+                },
+                {
+                  "children": [
+                    {
+                      "detail": 0,
+                      "format": 1,
+                      "mode": "normal",
+                      "style": "",
+                      "text": "Risk Management:",
+                      "type": "text",
+                      "version": 1
+                    },
+                    {
+                      "detail": 0,
+                      "format": 0,
+                      "mode": "normal",
+                      "style": "",
+                      "text": " His proficiency includes sophisticated techniques for position sizing, comprehensive portfolio management, and effective risk mitigation strategies.",
+                      "type": "text",
+                      "version": 1
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0,
+                  "type": "listitem",
+                  "version": 1,
+                  "textFormat": 1,
+                  "value": 2
+                },
+                {
+                  "children": [
+                    {
+                      "detail": 0,
+                      "format": 1,
+                      "mode": "normal",
+                      "style": "",
+                      "text": "Market Psychology:",
+                      "type": "text",
+                      "version": 1
+                    },
+                    {
+                      "detail": 0,
+                      "format": 0,
+                      "mode": "normal",
+                      "style": "",
+                      "text": " He understands the principles of behavioral finance and trading psychology, recognizing their profound impact on market dynamics.",
+                      "type": "text",
+                      "version": 1
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0,
+                  "type": "listitem",
+                  "version": 1,
+                  "textFormat": 1,
+                  "value": 3
+                },
+                {
+                  "children": [
+                    {
+                      "detail": 0,
+                      "format": 1,
+                      "mode": "normal",
+                      "style": "",
+                      "text": "Macroeconomic Analysis:",
+                      "type": "text",
+                      "version": 1
+                    },
+                    {
+                      "detail": 0,
+                      "format": 0,
+                      "mode": "normal",
+                      "style": "",
+                      "text": " He can effectively analyze the impact of broader economic events and indicators on currency markets, providing a fundamental context to technical analysis.",
+                      "type": "text",
+                      "version": 1
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0,
+                  "type": "listitem",
+                  "version": 1,
+                  "textFormat": 1,
+                  "value": 4
+                },
+                {
+                  "children": [
+                    {
+                      "detail": 0,
+                      "format": 1,
+                      "mode": "normal",
+                      "style": "",
+                      "text": "Trading Systems:",
+                      "type": "text",
+                      "version": 1
+                    },
+                    {
+                      "detail": 0,
+                      "format": 0,
+                      "mode": "normal",
+                      "style": "",
+                      "text": " His skills extend to the development and optimization of automated trading strategies, showcasing his technical and algorithmic capabilities.",
+                      "type": "text",
+                      "version": 1
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0,
+                  "type": "listitem",
+                  "version": 1,
+                  "textFormat": 1,
+                  "value": 5
+                },
+                {
+                  "children": [
+                    {
+                      "detail": 0,
+                      "format": 1,
+                      "mode": "normal",
+                      "style": "",
+                      "text": "Educational Content:",
+                      "type": "text",
+                      "version": 1
+                    },
+                    {
+                      "detail": 0,
+                      "format": 0,
+                      "mode": "normal",
+                      "style": "",
+                      "text": " He is adept at creating comprehensive and accessible forex trading educational materials, reflecting his role as a teacher and mentor.",
+                      "type": "text",
+                      "version": 1
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0,
+                  "type": "listitem",
+                  "version": 1,
+                  "textFormat": 1,
+                  "value": 6
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "list",
+              "version": 1,
+              "listType": "bullet",
+              "start": 1,
+              "tag": "ul"
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "The comprehensive and multi-dimensional nature of his listed expertisegoes far beyond basic trading skills, indicating a sophisticated and holistic understanding of financial markets. The inclusion of areas like \"Market Psychology\" and \"Macroeconomic Analysis\" alongside technical and system development skills suggests a deep appreciation for the complex interplay of factors influencing market behavior.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "This breadth of knowledge is crucial for a firm offering comprehensive training and portfolio management, enabling him to provide nuanced, strategic advice that addresses the full spectrum of trading challenges.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "The emphasis on \"Market Psychology\" and \"Macroeconomic Analysis\" signifies that Patrick's approach to forex trading is not purely mechanical or technical. ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "He recognizes that successful trading involves understanding human behavior, global economic trends, and their impact on currency markets. This holistic perspective is vital for developing resilient trading strategies and for educating traders to navigate volatile markets effectively. It suggests a commitment to fostering well-rounded traders, distinguishing his firm by providing a deeper, more strategic level of education and mentorship than just basic trade signals. This comprehensive expertise enhances his authority and the value proposition of Kenya Forex Firm significantly.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      },
+      "awards": [
+        {
+          "name": "Best Forex Trader in Africa",
+          "year": 2016,
+          "description": "Awarded best forex trader in Africa",
+          "id": "687880f681f466b407680814"
+        }
+      ],
+      "certifications": [
+        {
+          "id": "68787fc681f466b407680810"
+        }
+      ],
+      "education": [
+        {
+          "degree": "Bachelor of Journalism and Mass Communication",
+          "institution": "Masinde Muliro University of Science and Technology",
+          "year": 2012,
+          "url": "https://mmust.ac.ke",
+          "id": "6878803381f466b407680811"
+        }
+      ],
+      "sameAs": [],
+      "workHistory": [
+        {
+          "position": "Media Communications Officer",
+          "company": "Wildlife Works",
+          "startYear": 2013,
+          "endYear": 2014,
+          "description": "Writing and distributing press releases\n\nBuilding and maintaining relationships with journalists\n\nCoordinating media interviews, press conferences, and coverage",
+          "id": "6878807b81f466b407680812"
+        }
+      ],
+      "yearsExperience": 12,
+      "authorImage": {
+        "createdAt": "2025-06-20T20:22:23.774Z",
+        "updatedAt": "2025-06-20T20:22:23.774Z",
+        "status": "published",
+        "alt": "Patrick Mahinge",
+        "caption": "patrick-mahinge",
+        "blog": "684042e245e28e4550cbd4e6",
+        "sizes": {
+          "small": {
+            "width": 200,
+            "height": 200,
+            "mimeType": "image/webp",
+            "filesize": 3628,
+            "filename": "Patrick-MahingeDtXhxnGE_MW0CN-775.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/small/Patrick-MahingeDtXhxnGE_MW0CN-775.webp"
+          },
+          "tablet": {
+            "width": 200,
+            "height": 200,
+            "mimeType": "image/webp",
+            "filesize": 3628,
+            "filename": "Patrick-MahingeDtXhxnGE_MW0CN-1020.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/tablet/Patrick-MahingeDtXhxnGE_MW0CN-1020.webp"
+          },
+          "large": {
+            "width": 200,
+            "height": 200,
+            "mimeType": "image/webp",
+            "filesize": 3628,
+            "filename": "Patrick-MahingeDtXhxnGE_MW0CN-1627.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/large/Patrick-MahingeDtXhxnGE_MW0CN-1627.webp"
+          }
+        },
+        "tenant": "683f46937e7deb35fd6bca89",
+        "url": "https://api.kenyaforexfirm.com/api/media/file/Patrick-MahingeDtXhxnGE_MW0CN.png",
+        "thumbnailURL": null,
+        "filename": "Patrick-MahingeDtXhxnGE_MW0CN.png",
+        "mimeType": "image/png",
+        "filesize": 64892,
+        "width": 200,
+        "height": 200,
+        "focalX": 50,
+        "focalY": 50,
+        "id": "6855c2ff04f6fe7f58746090",
+        "slug": "patrick-mahinge"
+      },
+      "credentials": "CFA, CMT® Charterholder",
+      "reviews": {
+        "docs": [
+          {
+            "slug": "superforex",
+            "brokerRating": 6.6,
+            "brokerName": "SuperForex",
+            "title": "SuperForex",
+            "id": "6876645d3bcfeb06fcd2c685"
+          },
+          {
+            "slug": "justmarkets",
+            "brokerRating": 7.7,
+            "brokerName": "JustMarkets",
+            "title": "JustMarkets",
+            "id": "687652a9b308da7fea5b4be8"
+          },
+          {
+            "slug": "roboforex",
+            "brokerRating": 7.4,
+            "brokerName": "RoboForex",
+            "title": "RoboForex",
+            "id": "6872c4747edb8c00dad6286b"
+          },
+          {
+            "title": "FBS Forex Broker Review",
+            "brokerName": "FBS",
+            "brokerRating": 7.1,
+            "slug": "fbs-review",
+            "id": "68511086420a743c10f899ff"
+          },
+          {
+            "title": "XM Review - Unbiased Forex Broker Review",
+            "brokerName": "XM",
+            "brokerRating": 8,
+            "slug": "xm-forex",
+            "id": "6851077551388e130fba71de"
+          },
+          {
+            "title": "Pepperstone Markets",
+            "brokerName": "Pepperstone Markets",
+            "brokerRating": 8.1,
+            "slug": "pepperstone-markets",
+            "id": "685105714af8cf6acb8f2f24"
+          },
+          {
+            "title": "HF Markets Prevously Known as HotForex: Full unbiased Review for Forex Traders in Kenya",
+            "brokerName": "HFM",
+            "brokerRating": 7.9,
+            "slug": "hfm",
+            "id": "6850f92cc253c304b9e9559b"
+          },
+          {
+            "title": "IC Markets Global Review: Does this Forex Broker Deliver?",
+            "brokerName": "IC Markets",
+            "brokerRating": 8.3,
+            "slug": "ic-markets-global",
+            "id": "6850dc64b2dd62e38b46cc94"
+          },
+          {
+            "title": "Exness Review in Kenya? Is Exness a Good Broker to Trade With",
+            "brokerName": "Exness",
+            "brokerRating": 7.8,
+            "slug": "exness",
+            "id": "6850d14ce1093de74a02f2fb"
+          },
+          {
+            "title": "FxPesa Review - A Deep Dive into Kenya's First CMA-Regulated Forex Broker",
+            "brokerName": "FXPesa",
+            "brokerRating": 7.8,
+            "slug": "fxpesa",
+            "id": "6850b81881d45ff392e42761"
+          }
+        ],
+        "hasNextPage": false
+      },
+      "paymentMethods": {
+        "docs": [
+          {
+            "slug": "superforex",
+            "brokerRating": 6.6,
+            "brokerName": "SuperForex",
+            "title": "SuperForex",
+            "id": "6876645d3bcfeb06fcd2c685"
+          },
+          {
+            "slug": "justmarkets",
+            "brokerRating": 7.7,
+            "brokerName": "JustMarkets",
+            "title": "JustMarkets",
+            "id": "687652a9b308da7fea5b4be8"
+          },
+          {
+            "slug": "roboforex",
+            "brokerRating": 7.4,
+            "brokerName": "RoboForex",
+            "title": "RoboForex",
+            "id": "6872c4747edb8c00dad6286b"
+          },
+          {
+            "title": "FBS Forex Broker Review",
+            "brokerName": "FBS",
+            "brokerRating": 7.1,
+            "slug": "fbs-review",
+            "id": "68511086420a743c10f899ff"
+          },
+          {
+            "title": "XM Review - Unbiased Forex Broker Review",
+            "brokerName": "XM",
+            "brokerRating": 8,
+            "slug": "xm-forex",
+            "id": "6851077551388e130fba71de"
+          },
+          {
+            "title": "Pepperstone Markets",
+            "brokerName": "Pepperstone Markets",
+            "brokerRating": 8.1,
+            "slug": "pepperstone-markets",
+            "id": "685105714af8cf6acb8f2f24"
+          },
+          {
+            "title": "HF Markets Prevously Known as HotForex: Full unbiased Review for Forex Traders in Kenya",
+            "brokerName": "HFM",
+            "brokerRating": 7.9,
+            "slug": "hfm",
+            "id": "6850f92cc253c304b9e9559b"
+          },
+          {
+            "title": "IC Markets Global Review: Does this Forex Broker Deliver?",
+            "brokerName": "IC Markets",
+            "brokerRating": 8.3,
+            "slug": "ic-markets-global",
+            "id": "6850dc64b2dd62e38b46cc94"
+          },
+          {
+            "title": "Exness Review in Kenya? Is Exness a Good Broker to Trade With",
+            "brokerName": "Exness",
+            "brokerRating": 7.8,
+            "slug": "exness",
+            "id": "6850d14ce1093de74a02f2fb"
+          },
+          {
+            "title": "FxPesa Review - A Deep Dive into Kenya's First CMA-Regulated Forex Broker",
+            "brokerName": "FXPesa",
+            "brokerRating": 7.8,
+            "slug": "fxpesa",
+            "id": "6850b81881d45ff392e42761"
+          }
+        ],
+        "hasNextPage": false
+      },
+      "id": "6850b776788b53611ad7ae0d"
+    }
+  ],
+  "hasNextPage": false,
+  "hasPrevPage": false,
+  "limit": 10,
+  "nextPage": null,
+  "page": 1,
+  "pagingCounter": 1,
+  "prevPage": null,
+  "totalDocs": 1,
+  "totalPages": 1
+}
