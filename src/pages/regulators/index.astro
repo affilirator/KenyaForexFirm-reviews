@@ -4,7 +4,9 @@ import Navigation from '../../components/Navigation.astro';
 import RegulatorCard from '../../components/regulators/RegulatorCard.astro';
 import { site } from '../../data/site';
 import { getRegulators } from '~/lib/regulators-api';
+import { getAuthors } from '~/lib/api-service';
 import type { Regulator } from '../../types/regulator';
+import type { Author } from '../../types/author';
 
 const schemaData = {
   "@context": "https://schema.org",

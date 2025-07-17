@@ -8,6 +8,7 @@ import BrokerProsAndCons from '../../components/review/BrokerProsAndCons.astro';
 import BrokerVerdict from '../../components/review/BrokerVerdict.astro';
 import RiskWarning from '../../components/review/RiskWarning.astro';
 import { getReviews } from '../../lib/qs-esm';
+import { getAuthorByIdCached } from '../../lib/author-service';
 import { site } from '../../data/site';
 
 export async function getStaticPaths() {
@@ -17,6 +18,12 @@ export async function getStaticPaths() {
 
 const { broker } = Astro.props;
 if (!broker) return Astro.redirect('/404');
+
+// Get author information
+let author = null;
+if (broker.author && broker.author.length > 0) {
+  author = await getAuthorByIdCached(broker.author[0].id);
+}
 
 const logoUrl = typeof broker.logo === 'string' ? broker.logo : broker.logo?.url;
 const title = `${broker.brokerName} Review ${new Date().getFullYear()} - Expert Analysis for Kenyan Traders`;
@@ -38,8 +45,9 @@ const schemaData = [{
   },
   "author": {
     "@type": "Person",
-    "name": "Patrick Mahinge",
-    "jobTitle": "Senior Financial Analyst",
+    "name": author?.name || "Patrick Mahinge",
+    "jobTitle": author?.jobTitle || "Senior Financial Analyst",
+    "url": author ? `${site.url}/authors/${author.slug}` : undefined,
     "worksFor": { "@type": "Organization", "name": site.siteName, "url": site.url }
   },
   "publisher": { "@type": "Organization", "name": site.siteName, "url": site.url },
@@ -56,7 +64,7 @@ const schemaData = [{
 }];
 ---
 
-<BaseLayout title={title} description={description} image={logoUrl} schemaData={schemaData}>
+<BaseLayout title={title} description={description} image={logoUrl} schemaData={schemaData} author={author}>
   <BrokerHeader broker={broker} />
   <BrokerNavigation />
   

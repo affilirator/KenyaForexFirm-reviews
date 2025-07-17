@@ -3,6 +3,9 @@ import { SEO } from "astro-seo";
 import { site } from "@data/site";
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
+import AuthorAttribution from "../components/common/AuthorAttribution.astro";
+import { getDefaultAuthor } from "../lib/author-service";
+import type { Author } from "../types/author";
 import "../styles/global.css";
 
 export interface Props {
@@ -11,6 +14,7 @@ export interface Props {
   image?: string;
   noindex?: boolean;
   schemaData?: any;
+  author?: Author;
 }
 
 const {
@@ -18,8 +22,15 @@ const {
   description = "Comprehensive forex broker reviews and rankings for Kenyan traders. Expert analysis, regulatory information, and unbiased comparisons to help you choose the best forex broker.",
   image = "/og-image.jpg",
   noindex = false,
-  schemaData
+  schemaData,
+  author
 } = Astro.props;
+
+// Get default author if none is provided
+let pageAuthor = author;
+if (!pageAuthor) {
+  pageAuthor = await getDefaultAuthor();
+}
 
 const canonicalURL = `${site.url}${Astro.url.pathname}`;
 ---
@@ -57,6 +68,28 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
     {schemaData && (
       <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
     )}
+    
+    {/* Add author schema if not already included in schemaData */}
+    {pageAuthor && !schemaData?.mainEntity?.['@type']?.includes('Person') && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "author": {
+          "@type": "Person",
+          "name": pageAuthor.name,
+          "url": `${site.url}/authors/${pageAuthor.slug}`
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": site.name,
+          "url": site.url,
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${site.url}/logo.png`
+          }
+        }
+      })} />
+    )}
   </head>
 
   <body class=" bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 text-neutral-100 min-h-screen">
@@ -66,6 +99,13 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
     <div class="relative z-10">
       <Navigation />
       <slot />
+      
+      {pageAuthor && (
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-neutral-800/50">
+          <AuthorAttribution author={pageAuthor} />
+        </div>
+      )}
+      
       <Footer />
     </div>
 
