@@ -1,0 +1,48 @@
+---
+import type { Regulator } from '../../types/regulator';
+
+interface Props {
+  regulator: Regulator;
+}
+
+const { regulator } = Astro.props;
+
+// Sample requirements data - in a real implementation, this would come from the API
+const requirements = [
+  {
+    title: "Capital Requirements",
+    description: `Brokers regulated by ${regulator.shortName} must maintain minimum capital of $${regulator.minDepositRequirement.toLocaleString()}.`
+  },
+  {
+    title: "Client Fund Protection",
+    description: `${regulator.shortName} requires brokers to keep client funds in segregated accounts separate from operational funds.`
+  },
+  {
+    title: "Leverage Limits",
+    description: `Maximum leverage allowed is ${regulator.maxLeverage} for retail clients trading forex.`
+  },
+  {
+    title: "Reporting Requirements",
+    description: `Brokers must submit regular financial reports and maintain transparent operations.`
+  },
+  {
+    title: "Dispute Resolution",
+    description: `${regulator.shortName} provides a framework for handling client complaints and resolving disputes.`
+  }
+];
+---
+
+<div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden">
+  <div class="p-6">
+    <h2 class="text-xl font-bold text-white mb-4">Regulatory Requirements</h2>
+    
+    <div class="space-y-4">
+      {requirements.map((req, index) => (
+        <div class={index < requirements.length - 1 ? "pb-4 border-b border-neutral-700/30" : ""}>
+          <h3 class="text-lg font-medium text-white mb-1">{req.title}</h3>
+          <p class="text-neutral-300 text-sm">{req.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

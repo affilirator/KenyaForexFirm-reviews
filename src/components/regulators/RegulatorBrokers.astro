@@ -1,0 +1,72 @@
+---
+import type { BrokerProps } from '../../types';
+
+interface Props {
+  brokers: BrokerProps[];
+  regulatorName: string;
+}
+
+const { brokers, regulatorName } = Astro.props;
+
+// Filter brokers that are regulated by this regulator
+const filteredBrokers = brokers.filter(broker => 
+  broker.regulators?.includes(regulatorName) || 
+  broker.regulations?.includes(regulatorName)
+);
+---
+
+<div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden">
+  <div class="p-6">
+    <h2 class="text-xl font-bold text-white mb-4">Brokers Regulated by {regulatorName}</h2>
+    
+    {filteredBrokers.length > 0 ? (
+      <div class="space-y-4">
+        {filteredBrokers.map(broker => (
+          <a 
+            href={`/brokers/${broker.slug}`}
+            class="flex items-center gap-4 bg-neutral-700/20 p-3 rounded-lg hover:bg-neutral-700/30 transition-colors"
+          >
+            <div class="flex-shrink-0">
+              {typeof broker.logo === 'object' && broker.logo?.url ? (
+                <img 
+                  src={broker.logo.url} 
+                  alt={`${broker.brokerName} logo`} 
+                  class="w-10 h-10 object-contain bg-white rounded p-1"
+                />
+              ) : typeof broker.logo === 'string' ? (
+                <img 
+                  src={broker.logo} 
+                  alt={`${broker.brokerName} logo`} 
+                  class="w-10 h-10 object-contain bg-white rounded p-1"
+                />
+              ) : (
+                <div class="w-10 h-10 bg-neutral-700 rounded flex items-center justify-center">
+                  <span class="text-xs text-neutral-400">{broker.brokerName.substring(0, 2)}</span>
+                </div>
+              )}
+            </div>
+            
+            <div class="flex-grow">
+              <div class="font-medium text-white">{broker.brokerName}</div>
+              <div class="text-xs text-neutral-400">
+                {broker.minDeposit ? `Min Deposit: $${broker.minDeposit}` : ''}
+                {broker.minDeposit && broker.maxLeverage ? ' • ' : ''}
+                {broker.maxLeverage ? `Max Leverage: ${broker.maxLeverage}` : ''}
+              </div>
+            </div>
+            
+            <div class="flex-shrink-0">
+              <div class="bg-primary-500/20 text-primary-400 px-2 py-1 rounded text-xs font-medium">
+                {broker.brokerRating.toFixed(1)}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-6 bg-neutral-800/30 rounded-lg">
+        <p class="text-neutral-400">No brokers found regulated by {regulatorName}</p>
+      </div>
+    )}
+  </div>
+</div>

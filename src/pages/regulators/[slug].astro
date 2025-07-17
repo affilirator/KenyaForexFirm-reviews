@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import RegulatorDetail from '../../components/regulators/RegulatorDetail.astro';
+import RegulatorRequirements from '../../components/regulators/RegulatorRequirements.astro';
+import RegulatorBrokers from '../../components/regulators/RegulatorBrokers.astro';
+import SimilarRegulators from '../../components/regulators/SimilarRegulators.astro';
+import { site } from '../../data/site';
+import { getRegulators } from '~/lib/regulators-api';
+import { getReviews } from '~/lib/qs-esm';
+import type { Regulator } from '../../types/regulator';
+
+export async function getStaticPaths() {
+  const regulatorsData = await getRegulators();
+  const regulators = regulatorsData?.docs || [];
+  
+  return regulators.map(regulator => ({
+    params: { slug: regulator.slug },
+    props: { regulator }
+  }));
+}
+
+interface Props {
+  regulator: Regulator;
+}
+
+const { regulator } = Astro.props;
+
+// Fetch all regulators for similar regulators component
+const regulatorsData = await getRegulators();
+
+// Fetch all brokers to filter those regulated by this regulator
+const brokersData = await getReviews();
+const brokers = brokersData?.docs || [];
+
+// Create schema data for SEO
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": regulator.name,
+  "description": regulator.description,
+  "url": regulator.website,
+  "logo": regulator.logo?.url,
+  "foundingDate": regulator.established,
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": regulator.country
+  }
+};
+---
+
+<BaseLayout
+  title={`${regulator.name} (${regulator.shortName}) - Regulatory Authority Profile`}
+  description={`Learn about ${regulator.name}, its regulatory framework, requirements for forex brokers, and how it protects traders in ${regulator.country}.`}
+  schemaData={schemaData}>
+  
+  <Navigation />
+
+  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-6">
+        <a href="/regulators" class="text-neutral-400 hover:text-primary-400 flex items-center gap-1 text-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to All Regulators
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-6 bg-gradient-to-b from-neutral-950 to-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <RegulatorDetail regulator={regulator} />
+    </div>
+  </section>
+
+  <section class="py-6 bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2">
+          <div class="grid grid-cols-1 gap-6">
+            <RegulatorRequirements regulator={regulator} />
+            <RegulatorBrokers brokers={brokers} regulatorName={regulator.shortName} />
+          </div>
+        </div>
+        <div>
+          <SimilarRegulators currentRegulator={regulator} allRegulators={regulatorsData?.docs || []} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gradient-to-b from-neutral-900 to-neutral-950">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-white mb-6">Choosing a {regulator.shortName}-Regulated Broker</h2>
+      <div class="prose prose-invert max-w-none">
+        <p>
+          When selecting a forex broker regulated by {regulator.name}, consider the following factors to ensure you choose a reputable and suitable platform for your trading needs:
+        </p>
+        
+        <ul>
+          <li><strong>Verify Regulation Status</strong> - Always confirm the broker's regulatory status directly on the {regulator.shortName} website.</li>
+          <li><strong>Check Compliance History</strong> - Research if the broker has faced any regulatory actions or penalties.</li>
+          <li><strong>Understand Protection Measures</strong> - Learn about the specific investor protection schemes available under {regulator.shortName} regulation.</li>
+          <li><strong>Review Trading Conditions</strong> - Compare spreads, commissions, and leverage offered by different {regulator.shortName}-regulated brokers.</li>
+          <li><strong>Assess Platform Reliability</strong> - Test the broker's trading platform through a demo account before committing real funds.</li>
+        </ul>
+        
+        <p>
+          Remember that while regulation provides a layer of security, it's still important to conduct thorough research and choose a broker that aligns with your specific trading goals and risk tolerance.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
