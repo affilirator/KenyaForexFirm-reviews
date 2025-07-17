@@ -32,43 +32,55 @@ const authorTitle = author.jobTitle || 'Financial Expert';
 // Create schema data for SEO
 const schemaData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": author.name,
-  "jobTitle": author.jobTitle,
-  "description": author.bio,
-  "image": author.authorImage?.url,
-  "url": new URL(Astro.request.url).href,
-  "sameAs": [
-    author.socialMediaProfiles?.facebookUrl,
-    author.socialMediaProfiles?.twitterUrl,
-    ...(author.socialMediaProfiles?.additionalProfiles?.map(p => p.profileUrl) || [])
-  ].filter(Boolean),
-  "knowsAbout": author.knowsAbout?.map(item => ({
-    "@type": "Thing",
-    "name": item.fieldName,
-    "description": item.description,
-    "url": item.fieldUrl
-  })) || [],
-  "alumniOf": author.education?.map(edu => ({
-    "@type": "EducationalOrganization",
-    "name": edu.institution,
-    "url": edu.url
-  })) || [],
-  "worksFor": {
-    "@type": "Organization",
-    "name": site.name,
-    "url": site.url
+  "@type": "ProfilePage",
+  "dateCreated": author.createdAt || new Date().toISOString(),
+  "dateModified": author.updatedAt || new Date().toISOString(),
+  "mainEntity": {
+    "@type": "Person",
+    "name": author.name,
+    "jobTitle": author.jobTitle,
+    "description": author.bio,
+    "image": author.authorImage?.url,
+    "url": new URL(Astro.request.url).href,
+    "sameAs": [
+      author.socialMediaProfiles?.facebookUrl,
+      author.socialMediaProfiles?.twitterUrl,
+      ...(author.socialMediaProfiles?.additionalProfiles?.map(p => p.profileUrl) || [])
+    ].filter(Boolean),
+    "knowsAbout": author.knowsAbout?.map(item => ({
+      "@type": "Thing",
+      "name": item.fieldName,
+      "description": item.description,
+      "url": item.fieldUrl
+    })) || [],
+    "alumniOf": author.education?.map(edu => ({
+      "@type": "EducationalOrganization",
+      "name": edu.institution,
+      "url": edu.url
+    })) || [],
+    "worksFor": {
+      "@type": "Organization",
+      "name": site.name,
+      "url": site.url
+    },
+    "interactionStatistic": [
+      {
+        "@type": "InteractionCounter",
+        "interactionType": "https://schema.org/WriteAction",
+        "userInteractionCount": author.reviews?.docs?.length || 0
+      }
+    ]
   }
 };
 
 // Add awards if available
 if (author.awards && author.awards.length > 0) {
-  schemaData.award = author.awards.map(award => award.name);
+  schemaData.mainEntity.award = author.awards.map(award => award.name);
 }
 
 // Add location if available
 if (author.location) {
-  schemaData.homeLocation = {
+  schemaData.mainEntity.homeLocation = {
     "@type": "Place",
     "address": {
       "@type": "PostalAddress",
