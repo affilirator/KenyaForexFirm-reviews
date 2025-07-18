@@ -26,7 +26,8 @@ export const REGULATOR_GLOBALS = [
  */
 export async function fetchRegulatorGlobal(slug: string): Promise<AsicRegulationGlobal> {
   try {
-    const response = await fetch(`${API_BASE_URL}/globals/${slug}?depth=1`, {
+    // Increased depth parameter to ensure nested content is included
+    const response = await fetch(`${API_BASE_URL}/globals/${slug}?depth=3`, {
       headers: {
         'Content-Type': 'application/json',
       },

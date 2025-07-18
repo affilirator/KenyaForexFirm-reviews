@@ -173,7 +173,104 @@
     },
     "officialWebsite": "https://asic.gov.au/"
   },
-  "contentSections": [],
+  "contentSections": [
+    {
+      "blockType": "regulator-content-section",
+      "sectionTitle": "Introduction to my ASIC review",
+      "sectionId": "my-asic-review",
+      "content": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "In summary, trading with an ASIC-regulated broker gives you strong ",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 1,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "market integrity and fund security",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": ", but remember you trade in a foreign regulatory framework. You will have to manage currency risk and handle any issues through Australian channels. For many Kenyans, the pros of robust oversight and advanced platforms outweigh the cons.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      },
+      "generateWithAI": false,
+      "keyPoints": [],
+      "id": "6879b3ed1305f98d84b93211"
+    },
+    {
+      "blockType": "regulator-content-section",
+      "sectionTitle": "Why Trader Protections Matter for Kenyan Forex Investors",
+      "sectionId": "why-it-matters",
+      "content": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "ASIC- and FCA-regulated brokers must perform stringent KYC/AML checks and usually require higher documentation. CySEC brokers operating in the EU also follow tight MiFID investor categorization. CMA-licensed brokers (dealing or non-dealing) must maintain a local office in Kenya, prepare financial accounts in English, and undergo periodic inspections. All regimes force brokers to produce a Product Disclosure Statement (PDS) or Risk Disclosure Statement for clients",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      },
+      "generateWithAI": false,
+      "keyPoints": [],
+      "id": "6879ed7c202e82c62431ff61"
+    }
+  ],
   "regulations": {
     "sectionTitle": "Key ASIC Regulations for Forex Brokers",
     "sectionId": "regulations",
