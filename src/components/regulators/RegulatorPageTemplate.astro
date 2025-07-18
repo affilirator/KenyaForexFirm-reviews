@@ -81,7 +81,11 @@ const pageDescription = regulatorData?.meta?.description || 'Learn about this fi
           content={regulatorData.brokerRequirements.content}
           capitalRequirements={regulatorData.brokerRequirements.capitalRequirements}
           clientMoneyProtection={regulatorData.brokerRequirements.clientMoneyProtection}
-          leverageLimits={regulatorData.brokerRequirements.leverageLimits}
+          leverageLimits={{
+            retailClients: regulatorData.brokerRequirements.leverageLimits?.retailClients || 'N/A',
+            professionalClients: regulatorData.brokerRequirements.leverageLimits?.retailClients || 'Varies',
+            details: undefined
+          }}
         />
       )}
 
