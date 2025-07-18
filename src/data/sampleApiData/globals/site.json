@@ -1,0 +1,145 @@
+{
+  "createdAt": "2025-07-17T15:29:33.861Z",
+  "updatedAt": "2025-07-17T17:22:06.556Z",
+  "globalType": "site",
+  "name": "Best Forex Broker Reviews | By Kenya Forex Firm",
+  "url": "https://fx.kenyaforexfirm.com",
+  "description": "Expert analysis, unbiased reviews, and comprehensive rankings of forex brokers specifically for Kenyan traders. Make informed decisions with our data-driven insights.",
+  "foundingDate": "2014-12-01T12:00:00.000Z",
+  "organizationType": "Organization",
+  "address": {
+    "mapsEmbed": [],
+    "streetAddress": "14 Riverside Dr",
+    "addressLocality": "Westlands",
+    "addressRegion": "Nairobi",
+    "postalCode": "00400",
+    "addressCountry": "Kenya"
+  },
+  "contactPoint": {
+    "telephone": "+254710251380",
+    "email": "support@kenyaforexfirm.com",
+    "contactType": "Customer Service",
+    "contactHours": []
+  },
+  "credentials": [],
+  "sameAs": [
+    {
+      "platform": "Facebook",
+      "url": "https://www.facebook.com/KenyaForexFirm/",
+      "displayName": "@KenyaForexFirm",
+      "id": "687918cd340977313f795ecf"
+    },
+    {
+      "platform": "Twitter",
+      "url": "https://x.com/kenyaforexfirm",
+      "displayName": "@kenyaforexfirm",
+      "id": "6879190d340977313f795ed0"
+    },
+    {
+      "platform": "LinkedIn",
+      "url": "https://ke.linkedin.com/company/kenya-forex-firm",
+      "displayName": "@kenyaforexfirm",
+      "id": "68791c62340977313f795ed1"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/@kenyaforexfirm",
+      "displayName": "@kenyaforexfirm",
+      "id": "68791ce10871982737a2c859"
+    }
+  ],
+  "keywords": [
+    {
+      "keyword": "Forex trading in Kenya",
+      "id": "68791cff0871982737a2c85a"
+    }
+  ],
+  "alternateNames": [],
+  "areaServed": [
+    {
+      "area": "Kenya",
+      "id": "68791d0b0871982737a2c85b"
+    },
+    {
+      "area": "Nairobi",
+      "id": "68791d110871982737a2c85c"
+    }
+  ],
+  "_status": "published",
+  "legalName": "Kenya Forex Firm",
+  "logos": [
+    {
+      "mainLogo": true,
+      "image": {
+        "createdAt": "2025-07-17T16:44:35.000Z",
+        "updatedAt": "2025-07-17T16:44:35.000Z",
+        "status": "published",
+        "alt": "Kenya Forex Firm Logo",
+        "blog": "684042e245e28e4550cbd4e6",
+        "sizes": {
+          "small": {
+            "width": 250,
+            "height": 50,
+            "mimeType": "image/webp",
+            "filesize": 3954,
+            "filename": "Logo-2-Kenya-Forex-Firm-775.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/small/Logo-2-Kenya-Forex-Firm-775.webp"
+          },
+          "tablet": {
+            "width": 250,
+            "height": 50,
+            "mimeType": "image/webp",
+            "filesize": 3954,
+            "filename": "Logo-2-Kenya-Forex-Firm-1020.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/tablet/Logo-2-Kenya-Forex-Firm-1020.webp"
+          },
+          "large": {
+            "width": 250,
+            "height": 50,
+            "mimeType": "image/webp",
+            "filesize": 3954,
+            "filename": "Logo-2-Kenya-Forex-Firm-1627.webp",
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/large/Logo-2-Kenya-Forex-Firm-1627.webp"
+          }
+        },
+        "tenant": "683f46937e7deb35fd6bca89",
+        "url": "https://api.kenyaforexfirm.com/api/media/file/Logo-2-Kenya-Forex-Firm.png",
+        "thumbnailURL": null,
+        "filename": "Logo-2-Kenya-Forex-Firm.png",
+        "mimeType": "image/png",
+        "filesize": 4356,
+        "width": 250,
+        "height": 50,
+        "focalX": 50,
+        "focalY": 50,
+        "id": "687928722118c1e124fde4d6",
+        "slug": "kenya-forex-firm-logo",
+        "caption": "kenya-forex-firm-logo"
+      },
+      "id": "6879284ac0ae6bec738c1c2c"
+    }
+  ],
+  "employees": {
+    "number": 5,
+    "employee": [
+      {
+        "slug": "patrick-mahinge",
+        "name": "Patrick Mahinge",
+        "id": "6850b776788b53611ad7ae0d"
+      }
+    ]
+  },
+  "legalPages": {
+    "aboutPage": "https://fx.kenyaforexfirm.com/about",
+    "ContactPage": "https://kenyaforexfirm.com/contact/",
+    "ethicsPolicy": "https://kenyaforexfirm.com/about/ethics/",
+    "termsOfService": "https://kenyaforexfirm.com/terms/",
+    "publishingPrinciples": "https://kenyaforexfirm.com/about/editorial-guidelines/"
+  },
+  "priceRange": "$$",
+  "isSubsidiary": true,
+  "parentOrganization": {
+
+  },
+  "id": "687916ddcc5534fd4f98db24"
+}

@@ -1,0 +1,141 @@
+---
+// RegulatorPage.astro - Main component for regulator pages
+import RegulatorHero from './RegulatorHero.astro';
+import RegulatorSection from './RegulatorSection.astro';
+import RegulatorRequirements from './RegulatorRequirements.astro';
+import RegulatorBenefits from './RegulatorBenefits.astro';
+import RegulatorComparison from './RegulatorComparison.astro';
+import RegulatorFAQ from './RegulatorFAQ.astro';
+import RegulatorConclusion from './RegulatorConclusion.astro';
+import RegulatorRelatedContent from './RegulatorRelatedContent.astro';
+import RegulatorEEAT from './RegulatorEEAT.astro';
+
+interface Props {
+  regulator: any; // The regulator global data
+}
+
+const { regulator } = Astro.props;
+
+// Extract metadata for SEO
+const meta = regulator.meta || {};
+const pageTitle = meta.title || `${regulator.label} Guide`;
+const pageDescription = meta.description || '';
+
+// Extract page settings
+const pageSettings = regulator.pageSettings || {};
+const publishedDate = pageSettings.publishedDate;
+const lastUpdated = pageSettings.lastUpdated;
+
+// Extract author information
+const relationships = regulator.relationships || {};
+const author = relationships.author;
+
+// Extract EEAT indicators
+const eeatIndicators = regulator.eeatIndicators || {};
+---
+
+<main class="min-h-screen">
+  {/* Hero Section */}
+  <RegulatorHero
+    heading={regulator.hero?.heading}
+    subheading={regulator.hero?.subheading}
+    introduction={regulator.hero?.introduction}
+    heroImage={regulator.hero?.heroImage}
+    showTableOfContents={regulator.hero?.tableOfContents}
+  />
+  
+  {/* About Regulator Section */}
+  {regulator.aboutRegulator && (
+    <RegulatorSection
+      sectionTitle={regulator.aboutRegulator.sectionTitle}
+      sectionId={regulator.aboutRegulator.sectionId}
+      content={regulator.aboutRegulator.content}
+      featuredImage={regulator.aboutRegulator.regulatorLogo}
+      imagePosition="right"
+    />
+  )}
+  
+  {/* Content Sections */}
+  {regulator.contentSections && regulator.contentSections.map((section, index) => (
+    <RegulatorSection
+      sectionTitle={section.sectionTitle}
+      sectionId={section.sectionId}
+      content={section.content}
+      featuredImage={section.featuredImage}
+      imagePosition={section.imagePosition || (index % 2 === 0 ? 'right' : 'left')}
+      keyPoints={section.keyPoints}
+    />
+  ))}
+  
+  {/* Broker Requirements */}
+  {regulator.brokerRequirements && (
+    <RegulatorRequirements
+      sectionTitle={regulator.brokerRequirements.sectionTitle}
+      sectionId={regulator.brokerRequirements.sectionId}
+      content={regulator.brokerRequirements.content}
+      capitalRequirements={regulator.brokerRequirements.capitalRequirements}
+      clientMoneyProtection={regulator.brokerRequirements.clientMoneyProtection}
+      leverageLimits={regulator.brokerRequirements.leverageLimits}
+    />
+  )}
+  
+  {/* Benefits and Protections */}
+  {regulator.benefitsProtections && (
+    <RegulatorBenefits
+      sectionTitle={regulator.benefitsProtections.sectionTitle}
+      sectionId={regulator.benefitsProtections.sectionId}
+      content={regulator.benefitsProtections.content}
+      benefitsList={regulator.benefitsProtections.benefitsList}
+    />
+  )}
+  
+  {/* Regulator Comparison */}
+  {regulator.regulatorComparison && (
+    <RegulatorComparison
+      sectionTitle={regulator.regulatorComparison.sectionTitle}
+      sectionId={regulator.regulatorComparison.sectionId}
+      content={regulator.regulatorComparison.content}
+      comparisonTable={regulator.regulatorComparison.comparisonTable}
+    />
+  )}
+  
+  {/* FAQ Section */}
+  {regulator.faq && (
+    <RegulatorFAQ
+      sectionTitle={regulator.faq.sectionTitle}
+      sectionId={regulator.faq.sectionId}
+      introduction={regulator.faq.introduction}
+      faqItems={regulator.faq.faqItems}
+    />
+  )}
+  
+  {/* Conclusion */}
+  {regulator.conclusion && (
+    <RegulatorConclusion
+      sectionTitle={regulator.conclusion.sectionTitle}
+      sectionId={regulator.conclusion.sectionId}
+      content={regulator.conclusion.content}
+    />
+  )}
+  
+  {/* EEAT Indicators */}
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <RegulatorEEAT
+      expertise={eeatIndicators.expertise}
+      authoritativeness={eeatIndicators.authoritativeness}
+      trustworthiness={eeatIndicators.trustworthiness}
+      sources={eeatIndicators.sources}
+      author={author}
+      publishedDate={publishedDate}
+      lastUpdated={lastUpdated}
+    />
+  </div>
+  
+  {/* Related Content */}
+  {regulator.relatedContent && (
+    <RegulatorRelatedContent
+      sectionTitle={regulator.relatedContent.sectionTitle}
+      articles={regulator.relatedContent.articles}
+    />
+  )}
+</main>

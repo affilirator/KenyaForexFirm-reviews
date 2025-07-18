@@ -1,0 +1,44 @@
+---
+// RegulatorComparison.astro - Component for comparing regulators
+import RichTextRenderer from './RichTextRenderer.astro';
+
+interface Props {
+  sectionTitle: string;
+  sectionId: string;
+  content: any; // Rich text content
+  comparisonTable?: {
+    tableTitle?: string;
+    tableContent: any; // Rich text content with table
+  };
+}
+
+const { sectionTitle, sectionId, content, comparisonTable } = Astro.props;
+---
+
+<section id={sectionId} class="py-12 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8">
+      {sectionTitle}
+    </h2>
+    
+    <div class="prose prose-blue max-w-none mb-10">
+      <RichTextRenderer content={content} />
+    </div>
+    
+    {comparisonTable && (
+      <div class="mt-8 bg-white rounded-lg shadow-lg overflow-hidden">
+        {comparisonTable.tableTitle && (
+          <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+            <h3 class="text-xl font-semibold text-gray-900">
+              {comparisonTable.tableTitle}
+            </h3>
+          </div>
+        )}
+        
+        <div class="p-6 overflow-x-auto">
+          <RichTextRenderer content={comparisonTable.tableContent} />
+        </div>
+      </div>
+    )}
+  </div>
+</section>

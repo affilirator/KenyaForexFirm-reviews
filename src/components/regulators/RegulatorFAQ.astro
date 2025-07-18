@@ -1,0 +1,83 @@
+---
+// RegulatorFAQ.astro - FAQ section for regulator pages
+import RichTextRenderer from './RichTextRenderer.astro';
+
+interface FAQItem {
+  question: string;
+  answer: any; // Rich text content
+}
+
+interface Props {
+  sectionTitle: string;
+  sectionId: string;
+  introduction?: any; // Rich text content
+  faqItems: FAQItem[];
+}
+
+const { sectionTitle, sectionId, introduction, faqItems = [] } = Astro.props;
+const hasFAQs = faqItems && faqItems.length > 0;
+---
+
+<section id={sectionId} class="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 scroll-mt-16">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6">
+      {sectionTitle}
+    </h2>
+    
+    {introduction && (
+      <div class="prose prose-blue max-w-none mb-8">
+        <RichTextRenderer content={introduction} />
+      </div>
+    )}
+    
+    {hasFAQs ? (
+      <div class="space-y-6">
+        {faqItems.map((faq, index) => (
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <button
+              class="faq-question w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-expanded="false"
+              aria-controls={`faq-answer-${index}`}
+            >
+              <span class="font-medium text-lg">{faq.question}</span>
+              <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div 
+              id={`faq-answer-${index}`}
+              class="faq-answer px-6 pb-4 hidden"
+            >
+              <div class="prose prose-blue max-w-none pt-2 border-t border-gray-100">
+                <RichTextRenderer content={faq.answer} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p class="text-gray-500">No FAQ items available</p>
+    )}
+  </div>
+</section>
+
+<script>
+  // Handle FAQ accordion functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach((question) => {
+      question.addEventListener('click', () => {
+        const isExpanded = question.getAttribute('aria-expanded') === 'true';
+        const answerId = question.getAttribute('aria-controls');
+        const answer = document.getElementById(answerId);
+        const icon = question.querySelector('svg');
+        
+        // Toggle current FAQ
+        question.setAttribute('aria-expanded', !isExpanded);
+        answer.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
+      });
+    });
+  });
+</script>

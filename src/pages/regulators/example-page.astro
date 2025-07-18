@@ -1,0 +1,147 @@
+---
+// Example of how to use the regulator components in an Astro page
+import { RegulatorPage } from '../../components/regulators';
+
+// In a real implementation, you would fetch this data from your API
+// For example: const regulator = await fetch(`/api/globals/regulators/${params.slug}`).then(res => res.json());
+const regulator = {
+  // This is just a placeholder for demonstration purposes
+  meta: {
+    title: 'FCA Regulated Forex Brokers: Complete Guide',
+    description: 'Comprehensive guide about UK FCA regulation in forex trading',
+  },
+  hero: {
+    heading: 'UK Financial Conduct Authority (FCA) in Forex Trading',
+    subheading: 'A Comprehensive Guide to FCA Regulation and Forex Brokers',
+    introduction: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            text: 'The Financial Conduct Authority (FCA) is one of the most respected financial regulators in the world. This guide explores how the FCA regulates forex brokers and what this means for traders.',
+          }
+        ]
+      }
+    ],
+    tableOfContents: true
+  },
+  aboutRegulator: {
+    sectionTitle: 'About the Financial Conduct Authority',
+    sectionId: 'about-fca',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            text: 'The Financial Conduct Authority (FCA) is the financial regulatory body in the United Kingdom. It operates independently from the UK government and is financed by charging fees to members of the financial services industry.',
+          }
+        ]
+      }
+    ],
+    establishedDate: '2013-04-01',
+    officialWebsite: 'https://www.fca.org.uk/'
+  },
+  // Additional sections would be included here
+  pageSettings: {
+    publishedDate: '2023-01-15',
+    lastUpdated: '2023-06-20',
+  },
+  eeatIndicators: {
+    expertise: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            text: 'This guide is written by financial regulation experts with over 10 years of experience in the forex industry.',
+          }
+        ]
+      }
+    ],
+    authoritativeness: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            text: 'All information is sourced directly from official FCA documentation and verified by certified financial analysts.',
+          }
+        ]
+      }
+    ],
+    trustworthiness: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            text: 'We regularly update this guide to reflect the latest regulatory changes and maintain accuracy.',
+          }
+        ]
+      }
+    ],
+    sources: [
+      {
+        sourceName: 'FCA Official Website',
+        sourceUrl: 'https://www.fca.org.uk/',
+        description: 'Primary source for regulatory information'
+      },
+      {
+        sourceName: 'FCA Handbook',
+        sourceUrl: 'https://www.handbook.fca.org.uk/',
+        description: 'Detailed regulatory rules and guidance'
+      }
+    ]
+  }
+};
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{regulator.meta.title}</title>
+  <meta name="description" content={regulator.meta.description}>
+  <!-- Include your CSS (Tailwind) -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+  <header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+      <nav class="flex justify-between">
+        <div class="flex items-center">
+          <a href="/" class="text-xl font-bold text-blue-600">Kenya Forex Firm</a>
+        </div>
+        <div>
+          <!-- Navigation items would go here -->
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <RegulatorPage regulator={regulator} />
+
+  <footer class="bg-gray-800 text-white py-12 px-4 sm:px-6 lg:px-8 mt-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Kenya Forex Firm</h3>
+          <p class="text-gray-300">Providing comprehensive information about forex trading and regulation.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="/" class="text-gray-300 hover:text-white">Home</a></li>
+            <li><a href="/regulators" class="text-gray-300 hover:text-white">Regulators</a></li>
+            <li><a href="/brokers" class="text-gray-300 hover:text-white">Brokers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Contact</h3>
+          <p class="text-gray-300">Email: info@kenyaforexfirm.com</p>
+        </div>
+      </div>
+      <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+        <p>&copy; {new Date().getFullYear()} Kenya Forex Firm. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

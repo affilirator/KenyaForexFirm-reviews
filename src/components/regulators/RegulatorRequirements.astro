@@ -1,48 +1,119 @@
 ---
-import type { Regulator } from '../../types/regulator';
+// RegulatorRequirements.astro - Component for displaying broker requirements
+import RichTextRenderer from './RichTextRenderer.astro';
 
 interface Props {
-  regulator: Regulator;
+  sectionTitle: string;
+  sectionId: string;
+  content: any; // Rich text content
+  capitalRequirements?: {
+    minimumCapital: string;
+    details?: any; // Rich text content
+  };
+  clientMoneyProtection?: {
+    protectionLimit: string;
+    details?: any; // Rich text content
+  };
+  leverageLimits?: {
+    retailClients: string;
+    professionalClients: string;
+    details?: any; // Rich text content
+  };
 }
 
-const { regulator } = Astro.props;
-
-// Sample requirements data - in a real implementation, this would come from the API
-const requirements = [
-  {
-    title: "Capital Requirements",
-    description: `Brokers regulated by ${regulator.shortName} must maintain minimum capital of $${regulator.minDepositRequirement.toLocaleString()}.`
-  },
-  {
-    title: "Client Fund Protection",
-    description: `${regulator.shortName} requires brokers to keep client funds in segregated accounts separate from operational funds.`
-  },
-  {
-    title: "Leverage Limits",
-    description: `Maximum leverage allowed is ${regulator.maxLeverage} for retail clients trading forex.`
-  },
-  {
-    title: "Reporting Requirements",
-    description: `Brokers must submit regular financial reports and maintain transparent operations.`
-  },
-  {
-    title: "Dispute Resolution",
-    description: `${regulator.shortName} provides a framework for handling client complaints and resolving disputes.`
-  }
-];
+const { 
+  sectionTitle, 
+  sectionId, 
+  content, 
+  capitalRequirements, 
+  clientMoneyProtection,
+  leverageLimits
+} = Astro.props;
 ---
 
-<div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden">
-  <div class="p-6">
-    <h2 class="text-xl font-bold text-white mb-4">Regulatory Requirements</h2>
+<section id={sectionId} class="py-12 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8">
+      {sectionTitle}
+    </h2>
     
-    <div class="space-y-4">
-      {requirements.map((req, index) => (
-        <div class={index < requirements.length - 1 ? "pb-4 border-b border-neutral-700/30" : ""}>
-          <h3 class="text-lg font-medium text-white mb-1">{req.title}</h3>
-          <p class="text-neutral-300 text-sm">{req.description}</p>
-        </div>
-      ))}
+    <div class="prose prose-blue max-w-none mb-10">
+      <RichTextRenderer content={content} />
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Capital Requirements */}
+      <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-blue-500">
+        <h3 class="text-xl font-semibold mb-4">Capital Requirements</h3>
+        
+        {capitalRequirements?.minimumCapital ? (
+          <>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-gray-600">Minimum Capital:</span>
+              <span class="font-bold text-lg">{capitalRequirements.minimumCapital}</span>
+            </div>
+            
+            {capitalRequirements.details && (
+              <div class="mt-4 pt-4 border-t border-gray-100">
+                <RichTextRenderer content={capitalRequirements.details} />
+              </div>
+            )}
+          </>
+        ) : (
+          <p class="text-gray-500">Information not available</p>
+        )}
+      </div>
+      
+      {/* Client Money Protection */}
+      <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-green-500">
+        <h3 class="text-xl font-semibold mb-4">Client Money Protection</h3>
+        
+        {clientMoneyProtection?.protectionLimit ? (
+          <>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-gray-600">Protection Limit:</span>
+              <span class="font-bold text-lg">{clientMoneyProtection.protectionLimit}</span>
+            </div>
+            
+            {clientMoneyProtection.details && (
+              <div class="mt-4 pt-4 border-t border-gray-100">
+                <RichTextRenderer content={clientMoneyProtection.details} />
+              </div>
+            )}
+          </>
+        ) : (
+          <p class="text-gray-500">Information not available</p>
+        )}
+      </div>
+      
+      {/* Leverage Limits */}
+      <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-amber-500">
+        <h3 class="text-xl font-semibold mb-4">Leverage Limits</h3>
+        
+        {leverageLimits?.retailClients ? (
+          <>
+            <div class="space-y-3 mb-4">
+              <div class="flex items-center justify-between">
+                <span class="text-gray-600">Retail Clients:</span>
+                <span class="font-bold">{leverageLimits.retailClients}</span>
+              </div>
+              
+              <div class="flex items-center justify-between">
+                <span class="text-gray-600">Professional Clients:</span>
+                <span class="font-bold">{leverageLimits.professionalClients}</span>
+              </div>
+            </div>
+            
+            {leverageLimits.details && (
+              <div class="mt-4 pt-4 border-t border-gray-100">
+                <RichTextRenderer content={leverageLimits.details} />
+              </div>
+            )}
+          </>
+        ) : (
+          <p class="text-gray-500">Information not available</p>
+        )}
+      </div>
     </div>
   </div>
-</div>
+</section>

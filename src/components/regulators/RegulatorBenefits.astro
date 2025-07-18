@@ -1,0 +1,50 @@
+---
+// RegulatorBenefits.astro - Component for displaying regulator benefits and protections
+import RichTextRenderer from './RichTextRenderer.astro';
+
+interface BenefitItem {
+  title: string;
+  description: any; // Rich text content
+}
+
+interface Props {
+  sectionTitle: string;
+  sectionId: string;
+  content: any; // Rich text content
+  benefitsList?: BenefitItem[];
+}
+
+const { sectionTitle, sectionId, content, benefitsList = [] } = Astro.props;
+const hasBenefits = benefitsList && benefitsList.length > 0;
+---
+
+<section id={sectionId} class="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50 to-indigo-50 scroll-mt-16">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8">
+      {sectionTitle}
+    </h2>
+    
+    <div class="prose prose-blue max-w-none mb-10">
+      <RichTextRenderer content={content} />
+    </div>
+    
+    {hasBenefits && (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        {benefitsList.map((benefit, index) => (
+          <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <h3 class="text-xl font-semibold">{benefit.title}</h3>
+            </div>
+            
+            <div class="prose prose-sm">
+              <RichTextRenderer content={benefit.description} />
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

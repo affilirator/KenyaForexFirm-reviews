@@ -1,0 +1,165 @@
+---
+// RegulatorEEAT.astro - Component for showcasing EEAT signals
+import RichTextRenderer from './RichTextRenderer.astro';
+
+interface Source {
+  sourceName: string;
+  sourceUrl: string;
+  description?: string;
+}
+
+interface Props {
+  expertise?: any; // Rich text content
+  authoritativeness?: any; // Rich text content
+  trustworthiness?: any; // Rich text content
+  sources?: Source[];
+  author?: {
+    name: string;
+    title?: string;
+    bio?: string;
+    image?: {
+      url: string;
+      alt?: string;
+    };
+  };
+  publishedDate?: string;
+  lastUpdated?: string;
+}
+
+const { 
+  expertise, 
+  authoritativeness, 
+  trustworthiness, 
+  sources = [],
+  author,
+  publishedDate,
+  lastUpdated
+} = Astro.props;
+
+const hasSources = sources && sources.length > 0;
+const formattedPublishedDate = publishedDate ? new Date(publishedDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}) : null;
+
+const formattedLastUpdated = lastUpdated ? new Date(lastUpdated).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}) : null;
+---
+
+<div class="bg-white border border-gray-200 rounded-lg shadow-sm mt-12 mb-8">
+  {/* Author and Date Information */}
+  <div class="border-b border-gray-200 p-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+      {author && (
+        <div class="flex items-center mb-4 md:mb-0">
+          {author.image && (
+            <img 
+              src={author.image.url} 
+              alt={author.image.alt || author.name} 
+              class="w-12 h-12 rounded-full mr-4 object-cover"
+            />
+          )}
+          <div>
+            <div class="font-semibold text-gray-900">{author.name}</div>
+            {author.title && <div class="text-sm text-gray-600">{author.title}</div>}
+          </div>
+        </div>
+      )}
+      
+      <div class="text-sm text-gray-600">
+        {formattedPublishedDate && (
+          <div>
+            <span class="font-medium">Published:</span> {formattedPublishedDate}
+          </div>
+        )}
+        
+        {formattedLastUpdated && (
+          <div>
+            <span class="font-medium">Last updated:</span> {formattedLastUpdated}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+  
+  {/* EEAT Content */}
+  <div class="p-6">
+    {/* Expertise */}
+    {expertise && (
+      <div class="mb-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+          Expertise
+        </h3>
+        <div class="prose prose-blue max-w-none">
+          <RichTextRenderer content={expertise} />
+        </div>
+      </div>
+    )}
+    
+    {/* Authoritativeness */}
+    {authoritativeness && (
+      <div class="mb-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          Authoritativeness
+        </h3>
+        <div class="prose prose-blue max-w-none">
+          <RichTextRenderer content={authoritativeness} />
+        </div>
+      </div>
+    )}
+    
+    {/* Trustworthiness */}
+    {trustworthiness && (
+      <div class="mb-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+          </svg>
+          Trustworthiness
+        </h3>
+        <div class="prose prose-blue max-w-none">
+          <RichTextRenderer content={trustworthiness} />
+        </div>
+      </div>
+    )}
+    
+    {/* Sources */}
+    {hasSources && (
+      <div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          Sources
+        </h3>
+        <ul class="space-y-3">
+          {sources.map((source) => (
+            <li class="bg-gray-50 p-4 rounded-md">
+              <a 
+                href={source.sourceUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="font-medium text-blue-600 hover:underline"
+              >
+                {source.sourceName}
+              </a>
+              {source.description && (
+                <p class="text-sm text-gray-600 mt-1">{source.description}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+</div>

@@ -1,0 +1,70 @@
+---
+// RegulatorRelatedContent.astro - Related content component for regulator pages
+interface RelatedArticle {
+  title: string;
+  description?: string;
+  link: string;
+  image?: {
+    url: string;
+    alt?: string;
+  };
+}
+
+interface Props {
+  sectionTitle: string;
+  articles: RelatedArticle[];
+}
+
+const { sectionTitle, articles = [] } = Astro.props;
+const hasArticles = articles && articles.length > 0;
+---
+
+<section class="py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8">
+      {sectionTitle}
+    </h2>
+    
+    {hasArticles ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.map((article) => (
+          <a 
+            href={article.link} 
+            class="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+          >
+            {article.image && (
+              <div class="aspect-w-16 aspect-h-9 w-full">
+                <img 
+                  src={article.image.url} 
+                  alt={article.image.alt || article.title} 
+                  class="w-full h-48 object-cover group-hover:opacity-90 transition-opacity"
+                />
+              </div>
+            )}
+            
+            <div class="p-6">
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                {article.title}
+              </h3>
+              
+              {article.description && (
+                <p class="mt-2 text-gray-600 line-clamp-3">
+                  {article.description}
+                </p>
+              )}
+              
+              <div class="mt-4 flex items-center text-blue-600">
+                <span>Read more</span>
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p class="text-gray-500">No related articles available</p>
+    )}
+  </div>
+</section>

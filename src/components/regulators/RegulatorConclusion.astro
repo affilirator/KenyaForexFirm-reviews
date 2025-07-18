@@ -1,0 +1,24 @@
+---
+// RegulatorConclusion.astro - Conclusion component for regulator pages
+import RichTextRenderer from './RichTextRenderer.astro';
+
+interface Props {
+  sectionTitle: string;
+  sectionId: string;
+  content: any; // Rich text content
+}
+
+const { sectionTitle, sectionId, content } = Astro.props;
+---
+
+<section id={sectionId} class="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 scroll-mt-16">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8">
+      {sectionTitle}
+    </h2>
+    
+    <div class="prose prose-blue max-w-none">
+      <RichTextRenderer content={content} />
+    </div>
+  </div>
+</section>

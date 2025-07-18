@@ -1,0 +1,193 @@
+---
+// RichTextRenderer.astro - Handles rendering of rich text content with all edge cases
+import { Fragment } from 'astro/jsx-runtime';
+
+interface Props {
+  content: any;
+  className?: string;
+}
+
+const { content, className = '' } = Astro.props;
+
+// Helper function to determine if content is empty
+function isEmpty(content) {
+  if (!content) return true;
+  if (Array.isArray(content) && content.length === 0) return true;
+  if (typeof content === 'object' && Object.keys(content).length === 0) return true;
+  return false;
+}
+
+// Helper function to render nodes recursively
+function renderNodes(nodes) {
+  if (!nodes || !Array.isArray(nodes)) return null;
+  
+  return nodes.map((node, i) => {
+    // Handle text nodes
+    if (node.text) {
+      let textContent = node.text;
+      
+      // Apply text formatting
+      if (node.bold) textContent = `<strong>${textContent}</strong>`;
+      if (node.italic) textContent = `<em>${textContent}</em>`;
+      if (node.underline) textContent = `<u>${textContent}</u>`;
+      if (node.strikethrough) textContent = `<s>${textContent}</s>`;
+      if (node.code) textContent = `<code class="px-1 py-0.5 bg-gray-100 rounded text-sm">${textContent}</code>`;
+      
+      return <Fragment key={i} set:html={textContent} />;
+    }
+    
+    // Handle headings
+    if (node.type === 'h1') return <h1 class="text-3xl font-bold mt-6 mb-4">{renderNodes(node.children)}</h1>;
+    if (node.type === 'h2') return <h2 class="text-2xl font-bold mt-6 mb-3">{renderNodes(node.children)}</h2>;
+    if (node.type === 'h3') return <h3 class="text-xl font-bold mt-5 mb-2">{renderNodes(node.children)}</h3>;
+    if (node.type === 'h4') return <h4 class="text-lg font-bold mt-4 mb-2">{renderNodes(node.children)}</h4>;
+    if (node.type === 'h5') return <h5 class="text-base font-bold mt-3 mb-1">{renderNodes(node.children)}</h5>;
+    if (node.type === 'h6') return <h6 class="text-sm font-bold mt-3 mb-1">{renderNodes(node.children)}</h6>;
+    
+    // Handle paragraphs
+    if (node.type === 'paragraph') {
+      return <p class="my-4">{renderNodes(node.children)}</p>;
+    }
+    
+    // Handle lists
+    if (node.type === 'ul') {
+      return <ul class="list-disc pl-6 my-4">{renderNodes(node.children)}</ul>;
+    }
+    if (node.type === 'ol') {
+      return <ol class="list-decimal pl-6 my-4">{renderNodes(node.children)}</ol>;
+    }
+    if (node.type === 'li') {
+      return <li class="my-1">{renderNodes(node.children)}</li>;
+    }
+    
+    // Handle links
+    if (node.type === 'link') {
+      const rel = node.fields?.rel ? node.fields.rel.join(' ') : '';
+      return (
+        <a 
+          href={node.url} 
+          class="text-blue-600 hover:underline" 
+          target={node.newTab ? "_blank" : undefined}
+          rel={rel || undefined}
+        >
+          {renderNodes(node.children)}
+        </a>
+      );
+    }
+    
+    // Handle blockquotes
+    if (node.type === 'blockquote') {
+      return (
+        <blockquote class="border-l-4 border-gray-300 pl-4 py-2 my-4 italic">
+          {renderNodes(node.children)}
+        </blockquote>
+      );
+    }
+    
+    // Handle horizontal rule
+    if (node.type === 'hr') {
+      return <hr class="my-6 border-t border-gray-300" />;
+    }
+    
+    // Handle tables
+    if (node.type === 'table') {
+      return (
+        <div class="overflow-x-auto my-6">
+          <table class="min-w-full border-collapse border border-gray-300">
+            {node.children && node.children.map((row, rowIndex) => {
+              if (row.type === 'table-row') {
+                return (
+                  <tr class={rowIndex === 0 ? 'bg-gray-100' : 'border-t border-gray-300'}>
+                    {row.children && row.children.map((cell, cellIndex) => {
+                      const Tag = rowIndex === 0 ? 'th' : 'td';
+                      return (
+                        <Tag class="px-4 py-2 border border-gray-300 text-left">
+                          {renderNodes(cell.children)}
+                        </Tag>
+                      );
+                    })}
+                  </tr>
+                );
+              }
+              return null;
+            })}
+          </table>
+        </div>
+      );
+    }
+    
+    // Handle upload blocks (images)
+    if (node.type === 'upload' && node.value) {
+      const { url, alt, width, height } = node.value;
+      return (
+        <figure class="my-6">
+          <img 
+            src={url} 
+            alt={alt || ''} 
+            width={width} 
+            height={height}
+            class="max-w-full h-auto rounded"
+          />
+          {node.value.caption && (
+            <figcaption class="text-sm text-gray-600 mt-2 text-center">
+              {node.value.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    }
+    
+    // Handle custom blocks
+    if (node.type === 'banner' && node.value) {
+      return (
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+          {node.value.title && <h4 class="font-bold">{node.value.title}</h4>}
+          {node.value.content && <div class="mt-2">{renderNodes(node.value.content)}</div>}
+        </div>
+      );
+    }
+    
+    if (node.type === 'callToAction' && node.value) {
+      return (
+        <div class="bg-gray-100 p-6 rounded-lg my-6 text-center">
+          {node.value.heading && <h4 class="font-bold text-xl mb-3">{node.value.heading}</h4>}
+          {node.value.text && <p class="mb-4">{node.value.text}</p>}
+          {node.value.buttonLabel && node.value.buttonLink && (
+            <a 
+              href={node.value.buttonLink} 
+              class="inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+            >
+              {node.value.buttonLabel}
+            </a>
+          )}
+        </div>
+      );
+    }
+    
+    if (node.type === 'testimonialQuote' && node.value) {
+      return (
+        <div class="bg-gray-50 p-6 rounded-lg my-6 border-l-4 border-blue-500">
+          {node.value.quote && <p class="italic text-lg mb-4">"{node.value.quote}"</p>}
+          {node.value.author && <p class="font-bold text-right">— {node.value.author}</p>}
+          {node.value.title && <p class="text-sm text-gray-600 text-right">{node.value.title}</p>}
+        </div>
+      );
+    }
+    
+    // Handle unknown blocks by rendering their children
+    if (node.children) {
+      return <Fragment>{renderNodes(node.children)}</Fragment>;
+    }
+    
+    return null;
+  });
+}
+---
+
+{isEmpty(content) ? (
+  <div class={`rich-text-empty ${className}`}>No content available</div>
+) : (
+  <div class={`rich-text ${className}`}>
+    {renderNodes(content)}
+  </div>
+)}
