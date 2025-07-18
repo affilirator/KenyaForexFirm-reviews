@@ -46,7 +46,7 @@ const hasBrokers = brokers && brokers.length > 0;
       <div class="text-center mb-10">
         <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-3 font-display tracking-tight inline-block relative">
           <span class="relative z-10">Top {regulatorName} Regulated Brokers</span>
-          <span class="absolute bottom-0 left-0 w-full h-2 bg-primary-400/20 -z-10 transform -rotate-1"></span>
+          <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary-500"></span>
         </h2>
         <p class="text-lg text-neutral-700 max-w-3xl mx-auto">
           These top-rated brokers are regulated by {regulatorName} and comply with their regulatory requirements.
@@ -56,7 +56,7 @@ const hasBrokers = brokers && brokers.length > 0;
       {hasBrokers ? (
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {brokers.map((broker) => (
-          <div class="broker-card bg-white/95 backdrop-blur-md rounded-xl shadow-md p-6 border border-neutral-200 hover:border-primary-500/40 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+          <div class="broker-card bg-white/95 backdrop-blur-md rounded-lg p-6 border border-neutral-200 hover:border-primary-500/40 transition-all duration-300 group relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(56,189,248,0.07),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             
@@ -134,7 +134,7 @@ const hasBrokers = brokers && brokers.length > 0;
         ))}
         </div>
       ) : (
-        <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-md p-8 border border-neutral-200 text-center max-w-2xl mx-auto">
+        <div class="bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-neutral-200 text-center max-w-2xl mx-auto">
           <div class="text-primary-500 mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -149,7 +149,7 @@ const hasBrokers = brokers && brokers.length > 0;
       <div class="mt-8 text-center">
         <a 
           href="/brokers" 
-          class="inline-flex items-center px-5 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-300 font-medium shadow-md hover:shadow-lg"
+          class="inline-flex items-center px-5 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-300 font-medium"
         >
           View All Brokers
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

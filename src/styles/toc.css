@@ -1,0 +1,33 @@
+/* Table of Contents Styles */
+
+.toc-container {
+  position: relative;
+}
+
+.toc-container a {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #4b5563; /* text-neutral-600 */
+  padding: 0.25rem 0;
+  transition: color 0.2s;
+}
+
+.toc-container a:hover {
+  color: #2563eb; /* text-primary-600 */
+}
+
+.toc-container a svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+  color: #3b82f6; /* text-primary-500 */
+}
+
+/* Responsive grid for table of contents */
+@media (max-width: 768px) {
+  .toc-container #table-of-contents {
+    grid-template-columns: 1fr !important;
+  }
+}
