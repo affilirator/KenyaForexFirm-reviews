@@ -1,7 +1,8 @@
 ---
-import { getRegulatorData, getAllRegulatorSlugs } from '../../lib/regulatorData';
+import { getRegulatorBySlug } from '../../lib/regulators-api';
+import { transformRegulatorData } from '../../lib/regulatorTransformer';
 import { generateRegulatorMetadata } from '../../lib/regulatorUtils';
-import type { RegulatorPage } from '../../types/regulator';
+import type { RegulatorPage, Regulator } from '../../types/regulator';
 import Layout from '../../layouts/BaseLayout.astro';
 import { 
   RegulatorHero, 
@@ -11,26 +12,28 @@ import {
   RegulatorRelatedContent,
   RegulatorRequirements,
   RegulatorBenefits,
-  RegulatorBrokers
+  RegulatorBrokers,
+  TopRegulatedBrokers
 } from '../../components/regulators';
 import ErrorDisplay from '../../components/common/ErrorDisplay.astro';
 
-export async function getStaticPaths() {
-  const slugs = await getAllRegulatorSlugs();
-  return slugs.map(slug => ({ params: { slug } }));
-}
-
 const { slug } = Astro.params;
 
-// Fetch the regulator data
+// Fetch the regulator data from the regulators API endpoint
 let regulatorData: RegulatorPage | null = null;
+let rawRegulatorData: Regulator | null = null;
 let error = null;
 
 try {
-  regulatorData = await getRegulatorData(slug);
-  if (!regulatorData) {
+  // Fetch from regulators API endpoint
+  rawRegulatorData = await getRegulatorBySlug(slug);
+  
+  if (!rawRegulatorData) {
     throw new Error(`Regulator data not found for slug: ${slug}`);
   }
+  
+  // Transform the data to the format expected by our components
+  regulatorData = transformRegulatorData(rawRegulatorData);
 } catch (err) {
   error = err;
   console.error(`Error fetching regulator data for ${slug}:`, err);
