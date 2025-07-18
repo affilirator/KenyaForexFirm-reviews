@@ -1,6 +1,7 @@
 ---
 // RichTextRenderer.astro - Handles rendering of rich text content with all edge cases
 import { Fragment } from 'astro/jsx-runtime';
+import { HTMLString } from 'astro/runtime/server';
 
 interface Props {
   content: any;
@@ -33,7 +34,7 @@ function renderNodes(nodes) {
       if (node.strikethrough) textContent = `<s>${textContent}</s>`;
       if (node.code) textContent = `<code class="px-1 py-0.5 bg-gray-100 rounded text-sm">${textContent}</code>`;
       
-      return <span set:html={textContent} />;
+      return <Fragment>{new HTMLString(textContent)}</Fragment>;
     }
     
     // Handle headings
