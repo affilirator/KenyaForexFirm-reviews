@@ -11,4 +11,5 @@ export { default as RegulatorRelatedContent } from './RegulatorRelatedContent.as
 export { default as RegulatorEEAT } from './RegulatorEEAT.astro';
 export { default as RegulatorBrokers } from './RegulatorBrokers.astro';
 export { default as RegulatorCard } from './RegulatorCard.astro';
+export { default as RegulatorPageTemplate } from './RegulatorPageTemplate.astro';
 export { default as RichTextRenderer } from './RichTextRenderer.astro';

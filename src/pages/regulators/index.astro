@@ -2,23 +2,20 @@
 import Layout from '../../layouts/Layout.astro';
 import { RegulatorCard } from '../../components/regulators';
 import type { Regulator } from '../../types/regulator';
+import { REGULATOR_GLOBALS } from '../../lib/regulatorGlobals';
 
-// In a real implementation, you would fetch this data from the API
-// For now, we'll use a static list as an example
-const regulators: Regulator[] = [
-  {
-    name: 'Australian Securities and Investments Commission',
-    shortName: 'ASIC',
-    country: 'Australia',
-    description: 'ASIC is Australia\'s corporate, markets and financial services regulator, responsible for maintaining market integrity and consumer protection in the financial sector.',
-    trustScore: 92,
-    maxLeverage: '1:30',
-    established: '1998',
-    website: 'https://asic.gov.au',
-    slug: 'asic-regulation',
-  },
-  // Add more regulators as needed
-];
+// Convert the regulator globals to the Regulator type
+const regulators: Regulator[] = REGULATOR_GLOBALS.map(reg => ({
+  name: `${reg.name} - ${reg.country} Financial Regulator`,
+  shortName: reg.name,
+  country: reg.country,
+  description: `${reg.name} is the financial regulator of ${reg.country}, responsible for overseeing forex brokers and ensuring market integrity.`,
+  trustScore: 85, // Default value
+  maxLeverage: 'Varies', // Default value
+  established: 'N/A', // Default value
+  website: '#',
+  slug: reg.slug,
+}));
 
 const title = 'Forex Regulators - Complete Guide to Forex Regulation';
 const description = 'Learn about the top forex regulators worldwide. Compare regulatory frameworks, requirements, and find regulated brokers.';

@@ -3,15 +3,15 @@ import { fetchRegulatorGlobal } from '../../lib/regulatorGlobals';
 import type { AsicRegulationGlobal } from '../../types/asicRegulation';
 import { RegulatorPageTemplate } from '../../components/regulators';
 
-// Fetch the ASIC regulation data
+// Fetch the BaFin regulation data
 let regulatorData: AsicRegulationGlobal | null = null;
 let error = null;
 
 try {
-  regulatorData = await fetchRegulatorGlobal('asic-regulation');
+  regulatorData = await fetchRegulatorGlobal('bafin-regulation');
 } catch (err) {
   error = err;
-  console.error('Error fetching ASIC regulation data:', err);
+  console.error('Error fetching BaFin regulation data:', err);
 }
 ---
 
