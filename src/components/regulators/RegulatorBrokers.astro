@@ -1,72 +1,58 @@
 ---
-import type { BrokerProps } from '../../types';
+// RegulatorBrokers.astro - Component for displaying brokers regulated by this authority
+import type { RegulatedBroker } from '../../types/regulator';
 
 interface Props {
-  brokers: BrokerProps[];
-  regulatorName: string;
+  sectionTitle: string;
+  sectionId: string;
+  brokers: RegulatedBroker[];
 }
 
-const { brokers, regulatorName } = Astro.props;
-
-// Filter brokers that are regulated by this regulator
-const filteredBrokers = brokers.filter(broker => 
-  broker.regulators?.includes(regulatorName) || 
-  broker.regulations?.includes(regulatorName)
-);
+const { sectionTitle, sectionId, brokers = [] } = Astro.props;
+const hasBrokers = brokers && brokers.length > 0;
 ---
 
-<div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden">
-  <div class="p-6">
-    <h2 class="text-xl font-bold text-white mb-4">Brokers Regulated by {regulatorName}</h2>
+<section id={sectionId} class="py-16 px-4 sm:px-6 lg:px-8 bg-neutral-100/50 scroll-mt-20 relative overflow-hidden">
+  <div class="absolute inset-0 bg-cyber-grid bg-[length:30px_30px] opacity-10"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-8 font-display">
+      {sectionTitle}
+    </h2>
     
-    {filteredBrokers.length > 0 ? (
-      <div class="space-y-4">
-        {filteredBrokers.map(broker => (
-          <a 
-            href={`/brokers/${broker.slug}`}
-            class="flex items-center gap-4 bg-neutral-700/20 p-3 rounded-lg hover:bg-neutral-700/30 transition-colors"
-          >
-            <div class="flex-shrink-0">
-              {typeof broker.logo === 'object' && broker.logo?.url ? (
-                <img 
-                  src={broker.logo.url} 
-                  alt={`${broker.brokerName} logo`} 
-                  class="w-10 h-10 object-contain bg-white rounded p-1"
-                />
-              ) : typeof broker.logo === 'string' ? (
-                <img 
-                  src={broker.logo} 
-                  alt={`${broker.brokerName} logo`} 
-                  class="w-10 h-10 object-contain bg-white rounded p-1"
-                />
-              ) : (
-                <div class="w-10 h-10 bg-neutral-700 rounded flex items-center justify-center">
-                  <span class="text-xs text-neutral-400">{broker.brokerName.substring(0, 2)}</span>
-                </div>
-              )}
-            </div>
-            
-            <div class="flex-grow">
-              <div class="font-medium text-white">{broker.brokerName}</div>
-              <div class="text-xs text-neutral-400">
-                {broker.minDeposit ? `Min Deposit: $${broker.minDeposit}` : ''}
-                {broker.minDeposit && broker.maxLeverage ? ' • ' : ''}
-                {broker.maxLeverage ? `Max Leverage: ${broker.maxLeverage}` : ''}
+    {hasBrokers ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {brokers.map((broker) => (
+          <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-md p-6 border border-neutral-200 hover:border-primary-500/30 hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-semibold text-neutral-900">
+                <a href={`/brokers/${broker.slug}`} class="hover:text-primary-600 transition-colors">
+                  {broker.brokerName}
+                </a>
+              </h3>
+              <div class="flex items-center bg-primary-500/10 px-3 py-1 rounded-full">
+                <span class="text-primary-600 font-bold">{broker.brokerRating}</span>
+                <span class="text-primary-600 ml-1">/10</span>
               </div>
             </div>
             
-            <div class="flex-shrink-0">
-              <div class="bg-primary-500/20 text-primary-400 px-2 py-1 rounded text-xs font-medium">
-                {broker.brokerRating.toFixed(1)}
-              </div>
-            </div>
-          </a>
+            <p class="text-neutral-700 mb-4 line-clamp-2">
+              {broker.title.replace(broker.brokerName, '').replace('Review -', '').trim()}
+            </p>
+            
+            <a 
+              href={`/brokers/${broker.slug}`}
+              class="inline-flex items-center text-primary-600 hover:text-primary-500 font-medium"
+            >
+              Read Review
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
         ))}
       </div>
     ) : (
-      <div class="text-center py-6 bg-neutral-800/30 rounded-lg">
-        <p class="text-neutral-400">No brokers found regulated by {regulatorName}</p>
-      </div>
+      <p class="text-neutral-500 italic">No regulated brokers available</p>
     )}
   </div>
-</div>
+</section>

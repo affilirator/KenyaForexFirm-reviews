@@ -1,130 +1,144 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Navigation from '../../components/Navigation.astro';
-import RegulatorDetail from '../../components/regulators/RegulatorDetail.astro';
-import RegulatorRequirements from '../../components/regulators/RegulatorRequirements.astro';
-import RegulatorBrokers from '../../components/regulators/RegulatorBrokers.astro';
-import SimilarRegulators from '../../components/regulators/SimilarRegulators.astro';
-import { site } from '../../data/site';
-import { getRegulators } from '~/lib/regulators-api';
-import { getReviews } from '~/lib/qs-esm';
-import { getAuthors } from '~/lib/api-service';
-import type { Regulator } from '../../types/regulator';
-import type { Author } from '../../types/author';
+import { getRegulatorData, getAllRegulatorSlugs } from '../../lib/regulatorData';
+import { generateRegulatorMetadata } from '../../lib/regulatorUtils';
+import type { RegulatorPage } from '../../types/regulator';
+import Layout from '../../layouts/Layout.astro';
+import { 
+  RegulatorHero, 
+  RegulatorSection, 
+  RegulatorFAQ, 
+  RegulatorConclusion, 
+  RegulatorRelatedContent,
+  RegulatorRequirements,
+  RegulatorBenefits
+} from '../../components/regulators';
+import ErrorDisplay from '../../components/common/ErrorDisplay.astro';
 
 export async function getStaticPaths() {
-  const regulatorsData = await getRegulators();
-  const regulators = regulatorsData?.docs || [];
-  
-  return regulators.map(regulator => ({
-    params: { slug: regulator.slug },
-    props: { regulator }
-  }));
+  const slugs = await getAllRegulatorSlugs();
+  return slugs.map(slug => ({ params: { slug } }));
 }
 
-interface Props {
-  regulator: Regulator;
-}
+const { slug } = Astro.params;
 
-const { regulator } = Astro.props;
+// Fetch the regulator data
+let regulatorData: RegulatorPage | null = null;
+let error = null;
 
-// Fetch all regulators for similar regulators component
-const regulatorsData = await getRegulators();
-
-// Fetch all brokers to filter those regulated by this regulator
-const brokersData = await getReviews();
-const brokers = brokersData?.docs || [];
-
-// Get author with regulation expertise for this page
-const authorsData = await getAuthors();
-const authors = authorsData?.docs || [];
-const regulationExperts = authors.filter(author => 
-  author.knowsAbout?.some(expertise => 
-    expertise.fieldName.toLowerCase().includes('regulation') || 
-    expertise.fieldName.toLowerCase().includes('regulatory')
-  )
-);
-const pageAuthor = regulationExperts.length > 0 ? regulationExperts[0] : (authors.length > 0 ? authors[0] : null);
-
-// Create schema data for SEO
-const schemaData = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": regulator.name,
-  "description": regulator.description,
-  "url": regulator.website,
-  "logo": regulator.logo?.url,
-  "foundingDate": regulator.established,
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": regulator.country
+try {
+  regulatorData = await getRegulatorData(slug);
+  if (!regulatorData) {
+    throw new Error(`Regulator data not found for slug: ${slug}`);
   }
-};
+} catch (err) {
+  error = err;
+  console.error(`Error fetching regulator data for ${slug}:`, err);
+}
+
+// Set page metadata
+const metadata = regulatorData ? generateRegulatorMetadata(regulatorData) : null;
+const pageTitle = metadata?.title || 'Regulator Information';
+const pageDescription = metadata?.description || 'Learn about this financial regulator';
 ---
 
-<BaseLayout
-  title={`${regulator.name} (${regulator.shortName}) - Regulatory Authority Profile`}
-  description={`Learn about ${regulator.name}, its regulatory framework, requirements for forex brokers, and how it protects traders in ${regulator.country}.`}
-  schemaData={schemaData}
-  author={pageAuthor}>
-  
-  <Navigation />
+<Layout title={pageTitle} description={pageDescription}>
+  <script src="/src/scripts/regulatorPage.js"></script>
+  {error && (
+    <ErrorDisplay 
+      title="Error Loading Regulator Data"
+      message="We encountered an error while loading the regulator information. Please try again later."
+      backLink={{ text: "View All Regulators", url: "/regulators" }}
+    />
+  )}
 
-  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-6">
-        <a href="/regulators" class="text-neutral-400 hover:text-primary-400 flex items-center gap-1 text-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-          Back to All Regulators
-        </a>
-      </div>
-    </div>
-  </section>
+  {regulatorData && (
+    <>
+      <!-- Hero Section -->
+      <RegulatorHero
+        heading={regulatorData.heroSection.heading}
+        subheading={regulatorData.heroSection.subheading}
+        introduction={regulatorData.heroSection.introduction}
+        heroImage={regulatorData.heroSection.heroImage}
+        showTableOfContents={true}
+      />
 
-  <section class="py-6 bg-gradient-to-b from-neutral-950 to-neutral-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <RegulatorDetail regulator={regulator} />
-    </div>
-  </section>
-
-  <section class="py-6 bg-neutral-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2">
-          <div class="grid grid-cols-1 gap-6">
-            <RegulatorRequirements regulator={regulator} />
-            <RegulatorBrokers brokers={brokers} regulatorName={regulator.shortName} />
-          </div>
-        </div>
-        <div>
-          <SimilarRegulators currentRegulator={regulator} allRegulators={regulatorsData?.docs || []} />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-12 bg-gradient-to-b from-neutral-900 to-neutral-950">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-white mb-6">Choosing a {regulator.shortName}-Regulated Broker</h2>
-      <div class="prose prose-invert max-w-none">
-        <p>
-          When selecting a forex broker regulated by {regulator.name}, consider the following factors to ensure you choose a reputable and suitable platform for your trading needs:
-        </p>
+      <!-- Main Content Sections -->
+      {regulatorData.sections.map((section) => {
+        // Check if this is a requirements section
+        if (section.sectionId === 'requirements') {
+          return (
+            <RegulatorRequirements
+              sectionTitle={section.sectionTitle}
+              sectionId={section.sectionId}
+              content={section.content}
+              // Add specific requirements data if available
+            />
+          );
+        }
         
-        <ul>
-          <li><strong>Verify Regulation Status</strong> - Always confirm the broker's regulatory status directly on the {regulator.shortName} website.</li>
-          <li><strong>Check Compliance History</strong> - Research if the broker has faced any regulatory actions or penalties.</li>
-          <li><strong>Understand Protection Measures</strong> - Learn about the specific investor protection schemes available under {regulator.shortName} regulation.</li>
-          <li><strong>Review Trading Conditions</strong> - Compare spreads, commissions, and leverage offered by different {regulator.shortName}-regulated brokers.</li>
-          <li><strong>Assess Platform Reliability</strong> - Test the broker's trading platform through a demo account before committing real funds.</li>
-        </ul>
+        // Check if this is a benefits section
+        if (section.sectionId === 'benefits') {
+          return (
+            <RegulatorBenefits
+              sectionTitle={section.sectionTitle}
+              sectionId={section.sectionId}
+              content={section.content}
+              benefitsList={section.keyPoints?.map(item => ({
+                title: item.point.split(':')[0] || item.point,
+                description: { root: { children: [{ children: [{ text: item.point.split(':')[1] || '' }], type: 'paragraph' }], type: 'root' } }
+              }))}
+            />
+          );
+        }
         
-        <p>
-          Remember that while regulation provides a layer of security, it's still important to conduct thorough research and choose a broker that aligns with your specific trading goals and risk tolerance.
-        </p>
-      </div>
-    </div>
-  </section>
-</BaseLayout>
+        // Default section rendering
+        return (
+          <RegulatorSection
+            sectionTitle={section.sectionTitle}
+            sectionId={section.sectionId}
+            content={section.content}
+            featuredImage={section.featuredImage}
+            imagePosition={section.imagePosition}
+            keyPoints={section.keyPoints}
+          />
+        );
+      })}
+
+      <!-- FAQ Section -->
+      {regulatorData.faqSection && (
+        <RegulatorFAQ
+          sectionTitle={regulatorData.faqSection.sectionTitle}
+          sectionId={regulatorData.faqSection.sectionId}
+          introduction={regulatorData.faqSection.introduction}
+          faqItems={regulatorData.faqSection.faqItems}
+        />
+      )}
+
+      <!-- Conclusion Section -->
+      {regulatorData.conclusionSection && (
+        <RegulatorConclusion
+          sectionTitle={regulatorData.conclusionSection.sectionTitle}
+          sectionId={regulatorData.conclusionSection.sectionId}
+          content={regulatorData.conclusionSection.content}
+        />
+      )}
+
+      <!-- Regulated Brokers Section -->
+      {regulatorData.relationships?.regulatedBrokers && regulatorData.relationships.regulatedBrokers.length > 0 && (
+        <RegulatorBrokers
+          sectionTitle="Regulated Brokers"
+          sectionId="regulated-brokers"
+          brokers={regulatorData.relationships.regulatedBrokers}
+        />
+      )}
+
+      <!-- Related Content -->
+      {regulatorData.relatedContent && regulatorData.relatedContent.articles.length > 0 && (
+        <RegulatorRelatedContent
+          sectionTitle={regulatorData.relatedContent.sectionTitle}
+          articles={regulatorData.relatedContent.articles}
+        />
+      )}
+    </>
+  )}
+</Layout>

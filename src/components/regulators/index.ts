@@ -9,4 +9,6 @@ export { default as RegulatorFAQ } from './RegulatorFAQ.astro';
 export { default as RegulatorConclusion } from './RegulatorConclusion.astro';
 export { default as RegulatorRelatedContent } from './RegulatorRelatedContent.astro';
 export { default as RegulatorEEAT } from './RegulatorEEAT.astro';
+export { default as RegulatorBrokers } from './RegulatorBrokers.astro';
+export { default as RegulatorCard } from './RegulatorCard.astro';
 export { default as RichTextRenderer } from './RichTextRenderer.astro';
