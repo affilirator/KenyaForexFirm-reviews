@@ -26,26 +26,31 @@ const {
 const hasKeyPoints = keyPoints && keyPoints.length > 0;
 ---
 
-<section id={sectionId} class="py-16 px-4 sm:px-6 lg:px-8 scroll-mt-20">
-  <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-10 font-display">
-      {sectionTitle}
+<section id={sectionId} class="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20 relative">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.03),transparent_80%)]">
+  </div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-12 font-display tracking-tight relative inline-block">
+      <span class="relative z-10">{sectionTitle}</span>
+      <span class="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full"></span>
     </h2>
     
     {/* Image at the top */}
     {featuredImage && imagePosition === 'top' && (
-      <div class="mb-10 relative group">
-        <div class="absolute -inset-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-lg blur-md opacity-75 group-hover:opacity-100 transition duration-300"></div>
+      <div class="mb-12 relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-xl blur-md opacity-75 group-hover:opacity-100 transition duration-300"></div>
+        <div class="absolute -inset-0.5 bg-white rounded-xl"></div>
         <img 
           src={featuredImage.url} 
           alt={featuredImage.alt || sectionTitle} 
-          class="relative rounded-lg shadow-lg w-full h-auto object-cover max-h-96 border border-neutral-200"
+          class="relative rounded-lg shadow-xl w-full h-auto object-cover max-h-96 border border-neutral-200 group-hover:scale-[1.01] transition-transform duration-300 z-10"
         />
+        <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-primary-500/30 to-accent-500/30 rounded-full opacity-30 blur-xl"></div>
       </div>
     )}
     
     <div class={`
-      ${featuredImage && (imagePosition === 'left' || imagePosition === 'right') ? 'flex flex-col md:flex-row gap-10' : ''}
+      ${featuredImage && (imagePosition === 'left' || imagePosition === 'right') ? 'flex flex-col md:flex-row gap-12' : ''}
       ${featuredImage && imagePosition === 'left' ? 'md:flex-row-reverse' : ''}
     `}>
       {/* Content with side image */}
@@ -53,19 +58,25 @@ const hasKeyPoints = keyPoints && keyPoints.length > 0;
         ${featuredImage && (imagePosition === 'left' || imagePosition === 'right') ? 'md:w-2/3' : 'w-full'}
         prose prose-lg max-w-none prose-headings:font-display prose-headings:text-neutral-900 prose-p:text-neutral-800
         prose-a:text-primary-600 prose-a:no-underline hover:prose-a:text-primary-500 hover:prose-a:underline
-        prose-strong:text-neutral-900
+        prose-strong:text-neutral-900 prose-headings:tracking-tight
       `}>
         <RichTextRenderer content={content} />
         
         {hasKeyPoints && (
-          <div class="mt-10 bg-primary-400/10 p-6 rounded-xl border-l-4 border-primary-500 shadow-sm">
-            <h3 class="text-xl font-semibold mb-4 text-neutral-900 font-display">Key Points</h3>
-            <ul class="space-y-3">
+          <div class="mt-12 bg-gradient-to-br from-primary-400/10 to-primary-400/5 p-7 rounded-xl border-l-4 border-primary-500 shadow-md relative overflow-hidden group hover:shadow-lg transition-shadow duration-300">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(56,189,248,0.1),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <h3 class="text-xl font-semibold mb-5 text-neutral-900 font-display flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Key Points
+            </h3>
+            <ul class="space-y-4 relative z-10">
               {keyPoints.map((item) => (
-                <li class="flex items-start">
-                  <span class="text-primary-600 mr-2 mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                <li class="flex items-start group/item">
+                  <span class="text-primary-600 mr-3 mt-1 flex-shrink-0 bg-primary-500/10 rounded-full p-1 group-hover/item:bg-primary-500/20 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                     </svg>
                   </span>
                   <span class="text-neutral-800">{item.point}</span>
@@ -79,25 +90,29 @@ const hasKeyPoints = keyPoints && keyPoints.length > 0;
       {/* Side image */}
       {featuredImage && (imagePosition === 'left' || imagePosition === 'right') && (
         <div class="md:w-1/3 relative group">
-          <div class="absolute -inset-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-lg blur-md opacity-75 group-hover:opacity-100 transition duration-300"></div>
+          <div class="absolute -inset-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-xl blur-md opacity-75 group-hover:opacity-100 transition duration-300"></div>
+          <div class="absolute -inset-0.5 bg-white rounded-xl"></div>
           <img 
             src={featuredImage.url} 
             alt={featuredImage.alt || sectionTitle} 
-            class="relative rounded-lg shadow-lg w-full h-auto object-cover sticky top-24 border border-neutral-200"
+            class="relative rounded-lg shadow-xl w-full h-auto object-cover sticky top-24 border border-neutral-200 group-hover:scale-[1.01] transition-transform duration-300 z-10"
           />
+          <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-primary-500/30 to-accent-500/30 rounded-full opacity-30 blur-xl"></div>
         </div>
       )}
     </div>
     
     {/* Image at the bottom */}
     {featuredImage && imagePosition === 'bottom' && (
-      <div class="mt-10 relative group">
-        <div class="absolute -inset-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-lg blur-md opacity-75 group-hover:opacity-100 transition duration-300"></div>
+      <div class="mt-12 relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-xl blur-md opacity-75 group-hover:opacity-100 transition duration-300"></div>
+        <div class="absolute -inset-0.5 bg-white rounded-xl"></div>
         <img 
           src={featuredImage.url} 
           alt={featuredImage.alt || sectionTitle} 
-          class="relative rounded-lg shadow-lg w-full h-auto object-cover max-h-96 border border-neutral-200"
+          class="relative rounded-lg shadow-xl w-full h-auto object-cover max-h-96 border border-neutral-200 group-hover:scale-[1.01] transition-transform duration-300 z-10"
         />
+        <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-primary-500/30 to-accent-500/30 rounded-full opacity-30 blur-xl"></div>
       </div>
     )}
   </div>

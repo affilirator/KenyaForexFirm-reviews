@@ -42,16 +42,16 @@ function renderNodes(nodes) {
     }
     
     // Handle headings
-    if (node.type === 'h1') return { tag: 'h1', attrs: { class: 'text-3xl font-bold mt-6 mb-4' }, content: renderNodes(node.children) };
-    if (node.type === 'h2') return { tag: 'h2', attrs: { class: 'text-2xl font-bold mt-6 mb-3' }, content: renderNodes(node.children) };
-    if (node.type === 'h3') return { tag: 'h3', attrs: { class: 'text-xl font-bold mt-5 mb-2' }, content: renderNodes(node.children) };
-    if (node.type === 'h4') return { tag: 'h4', attrs: { class: 'text-lg font-bold mt-4 mb-2' }, content: renderNodes(node.children) };
-    if (node.type === 'h5') return { tag: 'h5', attrs: { class: 'text-base font-bold mt-3 mb-1' }, content: renderNodes(node.children) };
-    if (node.type === 'h6') return { tag: 'h6', attrs: { class: 'text-sm font-bold mt-3 mb-1' }, content: renderNodes(node.children) };
+    if (node.type === 'h1') return { tag: 'h1', attrs: { class: 'text-3xl font-bold mt-8 mb-5 tracking-tight relative inline-block' }, content: renderNodes(node.children) };
+    if (node.type === 'h2') return { tag: 'h2', attrs: { class: 'text-2xl font-bold mt-7 mb-4 tracking-tight relative inline-block' }, content: renderNodes(node.children) };
+    if (node.type === 'h3') return { tag: 'h3', attrs: { class: 'text-xl font-bold mt-6 mb-3 tracking-tight relative inline-block' }, content: renderNodes(node.children) };
+    if (node.type === 'h4') return { tag: 'h4', attrs: { class: 'text-lg font-bold mt-5 mb-3 tracking-tight relative inline-block' }, content: renderNodes(node.children) };
+    if (node.type === 'h5') return { tag: 'h5', attrs: { class: 'text-base font-bold mt-4 mb-2 tracking-tight relative inline-block' }, content: renderNodes(node.children) };
+    if (node.type === 'h6') return { tag: 'h6', attrs: { class: 'text-sm font-bold mt-4 mb-2 tracking-tight relative inline-block' }, content: renderNodes(node.children) };
     
     // Handle paragraphs
     if (node.type === 'paragraph') {
-      return { tag: 'p', attrs: { class: 'my-4' }, content: renderNodes(node.children) };
+      return { tag: 'p', attrs: { class: 'my-4 leading-relaxed' }, content: renderNodes(node.children) };
     }
     
     // Handle Lexical paragraph format
@@ -61,13 +61,39 @@ function renderNodes(nodes) {
     
     // Handle lists
     if (node.type === 'ul') {
-      return { tag: 'ul', attrs: { class: 'list-disc pl-6 my-4' }, content: renderNodes(node.children) };
+      return { tag: 'ul', attrs: { class: 'list-none pl-0 my-5 space-y-2' }, content: renderNodes(node.children) };
     }
     if (node.type === 'ol') {
-      return { tag: 'ol', attrs: { class: 'list-decimal pl-6 my-4' }, content: renderNodes(node.children) };
+      return { tag: 'ol', attrs: { class: 'list-decimal pl-6 my-5 space-y-2' }, content: renderNodes(node.children) };
     }
     if (node.type === 'li') {
-      return { tag: 'li', attrs: { class: 'my-1' }, content: renderNodes(node.children) };
+      if (node.parent && node.parent.type === 'ul') {
+        return { 
+          tag: 'li', 
+          attrs: { class: 'flex items-start my-1.5 group' }, 
+          content: [
+            {
+              tag: 'span',
+              attrs: { class: 'text-primary-600 mr-2 mt-1.5 flex-shrink-0 bg-primary-500/10 rounded-full p-0.5 group-hover:bg-primary-500/20 transition-colors duration-200' },
+              content: [
+                {
+                  tag: 'svg',
+                  attrs: { xmlns: 'http://www.w3.org/2000/svg', class: 'h-3 w-3', viewBox: '0 0 20 20', fill: 'currentColor' },
+                  content: [
+                    {
+                      tag: 'path',
+                      attrs: { 'fill-rule': 'evenodd', d: 'M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z', 'clip-rule': 'evenodd' }
+                    }
+                  ]
+                }
+              ]
+            },
+            ...renderNodes(node.children)
+          ] 
+        };
+      } else {
+        return { tag: 'li', attrs: { class: 'my-1.5 pl-2' }, content: renderNodes(node.children) };
+      }
     }
     
     // Handle links
@@ -79,11 +105,21 @@ function renderNodes(nodes) {
           tag: 'a',
           attrs: {
             href: node.url,
-            class: 'text-blue-600 hover:underline',
+            class: 'text-primary-600 font-medium relative inline-block group',
             target: node.newTab ? '_blank' : undefined,
             rel: rel || undefined
           },
-          content: renderNodes(node.children)
+          content: [
+            {
+              tag: 'span',
+              attrs: { class: 'relative z-10' },
+              content: renderNodes(node.children)
+            },
+            {
+              tag: 'span',
+              attrs: { class: 'absolute bottom-0 left-0 w-full h-0.5 bg-primary-500/30 group-hover:h-full group-hover:bg-primary-500/10 transition-all duration-200 -z-10' }
+            }
+          ]
         };
       }
       
@@ -93,10 +129,20 @@ function renderNodes(nodes) {
           tag: 'a',
           attrs: {
             href: node.fields.url,
-            class: 'text-blue-600 hover:underline',
+            class: 'text-primary-600 font-medium relative inline-block group',
             target: node.fields.newTab ? '_blank' : undefined
           },
-          content: renderNodes(node.children)
+          content: [
+            {
+              tag: 'span',
+              attrs: { class: 'relative z-10' },
+              content: renderNodes(node.children)
+            },
+            {
+              tag: 'span',
+              attrs: { class: 'absolute bottom-0 left-0 w-full h-0.5 bg-primary-500/30 group-hover:h-full group-hover:bg-primary-500/10 transition-all duration-200 -z-10' }
+            }
+          ]
         };
       }
     }
@@ -105,8 +151,26 @@ function renderNodes(nodes) {
     if (node.type === 'blockquote') {
       return {
         tag: 'blockquote',
-        attrs: { class: 'border-l-4 border-gray-300 pl-4 py-2 my-4 italic' },
-        content: renderNodes(node.children)
+        attrs: { class: 'border-l-4 border-primary-500/50 pl-5 py-3 my-6 italic bg-primary-500/5 rounded-r-lg relative group' },
+        content: [
+          {
+            tag: 'div',
+            attrs: { class: 'absolute top-0 right-0 opacity-10 text-primary-500 transform -translate-y-1/4 translate-x-1/4' },
+            content: [
+              {
+                tag: 'svg',
+                attrs: { xmlns: 'http://www.w3.org/2000/svg', width: '48', height: '48', fill: 'currentColor', viewBox: '0 0 24 24' },
+                content: [
+                  {
+                    tag: 'path',
+                    attrs: { d: 'M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z' }
+                  }
+                ]
+              }
+            ]
+          },
+          ...renderNodes(node.children)
+        ]
       };
     }
     
@@ -123,14 +187,22 @@ function renderNodes(nodes) {
             const tag = rowIndex === 0 ? 'th' : 'td';
             return {
               tag,
-              attrs: { class: 'px-4 py-2 border border-gray-300 text-left' },
+              attrs: { 
+                class: rowIndex === 0 
+                  ? 'px-5 py-3 border-b-2 border-primary-500/30 bg-primary-500/10 text-left text-sm font-semibold text-neutral-900 tracking-wider' 
+                  : 'px-5 py-3 border-b border-neutral-200 text-left text-sm'
+              },
               content: renderNodes(cell.children)
             };
           }) || [];
           
           return {
             tag: 'tr',
-            attrs: { class: rowIndex === 0 ? 'bg-gray-100' : 'border-t border-gray-300' },
+            attrs: { 
+              class: rowIndex === 0 
+                ? '' 
+                : 'hover:bg-neutral-50 transition-colors duration-150'
+            },
             content: cells
           };
         }
@@ -139,10 +211,10 @@ function renderNodes(nodes) {
       
       return {
         tag: 'div',
-        attrs: { class: 'overflow-x-auto my-6' },
+        attrs: { class: 'overflow-x-auto my-8 rounded-lg shadow-md border border-neutral-200' },
         content: [{
           tag: 'table',
-          attrs: { class: 'min-w-full border-collapse border border-gray-300' },
+          attrs: { class: 'min-w-full divide-y divide-neutral-200 bg-white' },
           content: rows
         }]
       };
@@ -153,14 +225,22 @@ function renderNodes(nodes) {
       const { url, alt, width, height } = node.value;
       const caption = node.value.caption ? {
         tag: 'figcaption',
-        attrs: { class: 'text-sm text-gray-600 mt-2 text-center' },
+        attrs: { class: 'text-sm text-neutral-600 mt-3 text-center italic' },
         content: [node.value.caption]
       } : null;
       
       return {
         tag: 'figure',
-        attrs: { class: 'my-6' },
+        attrs: { class: 'my-8 group relative' },
         content: [
+          {
+            tag: 'div',
+            attrs: { class: 'absolute -inset-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-xl blur-md opacity-75 group-hover:opacity-100 transition duration-300' }
+          },
+          {
+            tag: 'div',
+            attrs: { class: 'absolute -inset-0.5 bg-white rounded-xl' }
+          },
           {
             tag: 'img',
             attrs: {
@@ -168,8 +248,12 @@ function renderNodes(nodes) {
               alt: alt || '',
               width,
               height,
-              class: 'max-w-full h-auto rounded'
+              class: 'relative max-w-full h-auto rounded-lg shadow-lg border border-neutral-200 group-hover:scale-[1.01] transition-transform duration-300 z-10'
             }
+          },
+          {
+            tag: 'div',
+            attrs: { class: 'absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-primary-500/30 to-accent-500/30 rounded-full opacity-30 blur-xl' }
           },
           caption
         ].filter(Boolean)
@@ -180,33 +264,52 @@ function renderNodes(nodes) {
     if (node.type === 'banner' && node.value) {
       const title = node.value.title ? {
         tag: 'h4',
-        attrs: { class: 'font-bold' },
-        content: [node.value.title]
+        attrs: { class: 'font-bold text-lg flex items-center' },
+        content: [
+          {
+            tag: 'svg',
+            attrs: { xmlns: 'http://www.w3.org/2000/svg', class: 'h-5 w-5 mr-2 text-primary-600', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor' },
+            content: [
+              {
+                tag: 'path',
+                attrs: { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' }
+              }
+            ]
+          },
+          node.value.title
+        ]
       } : null;
       
       const content = node.value.content ? {
         tag: 'div',
-        attrs: { class: 'mt-2' },
+        attrs: { class: 'mt-3' },
         content: renderNodes(node.value.content)
       } : null;
       
       return {
         tag: 'div',
-        attrs: { class: 'bg-blue-50 border-l-4 border-blue-500 p-4 my-6' },
-        content: [title, content].filter(Boolean)
+        attrs: { class: 'bg-gradient-to-br from-primary-500/10 to-primary-500/5 border-l-4 border-primary-500 p-5 my-8 rounded-r-lg shadow-md relative group overflow-hidden' },
+        content: [
+          {
+            tag: 'div',
+            attrs: { class: 'absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(56,189,248,0.1),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300' }
+          },
+          title, 
+          content
+        ].filter(Boolean)
       };
     }
     
     if (node.type === 'callToAction' && node.value) {
       const heading = node.value.heading ? {
         tag: 'h4',
-        attrs: { class: 'font-bold text-xl mb-3' },
+        attrs: { class: 'font-bold text-2xl mb-4 tracking-tight text-neutral-900' },
         content: [node.value.heading]
       } : null;
       
       const text = node.value.text ? {
         tag: 'p',
-        attrs: { class: 'mb-4' },
+        attrs: { class: 'mb-6 text-lg text-neutral-700 max-w-2xl mx-auto' },
         content: [node.value.text]
       } : null;
       
@@ -214,41 +317,78 @@ function renderNodes(nodes) {
         tag: 'a',
         attrs: {
           href: node.value.buttonLink,
-          class: 'inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700'
+          class: 'inline-block bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white px-8 py-3 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5'
         },
         content: [node.value.buttonLabel]
       } : null;
       
       return {
         tag: 'div',
-        attrs: { class: 'bg-gray-100 p-6 rounded-lg my-6 text-center' },
-        content: [heading, text, button].filter(Boolean)
+        attrs: { class: 'bg-gradient-to-br from-neutral-50 to-primary-50 p-8 rounded-xl my-8 text-center shadow-lg border border-neutral-200 relative overflow-hidden group' },
+        content: [
+          {
+            tag: 'div',
+            attrs: { class: 'absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(56,189,248,0.15),transparent_70%)] opacity-70' }
+          },
+          {
+            tag: 'div',
+            attrs: { class: 'absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500' }
+          },
+          {
+            tag: 'div',
+            attrs: { class: 'relative z-10' },
+            content: [heading, text, button].filter(Boolean)
+          }
+        ]
       };
     }
     
     if (node.type === 'testimonialQuote' && node.value) {
       const quote = node.value.quote ? {
         tag: 'p',
-        attrs: { class: 'italic text-lg mb-4' },
-        content: [`"${node.value.quote}"`]
+        attrs: { class: 'italic text-xl mb-6 leading-relaxed text-neutral-800 relative z-10' },
+        content: [
+          {
+            tag: 'span',
+            attrs: { class: 'text-primary-500 text-4xl absolute -top-6 -left-2 opacity-30 font-serif' },
+            content: ['❝']
+          },
+          `${node.value.quote}`,
+          {
+            tag: 'span',
+            attrs: { class: 'text-primary-500 text-4xl absolute -bottom-10 -right-2 opacity-30 font-serif' },
+            content: ['❞']
+          }
+        ]
       } : null;
       
       const author = node.value.author ? {
         tag: 'p',
-        attrs: { class: 'font-bold text-right' },
+        attrs: { class: 'font-bold text-right text-neutral-900' },
         content: [`— ${node.value.author}`]
       } : null;
       
       const title = node.value.title ? {
         tag: 'p',
-        attrs: { class: 'text-sm text-gray-600 text-right' },
+        attrs: { class: 'text-sm text-neutral-600 text-right' },
         content: [node.value.title]
       } : null;
       
       return {
         tag: 'div',
-        attrs: { class: 'bg-gray-50 p-6 rounded-lg my-6 border-l-4 border-blue-500' },
-        content: [quote, author, title].filter(Boolean)
+        attrs: { class: 'bg-gradient-to-br from-neutral-50 to-primary-50 p-8 rounded-xl my-8 border-l-4 border-primary-500 shadow-lg relative group overflow-hidden' },
+        content: [
+          {
+            tag: 'div',
+            attrs: { class: 'absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(56,189,248,0.1),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300' }
+          },
+          quote, 
+          {
+            tag: 'div',
+            attrs: { class: 'relative z-10' },
+            content: [author, title].filter(Boolean)
+          }
+        ].filter(Boolean)
       };
     }
     
@@ -290,6 +430,6 @@ function renderNodeObject(node) {
 ---
 
 <Fragment set:html={isEmpty(content) ? 
-  `<div class="rich-text-empty ${className}">No content available</div>` : 
+  `<div class="rich-text-empty ${className} text-neutral-500 italic p-4 border border-dashed border-neutral-300 rounded-lg text-center">No content available</div>` : 
   `<div class="rich-text ${className}">${renderNodes(content).map(renderNodeObject).join('')}</div>`
 } />

@@ -15,28 +15,36 @@ interface Props {
 const { sectionTitle, sectionId, content, comparisonTable } = Astro.props;
 ---
 
-<section id={sectionId} class="py-16 px-4 sm:px-6 lg:px-8 scroll-mt-20">
-  <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-8 font-display">
-      {sectionTitle}
+<section id={sectionId} class="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20 relative">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.03),transparent_80%)]"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-10 font-display tracking-tight relative inline-block">
+      <span class="relative z-10">{sectionTitle}</span>
+      <span class="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full"></span>
     </h2>
     
-    <div class="prose prose-lg max-w-none mb-10 text-neutral-800">
+    <div class="prose prose-lg max-w-none mb-12 text-neutral-800">
       <RichTextRenderer content={content} />
     </div>
     
     {comparisonTable && (
-      <div class="mt-10 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden border border-neutral-200">
+      <div class="mt-12 bg-white/95 backdrop-blur-md rounded-xl shadow-xl overflow-hidden border border-neutral-200 hover:border-primary-500/30 transition-colors duration-300 group relative">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(56,189,248,0.05),transparent_60%)]"></div>
+        
         {comparisonTable.tableTitle && (
-          <div class="bg-gradient-to-r from-primary-500/10 to-accent-500/10 px-6 py-5 border-b border-neutral-200">
-            <h3 class="text-xl font-semibold text-neutral-900 font-display">
+          <div class="bg-gradient-to-r from-primary-500/15 to-accent-500/15 px-7 py-5 border-b border-neutral-200 relative z-10">
+            <h3 class="text-xl font-semibold text-neutral-900 font-display tracking-tight flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
               {comparisonTable.tableTitle}
             </h3>
           </div>
         )}
         
-        <div class="p-6 overflow-x-auto">
-          <div class="prose prose-lg max-w-none prose-table:w-full prose-table:border-collapse prose-th:bg-neutral-100 prose-th:text-neutral-900 prose-th:p-3 prose-td:p-3 prose-td:border prose-td:border-neutral-200">
+        <div class="p-7 overflow-x-auto relative z-10">
+          <div class="prose prose-lg max-w-none prose-table:w-full prose-table:border-collapse prose-th:bg-primary-500/10 prose-th:text-neutral-900 prose-th:p-4 prose-th:font-semibold prose-td:p-4 prose-td:border prose-td:border-neutral-200 prose-tr:hover:bg-neutral-50 prose-tr:transition-colors prose-tr:duration-150">
             <RichTextRenderer content={comparisonTable.tableContent} />
           </div>
         </div>

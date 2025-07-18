@@ -11,16 +11,32 @@ interface Props {
 const { sectionTitle, sectionId, content } = Astro.props;
 ---
 
-<section id={sectionId} class="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary-400/5 to-accent-400/5 scroll-mt-20 relative overflow-hidden">
-  <div class="absolute inset-0 bg-cyber-grid bg-[length:30px_30px] opacity-10"></div>
+<section id={sectionId} class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary-400/10 to-accent-400/10 scroll-mt-20 relative overflow-hidden">
+  <div class="absolute inset-0 bg-cyber-grid bg-[length:30px_30px] opacity-15"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(56,189,248,0.15),transparent_50%)]"></div>
   <div class="max-w-7xl mx-auto relative z-10">
-    <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-neutral-200">
-      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-8 font-display">
-        {sectionTitle}
-      </h2>
+    <div class="bg-white/90 backdrop-blur-md rounded-xl shadow-xl p-10 border border-neutral-200 hover:border-primary-500/30 transition-all duration-300 group relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(56,189,248,0.07),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       
-      <div class="prose prose-lg max-w-none text-neutral-800 prose-headings:font-display prose-headings:text-neutral-900 prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline">
-        <RichTextRenderer content={content} />
+      <div class="relative z-10">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-8 font-display tracking-tight relative inline-block">
+          <span class="relative z-10">{sectionTitle}</span>
+          <span class="absolute bottom-0 left-0 w-full h-3 bg-primary-400/20 -z-10 transform -rotate-1"></span>
+        </h2>
+        
+        <div class="prose prose-lg max-w-none text-neutral-800 prose-headings:font-display prose-headings:text-neutral-900 prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline prose-headings:tracking-tight">
+          <RichTextRenderer content={content} />
+        </div>
+        
+        <div class="mt-8 pt-8 border-t border-neutral-200">
+          <div class="flex items-center text-neutral-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm">This conclusion is based on our research and analysis. Always conduct your own due diligence before making financial decisions.</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
