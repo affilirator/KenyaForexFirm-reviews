@@ -19,195 +19,251 @@ function isEmpty(content) {
 
 // Helper function to render nodes recursively
 function renderNodes(nodes) {
-  if (!nodes || !Array.isArray(nodes)) return null;
+  if (!nodes || !Array.isArray(nodes)) return [];
   
   return nodes.map((node, i) => {
     // Handle text nodes
     if (node.text) {
-      // Handle text formatting directly with JSX instead of HTML strings
       let content = node.text;
       
-      // Apply nested formatting
-      if (node.code) {
-        return <code class="px-1 py-0.5 bg-gray-100 rounded text-sm">{content}</code>;
-      }
-      if (node.bold && node.italic) {
-        return <strong><em>{content}</em></strong>;
-      }
-      if (node.bold && node.underline) {
-        return <strong><u>{content}</u></strong>;
-      }
-      if (node.italic && node.underline) {
-        return <em><u>{content}</u></em>;
-      }
-      if (node.bold) {
-        return <strong>{content}</strong>;
-      }
-      if (node.italic) {
-        return <em>{content}</em>;
-      }
-      if (node.underline) {
-        return <u>{content}</u>;
-      }
-      if (node.strikethrough) {
-        return <s>{content}</s>;
-      }
+      // Format text without JSX in the frontmatter
+      if (node.bold) content = `**${content}**`;
+      if (node.italic) content = `*${content}*`;
+      if (node.underline) content = `<u>${content}</u>`;
+      if (node.strikethrough) content = `~~${content}~~`;
+      if (node.code) content = `<code class="px-1 py-0.5 bg-gray-100 rounded text-sm">${content}</code>`;
       
-      return <Fragment>{content}</Fragment>;
+      return content;
     }
     
     // Handle headings
-    if (node.type === 'h1') return <h1 class="text-3xl font-bold mt-6 mb-4">{renderNodes(node.children)}</h1>;
-    if (node.type === 'h2') return <h2 class="text-2xl font-bold mt-6 mb-3">{renderNodes(node.children)}</h2>;
-    if (node.type === 'h3') return <h3 class="text-xl font-bold mt-5 mb-2">{renderNodes(node.children)}</h3>;
-    if (node.type === 'h4') return <h4 class="text-lg font-bold mt-4 mb-2">{renderNodes(node.children)}</h4>;
-    if (node.type === 'h5') return <h5 class="text-base font-bold mt-3 mb-1">{renderNodes(node.children)}</h5>;
-    if (node.type === 'h6') return <h6 class="text-sm font-bold mt-3 mb-1">{renderNodes(node.children)}</h6>;
+    if (node.type === 'h1') return { tag: 'h1', attrs: { class: 'text-3xl font-bold mt-6 mb-4' }, content: renderNodes(node.children) };
+    if (node.type === 'h2') return { tag: 'h2', attrs: { class: 'text-2xl font-bold mt-6 mb-3' }, content: renderNodes(node.children) };
+    if (node.type === 'h3') return { tag: 'h3', attrs: { class: 'text-xl font-bold mt-5 mb-2' }, content: renderNodes(node.children) };
+    if (node.type === 'h4') return { tag: 'h4', attrs: { class: 'text-lg font-bold mt-4 mb-2' }, content: renderNodes(node.children) };
+    if (node.type === 'h5') return { tag: 'h5', attrs: { class: 'text-base font-bold mt-3 mb-1' }, content: renderNodes(node.children) };
+    if (node.type === 'h6') return { tag: 'h6', attrs: { class: 'text-sm font-bold mt-3 mb-1' }, content: renderNodes(node.children) };
     
     // Handle paragraphs
     if (node.type === 'paragraph') {
-      return <p class="my-4">{renderNodes(node.children)}</p>;
+      return { tag: 'p', attrs: { class: 'my-4' }, content: renderNodes(node.children) };
     }
     
     // Handle lists
     if (node.type === 'ul') {
-      return <ul class="list-disc pl-6 my-4">{renderNodes(node.children)}</ul>;
+      return { tag: 'ul', attrs: { class: 'list-disc pl-6 my-4' }, content: renderNodes(node.children) };
     }
     if (node.type === 'ol') {
-      return <ol class="list-decimal pl-6 my-4">{renderNodes(node.children)}</ol>;
+      return { tag: 'ol', attrs: { class: 'list-decimal pl-6 my-4' }, content: renderNodes(node.children) };
     }
     if (node.type === 'li') {
-      return <li class="my-1">{renderNodes(node.children)}</li>;
+      return { tag: 'li', attrs: { class: 'my-1' }, content: renderNodes(node.children) };
     }
     
     // Handle links
     if (node.type === 'link') {
       const rel = node.fields?.rel ? node.fields.rel.join(' ') : '';
-      return (
-        <a 
-          href={node.url} 
-          class="text-blue-600 hover:underline" 
-          target={node.newTab ? "_blank" : undefined}
-          rel={rel || undefined}
-        >
-          {renderNodes(node.children)}
-        </a>
-      );
+      return {
+        tag: 'a',
+        attrs: {
+          href: node.url,
+          class: 'text-blue-600 hover:underline',
+          target: node.newTab ? '_blank' : undefined,
+          rel: rel || undefined
+        },
+        content: renderNodes(node.children)
+      };
     }
     
     // Handle blockquotes
     if (node.type === 'blockquote') {
-      return (
-        <blockquote class="border-l-4 border-gray-300 pl-4 py-2 my-4 italic">
-          {renderNodes(node.children)}
-        </blockquote>
-      );
+      return {
+        tag: 'blockquote',
+        attrs: { class: 'border-l-4 border-gray-300 pl-4 py-2 my-4 italic' },
+        content: renderNodes(node.children)
+      };
     }
     
     // Handle horizontal rule
     if (node.type === 'hr') {
-      return <hr class="my-6 border-t border-gray-300" />;
+      return { tag: 'hr', attrs: { class: 'my-6 border-t border-gray-300' } };
     }
     
     // Handle tables
     if (node.type === 'table') {
-      return (
-        <div class="overflow-x-auto my-6">
-          <table class="min-w-full border-collapse border border-gray-300">
-            {node.children && node.children.map((row, rowIndex) => {
-              if (row.type === 'table-row') {
-                return (
-                  <tr class={rowIndex === 0 ? 'bg-gray-100' : 'border-t border-gray-300'}>
-                    {row.children && row.children.map((cell, cellIndex) => {
-                      const Tag = rowIndex === 0 ? 'th' : 'td';
-                      return (
-                        <Tag class="px-4 py-2 border border-gray-300 text-left">
-                          {renderNodes(cell.children)}
-                        </Tag>
-                      );
-                    })}
-                  </tr>
-                );
-              }
-              return null;
-            })}
-          </table>
-        </div>
-      );
+      const rows = node.children?.map((row, rowIndex) => {
+        if (row.type === 'table-row') {
+          const cells = row.children?.map((cell, cellIndex) => {
+            const tag = rowIndex === 0 ? 'th' : 'td';
+            return {
+              tag,
+              attrs: { class: 'px-4 py-2 border border-gray-300 text-left' },
+              content: renderNodes(cell.children)
+            };
+          }) || [];
+          
+          return {
+            tag: 'tr',
+            attrs: { class: rowIndex === 0 ? 'bg-gray-100' : 'border-t border-gray-300' },
+            content: cells
+          };
+        }
+        return null;
+      }).filter(Boolean) || [];
+      
+      return {
+        tag: 'div',
+        attrs: { class: 'overflow-x-auto my-6' },
+        content: [{
+          tag: 'table',
+          attrs: { class: 'min-w-full border-collapse border border-gray-300' },
+          content: rows
+        }]
+      };
     }
     
     // Handle upload blocks (images)
     if (node.type === 'upload' && node.value) {
       const { url, alt, width, height } = node.value;
-      return (
-        <figure class="my-6">
-          <img 
-            src={url} 
-            alt={alt || ''} 
-            width={width} 
-            height={height}
-            class="max-w-full h-auto rounded"
-          />
-          {node.value.caption && (
-            <figcaption class="text-sm text-gray-600 mt-2 text-center">
-              {node.value.caption}
-            </figcaption>
-          )}
-        </figure>
-      );
+      const caption = node.value.caption ? {
+        tag: 'figcaption',
+        attrs: { class: 'text-sm text-gray-600 mt-2 text-center' },
+        content: [node.value.caption]
+      } : null;
+      
+      return {
+        tag: 'figure',
+        attrs: { class: 'my-6' },
+        content: [
+          {
+            tag: 'img',
+            attrs: {
+              src: url,
+              alt: alt || '',
+              width,
+              height,
+              class: 'max-w-full h-auto rounded'
+            }
+          },
+          caption
+        ].filter(Boolean)
+      };
     }
     
     // Handle custom blocks
     if (node.type === 'banner' && node.value) {
-      return (
-        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
-          {node.value.title && <h4 class="font-bold">{node.value.title}</h4>}
-          {node.value.content && <div class="mt-2">{renderNodes(node.value.content)}</div>}
-        </div>
-      );
+      const title = node.value.title ? {
+        tag: 'h4',
+        attrs: { class: 'font-bold' },
+        content: [node.value.title]
+      } : null;
+      
+      const content = node.value.content ? {
+        tag: 'div',
+        attrs: { class: 'mt-2' },
+        content: renderNodes(node.value.content)
+      } : null;
+      
+      return {
+        tag: 'div',
+        attrs: { class: 'bg-blue-50 border-l-4 border-blue-500 p-4 my-6' },
+        content: [title, content].filter(Boolean)
+      };
     }
     
     if (node.type === 'callToAction' && node.value) {
-      return (
-        <div class="bg-gray-100 p-6 rounded-lg my-6 text-center">
-          {node.value.heading && <h4 class="font-bold text-xl mb-3">{node.value.heading}</h4>}
-          {node.value.text && <p class="mb-4">{node.value.text}</p>}
-          {node.value.buttonLabel && node.value.buttonLink && (
-            <a 
-              href={node.value.buttonLink} 
-              class="inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
-            >
-              {node.value.buttonLabel}
-            </a>
-          )}
-        </div>
-      );
+      const heading = node.value.heading ? {
+        tag: 'h4',
+        attrs: { class: 'font-bold text-xl mb-3' },
+        content: [node.value.heading]
+      } : null;
+      
+      const text = node.value.text ? {
+        tag: 'p',
+        attrs: { class: 'mb-4' },
+        content: [node.value.text]
+      } : null;
+      
+      const button = (node.value.buttonLabel && node.value.buttonLink) ? {
+        tag: 'a',
+        attrs: {
+          href: node.value.buttonLink,
+          class: 'inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700'
+        },
+        content: [node.value.buttonLabel]
+      } : null;
+      
+      return {
+        tag: 'div',
+        attrs: { class: 'bg-gray-100 p-6 rounded-lg my-6 text-center' },
+        content: [heading, text, button].filter(Boolean)
+      };
     }
     
     if (node.type === 'testimonialQuote' && node.value) {
-      return (
-        <div class="bg-gray-50 p-6 rounded-lg my-6 border-l-4 border-blue-500">
-          {node.value.quote && <p class="italic text-lg mb-4">"{node.value.quote}"</p>}
-          {node.value.author && <p class="font-bold text-right">— {node.value.author}</p>}
-          {node.value.title && <p class="text-sm text-gray-600 text-right">{node.value.title}</p>}
-        </div>
-      );
+      const quote = node.value.quote ? {
+        tag: 'p',
+        attrs: { class: 'italic text-lg mb-4' },
+        content: [`"${node.value.quote}"`]
+      } : null;
+      
+      const author = node.value.author ? {
+        tag: 'p',
+        attrs: { class: 'font-bold text-right' },
+        content: [`— ${node.value.author}`]
+      } : null;
+      
+      const title = node.value.title ? {
+        tag: 'p',
+        attrs: { class: 'text-sm text-gray-600 text-right' },
+        content: [node.value.title]
+      } : null;
+      
+      return {
+        tag: 'div',
+        attrs: { class: 'bg-gray-50 p-6 rounded-lg my-6 border-l-4 border-blue-500' },
+        content: [quote, author, title].filter(Boolean)
+      };
     }
     
     // Handle unknown blocks by rendering their children
     if (node.children) {
-      return <Fragment>{renderNodes(node.children)}</Fragment>;
+      return { tag: 'div', content: renderNodes(node.children) };
     }
     
     return null;
-  });
+  }).filter(Boolean);
+}
+
+// Helper function to render a node object
+function renderNodeObject(node) {
+  if (!node) return '';
+  if (typeof node === 'string') return node;
+  
+  const { tag, attrs = {}, content = [] } = node;
+  const contentStr = Array.isArray(content) ? content.map(renderNodeObject).join('') : renderNodeObject(content);
+  
+  // For void elements
+  if (tag === 'img' || tag === 'hr' || tag === 'br' || tag === 'input') {
+    const attrsStr = Object.entries(attrs || {}).map(([key, value]) => {
+      if (value === undefined || value === null) return '';
+      return `${key}="${value}"`;
+    }).filter(Boolean).join(' ');
+    
+    return `<${tag}${attrsStr ? ' ' + attrsStr : ''} />`;
+  }
+  
+  // For normal elements
+  const attrsStr = Object.entries(attrs || {}).map(([key, value]) => {
+    if (value === undefined || value === null) return '';
+    return `${key}="${value}"`;
+  }).filter(Boolean).join(' ');
+  
+  return `<${tag}${attrsStr ? ' ' + attrsStr : ''}>${contentStr}</${tag}>`;
 }
 ---
 
-{isEmpty(content) ? (
-  <div class={`rich-text-empty ${className}`}>No content available</div>
-) : (
-  <div class={`rich-text ${className}`}>
-    {renderNodes(content)}
-  </div>
-)}
+<Fragment set:html={isEmpty(content) ? 
+  `<div class="rich-text-empty ${className}">No content available</div>` : 
+  `<div class="rich-text ${className}">${renderNodes(content).map(renderNodeObject).join('')}</div>`
+} />
