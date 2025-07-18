@@ -1,0 +1,140 @@
+---
+import { fetchAsicRegulation } from '../../lib/asicRegulationApi';
+import type { AsicRegulationGlobal } from '../../types/asicRegulation';
+import Layout from '../../layouts/Layout.astro';
+import { 
+  RegulatorHero, 
+  RegulatorSection, 
+  RegulatorFAQ, 
+  RegulatorConclusion, 
+  RegulatorRelatedContent,
+  RegulatorRequirements,
+  RegulatorBenefits,
+  RegulatorBrokers,
+  RichTextRenderer
+} from '../../components/regulators';
+import ErrorDisplay from '../../components/common/ErrorDisplay.astro';
+
+// Fetch the ASIC regulation data
+let regulatorData: AsicRegulationGlobal | null = null;
+let error = null;
+
+try {
+  regulatorData = await fetchAsicRegulation();
+} catch (err) {
+  error = err;
+  console.error('Error fetching ASIC regulation data:', err);
+}
+
+// Set page metadata
+const pageTitle = regulatorData?.meta?.title || 'ASIC Regulated Forex Brokers';
+const pageDescription = regulatorData?.meta?.description || 'Learn about ASIC regulation for forex brokers';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <script src="/src/scripts/regulatorPage.js"></script>
+  
+  {error && (
+    <ErrorDisplay 
+      title="Error Loading ASIC Regulation Data"
+      message="We encountered an error while loading the ASIC regulation information. Please try again later."
+      backLink={{ text: "View All Regulators", url: "/regulators" }}
+    />
+  )}
+
+  {regulatorData && (
+    <>
+      <!-- Hero Section -->
+      <RegulatorHero
+        heading={regulatorData.hero.heading}
+        subheading={regulatorData.hero.subheading}
+        introduction={regulatorData.hero.introduction}
+        heroImage={regulatorData.hero.heroImage}
+        showTableOfContents={regulatorData.hero.tableOfContents}
+      />
+
+      <!-- About Regulator Section -->
+      {regulatorData.aboutRegulator && (
+        <RegulatorSection
+          sectionTitle={regulatorData.aboutRegulator.sectionTitle}
+          sectionId={regulatorData.aboutRegulator.sectionId}
+          content={regulatorData.aboutRegulator.content}
+          featuredImage={regulatorData.aboutRegulator.regulatorLogo}
+          imagePosition="right"
+        />
+      )}
+
+      <!-- Regulations Section -->
+      {regulatorData.regulations && (
+        <RegulatorSection
+          sectionTitle={regulatorData.regulations.sectionTitle}
+          sectionId={regulatorData.regulations.sectionId}
+          content={regulatorData.regulations.introduction}
+          keyPoints={regulatorData.regulations.regulationDetails?.map(detail => ({
+            point: detail.title + ': ' + detail.description
+          }))}
+        />
+      )}
+
+      <!-- Broker Requirements Section -->
+      {regulatorData.brokerRequirements && (
+        <RegulatorRequirements
+          sectionTitle={regulatorData.brokerRequirements.sectionTitle}
+          sectionId={regulatorData.brokerRequirements.sectionId}
+          content={regulatorData.brokerRequirements.content}
+          capitalRequirements={regulatorData.brokerRequirements.capitalRequirements}
+          clientMoneyProtection={regulatorData.brokerRequirements.clientMoneyProtection}
+          leverageLimits={regulatorData.brokerRequirements.leverageLimits}
+        />
+      )}
+
+      <!-- Benefits and Protections Section -->
+      {regulatorData.benefitsProtections && (
+        <RegulatorBenefits
+          sectionTitle={regulatorData.benefitsProtections.sectionTitle}
+          sectionId={regulatorData.benefitsProtections.sectionId}
+          content={regulatorData.benefitsProtections.content}
+          benefitsList={regulatorData.benefitsProtections.benefitsList?.map(benefit => ({
+            title: benefit.title,
+            description: benefit.details
+          }))}
+        />
+      )}
+
+      <!-- FAQ Section -->
+      {regulatorData.faq && (
+        <RegulatorFAQ
+          sectionTitle={regulatorData.faq.sectionTitle}
+          sectionId={regulatorData.faq.sectionId}
+          faqItems={regulatorData.faq.faqItems}
+        />
+      )}
+
+      <!-- Conclusion Section -->
+      {regulatorData.conclusion && (
+        <RegulatorConclusion
+          sectionTitle={regulatorData.conclusion.sectionTitle}
+          sectionId={regulatorData.conclusion.sectionId}
+          content={regulatorData.conclusion.content}
+        />
+      )}
+
+      <!-- Regulated Brokers Section -->
+      {regulatorData.relationships?.regulatedBrokers && regulatorData.relationships.regulatedBrokers.length > 0 && (
+        <RegulatorBrokers
+          sectionTitle="ASIC Regulated Brokers"
+          sectionId="regulated-brokers"
+          brokers={regulatorData.relationships.regulatedBrokers}
+        />
+      )}
+
+      <!-- Related Content -->
+      {regulatorData.relatedContent && regulatorData.relatedContent.articles && regulatorData.relatedContent.articles.length > 0 && (
+        <RegulatorRelatedContent
+          sectionTitle={regulatorData.relatedContent.sectionTitle}
+          articles={regulatorData.relatedContent.articles}
+        />
+      )}
+    </>
+  )}
+</Layout>
