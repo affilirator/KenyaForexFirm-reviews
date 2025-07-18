@@ -37,12 +37,24 @@ const regulatorsByRegion = regulators.reduce((acc, regulator) => {
 
 // Sort regions alphabetically
 const sortedRegions = Object.keys(regulatorsByRegion).sort();
+
+// Get author with regulation expertise for this page
+const authorsData = await getAuthors();
+const authors = authorsData?.docs || [];
+const regulationExperts = authors.filter(author => 
+  author.knowsAbout?.some(expertise => 
+    expertise.fieldName.toLowerCase().includes('regulation') || 
+    expertise.fieldName.toLowerCase().includes('regulatory')
+  )
+);
+const pageAuthor = regulationExperts.length > 0 ? regulationExperts[0] : (authors.length > 0 ? authors[0] : null);
 ---
 
 <BaseLayout
   title={`Forex Regulatory Authorities - Complete Guide (${site.currentYear})`}
   description={`Learn about forex regulatory bodies worldwide. Compare trust scores, jurisdiction details, and how they protect traders in ${site.address.country}.`}
-  schemaData={schemaData}>
+  schemaData={schemaData}
+  author={pageAuthor}>
   
   <Navigation />
 

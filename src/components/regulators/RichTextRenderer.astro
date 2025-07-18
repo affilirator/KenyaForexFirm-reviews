@@ -33,7 +33,7 @@ function renderNodes(nodes) {
       if (node.strikethrough) textContent = `<s>${textContent}</s>`;
       if (node.code) textContent = `<code class="px-1 py-0.5 bg-gray-100 rounded text-sm">${textContent}</code>`;
       
-      return <Fragment key={i} set:html={textContent} />;
+      return <Fragment set:html={textContent} />;
     }
     
     // Handle headings

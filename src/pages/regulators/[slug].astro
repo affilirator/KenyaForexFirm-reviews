@@ -8,7 +8,9 @@ import SimilarRegulators from '../../components/regulators/SimilarRegulators.ast
 import { site } from '../../data/site';
 import { getRegulators } from '~/lib/regulators-api';
 import { getReviews } from '~/lib/qs-esm';
+import { getAuthors } from '~/lib/api-service';
 import type { Regulator } from '../../types/regulator';
+import type { Author } from '../../types/author';
 
 export async function getStaticPaths() {
   const regulatorsData = await getRegulators();
@@ -33,6 +35,17 @@ const regulatorsData = await getRegulators();
 const brokersData = await getReviews();
 const brokers = brokersData?.docs || [];
 
+// Get author with regulation expertise for this page
+const authorsData = await getAuthors();
+const authors = authorsData?.docs || [];
+const regulationExperts = authors.filter(author => 
+  author.knowsAbout?.some(expertise => 
+    expertise.fieldName.toLowerCase().includes('regulation') || 
+    expertise.fieldName.toLowerCase().includes('regulatory')
+  )
+);
+const pageAuthor = regulationExperts.length > 0 ? regulationExperts[0] : (authors.length > 0 ? authors[0] : null);
+
 // Create schema data for SEO
 const schemaData = {
   "@context": "https://schema.org",
@@ -52,7 +65,8 @@ const schemaData = {
 <BaseLayout
   title={`${regulator.name} (${regulator.shortName}) - Regulatory Authority Profile`}
   description={`Learn about ${regulator.name}, its regulatory framework, requirements for forex brokers, and how it protects traders in ${regulator.country}.`}
-  schemaData={schemaData}>
+  schemaData={schemaData}
+  author={pageAuthor}>
   
   <Navigation />
 
