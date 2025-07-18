@@ -2,7 +2,7 @@
 import { getRegulatorData, getAllRegulatorSlugs } from '../../lib/regulatorData';
 import { generateRegulatorMetadata } from '../../lib/regulatorUtils';
 import type { RegulatorPage } from '../../types/regulator';
-import Layout from '../../layouts/Layout.astro';
+import Layout from '../../layouts/BaseLayout.astro';
 import { 
   RegulatorHero, 
   RegulatorSection, 
@@ -10,7 +10,8 @@ import {
   RegulatorConclusion, 
   RegulatorRelatedContent,
   RegulatorRequirements,
-  RegulatorBenefits
+  RegulatorBenefits,
+  RegulatorBrokers
 } from '../../components/regulators';
 import ErrorDisplay from '../../components/common/ErrorDisplay.astro';
 
@@ -71,7 +72,7 @@ const pageDescription = metadata?.description || 'Learn about this financial reg
               sectionTitle={section.sectionTitle}
               sectionId={section.sectionId}
               content={section.content}
-              // Add specific requirements data if available
+              
             />
           );
         }
