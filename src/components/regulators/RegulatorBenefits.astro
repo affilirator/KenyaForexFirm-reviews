@@ -18,28 +18,29 @@ const { sectionTitle, sectionId, content, benefitsList = [] } = Astro.props;
 const hasBenefits = benefitsList && benefitsList.length > 0;
 ---
 
-<section id={sectionId} class="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50 to-indigo-50 scroll-mt-16">
-  <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl font-bold text-gray-900 mb-8">
+<section id={sectionId} class="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-neutral-100 via-neutral-100 to-primary-400/10 scroll-mt-20 relative overflow-hidden">
+  <div class="absolute inset-0 bg-cyber-grid bg-[length:40px_40px] opacity-20"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-8 font-display">
       {sectionTitle}
     </h2>
     
-    <div class="prose prose-blue max-w-none mb-10">
+    <div class="prose prose-lg max-w-none mb-12 text-neutral-800">
       <RichTextRenderer content={content} />
     </div>
     
     {hasBenefits && (
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
         {benefitsList.map((benefit, index) => (
-          <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-            <div class="flex items-center mb-4">
-              <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+          <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-md p-6 hover:shadow-xl hover:border-primary-500/30 border border-neutral-200 transition-all duration-300 group">
+            <div class="flex items-center mb-5">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white mr-4 shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
                 <span class="font-bold">{index + 1}</span>
               </div>
-              <h3 class="text-xl font-semibold">{benefit.title}</h3>
+              <h3 class="text-xl font-semibold text-neutral-900 font-display">{benefit.title}</h3>
             </div>
             
-            <div class="prose prose-sm">
+            <div class="prose prose-sm max-w-none text-neutral-800">
               <RichTextRenderer content={benefit.description} />
             </div>
           </div>

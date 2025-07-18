@@ -31,87 +31,115 @@ const {
 } = Astro.props;
 ---
 
-<section id={sectionId} class="py-12 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+<section id={sectionId} class="py-16 px-4 sm:px-6 lg:px-8 scroll-mt-20">
   <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl font-bold text-gray-900 mb-8">
+    <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-8 font-display">
       {sectionTitle}
     </h2>
     
-    <div class="prose prose-blue max-w-none mb-10">
+    <div class="prose prose-lg max-w-none mb-12 text-neutral-800">
       <RichTextRenderer content={content} />
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {/* Capital Requirements */}
-      <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-blue-500">
-        <h3 class="text-xl font-semibold mb-4">Capital Requirements</h3>
+      <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-md p-6 border-t-4 border-primary-500 hover:shadow-lg transition-shadow duration-300 group">
+        <div class="flex items-center mb-5">
+          <div class="w-10 h-10 rounded-full bg-primary-500/10 flex items-center justify-center text-primary-600 mr-3 group-hover:bg-primary-500/20 transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+              <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-neutral-900 font-display">Capital Requirements</h3>
+        </div>
         
         {capitalRequirements?.minimumCapital ? (
           <>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-gray-600">Minimum Capital:</span>
-              <span class="font-bold text-lg">{capitalRequirements.minimumCapital}</span>
+            <div class="flex items-center justify-between mb-5 bg-neutral-100/50 p-3 rounded-lg">
+              <span class="text-neutral-700">Minimum Capital:</span>
+              <span class="font-bold text-lg text-neutral-900">{capitalRequirements.minimumCapital}</span>
             </div>
             
             {capitalRequirements.details && (
-              <div class="mt-4 pt-4 border-t border-gray-100">
-                <RichTextRenderer content={capitalRequirements.details} />
+              <div class="mt-5 pt-4 border-t border-neutral-200">
+                <div class="prose prose-sm max-w-none text-neutral-800">
+                  <RichTextRenderer content={capitalRequirements.details} />
+                </div>
               </div>
             )}
           </>
         ) : (
-          <p class="text-gray-500">Information not available</p>
+          <p class="text-neutral-500 italic">Information not available</p>
         )}
       </div>
       
       {/* Client Money Protection */}
-      <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-green-500">
-        <h3 class="text-xl font-semibold mb-4">Client Money Protection</h3>
+      <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-md p-6 border-t-4 border-accent-500 hover:shadow-lg transition-shadow duration-300 group">
+        <div class="flex items-center mb-5">
+          <div class="w-10 h-10 rounded-full bg-accent-500/10 flex items-center justify-center text-accent-600 mr-3 group-hover:bg-accent-500/20 transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-neutral-900 font-display">Client Money Protection</h3>
+        </div>
         
         {clientMoneyProtection?.protectionLimit ? (
           <>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-gray-600">Protection Limit:</span>
-              <span class="font-bold text-lg">{clientMoneyProtection.protectionLimit}</span>
+            <div class="flex items-center justify-between mb-5 bg-neutral-100/50 p-3 rounded-lg">
+              <span class="text-neutral-700">Protection Limit:</span>
+              <span class="font-bold text-lg text-neutral-900">{clientMoneyProtection.protectionLimit}</span>
             </div>
             
             {clientMoneyProtection.details && (
-              <div class="mt-4 pt-4 border-t border-gray-100">
-                <RichTextRenderer content={clientMoneyProtection.details} />
+              <div class="mt-5 pt-4 border-t border-neutral-200">
+                <div class="prose prose-sm max-w-none text-neutral-800">
+                  <RichTextRenderer content={clientMoneyProtection.details} />
+                </div>
               </div>
             )}
           </>
         ) : (
-          <p class="text-gray-500">Information not available</p>
+          <p class="text-neutral-500 italic">Information not available</p>
         )}
       </div>
       
       {/* Leverage Limits */}
-      <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-amber-500">
-        <h3 class="text-xl font-semibold mb-4">Leverage Limits</h3>
+      <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-md p-6 border-t-4 border-primary-400 hover:shadow-lg transition-shadow duration-300 group">
+        <div class="flex items-center mb-5">
+          <div class="w-10 h-10 rounded-full bg-primary-400/10 flex items-center justify-center text-primary-500 mr-3 group-hover:bg-primary-400/20 transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-neutral-900 font-display">Leverage Limits</h3>
+        </div>
         
         {leverageLimits?.retailClients ? (
           <>
-            <div class="space-y-3 mb-4">
-              <div class="flex items-center justify-between">
-                <span class="text-gray-600">Retail Clients:</span>
-                <span class="font-bold">{leverageLimits.retailClients}</span>
+            <div class="space-y-3 mb-5">
+              <div class="flex items-center justify-between bg-neutral-100/50 p-3 rounded-lg">
+                <span class="text-neutral-700">Retail Clients:</span>
+                <span class="font-bold text-neutral-900">{leverageLimits.retailClients}</span>
               </div>
               
-              <div class="flex items-center justify-between">
-                <span class="text-gray-600">Professional Clients:</span>
-                <span class="font-bold">{leverageLimits.professionalClients}</span>
+              <div class="flex items-center justify-between bg-neutral-100/50 p-3 rounded-lg">
+                <span class="text-neutral-700">Professional Clients:</span>
+                <span class="font-bold text-neutral-900">{leverageLimits.professionalClients}</span>
               </div>
             </div>
             
             {leverageLimits.details && (
-              <div class="mt-4 pt-4 border-t border-gray-100">
-                <RichTextRenderer content={leverageLimits.details} />
+              <div class="mt-5 pt-4 border-t border-neutral-200">
+                <div class="prose prose-sm max-w-none text-neutral-800">
+                  <RichTextRenderer content={leverageLimits.details} />
+                </div>
               </div>
             )}
           </>
         ) : (
-          <p class="text-gray-500">Information not available</p>
+          <p class="text-neutral-500 italic">Information not available</p>
         )}
       </div>
     </div>

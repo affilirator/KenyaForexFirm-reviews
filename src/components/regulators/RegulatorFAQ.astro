@@ -18,37 +18,38 @@ const { sectionTitle, sectionId, introduction, faqItems = [] } = Astro.props;
 const hasFAQs = faqItems && faqItems.length > 0;
 ---
 
-<section id={sectionId} class="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 scroll-mt-16">
-  <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl font-bold text-gray-900 mb-6">
+<section id={sectionId} class="py-16 px-4 sm:px-6 lg:px-8 bg-neutral-100/50 scroll-mt-20 relative overflow-hidden">
+  <div class="absolute inset-0 bg-cyber-grid bg-[length:30px_30px] opacity-10"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-8 font-display">
       {sectionTitle}
     </h2>
     
     {introduction && (
-      <div class="prose prose-blue max-w-none mb-8">
+      <div class="prose prose-lg max-w-none mb-10 text-neutral-800">
         <RichTextRenderer content={introduction} />
       </div>
     )}
     
     {hasFAQs ? (
-      <div class="space-y-6">
+      <div class="space-y-4">
         {faqItems.map((faq, index) => (
-          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-md overflow-hidden border border-neutral-200 hover:border-primary-500/30 transition-all duration-300">
             <button
-              class="faq-question w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="faq-question w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
               aria-expanded="false"
               aria-controls={`faq-answer-${index}`}
             >
-              <span class="font-medium text-lg">{faq.question}</span>
-              <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <span class="font-medium text-lg text-neutral-900">{faq.question}</span>
+              <svg class="w-5 h-5 text-primary-500 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
             <div 
               id={`faq-answer-${index}`}
-              class="faq-answer px-6 pb-4 hidden"
+              class="faq-answer px-6 pb-5 hidden"
             >
-              <div class="prose prose-blue max-w-none pt-2 border-t border-gray-100">
+              <div class="prose prose-lg max-w-none pt-3 border-t border-neutral-200 text-neutral-800">
                 <RichTextRenderer content={faq.answer} />
               </div>
             </div>
@@ -56,7 +57,7 @@ const hasFAQs = faqItems && faqItems.length > 0;
         ))}
       </div>
     ) : (
-      <p class="text-gray-500">No FAQ items available</p>
+      <p class="text-neutral-500 italic">No FAQ items available</p>
     )}
   </div>
 </section>

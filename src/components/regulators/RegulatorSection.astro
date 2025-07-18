@@ -26,42 +26,49 @@ const {
 const hasKeyPoints = keyPoints && keyPoints.length > 0;
 ---
 
-<section id={sectionId} class="py-12 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+<section id={sectionId} class="py-16 px-4 sm:px-6 lg:px-8 scroll-mt-20">
   <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl font-bold text-gray-900 mb-8">
+    <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-10 font-display">
       {sectionTitle}
     </h2>
     
     {/* Image at the top */}
     {featuredImage && imagePosition === 'top' && (
-      <div class="mb-8">
+      <div class="mb-10 relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-lg blur-md opacity-75 group-hover:opacity-100 transition duration-300"></div>
         <img 
           src={featuredImage.url} 
           alt={featuredImage.alt || sectionTitle} 
-          class="rounded-lg shadow-md w-full h-auto object-cover max-h-96"
+          class="relative rounded-lg shadow-lg w-full h-auto object-cover max-h-96 border border-neutral-200"
         />
       </div>
     )}
     
     <div class={`
-      ${featuredImage && (imagePosition === 'left' || imagePosition === 'right') ? 'flex flex-col md:flex-row gap-8' : ''}
+      ${featuredImage && (imagePosition === 'left' || imagePosition === 'right') ? 'flex flex-col md:flex-row gap-10' : ''}
       ${featuredImage && imagePosition === 'left' ? 'md:flex-row-reverse' : ''}
     `}>
       {/* Content with side image */}
       <div class={`
         ${featuredImage && (imagePosition === 'left' || imagePosition === 'right') ? 'md:w-2/3' : 'w-full'}
-        prose prose-blue max-w-none
+        prose prose-lg max-w-none prose-headings:font-display prose-headings:text-neutral-900 prose-p:text-neutral-800
+        prose-a:text-primary-600 prose-a:no-underline hover:prose-a:text-primary-500 hover:prose-a:underline
+        prose-strong:text-neutral-900
       `}>
         <RichTextRenderer content={content} />
         
         {hasKeyPoints && (
-          <div class="mt-8 bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
-            <h3 class="text-xl font-semibold mb-4">Key Points</h3>
-            <ul class="space-y-2">
+          <div class="mt-10 bg-primary-400/10 p-6 rounded-xl border-l-4 border-primary-500 shadow-sm">
+            <h3 class="text-xl font-semibold mb-4 text-neutral-900 font-display">Key Points</h3>
+            <ul class="space-y-3">
               {keyPoints.map((item) => (
                 <li class="flex items-start">
-                  <span class="text-blue-600 mr-2">✓</span>
-                  <span>{item.point}</span>
+                  <span class="text-primary-600 mr-2 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                  <span class="text-neutral-800">{item.point}</span>
                 </li>
               ))}
             </ul>
@@ -71,11 +78,12 @@ const hasKeyPoints = keyPoints && keyPoints.length > 0;
       
       {/* Side image */}
       {featuredImage && (imagePosition === 'left' || imagePosition === 'right') && (
-        <div class="md:w-1/3">
+        <div class="md:w-1/3 relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-lg blur-md opacity-75 group-hover:opacity-100 transition duration-300"></div>
           <img 
             src={featuredImage.url} 
             alt={featuredImage.alt || sectionTitle} 
-            class="rounded-lg shadow-md w-full h-auto object-cover sticky top-24"
+            class="relative rounded-lg shadow-lg w-full h-auto object-cover sticky top-24 border border-neutral-200"
           />
         </div>
       )}
@@ -83,11 +91,12 @@ const hasKeyPoints = keyPoints && keyPoints.length > 0;
     
     {/* Image at the bottom */}
     {featuredImage && imagePosition === 'bottom' && (
-      <div class="mt-8">
+      <div class="mt-10 relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-lg blur-md opacity-75 group-hover:opacity-100 transition duration-300"></div>
         <img 
           src={featuredImage.url} 
           alt={featuredImage.alt || sectionTitle} 
-          class="rounded-lg shadow-md w-full h-auto object-cover max-h-96"
+          class="relative rounded-lg shadow-lg w-full h-auto object-cover max-h-96 border border-neutral-200"
         />
       </div>
     )}
