@@ -19,6 +19,11 @@ function isEmpty(content) {
 
 // Helper function to render nodes recursively
 function renderNodes(nodes) {
+  // Handle Lexical format from PayloadCMS
+  if (nodes && nodes.root && nodes.root.children) {
+    return renderNodes(nodes.root.children);
+  }
+  
   if (!nodes || !Array.isArray(nodes)) return [];
   
   return nodes.map((node, i) => {
@@ -49,6 +54,11 @@ function renderNodes(nodes) {
       return { tag: 'p', attrs: { class: 'my-4' }, content: renderNodes(node.children) };
     }
     
+    // Handle Lexical paragraph format
+    if (node.direction !== undefined && node.children) {
+      return { tag: 'p', attrs: { class: 'my-4' }, content: renderNodes(node.children) };
+    }
+    
     // Handle lists
     if (node.type === 'ul') {
       return { tag: 'ul', attrs: { class: 'list-disc pl-6 my-4' }, content: renderNodes(node.children) };
@@ -62,17 +72,33 @@ function renderNodes(nodes) {
     
     // Handle links
     if (node.type === 'link') {
-      const rel = node.fields?.rel ? node.fields.rel.join(' ') : '';
-      return {
-        tag: 'a',
-        attrs: {
-          href: node.url,
-          class: 'text-blue-600 hover:underline',
-          target: node.newTab ? '_blank' : undefined,
-          rel: rel || undefined
-        },
-        content: renderNodes(node.children)
-      };
+      // Handle standard link format
+      if (node.url) {
+        const rel = node.fields?.rel ? node.fields.rel.join(' ') : '';
+        return {
+          tag: 'a',
+          attrs: {
+            href: node.url,
+            class: 'text-blue-600 hover:underline',
+            target: node.newTab ? '_blank' : undefined,
+            rel: rel || undefined
+          },
+          content: renderNodes(node.children)
+        };
+      }
+      
+      // Handle Lexical link format
+      if (node.fields && node.fields.url) {
+        return {
+          tag: 'a',
+          attrs: {
+            href: node.fields.url,
+            class: 'text-blue-600 hover:underline',
+            target: node.fields.newTab ? '_blank' : undefined
+          },
+          content: renderNodes(node.children)
+        };
+      }
     }
     
     // Handle blockquotes
