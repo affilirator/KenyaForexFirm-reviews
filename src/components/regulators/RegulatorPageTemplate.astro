@@ -12,7 +12,8 @@ import {
   RegulatorRelatedContent,
   RegulatorRequirements,
   RegulatorBenefits,
-  RegulatorBrokers
+  RegulatorBrokers,
+  TopRegulatedBrokers
 } from '../regulators';
 import ErrorDisplay from '../common/ErrorDisplay.astro';
 
@@ -30,6 +31,7 @@ const pageDescription = regulatorData?.meta?.description || 'Learn about this fi
 
 <Layout title={pageTitle} description={pageDescription}>
   <script src="/src/scripts/regulatorPage.js"></script>
+  <script src="/src/scripts/regulatorBrokerCards.js"></script>
   
   {error && (
     <ErrorDisplay 
@@ -58,6 +60,15 @@ const pageDescription = regulatorData?.meta?.description || 'Learn about this fi
           content={regulatorData.aboutRegulator.content}
           featuredImage={regulatorData.aboutRegulator.regulatorLogo}
           imagePosition="right"
+        />
+      )}
+      
+      <!-- Top Regulated Brokers Section -->
+      {regulatorData.officialWebsite && regulatorData.regulatorRelationship?.shortName && (
+        <TopRegulatedBrokers
+          regulatorWebsite={regulatorData.officialWebsite}
+          regulatorName={regulatorData.regulatorRelationship.shortName}
+          sectionId="top-regulated-brokers"
         />
       )}
 

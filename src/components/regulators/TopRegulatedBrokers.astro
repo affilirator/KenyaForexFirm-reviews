@@ -1,0 +1,162 @@
+---
+/**
+ * TopRegulatedBrokers.astro - Component to display top brokers regulated by a specific regulator
+ */
+import { getBrokersByRegulatorWebsite, getBrokersByRegulatorName } from '../../lib/broker-regulator-service';
+
+interface Props {
+  regulatorWebsite: string;
+  regulatorName: string;
+  sectionId?: string;
+}
+
+const { regulatorWebsite, regulatorName, sectionId = 'top-regulated-brokers' } = Astro.props;
+
+// Fetch top 5 brokers regulated by this regulator
+let brokers = [];
+let error = null;
+
+try {
+  // First try to fetch by website
+  if (regulatorWebsite) {
+    const response = await getBrokersByRegulatorWebsite(regulatorWebsite, 5);
+    brokers = response.docs || [];
+    
+    // If no brokers found, try by name as fallback
+    if (brokers.length === 0 && regulatorName) {
+      console.log(`No brokers found by website, trying by name: ${regulatorName}`);
+      const nameResponse = await getBrokersByRegulatorName(regulatorName, 5);
+      brokers = nameResponse.docs || [];
+    }
+  }
+} catch (err) {
+  console.error('Error fetching regulated brokers:', err);
+  error = err;
+}
+
+const hasBrokers = brokers && brokers.length > 0;
+---
+
+{(
+  <section id={sectionId} class="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-neutral-50 via-neutral-50 to-primary-400/5 scroll-mt-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-cyber-grid bg-[length:30px_30px] opacity-10"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(56,189,248,0.1),transparent_50%)]"></div>
+    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500"></div>
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-3 font-display tracking-tight inline-block relative">
+          <span class="relative z-10">Top {regulatorName} Regulated Brokers</span>
+          <span class="absolute bottom-0 left-0 w-full h-2 bg-primary-400/20 -z-10 transform -rotate-1"></span>
+        </h2>
+        <p class="text-lg text-neutral-700 max-w-3xl mx-auto">
+          These top-rated brokers are regulated by {regulatorName} and comply with their regulatory requirements.
+        </p>
+      </div>
+      
+      {hasBrokers ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {brokers.map((broker) => (
+          <div class="broker-card bg-white/95 backdrop-blur-md rounded-xl shadow-md p-6 border border-neutral-200 hover:border-primary-500/40 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(56,189,248,0.07),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            {/* Broker Logo */}
+            {broker.logo && (
+              <div class="flex justify-center mb-4">
+                <img 
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+                  data-src={typeof broker.logo === 'string' ? broker.logo : broker.logo.url} 
+                  alt={`${broker.brokerName} logo`} 
+                  class="broker-logo h-12 object-contain rounded-md transition-opacity duration-500 opacity-0"
+                  loading="lazy"
+                />
+              </div>
+            )}
+            
+            <div class="flex items-center justify-between mb-4 relative z-10">
+              <h3 class="text-lg font-semibold text-neutral-900 font-display tracking-tight">
+                <a href={`/brokers/${broker.slug}`} class="hover:text-primary-600 transition-colors relative inline-block group-hover:text-primary-600">
+                  <span class="relative z-10">{broker.brokerName}</span>
+                  <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+              </h3>
+              <div class="rating-badge flex items-center bg-primary-500/15 px-2.5 py-1 rounded-full border border-primary-500/20 group-hover:bg-primary-500/20 transition-colors duration-300">
+                <span class="text-primary-600 font-bold text-sm">{broker.brokerRating}</span>
+                <span class="text-primary-600 ml-0.5 text-sm">/10</span>
+              </div>
+            </div>
+            
+            {/* Key Features */}
+            <div class="mb-4">
+              <ul class="space-y-1.5">
+                {broker.features && broker.features.slice(0, 3).map((feature) => (
+                  <li class="flex items-start text-sm">
+                    <span class="text-primary-600 mr-2 mt-0.5 flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                    <span class="text-neutral-700">{feature}</span>
+                  </li>
+                ))}
+                {(!broker.features || broker.features.length === 0) && (
+                  <li class="flex items-start text-sm">
+                    <span class="text-primary-600 mr-2 mt-0.5 flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                    <span class="text-neutral-700">{regulatorName} Regulated</span>
+                  </li>
+                )}
+              </ul>
+            </div>
+            
+            <div class="flex items-center justify-between relative z-10">
+              <a 
+                href={`/brokers/${broker.slug}`}
+                class="inline-flex items-center text-primary-600 hover:text-primary-500 font-medium text-sm group/btn"
+              >
+                Read Review
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 ml-1 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+              
+              <span class="text-xs text-neutral-500 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                Verified
+              </span>
+            </div>
+          </div>
+        ))}
+        </div>
+      ) : (
+        <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-md p-8 border border-neutral-200 text-center max-w-2xl mx-auto">
+          <div class="text-primary-500 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-neutral-900 mb-2">Coming Soon</h3>
+          <p class="text-neutral-700 mb-4">We're currently reviewing brokers regulated by {regulatorName}.</p>
+          <p class="text-neutral-600 text-sm">Check back soon for our detailed broker reviews.</p>
+        </div>
+      )}
+      
+      <div class="mt-8 text-center">
+        <a 
+          href="/brokers" 
+          class="inline-flex items-center px-5 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-300 font-medium shadow-md hover:shadow-lg"
+        >
+          View All Brokers
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+)}
