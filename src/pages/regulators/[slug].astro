@@ -2,6 +2,7 @@
 import { getRegulators, getRegulatorBySlug } from '../../lib/regulators-api';
 import { transformRegulatorData } from '../../lib/regulatorTransformer';
 import { generateRegulatorMetadata } from '../../lib/regulatorUtils';
+import { getAuthorBySlug } from '../../lib/authors-api';
 import type { RegulatorPage, Regulator } from '../../types/regulator';
 import Layout from '../../layouts/BaseLayout.astro';
 import { 
@@ -22,14 +23,25 @@ export async function getStaticPaths() {
   const regulatorsResponse = await getRegulators();
   const regulators = regulatorsResponse.docs || [];
   
-  return regulators.map(regulator => ({
-    params: { slug: regulator.slug },
-    props: { regulator }
+  // Create paths with author data for each regulator
+  const paths = await Promise.all(regulators.map(async regulator => {
+    // Get author data if available
+    let author = null;
+    if (regulator.author && regulator.author.slug) {
+      author = await getAuthorBySlug(regulator.author.slug);
+    }
+    
+    return {
+      params: { slug: regulator.slug },
+      props: { regulator, author }
+    };
   }));
+  
+  return paths;
 }
 
 const { slug } = Astro.params;
-const { regulator } = Astro.props;
+const { regulator, author } = Astro.props;
 
 // Transform the data to the format expected by our components
 let regulatorData: RegulatorPage | null = null;
@@ -53,8 +65,12 @@ const canonicalUrl = `${siteUrl}/regulators/${slug}`;
 const publishDate = regulator?.createdAt ? new Date(regulator.createdAt).toISOString() : new Date().toISOString();
 const modifiedDate = regulator?.updatedAt ? new Date(regulator.updatedAt).toISOString() : publishDate;
 const heroImage = regulatorData?.heroSection?.heroImage?.src || `${siteUrl}/images/regulators/default-regulator.jpg`;
-const authorName = regulator?.author?.name || 'Kenya Forex Firm';
-const authorUrl = regulator?.author?.url || `${siteUrl}/about-us`;
+
+// Author information from API
+const authorName = author?.name || regulator?.author?.name || 'Kenya Forex Firm';
+const authorUrl = author ? `${siteUrl}/authors/${author.slug}` : `${siteUrl}/about-us`;
+const authorBio = author?.bio || '';
+const authorImage = author?.meta?.image?.url || '';
 
 // Schema markup for Article
 const schemaMarkup = {
@@ -67,9 +83,11 @@ const schemaMarkup = {
   "datePublished": publishDate,
   "dateModified": new Date().toISOString(),
   "author": {
-    "@type": "Organization",
+    "@type": author ? "Person" : "Organization",
     "name": authorName,
-    "url": authorUrl
+    "url": authorUrl,
+    ...(authorBio && { "description": authorBio }),
+    ...(authorImage && { "image": authorImage })
   },
   "publisher": {
     "@type": "Organization",
