@@ -60,7 +60,7 @@ const pageTitle = metadata?.title || 'Regulator Information';
 const pageDescription = metadata?.description || 'Learn about this financial regulator';
 
 // Prepare schema markup data
-const siteUrl = import.meta.env.SITE || 'https://kenyaforexfirm.com';
+const siteUrl = import.meta.env.SITE || 'https://fx.kenyaforexfirm.com';
 const canonicalUrl = `${siteUrl}/regulators/${slug}`;
 const publishDate = regulator?.createdAt ? new Date(regulator.createdAt).toISOString() : new Date().toISOString();
 const modifiedDate = regulator?.updatedAt ? new Date(regulator.updatedAt).toISOString() : publishDate;
