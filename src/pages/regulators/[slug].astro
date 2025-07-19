@@ -1,5 +1,5 @@
 ---
-import { getRegulatorBySlug } from '../../lib/regulators-api';
+import { getRegulators, getRegulatorBySlug } from '../../lib/regulators-api';
 import { transformRegulatorData } from '../../lib/regulatorTransformer';
 import { generateRegulatorMetadata } from '../../lib/regulatorUtils';
 import type { RegulatorPage, Regulator } from '../../types/regulator';
@@ -17,26 +17,29 @@ import {
 } from '../../components/regulators';
 import ErrorDisplay from '../../components/common/ErrorDisplay.astro';
 
-const { slug } = Astro.params;
+// Generate static paths from regulators API
+export async function getStaticPaths() {
+  const regulatorsResponse = await getRegulators();
+  const regulators = regulatorsResponse.docs || [];
+  
+  return regulators.map(regulator => ({
+    params: { slug: regulator.slug },
+    props: { regulator }
+  }));
+}
 
-// Fetch the regulator data from the regulators API endpoint
+const { slug } = Astro.params;
+const { regulator } = Astro.props;
+
+// Transform the data to the format expected by our components
 let regulatorData: RegulatorPage | null = null;
-let rawRegulatorData: Regulator | null = null;
 let error = null;
 
 try {
-  // Fetch from regulators API endpoint
-  rawRegulatorData = await getRegulatorBySlug(slug);
-  
-  if (!rawRegulatorData) {
-    throw new Error(`Regulator data not found for slug: ${slug}`);
-  }
-  
-  // Transform the data to the format expected by our components
-  regulatorData = transformRegulatorData(rawRegulatorData);
+  regulatorData = transformRegulatorData(regulator);
 } catch (err) {
   error = err;
-  console.error(`Error fetching regulator data for ${slug}:`, err);
+  console.error(`Error transforming regulator data for ${slug}:`, err);
 }
 
 // Set page metadata
@@ -67,22 +70,24 @@ const pageDescription = metadata?.description || 'Learn about this financial reg
       />
 
       <!-- Main Content Sections -->
-      {regulatorData.sections.map((section) => {
+      {regulatorData.sections.map((section, index) => {
+        // Add TopRegulatedBrokers after the first section
+        const isFirstSection = index === 0;
+        let sectionContent;
+        
         // Check if this is a requirements section
         if (section.sectionId === 'requirements') {
-          return (
+          sectionContent = (
             <RegulatorRequirements
               sectionTitle={section.sectionTitle}
               sectionId={section.sectionId}
               content={section.content}
-              
             />
           );
         }
-        
         // Check if this is a benefits section
-        if (section.sectionId === 'benefits') {
-          return (
+        else if (section.sectionId === 'benefits') {
+          sectionContent = (
             <RegulatorBenefits
               sectionTitle={section.sectionTitle}
               sectionId={section.sectionId}
@@ -94,17 +99,31 @@ const pageDescription = metadata?.description || 'Learn about this financial reg
             />
           );
         }
-        
         // Default section rendering
+        else {
+          sectionContent = (
+            <RegulatorSection
+              sectionTitle={section.sectionTitle}
+              sectionId={section.sectionId}
+              content={section.content}
+              featuredImage={section.featuredImage}
+              imagePosition={section.imagePosition}
+              keyPoints={section.keyPoints}
+            />
+          );
+        }
+        
         return (
-          <RegulatorSection
-            sectionTitle={section.sectionTitle}
-            sectionId={section.sectionId}
-            content={section.content}
-            featuredImage={section.featuredImage}
-            imagePosition={section.imagePosition}
-            keyPoints={section.keyPoints}
-          />
+          <>
+            {sectionContent}
+            {isFirstSection && regulator.website && (
+              <TopRegulatedBrokers
+                regulatorWebsite={regulator.website}
+                regulatorName={regulator.shortName}
+                sectionId="top-regulated-brokers"
+              />
+            )}
+          </>
         );
       })}
 

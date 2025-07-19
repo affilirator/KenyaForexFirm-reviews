@@ -1,6 +1,84 @@
 {
   "docs": [
     {
+      "createdAt": "2025-07-17T19:54:52.897Z",
+      "updatedAt": "2025-07-17T21:19:31.173Z",
+      "author": {
+        "slug": "patrick-mahinge",
+        "name": "Patrick Mahinge",
+        "id": "6850b776788b53611ad7ae0d"
+      },
+      "generateData": false,
+      "keyRegulation": [
+        {
+          "regulation": "Asset Classes",
+          "description": "The 25:1 cap applies across currency pairs; Japan does not allow offshore FX or CFDs to domestic retail clients.",
+          "id": "687955898bfd726aa1077117"
+        }
+      ],
+      "requirements": {
+        "capitalRequirement": {
+          "minimumCapital": 5000
+        }
+      },
+      "name": "Financial Services Agency (Japan)",
+      "shortName": "JFSA",
+      "description": "The Financial Services Agency (FSA) is Japan’s integrated financial regulator responsible for overseeing banking, securities, and insurance sectors to maintain the stability of the country’s financial system and protect investors.",
+      "country": "Japan",
+      "region": "Asia",
+      "established": 2000,
+      "keywords": [],
+      "maxLeverage": "25:1",
+      "minDepositRequirement": 50000000,
+      "website": "https://www.fsa.go.jp/",
+      "faqs": [],
+      "trustScore": 90,
+      "brokerRequirements": [],
+      "investorProtection": [],
+      "pubDate": "2025-07-17T19:53:23.377Z",
+      "lastmod": "2025-07-17T19:53:23.377Z",
+      "relatedLinks": [],
+      "slug": "jfsa-japan",
+      "blog": {
+        "blogTitle": "Kenya Forex Firm",
+        "slug": "kenya-forex-firm",
+        "tenant": "683f46937e7deb35fd6bca89",
+        "githubBranch": "main",
+        "id": "684042e245e28e4550cbd4e6"
+      },
+      "status": "published",
+      "tenant": "683f46937e7deb35fd6bca89",
+      "standoutFeatures": [],
+      "meta": {
+
+      },
+      "disputeResolution": true,
+      "segregatedAccounts": true,
+      "leverage": {
+        "maxLeverage": "25:1",
+        "variableLeverage": false,
+        "maxLeverageOnAsset": [],
+        "specialRequirements": [
+          {
+            "requirement": "The 25:1 cap applies across currency pairs; Japan does not allow offshore FX or CFDs to domestic retail clients.",
+            "id": "6879638dce8f08a9e0621302"
+          }
+        ],
+        "recentChanges": "The leverage cap in Japan has been 25:1 since 2011. No higher leverage is permitted; this has not changed in the last 5 years.",
+        "reference": [
+          {
+            "url": "https://www.ffaj.or.jp/en/regulation/customers/",
+            "id": "687967715515878278428eb7"
+          }
+        ]
+      },
+      "id": "6879550cf152d46bea775d8f",
+      "regScoreRating": {
+        "regulatorTrustScore": [],
+        "scoreCard": []
+      }
+    },
+    {
       "createdAt": "2025-07-11T10:30:54.668Z",
       "updatedAt": "2025-07-11T10:31:42.381Z",
       "generateData": false,
@@ -12,20 +90,15 @@
       "established": 1997,
       "keywords": [],
       "maxLeverage": "1:100",
-      "assetLeverageMapping": [],
       "minDepositRequirement": 100000,
       "website": "https://www.jsc.gov.jo",
       "faqs": [],
       "trustScore": 75,
-      "betterTrustScore": {
-
-      },
       "brokerRequirements": [],
       "investorProtection": [],
       "pubDate": "2025-07-11T10:30:26.761Z",
       "lastmod": "2025-07-11T10:30:26.761Z",
       "relatedLinks": [],
-      "tableData": [],
       "slug": "jsc-jordan",
       "blog": {
         "blogTitle": "Kenya Forex Firm",
@@ -86,7 +159,25 @@
         "slug": "jordan-securities-commission-(jsc)",
         "caption": "jordan-securities-commission-(jsc)"
       },
-      "id": "6870e7dec1d9c8abe1522af4"
+      "id": "6870e7dec1d9c8abe1522af4",
+      "leverage": {
+        "maxLeverageOnAsset": [],
+        "specialRequirements": [],
+        "reference": [],
+        "variableLeverage": true
+      },
+      "keyRegulation": [],
+      "requirements": {
+        "capitalRequirement": {
+          "minimumCapital": 5000
+        }
+      },
+      "regScoreRating": {
+        "regulatorTrustScore": [],
+        "scoreCard": []
+      },
+      "segregatedAccounts": true,
+      "disputeResolution": true
     },
     {
       "createdAt": "2025-07-11T10:28:17.219Z",
@@ -100,20 +191,15 @@
       "established": 2001,
       "keywords": [],
       "maxLeverage": "1:200",
-      "assetLeverageMapping": [],
       "minDepositRequirement": 50000,
       "website": "https://www.bvifsc.vg",
       "faqs": [],
       "trustScore": 70,
-      "betterTrustScore": {
-
-      },
       "brokerRequirements": [],
       "investorProtection": [],
       "pubDate": "2025-07-11T10:22:44.778Z",
       "lastmod": "2025-07-11T10:22:44.778Z",
       "relatedLinks": [],
-      "tableData": [],
       "slug": "fsc-british-virgin-islands",
       "blog": {
         "blogTitle": "Kenya Forex Firm",
@@ -174,98 +260,28 @@
         "slug": "british-virgin-islands-financial-services-commission",
         "caption": "british-virgin-islands-financial-services-commission"
       },
-      "id": "6870e741c1d9c8abe1522aa6"
-    },
-    {
-      "createdAt": "2025-07-11T10:24:10.551Z",
-      "updatedAt": "2025-07-11T10:25:38.793Z",
-      "generateData": false,
-      "name": "Central Bank of Curaçao and Sint Maarten",
-      "shortName": "CBCS",
-      "description": "The Central Bank of Curaçao and Sint Maarten is the monetary authority responsible for maintaining monetary and financial stability, supervising financial institutions, and promoting the integrity of Curaçao and Sint Maarten’s financial system.",
-      "country": "Curaçao and Sint Maarten",
-      "region": "Caribbean",
-      "established": 2010,
-      "keywords": [],
-      "maxLeverage": "1:200",
-      "assetLeverageMapping": [],
-      "minDepositRequirement": 50000,
-      "website": "https://www.centralbank.cw",
-      "faqs": [],
-      "trustScore": 65,
-      "betterTrustScore": {
-
+      "id": "6870e741c1d9c8abe1522aa6",
+      "leverage": {
+        "maxLeverageOnAsset": [],
+        "specialRequirements": [],
+        "reference": [],
+        "variableLeverage": true
       },
-      "brokerRequirements": [],
-      "investorProtection": [],
-      "pubDate": "2025-07-11T10:22:44.778Z",
-      "lastmod": "2025-07-11T10:22:44.778Z",
-      "relatedLinks": [],
-      "tableData": [],
-      "slug": "cbcs-cura-ao-and-sint-maarten",
-      "blog": {
-        "blogTitle": "Kenya Forex Firm",
-        "slug": "kenya-forex-firm",
-        "tenant": "683f46937e7deb35fd6bca89",
-        "githubBranch": "main",
-        "id": "684042e245e28e4550cbd4e6"
+      "keyRegulation": [],
+      "requirements": {
+        "capitalRequirement": {
+          "minimumCapital": 5000
+        }
       },
-      "status": "draft",
-      "tenant": "683f46937e7deb35fd6bca89",
-      "standoutFeatures": [],
-      "meta": {
-
+      "regScoreRating": {
+        "regulatorTrustScore": [],
+        "scoreCard": []
       },
-      "logo": {
-        "createdAt": "2025-07-11T10:25:32.783Z",
-        "updatedAt": "2025-07-11T10:25:32.783Z",
-        "status": "published",
-        "alt": "Curaçao and Sint Maarten regulatory authority",
-        "blog": "684042e245e28e4550cbd4e6",
-        "sizes": {
-          "small": {
-            "width": 775,
-            "height": 259,
-            "mimeType": "image/webp",
-            "filesize": 4956,
-            "filename": "CuracaoandSintMaarten-775.webp",
-            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/small/CuracaoandSintMaarten-775.webp"
-          },
-          "tablet": {
-            "width": 961,
-            "height": 321,
-            "mimeType": "image/webp",
-            "filesize": 6214,
-            "filename": "CuracaoandSintMaarten-1020.webp",
-            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/tablet/CuracaoandSintMaarten-1020.webp"
-          },
-          "large": {
-            "width": 961,
-            "height": 321,
-            "mimeType": "image/webp",
-            "filesize": 6214,
-            "filename": "CuracaoandSintMaarten-1627.webp",
-            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/large/CuracaoandSintMaarten-1627.webp"
-          }
-        },
-        "tenant": "683f46937e7deb35fd6bca89",
-        "url": "https://api.kenyaforexfirm.com/api/media/file/CuracaoandSintMaarten.png",
-        "thumbnailURL": null,
-        "filename": "CuracaoandSintMaarten.png",
-        "mimeType": "image/png",
-        "filesize": 43992,
-        "width": 961,
-        "height": 321,
-        "focalX": 50,
-        "focalY": 50,
-        "id": "6870e69cc1d9c8abe1522a7a",
-        "slug": "curaçao-and-sint-maarten-regulatory-authority",
-        "caption": "curaçao-and-sint-maarten-regulatory-authority"
-      },
-      "id": "6870e64ac1d9c8abe1522a58"
+      "segregatedAccounts": true,
+      "disputeResolution": true
     }
   ],
-  "totalDocs": 14,
+  "totalDocs": 15,
   "limit": 3,
   "totalPages": 5,
   "page": 1,

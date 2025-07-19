@@ -44,6 +44,9 @@ function textToRichText(text: string): RichText {
  * Transform regulator data from the API into the format expected by our components
  */
 export function transformRegulatorData(regulator: Regulator): RegulatorPage {
+  if (!regulator) {
+    throw new Error('No regulator data provided to transform');
+  }
   // Create sections from regulator data
   const sections = [];
   
