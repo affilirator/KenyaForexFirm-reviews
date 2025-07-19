@@ -1,6 +1,7 @@
+//https://api.kenyaforexfirm.com/api/globals/site?depth=2
 {
   "createdAt": "2025-07-17T15:29:33.861Z",
-  "updatedAt": "2025-07-17T17:22:06.556Z",
+  "updatedAt": "2025-07-19T14:27:35.343Z",
   "globalType": "site",
   "name": "Best Forex Broker Reviews | By Kenya Forex Firm",
   "url": "https://fx.kenyaforexfirm.com",
@@ -140,6 +141,11 @@
   "isSubsidiary": true,
   "parentOrganization": {
 
+  },
+  "defaultAuthor": {
+    "slug": "patrick-mahinge",
+    "name": "Patrick Mahinge",
+    "id": "6850b776788b53611ad7ae0d"
   },
   "id": "687916ddcc5534fd4f98db24"
 }

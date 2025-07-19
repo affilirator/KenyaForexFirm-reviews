@@ -62,7 +62,7 @@ const regulationExperts = authors.filter(author =>
 );
 
 // Get the main author for this page (first regulation expert or first author)
-const pageAuthor = regulationExperts.length > 0 ? regulationExperts[0] : (authors.length > 0 ? authors[0] : null);
+const pageAuthor = regulationExperts.length > 0 ? regulationExperts[0] : (authors.length > 0 ? authors[0] : undefined);
 ---
 
 <BaseLayout

@@ -25,9 +25,9 @@ export async function getAllAuthors(): Promise<Author[]> {
 /**
  * Get default author (first author in the list)
  */
-export async function getDefaultAuthor(): Promise<Author | null> {
+export async function getDefaultAuthor(): Promise<Author | undefined> {
   const authors = await getAllAuthors();
-  return authors.length > 0 ? authors[0] : null;
+  return authors.length > 0 ? authors[0] : undefined;
 }
 
 /**

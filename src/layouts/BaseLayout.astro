@@ -28,7 +28,7 @@ const {
 } = Astro.props;
 
 // Get default author if none is provided
-let pageAuthor: Author | null | undefined = author;
+let pageAuthor: Author | undefined = author;
 if (!pageAuthor) {
   pageAuthor = await getDefaultAuthor();
 }
