@@ -31,7 +31,7 @@ let foundLinkData: CloakedLinkData | null = null;
 if (slug) {
   try {
     // Construct the API URL to fetch the specific cloaked link
-    const apiResponse = await fetch(`${PAYLOAD_API_URL}/api/cloakedLinks?where[slug][equals]=/go/${slug}`);
+    const apiResponse = await fetch(`${PAYLOAD_API_URL}/api/cloaked-links?where[slug][equals]=/go/${slug}`);
 
     if (apiResponse.ok) {
       const data = await apiResponse.json();
