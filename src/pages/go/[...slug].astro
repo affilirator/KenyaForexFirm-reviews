@@ -1,10 +1,5 @@
 ---
-export const prerender = false;
-import { getCollection } from 'astro:content'; // Not directly used here, but common for content collections
-//import { Astro } from 'astro/runtime'; // Not usually needed for simple page setup
-
-// This tells Astro to server-render this page instead of pre-rendering it
-
+//export const prerender = true; // Explicitly tells Astro to pre-render this route
 
 interface Destination {
   url: string;
@@ -13,80 +8,90 @@ interface Destination {
 }
 
 interface CloakedLinkData {
-  slug: string;
+  slug: string; // e.g., "/go/product-name"
   destinationURLs: Destination[];
   trackingData?: Record<string, any>;
-  id: string; // Payload adds an ID
+  id: string;
   updatedAt: string;
   createdAt: string;
 }
 
-// Get the slug from the URL
-const { slug } = Astro.params;
-const PAYLOAD_API_URL = 'https://api.kenyaforexfirm.com'; // From your .env file
+// This function runs AT BUILD TIME
+export async function getStaticPaths() {
+  const PAYLOAD_API_URL = 'https://api.kenyaforexfirm.com' //|| import.meta.env.PAYLOAD_PUBLIC_SERVER_URL; // Ensure this is set in .env
 
-let redirectUrl: string | null = null;
-let foundLinkData: CloakedLinkData | null = null;
-
-if (slug) {
+  let allCloakedLinks: CloakedLinkData[] = [];
   try {
-    // Construct the API URL to fetch the specific cloaked link
-    const apiResponse = await fetch(`${PAYLOAD_API_URL}/api/cloaked-links?where[slug][equals]=/go/${slug}`);
+    // Fetch ALL cloaked links from your Payload CMS API
+    // You might need pagination if you have many links: /api/cloakedLinks?limit=1000
+    const apiResponse = await fetch(`${PAYLOAD_API_URL}/api/cloaked-links?limit=1000`);
 
     if (apiResponse.ok) {
       const data = await apiResponse.json();
-
-      if (data.docs && data.docs.length > 0) {
-        foundLinkData = data.docs[0] as CloakedLinkData;
-        const destinations = foundLinkData.destinationURLs;
-
-        if (destinations && destinations.length > 0) {
-          // --- Logic to select a destination URL (Weighted Redirect Example) ---
-          const totalWeight = destinations.reduce((sum, dest) => sum + (dest.weight || 0), 0);
-
-          if (totalWeight === 0) {
-              // Fallback if no weights are defined or all are 0
-              const randomIndex = Math.floor(Math.random() * destinations.length);
-              redirectUrl = destinations[randomIndex].url;
-          } else {
-              let randomNumber = Math.random() * totalWeight;
-              for (const dest of destinations) {
-                if (randomNumber < (dest.weight || 0)) {
-                  redirectUrl = dest.url;
-                  break;
-                }
-                randomNumber -= (dest.weight || 0);
-              }
-              // Fallback if somehow nothing selected (shouldn't happen with correct weights)
-              if (!redirectUrl) {
-                  redirectUrl = destinations[0].url;
-              }
-          }
-          // --- End selection logic ---
-
-          // --- Server-side Redirection (Recommended for Cloaking) ---
-          // Use Astro.redirect for a 302 redirect. This happens on the server before the page renders.
-          // This is the most effective way to "cloak" with Astro.
-          return Astro.redirect(redirectUrl, 302); // 302 Found (Temporary Redirect)
-          // For a permanent redirect, use 301: Astro.redirect(redirectUrl, 301);
-          // --- End Server-side Redirection ---
-
-        } else {
-          console.warn(`Cloaked link /go/${slug} has no destination URLs.`);
-        }
-      } else {
-        console.warn(`Cloaked link /go/${slug} not found in Payload.`);
-      }
+      allCloakedLinks = data.docs as CloakedLinkData[];
     } else {
-      console.error(`Error fetching cloaked link data: ${apiResponse.status} ${apiResponse.statusText}`);
+      console.error(`Error fetching cloaked links for getStaticPaths: ${apiResponse.status} ${apiResponse.statusText}`);
     }
   } catch (error) {
-    console.error('Error processing cloaked link:', error);
+    console.error('Error in getStaticPaths while fetching cloaked links:', error);
   }
+
+  // Map each cloaked link to a path object required by getStaticPaths
+  // The `params.slug` should match the dynamic segment in your filename `[...slug].astro`
+  return allCloakedLinks.map((link) => ({
+    params: {
+      // Remove the "/go/" prefix if your slug in Payload starts with it,
+      // as the Astro route already handles "/go/"
+      slug: link.slug.replace(/^\/go\//, ''),
+    },
+    props: {
+      cloakedLink: link, // Pass the entire link object as props
+    },
+  }));
 }
 
-// If no redirect happened (e.g., link not found or error), show a 404 page
-// You can customize this page or redirect to a generic 404
+// These props are available at BUILD TIME when Astro renders each static page
+const { cloakedLink } = Astro.props;
+
+let redirectUrl: string | null = null;
+
+if (cloakedLink && cloakedLink.destinationURLs && cloakedLink.destinationURLs.length > 0) {
+  const destinations = cloakedLink.destinationURLs;
+
+  // --- Logic to select a destination URL (Weighted Redirect Example) ---
+  const totalWeight = destinations.reduce((sum, dest) => sum + (dest.weight || 0), 0);
+
+  if (totalWeight === 0) {
+    const randomIndex = Math.floor(Math.random() * destinations.length);
+    redirectUrl = destinations[randomIndex].url;
+  } else {
+    let randomNumber = Math.random() * totalWeight;
+    for (const dest of destinations) {
+      if (randomNumber < (dest.weight || 0)) {
+        redirectUrl = dest.url;
+        break;
+      }
+      randomNumber -= (dest.weight || 0);
+    }
+    if (!redirectUrl) {
+        redirectUrl = destinations[0].url;
+    }
+  }
+  // --- End selection logic ---
+
+  // Astro.redirect can be used in getStaticPaths for server-side redirects
+  // This is the ideal way to handle "cloaking" during SSG.
+  // Astro generates an HTML file that immediately issues a 302 redirect.
+  // It's technically not truly static *content* but a static *redirect* file.
+  return Astro.redirect(redirectUrl, 302);
+} else {
+  // Handle cases where cloakedLink or its destinations are missing/empty
+  // If getStaticPaths didn't return a path for it, it would already be a 404.
+  // This part would only be hit if props.cloakedLink existed but was malformed.
+  // For robustness, you might want to return a specific 404 page here.
+  Astro.response.status = 404;
+  Astro.response.statusText = 'Not Found';
+}
 ---
 <!DOCTYPE html>
 <html lang="en">
