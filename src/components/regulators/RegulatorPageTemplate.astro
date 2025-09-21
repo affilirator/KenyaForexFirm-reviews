@@ -16,6 +16,7 @@ import {
   TopRegulatedBrokers
 } from '../regulators';
 import ErrorDisplay from '../common/ErrorDisplay.astro';
+import RegulatorCard from './RegCardTwo';
 
 interface Props {
   regulatorData: AsicRegulationGlobal | null;
@@ -23,6 +24,17 @@ interface Props {
 }
 
 const { regulatorData, error } = Astro.props;
+const name = 'Australian Securities Investment Company'
+const shortName = 'ASIC'
+const description = regulatorData?.aboutRegulator
+const country = 'Australia'
+const region = 'Oceania'
+const established = regulatorData?.aboutRegulator.establishedDate
+const logo = regulatorData?.hero.heroImage.url
+const trustScore = 90
+const slug = 'asic-regulation'
+const brokerArray = regulatorData?.relationships.regulatedBrokers
+
 
 // Set page metadata
 const pageTitle = regulatorData?.meta?.title || 'Forex Regulator Information';
@@ -40,6 +52,18 @@ const pageDescription = regulatorData?.meta?.description || 'Learn about this fi
       backLink={{ text: "View All Regulators", url: "/regulators" }}
     />
   )}
+  <RegulatorCard
+    name={name}
+    shortName={shortName}
+    description={description}
+    country={country}
+    region={region}
+    established={established}
+    logo={logo}
+    trustScore={trustScore}
+    slug={slug}
+    client:load
+  />
 
   {regulatorData && (
     <>
@@ -64,10 +88,10 @@ const pageDescription = regulatorData?.meta?.description || 'Learn about this fi
       )}
       
       <!-- Top Regulated Brokers Section -->
-      {regulatorData.officialWebsite && regulatorData.regulatorRelationship?.shortName && (
+      {regulatorData.aboutRegulator.officialWebsite && shortName && (
         <TopRegulatedBrokers
-          regulatorWebsite={regulatorData.officialWebsite}
-          regulatorName={regulatorData.regulatorRelationship.shortName}
+          regulatorWebsite={regulatorData.aboutRegulator.officialWebsite}
+          regulatorName={shortName}
           sectionId="top-regulated-brokers"
         />
       )}
