@@ -12,6 +12,11 @@ const { broker, rank } = Astro.props;
 const safetyScore = broker.catRatings?.safetyAndRegulation?.catScore || 0;
 const author = broker.author?.[0];
 
+// Convert camelCase to proper capitalization
+const formatFeature = (feature: string) => {
+  return feature.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+};
+
 // Determine safety level class based on score
 let safetyLevelClass = "bg-red-500/20 text-red-400";
 let safetyText = "Limited Protection";
@@ -120,7 +125,7 @@ if (safetyScore >= 8) {
         <div class="flex flex-wrap gap-2">
           {broker.features.slice(0, 3).map((feature) => (
             <span class="bg-neutral-700/30 text-neutral-300 px-3 py-1 rounded-full text-xs">
-              {feature}
+              {formatFeature(feature)}
             </span>
           ))}
         </div>
