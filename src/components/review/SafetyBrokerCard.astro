@@ -1,6 +1,6 @@
 ---
 import type { BrokerProps } from '../../types';
-
+import { uniqueRegulators } from '~/lib/regulated-brokers';
 interface Props {
   broker: BrokerProps;
   rank: number;
@@ -78,16 +78,16 @@ if (safetyScore >= 8) {
       <!-- Regulation info -->
       <div class="bg-neutral-700/20 p-3 rounded-lg">
         <div class="text-xs text-neutral-400 mb-1">Regulation</div>
-        {broker.regulation && broker.regulation.length > 0 ? (
+        {broker.regulations && broker.regulations.length > 0 ? (
           <div class="flex flex-wrap gap-1">
-            {Array.isArray(broker.regulation) && broker.regulation.slice(0, 2).map((reg) => (
+            {Array.isArray(broker.regulations) && broker.regulations.slice(0, 2).map((reg) => (
               <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-white">
-                {reg.shortName || reg.name}
+                {typeof reg === 'string' ? reg : reg.shortName || reg.name}
               </span>
             ))}
-            {Array.isArray(broker.regulation) && broker.regulation.length > 2 && (
+            {Array.isArray(broker.regulations) && broker.regulations.length > 2 && (
               <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-white">
-                +{broker.regulation.length - 2}
+                +{broker.regulations.length - 2}
               </span>
             )}
           </div>

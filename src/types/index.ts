@@ -184,7 +184,7 @@ export type BrokerProps = {
   review?: BrokerReview;
   author: ReviewContentAuthor[];
   regulation?: Array<Regulation> | Regulation[];
-  regulations?: string[];
+  regulations?: BrokerRegulation[];
   regulators?: string[];
   isRegulated?: boolean;
   minDeposit?: number;
