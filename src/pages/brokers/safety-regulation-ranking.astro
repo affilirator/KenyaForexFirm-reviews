@@ -14,14 +14,25 @@ import { site } from '../../data/site';
 import { getReviews } from '~/lib/qs-esm';
 import { getRegulators } from '~/lib/regulators-api';
 import { getAuthors } from '~/lib/api-service';
-import type { BrokerProps } from '../../types';
-import type { Regulator } from '../../types/regulator';
-import type { Author } from '../../types/author';
+
+
+const authorDocs = await getAuthors()
+const author = authorDocs.docs[0]
+
+// Fetch all brokers
+const brokersData = await getReviews();
+
+const brokers = brokersData?.docs || [];
+
+// Filter to only regulated brokers and limit to 10
+const regulatedBrokers = brokers.filter(broker => broker.isRegulated === true).slice(0, 10);
 
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": `Safest Forex Brokers in Kenya - ${site.name}`,
+  lastReviewed: new Date().toISOString(),
+  author: author.name,
   "description": `Top forex brokers ranked by safety and regulation for ${site.address.country} traders`,
   "url": new URL(Astro.request.url),
   "mainEntity": {
@@ -31,12 +42,10 @@ const schemaData = {
   }
 };
 
-// Fetch all brokers
-const brokersData = await getReviews();
-const brokers = brokersData?.docs || [];
 
-// Sort brokers by safety and regulation rating
-const rankedBrokers = [...brokers].sort((a, b) => {
+
+// Sort regulated brokers by safety and regulation rating
+const rankedBrokers = [...regulatedBrokers].sort((a, b) => {
   const aScore = a.catRatings?.safetyAndRegulation?.catScore || 0;
   const bScore = b.catRatings?.safetyAndRegulation?.catScore || 0;
   return bScore - aScore; // Sort in descending order
