@@ -42,12 +42,19 @@ const schemaData = {
   lastReviewed: new Date().toISOString(),
   author: {
     '@type': 'Person',
-    "@id": site.address + '/authors/patrick-mahinge/author',
-
-    //"@id": site.url
+    "@id": `${site.url}/authors/${author.slug}/`,
+    name: author.name,
+    description: author.bio,
+    worksFor: {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      "name": site.name,
+      "url": site.url
+    },
+    jobTitle: author.jobTitle || 'Founder of Kenya Forex Firm - CMT Charterholder',
     
-    //'@id': site.
-  name: author.name
+    knowsAbout: author.knowsAbout?.map(expertise => expertise.fieldName) || [],
+    url: `${site.url}/authors/${author.slug}/`
   },
   "description": `Top forex brokers ranked by safety and regulation for ${site.address.country} traders`,
   "url": new URL(Astro.request.url),
@@ -57,10 +64,6 @@ const schemaData = {
     "itemListElement": []
   }
 };
-
-
-
-
 // Update schema data with ranked brokers
 schemaData.mainEntity.itemListElement = rankedBrokers.map((broker, index) => ({
   "@type": "ListItem",
@@ -69,7 +72,24 @@ schemaData.mainEntity.itemListElement = rankedBrokers.map((broker, index) => ({
     "@type": "Organization",
     "name": broker.brokerName,
     "url": `${site.url}/brokers/${broker.slug}/`,
-    "description": `Safety score: ${(broker.catRatings?.safetyAndRegulation?.catScore || 0).toFixed(1)}/10`
+    "description": `Safety score: ${(broker.catRatings?.safetyAndRegulation?.catScore || 0).toFixed(1)}/10`,
+    review: {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "@id": `${site.url}/authors/${author.slug}/`,
+        "name": broker.author?.[0]?.name || site.name
+      },
+      "reviewBody": broker.description || `Comprehensive review of ${broker.brokerName}.`,
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": (broker.catRatings?.safetyAndRegulation?.catScore || 0).toFixed(1),
+        "bestRating": "10",
+        "worstRating": "0",
+        reviewAspect: 'Forex Broker Safety and Regulation in Kenya'
+
+      }
+    }
   }
 }));
 schemaData.mainEntity.numberOfItems = rankedBrokers.length;
