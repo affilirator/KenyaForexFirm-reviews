@@ -1,6 +1,7 @@
 ---
 import type { BrokerProps } from '../../types';
 import { uniqueRegulators } from '~/lib/regulated-brokers';
+import { Image } from 'astro:assets';
 interface Props {
   broker: BrokerProps;
   rank: number;
@@ -41,14 +42,16 @@ if (safetyScore >= 8) {
     <div class="flex items-center gap-4 mb-6">
       <div class="flex-shrink-0">
         {typeof broker.logo === 'object' && broker.logo?.url ? (
-          <img 
+          <Image 
             src={broker.logo.url} 
+            inferSize
             alt={`${broker.brokerName} logo`} 
             class="w-16 h-16 object-contain rounded-lg bg-white p-1 shadow-md"
           />
         ) : typeof broker.logo === 'string' ? (
-          <img 
+          <Image 
             src={broker.logo} 
+            inferSize
             alt={`${broker.brokerName} logo`} 
             class="w-16 h-16 object-contain rounded-lg bg-white p-1 shadow-md"
           />
@@ -61,7 +64,7 @@ if (safetyScore >= 8) {
       
       <div>
         <h3 class="text-xl font-bold text-white group-hover:text-primary-400 transition-colors">
-          <a href={`/brokers/${broker.slug}`} class="hover:text-primary-400">
+          <a href={`/brokers/${broker.slug}/`} class="hover:text-primary-400">
             {broker.brokerName}
           </a>
         </h3>
@@ -77,17 +80,22 @@ if (safetyScore >= 8) {
     <div class="grid grid-cols-2 gap-4 mb-6">
       <!-- Regulation info -->
       <div class="bg-neutral-700/20 p-3 rounded-lg">
-        <div class="text-xs text-neutral-400 mb-1">Regulation</div>
-        {broker.regulations && broker.regulations.length > 0 ? (
+        <div class="regulations text-xs text-neutral-400 mb-1">Regulation</div>
+        {(broker.regulations && broker.regulations.length > 0) || (broker.regulators && broker.regulators.length > 0) ? (
           <div class="flex flex-wrap gap-1">
-            {Array.isArray(broker.regulations) && broker.regulations.slice(0, 2).map((reg) => (
+            {broker.regulations && broker.regulations.slice(0, 2).map((reg) => (
               <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-white">
-                {typeof reg === 'string' ? reg : reg.shortName || reg.name}
+                {reg.shortName || reg.name}
               </span>
             ))}
-            {Array.isArray(broker.regulations) && broker.regulations.length > 2 && (
+            {broker.regulators && broker.regulators.slice(0, 2).map((reg) => (
               <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-white">
-                +{broker.regulations.length - 2}
+                {reg}
+              </span>
+            ))}
+            {((broker.regulations && broker.regulations.length > 2) || (broker.regulators && broker.regulators.length > 2)) && (
+              <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-white">
+                +{(broker.regulations?.length || 0) + (broker.regulators?.length || 0) - 2}
               </span>
             )}
           </div>
