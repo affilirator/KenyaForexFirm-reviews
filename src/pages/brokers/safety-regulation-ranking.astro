@@ -27,6 +27,14 @@ const brokers = brokersData?.docs || [];
 // Filter to only regulated brokers and limit to 10
 const regulatedBrokers = brokers.filter(broker => broker.isRegulated === true).slice(0, 10);
 
+
+// Sort regulated brokers by safety and regulation rating
+const rankedBrokers = [...regulatedBrokers].sort((a, b) => {
+  const aScore = a.catRatings?.safetyAndRegulation?.catScore || 0;
+  const bScore = b.catRatings?.safetyAndRegulation?.catScore || 0;
+  return bScore - aScore; // Sort in descending order
+});
+
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -37,19 +45,26 @@ const schemaData = {
   "url": new URL(Astro.request.url),
   "mainEntity": {
     "@type": "ItemList",
-    "numberOfItems": 15,
+    "numberOfItems": 10,
     "itemListElement": []
   }
 };
 
 
 
-// Sort regulated brokers by safety and regulation rating
-const rankedBrokers = [...regulatedBrokers].sort((a, b) => {
-  const aScore = a.catRatings?.safetyAndRegulation?.catScore || 0;
-  const bScore = b.catRatings?.safetyAndRegulation?.catScore || 0;
-  return bScore - aScore; // Sort in descending order
-});
+
+// Update schema data with ranked brokers
+schemaData.mainEntity.itemListElement = rankedBrokers.map((broker, index) => ({
+  "@type": "ListItem",
+  "position": index + 1,
+  "item": {
+    "@type": "Organization",
+    "name": broker.brokerName,
+    "url": `${site.url}/brokers/${broker.slug}/`,
+    "description": `Safety score: ${(broker.catRatings?.safetyAndRegulation?.catScore || 0).toFixed(1)}/10`
+  }
+}));
+schemaData.mainEntity.numberOfItems = rankedBrokers.length;
 
 // Fetch regulators data
 const regulatorsData = await getRegulators();
