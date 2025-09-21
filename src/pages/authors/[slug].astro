@@ -187,7 +187,7 @@ const metaDescription = author.meta?.description || `Learn about ${authorName}, 
                 <p class="text-neutral-300">{author.bio}</p>
               </div>
               <div>
-                <RichTextRenderer content={author.authorBio} />
+                <RichTextRenderer content={author.authorBio} client:visible />
               </div>
             </div>
           </div>
