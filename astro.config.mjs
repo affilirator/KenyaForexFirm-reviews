@@ -5,9 +5,11 @@ import icon from 'astro-icon';
 
 import node from '@astrojs/node';
 
+import react from '@astrojs/react';
+
 export default defineConfig({
   site: 'https://fx.kenyaforexfirm.com',
-  integrations: [tailwind(), icon()],
+  integrations: [tailwind(), icon(), react()],
 
   build: {
     inlineStylesheets: 'auto',

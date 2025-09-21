@@ -5,6 +5,7 @@ import { generateRegulatorMetadata } from '../../lib/regulatorUtils';
 import { getAuthorBySlug } from '../../lib/authors-api';
 import type { RegulatorPage, Regulator } from '../../types/regulator';
 import Layout from '../../layouts/BaseLayout.astro';
+import RegulatorCard from '~/components/regulators/RegCardTwo';
 import { 
   RegulatorHero, 
   RegulatorSection, 
@@ -42,6 +43,17 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const { regulator, author } = Astro.props;
+
+const {name,
+  shortName,
+  description,
+  country,
+  region,
+  established,
+  logo,
+  trustScore,
+  //slug,
+} = regulator
 
 // Transform the data to the format expected by our components
 let regulatorData: RegulatorPage | null = null;
@@ -115,6 +127,19 @@ const schemaMarkup = {
       backLink={{ text: "View All Regulators", url: "/regulators" }}
     />
   )}
+
+  <RegulatorCard
+    name={name}
+    shortName={shortName}
+    description={description}
+    country={country}
+    region={region}
+    established={established}
+    logo={logo}
+    trustScore={trustScore}
+    slug={slug}
+    client:load
+  />
 
   {regulatorData && (
     <>

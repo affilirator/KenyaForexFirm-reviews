@@ -95,7 +95,11 @@ export interface RegulatorPage {
 export interface Regulator {
   name: string;
   shortName: string;
+  region?: string;
   country: string;
+  author: Author;
+  createdAt: string;
+  updatedAt: string;
   description: string;
   trustScore: number;
   maxLeverage: string;
