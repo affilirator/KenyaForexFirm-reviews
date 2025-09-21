@@ -1,6 +1,6 @@
 ---
 import { getSafetyRegulation } from '~/lib/review-criteria/safety-regulation';
-import RichTextRenderer from './RichTextRenderer.astro';
+import RichTextRenderer from './RichTextRenderer.tsx';
 
 const data = await getSafetyRegulation();
 ---
@@ -15,6 +15,6 @@ const data = await getSafetyRegulation();
   </div>
   
   <div class="prose prose-invert max-w-none">
-    <RichTextRenderer content={data.methodology.root} />
+    <RichTextRenderer content={data.methodology.root} client:load />
   </div>
 </div>
