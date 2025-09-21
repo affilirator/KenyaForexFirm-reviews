@@ -75,14 +75,19 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Article",
+        "@id": canonicalURL,
+        //'@id': Astro.request.url,
         "author": {
           "@type": "Person",
+          
           "name": pageAuthor.name,
-          "url": `${site.url}/authors/${pageAuthor.slug}`
+          "url": `${site.url}/authors/${pageAuthor.slug}`,
+          "@id": `${site.url}/authors/${pageAuthor.slug}`
         },
         "publisher": {
           "@type": "Organization",
           "name": site.name,
+          "@id":`${site.url}/#organization`,
           "url": site.url,
           "logo": {
             "@type": "ImageObject",

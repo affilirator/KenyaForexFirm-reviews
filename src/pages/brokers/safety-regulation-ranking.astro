@@ -54,7 +54,12 @@ const schemaData = {
     jobTitle: author.jobTitle || 'Founder of Kenya Forex Firm - CMT Charterholder',
     
     knowsAbout: author.knowsAbout?.map(expertise => expertise.fieldName) || [],
-    url: `${site.url}/authors/${author.slug}/`
+    url: `${site.url}/authors/${author.slug}/`,
+    sameAs: [
+      author.socialMediaProfiles?.facebookUrl,
+      author.socialMediaProfiles?.twitterUrl,
+      ...(author.socialMediaProfiles?.additionalProfiles?.map(profile => profile.profileUrl) || [])
+    ].filter(Boolean) 
   },
   "description": `Top forex brokers ranked by safety and regulation for ${site.address.country} traders`,
   "url": new URL(Astro.request.url),
@@ -76,9 +81,9 @@ schemaData.mainEntity.itemListElement = rankedBrokers.map((broker, index) => ({
     review: {
       "@type": "Review",
       "author": {
-        "@type": "Person",
+        
         "@id": `${site.url}/authors/${author.slug}/`,
-        "name": broker.author?.[0]?.name || site.name
+        
       },
       "reviewBody": broker.description || `Comprehensive review of ${broker.brokerName}.`,
       "reviewRating": {
