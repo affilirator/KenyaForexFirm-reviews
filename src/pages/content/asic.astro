@@ -20,7 +20,16 @@ const title = 'Best ASIC-regulated Forex Brokers in Kenya';
   
 ---
 <BaseLayout title={title} description={regulator.description}>
-<RegulatorCard
+    <section>
+        <div class="container mx-auto px-4 py-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">ASIC Regulation Overview</h1>
+            <p class="text-neutral-300 mb-6 leading-relaxed">
+            The Australian Securities and Investments Commission (ASIC) is the financial regulatory body in Australia. Established in 1998, ASIC oversees financial markets, securities, and consumer protection to ensure fair and transparent operations. ASIC regulates forex brokers operating in Australia, enforcing strict compliance with financial laws and regulations to protect traders and maintain market integrity.
+            </p>
+            <p class="text-neutral-300 mb-6 leading-relaxed">
+            ASIC-regulated brokers must adhere to stringent requirements, including maintaining adequate capital reserves, segregating client funds, and providing transparent pricing. Traders benefit from ASIC's robust oversight, which includes dispute resolution services and compensation schemes in case of broker insolvency. Overall, ASIC regulation provides a high level of security and trust for forex traders in Australia.
+            </p>
+            <RegulatorCard
     name={name}
     shortName={shortName}
     description={description}
@@ -32,5 +41,9 @@ const title = 'Best ASIC-regulated Forex Brokers in Kenya';
     slug={slug}
     client:load
  />
+        </div>
+    </section>
+
+
 </BaseLayout>
 
