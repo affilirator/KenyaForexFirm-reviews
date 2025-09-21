@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <!-- Chosen Palette: Warm Neutrals & Professional Blues -->
-    <!-- Application Structure Plan: The SPA uses a single-page, top-to-bottom narrative structure. It starts with a personal hook ("Why care?"), explains the process ("Licensing Gauntlet"), presents key data ("Capital," "Funds"), provides practical context ("Trading Sessions"), shows historical progress ("Milestones"), and ends with a personal conclusion. This linear storytelling approach was chosen to guide a Kenyan retail trader from the foundational 'why' to the practical 'how' and 'what', making a complex regulatory topic digestible and relatable, mirroring a mentor's guidance. -->
-    <!-- Visualization & Content Choices: 1. Big Stat (76%): Goal: Inform. Method: Large HTML text. Interaction: None. Justification: High-impact introduction to risk. 2. Process Flow: Goal: Organize. Method: Styled HTML/Flexbox. Interaction: None. Justification: Clearly illustrates the multi-step licensing process without complex diagrams (No SVG/Mermaid). 3. Bar Chart (Capital): Goal: Compare. Method: Chart.js Canvas. Justification: Directly compares FSCA's strict requirements vs. weaker jurisdictions. 4. Doughnut Chart (Funds): Goal: Inform. Method: Chart.js Canvas. Justification: Visually represents the critical concept of 100% fund segregation simply. 5. Line Chart (Sessions): Goal: Change. Method: Chart.js Canvas. Justification: Shows volatility over a trading day, providing actionable context for Kenyan traders in their local timezone. 6. Timeline: Goal: Organize. Method: Styled HTML. Justification: Presents historical milestones in an easy-to-follow vertical format. -->
+    <!-- Application Structure Plan: The SPA uses a single-page, top-to-bottom narrative structure. It starts with a personal hook ("Why care?"), explains the process ("Licensing Gauntlet"), presents key data ("Capital," "Funds"), adds an interactive explainer ("Leverage"), compares regulators visually ("Broker Comparison"), provides practical context ("Trading Sessions"), shows historical progress ("Milestones"), and ends with a personal conclusion. This linear storytelling approach was chosen to guide a Kenyan retail trader from the foundational 'why' to the practical 'how' and 'what', making a complex regulatory topic digestible and relatable. The new interactive elements enhance learning through direct engagement. -->
+    <!-- Visualization & Content Choices: 1. Big Stat (76%): Goal: Inform. Method: Large HTML text. 2. Process Flow: Goal: Organize. Method: Styled HTML/Flexbox. 3. Bar Chart (Capital): Goal: Compare. Method: Chart.js Canvas. 4. Doughnut Chart (Funds): Goal: Inform. Method: Chart.js Canvas. 5. Interactive Sliders (Leverage/Margin): Goal: Inform/Explore. Method: HTML Sliders + JS. Justification: Provides a hands-on tool for understanding the critical relationship between leverage, trade size, and required margin. 6. Radar Chart (Regulator Comparison): Goal: Compare. Method: Chart.js Canvas. Justification: Offers a powerful multi-axis visual comparison of different regulatory environments, highlighting FSCA's strengths. 7. Line Chart (Sessions): Goal: Change. Method: Chart.js Canvas. 8. Timeline: Goal: Organize. Method: Styled HTML. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +16,9 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F8F7F4;
-            color: #2c3e50;
+            background-color: #0D1B2A;
+            color: #E0E1DD;
+            
         }
         .chart-container {
             position: relative;
@@ -34,20 +35,41 @@
             }
         }
         .card {
-            background-color: #FFFFFF;
-            border: 1px solid #ecf0f1;
+            background-color: #1B263B;
+            border: 1px solid #415A77;
         }
-        .stat-number {
+       .stat-number {
             font-weight: 900;
             font-size: 4rem;
             line-height: 1;
-            color: #3498db;
+            color: #E0E1DD;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
         .text-muted {
             color: #7f8c8d;
         }
-        .accent-color {
-            color: #3498db;
+        input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            background: #ecf0f1;
+            height: 0.5rem;
+            border-radius: 0.5rem;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            margin-top: -6px;
+            background-color: #3498db;
+            height: 1.5rem;
+            width: 1.5rem;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -64,7 +86,7 @@
             
             <section class="card rounded-xl shadow-lg p-6 md:p-8">
                 <h2 class="text-2xl font-bold mb-4">Why Should We in Kenya Even Care About the FSCA?</h2>
-                <p class="mb-4">It's just before dawn here in Rungiri, Kiambu, 5:37 AM to be exact. The air is cool and as the first light hits the Aberdares, my mind is already on the markets—and on you, my fellow traders. I'm often asked, "Patrick, why do you always insist on FSCA-regulated brokers?" The answer goes back to my early days over a decade ago when the forex scene was a Wild West. Finding a trustworthy broker felt impossible. That's why today, for us in Africa, the South African FSCA is our gold standard, a true beacon of safety.</p>
+                <p class="mb-4">It's 11:33 PM on a quiet Sunday night here in Rungiri, Kiambu. The house is still, but the global markets are about to stir awake. It’s at times like these, planning the week ahead, that the importance of a solid foundation really hits home. For us traders, that foundation is a trustworthy broker. I'm often asked, "Patrick, why do you always insist on FSCA-regulated brokers?" The answer goes back to my early days over a decade ago when the forex scene was a Wild West. Finding a reliable partner felt impossible. That's why today, for us in Africa, the South African FSCA is our gold standard, a true beacon of safety.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     <div>
                         <p class="text-muted mb-4">The financial markets are tough by design. A 2023 study by the Financial Conduct Authority (FCA) in the UK reaffirmed that a staggering number of retail traders lose money. Often, the reason isn't just a bad strategy; it's falling prey to an unscrupulous broker. A strong regulator like the FSCA is your first and most critical line of defence. It ensures the game is played on a level field, so your success depends on your skill, not your broker's integrity.</p>
@@ -129,6 +151,34 @@
             </div>
 
             <section class="card rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold mb-4">Leverage & Margin: A Double-Edged Sword</h2>
+                <p class="text-muted mb-6">Leverage is a powerful tool; it allows us to control a large position with a small amount of capital. But it amplifies both gains and losses. The FSCA allows for significant leverage but expects brokers to ensure clients understand the risks. Let's make this real—play with the sliders below to see how leverage and trade size affect the actual margin you need in your account.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-[#F8F7F4] p-6 rounded-lg">
+                    <div>
+                        <label for="leverageSlider" class="block font-semibold mb-2">Leverage: <span id="leverageValue" class="font-bold text-[#3498db]">1:100</span></label>
+                        <input type="range" id="leverageSlider" min="1" max="500" value="100" class="w-full">
+                    </div>
+                    <div>
+                        <label for="tradeSizeSlider" class="block font-semibold mb-2">Trade Size (Lots): <span id="tradeSizeValue" class="font-bold text-[#3498db]">1.00</span></label>
+                        <input type="range" id="tradeSizeSlider" min="1" max="200" value="100" class="w-full">
+                    </div>
+                    <div class="md:col-span-2 mt-4 text-center space-y-2">
+                        <p class="text-lg">Total Position Value: <span id="positionValue" class="font-bold text-2xl text-green-600">$100,000</span></p>
+                        <p class="text-lg">Required Margin: <span id="marginValue" class="font-bold text-2xl text-red-600">$1,000.00</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold mb-4">Comparing Broker Regulations: FSCA vs. The Rest</h2>
+                <p class="text-muted mb-6">Not all regulators are created equal. I've traded with brokers under various jurisdictions, and the difference in protection is night and day. This chart gives you a bird's-eye view. The larger the shape for a regulator, the more comprehensive its protection framework. You can see why I have confidence in the FSCA's model.</p>
+                <div class="chart-container h-[400px] md:h-[450px] max-h-[500px]">
+                    <canvas id="regulatorRadarChart"></canvas>
+                </div>
+            </section>
+
+            <section class="card rounded-xl shadow-lg p-6 md:p-8">
                 <h2 class="text-2xl font-bold mb-4">Trading Sessions for Us in Kenya (EAT)</h2>
                 <p class="text-muted mb-6">Understanding market overlaps is key to catching volatility. As a Kenyan trader, your day is perfectly positioned to capture the lucrative London/New York overlap. I've made some of my best trades during this window. Here’s a look at the market rhythm in our local time (EAT), showing estimated volatility.</p>
                 <div class="chart-container h-[400px] md:h-[450px] max-h-[500px]">
@@ -136,45 +186,21 @@
                 </div>
             </section>
 
-             <section class="card rounded-xl shadow-lg p-6 md:p-8">
+            <section class="card rounded-xl shadow-lg p-6 md:p-8">
                 <h2 class="text-2xl font-bold mb-4">FSCA's Evolution: Key Milestones</h2>
                 <p class="text-muted mb-6">The FSCA isn't static; it constantly evolves to better protect us. It replaced the old FSB in 2018 and has been making huge strides ever since. These aren't just bureaucratic changes; they have a real impact on the safety of our funds and the fairness of the trading environment.</p>
                 <div class="space-y-6 border-l-2 border-[#ecf0f1] ml-3 py-4">
-                    <div class="relative">
-                        <div class="absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-[#bdc3c7]"></div>
-                        <div class="pl-8">
-                            <p class="font-bold text-lg">2018: FSCA is Born</p>
-                            <p class="text-sm text-muted">The Financial Sector Conduct Authority is established, replacing the Financial Services Board (FSB) with a stronger, more proactive mandate.</p>
-                        </div>
-                    </div>
-                     <div class="relative">
-                        <div class="absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-[#bdc3c7]"></div>
-                        <div class="pl-8">
-                            <p class="font-bold text-lg">2020: ODP Licensing Framework</p>
-                            <p class="text-sm text-muted">Introduced a dedicated license for Over-the-Counter Derivative Providers (ODPs), which includes forex brokers, tightening the rules specifically for our industry.</p>
-                        </div>
-                    </div>
-                     <div class="relative">
-                        <div class="absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-[#bdc3c7]"></div>
-                        <div class="pl-8">
-                            <p class="font-bold text-lg">2023: COFI Act Implementation</p>
-                            <p class="text-sm text-muted">Phased rollout of the Conduct of Financial Institutions Act, a landmark piece of legislation promoting fair outcomes for customers across the financial sector.</p>
-                        </div>
-                    </div>
-                     <div class="relative">
-                        <div class="absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-[#bdc3c7]"></div>
-                        <div class="pl-8">
-                            <p class="font-bold text-lg">2024: Enforcement Actions Increased</p>
-                            <p class="text-sm text-muted">The FSCA issued record fines and public warnings against non-compliant entities, sending a clear message that rogue operations will not be tolerated.</p>
-                        </div>
-                    </div>
+                    <div class="relative"><div class="absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-[#bdc3c7]"></div><div class="pl-8"><p class="font-bold text-lg">2018: FSCA is Born</p><p class="text-sm text-muted">The Financial Sector Conduct Authority is established, replacing the Financial Services Board (FSB) with a stronger, more proactive mandate.</p></div></div>
+                    <div class="relative"><div class="absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-[#bdc3c7]"></div><div class="pl-8"><p class="font-bold text-lg">2020: ODP Licensing Framework</p><p class="text-sm text-muted">Introduced a dedicated license for Over-the-Counter Derivative Providers (ODPs), which includes forex brokers, tightening the rules specifically for our industry.</p></div></div>
+                    <div class="relative"><div class="absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-[#bdc3c7]"></div><div class="pl-8"><p class="font-bold text-lg">2023: COFI Act Implementation</p><p class="text-sm text-muted">Phased rollout of the Conduct of Financial Institutions Act, a landmark piece of legislation promoting fair outcomes for customers across the financial sector.</p></div></div>
+                    <div class="relative"><div class="absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-[#bdc3c7]"></div><div class="pl-8"><p class="font-bold text-lg">2024: Enforcement Actions Increased</p><p class="text-sm text-muted">The FSCA issued record fines and public warnings against non-compliant entities, sending a clear message that rogue operations will not be tolerated.</p></div></div>
                 </div>
             </section>
 
             <footer class="text-center py-8">
                  <h2 class="text-2xl font-bold mb-4">Patrick's Final Word</h2>
-                <p class="text-muted max-w-3xl mx-auto">Trading is a business of probabilities, not certainties. While we can't control the market's next move, we can control our risk. That starts with choosing the right partners. Trading with an FSCA-regulated broker means you have a powerful ally ensuring fairness and security. Don't compromise. Trade smart, trade safe. Tuko pamoja!</p>
-                <p class="text-sm mt-4 text-gray-400">© 2025 Patrick Mahinge. Writing from Rungiri, Kiambu. For educational purposes only. Trading involves risk.</p>
+                <p class="text-muted max-w-3xl mx-auto">As the week begins, our task is clear: to navigate the markets with skill and discipline. Trading is a business of probabilities, and while we can't control the market's next move, we can control our risk. That starts with choosing the right partners. Trading with an FSCA-regulated broker means you have a powerful ally ensuring fairness and security. Don't compromise. Trade smart, trade safe. Tuko pamoja!</p>
+                <p class="text-sm mt-4 text-gray-400">© 2025 Patrick Mahinge. Writing from Rungiri, Kiambu at 11:33 PM, Sep 21. For educational purposes only.</p>
             </footer>
 
         </main>
@@ -183,13 +209,12 @@
     <script>
         const chartTextColor = '#2c3e50';
         const gridColor = '#ecf0f1';
+        const usdToKes = 135;
 
         const processLabels = (labels) => {
             const limit = 16;
             return labels.map(label => {
-                if (label.length <= limit) {
-                    return label;
-                }
+                if (label.length <= limit) return label;
                 const words = label.split(' ');
                 const newLabel = [];
                 let line = '';
@@ -208,37 +233,19 @@
         const tooltipTitleCallback = (tooltipItems) => {
             const item = tooltipItems[0];
             let label = item.chart.data.labels[item.dataIndex];
-            if (Array.isArray(label)) {
-                return label.join(' ');
-            } else {
-                return label;
-            }
+            return Array.isArray(label) ? label.join(' ') : label;
         };
 
         const sharedChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: {
-                    labels: {
-                        color: chartTextColor
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        title: tooltipTitleCallback
-                    }
-                }
+                legend: { labels: { color: chartTextColor } },
+                tooltip: { callbacks: { title: tooltipTitleCallback } }
             },
             scales: {
-                y: {
-                    ticks: { color: chartTextColor },
-                    grid: { color: gridColor }
-                },
-                x: {
-                    ticks: { color: chartTextColor },
-                    grid: { color: 'transparent' }
-                }
+                y: { ticks: { color: chartTextColor }, grid: { color: gridColor } },
+                x: { ticks: { color: chartTextColor }, grid: { color: 'transparent' } }
             }
         };
 
@@ -248,31 +255,13 @@
             data: {
                 labels: processLabels(['FSCA (South Africa)', 'Typical Offshore Zone']),
                 datasets: [{
-                    label: 'Minimum Capital Required (KES Equivalent)',
-                    data: [13500000, 1500000], 
+                    label: 'Minimum Capital Required (KES)',
+                    data: [100000 * usdToKes, 10000 * usdToKes], 
                     backgroundColor: ['#3498db', '#95a5a6'],
-                    borderColor: ['#2c3e50'],
                     borderWidth: 0
                 }]
             },
-            options: {
-                ...sharedChartOptions,
-                scales: {
-                     y: {
-                        ticks: { 
-                            color: chartTextColor,
-                            callback: function(value) {
-                                return 'KES ' + new Intl.NumberFormat().format(value);
-                            }
-                        },
-                        grid: { color: gridColor }
-                    },
-                    x: {
-                        ticks: { color: chartTextColor },
-                        grid: { color: 'transparent' }
-                    }
-                }
-            }
+            options: { ...sharedChartOptions, scales: { y: { ticks: { color: chartTextColor, callback: value => 'KES ' + new Intl.NumberFormat().format(value) }, grid: { color: gridColor } }, x: { ticks: { color: chartTextColor }, grid: { color: 'transparent' } } } }
         });
 
         const fundsCtx = document.getElementById('fundsChart').getContext('2d');
@@ -281,38 +270,13 @@
             data: {
                 labels: ['Client Funds (Segregated)', 'Broker Operational Funds'],
                 datasets: [{
-                    label: 'Fund Separation',
                     data: [100, 0],
                     backgroundColor: ['#2ecc71', '#F8F7F4'],
                     borderColor: ['#ffffff'],
                     borderWidth: 2
                 }]
             },
-            options: {
-                 responsive: true,
-                 maintainAspectRatio: false,
-                 plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            color: chartTextColor
-                        }
-                    },
-                    tooltip: {
-                         callbacks: {
-                            title: tooltipTitleCallback
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: '100% of Client Funds are Segregated',
-                        color: chartTextColor,
-                        font: {
-                            size: 16
-                        }
-                    }
-                }
-            }
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: chartTextColor } }, tooltip: { callbacks: { title: tooltipTitleCallback } }, title: { display: true, text: '100% of Client Funds are Segregated', color: chartTextColor, font: { size: 16 } } } }
         });
 
         const sessionsCtx = document.getElementById('sessionsChart').getContext('2d');
@@ -321,56 +285,50 @@
             data: {
                 labels: ['3 AM', '5 AM', '7 AM', '9 AM', '11 AM', '1 PM', '3 PM', '5 PM', '7 PM', '9 PM', '11 PM'],
                 datasets: [
-                    {
-                        label: 'LSE (London)',
-                        data: [0, 0, 0, 0, 8, 9, 10, 8, 5, 0, 0],
-                        borderColor: '#3498db',
-                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    },
-                    {
-                        label: 'NYSE (New York)',
-                        data: [0, 0, 0, 0, 0, 0, 5, 10, 9, 8, 5],
-                        borderColor: '#2ecc71',
-                        backgroundColor: 'rgba(46, 204, 113, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    }
+                    { label: 'LSE (London)', data: [0, 0, 0, 0, 8, 9, 10, 8, 5, 0, 0], borderColor: '#3498db', backgroundColor: 'rgba(52, 152, 219, 0.1)', tension: 0.4, fill: true },
+                    { label: 'NYSE (New York)', data: [0, 0, 0, 0, 0, 0, 5, 10, 9, 8, 5], borderColor: '#2ecc71', backgroundColor: 'rgba(46, 204, 113, 0.1)', tension: 0.4, fill: true }
                 ]
             },
-            options: {
-                ...sharedChartOptions,
-                plugins: {
-                    ...sharedChartOptions.plugins,
-                     title: {
-                        display: true,
-                        text: 'Market Volatility by Trading Session (EAT)',
-                        color: chartTextColor,
-                        font: { size: 16 }
-                    }
-                },
-                scales: {
-                    y: {
-                        ...sharedChartOptions.scales.y,
-                        title: {
-                            display: true,
-                            text: 'Estimated Volatility',
-                            color: chartTextColor
-                        }
-                    },
-                     x: {
-                        ...sharedChartOptions.scales.x,
-                        title: {
-                            display: true,
-                            text: 'Time (East Africa Time)',
-                            color: chartTextColor
-                        }
-                    }
-                }
-            }
+            options: { ...sharedChartOptions, plugins: { ...sharedChartOptions.plugins, title: { display: true, text: 'Market Volatility by Trading Session (EAT)', color: chartTextColor, font: { size: 16 } } }, scales: { y: { ...sharedChartOptions.scales.y, title: { display: true, text: 'Estimated Volatility', color: chartTextColor } }, x: { ...sharedChartOptions.scales.x, title: { display: true, text: 'Time (East Africa Time)', color: chartTextColor } } } }
         });
 
+        const regulatorRadarCtx = document.getElementById('regulatorRadarChart').getContext('2d');
+        new Chart(regulatorRadarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Capital Requirements', 'Leverage Limits', 'Client Fund Security', 'Negative Balance Protection', 'Dispute Resolution'],
+                datasets: [
+                    { label: 'FSCA', data: [9, 7, 10, 9, 8], borderColor: '#3498db', backgroundColor: 'rgba(52, 152, 219, 0.2)' },
+                    { label: 'CySEC', data: [7, 6, 8, 9, 7], borderColor: '#f1c40f', backgroundColor: 'rgba(241, 196, 15, 0.2)' },
+                    { label: 'Offshore', data: [2, 10, 3, 2, 2], borderColor: '#e74c3c', backgroundColor: 'rgba(231, 76, 60, 0.2)' }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { color: gridColor }, grid: { color: gridColor }, pointLabels: { color: chartTextColor, font: {size: 11} }, ticks: { backdropColor: '#F8F7F4', color: chartTextColor } } }, plugins: { legend: { labels: { color: chartTextColor } } } }
+        });
+
+        const leverageSlider = document.getElementById('leverageSlider');
+        const tradeSizeSlider = document.getElementById('tradeSizeSlider');
+        const leverageValue = document.getElementById('leverageValue');
+        const tradeSizeValue = document.getElementById('tradeSizeValue');
+        const positionValue = document.getElementById('positionValue');
+        const marginValue = document.getElementById('marginValue');
+
+        function updateMargin() {
+            const lev = leverageSlider.value;
+            const size = tradeSizeSlider.value / 100;
+            const posVal = size * 100000;
+            const margin = posVal / lev;
+
+            leverageValue.textContent = `1:${lev}`;
+            tradeSizeValue.textContent = size.toFixed(2);
+            positionValue.textContent = '$' + new Intl.NumberFormat().format(posVal);
+            marginValue.textContent = '$' + new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(margin);
+        }
+
+        leverageSlider.addEventListener('input', updateMargin);
+        tradeSizeSlider.addEventListener('input', updateMargin);
+        
+        updateMargin();
     </script>
 </body>
 </html>
