@@ -40,7 +40,11 @@ const schemaData = {
   "@type": "CollectionPage",
   "name": `Safest Forex Brokers in Kenya - ${site.name}`,
   lastReviewed: new Date().toISOString(),
-  author: author.name,
+  author: {
+    '@type': 'Person',
+    //'@id': site.
+  name: author.name
+  },
   "description": `Top forex brokers ranked by safety and regulation for ${site.address.country} traders`,
   "url": new URL(Astro.request.url),
   "mainEntity": {
