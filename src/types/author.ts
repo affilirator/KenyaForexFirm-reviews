@@ -115,6 +115,7 @@ export interface Author {
     jobTitle?: string;
     credentials?: string;
     bio: string;
+    authorBio: any;
     yearsExperience?: number;
     location?: AuthorLocation;
     certification: AuthorCertification[];

@@ -5,9 +5,11 @@ import AuthorExpertise from '../../components/authors/AuthorExpertise.astro';
 import AuthorCredentials from '../../components/authors/AuthorCredentials.astro';
 import AuthorReviewsList from '../../components/authors/AuthorReviewsList.astro';
 import AuthorSocial from '../../components/authors/AuthorSocial.astro';
+import RichTextRenderer from '~/components/review-criteria/RichTextRenderer';
 import { site } from '../../data/site';
 import { getAuthorBySlug, getAuthors } from '../../lib/api-service';
 import type { Author } from '../../types/author';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
   const authorsData = await getAuthors();
@@ -108,7 +110,7 @@ const metaDescription = author.meta?.description || `Learn about ${authorName}, 
         <!-- Author Image -->
         <div class="flex-shrink-0">
           {author.authorImage ? (
-            <img 
+            <Image
               src={author.authorImage.url} 
               alt={author.authorImage.alt || author.name} 
               width="200"
@@ -183,6 +185,9 @@ const metaDescription = author.meta?.description || `Learn about ${authorName}, 
               <h2 class="text-xl font-bold text-white mb-4">About {author.name}</h2>
               <div class="prose prose-invert max-w-none">
                 <p class="text-neutral-300">{author.bio}</p>
+              </div>
+              <div>
+                <RichTextRenderer content={author.authorBio} />
               </div>
             </div>
           </div>

@@ -52,8 +52,8 @@ if (socialMedia.facebookUrl) {
 if (socialMedia.twitterUrl) {
   allProfiles.push({ name: 'Twitter', url: socialMedia.twitterUrl });
 }
-if (socialMedia.additionalProfiles) {
-  socialMedia.additionalProfiles.forEach(profile => {
+if (socialMedia.otherProfiles) {
+  socialMedia.otherProfiles.forEach(profile => {
     allProfiles.push({ name: profile.profileName, url: profile.profileUrl });
   });
 }
