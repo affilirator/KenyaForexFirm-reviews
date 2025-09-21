@@ -1,11 +1,15 @@
 ---
 import type { AuthorSocialMedia } from '../../types/author';
 
+
 interface Props {
   socialMedia: AuthorSocialMedia;
+  name: string;
+  
+  
 }
 
-const { socialMedia } = Astro.props;
+const { socialMedia, name } = Astro.props;
 
 // Social media icons
 const socialIcons = {
@@ -58,7 +62,7 @@ if (socialMedia.additionalProfiles) {
 {allProfiles.length > 0 && (
   <div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden">
     <div class="p-6">
-      <h2 class="text-xl font-bold text-white mb-4">Connect with {socialMedia.name}</h2>
+      <h2 class="text-xl font-bold text-white mb-4">Connect with {name}</h2>
       
       <div class="flex flex-wrap gap-3">
         {allProfiles.map(profile => (

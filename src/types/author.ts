@@ -12,7 +12,6 @@ export interface AuthorKnowsAbout {
     fieldName: string;
     fieldUrl: string;
     description: string;
-    id: string;
 }
 
 export interface AuthorLocation {
@@ -23,11 +22,17 @@ export interface AuthorLocation {
 export interface AuthorSocialMedia {
     facebookUrl?: string;
     twitterUrl?: string;
-    additionalProfiles?: {
-        profileName: string;
-        profileUrl: string;
-        id: string;
-    }[];
+    youtubeUrl?: string | null;
+    instagramUrl?: string | null;
+    websiteUrl?: string | null;
+    linkedinUrl?: string | null;
+    otherProfiles?:
+          | {
+              profileName?: string | null;
+              profileUrl?: string | null;
+              id?: string | null;
+            }[]
+          | null;
 }
 
 export interface AuthorEducation {
@@ -87,6 +92,14 @@ export interface AuthorReview {
     id: string;
 }
 
+export interface AuthorCertification {
+    name?: string | null;
+    organization?: string | null;
+    year?: number | null;
+    url?: string | null;
+    id?: string | null;
+}
+
 export interface AuthorReviews {
     docs: AuthorReview[];
     hasNextPage: boolean;
@@ -104,10 +117,12 @@ export interface Author {
     bio: string;
     yearsExperience?: number;
     location?: AuthorLocation;
+    certification: AuthorCertification[];
     knowsAbout?: AuthorKnowsAbout[];
     socialMediaProfiles?: AuthorSocialMedia;
     education?: AuthorEducation[];
     workHistory?: AuthorWorkHistory[];
+    sameAs: string[];
     awards?: AuthorAward[];
     authorImage?: AuthorImage;
     reviews?: AuthorReviews;

@@ -45,7 +45,7 @@ const schemaData = {
     "sameAs": [
       author.socialMediaProfiles?.facebookUrl,
       author.socialMediaProfiles?.twitterUrl,
-      ...(author.socialMediaProfiles?.additionalProfiles?.map(p => p.profileUrl) || [])
+      ...(author.socialMediaProfiles?.otherProfiles?.map(p => p.profileUrl) || [])
     ].filter(Boolean),
     "knowsAbout": author.knowsAbout?.map(item => ({
       "@type": "Thing",
@@ -212,7 +212,7 @@ const metaDescription = author.meta?.description || `Learn about ${authorName}, 
           
           <!-- Social Media -->
           {author.socialMediaProfiles && (
-            <AuthorSocial socialMedia={{...author.socialMediaProfiles, name: author.name}} />
+            <AuthorSocial socialMedia={author.socialMediaProfiles} name={author.name} />
           )}
         </div>
       </div>
