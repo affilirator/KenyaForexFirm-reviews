@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface Props {
   content: any;
 }
@@ -28,18 +30,19 @@ export default function RichTextRenderer({ content }: Props) {
         }
         
         if (node.type === 'heading' && node.children?.length > 0) {
-          const Tag = (node.tag || 'h2') as keyof JSX.IntrinsicElements;
-          return <Tag key={index} dangerouslySetInnerHTML={{ __html: renderChildren(node.children) }} />;
+          const tag = node.tag || 'h2';
+          return React.createElement(tag, {
+            key: index,
+            dangerouslySetInnerHTML: { __html: renderChildren(node.children) }
+          });
         }
         
         if (node.type === 'list' && node.children?.length > 0) {
-          const ListTag = (node.tag || 'ul') as keyof JSX.IntrinsicElements;
-          return (
-            <ListTag key={index}>
-              {node.children.map((item: any, itemIndex: number) => (
-                <li key={itemIndex} dangerouslySetInnerHTML={{ __html: renderChildren(item.children) }} />
-              ))}
-            </ListTag>
+          const tag = node.tag || 'ul';
+          return React.createElement(tag, { key: index }, 
+            node.children.map((item: any, itemIndex: number) => (
+              <li key={itemIndex} dangerouslySetInnerHTML={{ __html: renderChildren(item.children) }} />
+            ))
           );
         }
         

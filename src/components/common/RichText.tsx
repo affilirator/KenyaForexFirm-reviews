@@ -74,7 +74,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
 
         default:
           // paragraph is the default
-          return <p key={i} className="my-4 leading-relaxed">{serialize(node.children)}</p>;
+          return <p key={i} className="text-base my-8 leading-relaxed">{serialize(node.children)}</p>;
       }
     });
   }
