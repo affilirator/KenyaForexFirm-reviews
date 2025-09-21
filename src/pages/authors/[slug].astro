@@ -190,7 +190,7 @@ const metaDescription = author.meta?.description || `Learn about ${authorName}, 
               <div class="prose prose-invert max-w-none">
                 <p class="text-neutral-300">{author.bio}</p>
               </div>
-              <div>
+              <div class='prose prose-invert mt-4 border-neutral-700/50 '>
                 <RichTextRenderer content={author.authorBio.root} client:visible />
               </div>
             </div>

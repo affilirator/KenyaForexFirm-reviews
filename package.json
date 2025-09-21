@@ -23,6 +23,7 @@
     "astro": "^5.11.0",
     "astro-icon": "^1.1.5",
     "astro-seo": "^0.8.4",
+    "escape-html": "^1.0.3",
     "qs-esm": "^7.0.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
+    "@types/escape-html": "^1.0.4",
     "autoprefixer": "^10.4.21",
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
