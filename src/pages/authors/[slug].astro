@@ -27,6 +27,9 @@ interface Props {
 
 const { author } = Astro.props;
 
+// Sort reviews by brokerRating (highest first)
+const sortedReviews = author.reviews?.docs ? [...author.reviews.docs].sort((a, b) => b.brokerRating - a.brokerRating) : [];
+
 // Format author name for meta title
 const authorName = author.name;
 const authorTitle = author.jobTitle || 'Financial Expert';
@@ -95,6 +98,7 @@ if (author.location) {
 // Meta title and description
 const metaTitle = author.meta?.title || `${authorName} - ${authorTitle} | ${site.name}`;
 const metaDescription = author.meta?.description || `Learn about ${authorName}, ${authorTitle.toLowerCase()} at ${site.name}. Read expert forex broker reviews and financial insights.`;
+
 ---
 
 <BaseLayout
@@ -193,9 +197,9 @@ const metaDescription = author.meta?.description || `Learn about ${authorName}, 
           </div>
           
           <!-- Reviews -->
-          {author.reviews && author.reviews.docs.length > 0 && (
+          {sortedReviews.length > 0 && (
             <div class="mb-8">
-              <AuthorReviewsList reviews={author.reviews.docs} />
+              <AuthorReviewsList reviews={sortedReviews} />
             </div>
           )}
         </div>
@@ -225,11 +229,11 @@ const metaDescription = author.meta?.description || `Learn about ${authorName}, 
   </section>
   
   <!-- All Reviews Section (if many reviews) -->
-  {author.reviews && author.reviews.docs.length > 6 && (
+  {sortedReviews.length > 6 && (
     <section id="all-reviews" class="py-12 bg-neutral-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-2xl font-bold text-white mb-8">All Reviews by {author.name}</h2>
-        <AuthorReviewsList reviews={author.reviews.docs} showAll={true} />
+        <AuthorReviewsList reviews={sortedReviews} showAll={true} />
       </div>
     </section>
   )}
