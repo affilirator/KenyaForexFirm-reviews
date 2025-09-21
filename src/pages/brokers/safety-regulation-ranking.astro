@@ -9,11 +9,12 @@ import RegulatoryComparison from '../../components/regulators/RegulatoryComparis
 import AuthorCard from '../../components/authors/AuthorCard.astro';
 import SafetyBrokerCard from '../../components/review/SafetyBrokerCard.astro';
 import SafetyStats from '../../components/review/SafetyStats.astro';
-import SafetyCriteria from '../../components/review/SafetyCriteria.astro';
+import SafetyCriteria from '../../components/review-criteria/SafetyCriteria.astro';
 import { site } from '../../data/site';
 import { getReviews } from '~/lib/qs-esm';
 import { getRegulators } from '~/lib/regulators-api';
 import { getAuthors } from '~/lib/api-service';
+//import SafetyCriteria from '~/components/review/SafetyCriteria.astro';
 
 
 const authorDocs = await getAuthors()
@@ -38,6 +39,7 @@ const rankedBrokers = [...regulatedBrokers].sort((a, b) => {
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
+  "@id": Astro.request.url,
   "name": `Safest Forex Brokers in Kenya - ${site.name}`,
   lastReviewed: new Date().toISOString(),
   author: {
