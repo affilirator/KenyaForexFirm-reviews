@@ -140,7 +140,7 @@ const metaDescription = author.meta?.description || `Learn about ${authorName}, 
         </div>
         
         <!-- Sidebar -->
-        <div class="space-y-8">
+        <div class="space-y-8 lg:sticky lg:top-24 lg:self-start">
           <!-- Expertise -->
           {author.knowsAbout && author.knowsAbout.length > 0 && (
             <AuthorExpertise expertise={author.knowsAbout} />
