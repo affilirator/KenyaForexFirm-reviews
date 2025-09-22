@@ -1,274 +1,37 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
+import { getBrokerReviews } from '../lib/api-service';
+import { site } from '../data/site';
+import type { BrokerProps } from '../types';
+
+// Fetch brokers from API
+const brokersData = await getBrokerReviews({ limit: '20', sort: '-brokerRating' });
+const brokers = brokersData?.docs || [];
 
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Forex Broker Comparison - Kenya",
   "description": "Compare forex brokers side-by-side with detailed analysis of spreads, regulation, features, and costs for Kenyan traders",
-  "url": "https://forex-broker-kenya.netlify.app/compare"
-};
-
-// Complete broker database for comparison
-const brokerDatabase = {
-  1: {
-    id: 1,
-    name: "XM Group",
-    logo: "🏛️",
-    rating: 4.8,
-    regulation: ["CySEC", "ASIC", "IFSC"],
-    minDeposit: 5,
-    maxLeverage: "888:1",
-    spreadEURUSD: 0.6,
-    spreadGBPUSD: 0.9,
-    spreadUSDJPY: 0.7,
-    commission: "No commission (Standard accounts)",
-    platforms: ["MetaTrader 4", "MetaTrader 5", "XM WebTrader"],
-    accountTypes: ["Micro", "Standard", "XM Zero"],
-    paymentMethods: ["M-Pesa", "Bank Transfer", "Credit Card", "Skrill"],
-    cmaApproved: true,
-    islamicAccount: true,
-    demoAccount: true,
-    copyTrading: true,
-    vpsHosting: true,
-    educationalResources: "Extensive",
-    customerSupport: "24/7 Multilingual",
-    withdrawalTime: "Same day",
-    bonusAvailable: true,
-    founded: 2009,
-    headquarters: "Cyprus",
-    executionType: "Market Execution",
-    tradableInstruments: 1000,
-    mobileApp: true,
-    webPlatform: true,
-    apiAccess: true,
-    socialTrading: true,
-    autoCopyTrading: true,
-    marketAnalysis: "Daily",
-    researchTools: "Professional",
-    economicCalendar: true,
-    tradingSignals: true,
-    negativeBalanceProtection: true,
-    segregatedFunds: true,
-    depositFees: "No",
-    withdrawalFees: "No",
-    inactivityFee: "After 90 days"
-  },
-  2: {
-    id: 2,
-    name: "AvaTrade",
-    logo: "🚀",
-    rating: 4.6,
-    regulation: ["CBI", "ASIC", "FSA"],
-    minDeposit: 100,
-    maxLeverage: "400:1",
-    spreadEURUSD: 0.9,
-    spreadGBPUSD: 1.5,
-    spreadUSDJPY: 1.0,
-    commission: "No commission (Standard accounts)",
-    platforms: ["MetaTrader 4", "MetaTrader 5", "AvaTradeGO"],
-    accountTypes: ["Standard", "Professional", "Islamic"],
-    paymentMethods: ["M-Pesa", "Bank Transfer", "Credit Card", "PayPal"],
-    cmaApproved: false,
-    islamicAccount: true,
-    demoAccount: true,
-    copyTrading: true,
-    vpsHosting: false,
-    educationalResources: "Good",
-    customerSupport: "24/5",
-    withdrawalTime: "1-3 days",
-    bonusAvailable: true,
-    founded: 2006,
-    headquarters: "Ireland",
-    executionType: "Market Execution",
-    tradableInstruments: 250,
-    mobileApp: true,
-    webPlatform: true,
-    apiAccess: false,
-    socialTrading: true,
-    autoCopyTrading: true,
-    marketAnalysis: "Weekly",
-    researchTools: "Standard",
-    economicCalendar: true,
-    tradingSignals: false,
-    negativeBalanceProtection: true,
-    segregatedFunds: true,
-    depositFees: "No",
-    withdrawalFees: "Varies",
-    inactivityFee: "After 3 months"
-  },
-  3: {
-    id: 3,
-    name: "HotForex",
-    logo: "🔥",
-    rating: 4.5,
-    regulation: ["CySEC", "FCA", "DFSA"],
-    minDeposit: 5,
-    maxLeverage: "1000:1",
-    spreadEURUSD: 1.0,
-    spreadGBPUSD: 1.8,
-    spreadUSDJPY: 1.2,
-    commission: "From $6/lot (Zero accounts)",
-    platforms: ["MetaTrader 4", "MetaTrader 5", "HotForex App"],
-    accountTypes: ["Micro", "Premium", "Zero Spread", "Auto"],
-    paymentMethods: ["M-Pesa", "Bank Transfer", "Skrill", "Neteller"],
-    cmaApproved: false,
-    islamicAccount: true,
-    demoAccount: true,
-    copyTrading: true,
-    vpsHosting: true,
-    educationalResources: "Good",
-    customerSupport: "24/5",
-    withdrawalTime: "1-5 days",
-    bonusAvailable: true,
-    founded: 2010,
-    headquarters: "Cyprus",
-    executionType: "Market Execution",
-    tradableInstruments: 150,
-    mobileApp: true,
-    webPlatform: true,
-    apiAccess: true,
-    socialTrading: false,
-    autoCopyTrading: true,
-    marketAnalysis: "Daily",
-    researchTools: "Standard",
-    economicCalendar: true,
-    tradingSignals: true,
-    negativeBalanceProtection: true,
-    segregatedFunds: true,
-    depositFees: "No",
-    withdrawalFees: "Varies",
-    inactivityFee: "After 6 months"
-  },
-  4: {
-    id: 4,
-    name: "Exness",
-    logo: "⚡",
-    rating: 4.7,
-    regulation: ["CySEC", "FCA", "FSA"],
-    minDeposit: 1,
-    maxLeverage: "Unlimited",
-    spreadEURUSD: 0.3,
-    spreadGBPUSD: 0.7,
-    spreadUSDJPY: 0.4,
-    commission: "From $3.5/lot (Pro accounts)",
-    platforms: ["MetaTrader 4", "MetaTrader 5", "Exness Terminal"],
-    accountTypes: ["Standard", "Pro", "Zero", "Raw Spread"],
-    paymentMethods: ["M-Pesa", "Bank Transfer", "Perfect Money", "Crypto"],
-    cmaApproved: false,
-    islamicAccount: true,
-    demoAccount: true,
-    copyTrading: true,
-    vpsHosting: true,
-    educationalResources: "Excellent",
-    customerSupport: "24/7",
-    withdrawalTime: "Instant",
-    bonusAvailable: false,
-    founded: 2008,
-    headquarters: "Cyprus",
-    executionType: "Market Execution",
-    tradableInstruments: 120,
-    mobileApp: true,
-    webPlatform: true,
-    apiAccess: true,
-    socialTrading: true,
-    autoCopyTrading: true,
-    marketAnalysis: "Daily",
-    researchTools: "Professional",
-    economicCalendar: true,
-    tradingSignals: true,
-    negativeBalanceProtection: true,
-    segregatedFunds: true,
-    depositFees: "No",
-    withdrawalFees: "No",
-    inactivityFee: "None"
-  },
-  5: {
-    id: 5,
-    name: "Pepperstone",
-    logo: "🌶️",
-    rating: 4.4,
-    regulation: ["ASIC", "FCA", "CySEC"],
-    minDeposit: 200,
-    maxLeverage: "500:1",
-    spreadEURUSD: 0.8,
-    spreadGBPUSD: 1.2,
-    spreadUSDJPY: 0.9,
-    commission: "From $3.5/lot (Razor accounts)",
-    platforms: ["MetaTrader 4", "MetaTrader 5", "cTrader", "TradingView"],
-    accountTypes: ["Standard", "Razor", "Swap-Free"],
-    paymentMethods: ["Bank Transfer", "Credit Card", "PayPal", "Skrill"],
-    cmaApproved: false,
-    islamicAccount: true,
-    demoAccount: true,
-    copyTrading: true,
-    vpsHosting: true,
-    educationalResources: "Good",
-    customerSupport: "24/5",
-    withdrawalTime: "1-3 days",
-    bonusAvailable: false,
-    founded: 2010,
-    headquarters: "Australia",
-    executionType: "ECN",
-    tradableInstruments: 180,
-    mobileApp: true,
-    webPlatform: true,
-    apiAccess: true,
-    socialTrading: false,
-    autoCopyTrading: true,
-    marketAnalysis: "Weekly",
-    researchTools: "Professional",
-    economicCalendar: true,
-    tradingSignals: false,
-    negativeBalanceProtection: true,
-    segregatedFunds: true,
-    depositFees: "No",
-    withdrawalFees: "No",
-    inactivityFee: "After 6 months"
-  },
-  6: {
-    id: 6,
-    name: "IC Markets",
-    logo: "📈",
-    rating: 4.6,
-    regulation: ["ASIC", "CySEC", "FSA"],
-    minDeposit: 200,
-    maxLeverage: "500:1",
-    spreadEURUSD: 0.0,
-    spreadGBPUSD: 0.1,
-    spreadUSDJPY: 0.1,
-    commission: "From $3/lot (Raw accounts)",
-    platforms: ["MetaTrader 4", "MetaTrader 5", "cTrader"],
-    accountTypes: ["Standard", "Raw Spread", "cTrader"],
-    paymentMethods: ["Bank Transfer", "Credit Card", "Skrill", "Neteller"],
-    cmaApproved: false,
-    islamicAccount: true,
-    demoAccount: true,
-    copyTrading: true,
-    vpsHosting: true,
-    educationalResources: "Standard",
-    customerSupport: "24/5",
-    withdrawalTime: "1-3 days",
-    bonusAvailable: false,
-    founded: 2007,
-    headquarters: "Australia",
-    executionType: "ECN",
-    tradableInstruments: 230,
-    mobileApp: true,
-    webPlatform: true,
-    apiAccess: true,
-    socialTrading: false,
-    autoCopyTrading: true,
-    marketAnalysis: "Daily",
-    researchTools: "Standard",
-    economicCalendar: true,
-    tradingSignals: false,
-    negativeBalanceProtection: true,
-    segregatedFunds: true,
-    depositFees: "No",
-    withdrawalFees: "No",
-    inactivityFee: "After 6 months"
+  "url": new URL(Astro.request.url).href,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": brokers.length,
+    "itemListElement": brokers.map((broker, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Organization",
+        "name": broker.brokerName,
+        "url": `${site.url}/brokers/${broker.slug}/`,
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": broker.brokerRating,
+          "bestRating": 10
+        }
+      }
+    }))
   }
 };
 ---
@@ -297,540 +60,148 @@ const brokerDatabase = {
       </div>
 
       <!-- Broker Selector -->
-      <div class="bg-gradient-to-r from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 mb-8">
-        <h3 class="text-xl font-semibold text-white mb-4">Select Brokers to Compare</h3>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-          <div>
-            <label class="block text-sm font-medium text-neutral-300 mb-2">Broker 1</label>
-            <select id="broker1Select" class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500">
-              <option value="">Select first broker</option>
-              <option value="1">XM Group</option>
-              <option value="2">AvaTrade</option>
-              <option value="3">HotForex</option>
-              <option value="4">Exness</option>
-              <option value="5">Pepperstone</option>
-              <option value="6">IC Markets</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-neutral-300 mb-2">Broker 2</label>
-            <select id="broker2Select" class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500">
-              <option value="">Select second broker</option>
-              <option value="1">XM Group</option>
-              <option value="2">AvaTrade</option>
-              <option value="3">HotForex</option>
-              <option value="4">Exness</option>
-              <option value="5">Pepperstone</option>
-              <option value="6">IC Markets</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-neutral-300 mb-2">Broker 3 (Optional)</label>
-            <select id="broker3Select" class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500">
-              <option value="">Select third broker</option>
-              <option value="1">XM Group</option>
-              <option value="2">AvaTrade</option>
-              <option value="3">HotForex</option>
-              <option value="4">Exness</option>
-              <option value="5">Pepperstone</option>
-              <option value="6">IC Markets</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap gap-3">
-          <button id="compareBtn" class="bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300" disabled>
-            Compare Selected Brokers
-          </button>
-          <button id="clearComparison" class="border border-neutral-600 hover:border-red-400 text-neutral-300 hover:text-red-400 font-medium py-3 px-6 rounded-lg transition-all duration-300">
-            Clear Selection
-          </button>
-          <button id="shareComparison" class="border border-neutral-600 hover:border-primary-400 text-neutral-300 hover:text-primary-400 font-medium py-3 px-6 rounded-lg transition-all duration-300" style="display: none;">
-            Share Comparison
-          </button>
-          <button id="printComparison" class="border border-neutral-600 hover:border-primary-400 text-neutral-300 hover:text-primary-400 font-medium py-3 px-6 rounded-lg transition-all duration-300" style="display: none;">
-            Print
-          </button>
+      <div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold text-white mb-4">Select Brokers to Compare</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {brokers.slice(0, 12).map((broker) => (
+            <label class="flex items-center p-3 bg-neutral-700/30 rounded-lg hover:bg-neutral-700/50 cursor-pointer transition-colors">
+              <input type="checkbox" class="mr-3 text-primary-500" data-broker-id={broker.id} />
+              <div class="flex items-center gap-2">
+                {typeof broker.logo === 'object' && broker.logo?.url ? (
+                  <img src={broker.logo.url} alt={broker.brokerName} class="w-6 h-6 object-contain" />
+                ) : (
+                  <div class="w-6 h-6 bg-primary-500 rounded text-white text-xs flex items-center justify-center">
+                    {broker.brokerName.substring(0, 2)}
+                  </div>
+                )}
+                <span class="text-white text-sm">{broker.brokerName}</span>
+              </div>
+            </label>
+          ))}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Comparison Results -->
-  <section id="comparisonResults" class="py-12 bg-gradient-to-b from-neutral-950 to-neutral-900" style="display: none;">
+  <!-- Comparison Table -->
+  <section class="py-12 bg-gradient-to-b from-neutral-950 to-neutral-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Broker Headers -->
-      <div id="brokerHeaders" class="grid grid-cols-1 gap-4 mb-8"></div>
-
-      <!-- Comparison Categories -->
-      <div class="space-y-8">
-        <!-- Basic Information -->
-        <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50 overflow-hidden">
-          <div class="bg-gradient-to-r from-primary-600/20 to-accent-600/20 p-4 border-b border-neutral-700/50">
-            <h3 class="text-xl font-semibold text-white">Basic Information</h3>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full" id="basicInfoTable">
-              <tbody class="text-sm"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Regulation & Safety -->
-        <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50 overflow-hidden">
-          <div class="bg-gradient-to-r from-primary-600/20 to-accent-600/20 p-4 border-b border-neutral-700/50">
-            <h3 class="text-xl font-semibold text-white">Regulation & Safety</h3>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full" id="regulationTable">
-              <tbody class="text-sm"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Trading Conditions -->
-        <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50 overflow-hidden">
-          <div class="bg-gradient-to-r from-primary-600/20 to-accent-600/20 p-4 border-b border-neutral-700/50">
-            <h3 class="text-xl font-semibold text-white">Trading Conditions</h3>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full" id="tradingTable">
-              <tbody class="text-sm"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Platforms & Tools -->
-        <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50 overflow-hidden">
-          <div class="bg-gradient-to-r from-primary-600/20 to-accent-600/20 p-4 border-b border-neutral-700/50">
-            <h3 class="text-xl font-semibold text-white">Platforms & Tools</h3>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full" id="platformsTable">
-              <tbody class="text-sm"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Costs & Fees -->
-        <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50 overflow-hidden">
-          <div class="bg-gradient-to-r from-primary-600/20 to-accent-600/20 p-4 border-b border-neutral-700/50">
-            <h3 class="text-xl font-semibold text-white">Costs & Fees</h3>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full" id="costsTable">
-              <tbody class="text-sm"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Features & Services -->
-        <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50 overflow-hidden">
-          <div class="bg-gradient-to-r from-primary-600/20 to-accent-600/20 p-4 border-b border-neutral-700/50">
-            <h3 class="text-xl font-semibold text-white">Features & Services</h3>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full" id="featuresTable">
-              <tbody class="text-sm"></tbody>
-            </table>
-          </div>
+      <div id="comparison-table" class="hidden">
+        <h2 class="text-2xl font-bold text-white mb-6">Broker Comparison</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full bg-neutral-800/50 border border-neutral-700/50 rounded-xl">
+            <thead>
+              <tr class="border-b border-neutral-700/50">
+                <th class="p-4 text-left text-white font-semibold">Feature</th>
+                <th class="p-4 text-center text-white font-semibold min-w-[200px]" data-broker-col="1">Broker 1</th>
+                <th class="p-4 text-center text-white font-semibold min-w-[200px]" data-broker-col="2">Broker 2</th>
+                <th class="p-4 text-center text-white font-semibold min-w-[200px]" data-broker-col="3">Broker 3</th>
+              </tr>
+            </thead>
+            <tbody id="comparison-body">
+              <!-- Dynamic content will be inserted here -->
+            </tbody>
+          </table>
         </div>
       </div>
-
-      <!-- Winner Summary -->
-      <div id="winnerSummary" class="mt-12 bg-gradient-to-r from-primary-900/30 to-accent-900/30 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30" style="display: none;">
-        <h3 class="text-2xl font-semibold text-white mb-6">Comparison Summary</h3>
-        <div id="summaryContent" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      
+      <div id="no-selection" class="text-center py-12">
+        <p class="text-xl text-neutral-300 mb-4">Select brokers above to start comparing</p>
+        <p class="text-neutral-400">Choose 2-3 brokers to see a detailed side-by-side comparison</p>
       </div>
     </div>
   </section>
 
-  <!-- Empty State -->
-  <section id="emptyState" class="py-20 bg-gradient-to-b from-neutral-950 to-neutral-900">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="text-6xl mb-6">⚖️</div>
-      <h2 class="text-2xl font-semibold text-white mb-4">Select Brokers to Compare</h2>
-      <p class="text-neutral-400 mb-8">
-        Choose at least 2 brokers from the dropdown menus above to start comparing their features,
-        spreads, regulation, and more.
-      </p>
-      <a href="/brokers" class="inline-flex items-center bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300">
-        Browse All Brokers
-        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-        </svg>
-      </a>
-    </div>
-  </section>
-
-  <script define:vars={{ brokerDatabase }}>
-    // Comparison functionality
-    class BrokerComparison {
-      constructor() {
-        this.selectedBrokers = [];
-        this.brokerData = brokerDatabase;
-        this.init();
-      }
-
-      init() {
-        this.bindEvents();
-        this.loadFromURL();
-        this.loadFromStorage();
-      }
-
-      bindEvents() {
-        document.getElementById('broker1Select').addEventListener('change', () => this.updateSelection());
-        document.getElementById('broker2Select').addEventListener('change', () => this.updateSelection());
-        document.getElementById('broker3Select').addEventListener('change', () => this.updateSelection());
-        document.getElementById('compareBtn').addEventListener('click', () => this.performComparison());
-        document.getElementById('clearComparison').addEventListener('click', () => this.clearComparison());
-        document.getElementById('shareComparison').addEventListener('click', () => this.shareComparison());
-        document.getElementById('printComparison').addEventListener('click', () => this.printComparison());
-      }
-
-      loadFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const brokers = urlParams.get('brokers');
-        if (brokers) {
-          const brokerIds = brokers.split(',').filter(id => id && this.brokerData[id]);
-          if (brokerIds.length >= 2) {
-            document.getElementById('broker1Select').value = brokerIds[0] || '';
-            document.getElementById('broker2Select').value = brokerIds[1] || '';
-            document.getElementById('broker3Select').value = brokerIds[2] || '';
-            this.updateSelection();
-            setTimeout(() => this.performComparison(), 100);
+  <script define:vars={{ brokers }}>
+    const selectedBrokers = new Set();
+    const maxSelection = 3;
+    
+    // Handle broker selection
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const brokerId = this.dataset.brokerId;
+        
+        if (this.checked) {
+          if (selectedBrokers.size >= maxSelection) {
+            this.checked = false;
+            alert(`You can only compare up to ${maxSelection} brokers at once`);
+            return;
           }
+          selectedBrokers.add(brokerId);
+        } else {
+          selectedBrokers.delete(brokerId);
         }
+        
+        updateComparison();
+      });
+    });
+    
+    function updateComparison() {
+      const comparisonTable = document.getElementById('comparison-table');
+      const noSelection = document.getElementById('no-selection');
+      
+      if (selectedBrokers.size === 0) {
+        comparisonTable.classList.add('hidden');
+        noSelection.classList.remove('hidden');
+        return;
       }
-
-      loadFromStorage() {
-        const stored = localStorage.getItem('selectedBrokersForComparison');
-        if (stored && !window.location.search) {
-          try {
-            const brokerIds = JSON.parse(stored);
-            if (brokerIds.length >= 2) {
-              document.getElementById('broker1Select').value = brokerIds[0] || '';
-              document.getElementById('broker2Select').value = brokerIds[1] || '';
-              document.getElementById('broker3Select').value = brokerIds[2] || '';
-              this.updateSelection();
-            }
-          } catch (e) {
-            console.error('Error loading stored comparison:', e);
-          }
-        }
-      }
-
-      updateSelection() {
-        const broker1 = document.getElementById('broker1Select').value;
-        const broker2 = document.getElementById('broker2Select').value;
-        const broker3 = document.getElementById('broker3Select').value;
-
-        this.selectedBrokers = [broker1, broker2, broker3].filter(id => id && this.brokerData[id]);
-
-        // Update compare button state
-        const compareBtn = document.getElementById('compareBtn');
-        compareBtn.disabled = this.selectedBrokers.length < 2;
-
-        // Save to localStorage
-        localStorage.setItem('selectedBrokersForComparison', JSON.stringify(this.selectedBrokers));
-      }
-
-      performComparison() {
-        if (this.selectedBrokers.length < 2) return;
-
-        const emptyState = document.getElementById('emptyState');
-        const results = document.getElementById('comparisonResults');
-        const shareBtn = document.getElementById('shareComparison');
-        const printBtn = document.getElementById('printComparison');
-
-        emptyState.style.display = 'none';
-        results.style.display = 'block';
-        shareBtn.style.display = 'inline-block';
-        printBtn.style.display = 'inline-block';
-
-        this.renderBrokerHeaders();
-        this.renderComparisonTables();
-        this.renderSummary();
-
-        // Update URL
-        const url = new URL(window.location);
-        url.searchParams.set('brokers', this.selectedBrokers.join(','));
-        window.history.pushState({}, '', url);
-
-        // Smooth scroll to results
-        results.scrollIntoView({ behavior: 'smooth' });
-      }
-
-      renderBrokerHeaders() {
-        const container = document.getElementById('brokerHeaders');
-        const brokers = this.selectedBrokers.map(id => this.brokerData[id]);
-
-        container.className = `grid grid-cols-${brokers.length} gap-4 mb-8`;
-        container.innerHTML = brokers.map(broker => `
-          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 text-center">
-            <div class="text-4xl mb-4">${broker.logo}</div>
-            <h3 class="text-xl font-semibold text-white mb-2">${broker.name}</h3>
-            <div class="flex items-center justify-center mb-2">
-              <div class="flex text-yellow-400 mr-2">
-                ${"★".repeat(Math.floor(broker.rating))}
-              </div>
-              <span class="text-neutral-400">${broker.rating}/5</span>
-            </div>
-            ${broker.cmaApproved ? '<span class="bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs">CMA Approved</span>' : ''}
-          </div>
-        `).join('');
-      }
-
-      renderComparisonTables() {
-        this.renderBasicInfo();
-        this.renderRegulation();
-        this.renderTrading();
-        this.renderPlatforms();
-        this.renderCosts();
-        this.renderFeatures();
-      }
-
-      renderBasicInfo() {
-        const brokers = this.selectedBrokers.map(id => this.brokerData[id]);
-        const tbody = document.querySelector('#basicInfoTable tbody');
-
-        const rows = [
-          ['Founded', brokers.map(b => b.founded)],
-          ['Headquarters', brokers.map(b => b.headquarters)],
-          ['Overall Rating', brokers.map(b => `${b.rating}/5`)],
-          ['Min Deposit', brokers.map(b => `$${b.minDeposit}`)],
-          ['Max Leverage', brokers.map(b => b.maxLeverage)],
-          ['Tradable Instruments', brokers.map(b => `${b.tradableInstruments}+`)]
-        ];
-
-        tbody.innerHTML = this.renderTableRows(rows, brokers.length);
-      }
-
-      renderRegulation() {
-        const brokers = this.selectedBrokers.map(id => this.brokerData[id]);
-        const tbody = document.querySelector('#regulationTable tbody');
-
-        const rows = [
-          ['Regulations', brokers.map(b => b.regulation.join(', '))],
-          ['CMA Approved', brokers.map(b => b.cmaApproved ? '✅ Yes' : '❌ No')],
-          ['Segregated Funds', brokers.map(b => b.segregatedFunds ? '✅ Yes' : '❌ No')],
-          ['Negative Balance Protection', brokers.map(b => b.negativeBalanceProtection ? '✅ Yes' : '❌ No')],
-          ['Islamic Account', brokers.map(b => b.islamicAccount ? '✅ Available' : '❌ Not Available')]
-        ];
-
-        tbody.innerHTML = this.renderTableRows(rows, brokers.length);
-      }
-
-      renderTrading() {
-        const brokers = this.selectedBrokers.map(id => this.brokerData[id]);
-        const tbody = document.querySelector('#tradingTable tbody');
-
-        const rows = [
-          ['EUR/USD Spread', brokers.map(b => `${b.spreadEURUSD} pips`)],
-          ['GBP/USD Spread', brokers.map(b => `${b.spreadGBPUSD} pips`)],
-          ['USD/JPY Spread', brokers.map(b => `${b.spreadUSDJPY} pips`)],
-          ['Commission', brokers.map(b => b.commission)],
-          ['Execution Type', brokers.map(b => b.executionType)],
-          ['Account Types', brokers.map(b => b.accountTypes.join(', '))]
-        ];
-
-        tbody.innerHTML = this.renderTableRows(rows, brokers.length);
-      }
-
-      renderPlatforms() {
-        const brokers = this.selectedBrokers.map(id => this.brokerData[id]);
-        const tbody = document.querySelector('#platformsTable tbody');
-
-        const rows = [
-          ['Trading Platforms', brokers.map(b => b.platforms.join(', '))],
-          ['Mobile App', brokers.map(b => b.mobileApp ? '✅ Available' : '❌ Not Available')],
-          ['Web Platform', brokers.map(b => b.webPlatform ? '✅ Available' : '❌ Not Available')],
-          ['API Access', brokers.map(b => b.apiAccess ? '✅ Available' : '❌ Not Available')],
-          ['VPS Hosting', brokers.map(b => b.vpsHosting ? '✅ Available' : '❌ Not Available')],
-          ['Copy Trading', brokers.map(b => b.copyTrading ? '✅ Available' : '❌ Not Available')]
-        ];
-
-        tbody.innerHTML = this.renderTableRows(rows, brokers.length);
-      }
-
-      renderCosts() {
-        const brokers = this.selectedBrokers.map(id => this.brokerData[id]);
-        const tbody = document.querySelector('#costsTable tbody');
-
-        const rows = [
-          ['Deposit Fees', brokers.map(b => b.depositFees)],
-          ['Withdrawal Fees', brokers.map(b => b.withdrawalFees)],
-          ['Inactivity Fee', brokers.map(b => b.inactivityFee)],
-          ['Withdrawal Time', brokers.map(b => b.withdrawalTime)],
-          ['Bonus Available', brokers.map(b => b.bonusAvailable ? '✅ Yes' : '❌ No')]
-        ];
-
-        tbody.innerHTML = this.renderTableRows(rows, brokers.length);
-      }
-
-      renderFeatures() {
-        const brokers = this.selectedBrokers.map(id => this.brokerData[id]);
-        const tbody = document.querySelector('#featuresTable tbody');
-
-        const rows = [
-          ['Customer Support', brokers.map(b => b.customerSupport)],
-          ['Educational Resources', brokers.map(b => b.educationalResources)],
-          ['Market Analysis', brokers.map(b => b.marketAnalysis)],
-          ['Research Tools', brokers.map(b => b.researchTools)],
-          ['Trading Signals', brokers.map(b => b.tradingSignals ? '✅ Available' : '❌ Not Available')],
-          ['Economic Calendar', brokers.map(b => b.economicCalendar ? '✅ Available' : '❌ Not Available')],
-          ['Payment Methods', brokers.map(b => b.paymentMethods.join(', '))]
-        ];
-
-        tbody.innerHTML = this.renderTableRows(rows, brokers.length);
-      }
-
-      renderTableRows(rows, columnCount) {
-        return rows.map(([label, values]) => `
-          <tr class="border-b border-neutral-700/30">
-            <td class="p-4 font-medium text-neutral-300 bg-neutral-800/30">${label}</td>
-            ${values.map((value, index) => {
-              const isWinner = this.isWinner(values, value, label);
-              return `<td class="p-4 text-neutral-200 ${isWinner ? 'bg-primary-500/20 text-primary-300 font-medium' : ''}">${value}</td>`;
-            }).join('')}
-          </tr>
-        `).join('');
-      }
-
-      isWinner(values, currentValue, label) {
-        // Logic to determine if current value is the "best" for certain criteria
-        const lowerIsBetter = ['EUR/USD Spread', 'GBP/USD Spread', 'USD/JPY Spread', 'Min Deposit', 'Withdrawal Time'];
-        const higherIsBetter = ['Overall Rating', 'Max Leverage', 'Tradable Instruments'];
-
-        if (lowerIsBetter.includes(label)) {
-          const numValues = values.map(v => parseFloat(v.replace(/[^\d.]/g, ''))).filter(n => !isNaN(n));
-          const currentNum = parseFloat(currentValue.replace(/[^\d.]/g, ''));
-          return !isNaN(currentNum) && currentNum === Math.min(...numValues);
-        }
-
-        if (higherIsBetter.includes(label)) {
-          const numValues = values.map(v => parseFloat(v.replace(/[^\d.]/g, ''))).filter(n => !isNaN(n));
-          const currentNum = parseFloat(currentValue.replace(/[^\d.]/g, ''));
-          return !isNaN(currentNum) && currentNum === Math.max(...numValues);
-        }
-
-        return false;
-      }
-
-      renderSummary() {
-        const brokers = this.selectedBrokers.map(id => this.brokerData[id]);
-        const summaryContainer = document.getElementById('summaryContent');
-        const winnerSummary = document.getElementById('winnerSummary');
-
-        const categories = [
-          { name: 'Overall Rating', getValue: (b) => b.rating, higher: true },
-          { name: 'Lowest Spreads', getValue: (b) => b.spreadEURUSD, higher: false },
-          { name: 'Best for Beginners', getValue: (b) => (b.minDeposit <= 10 && b.educationalResources === 'Extensive') ? 1 : 0, higher: true },
-          { name: 'Best for Professionals', getValue: (b) => (b.executionType === 'ECN' && b.researchTools === 'Professional') ? 1 : 0, higher: true },
-          { name: 'Best for Kenya', getValue: (b) => (b.cmaApproved && b.paymentMethods.includes('M-Pesa')) ? 1 : 0, higher: true }
-        ];
-
-        const summaryCards = categories.map(category => {
-          const scores = brokers.map(broker => ({
-            broker,
-            score: category.getValue(broker)
-          }));
-
-          const winner = category.higher
-            ? scores.reduce((max, current) => current.score > max.score ? current : max)
-            : scores.reduce((min, current) => current.score < min.score ? current : min);
-
-          return `
-            <div class="bg-neutral-800/30 rounded-xl p-4 border border-neutral-700/50">
-              <h4 class="font-semibold text-white mb-2">${category.name}</h4>
-              <div class="flex items-center">
-                <span class="text-2xl mr-3">${winner.broker.logo}</span>
-                <div>
-                  <div class="text-primary-400 font-medium">${winner.broker.name}</div>
-                  <div class="text-sm text-neutral-400">Winner</div>
-                </div>
-              </div>
+      
+      comparisonTable.classList.remove('hidden');
+      noSelection.classList.add('hidden');
+      
+      const selectedBrokerData = Array.from(selectedBrokers).map(id => 
+        brokers.find(broker => broker.id === id)
+      );
+      
+      updateComparisonTable(selectedBrokerData);
+    }
+    
+    function updateComparisonTable(selectedBrokerData) {
+      const tbody = document.getElementById('comparison-body');
+      const headers = document.querySelectorAll('[data-broker-col]');
+      
+      // Update headers
+      headers.forEach((header, index) => {
+        if (selectedBrokerData[index]) {
+          const broker = selectedBrokerData[index];
+          header.innerHTML = `
+            <div class="flex flex-col items-center">
+              <div class="text-lg font-bold">${broker.brokerName}</div>
+              <div class="text-sm text-primary-400">★ ${broker.brokerRating}/10</div>
             </div>
           `;
-        }).join('');
-
-        summaryContainer.innerHTML = summaryCards;
-        winnerSummary.style.display = 'block';
-      }
-
-      clearComparison() {
-        document.getElementById('broker1Select').value = '';
-        document.getElementById('broker2Select').value = '';
-        document.getElementById('broker3Select').value = '';
-        this.selectedBrokers = [];
-        localStorage.removeItem('selectedBrokersForComparison');
-
-        document.getElementById('emptyState').style.display = 'block';
-        document.getElementById('comparisonResults').style.display = 'none';
-        document.getElementById('shareComparison').style.display = 'none';
-        document.getElementById('printComparison').style.display = 'none';
-        document.getElementById('compareBtn').disabled = true;
-
-        // Clear URL
-        const url = new URL(window.location);
-        url.searchParams.delete('brokers');
-        window.history.pushState({}, '', url);
-      }
-
-      shareComparison() {
-        const url = new URL(window.location);
-        url.searchParams.set('brokers', this.selectedBrokers.join(','));
-
-        if (navigator.share) {
-          navigator.share({
-            title: 'Forex Broker Comparison - Kenya',
-            text: 'Compare these forex brokers for Kenyan traders',
-            url: url.toString()
-          });
+          header.classList.remove('hidden');
         } else {
-          navigator.clipboard.writeText(url.toString()).then(() => {
-            alert('Comparison link copied to clipboard!');
-          });
+          header.classList.add('hidden');
         }
-      }
-
-      printComparison() {
-        window.print();
-      }
+      });
+      
+      // Comparison rows
+      const comparisonRows = [
+        { label: 'Overall Rating', key: 'brokerRating', format: (val) => `${val}/10` },
+        { label: 'Min Deposit', key: 'minDeposit', format: (val) => val ? `$${val}` : 'N/A' },
+        { label: 'Max Leverage', key: 'maxLeverage', format: (val) => val || 'N/A' },
+        { label: 'Spread (EUR/USD)', key: 'spread', format: (val) => val ? `${val} pips` : 'N/A' },
+        { label: 'CMA Regulated', key: 'cmaRegulated', format: (val) => val ? '✅ Yes' : '❌ No' },
+        { label: 'Islamic Account', key: 'islamicAccount', format: (val) => val ? '✅ Yes' : '❌ No' },
+        { label: 'M-Pesa Support', key: 'acceptsMpesa', format: (val) => val ? '✅ Yes' : '❌ No' },
+        { label: 'Founded', key: 'founded', format: (val) => val || 'N/A' },
+        { label: 'Headquarters', key: 'headquarters', format: (val) => val || 'N/A' }
+      ];
+      
+      tbody.innerHTML = comparisonRows.map(row => {
+        const cells = selectedBrokerData.map(broker => {
+          const value = broker ? broker[row.key] : null;
+          return `<td class="p-4 text-center text-neutral-300">${row.format(value)}</td>`;
+        }).join('');
+        
+        return `
+          <tr class="border-b border-neutral-700/30">
+            <td class="p-4 text-white font-medium">${row.label}</td>
+            ${cells}
+          </tr>
+        `;
+      }).join('');
     }
-
-    // Initialize comparison tool
-    document.addEventListener('DOMContentLoaded', () => {
-      new BrokerComparison();
-    });
   </script>
-
-  <style>
-    @media print {
-      .no-print {
-        display: none !important;
-      }
-
-      body {
-        background: white !important;
-        color: black !important;
-      }
-
-      .bg-neutral-950,
-      .bg-neutral-900,
-      .bg-neutral-800 {
-        background: white !important;
-      }
-
-      .text-white,
-      .text-neutral-300,
-      .text-neutral-400 {
-        color: black !important;
-      }
-
-      .border-neutral-700 {
-        border-color: #ccc !important;
-      }
-    }
-  </style>
 </BaseLayout>
