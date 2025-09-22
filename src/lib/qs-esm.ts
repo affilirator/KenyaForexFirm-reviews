@@ -165,7 +165,7 @@ export const getReviewBySlug = async (slug: string): Promise<BrokerProps | null>
   }
 };
 
-export const getFundingMethodBySlug = async (slug: string): Promise<FundingMethodsResponse | null> => {
+export const getFundingMethodBySlug = async (slug: string): Promise<FundingMethod | null> => {
   try {
     const queryString = stringify({
       where: {

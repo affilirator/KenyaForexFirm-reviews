@@ -4,11 +4,11 @@ import BrokerList from '../../../components/BrokerList.astro';
 import BrokerDetails from '../../../components/BrokerDetails.astro';
 import SEOContent from '../../../components/SEOContent.astro';
 import { site } from '../../../data/site';
-import { getfundingMethodBySlug, getAllfundingMethods, getReviews } from '../../../lib/qs-esm';
+import { getFundingMethodBySlug, getAllFundingMethods, getReviews } from '../../../lib/qs-esm';
 
 export async function getStaticPaths() {
   try {
-    const fundingMethods = await getAllfundingMethods();
+    const fundingMethods = await getAllFundingMethods();
     
     if (fundingMethods.docs.length === 0) {
       // Fallback paths if API fails
@@ -32,7 +32,7 @@ export async function getStaticPaths() {
 }
 
 const { methodSlug } = Astro.props;
-let fundingMethod = await getfundingMethodBySlug(methodSlug);
+let fundingMethod = await getFundingMethodBySlug(methodSlug);
 
 if (!fundingMethod) {
   // Fallback data
@@ -49,12 +49,12 @@ const allBrokers = await getReviews();
 const supportingBrokers = allBrokers.docs.filter(broker => 
   broker.brokerPaymentMethods?.some(method => 
     method.toLowerCase() === methodSlug.toLowerCase() ||
-    method.toLowerCase() === fundingMethod.name.toLowerCase()
+    method.toLowerCase() === fundingMethod?.name.toLowerCase()
   )
 );
 
-const title = `Best Forex Brokers with ${fundingMethod.name} ${new Date().getFullYear()} - Kenya`;
-const description = `Find top forex brokers accepting ${fundingMethod.name} payments in Kenya.`;
+const title = `Best Forex Brokers with ${fundingMethod?.name} ${new Date().getFullYear()} - Kenya`;
+const description = `Find top forex brokers accepting ${fundingMethod?.name} payments in Kenya.`;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -62,10 +62,10 @@ const description = `Find top forex brokers accepting ${fundingMethod.name} paym
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-          Best Forex Brokers with {fundingMethod.name}
+          Best Forex Brokers with {fundingMethod?.name}
         </h1>
         <p class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
-          {fundingMethod.description || `Discover forex brokers that accept ${fundingMethod.name} payments.`}
+          {fundingMethod?.description || `Discover forex brokers that accept ${fundingMethod?.name} payments.`}
         </p>
       </div>
     </div>
@@ -80,19 +80,19 @@ const description = `Find top forex brokers accepting ${fundingMethod.name} paym
             <p class="text-neutral-600">{fundingMethod.processingTime}</p>
           </div>
         )}
-        {fundingMethod.fees && (
+        {fundingMethod?.fees && (
           <div class="text-center p-6 bg-neutral-50 rounded-lg">
             <h3 class="font-semibold text-neutral-900 mb-2">Fees</h3>
-            <p class="text-neutral-600">{fundingMethod.fees}</p>
+            <p class="text-neutral-600">{fundingMethod?.fees}</p>
           </div>
         )}
-        {fundingMethod.minAmount && (
+        {fundingMethod?.minAmount && (
           <div class="text-center p-6 bg-neutral-50 rounded-lg">
             <h3 class="font-semibold text-neutral-900 mb-2">Min Amount</h3>
-            <p class="text-neutral-600">${fundingMethod.minAmount}</p>
+            <p class="text-neutral-600">${fundingMethod?.minAmount}</p>
           </div>
         )}
-        {fundingMethod.maxAmount && (
+        {fundingMethod?.maxAmount && (
           <div class="text-center p-6 bg-neutral-50 rounded-lg">
             <h3 class="font-semibold text-neutral-900 mb-2">Max Amount</h3>
             <p class="text-neutral-600">${fundingMethod.maxAmount}</p>
