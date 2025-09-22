@@ -22,16 +22,20 @@ const {
   <div class={`${maxWidth} mx-auto px-4 sm:px-6 lg:px-8`}>
     <div class={`flex flex-col ${direction} ${gap} items-${alignment} md:items-start`}>
       <!-- Left/Image Slot -->
-      <div class="flex-shrink-0">
-        <slot name="image" />
-      </div>
+      {Astro.slots.has('image') && (
+        <div class="flex-shrink-0">
+          <slot name="image" />
+        </div>
+      )}
       
       <!-- Right/Content Slot -->
       <div class="flex-grow text-center md:text-left">
         <!-- Badge/Credentials Slot -->
-        <div class="mb-2">
-          <slot name="badge" />
-        </div>
+        {Astro.slots.has('badge') && (
+          <div class="mb-2">
+            <slot name="badge" />
+          </div>
+        )}
         
         <!-- Title Slot -->
         <slot name="title" />
@@ -40,14 +44,18 @@ const {
         <slot name="subtitle" />
         
         <!-- Meta Info Slot -->
-        <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-neutral-400">
-          <slot name="meta" />
-        </div>
+        {Astro.slots.has('meta') && (
+          <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-neutral-400">
+            <slot name="meta" />
+          </div>
+        )}
         
         <!-- Description Slot -->
-        <div class="mt-4">
-          <slot name="description" />
-        </div>
+        {Astro.slots.has('description') && (
+          <div class="mt-4">
+            <slot name="description" />
+          </div>
+        )}
       </div>
     </div>
   </div>
