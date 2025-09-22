@@ -7,7 +7,7 @@ import type { BrokerProps } from '~/types'
 import { Image } from "astro:assets"
 
 const data = await getBrokerReviews();
-const brokers = data.docs || [];
+const brokers = (data.docs || []).sort((a, b) => (b.brokerRating || 0) - (a.brokerRating || 0));
 
 const schemaData = {
   "@context": "https://schema.org",
