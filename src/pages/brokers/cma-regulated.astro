@@ -19,6 +19,7 @@ const schemaData = {
   "@type": "CollectionPage",
   "name": title,
   "dateCreated": "2025-07-07",
+  lastReviewed: new Date().toISOString(),
   "dateModified": new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -51,6 +52,6 @@ const schemaData = {
   <BrokerList 
     brokers={brokers}
     title="Best CMA-Regulated Forex Brokers in Kenya"
-    description="Trade with confidence using CMA approved forex brokers. These brokers are licensed by Kenya's Capital Markets Authority, ensuring regulatory compliance and trader protection."
+    description="Trade with confidence using CMA-regulated forex brokers. These brokers are licensed by Kenya's Capital Markets Authority, ensuring regulatory compliance and trader protection."
   />
 </BaseLayout>
