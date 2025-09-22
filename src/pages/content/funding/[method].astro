@@ -45,7 +45,10 @@ if (!fundingMethod) {
 
 const allBrokers = await getReviews();
 const supportingBrokers = allBrokers.docs.filter(broker => 
-  broker.fundingMethods?.includes(fundingMethod.name)
+  broker.fundingMethods?.some(fm => 
+    fm.fundingMethod?.slug === methodSlug || 
+    fm.fundingMethod?.title?.toLowerCase() === fundingMethod.name.toLowerCase()
+  )
 );
 
 const title = `Best Forex Brokers with ${fundingMethod.name} ${new Date().getFullYear()} - Kenya`;
