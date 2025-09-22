@@ -156,11 +156,11 @@ const schemaData = {
   </section>
 
   <!-- Brokers Grid -->
-  <section class="py-16 bg-neutral-50">
+  <section class="py-16 -50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div id="brokersGrid" class="grid gap-8">
         {brokers.map((broker) => (
-          <div class="broker-card bg-white rounded-2xl shadow-lg border border-neutral-200 overflow-hidden hover:shadow-xl transition-all duration-300" data-broker={JSON.stringify(broker)}>
+          <div class="broker-card  rounded-2xl shadow-lg border border-neutral-200 overflow-hidden hover:shadow-xl transition-all duration-300" data-broker={JSON.stringify(broker)}>
             <div class="p-8">
               <!-- Header -->
               <div class="flex items-start justify-between mb-6">
@@ -358,9 +358,15 @@ const schemaData = {
           
           // Platform filter
           if (platformValue) {
-            const hasPlatform = data.tradingPlatforms?.some(platform => 
-              platform.toLowerCase().includes(platformValue.replace('mt', 'metatrader'))
-            );
+            const platforms = data.tradingPlatforms || [];
+            const hasPlatform = platforms.some(platform => {
+              const platformName = platform.toLowerCase();
+              if (platformValue === 'mt4') return platformName.includes('mt4') || platformName.includes('metatrader 4');
+              if (platformValue === 'mt5') return platformName.includes('mt5') || platformName.includes('metatrader 5');
+              if (platformValue === 'ctrader') return platformName.includes('ctrader');
+              if (platformValue === 'webtrader') return platformName.includes('webtrader') || platformName.includes('web trader');
+              return platformName.includes(platformValue);
+            });
             if (!hasPlatform) return false;
           }
           
