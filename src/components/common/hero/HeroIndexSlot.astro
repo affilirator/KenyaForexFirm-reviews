@@ -1,0 +1,32 @@
+---
+
+---
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0">
+        <!-- Gradient mesh background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-900/20 via-neutral-900 to-accent-900/20"></div>
+    
+        <!-- Floating geometric shapes -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-primary-500/5 to-accent-500/5 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-accent-500/5 to-primary-500/5 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: -2s;"></div>
+    
+        <!-- Animated grid lines -->
+        <div class="absolute inset-0 opacity-10">
+        <div class="h-full w-full bg-gradient-to-r from-transparent via-primary-500/20 to-transparent transform -skew-y-12"></div>
+        <div class="absolute top-0 h-full w-full bg-gradient-to-r from-transparent via-accent-500/20 to-transparent transform skew-y-12"></div>
+        </div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+        
+        
+        <div class="text-center">
+         <slot name="HeroHeadline"  />
+        <slot name="HeroSubtitle" />
+        <slot name="HeroCTA" />
+        <slot name="HeroTrustIndicators" />
+        </div>
+        <slot name="ScrollIndicator" />
+    </div>
+</section> 

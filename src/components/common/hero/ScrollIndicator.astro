@@ -1,0 +1,21 @@
+---
+import { Icon } from "astro-icon/components"
+
+interface Props {
+  iconName?: string;
+  position?: 'bottom-8' | 'bottom-4' | 'bottom-12';
+  color?: string;
+  animate?: boolean;
+}
+
+const { 
+  iconName = "mdi:arrow-down-thin",
+  position = "bottom-8",
+  color = "text-neutral-400",
+  animate = true
+} = Astro.props;
+---
+
+<div class={`absolute ${position} left-1/2 transform -translate-x-1/2 ${animate ? 'animate-bounce' : ''}`}>
+  <Icon name={iconName} class={`w-6 h-6 ${color}`} />
+</div>

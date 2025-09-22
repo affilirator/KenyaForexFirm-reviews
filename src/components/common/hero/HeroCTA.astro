@@ -1,0 +1,45 @@
+---
+import { Icon } from 'astro-icon/components'
+interface Button {
+  text: string;
+  href: string;
+  type?: 'primary' | 'secondary';
+  icon?: string;
+}
+
+interface Props {
+  buttons: Button[];
+}
+
+const { buttons = [
+  { text: 'Compare Brokers Now', href: '/brokers', type: 'primary', icon: 'mdi:arrow-right-circle' },
+  { text: 'Trading Guides', href: '/guides', type: 'secondary', icon: 'mdi:book-open-variant-outline' }
+, ] } = Astro.props;
+
+
+---
+
+<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+  {buttons.map((button) => (
+    <a
+      href={button.href}
+      class={button.type === 'primary' 
+        ? "group relative bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/25 flex items-center"
+        : "group border-2 border-neutral-600 hover:border-primary-400 text-neutral-300 hover:text-primary-400 font-semibold py-4 px-8 rounded-xl transition-all duration-300 hover:bg-neutral-800/30 backdrop-blur-sm flex items-center"
+      }
+    >
+      {button.icon && button.type === 'secondary' && (
+        <Icon name={button.icon} class="w-5 h-5 mr-2" fill="none" stroke="currentColor"  />
+        
+      )}
+      <span>{button.text}</span>
+      
+      {button.icon && button.type === 'primary' && (
+
+        <Icon name={button.icon} class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" />
+          
+        
+      )}
+    </a>
+  ))}
+</div>

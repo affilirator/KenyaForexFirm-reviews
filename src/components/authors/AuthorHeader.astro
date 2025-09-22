@@ -18,7 +18,10 @@ const { author } = Astro.props
             />
           ) : (
             <div class="w-40 h-40 md:w-48 md:h-48 bg-neutral-800 rounded-full flex items-center justify-center border-4 border-neutral-700/50">
-              <span class="text-4xl font-bold text-neutral-500">{author.name.substring(0, 2)}</span>
+              <span class="text-4xl font-bold text-neutral-500">
+                {author.name.substring(0, 2)}
+
+              </span>
             </div>
           )}
         </div>

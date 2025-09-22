@@ -1,0 +1,30 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Hero from '~/components/Hero.astro';
+import TopBrokers from '~/components/sections/TopBrokers.astro';
+import WhyTrustUs from '~/components/sections/WhyTrustUs.astro';
+import LatestInsights from '~/components/sections/LatestInsights.astro';
+import { site } from '~/data/site';
+import { getReviews } from '~/lib/qs-esm';
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": site.schemaId,
+  "name": site.name,
+  "url": site.url,
+  "description": site.description,
+  Publisher: {
+    "@type": "Organization",
+    "@id": site.organization.id,
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": `${site.url}/search?q={search_term_string}`,
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const data = await getReviews();
+const topRatedBrokers = data?.docs || [];
+---
