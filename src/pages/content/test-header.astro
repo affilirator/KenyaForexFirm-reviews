@@ -5,14 +5,16 @@ import HeaderSlot from "~/components/slots/HeaderSlot.astro";
 <BaseLayout title="" description="">
     <HeaderSlot>
         <Fragment slot="headerImage">
+            <div class="flex flex-grow">
             <h4>
                 KenyaForexFirm - Your Trusted Source for Forex Brokers in Kenya!
             </h4>
-            <ol>
+            <ol class="flex flex-auto">
                 <li>Home</li>
                 <li>/</li>
                 <li>Forex Brokers in Kenya</li>
             </ol>
+            </div>
             </Fragment>
         <span slot="topMeta">Welcome to KenyaForexFirm - Your Trusted Source for Forex Brokers in Kenya!</span>
         <h1 slot="mainHeading">Discover the Best Forex Brokers in Kenya with KenyaForexFirm</h1>
