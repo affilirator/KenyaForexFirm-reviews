@@ -1,28 +1,51 @@
 ---
-import BaseLayout from '~/layouts/BaseLayout.astro';
-import BrokerList from '~/components/BrokerList.astro';
-import { site } from '~/data/site';
-import { getFundingMethodBySlug, getAllFundingMethods, getReviews } from '~/lib/qs-esm';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BrokerList from '../../../components/BrokerList.astro';
+import { site } from '../../../data/site';
+import { getFundingMethodBySlug, getAllFundingMethods, getReviews } from '../../../lib/qs-esm';
 
 export async function getStaticPaths() {
-  const fundingMethods = await getAllFundingMethods();
-  
-  return fundingMethods.docs.map((method) => ({
-    params: { method: method.slug },
-    props: { methodSlug: method.slug }
-  }));
+  try {
+    const fundingMethods = await getAllFundingMethods();
+    
+    if (fundingMethods.docs.length === 0) {
+      // Fallback paths if API fails
+      return [
+        { params: { method: 'mpesa' }, props: { methodSlug: 'mpesa' } },
+        { params: { method: 'bank-transfer' }, props: { methodSlug: 'bank-transfer' } },
+        { params: { method: 'visa' }, props: { methodSlug: 'visa' } }
+      ];
+    }
+    
+    return fundingMethods.docs.map((method) => ({
+      params: { method: method.slug },
+      props: { methodSlug: method.slug }
+    }));
+  } catch (error) {
+    console.error('Failed to generate static paths:', error);
+    return [
+      { params: { method: 'mpesa' }, props: { methodSlug: 'mpesa' } }
+    ];
+  }
 }
 
 const { methodSlug } = Astro.props;
-const fundingMethod = await getFundingMethodBySlug(methodSlug);
+let fundingMethod = await getFundingMethodBySlug(methodSlug);
 
 if (!fundingMethod) {
-  return Astro.redirect('/404');
+  // Fallback data
+  fundingMethod = {
+    id: methodSlug,
+    name: methodSlug.charAt(0).toUpperCase() + methodSlug.slice(1).replace('-', ' '),
+    slug: methodSlug,
+    description: `Payment method for ${methodSlug}`,
+    status: 'published'
+  };
 }
 
 const allBrokers = await getReviews();
 const supportingBrokers = allBrokers.docs.filter(broker => 
-  broker.brokerPaymentMethods?.includes(fundingMethod.name)
+  broker.fundingMethods?.includes(fundingMethod.name)
 );
 
 const title = `Best Forex Brokers with ${fundingMethod.name} ${new Date().getFullYear()} - Kenya`;
