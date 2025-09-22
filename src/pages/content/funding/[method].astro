@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BrokerList from '../../../components/BrokerList.astro';
+import BrokerDetails from '../../../components/BrokerDetails.astro';
+import SEOContent from '../../../components/SEOContent.astro';
 import { site } from '../../../data/site';
 import { getFundingMethodBySlug, getAllFundingMethods, getReviews } from '../../../lib/qs-esm';
 
@@ -105,4 +107,8 @@ const description = `Find top forex brokers accepting ${fundingMethod.name} paym
     title={`${supportingBrokers.length} Brokers Supporting ${fundingMethod.name}`}
     description={`All brokers below accept ${fundingMethod.name} for deposits and withdrawals.`}
   />
+
+  <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={fundingMethod.name} />
+
+  <SEOContent type="payment" name={fundingMethod.name} brokerCount={supportingBrokers.length} />
 </BaseLayout>
