@@ -192,9 +192,7 @@ export const getFundingMethodBySlug = async (slug: string): Promise<FundingMetho
 export const getAllFundingMethods = async (): Promise<FundingMethodsResponse> => {
   try {
     const queryString = stringify({
-      where: {
-        status: { equals: 'published' }
-      },
+      
       depth: 2,
       sort: 'name'
     }, { addQueryPrefix: true });
