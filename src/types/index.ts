@@ -7,6 +7,20 @@ interface BrokerRegulation {
   country: string;
 }
 
+export interface FundingMethod {
+    id: string;
+    name: string;
+    slug: string;
+    description?: string;
+    processingTime?: string;
+    fees?: string;
+    minAmount?: number;
+    maxAmount?: number;
+    supportedCountries?: string[];
+    logo?: BrokerImage;
+    status: string;
+}
+
 export interface IndexBrokerProps {
   name: string;
   rating: number;
@@ -138,6 +152,7 @@ export type BrokerImage = {
   caption?: string;
 }
 
+
 export type ReviewContent = {
   docs: Array<{
     slug: string;
@@ -165,7 +180,7 @@ export type BrokerProps = {
   platforms?: string[];
   brokerPlatforms?: BrokerPlatform[];
   accountTypes?: string[];
-  paymentMethods?: string[];
+  paymentMethods?: FundingMethod[];
   fundingMethods?: string[];
   selectedAssets?: string[];
   brokerAssets?: string[];

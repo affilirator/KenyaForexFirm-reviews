@@ -1,31 +1,30 @@
 ---
-// Dynamic page for brokers filtered by payment method
+// Dynamic page for brokers filtered by payment broker
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BrokerList from '../../../components/BrokerList.astro';
 import BrokerDetails from '../../../components/BrokerDetails.astro';
 import SEOContent from '../../../components/SEOContent.astro';
-import { getReviews } from '../../../lib/qs-esm';
-import { filterByPaymentMethod, getUniquePaymentMethods } from '../../../utils/brokerFilters';
+
+
 import { site } from '../../../data/site';
+import { getMpesaForexBrokers } from '../../../lib/qs-esm';
 
 export async function getStaticPaths() {
-  const { docs: brokers } = await getReviews();
-  const methods = getUniquePaymentMethods(brokers);
+  const { docs: brokers } = await getMpesaForexBrokers();
   
-  return methods.map(method => ({
-    params: { method },
-    props: { 
-      brokers: filterByPaymentMethod(brokers, method.replace('-', ' ')),
-      method: method.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())
-    }
+  return brokers.map(broker => (
+    { params: { method: broker.slug }, 
+    props: { broker, brokers } 
   }));
 }
 
-const { brokers, method } = Astro.props;
+const { broker, brokers } = Astro.props;
+
+//const mpesa = broker.paymentMethods?.filter(method => method.toLowerCase().includes('mpesa'))?.length > 0;
 
 // SEO optimization
-const title = `Best Forex Brokers with ${method} ${new Date().getFullYear()} - Kenya`;
-const description = `Find top forex brokers accepting ${method} payments in Kenya. Compare spreads, features, and reviews of ${method} supported brokers for Kenyan traders.`;
+const title = `Best Forex Brokers with ${broker} ${new Date().getFullYear()} - Kenya`;
+const description = `Find top forex brokers accepting ${broker} payments in Kenya. Compare spreads, features, and reviews of ${broker} supported brokers for Kenyan traders.`;
 
 // Schema markup
 const schemaData = {
@@ -33,7 +32,7 @@ const schemaData = {
   "@type": "CollectionPage",
   "name": title,
   "description": description,
-  "url": `${site.url}/brokers/funding/${method.toLowerCase().replace(' ', '-')}/`,
+  "url": `${site.url}/brokers/funding/${broker.slug.toLowerCase().replace(' ', '-')}/`,
   "mainEntity": {
     "@type": "ItemList",
     "numberOfItems": brokers.length,
@@ -56,10 +55,10 @@ const schemaData = {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-          Best Forex Brokers with {method}
+          Best Forex Brokers with {broker}
         </h1>
         <p class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
-          Discover forex brokers that accept {method} payments. Perfect for Kenyan traders looking for convenient and familiar funding options.
+          Discover forex brokers that accept {broker} payments. Perfect for Kenyan traders looking for convenient and familiar funding options.
         </p>
       </div>
     </div>
@@ -67,11 +66,11 @@ const schemaData = {
 
   <BrokerList 
     brokers={brokers}
-    title={`${brokers.length} Brokers Supporting ${method}`}
-    description={`All brokers below accept ${method} for deposits and withdrawals.`}
+    title={`${brokers.length} Brokers Supporting ${broker}`}
+    description={`All brokers below accept ${broker} for deposits and withdrawals.`}
   />
 
-  <BrokerDetails brokers={brokers} filterType="payment" filterName={method} />
+  <BrokerDetails brokers={brokers} filterType="payment" filterName={'mPesa'} />
 
-  <SEOContent type="payment" name={method} brokerCount={brokers.length} />
+  <SEOContent type="payment" name={broker.brokerName || broker.slug} brokerCount={brokers.length} />
 </BaseLayout>

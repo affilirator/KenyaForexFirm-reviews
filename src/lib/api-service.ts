@@ -8,6 +8,7 @@ const API_BASE_URL = "https://api.kenyaforexfirm.com/api";
 
 /**
  * Generic function to fetch data from API endpoints
+ * @deprecated - The functions here are deprecated in favor of src/lib/qs-esm
  */
 async function fetchFromApi<T>(endpoint: string, params: Record<string, string> = {}): Promise<T> {
   try {
@@ -31,6 +32,7 @@ async function fetchFromApi<T>(endpoint: string, params: Record<string, string> 
 
 /**
  * Fetch regulators data
+ * @deprecated
  */
 export async function getRegulators(params: Record<string, string> = {}): Promise<RegulatorResponse> {
   return fetchFromApi<RegulatorResponse>('regulators', params);
@@ -38,6 +40,7 @@ export async function getRegulators(params: Record<string, string> = {}): Promis
 
 /**
  * Fetch regulator by slug
+ * @deprecated
  */
 export async function getRegulatorBySlug(slug: string): Promise<RegulatorResponse> {
   return fetchFromApi<RegulatorResponse>('regulators', { 'where[slug][equals]': slug });
@@ -45,6 +48,7 @@ export async function getRegulatorBySlug(slug: string): Promise<RegulatorRespons
 
 /**
  * Fetch authors data
+ * @deprecated
  */
 export async function getAuthors(params: Record<string, string> = {}): Promise<AuthorResponse> {
   return fetchFromApi<AuthorResponse>('authors', params);
@@ -52,6 +56,7 @@ export async function getAuthors(params: Record<string, string> = {}): Promise<A
 
 /**
  * Fetch author by slug
+ *  @deprecated
  */
 export async function getAuthorBySlug(slug: string): Promise<AuthorResponse> {
   return fetchFromApi<AuthorResponse>('authors', { 'where[slug][equals]': slug });
@@ -59,6 +64,7 @@ export async function getAuthorBySlug(slug: string): Promise<AuthorResponse> {
 
 /**
  * Fetch broker reviews data
+ *  @deprecated
  */
 export async function getBrokerReviews(params: Record<string, string> = {}): Promise<BrokerProps> {
   return fetchFromApi<BrokerProps>('broker-reviews', params);
@@ -66,6 +72,7 @@ export async function getBrokerReviews(params: Record<string, string> = {}): Pro
 
 /**
  * Fetch broker review by slug
+ *  @deprecated
  */
 export async function getBrokerReviewBySlug(slug: string): Promise<BrokerProps> {
   return fetchFromApi<BrokerProps>('broker-reviews', { 'where[slug][equals]': slug });
@@ -73,6 +80,7 @@ export async function getBrokerReviewBySlug(slug: string): Promise<BrokerProps> 
 
 /**
  * Fetch funding methods data
+ *  @deprecated
  */
 export async function getFundingMethods(params: Record<string, string> = {}): Promise<FundingMethodsResponse> {
   return fetchFromApi<FundingMethodsResponse>('funding-methods', params);
@@ -80,6 +88,7 @@ export async function getFundingMethods(params: Record<string, string> = {}): Pr
 
 /**
  * Fetch funding method by slug
+ *  @deprecated
  */
 export async function getFundingMethodBySlug(slug: string): Promise<FundingMethodsResponse> {
   return fetchFromApi<FundingMethodsResponse>('funding-methods', { 'where[slug][equals]': slug });
