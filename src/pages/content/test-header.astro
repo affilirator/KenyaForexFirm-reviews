@@ -1,8 +1,10 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import HeaderSlot from "~/components/slots/HeaderSlot.astro";
+import MainHero from "~/components/common/hero/MainHero.astro";
 ---
 <BaseLayout title="" description="">
+    <MainHero />
     <HeaderSlot>
         <Fragment slot="headerImage">
             <div class="flex flex-grow">
