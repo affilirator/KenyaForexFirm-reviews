@@ -1,5 +1,6 @@
 ---
 import type { Author } from '../../types/author';
+import { Image } from 'astro:assets';
 
 interface Props {
   author: Author;
@@ -11,14 +12,18 @@ const { author, showImage = true } = Astro.props;
 
 <div class="flex items-center gap-3">
   {showImage && author.authorImage && (
-    <a href={`/authors/${author.slug}`} class="flex-shrink-0">
-      <img 
+    <a href={`/authors/${author.slug}/`} class="flex-shrink-0">
+      <Image
         src={author.authorImage.url} 
         alt={author.name} 
         class="w-10 h-10 rounded-full object-cover"
+        format='webp'
         width="40"
         height="40"
-        loading="lazy"
+        loading={'lazy'}
+        decoding={'auto'}
+        
+        
       />
     </a>
   )}

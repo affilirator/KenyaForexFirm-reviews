@@ -110,11 +110,11 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
       
       {pageAuthor && (
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-neutral-800/50">
-          <AuthorAttribution author={pageAuthor} />
+          <AuthorAttribution author={pageAuthor} transition:animate="slide" />
         </div>
       )}
       
-      <Footer />
+      <Footer transition:animate="slide" />
     </div>
 
     <div class="fixed inset-0 pointer-events-none overflow-hidden">
