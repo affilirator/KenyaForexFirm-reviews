@@ -55,7 +55,7 @@ const brokers = dynamicData?.docs?.length > 0 ? dynamicData.docs : staticBrokers
           <span id="resultsCount">{brokers.length}</span> brokers found
         </p>
       </div>
-      <div id="brokerGrid" class="space-y-6">
+      <div id="brokerGrid" class="space-y-6 grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
         {brokers.map((broker, index) => (
           <BrokerCard broker={broker} index={index} />
         ))}
