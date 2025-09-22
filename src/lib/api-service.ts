@@ -1,7 +1,8 @@
 import type { RegulatorResponse } from '../types/regulator';
 import type { AuthorResponse } from '../types/author';
-import type { BrokerReviewsResponse } from '../types/broker-reviews';
+//import type { BrokerReviewsResponse } from '../types/broker-reviews';
 import type { FundingMethodsResponse } from '../types/funding-methods';
+import type { BrokerProps } from '~/types';
 
 const API_BASE_URL = "https://api.kenyaforexfirm.com/api";
 
@@ -59,15 +60,15 @@ export async function getAuthorBySlug(slug: string): Promise<AuthorResponse> {
 /**
  * Fetch broker reviews data
  */
-export async function getBrokerReviews(params: Record<string, string> = {}): Promise<BrokerReviewsResponse> {
-  return fetchFromApi<BrokerReviewsResponse>('broker-reviews', params);
+export async function getBrokerReviews(params: Record<string, string> = {}): Promise<BrokerProps> {
+  return fetchFromApi<BrokerProps>('broker-reviews', params);
 }
 
 /**
  * Fetch broker review by slug
  */
-export async function getBrokerReviewBySlug(slug: string): Promise<BrokerReviewsResponse> {
-  return fetchFromApi<BrokerReviewsResponse>('broker-reviews', { 'where[slug][equals]': slug });
+export async function getBrokerReviewBySlug(slug: string): Promise<BrokerProps> {
+  return fetchFromApi<BrokerProps>('broker-reviews', { 'where[slug][equals]': slug });
 }
 
 /**

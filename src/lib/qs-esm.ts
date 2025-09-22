@@ -11,8 +11,80 @@ const queryConfig = {
   where: {
     status: { equals: 'published' }
   },
-  depth: 3,
+  depth: 2,
   sort: '-brokerRating'
+};
+
+// A more complex query object
+const queryObject = {
+  where: {
+    // The top-level 'and' means all conditions inside this array must be true
+    and: [
+      {
+        // First condition: The post must have more than 50 likes.
+        likeCount: {
+          greater_than: 50,
+        },
+      },
+      {
+        // Second condition: This condition contains a nested 'or'.
+        // This means at least one of the conditions inside the 'or' array must be true.
+        or: [
+          {
+            status: {
+              equals: 'published',
+            },
+          },
+          {
+            status: {
+              equals: 'archived',
+            },
+          },
+        ],
+      },
+    ],
+  },
+  limit: 20, // Let's get up to 20 matching documents
+};
+
+const mpesaQuery = {
+  select: {
+    content: false,
+    blog: false
+  },
+  where: {
+    and: [
+      
+      { status: { equals: 'published' } },
+      {
+        or: [
+          { brokerPaymentMethods: { contains: '"mPesa"' } },
+          { acceptsMpesa: { equals: true } },
+          
+        ]
+      }
+
+    ]
+    
+  },
+  depth: 2,
+  sort: '-brokerRating'
+};
+
+export const getMpesaForexBrokers = async (): Promise<{ docs: BrokerProps[] }> => {
+  try {
+    const queryString = stringify(mpesaQuery, { addQueryPrefix: true });
+    const response = await fetch(`${PAYLOAD_API_URL}/api/broker-reviews${queryString}`);
+    
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch reviews:', error);
+    return { docs: [] };
+  }
 };
 
 export const getReviews = async (): Promise<{ docs: BrokerProps[] }> => {

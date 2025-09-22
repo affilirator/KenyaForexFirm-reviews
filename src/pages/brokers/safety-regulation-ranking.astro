@@ -60,7 +60,7 @@ const schemaData = {
     sameAs: [
       author.socialMediaProfiles?.facebookUrl,
       author.socialMediaProfiles?.twitterUrl,
-      ...(author.socialMediaProfiles?.additionalProfiles?.map(profile => profile.profileUrl) || [])
+      ...(author.socialMediaProfiles?.otherProfiles?.map(profile => profile.profileUrl) || [])
     ].filter(Boolean) 
   },
   "description": `Top forex brokers ranked by safety and regulation for ${site.address.country} traders`,

@@ -2,11 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import { site } from '../data/site';
-import { getBrokerReviews } from '~/lib/api-service';
+import { getReviews } from '~/lib/qs-esm';
 import type { BrokerProps } from '~/types'
 import { Image } from "astro:assets"
 
-const data = await getBrokerReviews();
+const data = await getReviews();
 const brokers = (data.docs || []).sort((a, b) => (b.brokerRating || 0) - (a.brokerRating || 0));
 
 const schemaData = {

@@ -154,6 +154,7 @@ export type BrokerProps = {
   slug: string;
   catRatings: CatRatings;
   brokerWebsite?: string;
+  tradingPlatforms: string[];
   cmaRegulated?: boolean;
   meta?: BrokerMeta;
   baseDetails?: BrokerBaseDetails;
