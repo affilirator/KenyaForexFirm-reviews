@@ -10,6 +10,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://fx.kenyaforexfirm.com',
   integrations: [tailwind(), icon(), react()],
+  trailingSlash: 'always',
 
   build: {
     inlineStylesheets: 'auto',
