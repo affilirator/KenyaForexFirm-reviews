@@ -32,6 +32,9 @@ importers:
       '@iconify-json/lucide':
         specifier: ^1.2.56
         version: 1.2.56
+      '@iconify-json/mdi':
+        specifier: ^1.2.3
+        version: 1.2.3
       '@iconify-json/tabler':
         specifier: ^1.2.19
         version: 1.2.19
@@ -686,6 +689,9 @@ packages:
 
   '@iconify-json/lucide@1.2.56':
     resolution: {integrity: sha512-GgfOALr1+ui8ZKtOqxqWW9Vk+Mtsf7JxV0yIEcsk0Tv92ha7LBN2dfAV7YdTD7IbEyAIKgNllmQUOBrUlhiWPQ==}
+
+  '@iconify-json/mdi@1.2.3':
+    resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
 
   '@iconify-json/tabler@1.2.19':
     resolution: {integrity: sha512-JDeQTQxHD8KE12pAbPVHX1WFVOPq8D0XfRb/LwYHwGwYE0HP9OIjJ//TKxS1Gt++RirYu6Xsx+Jm5LA5KbykoA==}
@@ -3978,6 +3984,10 @@ snapshots:
   '@fastify/busboy@2.1.1': {}
 
   '@iconify-json/lucide@1.2.56':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/mdi@1.2.3':
     dependencies:
       '@iconify/types': 2.0.0
 
