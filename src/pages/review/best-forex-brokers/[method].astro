@@ -4,11 +4,11 @@ import BrokerList from '../../../components/BrokerList.astro';
 import BrokerDetails from '../../../components/BrokerDetails.astro';
 import SEOContent from '../../../components/SEOContent.astro';
 import { site } from '../../../data/site';
-import { getFundingMethodBySlug, getAllFundingMethods, getReviews } from '../../../lib/qs-esm';
+import { getfundingMethodBySlug, getAllfundingMethods, getReviews } from '../../../lib/qs-esm';
 
 export async function getStaticPaths() {
   try {
-    const fundingMethods = await getAllFundingMethods();
+    const fundingMethods = await getAllfundingMethods();
     
     if (fundingMethods.docs.length === 0) {
       // Fallback paths if API fails
@@ -32,7 +32,7 @@ export async function getStaticPaths() {
 }
 
 const { methodSlug } = Astro.props;
-let fundingMethod = await getFundingMethodBySlug(methodSlug);
+let fundingMethod = await getfundingMethodBySlug(methodSlug);
 
 if (!fundingMethod) {
   // Fallback data
