@@ -1,0 +1,420 @@
+---
+// Dynamic page for brokers filtered by payment broker
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import BrokerList from '~/components/BrokerList.astro';
+import BrokerDetails from '~/components/BrokerDetails.astro';
+import SEOContent from '~/components/SEOContent.astro';
+import { Image } from 'astro:assets'
+
+
+import { site } from '~/data/site';
+import { getMpesaForexBrokers } from '~/lib/qs-esm';
+
+const brokerQuery = await getMpesaForexBrokers()
+const brokers = brokerQuery.docs;
+
+//const { broker } = Astro.props;
+
+//const mpesa = broker.paymentMethods?.filter(method => method.toLowerCase().includes('mpesa'))?.length > 0;
+
+// SEO optimization
+const title = `Best Forex Brokers with  ${new Date().getFullYear()} - Kenya`;
+const description = `Find top forex brokers accepting payments in Kenya. Compare spreads, features, and reviews of ${broker} supported brokers for Kenyan traders.`;
+
+// Schema markup
+
+---
+
+
+  <!-- Hero Section -->
+  <BaseLayout
+  title={`Best Forex Brokers in ${site.address.country} (${site.currentYear}) - Expert Reviews & Rankings`}
+  description={`Compare the top forex brokers available to ${site.address.country}n traders. Expert reviews, regulation info, spreads, and features to help you choose the best broker for trading.`}
+  
+  noindex={true}
+>
+  
+
+  <!-- Header Section -->
+  <section class="prose prose-invert prose-lg pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+          Best
+          <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
+            Forex Brokers
+          </span>
+          in Kenya
+        </h1>
+        <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
+          Compare the top-rated forex brokers available to Kenyan traders. Our expert analysis covers
+          regulation, spreads, platforms, and features to help you make informed decisions.
+        </p>
+      </div>
+
+      <!-- Filter and Search Controls -->
+      <div class="bg-gradient-to-r from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 mb-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <!-- Search -->
+          <div class="lg:col-span-2">
+            <label class="block text-sm font-medium text-neutral-300 mb-2">Search Brokers</label>
+            <input
+              type="text"
+              id="brokerSearch"
+              placeholder="Search by name, regulation, or features..."
+              class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white placeholder-neutral-400 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+            >
+          </div>
+
+          <!-- Regulation Filter -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-300 mb-2">Regulation</label>
+            <select
+              id="regulationFilter"
+              class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+            >
+              <option value="">All Regulators</option>
+              <option value="regulated">Regulated Only</option>
+              <option value="cysec">CySEC</option>
+              <option value="asic">ASIC</option>
+              <option value="fca">FCA</option>
+            </select>
+          </div>
+
+          <!-- Min Deposit Filter -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-300 mb-2">Min Deposit</label>
+            <select
+              id="depositFilter"
+              class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+            >
+              <option value="">Any Amount</option>
+              <option value="0-10">$1 - $10</option>
+              <option value="10-100">$10 - $100</option>
+              <option value="100-500">$100 - $500</option>
+              <option value="500+">$500+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <!-- Platform Filter -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-300 mb-2">Trading Platform</label>
+            <select
+              id="platformFilter"
+              class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+            >
+              <option value="">All Platforms</option>
+              <option value="mt4">MetaTrader 4</option>
+              <option value="mt5">MetaTrader 5</option>
+              <option value="ctrader">cTrader</option>
+              <option value="webtrader">WebTrader</option>
+            </select>
+          </div>
+
+          <!-- Account Type Filter -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-300 mb-2">Account Features</label>
+            <select
+              id="featuresFilter"
+              class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+            >
+              <option value="">All Features</option>
+              <option value="demo">Demo Account</option>
+              <option value="islamic">Islamic Account</option>
+              <option value="copy-trading">Copy Trading</option>
+              <option value="bonus">Bonus Available</option>
+            </select>
+          </div>
+
+          <!-- Sort Filter -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-300 mb-2">Sort By</label>
+            <select
+              id="sortFilter"
+              class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+            >
+              <option value="rating">Highest Rated</option>
+              <option value="name">Name A-Z</option>
+              <option value="deposit">Min Deposit</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brokers Grid -->
+  <section class="py-16 -50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="brokersGrid" class="space-y-6 grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+        {brokers.map((broker) => (
+          <div class="broker-card  rounded-2xl shadow-lg border border-neutral-200/60 overflow-hidden hover:shadow-xl transition-all duration-300" data-broker={JSON.stringify(broker)}>
+            <div class="p-8">
+              <!-- Header -->
+              <div class="flex items-start justify-between mb-6">
+                <div class="flex items-center space-x-4">
+                  <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center text-2xl font-bold ">
+                   { broker.logo && (
+                    <Image
+                    src={broker.logo.url}
+                    inferSize
+                    alt={broker.brokerName}
+                    class="w-16 h-16"
+                    format='webp'
+                    loading={'lazy'}
+                    />)
+                    }
+                   
+                  </div>
+                  <div>
+                    <h3 class="text-2xl font-bold  mb-1">{broker.brokerName}</h3>
+                    <div class="flex items-center space-x-2">
+                      <div class="flex items-center">
+                        {Array.from({length: 5}, (_, i) => (
+                          <svg class={`w-5 h-5 ${i < Math.floor(broker.brokerRating || 0) ? 'text-yellow-400' : 'text-neutral-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                      </div>
+                      <span class="text-lg font-semibold ">{broker.brokerRating || 'N/A'}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="text-right">
+                  {broker.isRegulated && (
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 mb-2">
+                      ✓ Regulated
+                    </span>
+                  )}
+                  <div class="text-sm text-neutral-600">
+                    Est. {broker.baseDetails?.founded || 'N/A'}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Key Stats -->
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="text-center p-4 bg-neutral-50 rounded-lg">
+                  <div class="text-2xl font-bold text-primary-600">${broker.minDeposit || 'N/A'}</div>
+                  <div class="text-sm text-neutral-200">Min Deposit</div>
+                </div>
+                <div class="text-center p-4 bg-neutral-50 rounded-lg">
+                  <div class="text-2xl font-bold text-primary-600">{broker.maxLeverage || 'N/A'}</div>
+                  <div class="text-sm text-neutral-200">Max Leverage</div>
+                </div>
+                <div class="text-center p-4 bg-neutral-50 rounded-lg">
+                  <div class="text-2xl font-bold text-primary-600">{broker.spread || 'N/A'}</div>
+                  <div class="text-sm text-neutral-200">Avg Spread</div>
+                </div>
+                <div class="text-center p-4 bg-neutral-50 rounded-lg">
+                  <div class="text-2xl font-bold text-primary-600">{broker.tradingPlatforms?.length || 0}</div>
+                  <div class="text-sm text-neutral-200">Platforms</div>
+                </div>
+              </div>
+
+              <!-- Features -->
+              <div class="mb-6">
+                <h4 class="text-lg font-semibold text-neutral-400 mb-3">Key Features</h4>
+                <div class="flex flex-wrap gap-2">
+                  {broker.features?.slice(0, 6).map((feature: string) => (
+                    <span class="px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm font-medium">
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Regulations -->
+              {broker.regulations && broker.regulations.length > 0 && (
+                <div class="mb-6">
+                  <h4 class="text-lg font-semibold text-neutral-300 mb-3">Regulation</h4>
+                  <div class="flex flex-wrap gap-2">
+                    {broker.regulations.map((reg) => (
+                      <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                        {typeof reg === 'object' ? reg.name : reg}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <!-- Trading Platforms -->
+              {broker.tradingPlatforms && broker.tradingPlatforms.length > 0 && (
+                <div class="mb-6">
+                  <h4 class="text-lg font-semibold text-neutral-900 mb-3">Trading Platforms</h4>
+                  <div class="flex flex-wrap gap-2">
+                    {broker.tradingPlatforms.map((platform) => (
+                      <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                        {platform.toUpperCase()}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <!-- Summary -->
+              {broker.description && (
+                <div class="mb-6">
+                  <p class="text-neutral-700 leading-relaxed">{broker.description}</p>
+                </div>
+              )}
+
+              <!-- Action Buttons -->
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a
+                  href={`/brokers/${broker.slug}`}
+                  class="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 text-center"
+                >
+                  Read Full Review
+                </a>
+                {broker.brokerWebsite && (
+                  <a
+                    href={broker.brokerWebsite}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1 bg-neutral-800 hover:bg-neutral-900 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 text-center"
+                  >
+                    Visit Broker →
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {brokers.length === 0 && (
+        <div class="text-center py-12">
+          <div class="text-6xl mb-4">🔍</div>
+          <h3 class="text-2xl font-bold text-neutral-900 mb-2">No brokers found</h3>
+          <p class="text-neutral-600">Try adjusting your search criteria or filters.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- JavaScript for filtering and search -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('brokerSearch') as HTMLInputElement;
+      const regulationFilter = document.getElementById('regulationFilter') as HTMLSelectElement;
+      const depositFilter = document.getElementById('depositFilter') as HTMLSelectElement;
+      const platformFilter = document.getElementById('platformFilter') as HTMLSelectElement;
+      const featuresFilter = document.getElementById('featuresFilter') as HTMLSelectElement;
+      const sortFilter = document.getElementById('sortFilter') as HTMLSelectElement;
+      const brokersGrid = document.getElementById('brokersGrid') as HTMLElement;
+      
+      let allBrokers = [];
+      
+      // Get all broker cards and extract data
+      function initializeBrokers() {
+        const brokerCards = document.querySelectorAll('.broker-card');
+        allBrokers = Array.from(brokerCards).map(card => {
+          const brokerData = JSON.parse(card.dataset.broker);
+          return { element: card, data: brokerData };
+        });
+      }
+      
+      // Filter and sort brokers
+      function filterBrokers() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const regulationValue = regulationFilter.value;
+        const depositValue = depositFilter.value;
+        const platformValue = platformFilter.value;
+        const featuresValue = featuresFilter.value;
+        const sortValue = sortFilter.value;
+        
+        let filteredBrokers = allBrokers.filter(broker => {
+          const data = broker.data;
+          
+          // Search filter
+          if (searchTerm && !data.brokerName.toLowerCase().includes(searchTerm) && 
+              !data.description?.toLowerCase().includes(searchTerm)) {
+            return false;
+          }
+          
+          // Regulation filter
+          if (regulationValue === 'regulated' && !data.isRegulated) {
+            return false;
+          }
+          if (regulationValue && regulationValue !== 'regulated') {
+            const hasRegulation = data.regulations?.some(reg => 
+              (typeof reg === 'string' ? reg : reg.name)?.toLowerCase().includes(regulationValue)
+            );
+            if (!hasRegulation) return false;
+          }
+          
+          // Deposit filter
+          if (depositValue) {
+            const deposit = parseFloat(data.minDeposit) || 0;
+            const [min, max] = depositValue.split('-').map(v => v === '+' ? Infinity : parseFloat(v));
+            if (deposit < min || (max !== undefined && deposit > max)) {
+              return false;
+            }
+          }
+          
+          // Platform filter
+          if (platformValue) {
+            const platforms = data.tradingPlatforms || [];
+            const hasPlatform = platforms.some(platform => {
+              const platformName = platform.toLowerCase();
+              if (platformValue === 'mt4') return platformName.includes('mt4') || platformName.includes('metatrader 4');
+              if (platformValue === 'mt5') return platformName.includes('mt5') || platformName.includes('metatrader 5');
+              if (platformValue === 'ctrader') return platformName.includes('ctrader');
+              if (platformValue === 'webtrader') return platformName.includes('webtrader') || platformName.includes('web trader');
+              return platformName.includes(platformValue);
+            });
+            if (!hasPlatform) return false;
+          }
+          
+          return true;
+        });
+        
+        // Sort brokers
+        filteredBrokers.sort((a, b) => {
+          switch (sortValue) {
+            case 'rating':
+              return (b.data.brokerRating || 0) - (a.data.brokerRating || 0);
+            case 'name':
+              return a.data.brokerName.localeCompare(b.data.brokerName);
+            case 'deposit':
+              return (parseFloat(a.data.minDeposit) || 0) - (parseFloat(b.data.minDeposit) || 0);
+            default:
+              return 0;
+          }
+        });
+        
+        // Update display
+        brokersGrid.innerHTML = '';
+        filteredBrokers.forEach(broker => {
+          brokersGrid.appendChild(broker.element);
+        });
+        
+        // Show no results message if needed
+        if (filteredBrokers.length === 0) {
+          brokersGrid.innerHTML = `
+            <div class="col-span-full text-center py-12">
+              <div class="text-6xl mb-4">🔍</div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-2">No brokers found</h3>
+              <p class="text-neutral-600">Try adjusting your search criteria or filters.</p>
+            </div>
+          `;
+        }
+      }
+      
+      // Initialize
+      initializeBrokers();
+      
+      // Add event listeners
+      searchInput.addEventListener('input', filterBrokers);
+      regulationFilter.addEventListener('change', filterBrokers);
+      depositFilter.addEventListener('change', filterBrokers);
+      platformFilter.addEventListener('change', filterBrokers);
+      featuresFilter.addEventListener('change', filterBrokers);
+      sortFilter.addEventListener('change', filterBrokers);
+    });
+  </script>
+</BaseLayout>

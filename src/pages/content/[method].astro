@@ -1,13 +1,13 @@
 ---
 // Dynamic page for brokers filtered by payment broker
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import BrokerList from '../../../components/BrokerList.astro';
-import BrokerDetails from '../../../components/BrokerDetails.astro';
-import SEOContent from '../../../components/SEOContent.astro';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import BrokerList from '~/components/BrokerList.astro';
+import BrokerDetails from '~/components/BrokerDetails.astro';
+import SEOContent from '~/components/SEOContent.astro';
 
 
-import { site } from '../../../data/site';
-import { getMpesaForexBrokers } from '../../../lib/qs-esm';
+import { site } from '~/data/site';
+import { getMpesaForexBrokers } from '~/lib/qs-esm';
 
 export async function getStaticPaths() {
   const { docs: brokers } = await getMpesaForexBrokers();
