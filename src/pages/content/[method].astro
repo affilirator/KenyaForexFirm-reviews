@@ -7,10 +7,10 @@ import SEOContent from '~/components/SEOContent.astro';
 
 
 import { site } from '~/data/site';
-import { getMpesaForexBrokers } from '~/lib/qs-esm';
+import { getFundingMethodBySlug, getMpesaForexBrokers } from '~/lib/qs-esm';
 
 export async function getStaticPaths() {
-  const { docs: brokers } = await getMpesaForexBrokers();
+  const fundings = await getFundingMethodBySlug();
   
   return brokers.map(broker => (
     { params: { method: broker.slug }, 

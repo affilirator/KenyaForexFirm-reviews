@@ -1,0 +1,82 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import BrokerList from '~/components/BrokerList.astro';
+import { site } from '~/data/site';
+import { getFundingMethodBySlug, getAllFundingMethods, getReviews } from '~/lib/qs-esm';
+
+export async function getStaticPaths() {
+  const fundingMethods = await getAllFundingMethods();
+  
+  return fundingMethods.docs.map((method) => ({
+    params: { method: method.slug },
+    props: { methodSlug: method.slug }
+  }));
+}
+
+const { methodSlug } = Astro.props;
+const fundingMethod = await getFundingMethodBySlug(methodSlug);
+
+if (!fundingMethod) {
+  return Astro.redirect('/404');
+}
+
+const allBrokers = await getReviews();
+const supportingBrokers = allBrokers.docs.filter(broker => 
+  broker.brokerPaymentMethods?.includes(fundingMethod.name)
+);
+
+const title = `Best Forex Brokers with ${fundingMethod.name} ${new Date().getFullYear()} - Kenya`;
+const description = `Find top forex brokers accepting ${fundingMethod.name} payments in Kenya.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+          Best Forex Brokers with {fundingMethod.name}
+        </h1>
+        <p class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
+          {fundingMethod.description || `Discover forex brokers that accept ${fundingMethod.name} payments.`}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {fundingMethod.processingTime && (
+          <div class="text-center p-6 bg-neutral-50 rounded-lg">
+            <h3 class="font-semibold text-neutral-900 mb-2">Processing Time</h3>
+            <p class="text-neutral-600">{fundingMethod.processingTime}</p>
+          </div>
+        )}
+        {fundingMethod.fees && (
+          <div class="text-center p-6 bg-neutral-50 rounded-lg">
+            <h3 class="font-semibold text-neutral-900 mb-2">Fees</h3>
+            <p class="text-neutral-600">{fundingMethod.fees}</p>
+          </div>
+        )}
+        {fundingMethod.minAmount && (
+          <div class="text-center p-6 bg-neutral-50 rounded-lg">
+            <h3 class="font-semibold text-neutral-900 mb-2">Min Amount</h3>
+            <p class="text-neutral-600">${fundingMethod.minAmount}</p>
+          </div>
+        )}
+        {fundingMethod.maxAmount && (
+          <div class="text-center p-6 bg-neutral-50 rounded-lg">
+            <h3 class="font-semibold text-neutral-900 mb-2">Max Amount</h3>
+            <p class="text-neutral-600">${fundingMethod.maxAmount}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <BrokerList 
+    brokers={supportingBrokers}
+    title={`${supportingBrokers.length} Brokers Supporting ${fundingMethod.name}`}
+    description={`All brokers below accept ${fundingMethod.name} for deposits and withdrawals.`}
+  />
+</BaseLayout>

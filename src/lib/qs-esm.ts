@@ -1,5 +1,6 @@
 import { stringify } from 'qs-esm';
 import type { BrokerProps } from '../types';
+import type { FundingMethod, FundingMethodsResponse } from '~/types/funding-methods';
 
 const PAYLOAD_API_URL = "https://api.kenyaforexfirm.com";
 
@@ -48,6 +49,30 @@ const queryObject = {
 };
 
 const mpesaQuery = {
+  select: {
+    content: false,
+    blog: false
+  },
+  where: {
+    and: [
+      
+      { status: { equals: 'published' } },
+      {
+        or: [
+          { brokerPaymentMethods: { contains: '"mPesa"' } },
+          { acceptsMpesa: { equals: true } },
+          
+        ]
+      }
+
+    ]
+    
+  },
+  depth: 2,
+  sort: '-brokerRating'
+};
+
+const fundingQuery = {
   select: {
     content: false,
     blog: false
@@ -137,6 +162,53 @@ export const getReviewBySlug = async (slug: string): Promise<BrokerProps | null>
   } catch (error) {
     console.error(`Failed to fetch review with slug ${slug}:`, error);
     return null;
+  }
+};
+
+export const getFundingMethodBySlug = async (slug: string): Promise<FundingMethodsResponse | null> => {
+  try {
+    const queryString = stringify({
+      where: {
+        slug: { equals: slug },
+        status: { equals: 'published' }
+      },
+      depth: 3
+    }, { addQueryPrefix: true });
+    
+    const response = await fetch(`${PAYLOAD_API_URL}/api/funding-methods${queryString}`);
+    
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data.docs?.[0] || null;
+  } catch (error) {
+    console.error(`Failed to fetch review with slug ${slug}:`, error);
+    return null;
+  }
+};
+
+export const getAllFundingMethods = async (): Promise<FundingMethodsResponse> => {
+  try {
+    const queryString = stringify({
+      where: {
+        status: { equals: 'published' }
+      },
+      depth: 2,
+      sort: 'name'
+    }, { addQueryPrefix: true });
+    
+    const response = await fetch(`${PAYLOAD_API_URL}/api/funding-methods${queryString}`);
+    
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch funding methods:', error);
+    return { docs: [], totalDocs: 0, limit: 0, totalPages: 0, page: 1, pagingCounter: 1, hasPrevPage: false, hasNextPage: false, prevPage: null, nextPage: null };
   }
 };
 
