@@ -180,7 +180,7 @@ export type BrokerProps = {
   platforms?: string[];
   brokerPlatforms?: BrokerPlatform[];
   accountTypes?: string[];
-  paymentMethods?: FundingMethod[];
+  brokerPaymentMethods?: FundingMethod[];
   fundingMethods?: FundingMethod[];
   selectedAssets?: string[];
   brokerAssets?: string[];

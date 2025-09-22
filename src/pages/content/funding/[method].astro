@@ -45,7 +45,7 @@ if (!fundingMethod) {
 
 const allBrokers = await getReviews();
 const supportingBrokers = allBrokers.docs.filter(broker => 
-  broker.brokerPaymentMethods?.includes(fundingMethod.name)
+  broker.brokerPaymentMethods?.toLowerCase().includes(fundingMethod.name)
 );
 /**
  * const allBrokers = await getReviews();
