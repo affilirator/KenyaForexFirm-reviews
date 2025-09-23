@@ -18,4 +18,3 @@
 #/brokers/ /review/best-forex-brokers/:splat 301
 /*[^/]$ /$1/:splat 301
 /*[^/.]$ /$1/ 301
-/*[^/]$ /$1/ 301

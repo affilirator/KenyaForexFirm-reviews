@@ -1,0 +1,165 @@
+---
+// src/pages/improved-brokers.astro
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Navigation from '~/components/Navigation.astro';
+import BrokerCard from '~/components/review/BrokerCard.astro';
+import FilterControls from '~/components/review/FilterControls.astro';
+import { site } from '~/data/site';
+import { getReviews } from '~/lib/qs-esm';
+import { staticBrokers } from '~/data/brokers';
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": 'Best Forex Brokers in Kenya',
+  "description": site.description,
+  "url": new URL(Astro.request.url),
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": 15,
+    "itemListElement": []
+  }
+};
+
+// Fetch dynamic data and merge with static data
+const dynamicData = await getReviews();
+const brokers = dynamicData?.docs?.length > 0 ? dynamicData.docs : staticBrokers;
+//const brokers =  staticBrokers;
+---
+
+<BaseLayout
+  title={`Best Forex Brokers in ${site.address.country} (${site.currentYear}) - Expert Reviews & Rankings`}
+  description={`Compare the top forex brokers available to ${site.address.country}n traders. Expert reviews, regulation info, spreads, and features to help you choose the best broker for trading.`}
+  schemaData={schemaData}>
+  
+  <Navigation />
+
+  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+          Best <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Forex Brokers</span> in Kenya
+        </h1>
+        <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
+          Compare the top-rated forex brokers available to Kenyan traders. Our expert analysis covers regulation, spreads, platforms, and features to help you make informed decisions.
+        </p>
+      </div>
+      <FilterControls />
+    </div>
+  </section>
+
+  <section class="py-12 bg-gradient-to-b from-neutral-950 to-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <p class="text-neutral-400">
+          <span id="resultsCount">{brokers.length}</span> brokers found
+        </p>
+      </div>
+      <div id="brokerGrid" class="space-y-6 grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+        {brokers.map((broker, index) => (
+          <BrokerCard broker={broker} index={index} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .broker-card.hidden { display: none; }
+  </style>
+
+  <script>
+  class BrokerFilter {
+    brokerCards;
+    
+    constructor() {
+      this.brokerCards = document.querySelectorAll('.broker-card');
+      this.initializeEventListeners();
+    }
+
+    initializeEventListeners() {
+      document.getElementById('brokerSearch')?.addEventListener('input', () => this.applyFilters());
+      document.getElementById('regulationFilter')?.addEventListener('change', () => this.applyFilters());
+      document.getElementById('depositFilter')?.addEventListener('change', () => this.applyFilters());
+      document.getElementById('sortFilter')?.addEventListener('change', () => this.applySorting());
+      document.querySelectorAll('.quick-filter').forEach(button => {
+        button.addEventListener('click', (e) => this.handleQuickFilter(e));
+      });
+    }
+
+    applyFilters() {
+  const searchTerm = (document.getElementById('brokerSearch') as HTMLInputElement)?.value?.toLowerCase();
+  const regulation = (document.getElementById('regulationFilter') as HTMLSelectElement)?.value;
+  const deposit = (document.getElementById('depositFilter') as HTMLSelectElement)?.value;
+  let visibleCount = 0;
+
+      this.brokerCards.forEach(card => {
+        const htmlCard = card as HTMLElement;
+        let show = true;
+
+        if (searchTerm && !card.querySelector('h3')?.textContent?.toLowerCase().includes(searchTerm)) show = false;
+        if (regulation === 'cma-approved' && htmlCard.dataset.cma !== 'true') show = false;
+        if (regulation && regulation !== 'cma-approved' && !htmlCard.dataset.regulation?.includes(regulation)) show = false;
+        
+        if (deposit) {
+          const minDeposit = parseFloat(htmlCard.dataset.deposit || '0');
+          const ranges: Record<string, number[]> = { '0-10': [0, 10], '10-100': [10, 100], '100-500': [100, 500], '500+': [500, Infinity] };
+          const [min, max] = ranges[deposit] || [0, Infinity];
+          if (minDeposit < min || minDeposit > max) show = false;
+        }
+
+        card.classList.toggle('hidden', !show);
+        if (show) visibleCount++;
+      });
+
+      document.getElementById('resultsCount')!.textContent = visibleCount.toString();
+    }
+
+    applySorting() {
+  const sortBy = (document.getElementById('sortFilter') as HTMLSelectElement)?.value;
+      const container = document.getElementById('brokerGrid');
+      const cards = Array.from(this.brokerCards);
+
+      cards.sort((a, b) => {
+        const htmlA = a as HTMLElement;
+        const htmlB = b as HTMLElement;
+        switch (sortBy) {
+          case 'rating': return parseFloat(htmlB.dataset.rating || '0') - parseFloat(htmlA.dataset.rating || '0');
+          case 'spread': return parseFloat(htmlA.dataset.spread || '0') - parseFloat(htmlB.dataset.spread || '0');
+          case 'deposit': return parseFloat(htmlA.dataset.deposit || '0') - parseFloat(htmlB.dataset.deposit || '0');
+          default: return 0;
+        }
+      });
+
+      cards.forEach(card => container?.appendChild(card));
+      this.applyFilters();
+    }
+
+    handleQuickFilter(e: Event) {
+      const button = e.target as HTMLElement;
+      const filter = button.dataset.filter;
+      
+      button.classList.toggle('active');
+      document.querySelectorAll('.quick-filter').forEach(b => b !== button && b.classList.remove('active'));
+
+      
+  if (button.classList.contains('active')) {
+    switch (filter) {
+      case 'cma-approved': 
+        (document.getElementById('regulationFilter') as HTMLSelectElement).value = 'cma-approved'; 
+        break;
+      case 'low-deposit': 
+        (document.getElementById('depositFilter') as HTMLSelectElement).value = '0-10'; 
+        break;
+    }
+  } else {
+    (document.getElementById('regulationFilter') as HTMLSelectElement).value = '';
+    (document.getElementById('depositFilter') as HTMLSelectElement).value = '';
+  }
+  this.applyFilters();
+}
+  }
+
+  new BrokerFilter();
+</script>
+
+</BaseLayout>
