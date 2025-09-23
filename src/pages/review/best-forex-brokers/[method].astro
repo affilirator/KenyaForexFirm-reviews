@@ -14,6 +14,7 @@ export async function getStaticPaths() {
     
     if (fundingMethods.docs.length === 0) {
       // Fallback paths if API fails
+      
       return window.location.href = '/404/'
     }
     
@@ -35,7 +36,7 @@ const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2
 
 if (!fundingMethod) {
   // Fallback data
-  return window.location.href = '/404/'
+  return Astro.redirect('/404/')
 }
 
 const allBrokers = await getReviews();
