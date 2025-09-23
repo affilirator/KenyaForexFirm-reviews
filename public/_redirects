@@ -13,4 +13,5 @@
 /regulators/jfsa-regulation/ /forex-trading/regulations/jfsa/ 301
 /regulators/mas-regulation/ /forex-trading/regulations/mas/ 301
 /regulators/nfa-regulation/ /forex-trading/regulations/nfa/ 301
-/regulators/:path* /forex-trading/regulations/:path* 301
+/regulators /forex-trading/regulations/ 301
+/regulators*:path* /forex-trading/regulations/:path* 301
