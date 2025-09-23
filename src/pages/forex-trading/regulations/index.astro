@@ -1,8 +1,8 @@
 ---
-import Layout from '../../layouts/BaseLayout.astro';
-import { RegulatorCard } from '../../components/regulators';
-import type { Regulator } from '../../types/regulator';
-import { REGULATOR_GLOBALS } from '../../lib/regulatorGlobals';
+import Layout from '~/layouts/BaseLayout.astro';
+import { RegulatorCard } from '~/components/regulators';
+import type { Regulator } from '~/types/regulator';
+import { REGULATOR_GLOBALS } from '~/lib/regulatorGlobals';
 
 // Convert the regulator globals to the Regulator type
 const regulators: Regulator[] = REGULATOR_GLOBALS.map(reg => ({

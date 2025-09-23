@@ -1,10 +1,10 @@
 ---
-import { getRegulators, getRegulatorBySlug } from '../../lib/regulators-api';
-import { transformRegulatorData } from '../../lib/regulatorTransformer';
-import { generateRegulatorMetadata } from '../../lib/regulatorUtils';
-import { getAuthorBySlug } from '../../lib/authors-api';
-import type { RegulatorPage, Regulator } from '../../types/regulator';
-import Layout from '../../layouts/BaseLayout.astro';
+import { getRegulators, getRegulatorBySlug } from '~/lib/regulators-api';
+import { transformRegulatorData } from '~/lib/regulatorTransformer';
+import { generateRegulatorMetadata } from '~/lib/regulatorUtils';
+import { getAuthorBySlug } from '~/lib/authors-api';
+import type { RegulatorPage, Regulator } from '~/types/regulator';
+import Layout from '~/layouts/BaseLayout.astro';
 import RegulatorCard from '~/components/regulators/RegCardTwo';
 import { 
   RegulatorHero, 
@@ -16,8 +16,8 @@ import {
   RegulatorBenefits,
   RegulatorBrokers,
   TopRegulatedBrokers
-} from '../../components/regulators';
-import ErrorDisplay from '../../components/common/ErrorDisplay.astro';
+} from '~/components/regulators';
+import ErrorDisplay from '~/components/common/ErrorDisplay.astro';
 
 // Generate static paths from regulators API
 export async function getStaticPaths() {
