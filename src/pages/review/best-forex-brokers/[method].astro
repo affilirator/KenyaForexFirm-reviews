@@ -66,7 +66,7 @@ const description = `Find top forex brokers accepting ${fundingMethod?.title || 
     
     <span slot="image">
 
-      <img src={`https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/${fundingMethod.image.filename}`}
+      <img src={fundingMethod.image?.filename ? `https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/${fundingMethod.image.filename}` : (fundingMethod.image?.url || fallbackCdnUrl)}
       alt={`${fundingMethod?.title || fundingMethod?.name} Logo`} 
       height={48}
       width={48}
