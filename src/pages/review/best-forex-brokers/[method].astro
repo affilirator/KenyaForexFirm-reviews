@@ -38,7 +38,7 @@ if (!fundingMethod) {
     image:{
       url: fallbackCdnUrl
     },
-    name: methodSlug.charAt(0).toUpperCase() + methodSlug.slice(1).replace('-', ' '),
+    name: methodSlug.charAt(0).toUpperCase() + methodSlug.slice(1).replace('-', ' ') + Date.now().toString(36).charAt(0),
     slug: methodSlug,
     description: `Payment method for ${methodSlug}`,
     status: 'published'
@@ -62,7 +62,7 @@ const description = `Find top forex brokers accepting ${fundingMethod?.name} pay
 
 <BaseLayout title={title} description={description}>
   <TopSlot>
-    { fundingMethod.image && (
+    
     <span slot="image">
 
       <img src={fundingMethod.image?.cdnUrl ||  
@@ -73,7 +73,7 @@ const description = `Find top forex brokers accepting ${fundingMethod?.name} pay
       width={48}
       class="h-12 w-auto mx-auto md:mx-0 rounded-full object-cover" />
       
-    </span>)}
+    </span>
 
     <h1 slot="title" class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
       Best Forex Brokers That Accept {fundingMethod?.name} in Kenya
