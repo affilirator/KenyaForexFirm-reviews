@@ -2,3 +2,4 @@
 /brokers/cma-approved /brokers/cma-regulated/ 301
 /brokers/funding/m-pesa/ /review/best-forex-brokers/mpesa/ 301
 /brokers/funding/m-pesa /review/best-forex-brokers/mpesa/ 301
+/regulators/:path* /forex-trading/regulations/:path* 301
