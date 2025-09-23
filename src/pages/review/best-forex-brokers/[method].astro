@@ -33,7 +33,7 @@ let fundingMethod = await getFundingMethodBySlug(methodSlug);
 
 
 if (!fundingMethod) {
-  // Fallback data needs to be data
+  // Fallback data
   throw new Error('not found')
 }
 
