@@ -10,7 +10,7 @@ import TopSlot from '~/components/slots/TopSlot.astro';
 import { getFundingMethodBySlug, getAllFundingMethods, getReviews } from '../../../lib/qs-esm';
 const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/OrangeIconLogo.webp'
 
-
+const endpoint = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media'
 export async function getStaticPaths() {
   try {
     const fundingMethods = await getAllFundingMethods();
@@ -66,9 +66,7 @@ const description = `Find top forex brokers accepting ${fundingMethod?.title || 
     
     <span slot="image">
 
-      <img src={fundingMethod.image?.cdnUrl ||  
-      fundingMethod.image?.url 
-      }
+      <img src={`${endpoint}/${fundingMethod.image?.filename}` || fallbackCdnUrl}
       alt={`${fundingMethod?.title || fundingMethod?.name} Logo`} 
       height={48}
       width={48}
