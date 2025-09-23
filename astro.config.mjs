@@ -16,6 +16,12 @@ export default defineConfig({
     inlineStylesheets: 'auto',
   },
    image: {
+    ervice: {
+      entrypoint:  'astro/assets/services/sharp' | string,
+      config: {
+        // ... service-specific config. Optional.
+      }
+    },
     domains: ['kenyaforexfirm.com', 'kenyaforexfirm.co.ke',
        'mahinge.com', 
        'www.mahinge.com',
