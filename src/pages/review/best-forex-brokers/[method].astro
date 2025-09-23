@@ -7,16 +7,13 @@ import { Image } from 'astro:assets';
 import { site } from '../../../data/site';
 import TopSlot from '~/components/slots/TopSlot.astro';
 import { getFundingMethodBySlug, getAllFundingMethods, getReviews } from '../../../lib/qs-esm';
+const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/OrangeIconLogo.webp'
+
 
 export async function getStaticPaths() {
   try {
     const fundingMethods = await getAllFundingMethods();
     
-    if (fundingMethods.docs.length === 0) {
-      // Fallback paths if API fails
-      
-      throw new Error('notfound')
-    }
     
     return fundingMethods.docs.map((method) => ({
       params: { method: method.slug },
@@ -32,7 +29,7 @@ export async function getStaticPaths() {
 
 const { methodSlug } = Astro.props;
 let fundingMethod = await getFundingMethodBySlug(methodSlug);
-const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/OrangeIconLogo.webp'
+
 
 if (!fundingMethod) {
   // Fallback data
