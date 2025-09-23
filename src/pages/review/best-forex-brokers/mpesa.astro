@@ -35,7 +35,7 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
     </span>
 
     <h1 slot="title" class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-      Best Forex Brokers That Accept {data?.title || data?.name} in Kenya
+      Best Forex Brokers That Accept {data?.name || data?.name} in Kenya
     </h1>
     <p slot="subtitle" class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
       {data?.description || `Discover forex brokers that accept ${data?.title || data?.name} payments.`}
@@ -44,11 +44,11 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
     <BrokerList 
     brokers={supportingBrokers}
     title={`${supportingBrokers.length} of Our Top-Rated Forex Brokers Accept ${data.title || data.name}`}
-    description={`All brokers below accept ${data.title || data.name} for deposits and withdrawals.`}
+    description={`All brokers below accept ${data.name || data.name} for deposits and withdrawals.`}
   />
 
-  <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={data.title || data.name} />
+  <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={data.name || data.name} />
 
-  <SEOContent type="payment" name={data.title || data.name} brokerCount={supportingBrokers.length} />
+  <SEOContent type="payment" name={data.name || data.name} brokerCount={supportingBrokers.length} />
 </BaseLayout>
 
