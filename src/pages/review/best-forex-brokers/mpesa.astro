@@ -52,16 +52,49 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
   <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={data.name || data.name} />
 
   <SEOContent type="payment" name={data.name || data.name} brokerCount={supportingBrokers.length} />
-  {prosAndCons && prosAndCons.length > 0 && (
-    <section class="py-12">
+  {prosAndCons && (
+    <section class="py-16 bg-neutral-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
-          {prosAndCons.map((item, index) => (
-            <div key={index} class="card-glass p-6">
-              <h3 class="text-lg font-semibold text-white mb-3">{item.title}</h3>
-              <p class="text-neutral-300">{item.pro}</p>
-            </div>
-          ))}
+        <h2 class="text-3xl font-display font-bold text-white mb-12 text-center">
+          {data.title} Pros and Cons
+        </h2>
+        <div class="grid lg:grid-cols-2 gap-8">
+          <div class="card-glass p-8">
+            <h3 class="text-2xl font-semibold text-emerald-400 mb-6 flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Pros
+            </h3>
+            <ul class="space-y-4">
+              {prosAndCons.pros?.map((item) => (
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-neutral-300">{item.pro}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="card-glass p-8">
+            <h3 class="text-2xl font-semibold text-red-400 mb-6 flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              Cons
+            </h3>
+            <ul class="space-y-4">
+              {prosAndCons.cons?.map((item) => (
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-red-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-neutral-300">{item.cons}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
