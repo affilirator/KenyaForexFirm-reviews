@@ -84,30 +84,30 @@ const description = `Find top forex brokers accepting ${fundingMethod?.name} pay
   </TopSlot>
 
 
-  <section class="py-12 bg-white">
+  <section class="py-12 ">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         {fundingMethod.processingTime && (
-          <div class="text-center p-6 bg-neutral-50 rounded-lg">
-            <h3 class="font-semibold text-neutral-900 mb-2">Processing Time</h3>
+          <div class="text-center p-6  rounded-lg">
+            <h3 class="font-semibold  mb-2">Processing Time</h3>
             <p class="text-neutral-600">{fundingMethod.processingTime}</p>
           </div>
         )}
         {fundingMethod?.fees && (
-          <div class="text-center p-6 bg-neutral-50 rounded-lg">
-            <h3 class="font-semibold text-neutral-900 mb-2">Fees</h3>
+          <div class="text-center p-6 bg-neutral-900 rounded-lg">
+            <h3 class="font-semibold text-neutral-100 mb-2">Fees</h3>
             <p class="text-neutral-600">{fundingMethod?.fees}</p>
           </div>
         )}
         {fundingMethod?.minAmount && (
-          <div class="text-center p-6 bg-neutral-50 rounded-lg">
-            <h3 class="font-semibold text-neutral-900 mb-2">Min Amount</h3>
+          <div class="text-center p-6 bg-neutral-900 rounded-lg">
+            <h3 class="font-semibold text-neutral-100 mb-2">Min Amount</h3>
             <p class="text-neutral-600">${fundingMethod?.minAmount}</p>
           </div>
         )}
         {fundingMethod?.maxAmount && (
-          <div class="text-center p-6 bg-neutral-50 rounded-lg">
-            <h3 class="font-semibold text-neutral-900 mb-2">Max Amount</h3>
+          <div class="text-center p-6 bg-neutral-900 rounded-lg">
+            <h3 class="font-semibold text-neutral-100 mb-2">Max Amount</h3>
             <p class="text-neutral-600">${fundingMethod.maxAmount}</p>
           </div>
         )}
