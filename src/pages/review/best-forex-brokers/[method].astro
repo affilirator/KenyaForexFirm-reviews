@@ -35,7 +35,7 @@ export async function getStaticPaths() {
 
 const { methodSlug } = Astro.props;
 let fundingMethod = await getFundingMethodBySlug(methodSlug);
-const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/Bafin-logo.webp'
+const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/OrangeIconLogo.webp'
 
 if (!fundingMethod) {
   // Fallback data
