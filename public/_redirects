@@ -11,3 +11,4 @@
 /regulators/mas-regulation/ /forex-trading/regulations/mas/ 301
 /regulators/nfa-regulation/ /forex-trading/regulations/nfa/ 301
 /regulators/* /forex-trading/regulations/:splat 301
+/*[^/]$ /$1/ 301
