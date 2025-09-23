@@ -22,18 +22,7 @@ export default defineConfig({
         // ... service-specific config. Optional.
       }
     },
-    domains: ['kenyaforexfirm.com', 'kenyaforexfirm.co.ke',
-       'mahinge.com', 
-       'www.mahinge.com',
-       'www.kenyaforexfirm.com',
-       'www.fx.kenyaforexfirm.com',
-       'api.kenyaforexfirm.com',
-       'fxmedia.kenyaforexfirm.com',
-       'www.fx.kenyaforexfirm.com',
-       'www.fx.kenyaforexfirm.com',
-'ajira.pro', 
-'amazonaws.com'
-], // Replace with your actual external image domains
+     // Replace with your actual external image domains
   },
 
   output: 'static',
