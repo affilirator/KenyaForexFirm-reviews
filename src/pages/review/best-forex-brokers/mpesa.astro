@@ -66,6 +66,22 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
   <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={data.name || data.name} />
 
   <SEOContent type="payment" name={data.name } brokerCount={supportingBrokers.length} />
+  <section class="py-16 bg-neutral-900">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="prose prose-invert max-w-none">
+      <h2 class="text-3xl font-display font-bold text-white mb-8">{data.title}</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        {data.benefits.map(benefit => (
+          <div class="card-glass p-6">
+            <h3 class="text-xl font-semibold text-white mb-3">{benefit.title}</h3>
+            <p class="text-neutral-300">{benefit.benefit}</p>
+          </div>
+        ))}
+      </div>
+      </div>
+      </div>
+      </section>
   {prosAndCons && (
     <section class="py-16 bg-neutral-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

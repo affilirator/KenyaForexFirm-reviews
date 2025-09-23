@@ -3,9 +3,11 @@ interface Props {
   type: 'regulator' | 'payment' | 'platform';
   name: string;
   brokerCount: number;
+  fetchedContent?: [],
+  contentTitle?: string;
 }
 
-const { type, name, brokerCount } = Astro.props;
+const { type, name, brokerCount, fetchedContent, contentTitle } = Astro.props;
 
 const contentMap = {
   regulator: {
