@@ -8,7 +8,7 @@ const API_BASE_URL = "https://api.kenyaforexfirm.com/api";
 
 /**
  * Generic function to fetch data from API endpoints
- * @deprecated - The functions here are deprecated in favor of src/lib/qs-esm
+ * - The functions here are deprecated in favor of src/lib/qs-esm
  */
 async function fetchFromApi<T>(endpoint: string, params: Record<string, string> = {}): Promise<T> {
   try {
@@ -48,7 +48,7 @@ export async function getRegulatorBySlug(slug: string): Promise<RegulatorRespons
 
 /**
  * Fetch authors data
- * @deprecated
+ * 
  */
 export async function getAuthors(params: Record<string, string> = {}): Promise<AuthorResponse> {
   return fetchFromApi<AuthorResponse>('authors', params);
@@ -56,7 +56,7 @@ export async function getAuthors(params: Record<string, string> = {}): Promise<A
 
 /**
  * Fetch author by slug
- *  @deprecated
+ *  
  */
 export async function getAuthorBySlug(slug: string): Promise<AuthorResponse> {
   return fetchFromApi<AuthorResponse>('authors', { 'where[slug][equals]': slug });
