@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
-import { getBrokerReviews } from '../lib/api-service';
-import { site } from '../data/site';
-import type { BrokerProps } from '../types';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Navigation from '~/components/Navigation.astro';
+import { getBrokerReviews } from '~/lib/api-service';
+import { site } from '~/data/site';
+import type { BrokerProps } from '~/types';
 
 // Fetch brokers from API
 const brokersData = await getBrokerReviews({ limit: '20', sort: '-brokerRating' });
