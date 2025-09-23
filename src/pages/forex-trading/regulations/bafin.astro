@@ -1,7 +1,7 @@
 ---
-import { fetchRegulatorGlobal } from '../../../lib/regulatorGlobals';
-import type { AsicRegulationGlobal } from '../../../types/asicRegulation';
-import { RegulatorPageTemplate } from '../../../Hero.astrocomponents/regulators';
+import { fetchRegulatorGlobal } from '~/lib/regulatorGlobals';
+import type { AsicRegulationGlobal } from '~/types/asicRegulation';
+import { RegulatorPageTemplate } from '~/components/regulators';
 
 // Fetch the BaFin regulation data global api
 let regulatorData: AsicRegulationGlobal | null = null;
