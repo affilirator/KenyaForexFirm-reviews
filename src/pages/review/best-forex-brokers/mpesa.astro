@@ -35,10 +35,19 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
       class="h-64 w-auto mx-auto md:mx-0 rounded-full object-cover" />
       
     </span>
+    
+        <p slot='badge'>Expert Review</p>
+    <span slot='meta'> 
+        <p>
+            By Patrick Mahinge
+        </p>
+
+    </span>
 
     <h1 slot="title" class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
       Best Forex Brokers That Accept {data?.name || data?.name} in Kenya
     </h1>
+
     <p slot="subtitle" class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
       {data?.description || `Discover forex brokers that accept ${data?.title || data?.name} payments.`}
     </p>
