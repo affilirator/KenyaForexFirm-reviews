@@ -6,10 +6,12 @@ import BrokerList from "~/components/BrokerList.astro";
 import BrokerDetails from "~/components/BrokerDetails.astro";
 import SEOContent from "~/components/SEOContent.astro";
 import { getReviews } from "~/lib/qs-esm";
+import type { BrokerProps } from "~/types";
 
 const Response = await fetch('https://api.kenyaforexfirm.com/api/funding-methods/685630291c520ff162aba6b4?depth=3&draft=false&locale=en&trash=false')
 
-const data = await Response.json()
+const data = await Response.json() 
+const prosAndCons = data.prosAndCons
 
 const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/OrangeIconLogo.webp'
 
@@ -30,7 +32,7 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
       <Image src={data.image?.filename ? `https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/${data.image.filename}` : (data.image?.url || fallbackCdnUrl)}
       alt={`${data?.title || data?.name} Logo`} 
       inferSize
-      class=" mx-auto md:mx-0 rounded-full object-cover" />
+      class="h-64 w-auto mx-auto md:mx-0 rounded-full object-cover" />
       
     </span>
 
@@ -50,5 +52,19 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
   <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={data.name || data.name} />
 
   <SEOContent type="payment" name={data.name || data.name} brokerCount={supportingBrokers.length} />
+  {prosAndCons && prosAndCons.length > 0 && (
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+          {prosAndCons.map((item, index) => (
+            <div key={index} class="card-glass p-6">
+              <h3 class="text-lg font-semibold text-white mb-3">{item.title}</h3>
+              <p class="text-neutral-300">{item.pro}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 </BaseLayout>
 
