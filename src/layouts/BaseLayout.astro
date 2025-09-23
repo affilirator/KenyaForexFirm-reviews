@@ -45,7 +45,7 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <link rel="stylesheet" href="/fonts/fonts.css" />
-
+    <slot name="opengraph">
     <SEO
       title={title}
       description={description}
@@ -66,6 +66,7 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
         ],
       }}
     />
+    </slot>
     
     {schemaData && (
       <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

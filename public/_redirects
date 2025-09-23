@@ -2,7 +2,7 @@
 /brokers/funding/m-pesa/* /review/best-forex-brokers/mpesa/:splat 301
 /regulators/asic-regulation/ /forex-trading/regulations/asic/ 301
 /regulators/fsca-regulation/ /forex-trading/regulations/fsca/ 301
-
+/compare/ /review/best-forex-brokers/compare/ 301
 /regulators/bafin-regulation/ /forex-trading/regulations/bafin/ 301
 /regulators/cma-regulation/ /forex-trading/regulations/cma/ 301
 /regulators/cysec-regulation/ /forex-trading/regulations/cysec/ 301
@@ -16,6 +16,6 @@
 /brokers/high-leverage/ /review/best-forex-brokers/high-leverage/ 301
 /brokers/safety-regulation-ranking/ /review/best-forex-brokers/most-regulated/ 301
 #/brokers/ /review/best-forex-brokers/:splat 301
-/*[^/]$ /$1/ 301
+/*[^/]$ /$1/:splat 301
 /*[^/.]$ /$1/ 301
 /*[^/]$ /$1/ 301
