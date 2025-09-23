@@ -1,12 +1,19 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro"
+import { Image } from 'astro:assets';
 
 const Response = await fetch('https://api.kenyaforexfirm.com/api/funding-methods/685630291c520ff162aba6b4?depth=3&draft=false&locale=en&trash=false')
 
 const data = await Response.json()
-
-
 ---
 <BaseLayout title={data.title} description={data.title} >
-    <h1>{data.title}</h1>
+    <section class="min-h-screen mt-8 mx-auto container">
+        <h1>{data.title}</h1>
+<Image
+src={`https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/${data.image?.filename}`}
+alt={data.title}
+inferSize
+/>
+    </section>
+    
 </BaseLayout>
