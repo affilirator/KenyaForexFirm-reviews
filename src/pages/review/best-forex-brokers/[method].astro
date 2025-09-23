@@ -3,7 +3,9 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BrokerList from '../../../components/BrokerList.astro';
 import BrokerDetails from '../../../components/BrokerDetails.astro';
 import SEOContent from '../../../components/SEOContent.astro';
+import { Image } from 'astro:assets';
 import { site } from '../../../data/site';
+import TopSlot from '~/components/slots/TopSlot.astro';
 import { getFundingMethodBySlug, getAllFundingMethods, getReviews } from '../../../lib/qs-esm';
 
 export async function getStaticPaths() {
@@ -58,6 +60,21 @@ const description = `Find top forex brokers accepting ${fundingMethod?.name} pay
 ---
 
 <BaseLayout title={title} description={description}>
+  <TopSlot>
+    <span slot="image">
+      <Image src={`${fundingMethod?.image.cdnUrl || 'payment-method'}.svg`} 
+      alt={`${fundingMethod?.name} Logo`} 
+      inferSize
+      class="h-12 w-auto mx-auto md:mx-0" />
+
+    </span>
+    <h1 slot="title" class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+      Best Forex Brokers That Accept {fundingMethod?.name} in Kenya
+    </h1>
+    <p slot="subtitle" class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
+      {fundingMethod?.description || `Discover forex brokers that accept ${fundingMethod?.name} payments.`}
+    </p>
+  </TopSlot>
   <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
