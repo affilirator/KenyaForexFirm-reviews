@@ -27,15 +27,15 @@ if (broker.author && broker.author.length > 0) {
 
 const logoUrl = typeof broker.logo === 'string' ? broker.logo : broker.logo?.url;
 const title = `${broker.brokerName} Review ${new Date().getFullYear()} - Expert Analysis for Kenyan Traders`;
-const description = `Comprehensive ${broker.brokerName} review for Kenyan traders. ${broker.cmaApproved ? 'CMA approved broker' : 'International broker'} with ${broker.minDeposit ? `$${broker.minDeposit} minimum deposit` : 'competitive conditions'}.`;
+const description = `Comprehensive ${broker.brokerName} review for Kenyan traders. ${broker.cmaRegulated ? 'CMA approved broker' : 'International broker'} with ${broker.minDeposit ? `$${broker.minDeposit} minimum deposit` : 'competitive conditions'}.`;
 
 const schemaData = [{
   "@context": "https://schema.org",
   "@type": "Review",
   "itemReviewed": {
-    "@type": "FinancialService",
+    "@type": "Product",
     "name": broker.brokerName,
-    "description": `${broker.brokerName} forex and CFD broker${broker.cmaApproved ? ' with CMA approval for Kenyan clients' : ''}`,
+    "description": `${broker.brokerName} forex and CFD broker${broker.cmaRegulated ? ' with CMA approval for Kenyan clients' : ''}`,
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": broker.brokerRating,
@@ -64,7 +64,7 @@ const schemaData = [{
 }];
 ---
 
-<BaseLayout title={title} description={description} image={logoUrl} schemaData={schemaData} author={author}>
+<BaseLayout title={title} description={description} image={logoUrl} schemaData={schemaData} author={author || undefined}>
   <BrokerHeader broker={broker} />
   <BrokerNavigation />
   

@@ -57,7 +57,7 @@ const description = `Find top forex brokers accepting ${fundingMethod?.name} pay
     { fundingMethod.image && (
     <span slot="image">
 
-      <Image src={fundingMethod.image?.cdnUrl ||  
+      <img src={fundingMethod.image?.cdnUrl ||  
       fundingMethod.image?.url 
       ||  fallbackCdnUrl}
       alt={`${fundingMethod?.name} Logo`} 
