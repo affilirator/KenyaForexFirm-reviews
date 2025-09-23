@@ -138,16 +138,17 @@ export type BrokerImage = {
   blog?: string;
   sizes?: ImageSizes;
   tenant?: string;
-  url: string;
+  url?: string;
+  cdnUrl?: string;
   thumbnailURL?: string | null;
-  filename: string;
-  mimeType: string;
-  filesize: number;
-  width: number;
-  height: number;
+  filename?: string;
+  mimeType?: string;
+  filesize?: number;
+  width?: number;
+  height?: number;
   focalX?: number;
   focalY?: number;
-  id: string;
+  id?: string;
   slug?: string;
   caption?: string;
 }

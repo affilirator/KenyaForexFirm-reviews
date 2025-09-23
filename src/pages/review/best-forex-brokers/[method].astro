@@ -40,6 +40,9 @@ if (!fundingMethod) {
   // Fallback data
   fundingMethod = {
     id: methodSlug,
+    image:{
+      cdnUrl: 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/Bafin-logo.webp'
+    },
     name: methodSlug.charAt(0).toUpperCase() + methodSlug.slice(1).replace('-', ' '),
     slug: methodSlug,
     description: `Payment method for ${methodSlug}`,
@@ -62,7 +65,7 @@ const description = `Find top forex brokers accepting ${fundingMethod?.name} pay
 <BaseLayout title={title} description={description}>
   <TopSlot>
     <span slot="image">
-      <Image src={`${fundingMethod?.image.cdnUrl || 'payment-method'}.svg`} 
+      <Image src={`${fundingMethod?.image?.cdnUrl || 'payment-method'}.svg`} 
       alt={`${fundingMethod?.name} Logo`} 
       inferSize
       class="h-12 w-auto mx-auto md:mx-0" />

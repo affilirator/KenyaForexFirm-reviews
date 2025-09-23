@@ -1,6 +1,7 @@
 import type { BrokerImage } from './index';
 
 export interface FundingMethod {
+[x: string]: any;
     id: string;
     name: string;
     slug: string;
@@ -11,6 +12,7 @@ export interface FundingMethod {
     maxAmount?: number;
     supportedCountries?: string[];
     logo?: BrokerImage;
+    image: BrokerImage;
     status: string;
 }
 
