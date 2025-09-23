@@ -7,6 +7,7 @@ import BrokerDetails from "~/components/BrokerDetails.astro";
 import SEOContent from "~/components/SEOContent.astro";
 import { getReviews } from "~/lib/qs-esm";
 import type { BrokerProps } from "~/types";
+import RichText from "~/components/common/RichText";
 
 const Response = await fetch('https://api.kenyaforexfirm.com/api/funding-methods/685630291c520ff162aba6b4?depth=3&draft=false&locale=en&trash=false')
 
@@ -32,17 +33,18 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
       <Image src={data.image?.filename ? `https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/${data.image.filename}` : (data.image?.url || fallbackCdnUrl)}
       alt={`${data?.title || data?.name} Logo`} 
       inferSize
-      class="h-64 w-auto mx-auto md:mx-0 rounded-full object-cover" />
+      class="h-48 w-auto mx-auto md:mx-0 rounded-full object-cover" />
       
     </span>
     
         <p slot='badge'>Expert Review</p>
-    <span slot='meta'> 
+         <span slot='meta'> 
         <p>
             By Patrick Mahinge
         </p>
 
     </span>
+   
 
     <h1 slot="title" class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
       Best Forex Brokers That Accept {data?.name || data?.name} in Kenya
@@ -57,10 +59,13 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
     title={`${supportingBrokers.length} of Our Top-Rated Forex Brokers Accept ${data.title || data.name}`}
     description={`All brokers below accept ${data.name || data.name} for deposits and withdrawals.`}
   />
+  <section class='prose prose-invert prose-lg'>
+    <RichText content={data.content} />
+  </section>
 
   <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={data.name || data.name} />
 
-  <SEOContent type="payment" name={data.name || data.name} brokerCount={supportingBrokers.length} />
+  <SEOContent type="payment" name={data.name } brokerCount={supportingBrokers.length} />
   {prosAndCons && (
     <section class="py-16 bg-neutral-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
