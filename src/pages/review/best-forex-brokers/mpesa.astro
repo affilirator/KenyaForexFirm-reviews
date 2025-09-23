@@ -2,12 +2,25 @@
 import BaseLayout from "~/layouts/BaseLayout.astro"
 import { Image } from 'astro:assets';
 import TopSlot from "~/components/slots/TopSlot.astro";
+import BrokerList from "~/components/BrokerList.astro";
+import BrokerDetails from "~/components/BrokerDetails.astro";
+import SEOContent from "~/components/SEOContent.astro";
+import { getReviews } from "~/lib/qs-esm";
 
 const Response = await fetch('https://api.kenyaforexfirm.com/api/funding-methods/685630291c520ff162aba6b4?depth=3&draft=false&locale=en&trash=false')
 
 const data = await Response.json()
 
 const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/OrangeIconLogo.webp'
+
+const allBrokers = await getReviews();
+
+const supportingBrokers = allBrokers.docs.filter(broker => 
+  broker.brokerPaymentMethods?.some(method => 
+    method.toLowerCase() === 'mpesa'.toLowerCase() //||
+    //method.toLowerCase() === data?.name.toLowerCase()
+  )
+);
 ---
 <BaseLayout title={data.title} description={data.title} >
     <TopSlot>
@@ -16,9 +29,8 @@ const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2
 
       <Image src={data.image?.filename ? `https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/${data.image.filename}` : (data.image?.url || fallbackCdnUrl)}
       alt={`${data?.title || data?.name} Logo`} 
-      height={48}
-      width={48}
-      class="h-12 w-auto mx-auto md:mx-0 rounded-full object-cover" />
+      inferSize
+      class=" mx-auto md:mx-0 rounded-full object-cover" />
       
     </span>
 
@@ -29,14 +41,14 @@ const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2
       {data?.description || `Discover forex brokers that accept ${data?.title || data?.name} payments.`}
     </p>
   </TopSlot>
-    <section class="min-h-screen mt-8 mx-auto container">
-        <h1>{data.title}</h1>
-<Image
-src={`https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/${data.image?.filename}`}
-alt={data.title}
-inferSize
-/>
-    </section>
-    
+    <BrokerList 
+    brokers={supportingBrokers}
+    title={`${supportingBrokers.length} of Our Top-Rated Forex Brokers Accept ${data.title || data.name}`}
+    description={`All brokers below accept ${data.title || data.name} for deposits and withdrawals.`}
+  />
+
+  <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={data.title || data.name} />
+
+  <SEOContent type="payment" name={data.title || data.name} brokerCount={supportingBrokers.length} />
 </BaseLayout>
 
