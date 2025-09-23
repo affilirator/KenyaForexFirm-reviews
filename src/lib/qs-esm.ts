@@ -213,10 +213,13 @@ export const getAllFundingMethods = async (): Promise<FundingMethodsResponse> =>
 export const getHighLeverageBrokers = async (): Promise<{ docs: BrokerProps[] }> => {
   try {
     const allBrokers = await getReviews();
+    const notCmaregulated = allBrokers.docs.filter(broker => !broker.cmaRegulated);
     const highLeverageBrokers = allBrokers.docs.filter(broker => {
       // Extract the leverage value from maxLeverage (format: "1:XXX")
       const leverageValue = broker.maxLeverage ? parseInt(broker.maxLeverage.split(':')[1]) : 0;
+       //const Combined = notCmaregulated.concat(highLeverageBrokers);
       return leverageValue > 400;
+     
     });
     
     return { docs: highLeverageBrokers };
