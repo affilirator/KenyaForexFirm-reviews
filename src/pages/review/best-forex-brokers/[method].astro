@@ -53,7 +53,7 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
   )
 );
 
-const title = `Best Forex Brokers with ${fundingMethod?.name} ${new Date().getFullYear()} - Kenya`;
+const title = `Best Forex Brokers That Accept ${fundingMethod?.name} in Kenya (${new Date().getFullYear()})`;
 const description = `Find top forex brokers accepting ${fundingMethod?.name} payments in Kenya.`;
 ---
 
@@ -62,7 +62,7 @@ const description = `Find top forex brokers accepting ${fundingMethod?.name} pay
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-          Best Forex Brokers with {fundingMethod?.name}
+          Best Forex Brokers That Accept {fundingMethod?.name} in Kenya
         </h1>
         <p class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
           {fundingMethod?.description || `Discover forex brokers that accept ${fundingMethod?.name} payments.`}
@@ -104,7 +104,7 @@ const description = `Find top forex brokers accepting ${fundingMethod?.name} pay
 
   <BrokerList 
     brokers={supportingBrokers}
-    title={`${supportingBrokers.length} Brokers Supporting ${fundingMethod.name}`}
+    title={`${supportingBrokers.length} of Our Top-Rated Forex Brokers Accept ${fundingMethod.name}`}
     description={`All brokers below accept ${fundingMethod.name} for deposits and withdrawals.`}
   />
 
