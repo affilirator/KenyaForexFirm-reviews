@@ -193,7 +193,7 @@ export const getAllFundingMethods = async (): Promise<FundingMethodsResponse> =>
   try {
     const queryString = stringify({
       
-      depth: 2,
+      depth: 3,
       sort: 'name'
     }, { addQueryPrefix: true });
     

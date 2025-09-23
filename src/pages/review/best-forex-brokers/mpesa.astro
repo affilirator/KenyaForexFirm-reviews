@@ -1,0 +1,12 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro"
+
+const Response = await fetch('https://api.kenyaforexfirm.com/api/funding-methods/685630291c520ff162aba6b4?depth=3&draft=false&locale=en&trash=false')
+
+const data = await Response.json()
+
+
+---
+<BaseLayout title={data.title} description={data.title} >
+    <h1>{data.title}</h1>
+</BaseLayout>
