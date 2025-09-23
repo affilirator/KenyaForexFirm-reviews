@@ -1,9 +1,9 @@
 ---
 // Static page for CMA approved brokers
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import BrokerList from '../../components/BrokerList.astro';
-import { getReviews } from '../../lib/qs-esm';
-import { site } from '../../data/site';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import BrokerList from '~/components/BrokerList.astro';
+import { getReviews } from '~/lib/qs-esm';
+import { site } from '~/data/site';
 
 // Filter CMA approved brokers
 const { docs: allBrokers } = await getReviews();

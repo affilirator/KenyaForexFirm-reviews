@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Navigation from '../../components/Navigation.astro';
-import BrokerCard from '../../components/review/BrokerCard.astro';
-import FilterControls from '../../components/review/FilterControls.astro';
-import { site } from '../../data/site';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Navigation from '~/components/Navigation.astro';
+import BrokerCard from '~/components/review/BrokerCard.astro';
+import FilterControls from '~/components/review/FilterControls.astro';
+import { site } from '~/data/site';
 import { getHighLeverageBrokers } from '~/lib/qs-esm';
 
 const schemaData = {

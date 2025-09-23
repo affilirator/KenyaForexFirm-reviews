@@ -1,16 +1,16 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Navigation from '../../components/Navigation.astro';
-import RegulatorCard from '../../components/regulators/RegulatorCard.astro';
-import RegulatorTiers from '../../components/regulators/RegulatorTiers.astro';
-import RegulatoryCompliance from '../../components/regulators/RegulatoryCompliance.astro';
-import RegulatoryNews from '../../components/regulators/RegulatoryNews.astro';
-import RegulatoryComparison from '../../components/regulators/RegulatoryComparison.astro';
-import AuthorCard from '../../components/authors/AuthorCard.astro';
-import SafetyBrokerCard from '../../components/review/SafetyBrokerCard.astro';
-import SafetyStats from '../../components/review/SafetyStats.astro';
-import SafetyCriteria from '../../components/review-criteria/SafetyCriteria.astro';
-import { site } from '../../data/site';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Navigation from '~/components/Navigation.astro';
+import RegulatorCard from '~/components/regulators/RegulatorCard.astro';
+import RegulatorTiers from '~/components/regulators/RegulatorTiers.astro';
+import RegulatoryCompliance from '~/components/regulators/RegulatoryCompliance.astro';
+import RegulatoryNews from '~/components/regulators/RegulatoryNews.astro';
+import RegulatoryComparison from '~/components/regulators/RegulatoryComparison.astro';
+import AuthorCard from '~/components/authors/AuthorCard.astro';
+import SafetyBrokerCard from '~/components/review/SafetyBrokerCard.astro';
+import SafetyStats from '~/components/review/SafetyStats.astro';
+import SafetyCriteria from '~/components/review-criteria/SafetyCriteria.astro';
+import { site } from '~/data/site';
 import { getReviews } from '~/lib/qs-esm';
 import { getRegulators } from '~/lib/regulators-api';
 import { getAuthors } from '~/lib/api-service';
