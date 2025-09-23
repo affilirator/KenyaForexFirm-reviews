@@ -31,10 +31,18 @@ export async function getStaticPaths() {
 const { methodSlug } = Astro.props;
 let fundingMethod = await getFundingMethodBySlug(methodSlug);
 
-
 if (!fundingMethod) {
   // Fallback data
-  throw new Error('not found')
+  fundingMethod = {
+    id: methodSlug,
+    image:{
+      url: fallbackCdnUrl
+    },
+    name: methodSlug.charAt(0).toUpperCase() + methodSlug.slice(1).replace('-', ' '),
+    slug: methodSlug,
+    description: `Payment method for ${methodSlug}`,
+    status: 'published'
+  };
 }
 
 const allBrokers = await getReviews();
