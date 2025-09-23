@@ -38,7 +38,8 @@ if (!fundingMethod) {
     image:{
       url: fallbackCdnUrl
     },
-    name: methodSlug.charAt(0).toUpperCase() + methodSlug.slice(1).replace('-', ' ') + Date.now().toString(36).charAt(0),
+    title: methodSlug.charAt(0).toUpperCase() + methodSlug.slice(1).replace('-', ' '),
+    name: methodSlug.charAt(0).toUpperCase() + methodSlug.slice(1).replace('-', ' '),
     slug: methodSlug,
     description: `Payment method for ${methodSlug}`,
     status: 'published'
@@ -56,8 +57,8 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
 
 
 
-const title = `Best Forex Brokers That Accept ${fundingMethod?.name} in Kenya (${new Date().getFullYear()})`;
-const description = `Find top forex brokers accepting ${fundingMethod?.name} payments in Kenya.`;
+const title = `Best Forex Brokers That Accept ${fundingMethod?.title || fundingMethod?.name} in Kenya (${new Date().getFullYear()})`;
+const description = `Find top forex brokers accepting ${fundingMethod?.title || fundingMethod?.name} payments in Kenya.`;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -68,7 +69,7 @@ const description = `Find top forex brokers accepting ${fundingMethod?.name} pay
       <img src={fundingMethod.image?.cdnUrl ||  
       fundingMethod.image?.url 
       }
-      alt={`${fundingMethod?.name} Logo`} 
+      alt={`${fundingMethod?.title || fundingMethod?.name} Logo`} 
       height={48}
       width={48}
       class="h-12 w-auto mx-auto md:mx-0 rounded-full object-cover" />
@@ -76,10 +77,10 @@ const description = `Find top forex brokers accepting ${fundingMethod?.name} pay
     </span>
 
     <h1 slot="title" class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-      Best Forex Brokers That Accept {fundingMethod?.name} in Kenya
+      Best Forex Brokers That Accept {fundingMethod?.title || fundingMethod?.name} in Kenya
     </h1>
     <p slot="subtitle" class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
-      {fundingMethod?.description || `Discover forex brokers that accept ${fundingMethod?.name} payments.`}
+      {fundingMethod?.description || `Discover forex brokers that accept ${fundingMethod?.title || fundingMethod?.name} payments.`}
     </p>
   </TopSlot>
 
@@ -117,11 +118,11 @@ const description = `Find top forex brokers accepting ${fundingMethod?.name} pay
 
   <BrokerList 
     brokers={supportingBrokers}
-    title={`${supportingBrokers.length} of Our Top-Rated Forex Brokers Accept ${fundingMethod.name}`}
-    description={`All brokers below accept ${fundingMethod.name} for deposits and withdrawals.`}
+    title={`${supportingBrokers.length} of Our Top-Rated Forex Brokers Accept ${fundingMethod.title || fundingMethod.name}`}
+    description={`All brokers below accept ${fundingMethod.title || fundingMethod.name} for deposits and withdrawals.`}
   />
 
-  <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={fundingMethod.name} />
+  <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={fundingMethod.title || fundingMethod.name} />
 
-  <SEOContent type="payment" name={fundingMethod.name} brokerCount={supportingBrokers.length} />
+  <SEOContent type="payment" name={fundingMethod.title || fundingMethod.name} brokerCount={supportingBrokers.length} />
 </BaseLayout>
