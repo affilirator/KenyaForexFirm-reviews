@@ -1,10 +1,16 @@
 import type { ReviewContentAuthor } from "./author";
 import type { CatRatings, CategoryReference } from "./catRatingsInterface";
-
-interface BrokerRegulation {
+interface Regulator {
   name: string;
   shortName: string;
   country: string;
+
+}
+
+interface BrokerRegulation {
+  regulator: Regulator;
+  licenseNumber?: string;
+  status?: string;
 }
 
 export interface FundingMethod {

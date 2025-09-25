@@ -20,9 +20,9 @@ if (broker.regulation && broker.regulation.length > 0) defaultPros.push('Strong 
 if (broker.fundingMethods?.includes('mpesa')) defaultPros.push('M-Pesa payment support');
 if (broker.islamicAccount) defaultPros.push('Islamic account available');
 if (broker.bonusAvailable) defaultPros.push('Welcome bonus available');
-if (broker.platforms && broker.platforms.length > 3) defaultPros.push('Multiple trading platforms');
+if (broker.tradingPlatforms && broker.tradingPlatforms.length > 3) defaultPros.push('Multiple trading platforms');
 
-if (!broker.regulation || broker.regulation.length === 0) defaultCons.push('Limited regulatory information');
+if (!broker.regulations || broker.regulations.length === 0) defaultCons.push('Limited regulatory information');
 if (broker.minDeposit && broker.minDeposit > 100) defaultCons.push('High minimum deposit requirement');
 if (!broker.cmaRegulated) defaultCons.push('Not specifically approved for Kenyan traders');
 if (!broker.fundingMethods?.includes('mpesa')) defaultCons.push('No M-Pesa payment support');

@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { broker } = Astro.props;
-const regulations = Array.isArray(broker.regulations) ? broker.regulations : broker.regulations ? [broker.regulations] : [];
+const regulations = Array.isArray(broker.regulations) ? broker.regulations : [];
 ---
 
 <section id="regulation" class="mb-16">
@@ -20,14 +20,13 @@ const regulations = Array.isArray(broker.regulations) ? broker.regulations : bro
       <h3 class="text-xl font-semibold text-white mb-4">Regulatory Licenses</h3>
       {regulations.length > 0 ? (
         <div class="space-y-4">
-          {regulations.map(reg => (
+          {regulations.map(reg => reg?.regulator && (
             <div class="flex items-center justify-between p-3 bg-neutral-800/50 rounded-lg">
               <div>
-                <div class="font-semibold text-white">{reg.name.replace(/\s*\([^)]*\)/g, '')}</div>
-
-                <div class="text-sm text-neutral-400">{reg.country}</div>
+                <div class="font-semibold text-white">{reg.regulator.name?.replace(/\s*\([^)]*\)/g, '') || 'Unknown Regulator'}</div>
+                <div class="text-sm text-neutral-400">{reg.regulator.country}</div>
               </div>
-              <div class="text-sm text-neutral-300">{reg.shortName}</div>
+              <div class="text-sm text-neutral-300">{reg.regulator.shortName}</div>
             </div>
           ))}
         </div>
