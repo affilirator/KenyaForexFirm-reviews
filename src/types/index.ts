@@ -218,11 +218,15 @@ export type BrokerProps = {
   acceptsMpesa: boolean;
   category?: string;
   title: string;
+  content: any;
   logo?: string | Logo | BrokerImage;
   image?: BrokerImage;
   gallery?: BrokerImage[];
   review?: BrokerReview;
   author: ReviewContentAuthor[];
+  /**
+   * @deprecated Use `regulations` instead
+   */
   regulation?: Array<Regulation> | Regulation[];
   regulations?: BrokerRegulation[];
   regulators?: string[];

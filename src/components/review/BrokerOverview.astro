@@ -1,5 +1,6 @@
 ---
 import type { BrokerProps } from '~/types';
+import RichTextRenderer from '../review-criteria/RichTextRenderer';
 
 interface Props {
   broker: BrokerProps;
@@ -16,7 +17,12 @@ const { broker, content } = Astro.props;
 
   <div class="prose prose-invert max-w-5xl">
     <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-8 border border-neutral-700/50 mb-8">
+      <div id="mainContent" class="text-lg text-neutral-300 leading-relaxed">
+        <RichTextRenderer content={broker.content} client:idle />
+      </div>
+      
       {content ? (
+        
         <div set:html={content} class="text-lg text-neutral-300 leading-relaxed" />
       ) : (
         <>
@@ -28,13 +34,13 @@ const { broker, content } = Astro.props;
 
           <p class="text-lg text-neutral-300 leading-relaxed mb-6">
             What sets {broker.brokerName} apart is its commitment to providing {broker.minDeposit && broker.minDeposit <= 100 ? 'accessible forex trading services with low minimum deposits' : 'professional trading services'}
-            {broker.platforms && broker.platforms.length > 0 && ` across ${broker.platforms.length} trading platforms`}.
-            {broker.regulation && broker.regulation.length > 0 && ` ${broker.brokerName} maintains strong regulatory compliance with ${broker.regulation.length} regulatory licenses`}.
+            {broker.brokerPlatforms && broker.brokerPlatforms.length > 0 && ` across ${broker.brokerPlatforms.length} trading platforms`}.
+            {broker.regulations && broker.regulations.length > 0 && ` ${broker.brokerName} maintains strong regulatory compliance with ${broker.regulations.length} regulatory licenses`}.
           </p>
 
           <p class="text-lg text-neutral-300 leading-relaxed">
             For Kenyan traders specifically, {broker.brokerName} provides 
-            {broker.paymentMethods?.includes('mpesa') ? 'M-Pesa payment support, making deposits and withdrawals convenient for local clients' : 'various payment methods suitable for international clients'}.
+            {broker.brokerPaymentMethods?.includes('mpesa') ? 'M-Pesa payment support, making deposits and withdrawals convenient for local clients' : 'various payment methods suitable for international clients'}.
             {broker.islamicAccount && ' The broker also offers swap-free Islamic accounts for traders following Shariah principles'}.
           </p>
         </>
