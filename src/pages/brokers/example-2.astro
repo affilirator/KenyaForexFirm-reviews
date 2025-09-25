@@ -9,6 +9,7 @@ import BrokerVerdict from '../../components/review/BrokerVerdict.astro';
 import RiskWarning from '../../components/review/RiskWarning.astro';
 import { generateBrokerReviewSchema, generateBreadcrumbSchema, generateFAQSchema } from '../../utils/schemaGenerator';
 import { getReviewBySlug } from '~/lib/qs-esm';
+import { site } from '~/data/site';
 
 // Example broker data (this would normally come from PayloadCMS)
 const broker = await getReviewBySlug('fxpesa')
@@ -46,7 +47,7 @@ const combinedSchema = [reviewSchema, breadcrumbSchema, faqSchema];
       <!-- Account Types Section -->
       <section id="accounts" class="mb-16">
         <h2 class="text-3xl font-display font-bold text-white mb-6">
-          Account Types
+          Account Types Offered by {broker.brokerName}
         </h2>
         <div class="grid lg:grid-cols-3 gap-6">
           {broker.account?.map((account, index) => (
@@ -73,9 +74,9 @@ const combinedSchema = [reviewSchema, breadcrumbSchema, faqSchema];
                   <span class="text-white font-medium">{account.spread} pips</span>
                 </div>
               </div>
-              <button class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+              <a href={`${site.organization.url}/goto/${broker.slug}/`} class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 block">
                 Open {account.accountName}
-              </button>
+              </a>
             </div>
           ))}
         </div>

@@ -189,6 +189,9 @@ export type BrokerProps = {
   account?: AccountType[];
   catRatings: CatRatings;
   brokerWebsite?: string;
+  /**
+   * @deprecated Use `brokerPlatforms?` instead
+   */
   tradingPlatforms: string[];
   cmaRegulated?: boolean;
   meta?: BrokerMeta;
@@ -199,7 +202,7 @@ export type BrokerProps = {
   features?: string[];
   //platforms?: string[];
   brokerPlatforms?: BrokerPlatform[];
-  accountTypes?: string[];
+  
   brokerPaymentMethods?: string[];
   fundingMethods?: FundingMethod[];
   selectedAssets?: string[];
