@@ -175,8 +175,8 @@ export default function BrokersPage() {
                         <TableCell className="font-medium">{broker.brokerName}</TableCell>
                         <TableCell className="text-center">
                             <div className="flex items-center justify-center gap-1">
-                                <StarRating rating={broker.brokerRating} />
-                                <span className="font-bold text-sm">({broker.brokerRating.toFixed(1)})</span>
+                                <StarRating rating={broker.brokerRating || 0} />
+                                <span className="font-bold text-sm">({(broker.brokerRating || 0).toFixed(1)})</span>
                             </div>
                         </TableCell>
                         <TableCell>${broker.minDeposit}</TableCell>

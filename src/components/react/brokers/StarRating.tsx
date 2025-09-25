@@ -9,12 +9,16 @@ interface StarRatingProps {
 }
 
 export default function StarRating({ rating, maxRating = 5, className, starClassName }: StarRatingProps) {
-  const fullStars = Math.floor(rating);
-  const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+  // Validate rating to prevent "Invalid array length" errors
+  const validRating = typeof rating === 'number' && !isNaN(rating) && rating >= 0 ? rating : 0;
+  const clampedRating = Math.min(validRating, maxRating);
+  
+  const fullStars = Math.floor(clampedRating);
+  const halfStar = clampedRating % 1 >= 0.5 ? 1 : 0;
   const emptyStars = maxRating - fullStars - halfStar;
 
   return (
-    <div className={cn("flex items-center gap-0.5", className)} aria-label={`Rating: ${rating} out of ${maxRating} stars`}>
+    <div className={cn("flex items-center gap-0.5", className)} aria-label={`Rating: ${clampedRating} out of ${maxRating} stars`}>
       {[...Array(fullStars)].map((_, i) => (
         <Star key={`full-${i}`} className={cn("h-4 w-4 text-accent fill-current", starClassName)} />
       ))}
