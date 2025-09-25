@@ -9,26 +9,12 @@ interface Props {
 
 const { broker, pros, cons } = Astro.props;
 
-// Generate default pros and cons based on broker data
-const defaultPros = [];
-const defaultCons = [];
+// Extract pros and cons from broker data or use provided ones
+const brokerPros = broker.pros?.map(p => p.pro) || [];
+const brokerCons = broker.cons?.map(c => c.con) || [];
 
-if (broker.cmaRegulated) defaultPros.push('CMA approved for Kenyan traders');
-if (broker.minDeposit && broker.minDeposit <= 50) defaultPros.push(`Low minimum deposit ($${broker.minDeposit})`);
-if (broker.maxLeverage || broker.leverage) defaultPros.push(`High leverage available (${broker.maxLeverage || broker.leverage})`);
-if (broker.regulation && broker.regulation.length > 0) defaultPros.push('Strong regulatory oversight');
-if (broker.fundingMethods?.includes('mpesa')) defaultPros.push('M-Pesa payment support');
-if (broker.islamicAccount) defaultPros.push('Islamic account available');
-if (broker.bonusAvailable) defaultPros.push('Welcome bonus available');
-if (broker.tradingPlatforms && broker.tradingPlatforms.length > 3) defaultPros.push('Multiple trading platforms');
-
-if (!broker.regulations || broker.regulations.length === 0) defaultCons.push('Limited regulatory information');
-if (broker.minDeposit && broker.minDeposit > 100) defaultCons.push('High minimum deposit requirement');
-if (!broker.cmaRegulated) defaultCons.push('Not specifically approved for Kenyan traders');
-if (!broker.fundingMethods?.includes('mpesa')) defaultCons.push('No M-Pesa payment support');
-
-const finalPros = pros || defaultPros;
-const finalCons = cons || defaultCons;
+const finalPros = pros || brokerPros;
+const finalCons = cons || brokerCons;
 ---
 
 <section id="pros-cons" class="mb-16">

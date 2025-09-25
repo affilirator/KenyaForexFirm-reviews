@@ -27,23 +27,7 @@ const breadcrumbSchema = generateBreadcrumbSchema(broker);
 const faqSchema = generateFAQSchema(broker);
 const combinedSchema = [reviewSchema, breadcrumbSchema, faqSchema];
 
-// Custom pros and cons for this example
-const customPros = [
-  "CMA approved for Kenyan traders",
-  "Low minimum deposit ($100)",
-  "Multiple regulatory licenses",
-  "M-Pesa payment support",
-  "Islamic account available",
-  "24/7 multilingual support",
-  "Comprehensive educational resources"
-];
 
-const customCons = [
-  "Limited cryptocurrency options",
-  "Higher spreads on exotic pairs",
-  "Withdrawal fees may apply",
-  "Platform customization limited"
-];
 
 const customVerdict = `
 <p class="mb-4">Example Forex Broker stands out as an excellent choice for Kenyan traders, offering a perfect blend of regulatory compliance, competitive trading conditions, and local market understanding. With CMA approval and M-Pesa integration, the broker demonstrates its commitment to serving the Kenyan trading community.</p>
@@ -200,8 +184,8 @@ const customVerdict = `
         </div>
       </section>
 
-      <BrokerProsAndCons broker={broker} pros={customPros} cons={customCons} />
-      <BrokerVerdict broker={broker} verdict={customVerdict} />
+      <BrokerProsAndCons broker={broker} />
+      <BrokerVerdict broker={broker} verdict={broker.quickVerdict} />
     </div>
   </main>
 
