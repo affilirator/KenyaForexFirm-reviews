@@ -8,9 +8,9 @@
   X-Frame-Options: SAMEORIGIN
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-https://kenyaforexfirm.com/*
+/*.kenyaforexfirm.com/*
     X-Content-Type-Options: nosniff
-    X-Robots-Tag: index, follow, archive
+    X-Robots-Tag: index, follow, noarchive
     Referrer-Policy: strict-origin-when-cross-origin
     Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=(), autoplay=self, fullscreen=self
     X-Frame-Options: SAMEORIGIN

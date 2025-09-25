@@ -1,0 +1,40 @@
+---
+interface Props {
+  author?: {
+    name: string;
+    bio?: string;
+    avatar?: string;
+    expertise?: string;
+  };
+}
+
+const { author } = Astro.props;
+
+// Default author if none provided
+const defaultAuthor = {
+  name: "Patrick Mahinge",
+  bio: "Senior financial analyst",
+  expertise: "Forex Trading & Regulation"
+};
+
+const authorInfo = author || defaultAuthor;
+---
+
+<div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50">
+  <div class="flex items-center space-x-3">
+    <div class="w-10 h-10 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full flex items-center justify-center flex-shrink-0">
+      {authorInfo.avatar ? (
+        <img src={authorInfo.avatar} alt={authorInfo.name} class="w-full h-full rounded-full object-cover" />
+      ) : (
+        <span class="text-white font-semibold text-sm">{authorInfo.name.charAt(0)}</span>
+      )}
+    </div>
+    <div class="min-w-0 flex-1">
+      <div class="text-sm font-medium text-white truncate">{authorInfo.name}</div>
+      <div class="text-xs text-neutral-400 truncate">{authorInfo.expertise}</div>
+    </div>
+  </div>
+  {authorInfo.bio && (
+    <p class="text-xs text-neutral-400 mt-2 line-clamp-2">{authorInfo.bio}</p>
+  )}
+</div>
