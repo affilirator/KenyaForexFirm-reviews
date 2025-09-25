@@ -29,6 +29,9 @@ importers:
       '@astrojs/tailwind':
         specifier: ^6.0.2
         version: 6.0.2(astro@5.11.0(@types/node@24.0.12)(jiti@1.21.7)(rollup@4.44.2)(typescript@5.8.3)(yaml@2.8.0))(tailwindcss@3.4.17)
+      '@iconify-json/cif':
+        specifier: ^1.2.7
+        version: 1.2.7
       '@iconify-json/lucide':
         specifier: ^1.2.56
         version: 1.2.56
@@ -692,6 +695,9 @@ packages:
   '@fastify/busboy@2.1.1':
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
+
+  '@iconify-json/cif@1.2.7':
+    resolution: {integrity: sha512-MUDOUt7xWMsWw9QW312wlCxblqaR+sRfQRokO6ZH7Xp+53HgzHA7K+ejrite+ULpV/bBVe6XZIrxSShXEpdpNg==}
 
   '@iconify-json/lucide@1.2.56':
     resolution: {integrity: sha512-GgfOALr1+ui8ZKtOqxqWW9Vk+Mtsf7JxV0yIEcsk0Tv92ha7LBN2dfAV7YdTD7IbEyAIKgNllmQUOBrUlhiWPQ==}
@@ -4127,6 +4133,10 @@ snapshots:
     optional: true
 
   '@fastify/busboy@2.1.1': {}
+
+  '@iconify-json/cif@1.2.7':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify-json/lucide@1.2.56':
     dependencies:
