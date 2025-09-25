@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { site } from '~/data/site';
 import type { BrokerProps } from '~/types';
 
@@ -12,7 +13,7 @@ const scaledRating = broker.brokerRating / 2;
 const fullStars = Math.floor(scaledRating);
 const hasHalfStar = scaledRating % 1 >= 0.5;
 const titleFromName = `${broker.brokerName} Review`
-const safeTitle = broker.meta?.title || titleFromName
+const safeTitle = broker.title || broker.meta?.title || titleFromName
 ---
 
 <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
@@ -22,7 +23,13 @@ const safeTitle = broker.meta?.title || titleFromName
         <div class="flex items-center mb-6">
           <div class="w-20 h-20 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mr-6">
             {logoUrl ? (
-              <img src={logoUrl} alt={`${broker.brokerName} logo`} class="w-full h-full object-contain rounded-2xl" />
+              <Image src={logoUrl} 
+              alt={`${broker.brokerName} logo`} 
+              height={80}
+              width={80}
+              priority
+              loading={'eager'}
+              class="w-full h-full object-cover rounded-2xl" />
             ) : (
               <span class="text-white font-bold text-2xl">{broker.brokerName.charAt(0)}</span>
             )}

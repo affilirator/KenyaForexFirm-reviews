@@ -217,6 +217,7 @@ export type BrokerProps = {
   islamicAccount: boolean;
   acceptsMpesa: boolean;
   category?: string;
+  title: string;
   logo?: string | Logo | BrokerImage;
   image?: BrokerImage;
   gallery?: BrokerImage[];
