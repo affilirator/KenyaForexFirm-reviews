@@ -24,15 +24,15 @@ const safeTitle = broker.title || broker.meta?.title || titleFromName
     <div class="grid lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
         <div class="flex items-center mb-6">
-          <div class="w-20 h-20 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mr-6">
+          <div class="w-40 h-40 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mr-6">
             {logoUrl ? (
               <Image src={logoUrl} 
-              alt={`${broker.brokerName} logo`} 
+              alt={`logo of ${broker.brokerName} forex broker in Kenya`} 
               height={80}
               width={80}
               priority
               loading={'eager'}
-              class="w-full h-full object-cover rounded-2xl" />
+              class="w-full h-auto object-cover rounded-2xl" />
             ) : (
               <span class="text-white font-bold text-2xl">{broker.brokerName.charAt(0)}</span>
             )}
