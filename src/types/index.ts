@@ -34,7 +34,19 @@ export interface IndexBrokerProps {
 export type AccountType = {
   minDeposit: number;
   accountName: string;
+  commission?: number;
+  spread?: number;
 }
+
+/**
+ * "accountName": "Premier Account",
+"minDeposit": 100,
+"commission": 3.5,
+"spread": 0,
+"id": "686efe8c64336547ee287dc8"
+}
+],
+ */
 
 export type Regulation = {
   name: string;
@@ -168,6 +180,7 @@ export type BrokerProps = {
   maxLeverage?: string;
   brokerRating: number;
   slug: string;
+  account?: AccountType[];
   catRatings: CatRatings;
   brokerWebsite?: string;
   tradingPlatforms: string[];
@@ -178,7 +191,7 @@ export type BrokerProps = {
   pros?: BrokerPros[];
   cons?: BrokerCons[];
   features?: string[];
-  platforms?: string[];
+  //platforms?: string[];
   brokerPlatforms?: BrokerPlatform[];
   accountTypes?: string[];
   brokerPaymentMethods?: string[];
