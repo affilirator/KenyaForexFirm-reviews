@@ -117,21 +117,18 @@ const structuredData = {
   
   
 
+const brokers = await getReviews()
 
-
-
-export default async function BrokersPage() {
-  
-  const brokers = await getReviews()
-  
+export default function BrokersPage() {
   if (!brokers || brokers.docs.length === 0) {
     return (
        <div className="container mx-auto px-4 md:px-6 py-12 text-center">
-            <h1 className="font-headline text-3xl font-bold">Could Not Load Brokers</h1>
+            <h1 className="font-display text-3xl font-bold">Could Not Load Brokers</h1>
             <p className="text-muted-foreground mt-4">We're having trouble fetching the latest broker reviews. Please check back later.</p>
         </div>
     )
   }
+  
 
   return (
     <div className="space-y-12">
@@ -146,7 +143,7 @@ export default async function BrokersPage() {
                 </BreadcrumbList>
             </Breadcrumb>
             <div className="text-center max-w-3xl mx-auto">
-                <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl">
+                <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
                 Best Forex Brokers in Kenya
                 </h1>
                 <p className="mt-4 text-lg text-muted-foreground">
@@ -157,7 +154,7 @@ export default async function BrokersPage() {
       </section>
 
       <section className="container mx-auto px-4 md:px-6">
-        <h2 className="font-headline text-3xl font-bold mb-6">Top Broker Comparison</h2>
+        <h2 className="font-display text-3xl font-bold mb-6">Top Broker Comparison</h2>
         <div className="overflow-x-hidden">
         <Table>
             <TableHeader>
@@ -203,7 +200,7 @@ export default async function BrokersPage() {
       </section>
       
        <section className="container mx-auto px-4 md:px-6">
-        <h2 className="font-headline text-3xl font-bold mb-6">Detailed Reviews</h2>
+        <h2 className="font-display text-3xl font-bold mb-6">Detailed Reviews</h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {brokers.docs.map((broker) => (
             <BrokerCard key={broker.id} broker={broker} />
