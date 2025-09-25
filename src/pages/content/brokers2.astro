@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '~layouts/BaseLayout.astro';
-import Navigation from '~components/Navigation.astro';
-import { site } from '~data/site';
-import { getReviews } from '~/lib/qs-esm';
-import type { BrokerProps } from '~/types'
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Navigation from '~/components/Navigation.astro';
+import { site } from '~/data/site';
+import { getReviews } from '~//lib/qs-esm';
+import type { BrokerProps } from '~//types'
 import { Image } from "astro:assets"
 
 const data = await getReviews();
