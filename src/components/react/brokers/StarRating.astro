@@ -19,15 +19,15 @@ const validRating = typeof rating === 'number' && !isNaN(rating) && rating >= 0 
   const emptyStars = maxRating - fullStars - halfStar;
 ---
 
-    <div class={cn("flex items-center gap-0.5", className)} aria-label={`Rating: ${clampedRating} out of ${maxRating} stars`}>
-      {[...Array(fullStars)].map((_, i) => (
-        <Star key={`full-${i}`} className={cn("h-4 w-4 text-accent fill-current", starClassName)} />
-      ))}
-      {halfStar === 1 && (
-        <StarHalf key="half" className={cn("h-4 w-4 text-accent fill-current", starClassName)} />
-      )}
-      {[...Array(emptyStars)].map((_, i) => (
-        <Star key={`empty-${i}`} className={cn("h-4 w-4 text-accent/30 fill-current", starClassName)} />
-      ))}
-    </div>
+<div class={cn("flex items-center gap-0.5", className)} aria-label={`Rating: ${clampedRating} out of ${maxRating} stars`}>
+  {Array.from({ length: fullStars }, (_, i) => (
+    <Star className={cn("h-4 w-4 text-accent fill-current", starClassName)} />
+  ))}
+  {halfStar === 1 && (
+    <StarHalf className={cn("h-4 w-4 text-accent fill-current", starClassName)} />
+  )}
+  {Array.from({ length: emptyStars }, (_, i) => (
+    <Star className={cn("h-4 w-4 text-accent/30 fill-current", starClassName)} />
+  ))}
+</div>
   

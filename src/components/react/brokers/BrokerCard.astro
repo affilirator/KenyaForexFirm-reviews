@@ -15,10 +15,6 @@ const { broker } = Astro.props
 
  const logoUrl = (typeof broker.logo === 'object' && broker.logo.url) ? broker.logo.url : '/images/default-logo.png';
 ---
-
-
- 
-  
   
     <Card className="flex flex-col overflow-hidden shadow-lg hover:shadow-primary/10 transition-all duration-300">
       <CardHeader className="p-6">
