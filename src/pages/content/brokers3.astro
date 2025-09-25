@@ -7,5 +7,5 @@ const description = 'Explore more'
 
 ---
 <BaseLayout server:defer title={title} description={description} >
-    <BrokersPage client:load />
+    <BrokersPage server:defer client:load />
 </BaseLayout>
