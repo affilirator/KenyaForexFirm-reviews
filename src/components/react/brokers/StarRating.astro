@@ -1,24 +1,25 @@
+---
 import { Star, StarHalf, StarOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-interface StarRatingProps {
+interface Props {
   rating: number;
   maxRating?: number;
   className?: string;
   starClassName?: string;
 }
 
-export default function StarRating({ rating, maxRating = 5, className, starClassName }: StarRatingProps) {
-  // Validate rating to prevent "Invalid array length" errors
-  const validRating = typeof rating === 'number' && !isNaN(rating) && rating >= 0 ? rating : 0;
+const { rating, maxRating = 5, className, starClassName } = Astro.props
+
+const validRating = typeof rating === 'number' && !isNaN(rating) && rating >= 0 ? rating : 0;
   const clampedRating = Math.min(validRating, maxRating);
   
   const fullStars = Math.floor(clampedRating);
   const halfStar = clampedRating % 1 >= 0.5 ? 1 : 0;
   const emptyStars = maxRating - fullStars - halfStar;
+---
 
-  return (
-    <div className={cn("flex items-center gap-0.5", className)} aria-label={`Rating: ${clampedRating} out of ${maxRating} stars`}>
+    <div class={cn("flex items-center gap-0.5", className)} aria-label={`Rating: ${clampedRating} out of ${maxRating} stars`}>
       {[...Array(fullStars)].map((_, i) => (
         <Star key={`full-${i}`} className={cn("h-4 w-4 text-accent fill-current", starClassName)} />
       ))}
@@ -29,5 +30,4 @@ export default function StarRating({ rating, maxRating = 5, className, starClass
         <Star key={`empty-${i}`} className={cn("h-4 w-4 text-accent/30 fill-current", starClassName)} />
       ))}
     </div>
-  );
-}
+  
