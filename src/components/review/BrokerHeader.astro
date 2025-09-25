@@ -8,7 +8,10 @@ interface Props {
 }
 
 const { broker } = Astro.props;
-const logoUrl = typeof broker.logo === 'string' ? broker.logo : broker.logo?.url;
+const image = typeof broker.image === 'string' ? broker.image : broker.image?.url;
+const metaImage = typeof broker.meta?.image === 'string' ? broker.meta?.image : broker.meta?.image?.url;
+const logoImage = typeof broker.logo === 'string' ? broker.logo : broker.logo?.url;
+const logoUrl = logoImage || metaImage || image
 const scaledRating = broker.brokerRating / 2;
 const fullStars = Math.floor(scaledRating);
 const hasHalfStar = scaledRating % 1 >= 0.5;
