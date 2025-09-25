@@ -39,17 +39,17 @@ const safeTitle = broker.meta?.title || titleFromName
               <span class="text-white font-semibold text-lg">{broker.brokerRating.toFixed(1)}/10</span>
             </div>
             <div class="flex items-center space-x-4 text-sm text-neutral-400">
-              {broker.founded && <span>Est. {broker.founded}</span>}
-              {broker.headquarters && (
+              {broker.baseDetails?.founded && <span>Est. {broker.baseDetails.founded}</span>}
+              {broker.baseDetails?.headquarters && (
                 <>
                   <span>•</span>
-                  <span>{broker.headquarters}</span>
+                  <span>{broker.baseDetails.headquarters}</span>
                 </>
               )}
               {broker.cmaRegulated && (
                 <>
                   <span>•</span>
-                  <span class="text-green-400 font-medium">CMA Approved</span>
+                  <span class="text-green-400 font-medium">CMA Regulated</span>
                 </>
               )}
             </div>
@@ -73,7 +73,7 @@ const safeTitle = broker.meta?.title || titleFromName
           </div>
           <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50">
             <div class="text-sm text-neutral-400 mb-1">Platforms</div>
-            <div class="text-2xl font-bold text-white">{broker.platforms?.length || 'Multiple'}</div>
+            <div class="text-2xl font-bold text-white">{broker.brokerPlatforms?.length || 'Multiple'}</div>
           </div>
         </div>
       </div>
@@ -86,12 +86,12 @@ const safeTitle = broker.meta?.title || titleFromName
             <a href={`${site.organization.url}/goto/${broker.slug}/`} class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center block">
               Visit {broker.brokerName}
             </a>
-            <button class="w-full border border-neutral-600 hover:border-primary-400 text-neutral-300 hover:text-primary-400 font-medium py-3 px-4 rounded-lg transition-all duration-300 text-center">
+            <a href={`${site.organization.url}/goto/${broker.slug}/`} class="w-full border border-neutral-600 hover:border-primary-400 text-neutral-300 hover:text-primary-400 font-medium py-3 px-4 rounded-lg transition-all duration-300 text-center">
               Open Demo Account
-            </button>
-            <button class="w-full bg-neutral-700/50 hover:bg-accent-600 text-neutral-300 hover:text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 text-center">
+            </a>
+            <a href='/review/best-forex-brokers/compare/'  class="w-full bg-neutral-700/50 hover:bg-accent-600 text-neutral-300 hover:text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 text-center">
               Compare with Others
-            </button>
+            </a>
           </div>
 
           <div class="border-t border-neutral-700/50 pt-4">
@@ -102,10 +102,10 @@ const safeTitle = broker.meta?.title || titleFromName
                   <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                   </svg>
-                  CMA Approved
+                  CMA Regulated
                 </li>
               )}
-              {broker.paymentMethods?.includes('mpesa') && (
+              {broker.brokerPaymentMethods?.includes('mPesa') && (
                 <li class="flex items-center">
                   <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
