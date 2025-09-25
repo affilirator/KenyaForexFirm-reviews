@@ -17,15 +17,14 @@ const { broker, content } = Astro.props;
 
   <div class="prose prose-invert max-w-5xl">
     <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-8 border border-neutral-700/50 mb-8">
-      <div id="mainContent" class="text-lg text-neutral-300 leading-relaxed">
+      <div id="mainContent" class="prose prose-lg dark:prose-invert text-lg text-neutral-300 leading-relaxed">
         <RichTextRenderer content={broker.content} client:idle />
       </div>
       
-      {content ? (
+      
         
-        <div set:html={content} class="text-lg text-neutral-300 leading-relaxed" />
-      ) : (
-        <>
+        <div class="text-lg text-neutral-300 leading-relaxed" />
+      
           <p class="text-lg text-neutral-300 leading-relaxed mb-6">
             {broker.brokerName} is a {broker.category || 'forex and CFD'} broker {broker.baseDetails?.founded ? `established in ${broker.baseDetails?.founded}` : 'serving traders globally'}.
             {broker.baseDetails?.headquarters && ` The company is headquartered in ${broker.baseDetails?.headquarters}`} and offers comprehensive trading services
@@ -43,8 +42,7 @@ const { broker, content } = Astro.props;
             {broker.brokerPaymentMethods?.includes('mpesa') ? 'M-Pesa payment support, making deposits and withdrawals convenient for local clients' : 'various payment methods suitable for international clients'}.
             {broker.islamicAccount && ' The broker also offers swap-free Islamic accounts for traders following Shariah principles'}.
           </p>
-        </>
-      )}
+        
     </div>
   </div>
 </section>
