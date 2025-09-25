@@ -8,6 +8,10 @@ interface Props {
 }
 
 const { broker, content } = Astro.props;
+const description = broker.description
+const quikVerdict = broker.quickVerdict
+const metaDescription = broker.meta?.description
+const overview = description || quikVerdict || metaDescription || ''
 ---
 
 <section id="overview" class="mb-16 mx-auto container">
@@ -18,7 +22,7 @@ const { broker, content } = Astro.props;
   <div class="prose prose-invert max-w-5xl">
     <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-8 border border-neutral-700/50 mb-8">
       <div id="mainContent" class=" text-lg text-neutral-300 leading-relaxed">
-        <RichTextRenderer content={broker.content} client:idle />
+        {overview}
       </div>
       
       
