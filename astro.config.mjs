@@ -15,15 +15,16 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
-   image: {
-    service: {
-      //entrypoint:  'astro/assets/services/sharp',
-      config: {
-        // ... service-specific config. Optional.
-      }
-    },
-     // Replace with your actual external image domains
-  },
+
+  image: {
+   service: {
+     //entrypoint:  'astro/assets/services/sharp',
+     config: {
+       // ... service-specific config. Optional.
+     }
+   },
+    // Replace with your actual external image domains
+ },
 
   output: 'static',
 
@@ -40,5 +41,7 @@ export default defineConfig({
     },
   },
 
-  
+  adapter: node({
+    mode: 'standalone',
+  }),
 });
