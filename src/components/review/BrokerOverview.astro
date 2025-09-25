@@ -17,7 +17,7 @@ const { broker, content } = Astro.props;
 
   <div class="prose prose-invert max-w-5xl">
     <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-8 border border-neutral-700/50 mb-8">
-      <div id="mainContent" class="prose prose-lg dark:prose-invert text-lg text-neutral-300 leading-relaxed">
+      <div id="mainContent" class=" text-lg text-neutral-300 leading-relaxed">
         <RichTextRenderer content={broker.content} client:idle />
       </div>
       
