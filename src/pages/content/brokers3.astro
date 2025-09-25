@@ -20,7 +20,7 @@ import RichText from "~/components/common/RichText";
 
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import { getReviews } from "~/lib/qs-esm";
-import StarRating from '~/components/react/brokers/StarRating.astro';
+//import StarRating from '~/components/react/brokers/StarRating.astro';
 import BrokerCard from '~/components/react/brokers/BrokerCard.astro';
 
 //import { StructuredData } from '~/components/seo/StructuredData';
@@ -85,7 +85,7 @@ const siteRes = await fetch('https://fx.mahinge.com/api/globals/site-config?dept
                         <TableCell className="font-medium">{broker.brokerName}</TableCell>
                         <TableCell className="text-center">
                             <div class="flex items-center justify-center gap-1">
-                                <StarRating client:idle rating={broker.brokerRating || 0} />
+                               {/*  <StarRating  rating={broker.brokerRating || 0} />*/}
                                 <span class="font-bold text-sm">({(broker.brokerRating || 0).toFixed(1)})</span>
                             </div>
                         </TableCell>
