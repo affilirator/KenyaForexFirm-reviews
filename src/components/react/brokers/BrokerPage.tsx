@@ -28,6 +28,7 @@ import RichText from '@/components/common/RichText';
 import { websiteSchema } from '@/lib/schema/website-schema';
 import { personSchema } from '@/lib/schema/person-schema';
 import { StructuredData } from '@/components/seo/StructuredData';
+import type { BrokerReviewsResponse } from '~/types/broker-reviews';
 
 //const year = new Date().getFullYear();
 
@@ -115,12 +116,13 @@ const structuredData = {
     },
     }
   
-  
+  interface Brokers {
+  brokers: BrokerProps[];
+    }
 
-const data = await getReviews();
-const brokers = (data.docs || []).sort((a, b) => (b.brokerRating || 0) - (a.brokerRating || 0));
 
-export default function BrokersPage() {
+
+export default function BrokersPage({ brokers }:Brokers) {
   {/* if (!brokers || brokers.length === 0) {
     return (
        <div className="container mx-auto px-4 md:px-6 py-12 text-center">

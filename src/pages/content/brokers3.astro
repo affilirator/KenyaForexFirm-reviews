@@ -1,11 +1,15 @@
 ---
 import BrokersPage from "~/components/react/brokers/BrokerPage";
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getReviews } from "~/lib/qs-esm";
 
 const title = 'Best Forex Traders in Kenya'
 const description = 'Explore more'
 
+const data = await getReviews();
+const brokers = (data.docs || []).sort((a, b) => (b.brokerRating || 0) - (a.brokerRating || 0));
+
 ---
 <BaseLayout server:defer title={title} description={description} >
-    <BrokersPage server:defer client:load />
+    <BrokersPage brokers={brokers} client:load />
 </BaseLayout>
