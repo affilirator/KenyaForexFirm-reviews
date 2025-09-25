@@ -1,6 +1,7 @@
-import { fetchSiteConfig } from "../site-config"
-import { personSchema } from "./person-schema"
-const site = await fetchSiteConfig()
+
+
+const siteRes = await fetch('https://fx.mahinge.com/api/globals/site-config');
+const site = await siteRes.json()
 const siteName = site.siteTitle || 'MahingeFX';
 const siteUrl = site.siteUrl || 'https://fx.mahinge.com';
 

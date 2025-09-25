@@ -1,7 +1,7 @@
-import { fetchSiteConfig } from "../site-config"
+const siteRes = await fetch('https://fx.mahinge.com/api/globals/site-config');
 
-const site = await fetchSiteConfig()
-
+const site = await siteRes.json()
+const siteName = site.siteTitle || 'MahingeFX';
 export const personSchema = {
     "@context": 'https://schema.org',
     '@type': 'Person',

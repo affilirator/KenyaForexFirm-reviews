@@ -1,4 +1,4 @@
-import { fetchSiteConfig } from "../site-config"
+
 
 const res = await fetch('https://fx.mahinge.com/api/globals/site-config')
 
