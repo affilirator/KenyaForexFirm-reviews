@@ -219,6 +219,7 @@ export type BrokerProps = {
   category?: string;
   title: string;
   content: any;
+  bestFor: string;
   logo?: string | Logo | BrokerImage;
   image?: BrokerImage;
   gallery?: BrokerImage[];
