@@ -211,11 +211,7 @@ export default function BrokersPage({ brokers }:Brokers) {
           ))}
         </div>
        </section>
-        <section className="bg-card py-16 md:py-24 mx-auto px-4 md:px-6">
-            <div className="container prose max-w-5xl mx-auto px-4 md:px-6">
-                <RichText content={page.content} />
-            </div>
-        </section>
+       
 
     </div>
   );

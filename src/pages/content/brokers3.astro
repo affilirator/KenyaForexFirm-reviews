@@ -1,4 +1,5 @@
 ---
+import RichText from "~/components/common/RichText";
 import BrokersPage from "~/components/react/brokers/BrokerPage";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import { getReviews } from "~/lib/qs-esm";
@@ -6,10 +7,18 @@ import { getReviews } from "~/lib/qs-esm";
 const title = 'Best Forex Traders in Kenya'
 const description = 'Explore more'
 
+const pageRes = await fetch('https://fx.mahinge.com/api/pages/68ccaebe63b3e43add6c8c6f?depth=2&draft=false&locale=undefined&trash=false')
+const page = await pageRes.json();
+
 const data = await getReviews();
 const brokers = (data.docs || []).sort((a, b) => (b.brokerRating || 0) - (a.brokerRating || 0));
 
 ---
-<BaseLayout server:defer title={title} description={description} >
+<BaseLayout title={title} description={description} >
     <BrokersPage brokers={brokers} client:load />
+     <section class="bg-card py-16 md:py-24 mx-auto px-4 md:px-6">
+            <div class="container prose max-w-5xl mx-auto px-4 md:px-6">
+                <RichText content={page.content} />
+            </div>
+        </section>
 </BaseLayout>
