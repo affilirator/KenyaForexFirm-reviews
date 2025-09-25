@@ -28,8 +28,7 @@ const safeTitle = broker.title || broker.meta?.title || titleFromName
             {logoUrl ? (
               <Image src={logoUrl} 
               alt={`logo of ${broker.brokerName} forex broker in Kenya`} 
-              height={80}
-              width={80}
+              inferSize
               priority
               loading={'eager'}
               class="w-full h-auto object-cover rounded-2xl" />
