@@ -3,7 +3,9 @@ import RichText from "~/components/common/RichText";
 import BrokersPage from "~/components/react/brokers/BrokerPage";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import { getReviews } from "~/lib/qs-esm";
-
+import { websiteSchema } from '~/lib/schema/website-schema';
+import { personSchema } from '~/lib/schema/person-schema';
+//import { StructuredData } from '~/components/seo/StructuredData';
 const title = 'Best Forex Traders in Kenya'
 const description = 'Explore more'
 
@@ -13,12 +15,95 @@ const page = await pageRes.json();
 const data = await getReviews();
 const brokers = (data.docs || []).sort((a, b) => (b.brokerRating || 0) - (a.brokerRating || 0));
 
+
+const siteRes = await fetch('https://fx.mahinge.com/api/globals/site-config?depth=2&draft=false&locale=undefined&trash=false')
+
+const site = await siteRes.json();
+const slug = site.siteUrl + '/' + page.slug
+
+export const metadata = {
+  title: `Best Forex Brokers in Kenya - | MahingeFX`,
+  
+  description: 'Find the best Forex broker for your trading needs in Kenya. In-depth reviews, comparisons, and expert ratings by Patrick Mahinge.',
+  keywords: ['best forex brokers Kenya', 'top forex brokers Kenya', 'forex trading Kenya', 'Kenya forex broker reviews', 'trusted forex brokers Kenya', 'forex trading platforms Kenya', 'forex broker comparisons', 'forex trading accounts Kenya'],
+  alternates: {
+    canonical: slug,
+  },
+  openGraph: {
+    type: 'article',
+    title: `Best Forex Brokers in Kenya (2025)`,
+    description: 'Find the best Forex broker for your trading needs in Kenya. In-depth reviews, comparisons, and expert ratings.',
+    url: slug,
+    siteName: 'MahingeFX',
+    images: [
+      {
+        url: site.siteUrl + '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Best Forex Brokers in Kenya',
+      },
+    ],
+    locale: 'en_US',
+  },
+};
+
+
+const structuredData = {
+  "@context": 'https://schema.org',
+  "@type": 'Article',
+  "headline": "Best Forex Brokers in Kenya - 2025 Update",
+  "description": "Find the best Forex broker for your trading needs in Kenya. In-depth reviews, comparisons, and expert ratings by Patrick Mahinge.",
+  "datePublished": "2024-03-25",
+  "dateModified": new Date().toISOString(),
+  "author": {
+    //"@type": "Person",
+    ...personSchema
+    
+    
+  },
+  "publisher": {
+    "@type": "Organization",
+    '@id': site.siteUrl + '/#organization',
+    
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": site.siteUrl + '/logo.png',
+    "width": 1200,
+    "height": 630
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": site.siteUrl + '/best-forex-brokers',
+    isPartOf: {
+      //"@id": site.siteUrl,
+      ...websiteSchema
+    },
+    
+    breadcrumb: {
+      "@id": site.siteUrl + '/#breadcrumb',
+      "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": site.siteUrl
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Best Forex Brokers in Kenya",
+    "item": site.siteUrl + '/best-forex-brokers'
+  }]
+}
+    },
+    }
 ---
 <BaseLayout title={title} description={description} >
+    
     <BrokersPage brokers={brokers} client:load />
      <section class="bg-card py-16 md:py-24 mx-auto px-4 md:px-6">
             <div class="container prose max-w-5xl mx-auto px-4 md:px-6">
-                <RichText content={page.content} />
+                <RichText content={page.content} client:load />
             </div>
         </section>
 </BaseLayout>

@@ -32,89 +32,11 @@ import type { BrokerReviewsResponse } from '~/types/broker-reviews';
 
 //const year = new Date().getFullYear();
 
-const siteRes = await fetch('https://fx.mahinge.com/api/globals/site-config?depth=2&draft=false&locale=undefined&trash=false')
-
-const site = await siteRes.json();
 const pageRes = await fetch('https://fx.mahinge.com/api/pages/68ccaebe63b3e43add6c8c6f?depth=2&draft=false&locale=undefined&trash=false')
 const page = await pageRes.json();
-const slug = site.siteUrl + '/' + page.slug
-
-export const metadata = {
-  title: `Best Forex Brokers in Kenya - | MahingeFX`,
-  
-  description: 'Find the best Forex broker for your trading needs in Kenya. In-depth reviews, comparisons, and expert ratings by Patrick Mahinge.',
-  keywords: ['best forex brokers Kenya', 'top forex brokers Kenya', 'forex trading Kenya', 'Kenya forex broker reviews', 'trusted forex brokers Kenya', 'forex trading platforms Kenya', 'forex broker comparisons', 'forex trading accounts Kenya'],
-  alternates: {
-    canonical: slug,
-  },
-  openGraph: {
-    type: 'article',
-    title: `Best Forex Brokers in Kenya (2025)`,
-    description: 'Find the best Forex broker for your trading needs in Kenya. In-depth reviews, comparisons, and expert ratings.',
-    url: slug,
-    siteName: 'MahingeFX',
-    images: [
-      {
-        url: site.siteUrl + '/logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'Best Forex Brokers in Kenya',
-      },
-    ],
-    locale: 'en_US',
-  },
-};
 
 
-const structuredData = {
-  "@context": 'https://schema.org',
-  "@type": 'Article',
-  "headline": "Best Forex Brokers in Kenya - 2025 Update",
-  "description": "Find the best Forex broker for your trading needs in Kenya. In-depth reviews, comparisons, and expert ratings by Patrick Mahinge.",
-  "datePublished": "2024-03-25",
-  "dateModified": new Date().toISOString(),
-  "author": {
-    //"@type": "Person",
-    ...personSchema
-    
-    
-  },
-  "publisher": {
-    "@type": "Organization",
-    '@id': site.siteUrl + '/#organization',
-    
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": site.siteUrl + '/logo.png',
-    "width": 1200,
-    "height": 630
-  },
-  mainEntityOfPage: {
-    "@type": "WebPage",
-    "@id": site.siteUrl + '/best-forex-brokers',
-    isPartOf: {
-      //"@id": site.siteUrl,
-      ...websiteSchema
-    },
-    
-    breadcrumb: {
-      "@id": site.siteUrl + '/#breadcrumb',
-      "@type": "BreadcrumbList",
-  "itemListElement": [{
-    "@type": "ListItem",
-    "position": 1,
-    "name": "Home",
-    "item": site.siteUrl
-  },{
-    "@type": "ListItem",
-    "position": 2,
-    "name": "Best Forex Brokers in Kenya",
-    "item": site.siteUrl + '/best-forex-brokers'
-  }]
-}
-    },
-    }
+
   
   interface Brokers {
   brokers: BrokerProps[];
@@ -136,7 +58,7 @@ export default function BrokersPage({ brokers }:Brokers) {
 
   return (
     <div className="space-y-12">
-       <StructuredData  data={structuredData} />
+       
       <section className="bg-card py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
             <Breadcrumb className="mb-8">
