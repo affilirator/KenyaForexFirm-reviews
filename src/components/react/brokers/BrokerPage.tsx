@@ -117,10 +117,11 @@ const structuredData = {
   
   
 
-const brokers = await getReviews()
+const data = await getReviews();
+const brokers = (data.docs || []).sort((a, b) => (b.brokerRating || 0) - (a.brokerRating || 0));
 
 export default function BrokersPage() {
-  if (!brokers || brokers.docs.length === 0) {
+  {/* if (!brokers || brokers.length === 0) {
     return (
        <div className="container mx-auto px-4 md:px-6 py-12 text-center">
             <h1 className="font-display text-3xl font-bold">Could Not Load Brokers</h1>
@@ -128,6 +129,7 @@ export default function BrokersPage() {
         </div>
     )
   }
+    */}
   
 
   return (
@@ -168,7 +170,7 @@ export default function BrokersPage() {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {brokers.docs.map((broker) => (
+                {brokers.map((broker) => (
                     <TableRow key={broker.id}>
                         <TableCell className="font-medium">{broker.brokerName}</TableCell>
                         <TableCell className="text-center">
@@ -202,7 +204,7 @@ export default function BrokersPage() {
        <section className="container mx-auto px-4 md:px-6">
         <h2 className="font-display text-3xl font-bold mb-6">Detailed Reviews</h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {brokers.docs.map((broker) => (
+          {brokers.map((broker) => (
             <BrokerCard key={broker.id} broker={broker} />
           ))}
         </div>
