@@ -26,13 +26,6 @@ const reviewSchema = generateBrokerReviewSchema(broker);
 const breadcrumbSchema = generateBreadcrumbSchema(broker);
 const faqSchema = generateFAQSchema(broker);
 const combinedSchema = [reviewSchema, breadcrumbSchema, faqSchema];
-
-
-
-const customVerdict = `
-<p class="mb-4">Example Forex Broker stands out as an excellent choice for Kenyan traders, offering a perfect blend of regulatory compliance, competitive trading conditions, and local market understanding. With CMA approval and M-Pesa integration, the broker demonstrates its commitment to serving the Kenyan trading community.</p>
-<p>The combination of multiple regulatory licenses, low minimum deposits, and comprehensive educational resources makes this broker particularly suitable for both beginner and experienced traders in Kenya.</p>
-`;
 ---
 
 <BaseLayout
@@ -56,10 +49,10 @@ const customVerdict = `
           Account Types
         </h2>
         <div class="grid lg:grid-cols-3 gap-6">
-          {broker.account?.map((accountType, index) => (
+          {broker.account?.map((account, index) => (
             <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-semibold text-white">{accountType}</h3>
+                <h3 class="text-xl font-semibold text-white">{account.accountName}</h3>
                 {index === 0 && (
                   <span class="bg-primary-500/20 text-primary-400 px-2 py-1 rounded-full text-xs font-medium">
                     Popular
@@ -69,19 +62,19 @@ const customVerdict = `
               <div class="space-y-3 mb-6">
                 <div class="flex justify-between">
                   <span class="text-neutral-400">Min Deposit:</span>
-                  <span class="text-white font-medium">${broker.minDeposit}</span>
+                  <span class="text-white font-medium">${account.minDeposit}</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-neutral-400">Max Leverage:</span>
-                  <span class="text-white font-medium">{broker.maxLeverage}</span>
+                  <span class="text-neutral-400">Commission:</span>
+                  <span class="text-white font-medium">{account.commission}%</span>
                 </div>
                 <div class="flex justify-between">
                   <span class="text-neutral-400">Spread:</span>
-                  <span class="text-white font-medium">{broker.spread} pips</span>
+                  <span class="text-white font-medium">{account.spread} pips</span>
                 </div>
               </div>
               <button class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
-                Open {accountType}
+                Open {account.accountName}
               </button>
             </div>
           ))}
