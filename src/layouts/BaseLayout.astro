@@ -48,7 +48,8 @@ if (!pageAuthor) {
 }
 
 const canonicalURL = `${site.url}${Astro.url.pathname}`;
-const schemaTypes = 'CollectionPage, WebPage, WebSite, Organization, Review'
+
+const schemaTypes = ['CollectionPage', 'WebPage', 'WebSite', 'Organization', 'Review']
 ---
 
 <!DOCTYPE html>
@@ -112,7 +113,7 @@ const schemaTypes = 'CollectionPage, WebPage, WebSite, Organization, Review'
     
     {/* Add author schema if not already included in schemaData */}
     {pageAuthor && !schemaData?.mainEntity?.['@type']?.includes('Person') 
-    && !schemaData?.['@type']?.includes(schemaTypes) 
+    && !schemaTypes.some(type => schemaData?.['@type']?.includes(type)) 
     && (
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
