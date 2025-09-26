@@ -60,7 +60,7 @@ const schemaData = {
         "itemListElement": broker.pros ? broker.pros.map((pro, index) => ({
           "@type": "ListItem",
           "position": index + 1,
-         "name": pro
+         "item": pro
         })) : undefined
       },
       negativeNotes: {
@@ -68,7 +68,7 @@ const schemaData = {
         "itemListElement": broker.cons ? broker.cons.map((con, index) => ({
           "@type": "ListItem",
           "position": index + 1,
-         "name": con
+         "item": con
         })) : undefined
       },
       reviewRating: {
