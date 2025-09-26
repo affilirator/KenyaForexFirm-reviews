@@ -67,7 +67,7 @@ export default {
         headline: ['Playfair Display', 'serif'],
         code: ['monospace'],
   			sans: [
-  				'Source Sans 3"',
+  				'Source Sans 3',
   				'system-ui',
   				'sans-serif'
   			],
