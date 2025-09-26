@@ -7,9 +7,11 @@ import node from '@astrojs/node';
 
 import react from '@astrojs/react';
 
+import sitemap from '@astrojs/sitemap';
+
 export default defineConfig({
   site: 'https://fx.kenyaforexfirm.com',
-  integrations: [tailwind(), icon(), react()],
+  integrations: [tailwind(), icon(), react(), sitemap()],
   trailingSlash: 'always',
 
   build: {

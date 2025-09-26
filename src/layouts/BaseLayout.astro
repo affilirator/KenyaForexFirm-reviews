@@ -13,6 +13,7 @@ import "../styles/toc.css";
 export interface Props {
   title: string;
   description: string;
+  type?: string;
   image?: string;
   noindex?: boolean;
   schemaData?: any;
@@ -20,14 +21,16 @@ export interface Props {
 }
 
 const {
-  title = `${site.name} ${site.currentYear} - Expert Forex Broker Analysis & Rankings"`,
-  description = "Comprehensive forex broker reviews and rankings for Kenyan traders. Expert analysis, regulatory information, and unbiased comparisons to help you choose the best forex broker.",
-  image = "/og-image.jpg",
+  title,
+  description,
+  image = "/best-forex-brokers-kenyaforexfirm.png",
   noindex = false,
   schemaData,
   author
 } = Astro.props;
 
+const homeTitle = `${site.name} ${site.currentYear} - Expert Forex Broker Analysis & Rankings"`
+const homeDescription = "Comprehensive forex broker reviews and rankings for Kenyan traders. Expert analysis, regulatory information, and unbiased comparisons to help you choose the best forex broker."
 // Get default author if none is provided
 let pageAuthor: Author | undefined = author;
 if (!pageAuthor) {
@@ -45,7 +48,14 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <link rel="stylesheet" href="/fonts/fonts.css" />
-    <slot name="opengraph">
+    <link rel='privacy-policy' href='/privacy/' />
+    <link rel='terms-of-service' href='/terms/' />
+    <link rel='canonical' href={canonicalURL} />
+    <link rel="me" href="/authors/patrick-mahinge/" />
+    <meta name="title" content={homeTitle} />
+    <meta name="description" content={homeDescription} />
+    <slot name='opengraph' />
+    
     <SEO
       title={title}
       description={description}
@@ -66,7 +76,7 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
         ],
       }}
     />
-    </slot>
+    
     
     {schemaData && (
       <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
