@@ -112,13 +112,10 @@ const schemaTypes = ['CollectionPage', 'WebPage', 'WebSite', 'Organization', 'Re
     
     
     {/* Add author schema if not already included in schemaData */}
-    {pageAuthor && schemaData && !schemaData?.mainEntity?.['@type']?.includes('Person')  
-    && (
-
-    !schemaTypes.some(type => schemaData?.['@type']?.includes(type)) ?
-      
+    {pageAuthor && !schemaData?.mainEntity?.['@type']?.includes('Person') 
+    
+    || ( !schemaTypes.some(type => schemaData?.['@type']?.includes(type)) ?
       <script type="application/ld+json" set:html={JSON.stringify({
-        
         "@context": "https://schema.org",
         "@type": "Article",
         "@id": `${canonicalURL}#article`,
@@ -173,8 +170,7 @@ const schemaTypes = ['CollectionPage', 'WebPage', 'WebSite', 'Organization', 'Re
             "url": `${site.url}/logo.png`
           }
         }
-      })} />
-      :  <script is:inline type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+      })} /> :  <script is:inline type="application/ld+json" set:html={JSON.stringify(schemaData)} />
     )}
     <ClientRouter />
   </head>
