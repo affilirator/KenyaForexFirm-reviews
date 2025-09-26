@@ -50,6 +50,24 @@ if (!pageAuthor) {
 const canonicalURL = `${site.url}${Astro.url.pathname}`;
 
 const schemaTypes = ['CollectionPage', 'WebPage',  'Review']
+
+if (schemaData && !schemaData?.['@id']) {
+  schemaData['@id'] = `${canonicalURL}#${Array.isArray(schemaData['@type']) ? schemaData['@type'][0]?.toLowerCase() : schemaData['@type']?.toLowerCase() || 'webpage'}`;
+  if (!schemaData.publisher) {
+    schemaData.publisher = {
+      "@type": "Organization",
+      "@id":`${site.url}/#organization`,
+    };
+  };
+  if (!schemaData.author) {
+    schemaData.author = {
+      "@type": "Person",
+      "name": pageAuthor?.name || "Patrick Mahinge",
+      "url": pageAuthor ? `${site.url}/authors/${pageAuthor.slug}` : undefined,
+      "@id": pageAuthor ? `${site.url}/authors/${pageAuthor.slug}` : undefined
+    };
+  }
+}
 ---
 
 <!DOCTYPE html>
@@ -110,21 +128,7 @@ const schemaTypes = ['CollectionPage', 'WebPage',  'Review']
     )}
       */}
 
-      {schemaData && !schemaData?.['@id']
-      && (
-        <script is:inline type="application/ld+json" set:html={JSON.stringify({
-          ...schemaData,
-          "@id": `${canonicalURL}#${Array.isArray(schemaData['@type']) ? schemaData['@type'][0]?.toLowerCase() : schemaData['@type']?.toLowerCase() || 'webpage'}`,
-          publisher: {
-            "@type": "Organization",
-            
-            "@id":`${site.url}/#organization`,
-            
-            
-          }
-        })} />
-      )
-    }
+    
       
       { schemaData && !schemaData?.['@type'].includes('Article')
      && (
