@@ -63,13 +63,16 @@ export default {
   			}
   		},
   		fontFamily: {
+			 body: ['PT Sans', 'sans-serif'],
+        headline: ['Playfair Display', 'serif'],
+        code: ['monospace'],
   			sans: [
   				'Source Sans 3"',
   				'system-ui',
   				'sans-serif'
   			],
   			display: [
-  				'Playfair Display"',
+  				'Playfair Display',
   				'serif'
   			],
   			ui: [
@@ -78,7 +81,7 @@ export default {
   				'sans-serif'
   			],
   			serif: [
-  				'EB Garamond"',
+  				'EB Garamond',
   				'serif'
   			]
   		},
