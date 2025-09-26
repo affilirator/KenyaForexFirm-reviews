@@ -110,7 +110,7 @@ const schemaTypes = ['CollectionPage', 'WebPage', 'WebSite', 'Organization', 'Re
     )}
       */}
 
-    
+     <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     
     {/* Add author schema if not already included in schemaData */}
     {pageAuthor && schemaData && !schemaData?.mainEntity?.['@type']?.includes('Person')  
