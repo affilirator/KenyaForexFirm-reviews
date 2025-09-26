@@ -19,6 +19,21 @@ export default defineConfig({
   },
 
   image: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'kenyaforexfirm.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.mahinge.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+    domains: ['kenyaforexfirm.com, mahinge.com'], // Add your actual external image domains
    service: {
      //entrypoint:  'astro/assets/services/sharp',
      config: {
