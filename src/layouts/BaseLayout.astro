@@ -154,15 +154,13 @@ if (schemaData && !schemaData?.['@id']) {
      <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     
     {/* Add author schema if not already included in schemaData */}
-    {pageAuthor && schemaData && !schemaData?.mainEntity?.['@type']?.includes('Person')  
+    {pageAuthor && schemaData && !schemaData?.mainEntity?.['@type']?.includes('Person') 
+    && !(Array.isArray(schemaData) ? schemaData.some(item => schemaTypes.includes(item['@type'])) : schemaTypes.includes(schemaData?.['@type']))
     && (
 
      
       
-      <script type="application/ld+json" set:html={JSON.stringify( !(Array.isArray(schemaData) ? schemaData.some(item => schemaTypes.includes(item['@type'])) : schemaData && schemaTypes.includes(schemaData?.['@type'])) ?
-        
-        {
-        
+      <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Article",
         "@id": `${canonicalURL}#article`,
@@ -176,22 +174,21 @@ if (schemaData && !schemaData?.['@id']) {
         },
         "datePublished": pubDate,
         "dateModified": modDate,
-        //'@id': Astro.request.url,
         "author": {
           "@type": "Person",
           "name": pageAuthor.name,
           "url": `${site.url}/authors/${pageAuthor.slug}`,
           "@id": `${site.url}/authors/${pageAuthor.slug}`
         },
-        mainEntityOfPage: !schemaData?.mainEntity ?  {
+        mainEntityOfPage: {
           "@type": "WebPage",
           "@id": canonicalURL,
           primaryImageOfPage: {
-          "@type": "ImageObject",
-          "url": `${site.url}${image}`,
-          "width": 1024,
-          "height": 1024
-        },
+            "@type": "ImageObject",
+            "url": `${site.url}${image}`,
+            "width": 1024,
+            "height": 1024
+          },
           isPartOf: {
             '@type': 'WebSite',
             "@id": `${site.url}/#website`,
@@ -202,10 +199,8 @@ if (schemaData && !schemaData?.['@id']) {
               "@type": "Organization",
               "@id":`${site.url}/#organization`,
             }
-
           }
-        } : undefined,
-        
+        },
         "publisher": {
           "@type": "Organization",
           "name": site.name,
@@ -216,9 +211,7 @@ if (schemaData && !schemaData?.['@id']) {
             "url": `${site.url}/logo.png`
           }
         }
-      }
-   : schemaData
-    )} />
+      })} />
       
     )}
     <ClientRouter />
