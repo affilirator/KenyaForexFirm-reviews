@@ -4,7 +4,7 @@ export const organizationSchema = {
         "@context": "https://schema.org",
         "@type": "Organization",
         "@id": `${site.url}/#organization`,
-        "name": site.name,
+        "name": 'Kenya Forex Firm',
         "url": site.url,
         "logo": site.logoPath ,
         "description": site.description,
