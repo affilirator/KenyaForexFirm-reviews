@@ -54,7 +54,10 @@ const schemaData = {
   "datePublished": new Date().toISOString().split('T')[0],
   "reviewRating": { "@type": "Rating", "ratingValue": broker.brokerRating, "bestRating": 10 }
 ,
-breadcrumb: {
+mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": `${site.url}/brokers/${broker.slug}/`,
+    breadcrumb: {
   
   "@type": "BreadcrumbList",
   "itemListElement": [
@@ -63,6 +66,9 @@ breadcrumb: {
     { "@type": "ListItem", "position": 3, "name": `${broker.brokerName} Review`, "item": `${site.url}/brokers/${broker.slug}/` }
   ]
 }
+
+}
+
 }
 ---
 
