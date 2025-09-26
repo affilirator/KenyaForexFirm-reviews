@@ -8,15 +8,15 @@ const organization =
 export const site = {
     name: 'Best Forex Broker Reviews in Kenya | By Kenya Forex Firm',
     siteName: organization.name,
-    schemaId: `${siteUrl}/#Website`,
-    audience: "Forex Traders",
+    schemaId: `${siteUrl}/#website`,
+    audience: "Forex Traders in Kenya",
     description: 'Kenya Forex Firm brings you all the reviews that matter from the forex trading industry.',
     url: siteUrl,
     affiliateSlug: "goto",
     currentYear: new Date().getFullYear(),
     canonicalURL: typeof window !== 'undefined' ? window.location.href : siteUrl,
     logoPath: "/favicon.svg",
-    reviewsIndexSlug: 'brokers',
+    reviewsIndexSlug: 'review/best-forex-brokers',
     profiles: [
         {
             facebook: "https://twitter.com/kenyaforexfirm"
@@ -34,7 +34,7 @@ export const site = {
         country: "Kenya",
         countryShortName: "KE",
         postalCode: "77001",
-        streetAddress: "123 Industrial Drive",
+        streetAddress: "Westlands",
         phone: "+254710251380",
     },
     organization: {

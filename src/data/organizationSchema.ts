@@ -3,7 +3,7 @@ import { site } from "@data/site";
 export const organizationSchema = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "@id": `${site.url}/#Organization`,
+        "@id": `${site.url}/#organization`,
         "name": site.name,
         "url": site.url,
         "logo": site.logoPath ,

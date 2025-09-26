@@ -8,6 +8,11 @@
     "dist"
   ],
   "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      },
+    ],
     "module": "esnext",
     "moduleResolution": "bundler",
     "target": "esnext",

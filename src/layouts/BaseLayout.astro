@@ -9,6 +9,7 @@ import { getDefaultAuthor } from "../lib/author-service";
 import type { Author } from "../types/author";
 import "../styles/global.css";
 import "../styles/toc.css";
+import { organizationSchema } from "~/data/organizationSchema";
 
 export interface Props {
   title: string;
@@ -47,6 +48,7 @@ if (!pageAuthor) {
 }
 
 const canonicalURL = `${site.url}${Astro.url.pathname}`;
+const schemaTypes = 'CollectionPage, WebPage, WebSite, Organization, Review'
 ---
 
 <!DOCTYPE html>
@@ -103,11 +105,15 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
     
     
     {schemaData && (
-      <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(schemaData)} />
     )}
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     
     {/* Add author schema if not already included in schemaData */}
-    {pageAuthor && !schemaData?.mainEntity?.['@type']?.includes('Person') && (
+    {pageAuthor && !schemaData?.mainEntity?.['@type']?.includes('Person') 
+    && !schemaData?.['@type']?.includes(schemaTypes) 
+    && (
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Article",
