@@ -45,10 +45,32 @@ const schemaData = {
         "@id": 'https://fx.kenyaforexfirm.com/authors/patrick-mahinge',
         "name": author?.name || "Patrick Mahinge"
       },
+      publisher: {
+        "@type": "Organization",
+        "@id": `${site.url}/#organization`,
+        
+      },
       "datePublished": new Date().toISOString().split('T')[0],
+      "dateModified": new Date().toISOString().split('T')[0],
       description: broker.quickVerdict || broker.description || `Comprehensive review of ${broker.brokerName}.` ,
       "reviewBody": broker.quickVerdict || broker.description || `Comprehensive review of ${broker.brokerName}.`,
-      "name": `${broker.brokerName} Review`,
+      "name": `${broker.brokerName} Review in Kenya`,
+      positiveNotes: {
+        "@type": "ItemList",
+        "itemListElement": broker.pros ? broker.pros.map((pro, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": pro
+        })) : undefined
+      },
+      negativeNotes: {
+        "@type": "ItemList",
+        "itemListElement": broker.cons ? broker.cons.map((con, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": con
+        })) : undefined
+      }
 
     },
     "aggregateRating": {
