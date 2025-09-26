@@ -70,15 +70,16 @@ const schemaData = {
           "position": index + 1,
           "name": con
         })) : undefined
+      },
+      reviewRating: {
+        "@type": "Rating",
+        "ratingValue": broker.brokerRating,
+        "bestRating": 10,
+        "worstRating": 1
       }
 
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": broker.brokerRating,
-      "bestRating": 10,
-      "worstRating": 1
-    }
+    
   },
   "author": {
     "@type": "Person",
