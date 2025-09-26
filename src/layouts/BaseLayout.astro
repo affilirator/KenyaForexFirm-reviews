@@ -105,9 +105,10 @@ const schemaTypes = ['CollectionPage', 'WebPage', 'WebSite', 'Organization', 'Re
     />
     
     
-    {schemaData && (
+   {/*  {schemaData && (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(schemaData)} />
     )}
+      */}
 
     
     
@@ -135,7 +136,6 @@ const schemaTypes = ['CollectionPage', 'WebPage', 'WebSite', 'Organization', 'Re
         //'@id': Astro.request.url,
         "author": {
           "@type": "Person",
-          
           "name": pageAuthor.name,
           "url": `${site.url}/authors/${pageAuthor.slug}`,
           "@id": `${site.url}/authors/${pageAuthor.slug}`
