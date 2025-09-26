@@ -110,7 +110,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
         
         case 'link':
           const url = node.fields?.url || node.url || '#'
-          const isExternal = url.startsWith('http') && !url.includes(window?.location?.hostname)
+          const isExternal = url.startsWith('http') && (typeof window === 'undefined' || !url.includes(window.location.hostname))
           
           return (
             <a
@@ -170,6 +170,31 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
         case 'block':
           return <BlockRenderer key={i} blocks={[node.fields]} />
         
+        case 'relationship':
+          // Handle relationship nodes (e.g., broker references)
+          if (node.value && typeof node.value === 'object') {
+            return (
+              <div key={i} className="my-6 p-4 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-lg">
+                <div className="flex items-center gap-3">
+                  {node.value.logo?.url && (
+                    <img 
+                      src={node.value.logo.url} 
+                      alt={node.value.logo.alt || `${node.value.name} logo`}
+                      className="w-12 h-12 rounded-lg object-cover"
+                    />
+                  )}
+                  <div>
+                    <h4 className="font-semibold text-foreground">{node.value.name}</h4>
+                    {node.value.summary && (
+                      <p className="text-sm text-foreground/70 mt-1">{node.value.summary}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )
+          }
+          return null
+        
         case 'table':
           return (
             <div key={i} className="my-6 md:my-8 overflow-x-auto rounded-lg border border-border shadow-sm">
@@ -202,12 +227,15 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
           )
         
         default:
-          return (
-            <div key={i} className="my-4 p-3 bg-muted/20 rounded border-l-4 border-yellow-500">
-              <small className="text-xs text-foreground/60">Unknown content type: {node.type}</small>
-              <div className="mt-2">{children}</div>
-            </div>
-          )
+          // Handle any unrecognized node types gracefully
+          if (children.length > 0) {
+            return (
+              <div key={i} className="my-4">
+                {children}
+              </div>
+            )
+          }
+          return null
       }
     })
   }
