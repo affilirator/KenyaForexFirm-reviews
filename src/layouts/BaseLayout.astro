@@ -53,13 +53,18 @@ const schemaTypes = ['CollectionPage', 'WebPage',  'Review']
 
 if (schemaData && !schemaData?.['@id']) {
   schemaData['@id'] = `${canonicalURL}#${Array.isArray(schemaData['@type']) ? schemaData['@type'][0]?.toLowerCase() : schemaData['@type']?.toLowerCase() || 'webpage'}`;
+
   if (!schemaData.publisher) {
     schemaData.publisher = {
       "@type": "Organization",
       "@id":`${site.url}/#organization`,
     };
   };
-  if (!schemaData.author) {
+
+
+  if ((!schemaData.author) 
+    || pageAuthor 
+    && `${schemaData.author?.['@id']}` !== `${site.url}/authors/${pageAuthor?.slug}`) {
     schemaData.author = {
       "@type": "Person",
       "name": pageAuthor?.name || "Patrick Mahinge",
