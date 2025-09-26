@@ -95,24 +95,39 @@ export const schemaData = {
   "name": "Terms of Service - Kenya Forex Firm",
   "description": "Terms and conditions governing the use of Kenya Forex Firm's website and services. Read our legal terms before using our forex broker review platform.",
   "url": `${site.url}/terms/`,
-  "datePublished": "2023-10-01",
-  "dateCreated": "2023-10-01",
+  "datePublished": "2025-07-01",
+  "dateCreated": "2025-07-01",
   "dateModified": new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   }),
-  "lastReviewed": termsHero.lastUpdated,
+  "lastReviewed": new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }),
+  isPartOf: {
+    "@id": `${site.url}/#website`
+  },
   "specialty": "Terms of Service",
   "mainContentOfPage": {
     "@type": "WebPageElement",
     "isPartOf": {
       "@id": `${site.url}/#website`
     },
-    "speakable": {
+    cssSelector: {
+      '@type': 'CssSelectorType',
+      value: '.main',
+      xpath: '//*[@class="main"]'
+
+
+    }
+   /* "speakable": {
       "@type": "SpeakableSpecification",
       "cssSelector": ["h1", ".terms-intro"]
     }
+      */
   },
   "about": {
     "@type": "Thing",
@@ -121,7 +136,7 @@ export const schemaData = {
   },
   "audience": {
     "@type": "Audience",
-    "audienceType": "Forex Traders"
+    "audienceType": "Forex Traders in Kenya"
   },
   "publisher": {
     "@type": "Organization",
