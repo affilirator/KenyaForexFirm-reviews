@@ -111,7 +111,17 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Article",
-        "@id": canonicalURL,
+        "@id": `${canonicalURL}#article`,
+        "headline": title,
+        "description": description,
+        "image": {
+          "@type": "ImageObject",
+          "url": `${site.url}/${image}`,
+          "width": 1024,
+          "height": 1024
+        },
+        "datePublished": pubDate,
+        "dateModified": modDate,
         //'@id': Astro.request.url,
         "author": {
           "@type": "Person",
@@ -120,6 +130,29 @@ const canonicalURL = `${site.url}${Astro.url.pathname}`;
           "url": `${site.url}/authors/${pageAuthor.slug}`,
           "@id": `${site.url}/authors/${pageAuthor.slug}`
         },
+        mainEntityOfPage: !schemaData?.mainEntity ?  {
+          "@type": "WebPage",
+          "@id": canonicalURL,
+          primaryImageOfPage: {
+          "@type": "ImageObject",
+          "url": `${site.url}/${image}`,
+          "width": 1024,
+          "height": 1024
+        },
+          isPartOf: {
+            '@type': 'WebSite',
+            "@id": `${site.url}/#website`,
+            name: site.name,
+            url: site.url,
+            description: site.description,
+            publisher: {
+              "@type": "Organization",
+              "@id":`${site.url}/#organization`,
+            }
+
+          }
+        } : undefined,
+        
         "publisher": {
           "@type": "Organization",
           "name": site.name,
