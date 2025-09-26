@@ -116,9 +116,11 @@ const schemaTypes = ['CollectionPage', 'WebPage', 'WebSite', 'Organization', 'Re
     {pageAuthor && schemaData && !schemaData?.mainEntity?.['@type']?.includes('Person')  
     && (
 
-    schemaData && !schemaTypes.some(type => schemaData?.['@type']?.includes(type)) ?
+     
       
-      <script type="application/ld+json" set:html={JSON.stringify({
+      <script type="application/ld+json" set:html={JSON.stringify( !schemaTypes.some(type => schemaData?.['@type']?.includes(type)) ?
+        
+        {
         
         "@context": "https://schema.org",
         "@type": "Article",
@@ -173,8 +175,10 @@ const schemaTypes = ['CollectionPage', 'WebPage', 'WebSite', 'Organization', 'Re
             "url": `${site.url}/logo.png`
           }
         }
-      })} />
-      :  <script is:inline type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+      }
+   : schemaData
+    )} />
+      
     )}
     <ClientRouter />
   </head>
