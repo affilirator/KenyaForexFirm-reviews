@@ -62,6 +62,10 @@ if (schemaData && !schemaData?.['@id']) {
     };
   };
 
+  if (!schemaData.dateModified) {
+    schemaData.dateModified = modDate;
+  }
+
 
   if ((!schemaData.author) 
     || pageAuthor 
