@@ -115,7 +115,7 @@ const schemaTypes = ['CollectionPage', 'WebPage', 'WebSite', 'Organization', 'Re
     {pageAuthor && schemaData && !schemaData?.mainEntity?.['@type']?.includes('Person')  
     && (
 
-    !schemaTypes.some(type => schemaData?.['@type']?.includes(type)) ?
+    schemaData && !schemaTypes.some(type => schemaData?.['@type']?.includes(type)) ?
       
       <script type="application/ld+json" set:html={JSON.stringify({
         
