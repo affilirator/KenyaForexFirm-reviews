@@ -1,12 +1,16 @@
 # Prevent indexing for specific paths and environments
 /content/*
-  X-Robots-Tag: noindex, nofollow, noarchive
-  X-Content-Type-Options: nosniff
- 
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=(), autoplay=self, fullscreen=self
-  X-Frame-Options: SAMEORIGIN
-  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+    X-Robots-Tag: noindex, nofollow, noarchive
+    X-Content-Type-Options: nosniff
+
+ /*.app/*
+    X-Robots-Tag: noindex, nofollow, noarchive
+    X-Content-Type-Options: nosniff
+
+Referrer-Policy: strict-origin-when-cross-origin
+  ..Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=(), autoplay=self, fullscreen=self
+  ..X-Frame-Options: SAMEORIGIN
+  ..Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
 /*.kenyaforexfirm.com/*
     X-Content-Type-Options: nosniff
@@ -19,27 +23,27 @@
 /api/*
     X-Robots-Tag: noindex, nofollow, noarchive
 /preview/*
-X-Robots-Tag: noindex, nofollow, noarchive
+    X-Robots-Tag: noindex, nofollow, noarchive
 /lp/*
-  X-Robots-Tag: noindex, nofollow, noarchive
+    X-Robots-Tag: noindex, nofollow, noarchive
 /search/*
-  X-Robots-Tag: noindex, nofollow, noarchive
+     X-Robots-Tag: noindex, nofollow, noarchive
 /category/*
-  X-Robots-Tag: noindex, nofollow, noarchive
+      X-Robots-Tag: noindex, nofollow, noarchive
 /goto/*
-  X-Robots-Tag: noindex, nofollow, noarchive
+    X-Robots-Tag: noindex, nofollow, noarchive
 
 
 https://*.pages.dev/*
-  X-Robots-Tag: noindex, nofollow, noarchive
+    X-Robots-Tag: noindex, nofollow, noarchive
 https://*.netlify.app/*
-  X-Robots-Tag: noindex, nofollow, noarchive
+    X-Robots-Tag: noindex, nofollow, noarchive
 https://*.vercel.app/*
-  X-Robots-Tag: noindex, nofollow, noarchive
+    X-Robots-Tag: noindex, nofollow, noarchive
 https://*.workers.dev/*
-  X-Robots-Tag: noindex, nofollow, noarchive
+    X-Robots-Tag: noindex, nofollow, noarchive
 https://*.dev/*
-  X-Robots-Tag: noindex, nofollow, noarchive
+    X-Robots-Tag: noindex, nofollow, noarchive
 
 
 /*goto/*
@@ -50,4 +54,4 @@ https://*.dev/*
     X-Frame-Options: DENY
 
 /*.(png|jpg|jpeg|gif|svg|webp|avif)
-  ! Content-Security-Policy
+    ! Content-Security-Policy
