@@ -1,5 +1,6 @@
 ---
 import { site } from '~/data/site';
+import { ModeToggle } from './react/ModdleToggle';
 
 const navItems = [
   { label: 'Home', href: '/', description: 'Homepage' },
@@ -80,6 +81,7 @@ const currentPath = Astro.url.pathname;
               )}
             </div>
           ))}
+          <ModeToggle client:load />
         </div>
 
         <!-- CTA Button -->
