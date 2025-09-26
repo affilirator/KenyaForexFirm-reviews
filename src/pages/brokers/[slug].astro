@@ -60,7 +60,7 @@ const schemaData = {
         "itemListElement": broker.pros ? broker.pros.map((pro, index) => ({
           "@type": "ListItem",
           "position": index + 1,
-         "item": pro
+          "name": typeof pro === 'string' ? pro : pro.pro || (pro as any).text || String(pro)
         })) : undefined
       },
       negativeNotes: {
@@ -68,7 +68,7 @@ const schemaData = {
         "itemListElement": broker.cons ? broker.cons.map((con, index) => ({
           "@type": "ListItem",
           "position": index + 1,
-         "item": con
+          "name": typeof con === 'string' ? con : con.con || (con as any).text || String(con)
         })) : undefined
       },
       reviewRating: {
