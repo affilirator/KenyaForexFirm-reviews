@@ -29,7 +29,7 @@ const logoUrl = typeof broker.logo === 'string' ? broker.logo : broker.logo?.url
 const title = `${broker.brokerName} Review ${new Date().getFullYear()} - Expert Analysis for Kenyan Traders`;
 const description = `Comprehensive ${broker.brokerName} review for Kenyan traders. ${broker.cmaRegulated ? 'CMA approved broker' : 'International broker'} with ${broker.minDeposit ? `$${broker.minDeposit} minimum deposit` : 'competitive conditions'}.`;
 
-const schemaData = [{
+const schemaData = {
   "@context": "https://schema.org",
   "@type": "Review",
   "itemReviewed": {
@@ -53,15 +53,17 @@ const schemaData = [{
   "publisher": { "@type": "Organization", "name": site.siteName, "url": site.url },
   "datePublished": new Date().toISOString().split('T')[0],
   "reviewRating": { "@type": "Rating", "ratingValue": broker.brokerRating, "bestRating": 10 }
-}, {
-  "@context": "https://schema.org",
+,
+mainEntity: {
+  
   "@type": "BreadcrumbList",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": site.url },
     { "@type": "ListItem", "position": 2, "name": "Broker Reviews", "item": `${site.url}/brokers/` },
     { "@type": "ListItem", "position": 3, "name": `${broker.brokerName} Review`, "item": `${site.url}/brokers/${broker.slug}/` }
   ]
-}];
+}
+}
 ---
 
 <BaseLayout title={title} description={description} image={logoUrl} schemaData={schemaData} author={author || undefined}>
