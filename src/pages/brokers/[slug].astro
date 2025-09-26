@@ -29,13 +29,28 @@ const logoUrl = typeof broker.logo === 'string' ? broker.logo : broker.logo?.url
 const title = `${broker.brokerName} Review ${new Date().getFullYear()} - Expert Analysis for Kenyan Traders`;
 const description = `Comprehensive ${broker.brokerName} review for Kenyan traders. ${broker.cmaRegulated ? 'CMA approved broker' : 'International broker'} with ${broker.minDeposit ? `$${broker.minDeposit} minimum deposit` : 'competitive conditions'}.`;
 
+
+
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "Review",
   "itemReviewed": {
     "@type": "Product",
     "name": broker.brokerName,
-    "description": `${broker.brokerName} forex and CFD broker${broker.cmaRegulated ? ' with CMA approval for Kenyan clients' : ''}`,
+    "description": broker.description || broker.quickVerdict || undefined,
+    review: {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "@id": 'https://fx.kenyaforexfirm.com/authors/patrick-mahinge',
+        "name": author?.name || "Patrick Mahinge"
+      },
+      "datePublished": new Date().toISOString().split('T')[0],
+      description: broker.quickVerdict || broker.description || `Comprehensive review of ${broker.brokerName}.` ,
+      "reviewBody": broker.quickVerdict || broker.description || `Comprehensive review of ${broker.brokerName}.`,
+      "name": `${broker.brokerName} Review`,
+
+    },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": broker.brokerRating,
@@ -52,8 +67,8 @@ const schemaData = {
   },
   "publisher": { "@type": "Organization", "name": site.siteName, "url": site.url },
   "datePublished": new Date().toISOString().split('T')[0],
-  "reviewRating": { "@type": "Rating", "ratingValue": broker.brokerRating, "bestRating": 10 }
-,
+//  "reviewRating": { "@type": "Rating", "ratingValue": broker.brokerRating, "bestRating": 10 }
+
 mainEntityOfPage: {
     "@type": "WebPage",
     "@id": `${site.url}/brokers/${broker.slug}/`,

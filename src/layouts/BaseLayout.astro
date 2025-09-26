@@ -33,9 +33,10 @@ const {
   type = 'website',
   image = "/best-forex-brokers-kenyaforexfirm.png",
   noindex = false,
-  schemaData,
   author
 } = Astro.props;
+
+let schemaData = Astro.props.schemaData;
 
 const charset = 'UTF-8';
 
@@ -50,6 +51,11 @@ if (!pageAuthor) {
 const canonicalURL = `${site.url}${Astro.url.pathname}`;
 
 const schemaTypes = ['CollectionPage', 'WebPage',  'Review']
+
+if(!schemaData){
+  schemaData = organizationSchema;
+}
+  
 
 if (schemaData && !schemaData?.['@id']) {
   schemaData['@id'] = `${canonicalURL}#${Array.isArray(schemaData['@type']) ? schemaData['@type'][0]?.toLowerCase() : schemaData['@type']?.toLowerCase() || 'webpage'}`;
