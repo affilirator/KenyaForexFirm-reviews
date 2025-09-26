@@ -33,7 +33,7 @@ const {
   type = 'website',
   image = "/best-forex-brokers-kenyaforexfirm.png",
   noindex = false,
-  schemaData,
+  schemaData = organizationSchema,
   author
 } = Astro.props;
 
@@ -108,7 +108,7 @@ const schemaTypes = 'CollectionPage, WebPage, WebSite, Organization, Review'
       <script is:inline type="application/ld+json" set:html={JSON.stringify(schemaData)} />
     )}
 
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    
     
     {/* Add author schema if not already included in schemaData */}
     {pageAuthor && !schemaData?.mainEntity?.['@type']?.includes('Person') 
@@ -122,7 +122,7 @@ const schemaTypes = 'CollectionPage, WebPage, WebSite, Organization, Review'
         "description": description,
         "image": {
           "@type": "ImageObject",
-          "url": `${site.url}/${image}`,
+          "url": `${site.url}${image}`,
           "width": 1024,
           "height": 1024
         },
@@ -141,7 +141,7 @@ const schemaTypes = 'CollectionPage, WebPage, WebSite, Organization, Review'
           "@id": canonicalURL,
           primaryImageOfPage: {
           "@type": "ImageObject",
-          "url": `${site.url}/${image}`,
+          "url": `${site.url}${image}`,
           "width": 1024,
           "height": 1024
         },

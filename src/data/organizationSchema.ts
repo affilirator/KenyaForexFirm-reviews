@@ -18,13 +18,21 @@ export const organizationSchema = {
           "contactType": "customer service",
           "email": site.address.email
         },
-        "sameAs": site.profiles.map(profile => {
+       /* "sameAs": site.profiles.map(profile => {
             if ('facebook' in profile) {
                 return profile.facebook;
             }
             if ('twitter' in profile) {
                 return profile.twitter;
             }
-            }).filter(Boolean)
+            }).filter(Boolean),
+            */
+            "sameAs": [
+          'https://kenyaforexfirm.com',
+          'https://www.facebook.com/kenyaforexfirm',
+          'https://twitter.com/kenyaforexfirm',
+          'https://www.instagram.com/kenyaforexfirm/',
+          'https://www.linkedin.com/company/kenyaforexfirm/'
+        ],
 
       };
