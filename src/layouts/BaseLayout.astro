@@ -114,7 +114,14 @@ const schemaTypes = ['CollectionPage', 'WebPage',  'Review']
       && (
         <script is:inline type="application/ld+json" set:html={JSON.stringify({
           ...schemaData,
-          "@id": `${canonicalURL}#${schemaData['@type']?.toLowerCase() || 'webpage'}`
+          "@id": `${canonicalURL}#${schemaData['@type']?.toLowerCase() || 'webpage'}`,
+          publisher: {
+            "@type": "Organization",
+            
+            "@id":`${site.url}/#organization`,
+            
+            
+          }
         })} />
       )
     }
