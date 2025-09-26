@@ -139,7 +139,7 @@ const schemaTypes = ['CollectionPage', 'WebPage',  'Review']
 
      
       
-      <script type="application/ld+json" set:html={JSON.stringify( !schemaTypes.some(type => schemaData?.['@type']?.includes(type)) ?
+      <script type="application/ld+json" set:html={JSON.stringify( !(Array.isArray(schemaData) ? schemaData.some(item => schemaTypes.includes(item['@type'])) : schemaTypes.includes(schemaData?.['@type'])) ?
         
         {
         
