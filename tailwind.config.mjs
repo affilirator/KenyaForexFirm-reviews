@@ -94,6 +94,8 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		}
   	}
+
   },
-  plugins: ['@tailwindcss/typography', require("tailwindcss-animate")],
+  
+  plugins: [require('@tailwindcss/typography'), require("tailwindcss-animate")],
 };
