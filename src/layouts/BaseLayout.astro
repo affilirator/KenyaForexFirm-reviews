@@ -33,7 +33,7 @@ const {
   type = 'website',
   image = "/best-forex-brokers-kenyaforexfirm.png",
   noindex = false,
-  schemaData = organizationSchema,
+  schemaData,
   author
 } = Astro.props;
 
@@ -49,7 +49,7 @@ if (!pageAuthor) {
 
 const canonicalURL = `${site.url}${Astro.url.pathname}`;
 
-const schemaTypes = ['CollectionPage', 'WebPage', 'WebSite', 'Organization', 'Review']
+const schemaTypes = ['CollectionPage', 'WebPage',  'Review']
 ---
 
 <!DOCTYPE html>
@@ -110,6 +110,20 @@ const schemaTypes = ['CollectionPage', 'WebPage', 'WebSite', 'Organization', 'Re
     )}
       */}
 
+      {schemaData && !schemaData?.['@id']
+      && (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify({
+          ...schemaData,
+          "@id": `${canonicalURL}#${schemaData['@type']?.toLowerCase() || 'webpage'}`
+        })} />
+      )
+    }
+      
+      { schemaData && !schemaData?.['@type'].includes('Article')
+     && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+      )}
+      {/** Organization schema is always included */}
      <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     
     {/* Add author schema if not already included in schemaData */}
