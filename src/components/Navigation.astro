@@ -81,8 +81,9 @@ const currentPath = Astro.url.pathname;
               )}
             </div>
           ))}
-          <ModeToggle client:load />
+          
         </div>
+
 
         <!-- CTA Button -->
         <div class="hidden md:block">
@@ -92,6 +93,7 @@ const currentPath = Astro.url.pathname;
           >
             Find Broker
           </a>
+          <ModeToggle client:load />
         </div>
 
         <!-- Mobile menu button -->
