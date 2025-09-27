@@ -13,9 +13,9 @@ import type { Author } from "~/types/author";
 
 import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 import { getDefaultAuthor } from "~/lib/author-service";
-import { fetchSiteConfig } from "~/lib/site-config";
-//import { fetchSiteConfig } from "@/lib/payload";
-const siteConfig = await fetchSiteConfig();
+
+import {site} from '~/data/site'
+const siteConfig = site;
 
 
 
