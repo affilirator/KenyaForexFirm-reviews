@@ -20,7 +20,7 @@ const siteConfig = site;
 
 
 
-export async function generateStaticPaths() {
+export async function getStaticPaths() {
   try {
     const res = await fetch('https://fx.mahinge.com/api/trading-sessions') 
     const data = await res.json()
