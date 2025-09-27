@@ -1,0 +1,122 @@
+---
+//import { Metadata } from 'next';
+//import a from 'next/a';
+//import { getPayload } from 'payload';
+//import config from '@payload-config';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Clock, TrendingUp, Globe } from 'lucide-react';
+import type { TradingSession } from '@/types/tradingSession';
+
+//const payload = await getPayload({ config });
+
+async function fetchTradingSessions(): Promise<TradingSession[]> {
+  try {
+    const res = await fetch('https://fx.mahinge.com/api/trading-sessions?sort=order') 
+    const data = await res.json()
+    return data.docs || [];
+  } catch (error) {
+    console.error('Failed to fetch trading sessions:', error);
+    return [];
+  }
+}
+
+
+  const sessions = await fetchTradingSessions();
+---
+    <div class="container mx-auto px-4 py-12">
+      <header class="text-center mb-12">
+        <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
+          Forex Trading Sessions in Kenya Time
+        </h1>
+        <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+          Master the timing of global forex markets from Kenya. Learn when each session opens and closes in East Africa Time (EAT) for optimal trading opportunities.
+        </p>
+      </header>
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2 mb-12">
+        {sessions.map((session) => (
+          <a key={session.id} href={`/forex-trading/sessions/${session.slug}/`}>
+            <Card className="h-full hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div class="flex items-center justify-between">
+                  <CardTitle className="font-display text-2xl">{session.name}</CardTitle>
+                  <Badge variant={
+                    session.volatility === 'very-high' ? 'destructive' :
+                    session.volatility === 'high' ? 'default' :
+                    session.volatility === 'medium' ? 'secondary' : 'outline'
+                  }>
+                    {session.volatility.replace('-', ' ')} volatility
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div class="flex items-center gap-2 text-sm">
+                  <Clock className="h-4 w-4" />
+                  <span>{session.kenyaOpenTime} - {session.kenyaCloseTime} EAT</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <Globe className="h-4 w-4" />
+                  <span>{session.timezone}</span>
+                </div>
+                {session.majorPairs && session.majorPairs.length > 0 && (
+                  <div class="flex flex-wrap gap-1">
+                    {session.majorPairs.slice(0, 3).map((pair, index) => (
+                      <Badge key={index} variant="outline" class="text-xs">
+                        {pair.pair}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </a>
+        ))}
+      </div>
+
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle className="font-display text-2xl flex items-center gap-2">
+            <TrendingUp className="h-6 w-6" />
+            Trading Sessions Overview
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="border-b">
+                  <th class="text-left p-3 font-semibold">Session</th>
+                  <th class="text-left p-3 font-semibold">Kenya Time (EAT)</th>
+                  <th class="text-left p-3 font-semibold">Local Time</th>
+                  <th class="text-left p-3 font-semibold">Volatility</th>
+                  <th class="text-left p-3 font-semibold">Best Pairs</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sessions.map((session) => (
+                  <tr key={session.id} class="border-b hover:bg-muted/50">
+                    <td class="p-3 font-medium">{session.name}</td>
+                    <td class="p-3">{session.kenyaOpenTime} - {session.kenyaCloseTime}</td>
+                    <td class="p-3">{session.localOpenTime} - {session.localCloseTime}</td>
+                    <td class="p-3">
+                      <Badge variant={
+                        session.volatility === 'very-high' ? 'destructive' :
+                        session.volatility === 'high' ? 'default' :
+                        session.volatility === 'medium' ? 'secondary' : 'outline'
+                      } className="text-xs">
+                        {session.volatility.replace('-', ' ')}
+                      </Badge>
+                    </td>
+                    <td class="p-3">
+                      {session.majorPairs?.slice(0, 2).map(pair => pair.pair).join(', ')}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  

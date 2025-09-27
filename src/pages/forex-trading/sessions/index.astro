@@ -1,0 +1,17 @@
+---
+import MainPage from "~/components/react/trading-sessions/MainPage.astro";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+
+export const metadata = {
+  title: 'Forex Trading Sessions in Kenya Time (EAT)',
+  description: 'Complete guide to forex trading sessions in Kenyan time. Learn when to trade major currency pairs for maximum profit in East Africa Time (EAT).',
+  openGraph: {
+    title: 'Forex Trading Sessions in Kenya Time',
+    description: 'Master forex trading sessions timing in Kenya. Optimize your trading strategy with our comprehensive session guide.',
+  },
+};
+
+---
+<BaseLayout title={metadata.title} description={metadata.description}>
+    <MainPage />
+</BaseLayout>
