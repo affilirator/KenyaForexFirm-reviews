@@ -10,8 +10,8 @@ interface AuthorBioProps {
   image?: string;
   bio: string;
   profileUrl?: string;
-  socialas?: {
-    aedin?: string;
+  socialLinks?: {
+    linkedin?: string;
     twitter?: string;
   };
 }
@@ -21,7 +21,7 @@ const {
   image, 
   bio, 
   profileUrl,
-  socialas 
+  socialLinks 
 } = Astro.props
 
 ---
@@ -51,17 +51,17 @@ const {
                 </Button>
               )}
               
-              {socialas?.aedin && (
+              {socialLinks?.linkedin && (
                 <Button variant="ghost" size="sm" asChild>
-                  <a href={socialas.aedin} target="_blank" rel="noopener noreferrer">
-                    <aedin className="h-4 w-4" />
+                  <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                    <Linkedin className="h-4 w-4" />
                   </a>
                 </Button>
               )}
               
-              {socialas?.twitter && (
+              {socialLinks?.twitter && (
                 <Button variant="ghost" size="sm" asChild>
-                  <a href={socialas.twitter} target="_blank" rel="noopener noreferrer">
+                  <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
                     <Twitter className="h-4 w-4" />
                   </a>
                 </Button>

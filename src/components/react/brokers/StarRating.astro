@@ -21,13 +21,13 @@ const validRating = typeof rating === 'number' && !isNaN(rating) && rating >= 0 
 
 <div class={cn("flex items-center gap-0.5", className)} aria-label={`Rating: ${clampedRating} out of ${maxRating} stars`}>
   {Array.from({ length: fullStars }, (_, i) => (
-    <Star className={cn("h-4 w-4 text-accent fill-current", starClassName)} />
+    <Star className={cn("h-4 w-4 text-orange-600 fill-current", starClassName)} />
   ))}
   {halfStar === 1 && (
-    <StarHalf className={cn("h-4 w-4 text-accent fill-current", starClassName)} />
+    <StarHalf className={cn("h-4 w-4 text-orange-500/60 fill-current", starClassName)} />
   )}
   {Array.from({ length: emptyStars }, (_, i) => (
-    <Star className={cn("h-4 w-4 text-accent/30 fill-current", starClassName)} />
+    <Star className={cn("h-4 w-4 text-orange-500/30 fill-current", starClassName)} />
   ))}
 </div>
   
