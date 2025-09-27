@@ -27,7 +27,7 @@ import {
   } from "@/components/ui/table"
 import RichText from '@/components/common/RichText';
 import BaseLayout from "~/layouts/BaseLayout.astro";
-import ArticleByline from "~/components/article/ArticleByline.astro";
+
 
 export interface Broker {
   id: string;
@@ -137,13 +137,16 @@ const fullYear = new Date().getFullYear()
                 </div>
             </header>
             
-            <ArticleByline 
-              authorName="Patrick Mahinge"
-              authorImage="/images/Patrick-Mahinge.webp"
-              publishedDate={broker.createdAt || newDate}
-              lastModified={newDate}
-              readTime="8"
-            />
+            <div class="flex items-center gap-4 py-4 border-b border-neutral-700/50">
+              <img src="/images/Patrick-Mahinge.webp" alt="Patrick Mahinge" class="h-12 w-12 rounded-full" />
+              <div class="flex-1">
+                <div class="flex flex-wrap items-center gap-4 text-sm text-neutral-300">
+                  <span class="font-medium text-white">By Patrick Mahinge</span>
+                  <span>{new Date(broker.createdAt || newDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                  <span>8 min read</span>
+                </div>
+              </div>
+            </div>
             
             <Card className="bg-primary/5 border-primary/20 mt-6">
                 <CardHeader>
@@ -228,7 +231,7 @@ const fullYear = new Date().getFullYear()
               </div>
             )}
             
-            <RichText content={broker.fullReview} />
+            <RichText content={broker.fullReview} client:load />
 
             <AuthorBio 
               name="Patrick Mahinge"
