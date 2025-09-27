@@ -22,12 +22,16 @@ const siteConfig = site;
 
 export async function getStaticPaths() {
   try {
-    const res = await fetch('https://fx.mahinge.com/api/trading-sessions') 
+    const res = await fetch('https://fx.mahinge.com/api/trading-sessions', {
+      headers: {
+        //'Authorization': 'Bearer ' + process.env.API_TOKEN || '',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    }) 
     const data = await res.json()
     
-    return data.docs
-      .filter((session) => session.slug && typeof session.slug === 'string')
-      .map((session) => (
+    return data.docs.map((session) => (
         { 
             params: {slug: session.slug as string},
             props: {session} 

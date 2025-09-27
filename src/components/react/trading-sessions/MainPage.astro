@@ -12,7 +12,12 @@ import type { TradingSession } from '@/types/tradingSession';
 
 
 
-    const res = await fetch('https://fx.mahinge.com/api/trading-sessions?sort=order') 
+    const res = await fetch('https://fx.mahinge.com/api/trading-sessions?sort=order', {
+      headers: {
+        'Authorization': 'Bearer ' + import.meta.env.API_TOKEN || '',
+        'Content-Type': 'application/json'
+      }
+    }) 
     const data = await res.json()
     
     // Debug: Log the API response to debug
@@ -23,7 +28,59 @@ import type { TradingSession } from '@/types/tradingSession';
         console.error('API Error:', data.errors)
     }
     
-    const sessions = data.docs || [];
+    // Fallback mock data if API fails
+    const mockSessions = [
+      {
+        id: '1',
+        name: 'Sydney Session',
+        slug: 'sydney',
+        kenyaOpenTime: '12:00 AM',
+        kenyaCloseTime: '9:00 AM',
+        localOpenTime: '10:00 AM',
+        localCloseTime: '7:00 PM',
+        timezone: 'AEDT (UTC+11)',
+        volatility: 'medium',
+        majorPairs: [{ pair: 'AUD/USD' }, { pair: 'NZD/USD' }]
+      },
+      {
+        id: '2',
+        name: 'Tokyo Session',
+        slug: 'tokyo',
+        kenyaOpenTime: '2:00 AM',
+        kenyaCloseTime: '11:00 AM',
+        localOpenTime: '9:00 AM',
+        localCloseTime: '6:00 PM',
+        timezone: 'JST (UTC+9)',
+        volatility: 'high',
+        majorPairs: [{ pair: 'USD/JPY' }, { pair: 'EUR/JPY' }]
+      },
+      {
+        id: '3',
+        name: 'London Session',
+        slug: 'london',
+        kenyaOpenTime: '10:00 AM',
+        kenyaCloseTime: '7:00 PM',
+        localOpenTime: '8:00 AM',
+        localCloseTime: '5:00 PM',
+        timezone: 'GMT (UTC+0)',
+        volatility: 'very-high',
+        majorPairs: [{ pair: 'GBP/USD' }, { pair: 'EUR/USD' }]
+      },
+      {
+        id: '4',
+        name: 'New York Session',
+        slug: 'new-york',
+        kenyaOpenTime: '3:00 PM',
+        kenyaCloseTime: '12:00 AM',
+        localOpenTime: '8:00 AM',
+        localCloseTime: '5:00 PM',
+        timezone: 'EST (UTC-5)',
+        volatility: 'very-high',
+        majorPairs: [{ pair: 'USD/CAD' }, { pair: 'EUR/USD' }]
+      }
+    ];
+    
+    const sessions = data.docs || mockSessions;
 ---
     <div class="container mx-auto px-4 py-12">
       <header class="text-center mb-12">
