@@ -11,7 +11,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Button, } from '@/components/ui/button';
 import { Check, X, ShieldCheck, ArrowRight } from 'lucide-react';
 import StarRating from '@/components/react/brokers/StarRating.astro';
 import type { BrokerProps } from '@/types';
@@ -41,7 +41,7 @@ export interface Broker {
   regulation: string;
   maxLeverage: string;
   yearFounded: number;
-  affiliatea: string;
+  affiliateLink: string;
   reviewDate?: string | null;
   rating: {
     overall: number;
@@ -154,11 +154,13 @@ const fullYear = new Date().getFullYear()
                 </CardHeader>
                 <CardContent>
                      <p class="mb-6">{broker.verdict}</p>
-                      <Button asChild size="lg">
-                        <a href={broker.affiliatea} target="_blank" rel="noopener noreferrer nofollow">
+                     <span class='block'>
+                      <Button asChild size="lg" >
+                        <a href={broker.affiliateLink} target="_blank" rel="noopener noreferrer nofollow">
                             Visit {broker.name} <ArrowRight className="ml-2"/>
                         </a>
                     </Button>
+                    </span>
                 </CardContent>
             </Card>
 
@@ -292,7 +294,7 @@ const fullYear = new Date().getFullYear()
                 </Card>
                 <div class="mt-6 lg:mt-8">
                     <Button asChild className="w-full text-sm md:text-base" size="lg">
-                         <a href={broker.affiliatea} target="_blank" rel="noopener noreferrer nofollow" class="break-words text-center">
+                         <a href={broker.affiliateLink} target="_blank" rel="noopener noreferrer nofollow" class="break-words text-center">
                             Open Account with {broker.name}
                         </a>
                     </Button>
