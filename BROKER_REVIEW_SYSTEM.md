@@ -1,5 +1,7 @@
 # Modular Broker Review System
 
+most of this is deprcated
+
 This document outlines the modular Astro component system for creating SEO-optimized broker review pages with EEAT compliance and proper schema markup.
 
 ## Architecture Overview
