@@ -8,7 +8,7 @@ This document outlines the modular Astro component system for creating SEO-optim
 
 The system consists of modular components that can be combined to create comprehensive broker review pages. All data is fetched from PayloadCMS API.
 
-## Core Components
+## Core Components - frontend
 
 ### 1. BrokerHeader.astro
 - Displays broker logo, name, rating, and key metrics
