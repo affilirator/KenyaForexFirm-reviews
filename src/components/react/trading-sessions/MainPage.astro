@@ -15,7 +15,7 @@ import type { TradingSession } from '@/types/tradingSession';
     const res = await fetch('https://fx.mahinge.com/api/trading-sessions?sort=order') 
     const data = await res.json()
     
-    // Debug: Log the API response
+    // Debug: Log the API response to debug
     console.log('API Response:', data)
     
     // Handle API errors
