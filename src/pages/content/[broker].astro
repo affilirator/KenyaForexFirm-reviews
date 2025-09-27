@@ -155,12 +155,12 @@ const fullYear = new Date().getFullYear()
                 <CardContent>
                      <p class="mb-6">{broker.verdict}</p>
                      
-                      <Button asChild size="lg" variant={'link'} className="bg-accent text-amber-50" >
-                      <span class='inline-flex flex-row items-center gap-2 md:flex-row'>
+                      <Button asChild size="lg" variant='secondary' className="w-full bg-gradient-to-r from-neutral-600 to-primary-600/50 hover:from-primary-500 hover:to-accent-500 font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center block text-amber-50" >
+                      
                          <a href={broker.affiliateLink} target="_blank" rel="noopener noreferrer nofollow" class="inline-flex">
                             Visit {broker.name} 
-                            <ArrowRight className="ml-2"/>
-                        </a> </span>
+                            <ArrowRight className="ml-2 inline-flex"/>
+                        </a> 
                     </Button>
                     
                 </CardContent>
