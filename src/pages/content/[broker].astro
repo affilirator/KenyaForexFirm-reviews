@@ -154,10 +154,11 @@ const fullYear = new Date().getFullYear()
                 </CardHeader>
                 <CardContent>
                      <p class="mb-6">{broker.verdict}</p>
-                     <span class='block'>
+                     <span class='flex flex-wrap items-center gap-2 md:flex-row'>
                       <Button asChild size="lg" >
                         <a href={broker.affiliateLink} target="_blank" rel="noopener noreferrer nofollow">
-                            Visit {broker.name} <ArrowRight className="ml-2"/>
+                            Visit {broker.name} 
+                            <ArrowRight className="ml-2"/>
                         </a>
                     </Button>
                     </span>
