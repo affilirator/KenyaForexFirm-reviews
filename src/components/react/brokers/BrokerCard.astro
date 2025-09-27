@@ -21,13 +21,13 @@ const { broker } = Astro.props
         <div class="flex items-center gap-4">
             <img src={logoUrl} alt={`${broker.brokerName} Logo`} width={56} height={56} class="rounded-lg border p-1" />
             <div>
-                <CardTitle className="font-headline text-2xl">
-                    <a href={`/best-forex-brokers/${broker.slug}`} class="hover:text-primary transition-colors">
+                <CardTitle className="font-display text-2xl">
+                    <a href={`/review/best-forex-brokers/${broker.slug}/`} class="hover:text-primary transition-colors">
                         {broker.brokerName}
                     </a>
                 </CardTitle>
                 <div class="flex items-center gap-2 mt-1">
-                   {/*  <StarRating rating={broker.brokerRating} />*/}
+                    <StarRating rating={broker.brokerRating} />
                     <span class="text-sm font-bold text-muted-foreground">{broker.brokerRating.toFixed(1)}</span>
                 </div>
             </div>
@@ -46,12 +46,12 @@ const { broker } = Astro.props
             </div>
         </div>
       </CardContent>
-      <CardFooter className="p-6 pt-0 flex gap-2">
+      <CardFooter className="cta-btns p-6 pt-0 flex gap-2">
         <Button asChild className="flex-1">
           <a href={`https://kenyaforexfirm.com/goto/${broker.slug}/`} target="_blank" rel="noopener noreferrer nofollow">Visit Broker</a>
         </Button>
         <Button asChild variant="outline" className="flex-1">
-          <a href={`/best-forex-brokers/${broker.slug}`}>
+          <a href={`/review/best-forex-brokers/${broker.slug}/`} class="btn-primary">
             Read Review
           </a>
         </Button>
