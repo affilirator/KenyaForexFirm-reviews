@@ -1,6 +1,7 @@
 ---
 
 import { Image } from "astro:assets";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,6 +15,8 @@ import { Button } from '@/components/ui/button';
 import { Check, X, ShieldCheck, ArrowRight } from 'lucide-react';
 import StarRating from '@/components/react/brokers/StarRating.astro';
 import type { BrokerProps } from '@/types';
+import ReviewSectionRenderer from '~/components/review-sections/ReviewSectionRenderer'
+import AuthorBio from "~/components/article/AuthorBio.astro";
 import {
     Table,
     TableBody,
@@ -24,6 +27,7 @@ import {
   } from "@/components/ui/table"
 import RichText from '@/components/common/RichText';
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import ArticleByline from "~/components/article/ArticleByline.astro";
 
 export interface Broker {
   id: string;
@@ -37,7 +41,7 @@ export interface Broker {
   regulation: string;
   maxLeverage: string;
   yearFounded: number;
-  affiliateLink: string;
+  affiliatea: string;
   reviewDate?: string | null;
   rating: {
     overall: number;
@@ -100,13 +104,15 @@ export async function getStaticPaths() {
 const { broker } = Astro.props as { broker: Broker };
 const brokerLogoUrl = broker.logo.url;
 const jsonLd = {}; // Add your JSON-LD schema here
+const newDate = new Date().toISOString();
+const fullYear = new Date().getFullYear()
 
 ---
 <BaseLayout title={broker.name} description={broker.summary} >
 
- <div class="bg-background ">
+<div class="bg-background">
        
-      <div class="container mx-auto px-4 md:px-6 py-12">
+      <div class="container mx-auto px-4 md:px-6 py-6 md:py-12">
         <Breadcrumb className="mb-8">
           <BreadcrumbList>
             <BreadcrumbItem><BreadcrumbLink asChild><a href="/">Home</a></BreadcrumbLink></BreadcrumbItem>
@@ -117,13 +123,13 @@ const jsonLd = {}; // Add your JSON-LD schema here
           </BreadcrumbList>
         </Breadcrumb>
         
-        <main class="grid lg:grid-cols-12 gap-12">
+        <main class="grid lg:grid-cols-12 gap-6 lg:gap-12">
           <article class="lg:col-span-8">
-            <header class="flex items-start gap-6 mb-8">
-                <img src={broker.logo.url} alt={`${broker.name} Logo`} width={80} height={80} class="rounded-lg shadow-md border" />
-                <div>
-                    <h1 class="font-display text-4xl font-bold">{broker.name} Review</h1>
-                    <p class="mt-2 text-lg text-muted-foreground">{broker.summary}</p>
+            <header class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-6 md:mb-8">
+                <Image src={broker.logo.url} alt={`${broker.name} review Logo`} width={120} height={120} class="sm:w-[160px] sm:h-[160px] rounded-lg shadow-md border flex-shrink-0" />
+                <div class="min-w-0 flex-1">
+                    <h1 class="font-headline text-2xl sm:text-3xl lg:text-4xl font-bold break-words">{broker.name} Review with Pros and Cons ({fullYear} Edition)</h1>
+                    <p class="mt-2 text-base sm:text-lg text-muted-foreground">{broker.summary}</p>
                     <div class="mt-3 flex items-center gap-2">
                         <StarRating rating={broker.rating.overall} />
                         <span class="font-bold text-muted-foreground">({broker.rating.overall.toFixed(1)})</span>
@@ -131,111 +137,159 @@ const jsonLd = {}; // Add your JSON-LD schema here
                 </div>
             </header>
             
-            <Card className="bg-primary/5 border-primary/20">
+            <ArticleByline 
+              authorName="Patrick Mahinge"
+              authorImage="/images/Patrick-Mahinge.webp"
+              publishedDate={broker.createdAt || newDate}
+              lastModified={newDate}
+              readTime="8"
+            />
+            
+            <Card className="bg-primary/5 border-primary/20 mt-6">
                 <CardHeader>
-                    <CardTitle className="font-display">The Verdict</CardTitle>
+                    <CardTitle className="font-headline">The Verdict</CardTitle>
                 </CardHeader>
                 <CardContent>
                      <p class="mb-6">{broker.verdict}</p>
                       <Button asChild size="lg">
-                        <a href={broker.affiliateLink} target="_blank" rel="noopener noreferrer nofollow">
+                        <a href={broker.affiliatea} target="_blank" rel="noopener noreferrer nofollow">
                             Visit {broker.name} <ArrowRight className="ml-2"/>
                         </a>
                     </Button>
                 </CardContent>
             </Card>
 
-            <section id="pros-cons" class="my-10">
-                <div class="grid md:grid-cols-2 gap-8">
+            <section id="pros-cons" class="my-8 md:my-10">
+                <div class="grid md:grid-cols-2 gap-6 md:gap-8">
                     <div>
-                        <h3 class="font-display text-2xl font-bold flex items-center gap-2 mb-4"><Check className="h-8 w-8 text-green-500"/> Pros</h3>
+                        <h3 class="font-headline text-xl md:text-2xl font-bold flex items-center gap-2 mb-4"><Check className="h-6 w-6 md:h-8 md:w-8 text-green-500 flex-shrink-0"/> Pros</h3>
                         <ul class="space-y-2 list-inside">
-                            {broker.pros?.map(pro => <li key={pro.id} class="flex items-start gap-2"><Check className="h-5 w-5 text-green-500 mt-1 shrink-0"/><span>{pro.pro}</span></li>)}
+                            {broker.pros?.map(pro => <li key={pro.id} class="flex items-start gap-2"><Check className="h-4 w-4 md:h-5 md:w-5 text-green-500 mt-1 shrink-0"/><span class="text-sm md:text-base break-words">{pro.pro}</span></li>)}
                         </ul>
                     </div>
                      <div>
-                        <h3 class="font-display text-2xl font-bold flex items-center gap-2 mb-4"><X className="h-8 w-8 text-red-500"/> Cons</h3>
+                        <h3 class="font-headline text-xl md:text-2xl font-bold flex items-center gap-2 mb-4"><X className="h-6 w-6 md:h-8 md:w-8 text-red-500 flex-shrink-0"/> Cons</h3>
                         <ul class="space-y-2 list-inside">
-                            {broker.cons?.map(con => <li key={con.id} class="flex items-start gap-2"><X className="h-5 w-5 text-red-500 mt-1 shrink-0"/><span>{con.con}</span></li>)}
+                            {broker.cons?.map(con => <li key={con.id} class="flex items-start gap-2"><X className="h-4 w-4 md:h-5 md:w-5 text-red-500 mt-1 shrink-0"/><span class="text-sm md:text-base break-words">{con.con}</span></li>)}
                         </ul>
                     </div>
                 </div>
             </section>
             
-            <section id="fees" class="my-10">
-                 <h2 class="font-display text-3xl font-bold mb-4">Fees & Spreads</h2>
-                 <p class="text-muted-foreground mb-6">Understanding the cost of trading is crucial. Here's a breakdown of {broker.name}'s fee structure.</p>
-                 <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Account</TableHead>
-                            <TableHead>Avg. Spread (EUR/USD)</TableHead>
-                            <TableHead>Commission</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {broker.fees?.map(fee => (
-                            <TableRow key={fee.id}>
-                                <TableCell className="font-medium">{fee.accountType}</TableCell>
-                                <TableCell>{fee.avgSpread}</TableCell>
-                                <TableCell>{fee.commission}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                 </Table>
+            <section id="fees" class="my-8 md:my-10">
+               <h2 class="font-headline text-2xl md:text-3xl font-bold mb-4 break-words">{broker.name} Fees & Spreads</h2>
+                 <p class="text-muted-foreground mb-6 text-sm md:text-base">Understanding the cost structure is crucial for profitable trading.</p>
+                 <div class="overflow-x-auto">
+                   <Table>
+                      <TableHeader>
+                          <TableRow>
+                              <TableHead className="text-xs md:text-sm whitespace-nowrap">Account</TableHead>
+                              <TableHead className="text-xs md:text-sm whitespace-nowrap">Avg. Spread (EUR/USD)</TableHead>
+                              <TableHead className="text-xs md:text-sm whitespace-nowrap">Commission</TableHead>
+                          </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                          {broker.fees?.map(fee => (
+                              <TableRow key={fee.id}>
+                                  <TableCell className="font-medium text-xs md:text-sm break-words">{fee.accountType}</TableCell>
+                                  <TableCell className="text-xs md:text-sm">{fee.avgSpread}</TableCell>
+                                  <TableCell className="text-xs md:text-sm break-words">{fee.commission}</TableCell>
+                              </TableRow>
+                          ))}
+                      </TableBody>
+                   </Table>
+                 </div>
             </section>
             
+            {/* Render Review Sections */}
+            {broker.reviewSections && broker.reviewSections.length > 0 && (
+              <div class="my-8 md:my-10">
+                {broker.reviewSections.map((section: any, index: number) => {
+                  // Map section types to broker ratings
+                  const getRatingForSection = (blockType: string) => {
+                    switch (blockType) {
+                      case 'safety-regulation': return broker.rating?.trust;
+                      case 'trading-conditions': return broker.rating?.fees;
+                      case 'platforms-tools': return broker.rating?.platforms;
+                      case 'customer-service': return broker.rating?.support;
+                      default: return undefined;
+                    }
+                  };
+                  
+                  return (
+                    <ReviewSectionRenderer
+                      key={index}
+                      blockType={section.blockType}
+                      rating={getRatingForSection(section.blockType)}
+                      {...section}
+                    />
+                  );
+                })}
+              </div>
+            )}
+            
             <RichText content={broker.fullReview} />
+
+            <AuthorBio 
+              name="Patrick Mahinge"
+              image="/images/Patrick-Mahinge.webp"
+              bio="Patrick Mahinge is the founder of MahingeFX and a seasoned forex analyst with over 10 years of experience in financial markets. He specializes in broker analysis and trading education for African markets."
+              profileUrl="/about/patrick-mahinge"
+              socialas={{
+                aedin: "https://aedin.com/in/patrick-mahinge",
+                twitter: "https://twitter.com/patrickmahinge"
+              }}
+            />
 
             {/* TODO: Add Comments Section */}
 
           </article>
-          <aside class="lg:col-span-4 space-y-8">
-              <div class="sticky top-24">
+          <aside class="lg:col-span-4 space-y-6 lg:space-y-8">
+              <div class="lg:sticky lg:top-24">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Key Information</CardTitle>
+                        <CardTitle className="text-lg md:text-xl">Key Information</CardTitle>
                     </CardHeader>
                     <CardContent className="text-sm space-y-4">
-                       <div class="flex justify-between">
-                           <span class="text-muted-foreground">Min. Deposit:</span>
-                           <span class="font-semibold">${broker.minDeposit}</span>
+                       <div class="flex justify-between items-start">
+                           <span class="text-muted-foreground flex-shrink-0">Min. Deposit:</span>
+                           <span class="font-semibold text-right">${broker.minDeposit}</span>
                        </div>
-                        <div class="flex justify-between">
-                           <span class="text-muted-foreground">Regulation:</span>
-                           <span class="font-semibold">{broker.regulation}</span>
+                        <div class="flex justify-between items-start">
+                           <span class="text-muted-foreground flex-shrink-0">Regulation:</span>
+                           <span class="font-semibold text-right break-words">{broker.regulation}</span>
                        </div>
-                        <div class="flex justify-between">
-                           <span class="text-muted-foreground">Max. Leverage:</span>
-                           <span class="font-semibold">{broker.maxLeverage}</span>
+                        <div class="flex justify-between items-start">
+                           <span class="text-muted-foreground flex-shrink-0">Max. Leverage:</span>
+                           <span class="font-semibold text-right">{broker.maxLeverage}</span>
                        </div>
-                        <div class="flex justify-between">
-                           <span class="text-muted-foreground">Year Founded:</span>
-                           <span class="font-semibold">{broker.yearFounded}</span>
+                        <div class="flex justify-between items-start">
+                           <span class="text-muted-foreground flex-shrink-0">Year Founded:</span>
+                           <span class="font-semibold text-right">{broker.yearFounded}</span>
                        </div>
                     </CardContent>
                 </Card>
-                 <Card className="mt-8">
+                 <Card className="mt-6 lg:mt-8">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2"><ShieldCheck className="h-6 w-6 text-primary"/>Is {broker.name} Safe?</CardTitle>
-                        <CardDescription>Our trust and safety analysis.</CardDescription>
+                        <CardTitle className="flex items-center gap-2 text-lg md:text-xl break-words"><ShieldCheck className="h-5 w-5 md:h-6 md:w-6 text-primary flex-shrink-0"/>Is {broker.name} Legit?</CardTitle>
+                        <CardDescription className="text-sm">Our trust and safety analysis.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div class="flex flex-col">
-                            <span class="font-semibold">Trust Score</span>
+                            <span class="font-semibold text-sm md:text-base">Trust Score</span>
                              <div class="flex items-center gap-2">
                                 <StarRating rating={broker.rating.trust} />
                                 <span class="font-bold text-sm">({broker.rating.trust.toFixed(1)}/5.0)</span>
                             </div>
                         </div>
-                        <p class="text-sm text-muted-foreground">
+                        <p class="text-sm text-muted-foreground break-words">
                             {broker.name} is regulated by top-tier authorities like the {broker.regulation}, ensuring a high level of client fund protection and operational transparency.
                         </p>
                     </CardContent>
                 </Card>
-                <div class="mt-8">
-                    <Button asChild className="w-full" size="lg">
-                         <a href={broker.affiliateLink} target="_blank" rel="noopener noreferrer nofollow">
+                <div class="mt-6 lg:mt-8">
+                    <Button asChild className="w-full text-sm md:text-base" size="lg">
+                         <a href={broker.affiliatea} target="_blank" rel="noopener noreferrer nofollow" class="break-words text-center">
                             Open Account with {broker.name}
                         </a>
                     </Button>
