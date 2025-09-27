@@ -10,11 +10,45 @@ import type { TradingSession } from '@/types/tradingSession';
 
 //const payload = await getPayload({ config });
 
+const apiUrl = 'https://fx.mahinge.com';
+
+export async function fetchSessions() {
+    try {
+        const response = await fetch(`${apiUrl}/api/trading-sessions?limit=100&sort=createdAt`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (!data || typeof data !== 'object' || !Array.isArray(data.docs)) {
+            throw new Error('Invalid data structure received');
+        }
+
+        return data.docs;
+
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error('Error fetching forex regulators:', error.message);
+        } else {
+            console.error('An unexpected error occurred:', error);
+        }
+        // Return an empty array as a fallback value in case of an error
+        return [];
+    }
+}
+
 
 
     const res = await fetch('https://fx.mahinge.com/api/trading-sessions?sort=order', {
       headers: {
-        'Authorization': 'Bearer ' + import.meta.env.API_TOKEN || '',
+        //'Authorization': 'Bearer ' + import.meta.env.API_TOKEN || '',
         'Content-Type': 'application/json'
       }
     }) 
@@ -80,7 +114,7 @@ import type { TradingSession } from '@/types/tradingSession';
       }
     ];
     
-    const sessions = data.docs || mockSessions;
+    const sessions = await fetchSessions() || data.docs || mockSessions;
 ---
     <div class="container mx-auto px-4 py-12">
       <header class="text-center mb-12">
@@ -94,7 +128,7 @@ import type { TradingSession } from '@/types/tradingSession';
 
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2 mb-12">
         {sessions.map((session) => (
-          <a key={session.id} href={`/forex-trading/sessions/${session.slug}/`}>
+          <a href={`/forex-trading/sessions/${session.slug}/`}>
             <Card className="h-full hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div class="flex items-center justify-between">
@@ -120,7 +154,7 @@ import type { TradingSession } from '@/types/tradingSession';
                 {session.majorPairs && session.majorPairs.length > 0 && (
                   <div class="flex flex-wrap gap-1">
                     {session.majorPairs.slice(0, 3).map((pair, index) => (
-                      <Badge key={index} variant="outline" class="text-xs">
+                      <Badge variant="outline" class="text-xs">
                         {pair.pair}
                       </Badge>
                     ))}
@@ -153,7 +187,7 @@ import type { TradingSession } from '@/types/tradingSession';
               </thead>
               <tbody>
                 {sessions.map((session) => (
-                  <tr key={session.id} class="border-b hover:bg-muted/50">
+                  <tr class="border-b hover:bg-muted/50">
                     <td class="p-3 font-medium">{session.name}</td>
                     <td class="p-3">{session.kenyaOpenTime} - {session.kenyaCloseTime}</td>
                     <td class="p-3">{session.localOpenTime} - {session.localCloseTime}</td>
