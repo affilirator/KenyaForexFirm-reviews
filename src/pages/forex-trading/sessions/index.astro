@@ -115,20 +115,23 @@ export async function fetchSessions() {
     ];
     
     const sessions = await fetchSessions() || data.docs || mockSessions;
+    const title = 'Forex Trading Sessions in Kenyan Time'
+    const description = 'Master the timing of global forex markets from Kenya. Learn when each session opens and closes in East Africa Time (EAT) for optimal trading opportunities.'
+    const modDate = new Date().toISOString()
 ---
-<BaseLayout title="forex trading sessions in Kenyan Time" description="Sessions">
+<BaseLayout title={title} description={description} modDate={modDate}>
     <div class="container mx-auto px-4 py-24">
       <header class="text-center mb-12">
         <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
           Forex Trading Sessions in Kenya Time
         </h1>
-        <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <p class="text-xl text-muted-foreground dark:invert max-w-3xl mx-auto">
           Master the timing of global forex markets from Kenya. Learn when each session opens and closes in East Africa Time (EAT) for optimal trading opportunities.
         </p>
       </header>
 
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2 mb-12">
-        {sessions.map((session) => (
+        {sessions.map((session: TradingSession) => (
           <a href={`/forex-trading/sessions/${session.slug}/`}>
             <Card className="h-full hover:shadow-lg transition-shadow">
               <CardHeader>
@@ -155,7 +158,7 @@ export async function fetchSessions() {
                 {session.majorPairs && session.majorPairs.length > 0 && (
                   <div class="flex flex-wrap gap-1">
                     {session.majorPairs.slice(0, 3).map((pair, index) => (
-                      <Badge variant="outline" class="text-xs">
+                      <Badge variant="outline" className="text-xs">
                         {pair.pair}
                       </Badge>
                     ))}
@@ -187,7 +190,7 @@ export async function fetchSessions() {
                 </tr>
               </thead>
               <tbody>
-                {sessions.map((session) => (
+                {sessions.map((session: TradingSession) => (
                   <tr class="border-b hover:bg-muted/50">
                     <td class="p-3 font-medium">{session.name}</td>
                     <td class="p-3">{session.kenyaOpenTime} - {session.kenyaCloseTime}</td>

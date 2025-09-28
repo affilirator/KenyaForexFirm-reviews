@@ -17,8 +17,10 @@ import { getDefaultAuthor } from "~/lib/author-service";
 import {site} from '~/data/site'
 const siteConfig = site;
 
-
-
+interface Props {
+  session: TradingSession;
+  author?: Author;
+}
 
 export async function getStaticPaths() {
   try {
@@ -31,7 +33,7 @@ export async function getStaticPaths() {
     }) 
     const data = await res.json()
     
-    return data.docs.map((session) => (
+    return data.docs.map((session: TradingSession) => (
         { 
             params: {slug: session.slug as string},
             props: {session} 
@@ -44,7 +46,7 @@ export async function getStaticPaths() {
   }
 }
 
-const { session, author } = Astro.props
+const { session, author }: Props = Astro.props
 
 // Get default author if none is provided
 let pageAuthor: Author | undefined = author;
@@ -55,7 +57,7 @@ if (!pageAuthor) {
 const currentDate = new Date();
     const authorName = author?.name || 'MahingeFX Team';
     const authorImage = "https://fx.mahinge.com/images/Patrick-Mahinge.webp"; // Placeholder
-    const sessionImage = typeof session.image === 'object' && session.image?.url ? session.image?.url : '/images/default-blog.png';
+    const sessionImage = session.image || '/images/default-blog.png';
 
 const jsonLd = {
     '@context': 'https://schema.org',
@@ -92,15 +94,18 @@ const jsonLd = {
     datePublished: session.createdAt ? new Date(session.createdAt).toISOString() : new Date().toISOString(),
     dateModified: new Date().toISOString(),
   };
+
+  const title = `${session.name} Trading Session in Kenyan Time`
+  const description = `Complete guide to ${session.name} forex trading session in Kenyan time. Learn optimal trading strategies, volatility patterns, and best currency pairs.`
 ---
-<BaseLayout title="" description=""
+<BaseLayout title={title} description={description}
   schemaData={jsonLd}
   author={author}
 >
 <div class="container font-sans mx-auto px-4 py-12">
       <div class="mb-8">
         <Button variant="ghost" asChild className="mb-4">
-          <a href="/forex-trading-sessions">
+          <a href="/forex-trading/sessions/">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Trading Sessions
           </a>
@@ -202,7 +207,7 @@ const jsonLd = {
                     </thead>
                     <tbody>
                       {session.majorPairs.map((pair, index) => (
-                        <tr key={index} className="border-b">
+                        <tr class="border-b">
                           <td class="py-2 font-medium">{pair.pair}</td>
                           <td class="py-2">{pair.avgSpread} pips</td>
                         </tr>
@@ -222,7 +227,7 @@ const jsonLd = {
               <CardContent>
                 <ul class="space-y-2">
                   {session.characteristics.map((char, index) => (
-                    <li key={index} className="flex items-start gap-2">
+                    <li class="flex items-start gap-2">
                       <span class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
                       <span class="text-sm">{char.characteristic}</span>
                     </li>
@@ -240,7 +245,7 @@ const jsonLd = {
               <CardContent>
                 <div class="space-y-2">
                   {session.bestFor.map((strategy, index) => (
-                    <Badge key={index} variant="secondary" className="mr-2 mb-2">
+                    <Badge variant="secondary" className="mr-2 mb-2">
                       {strategy.strategy}
                     </Badge>
                   ))}
