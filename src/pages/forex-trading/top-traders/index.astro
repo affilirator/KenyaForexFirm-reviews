@@ -94,7 +94,7 @@ const data = {
   }
 }
 */
-
+/*
 export const metadata = {
   title: `Best Forex Traders in Kenya ${new Date().getFullYear()} | Profiles & Strategies`,
   description: 'Meet Kenya\'s top forex traders: Bios, achievements, and broker insights from Patrick Mahinge.',
@@ -135,12 +135,15 @@ export const metadata = {
 const metaKeywords = metadata.keywords.map(
     (keyword) => keyword.trim()
 )
-
+*/
+const title =  `Best Forex Traders in Kenya ${new Date().getFullYear()} | Profiles & Strategies`
+  const description =  'Meet Kenya\'s top forex traders: Bios, achievements, and broker insights from Patrick Mahinge.'
+  const keywords = ['best forex traders in Kenya', 'top forex traders Kenya', 'forex trading experts Kenya', 'Kenya forex trader profiles', 'successful forex traders Kenya', 'forex trading strategies Kenya', 'Patrick Mahinge forex traders', 'Kenya forex market leaders']
 ---
-<BaseLayout title={metadata.title} 
-description={metadata.description}
+<BaseLayout title={title}
+description={description}
 
-keywords={metadata.keywords.join(',')}
+keywords={keywords.join(',')}
 >
 
     <div class="max-w-7xl mx-auto px-4 py-16">
