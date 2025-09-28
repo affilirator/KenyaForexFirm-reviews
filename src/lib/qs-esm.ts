@@ -191,19 +191,17 @@ export async function fetchTradersGlobal(): Promise<TradersGlobal> {
 
 export async function fetchTraders(): Promise<ForexTrader[]> {
   const res = await fetch('https://fx.mahinge.com/api/forex-traders')
-  const data = await res.json()
+  const traders = await res.json()
     if (!res.ok) {
         throw new Error('Failed to fetch traders');
     }
 
-    const traders = data.docs
+    //const traders = data.docs
     // Assuming the API returns an object with a 'docs' array
-    if (!data || !data.docs) {
-        throw new Error('Invalid data format from traders API');
-    }
+    
     // Sort traders alphabetically by name
 
-  if (traders.length === 0) {
+  if (traders.docs.length === 0) {
     console.warn('No traders found')
     //redirect('https://fx.mahinge.com');
   }
