@@ -139,12 +139,14 @@ const metaDescription = author.meta?.description || `Learn about ${authorName}, 
           )}
             <div class="p-6">
               <h2 class="text-xl font-bold text-white mb-4">About {author.name}</h2>
-              <RichText content={author.authorBio} client:visible />
-              <div class=" max-w-none">
-                
-              </div>
+             
+              
               
             </div>
+            <div class=" max-w-none">
+                 <RichText content={author.authorBio} client:visible />
+                
+              </div>
           </div>
           
          
