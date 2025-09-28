@@ -113,14 +113,7 @@ export default defineConfig({
   output: 'static',
 
   vite: {
-    resolve: {
-      alias: {
-        // This alias is crucial for Shadcn UI and clean imports.
-        // It lets you import with `@/components/ui/button` instead of `../../components/ui/button`.
-        '@': './src',
-        '~': './src',
-      },
-    },
+   
     build: {
       cssCodeSplit: true,
       rollupOptions: {
