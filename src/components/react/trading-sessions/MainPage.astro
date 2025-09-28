@@ -8,13 +8,11 @@ import { Badge } from '@/components/ui/badge';
 import { Clock, TrendingUp, Globe } from 'lucide-react';
 import type { TradingSession } from '@/types/tradingSession';
 
-//const payload = await getPayload({ config });
-
 const apiUrl = 'https://fx.mahinge.com';
 
 export async function fetchSessions() {
     try {
-        const response = await fetch(`${apiUrl}/api/trading-sessions?limit=100&sort=createdAt`, {
+        const response = await fetch(`${apiUrl}/api/trading-sessions`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -46,7 +44,7 @@ export async function fetchSessions() {
 
 
 
-    const res = await fetch('https://fx.mahinge.com/api/trading-sessions?sort=order', {
+    const res = await fetch('https://fx.mahinge.com/api/trading-sessions', {
       headers: {
         //'Authorization': 'Bearer ' + import.meta.env.API_TOKEN || '',
         'Content-Type': 'application/json'
