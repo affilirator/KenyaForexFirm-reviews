@@ -203,7 +203,7 @@ export async function fetchTraders(): Promise<ForexTrader[]> {
     }
     // Sort traders alphabetically by name
 
-  if (traders.docs.length === 0) {
+  if (traders.length === 0) {
     console.warn('No traders found')
     //redirect('https://fx.mahinge.com');
   }
