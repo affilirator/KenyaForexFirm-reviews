@@ -33,9 +33,9 @@ export const team = [
     experience: "12+ years in financial markets analysis",
     bio: "Patrick Mahinge has over 12 years of experience in financial markets, specializing in forex and derivatives trading. He holds the Chartered Financial Analyst (CFA) and Financial Risk Manager (FRM) designations. Previously worked at Standard Bank Kenya and Citibank as a senior analyst.",
     expertise: ["Forex Analysis", "Risk Management", "Market Research", "Financial Modeling"],
-    avatar: "👨🏾‍💼"
+    avatar: "https://fxmedia.kenyaforexfirm.com/Patrick-Mahinge-kenya-forex-firm.webp"
   },
-  {
+  /*{
     name: "Sylvia Muchai",
     role: "Senior Market Analyst",
     credentials: "CPA, CFE",
@@ -45,6 +45,7 @@ export const team = [
     expertise: ["Market Analysis", "Currency Trading", "Financial Reporting", "Compliance"],
     avatar: "👩🏾‍💼"
   },
+  */
   {
     name: "Edwin Kamau",
     role: "Regulatory Affairs Specialist",
@@ -53,7 +54,7 @@ export const team = [
     experience: "10+ years in financial regulation and compliance",
     bio: "Edwin Kamau is our regulatory expert with deep knowledge of Kenyan financial laws and CMA regulations. He holds a Law degree from University of Nairobi and is licensed by the Capital Markets Authority. Previously worked at CMA Kenya as a compliance officer.",
     expertise: ["Financial Law", "Regulatory Compliance", "CMA Regulations", "Legal Analysis"],
-    avatar: "👨🏾‍⚖️"
+    avatar: "https://fxmedia.kenyaforexfirm.com/edwin-kamau-kenya-forex-firm.jpg"
   },
   {
     name: "Grace Mutua",
@@ -63,7 +64,7 @@ export const team = [
     experience: "6+ years in fintech and payment systems",
     bio: "Grace specializes in financial technology and payment systems analysis. With an MSc in FinTech from University of Cape Town and Project Management Professional (PMP) certification, she evaluates broker payment methods and technology infrastructure.",
     expertise: ["Financial Technology", "Payment Systems", "M-Pesa Integration", "Digital Banking"],
-    avatar: "👩🏾‍💻"
+    avatar: "https://fxmedia.kenyaforexfirm.com/grace-mutua-kenya-forex-firm.jpg"
   },
   {
     name: "Peter Mwangi",
@@ -73,7 +74,7 @@ export const team = [
     experience: "9+ years in risk management and trading",
     bio: "Peter is our risk management specialist, focusing on trading risk assessment and broker safety evaluation. He holds the Certified Risk Manager (CRM) designation and ACCA qualification. Former risk manager at Equity Bank.",
     expertise: ["Risk Assessment", "Trading Risk", "Portfolio Management", "Stress Testing"],
-    avatar: "👨🏾‍📊"
+    avatar: "https://fxmedia.kenyaforexfirm.com/peter-mwangi-kenya-forex-firm.jpg"
   },
   {
     name: "Ann Nyokabi",
@@ -83,7 +84,7 @@ export const team = [
     experience: "7+ years in economic research and analysis",
     bio: "Ann leads our economic research efforts, analyzing macroeconomic factors affecting currency markets. She holds an MA in Economics and is a CFA Level II candidate. Previously worked at Kenya National Bureau of Statistics.",
     expertise: ["Economic Analysis", "Monetary Policy", "Currency Research", "Statistical Analysis"],
-    avatar: "👩🏾‍🎓"
+    avatar: "https://fxmedia.kenyaforexfirm.com/ann-nyokabi-kenya-forex-firm.jpg"
   }
 ];
 
