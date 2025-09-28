@@ -53,7 +53,7 @@ if (!pageAuthor) {
 }
 
 const currentDate = new Date();
-    const authorName = author?.fullName || 'MahingeFX Team';
+    const authorName = author?.name || 'MahingeFX Team';
     const authorImage = "https://fx.mahinge.com/images/Patrick-Mahinge.webp"; // Placeholder
     const sessionImage = typeof session.image === 'object' && session.image?.url ? session.image?.url : '/images/default-blog.png';
 
