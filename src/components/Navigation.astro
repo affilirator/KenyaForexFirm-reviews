@@ -6,16 +6,16 @@ const navItems = [
   { label: 'Home', href: '/', description: 'Homepage' },
   { 
     label: 'Brokers', 
-    href: '/brokers', 
+    href: '/review/best-forex-brokers/', 
     description: 'Forex broker reviews',
     submenu: [
-      { label: 'All Brokers', href: '/brokers' },
+      { label: 'All Brokers', href: '/review/best-forex-brokers/' },
       { label: 'CMA Approved', href: '/brokers/cma-approved' },
       { label: 'High Leverage', href: '/brokers/high-leverage' },
       { label: 'Safety Ranking', href: '/brokers/safety-regulation-ranking' },
       { label: 'Regulators', href: '/regulators' },
       { label: 'Our Experts', href: '/authors' },
-      { label: 'M-Pesa Brokers', href: '/brokers/funding/m-pesa' },
+      { label: 'M-Pesa Brokers', href: '/review/best-forex-brokers/mpesa' },
       { label: 'MT4 Brokers', href: '/brokers/platform/metatrader-4' }
     ]
   },
@@ -88,14 +88,14 @@ const currentPath = Astro.url.pathname;
         <!-- CTA Button -->
         <div class="hidden md:block">
           <a
-            href="/brokers"
+            href="/review/best-forex-brokers/compare/"
             class="bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white px-6 py-2 rounded-lg font-medium"
           >
             Find Broker
           </a>
           
         </div>
-        <ModeToggle client:load />
+        <ModeToggle client:idle />
 
         <!-- Mobile menu button -->
         <button
