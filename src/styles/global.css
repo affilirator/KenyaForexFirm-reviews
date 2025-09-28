@@ -40,7 +40,7 @@
   }
   html { scroll-behavior: smooth; }
   body { 
-    @apply bg-neutral-950 text-neutral-100 antialiased font-sans;
+    
     font-feature-settings: 'kern' 1, 'liga' 1;
   }
   
