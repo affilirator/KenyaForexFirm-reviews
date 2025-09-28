@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets'
 interface TeamMember {
   name: string;
   role: string;
@@ -22,7 +23,7 @@ const { team } = Astro.props;
     <div class="card-glass p-6 flex flex-col h-full">
       <div class="flex items-center gap-4 mb-4">
         <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full flex items-center justify-center text-2xl">
-          <img src={member.avatar} alt={member.role} loading="lazy" class="rounded-full object-cover" />
+          <Image width={64} height={64} src={member.avatar} alt={member.role} format='webp' loading="lazy" class="rounded-full object-cover" />
         </div>
         <div>
           <h3 class="text-xl font-semibold text-white">{member.name}</h3>
