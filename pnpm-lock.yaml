@@ -32,6 +32,12 @@ importers:
       '@astrojs/ts-plugin':
         specifier: ^1.10.4
         version: 1.10.4
+      '@fontsource/playfair-display':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/source-sans-pro':
+        specifier: ^5.2.5
+        version: 5.2.5
       '@iconify-json/cif':
         specifier: ^1.2.7
         version: 1.2.7
@@ -725,6 +731,12 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+
+  '@fontsource/playfair-display@5.2.8':
+    resolution: {integrity: sha512-fUEhib70SszNhQVsGbUMSsWJhr7Je0rdeuZdtGpDNu0GKF1xJM8QhpI/y0pckU25GcChXm9TLOmeZupkvvZo2g==}
+
+  '@fontsource/source-sans-pro@5.2.5':
+    resolution: {integrity: sha512-ypendqc4pYUc+EgF7qqPY9iVYEz1t/Qr03VojKxG/2g3dnpHa1B6DOlDxWQjQXDj5QrG6inEqGT0g+edjALZyg==}
 
   '@iconify-json/cif@1.2.7':
     resolution: {integrity: sha512-MUDOUt7xWMsWw9QW312wlCxblqaR+sRfQRokO6ZH7Xp+53HgzHA7K+ejrite+ULpV/bBVe6XZIrxSShXEpdpNg==}
@@ -4528,6 +4540,10 @@ snapshots:
       react-dom: 19.1.1(react@19.1.1)
 
   '@floating-ui/utils@0.2.10': {}
+
+  '@fontsource/playfair-display@5.2.8': {}
+
+  '@fontsource/source-sans-pro@5.2.5': {}
 
   '@iconify-json/cif@1.2.7':
     dependencies:

@@ -17,6 +17,8 @@
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/tailwind": "^6.0.2",
     "@astrojs/ts-plugin": "^1.10.4",
+    "@fontsource/playfair-display": "^5.2.8",
+    "@fontsource/source-sans-pro": "^5.2.5",
     "@iconify-json/cif": "^1.2.7",
     "@iconify-json/lucide": "^1.2.56",
     "@iconify-json/mdi": "^1.2.3",
