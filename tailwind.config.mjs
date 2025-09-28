@@ -75,11 +75,7 @@ export default {
   				'Playfair Display',
   				'serif'
   			],
-  			ui: [
-  				'Roboto',
-  				'system-ui',
-  				'sans-serif'
-  			],
+  			ui: ["var(--font-roboto)"],
   			serif: [
   				'EB Garamond',
   				'serif'

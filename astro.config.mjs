@@ -21,7 +21,10 @@ export default defineConfig({
         fonts: [{
             provider: fontProviders.google(),
             name: "Roboto",
-            cssVariable: "--font-roboto"
+            cssVariable: "--font-roboto",
+            weights: [400, 500, 700, ] ,
+            styles: ["normal", "italic", 'oblique', ],
+            subsets: ["cyrillic-ext", "cyrillic", "greek-ext", "greek", "vietnamese", "latin-ext", "latin"],
         }]
     },
 
