@@ -112,8 +112,8 @@ const jsonLd = {
         </Button>
         
         <header class="mb-8">
-          <div class="flex items-center gap-4 mb-4">
-            <h1 class="font-headline text-4xl md:text-5xl font-bold">{session.name} Forex Trading Session in Kenyan Time</h1>
+          <div class="inline-flex items-center gap-4 mb-4">
+            <h1 class="font-display  text-foreground text-4xl md:text-5xl font-bold">{session.name} Forex Trading Session in Kenyan Time</h1>
             <Badge variant={
               session.volatility === 'very-high' ? 'destructive' :
               session.volatility === 'high' ? 'default' :
