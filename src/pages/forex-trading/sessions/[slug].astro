@@ -103,7 +103,11 @@ const jsonLd = {
   author={author}
 >
 <div class="container font-sans mx-auto px-4 py-12">
-      <div class="mb-8">
+     
+
+      <div class="grid lg:grid-cols-3 gap-8 mb-12">
+        <div class="lg:col-span-2">
+           <div class="mb-8">
         <Button variant="ghost" asChild className="mb-4">
           <a href="/forex-trading/sessions/">
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -144,9 +148,6 @@ const jsonLd = {
                           </div>
         </header>
       </div>
-
-      <div class="grid lg:grid-cols-3 gap-8 mb-12">
-        <div class="lg:col-span-2">
           <Card className="mb-8">
             <CardHeader>
               <CardTitle className="font-headline text-2xl">Session Overview</CardTitle>
