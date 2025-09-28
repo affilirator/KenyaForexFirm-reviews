@@ -99,6 +99,7 @@
   .contain-layout { contain: layout; }
   .contain-paint { contain: paint; }
   
+  
   /* Broker card animations */
   .scale-102 { transform: scale(1.02); }
   .fade-in { opacity: 1 !important; }
