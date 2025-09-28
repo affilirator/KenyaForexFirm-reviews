@@ -16,6 +16,7 @@ import { fetchSiteConfig, fetchTraders, fetchTradersGlobal } from '~/lib/qs-esm'
 //const content = tradersDetail.content
 const site = await fetchSiteConfig()
 const traders = await fetchTraders()
+const apiTitle = site.siteTitle
 /*
 const data = {
   "@context": "https://schema.org",
@@ -146,7 +147,7 @@ description={description}
 keywords={keywords.join(',')}
 >
 
-    <div class="max-w-7xl mx-auto px-4 py-16">
+    <div class="bg-background max-w-7xl mx-auto px-4 py-16">
      
 
       <div class="text-center mb-16">

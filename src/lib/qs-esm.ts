@@ -176,14 +176,14 @@ export async function fetchSiteConfig(): Promise<SiteConfig> {
 }
 
 export async function fetchTradersGlobal(): Promise<TradersGlobal> {
-  const res = await fetch('https://fx.mahinge.com/api/globals/traders-global?depth=2&draft=false&locale=undefined&trash=false');
+  const res = await fetch('https://fx.mahinge.com/api/globals/traders-global');
 
-  const content = await res.json()
+  const tradersGlobal = await res.json() as TradersGlobal
   //const content = data.content
-  if (!content) {
+  if (!tradersGlobal) {
     console.warn('No content found for that page');
   }
-  return content;
+  return tradersGlobal;
   
 }
   
