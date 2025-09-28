@@ -9,10 +9,11 @@ import { Clock, TrendingUp, Globe } from 'lucide-react';
 import type { TradingSession } from '@/types/tradingSession';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 
-const apiUrl = 'https://fx.mahinge.com';
+
 
 export async function fetchSessions() {
     try {
+      const apiUrl = 'https://fx.mahinge.com';
         const response = await fetch(`${apiUrl}/api/trading-sessions`, {
             method: 'GET',
             headers: {
