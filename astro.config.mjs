@@ -15,7 +15,7 @@ export default defineConfig({
   trailingSlash: 'always',
 
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'never',
   },
   experimental: {
         fonts: [
