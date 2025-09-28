@@ -51,7 +51,7 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
     </h1>
 
     <p slot="subtitle" class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
-      {data?.description || `Discover forex brokers that accept ${data?.title || data?.name} payments.`}
+      {data?.description || `Discover forex brokers that accept ${data?.name || data?.name} payments.`}
     </p>
   </TopSlot>
     <BrokerList 
