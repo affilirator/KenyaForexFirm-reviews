@@ -18,14 +18,42 @@ export default defineConfig({
     inlineStylesheets: 'auto',
   },
   experimental: {
-        fonts: [{
+        fonts: [
+          {
             provider: fontProviders.google(),
             name: "Roboto",
             cssVariable: "--font-roboto",
             weights: [400, 500, 700, ] ,
             styles: ["normal", "italic", 'oblique', ],
             subsets: ["cyrillic-ext", "cyrillic", "greek-ext", "greek", "vietnamese", "latin-ext", "latin"],
-        }]
+        },
+         {
+            provider: fontProviders.google(),
+            name: "Source Sans 3",
+            cssVariable: "--font-source-sans-3",
+            weights: [400, 500, 700, ] ,
+            styles: ["normal", "italic", 'oblique', ],
+            subsets: ["cyrillic-ext", "cyrillic", "greek-ext", "greek", "vietnamese", "latin-ext", "latin"],
+        },
+        {
+        name: "EB Garamond",
+        cssVariable: "--font-eb-garamond",
+        provider: "local",
+        // Weight and style are not specified so Astro
+        // will try to infer them for each variant
+        variants: [
+          {
+            src: [
+              "./src/assets/fonts/eb-garamond-v31-latin-500.woff2",
+              "./src/assets/fonts/eb-garamond-v31-latin-700.woff2",
+              "./src/assets/fonts/eb-garamond-v31-latin-800.woff2",
+              "src/assets/fonts/eb-garamond-v31-latin-regular.woff2"
+            ]
+          },
+          
+        ]
+      }
+      ]
     },
 
   image: {

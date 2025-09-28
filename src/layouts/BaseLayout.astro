@@ -128,6 +128,8 @@ if (schemaData && !schemaData?.['@id']) {
     <meta name="description" content={homeDescription} />
     <slot name='opengraph' />
     <Font cssVariable='--font-roboto' preload />
+    <Font cssVariable='--font-source-sans-3' preload />
+     <Font cssVariable='--font-eb-garamond' preload />
     
     
     <SEO
@@ -251,7 +253,7 @@ if (schemaData && !schemaData?.['@id']) {
     <div class="fixed inset-0 bg-cyber-grid opacity-20 pointer-events-none" style="background-size: 50px 50px;"></div>
     <div class="fixed inset-0 bg-gradient-to-t from-neutral-950/50 via-transparent to-neutral-950/50 pointer-events-none"></div>
 
-    <main class=" flex-grow w-full relative z-10 min-h-screen bg-background" transition:animate="slide">
+    <main class=" flex-grow w-full relative z-10 min-h-screen bg-background " transition:animate="slide">
       <Navigation  />
       <slot />
       

@@ -66,20 +66,13 @@ export default {
 			 body: ['PT Sans', 'sans-serif'],
         headline: ['Playfair Display', 'serif'],
         code: ['monospace'],
-  			sans: [
-  				'Source Sans 3',
-  				'system-ui',
-  				'sans-serif'
-  			],
+  			sans: ["var(--font-source-sans-3)"],
   			display: [
   				'Playfair Display',
   				'serif'
   			],
   			ui: ["var(--font-roboto)"],
-  			serif: [
-  				'EB Garamond',
-  				'serif'
-  			]
+  			serif: ["var(--font-eb-garamond)"],
   		},
   		backgroundImage: {
   			'cyber-grid': 'linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)'
