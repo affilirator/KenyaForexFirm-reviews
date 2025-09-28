@@ -52,6 +52,32 @@ export default defineConfig({
           },
           
         ]
+      },
+       {
+        name: "Playfair Display",
+        cssVariable: "--font-playfair-display",
+        provider: "local",
+        // Weight and style are not specified so Astro
+        // will try to infer them for each variant
+        variants: [
+          {
+            
+            src: [
+              "./src/assets/fonts/playfair-display-v39-latin-500.woff2",
+              
+            ],
+            src: [
+              "./src/assets/fonts/playfair-display-v39-latin-700.woff2",
+              
+            ],
+            src: [
+              
+              "./src/assets/fonts/playfair-display-v39-latin-regular.woff2",
+              
+            ]
+          },
+          
+        ]
       }
       ]
     },

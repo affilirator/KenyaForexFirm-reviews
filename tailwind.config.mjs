@@ -67,10 +67,7 @@ export default {
         headline: ['Playfair Display', 'serif'],
         code: ['monospace'],
   			sans: ["var(--font-source-sans-3)"],
-  			display: [
-  				'Playfair Display',
-  				'serif'
-  			],
+  			display: ["var(--font-playfair-display)"],
   			ui: ["var(--font-roboto)"],
   			serif: ["var(--font-eb-garamond)"],
   		},
