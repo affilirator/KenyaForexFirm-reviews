@@ -62,8 +62,8 @@ const { trader, sectionTitle, sectionIntro} = Astro.props
           </div>
           <div class="md:w-2/3">
             <h2 id={`${trader.name.toLowerCase().replace(/\s+/g, '-')}`} class="text-4xl font-bold mb-4">{trader.name}</h2>
-            <p class="text-xl text-gray-600 mb-6">{trader.tradingStyle} Trader | {trader.experienceYears} Years</p>
-            <div class="prose max-w-none">
+            <p class="text-xl  mb-6">{trader.tradingStyle} Trader | {trader.experienceYears} Years</p>
+            <div class="max-w-none">
               <RichText content={trader.bio} />
 
               <section class="mb-8">
