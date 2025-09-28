@@ -1,6 +1,5 @@
 ---
 import { site } from '~/data/site';
-import { ModeToggle } from './react/ModdleToggle';
 
 const navItems = [
   { label: 'Home', href: '/', description: 'Homepage' },
@@ -10,17 +9,17 @@ const navItems = [
     description: 'Forex broker reviews',
     submenu: [
       { label: 'All Brokers', href: '/review/best-forex-brokers/' },
-      { label: 'CMA Approved', href: '/brokers/cma-approved' },
-      { label: 'High Leverage', href: '/brokers/high-leverage' },
-      { label: 'Safety Ranking', href: '/brokers/safety-regulation-ranking' },
+      { label: 'CMA Approved', href: 'review/best-forexbrokers/cma-regulated/' },
+      { label: 'High Leverage', href: '/review/best-forex-brokers/high-leverage/' },
+      { label: 'Safety Ranking', href: '/review/best-forex-brokers/most-regulated/' },
       { label: 'Regulators', href: '/regulators' },
-      { label: 'Our Experts', href: '/authors' },
+      { label: 'Our Experts', href: '/authors/' },
       { label: 'M-Pesa Brokers', href: '/review/best-forex-brokers/mpesa' },
       { label: 'MT4 Brokers', href: '/brokers/platform/metatrader-4' }
     ]
   },
-  { label: 'About', href: '/about', description: 'About our team' },
-  { label: 'Contact', href: '/contact', description: 'Get in touch' }
+  { label: 'About', href: '/about/', description: 'About our team' },
+  { label: 'Contact', href: '/contact/', description: 'Get in touch' }
 ];
 
 const currentPath = Astro.url.pathname;
@@ -95,7 +94,7 @@ const currentPath = Astro.url.pathname;
           </a>
           
         </div>
-        <ModeToggle client:idle />
+        
 
         <!-- Mobile menu button -->
         <button

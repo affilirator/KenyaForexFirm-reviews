@@ -56,7 +56,7 @@ if (!pageAuthor) {
 
 const canonicalURL = `${site.url}${Astro.url.pathname}`;
 
-const schemaTypes = ['CollectionPage', 'WebPage',  'Review']
+const schemaTypes = ['CollectionPage', 'WebPage',  'Review', 'AboutPage']
 
 if(!schemaData){
   schemaData = organizationSchema;
@@ -91,7 +91,7 @@ if (schemaData && !schemaData?.['@id']) {
   }
 }
 ---
-
+{/* 
 <script is:inline>
 	const getThemePreference = () => {
 		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -110,6 +110,7 @@ if (schemaData && !schemaData?.['@id']) {
 		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 	}
 </script>
+*/}
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr" class="!scroll-smooth" >
