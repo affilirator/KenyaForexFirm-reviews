@@ -1,0 +1,248 @@
+---
+
+import TraderBio from '~/components/traders/TraderBio.astro';
+
+import RichText from '~/components/common/RichText';
+
+import { personSchema } from '~/lib/schema/person-schema';
+import { websiteSchema } from '~/lib/schema/website-schema';
+import { orgSchema } from '~/lib/schema/org-schema';
+import type { ForexTrader, SiteConfig, TradersGlobal } from '~/types/payload-types';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+
+const tradersDetail = await fetchTradersGlobal()
+const site = await fetchSiteConfig()
+const traders = await fetchTraders()
+
+export async function fetchSiteConfig(): Promise<SiteConfig> {
+  const res = await fetch('https://fx.mahinge.com/api/globals/site-config');
+  const siteConfig = await res.json()
+  if (!siteConfig) {
+    throw new Error('No site config found');
+  }
+  return siteConfig;
+}
+
+export async function fetchTradersGlobal(): Promise<TradersGlobal> {
+  const res = await fetch('https://fx.mahinge.com/api/globals/traders-global?depth=2&draft=false&locale=undefined&trash=false');
+
+  const content = await res.json() as TradersGlobal
+  //const content = data.content
+  if (!content) {
+    console.warn('No content found for that page');
+  }
+  return content;
+  
+}
+
+
+export async function fetchTraders(): Promise<ForexTrader[]> {
+  const res = await fetch('https://fx.mahinge.com/api/forex-traders')
+  const data = await res.json()
+    if (!res.ok) {
+        throw new Error('Failed to fetch traders');
+    }
+
+    const traders = data.docs
+    // Assuming the API returns an object with a 'docs' array
+    if (!data || !data.docs) {
+        throw new Error('Invalid data format from traders API');
+    }
+    // Sort traders alphabetically by name
+
+  if (traders.docs.length === 0) {
+    console.warn('No traders found')
+    //redirect('https://fx.mahinge.com');
+  }
+  /*else {
+    traders.docs.sort((a: ForexTrader, b: ForexTrader) => {
+      const aName = a.name.toLowerCase();
+      const bName = b.name.toLowerCase();
+      if (aName < bName) return -1;
+      if (aName > bName) return 1;
+      return 0;
+    });
+
+  }
+    */
+  return traders.docs;
+  
+}
+
+const data = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  '@id': site.siteUrl + '/forex-trading/top-traders/',
+  "headline": "Best Forex Traders in Kenya - 2025 Update",
+  "description": "Meet Kenya's top forex traders: Bios, achievements, and broker insights from Patrick Mahinge.",
+  "datePublished": tradersDetail.createdAt,
+  "dateModified": new Date().toISOString(),
+  url: site.siteUrl + '/forex-trading/top-traders/',
+  primaryImageOfPage: {
+    "@type": "ImageObject",
+    "url": typeof tradersDetail.featuredImage === 'object' && tradersDetail.featuredImage?.url ? tradersDetail.featuredImage.url : site.siteUrl + '/logo.png',
+    "width": 1200,
+    "height": 630
+  },
+  breadcrumb: {
+    "@id": site.siteUrl + '/#richSnippets',
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": site.siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Forex Trading in Kenya",
+        "item": site.siteUrl + '/forex-trading/'
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Best Forex Traders in Kenya",
+        "item": site.siteUrl + '/forex-trading/top-traders/'
+      }
+    ]
+
+  },
+  lastReviewed: new Date().toISOString(),
+  mainEntity:{
+   "@type": "ItemList",
+                "itemListElement": traders.map((t: any, i: number) => ({
+                  "@type": "ListItem",
+                  "position": i + 1,
+                  "name": t.name,
+                  "url": `/best-forex-traders/${t.name.toLowerCase().replace(/\s+/g, '-')}`,
+                }))},
+  audience: {
+    "@type": "Audience",
+    "audienceType": "Kenya Forex Traders",
+    "url": site.siteUrl + '/best-forex-traders'
+  },
+  "author": {
+    ...personSchema
+  },
+  
+  "image": {
+    "@type": "ImageObject",
+    "url": typeof tradersDetail.featuredImage === 'object' && tradersDetail.featuredImage?.url ? tradersDetail.featuredImage.url : '/default-image.jpg',
+    "width": 1200,
+    "height": 630
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    '@id': site.siteUrl + '/forex-trading/top-traders/',
+    publisher: {
+      ...orgSchema
+    },
+    "isPartOf": {
+      ...websiteSchema
+      
+    }
+  }
+}
+
+export const metadata = {
+  title: `Best Forex Traders in Kenya ${new Date().getFullYear()} | Profiles & Strategies`,
+  description: 'Meet Kenya\'s top forex traders: Bios, achievements, and broker insights from Patrick Mahinge.',
+  keywords: ['best forex traders in Kenya', 'top forex traders Kenya', 'forex trading experts Kenya', 'Kenya forex trader profiles', 'successful forex traders Kenya', 'forex trading strategies Kenya', 'Patrick Mahinge forex traders', 'Kenya forex market leaders'],
+  alternates: {
+    canonical: 'https://fx.mahinge.com/best-forex-traders',
+  },
+   
+    authors: [{ name: tradersDetail.authorName, url: 'https://fx.mahinge.com/about/patrick-mahinge' }],
+    
+  openGraph: {
+    type: 'article',
+    publishedTime: tradersDetail.createdAt ? new Date(tradersDetail.createdAt).toISOString() : new Date().toISOString(),
+    modifiedTime: new Date().toISOString(),
+    authors: ['Patrick Mahinge'],
+    //siteName: siteConfig.siteTitle,
+    tags: ['forex trading', 'best forex traders', 'Kenya forex market', 'trading strategies', 'Patrick Mahinge'],
+    section: 'Finance',
+    
+    title: `Best Forex Traders in Kenya ${new Date().getFullYear()} | Profiles & Strategies`,
+    description: 'Meet Kenya\'s top forex traders: Bios, achievements, and broker insights from Patrick Mahinge.',
+    url: 'https://fx.mahinge.com/best-forex-traders',
+    siteName: site.siteTitle,
+    images: [
+      {
+        url: typeof tradersDetail.featuredImage === 'object' && tradersDetail.featuredImage?.url ? tradersDetail.featuredImage.url : '/default-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Best Forex Traders in Kenya',
+      },
+    ],
+    locale: 'en_US',
+   
+    
+  },
+
+};
+const metaKeywords = metadata.keywords.map(
+    (keyword) => keyword.trim()
+)
+
+---
+<BaseLayout title={metadata.title} 
+description={metadata.description}
+schemaData={data}
+keywords={metadata.keywords.join(',')}
+>
+
+    <div class="max-w-7xl mx-auto px-4 py-16">
+     
+
+      <div class="text-center mb-16">
+        <h1 class="text-4xl font-bold text-gray-200 mb-4">Best Forex Traders in Kenya</h1>
+        <p class="text-lg text-gray-300">Curated by Patrick Mahinge—real pros, real results.</p>
+     
+      </div>
+
+      {/* 
+      
+      {traders.length > 0 ? (
+        <>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {traders.map((trader: any) => (
+              <TraderCard key={trader.id} trader={trader} />
+            ))}
+          </div>
+          
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "itemListElement": traders.map((t: any, i: number) => ({
+                  "@type": "ListItem",
+                  "position": i + 1,
+                  "name": t.name,
+                  "url": `/best-forex-traders/${t.name.toLowerCase().replace(/\s+/g, '-')}`,
+                })),
+              }),
+            }}
+          />
+          
+        </>
+      ) : (
+        <div class="text-center py-16">
+          <h2 className="text-2xl font-semibold text-gray-700 mb-4">No Traders Found</h2>
+          <p class="text-gray-600">We're currently building our database of Kenya's top forex traders. Check back soon!</p>
+        </div>
+      )}*/}
+      <div class="mt-4 mx-auto">
+            {traders.map((trader: any) => (
+              
+              <TraderBio sectionIntro='' sectionTitle='' trader={trader} />
+            ))}
+          </div>
+          <RichText content={tradersDetail.content} client:idle />
+    </div>
+    </BaseLayout>
+  

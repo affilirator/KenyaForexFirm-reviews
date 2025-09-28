@@ -1,10 +1,149 @@
 import type { ReviewContentAuthor } from "./author";
 import type { CatRatings, CategoryReference } from "./catRatingsInterface";
+import type { Broker, ForexInstrument, Media, TradingStrategy } from "./payload-types";
 interface Regulator {
   name: string;
   shortName: string;
   country: string;
 
+}
+
+export interface ForexTrader {
+  id: string;
+  /**
+   * Full name of the trader, e.g., "John Mwangi"
+   */
+  name: string;
+  /**
+   * Check if this trader is featured on the homepage.
+   */
+  isFeatured?: boolean | null;
+  /**
+   * Win rate of the trader, e.g., "80%"
+   */
+  winRate?: string | null;
+  /**
+   * Performance of the trader, e.g., "+28% YTD"
+   */
+  performance?: string | null;
+  /**
+   * Unique URL slug for SEO, e.g., "john-mwangi".
+   */
+  slug: string;
+  /**
+   * Professional title, e.g., "Senior Forex Trader"
+   */
+  title: string;
+  /**
+   * Primary trading specialty, e.g., "Currency Trades"
+   */
+  mainSpecialty?: (string | ForexInstrument)[] | null;
+  /**
+   * Primary trading specialty, e.g., "Currency Trades"
+   */
+  specialty?: string | null;
+  /**
+   * Short bio, e.g., "Experienced in currency markets"
+   */
+  shortBio: string;
+  /**
+   * A compelling 200-300 word bio highlighting their journey in Kenyas forex scene.
+   */
+  bio: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * A compelling 200-300 word bio highlighting their journey in Kenyas forex scene.
+   */
+  mainArticle?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Professional headshot or trading setup photo.
+   */
+  photo: string | Media;
+  tradingFrom?: number | null;
+  /**
+   * Years trading forex—key for credibility.
+   */
+  experienceYears: number;
+  /**
+   * Net worth in USD—key for credibility.
+   */
+  networth: number;
+  /**
+   * Risk level they are comfortable with.
+   */
+  riskAppetite?: ('low' | 'medium' | 'high') | null;
+  forexBroker?: (string | null) | Broker;
+  /**
+   * Country of origin, e.g., "Kenya"
+   */
+  country: string;
+  /**
+   * tradingStyle is deprecated in favor of style. Primary style—tailored for Kenyan traders juggling MT4 and local brokers.
+   */
+  tradingStyle?: ('scalper' | 'day' | 'swing' | 'position' | 'other') | null;
+  /**
+   * List key wins, e.g., "Top 10% in KFC 2023 Challenge".
+   */
+  achievements?:
+    | {
+        achievement: string;
+        year: number;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Connect with Kenya's trading community.
+   */
+  socialLinks?:
+    | {
+        platform: 'x' | 'linkedin' | 'instagram' | 'facebook' | 'youtube' | 'xmlFeed' | 'other';
+        url: string;
+        /**
+         * Link to the social profile, e.g., "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+         */
+        profileUrl?:
+          | {
+              url: string;
+              title?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Link to modular strategies this trader uses.
+   */
+  strategies?: (string | TradingStrategy)[] | null;
+  updatedAt: string;
+  createdAt: string;
 }
 
 interface BrokerRegulation {

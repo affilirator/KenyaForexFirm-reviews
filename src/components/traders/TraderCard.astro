@@ -1,0 +1,38 @@
+---
+// components/TraderCard.tsx
+import {Image} from 'astro:assets';
+
+
+interface Trader { id: string; name: string; photo?: { url: string }; experienceYears: number; tradingStyle: string; forexBroker?: { name: string }; }
+interface Props {
+    trader: Trader;
+}
+const { trader } = Astro.props
+
+---
+    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-1 group">
+      <div class="relative h-48">
+        <Image src={trader.photo?.url || '/default-avatar.jpg'}
+        height={190} 
+        width={190} 
+        alt={trader.name} 
+        format={'webp'}
+        loading={'lazy'}
+        class="object-cover" 
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        <h3 class="absolute bottom-4 left-4 text-white font-bold text-xl">{trader.name}</h3>
+      </div>
+      <div class="p-6">
+        <p class="text-sm text-gray-500 mb-2">{trader.experienceYears} Years | {trader.tradingStyle}</p>
+        {trader.forexBroker && (
+          <p class="text-emerald-600 font-semibold mb-4">Broker: {trader.forexBroker.name}</p>
+        )}
+        <a href={`/best-forex-traders/${trader.name.toLowerCase().replace(/\s+/g, '-')}`}
+          class="text-emerald-600 hover:underline block"
+        >
+          Read Profile →
+        </a>
+      </div>
+    </div>
+  
