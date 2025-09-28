@@ -178,7 +178,7 @@ export async function fetchSiteConfig(): Promise<SiteConfig> {
 export async function fetchTradersGlobal(): Promise<TradersGlobal> {
   const res = await fetch('https://fx.mahinge.com/api/globals/traders-global');
 
-  const tradersGlobal = await res.json() as TradersGlobal
+  const tradersGlobal = await res.json()
   //const content = data.content
   if (!tradersGlobal) {
     console.warn('No content found for that page');

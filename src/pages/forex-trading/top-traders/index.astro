@@ -17,6 +17,11 @@ import { fetchSiteConfig, fetchTraders, fetchTradersGlobal } from '~/lib/qs-esm'
 const site = await fetchSiteConfig()
 const traders = await fetchTraders()
 const apiTitle = site.siteTitle
+const tradersDetail = await fetchTradersGlobal()
+const traderTitle = tradersDetail.title
+if (!traderTitle) {
+    throw new Error('Not found')
+}
 /*
 const data = {
   "@context": "https://schema.org",
