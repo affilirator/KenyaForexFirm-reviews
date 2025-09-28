@@ -11,7 +11,7 @@ import RichText from '@/components/common/RichText';
 import type { Author } from "~/types/author";
 
 
-import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
+
 import { getDefaultAuthor } from "~/lib/author-service";
 
 import {site} from '~/data/site'
@@ -120,10 +120,11 @@ const jsonLd = {
           <div class="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
                             <div class="flex items-center gap-2">
                                <a href={`/about/patrick-mahinge`} rel='author' class="group flex items-center gap-2">
-                                <Avatar className="h-8 w-8">
-                                  <AvatarImage src={authorImage} alt={authorName} className='rounded-full'  />
-                                  <AvatarFallback>{authorName.charAt(0).toUpperCase()}</AvatarFallback>
-                                </Avatar>
+                                <img 
+                                  src={authorImage} 
+                                  alt={authorName} 
+                                  class="h-8 w-8 rounded-full object-cover"
+                                />
                                 <span class="group-hover:text-primary transition-colors">{authorName}</span>
                               </a>
                             </div>
