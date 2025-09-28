@@ -10,11 +10,6 @@ import { orgSchema } from '~/lib/schema/org-schema';
 import type { ForexTrader, SiteConfig, TradersGlobal } from '~/types/payload-types';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 
-const tradersDetail = await fetchTradersGlobal()
-
-const site = await fetchSiteConfig()
-const traders = await fetchTraders()
-
 export async function fetchSiteConfig(): Promise<SiteConfig> {
   const res = await fetch('https://fx.mahinge.com/api/globals/site-config');
   const siteConfig = await res.json()
@@ -35,6 +30,7 @@ export async function fetchTradersGlobal(): Promise<TradersGlobal> {
   return content;
   
 }
+  
 
 
 export async function fetchTraders(): Promise<ForexTrader[]> {
@@ -69,7 +65,11 @@ export async function fetchTraders(): Promise<ForexTrader[]> {
   return traders.docs;
   
 }
+const tradersDetail = await fetchTradersGlobal()
 const content = tradersDetail.content
+const site = await fetchSiteConfig()
+const traders = await fetchTraders()
+
 const data = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
