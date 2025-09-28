@@ -15,6 +15,7 @@ import type { Author } from "../types/author";
 import "../styles/global.css";
 import "../styles/toc.css";
 import { organizationSchema } from "~/data/organizationSchema";
+import { Font } from 'astro:assets';
 
 export interface Props {
   title: string;
@@ -117,7 +118,7 @@ if (schemaData && !schemaData?.['@id']) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="https://fxmedia.kenyaforexfirm.com/fonts.css" />
     <link rel='privacy-policy' href='/privacy/' />
     <link rel='terms-of-service' href='/terms/' />
     <link rel='canonical' href={canonicalURL} />
@@ -126,6 +127,7 @@ if (schemaData && !schemaData?.['@id']) {
     <meta name="title" content={homeTitle} />
     <meta name="description" content={homeDescription} />
     <slot name='opengraph' />
+    <Font cssVariable='--font-roboto' preload />
     
     
     <SEO

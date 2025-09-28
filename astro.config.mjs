@@ -17,6 +17,13 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
+  experimental: {
+        fonts: [{
+            provider: fontProviders.google(),
+            name: "Roboto",
+            cssVariable: "--font-roboto"
+        }]
+    },
 
   image: {
     remotePatterns: [
