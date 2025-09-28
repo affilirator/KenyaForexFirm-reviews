@@ -1,6 +1,7 @@
 import { stringify } from 'qs-esm';
 import type { BrokerProps } from '../types';
 import type { FundingMethod, FundingMethodsResponse } from '~/types/funding-methods';
+import type { ForexTrader, SiteConfig, TradersGlobal } from '~/types/payload-types';
 
 const PAYLOAD_API_URL = "https://api.kenyaforexfirm.com";
 
@@ -164,6 +165,62 @@ export const getReviewBySlug = async (slug: string): Promise<BrokerProps | null>
     return null;
   }
 };
+
+export async function fetchSiteConfig(): Promise<SiteConfig> {
+  const res = await fetch('https://fx.mahinge.com/api/globals/site-config');
+  const siteConfig = await res.json()
+  if (!siteConfig) {
+    throw new Error('No site config found');
+  }
+  return siteConfig;
+}
+
+export async function fetchTradersGlobal(): Promise<TradersGlobal> {
+  const res = await fetch('https://fx.mahinge.com/api/globals/traders-global?depth=2&draft=false&locale=undefined&trash=false');
+
+  const content = await res.json()
+  //const content = data.content
+  if (!content) {
+    console.warn('No content found for that page');
+  }
+  return content;
+  
+}
+  
+
+
+export async function fetchTraders(): Promise<ForexTrader[]> {
+  const res = await fetch('https://fx.mahinge.com/api/forex-traders')
+  const data = await res.json()
+    if (!res.ok) {
+        throw new Error('Failed to fetch traders');
+    }
+
+    const traders = data.docs
+    // Assuming the API returns an object with a 'docs' array
+    if (!data || !data.docs) {
+        throw new Error('Invalid data format from traders API');
+    }
+    // Sort traders alphabetically by name
+
+  if (traders.docs.length === 0) {
+    console.warn('No traders found')
+    //redirect('https://fx.mahinge.com');
+  }
+  /*else {
+    traders.docs.sort((a: ForexTrader, b: ForexTrader) => {
+      const aName = a.name.toLowerCase();
+      const bName = b.name.toLowerCase();
+      if (aName < bName) return -1;
+      if (aName > bName) return 1;
+      return 0;
+    });
+
+  }
+    */
+  return traders.docs;
+  
+}
 
 export const getFundingMethodBySlug = async (slug: string): Promise<FundingMethod | null> => {
   try {
