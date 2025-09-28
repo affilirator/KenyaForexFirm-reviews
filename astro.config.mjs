@@ -110,12 +110,24 @@ export default defineConfig({
   output: 'static',
 
   vite: {
+    resolve: {
+      alias: {
+        // This alias is crucial for shadcn/ui to work correctly
+        "@": path.resolve(__dirname, "./src"),
+        "~": path.resolve(__dirname, "./src"),
+      },
+    },
     build: {
       cssCodeSplit: true,
       rollupOptions: {
         output: {
           manualChunks: {
             vendor: ['astro-seo'],
+            uiComponents: [
+            'react',
+            'react-dom',
+            // Add UI-related libraries if applicable
+          ],
           },
         },
       },
