@@ -27,7 +27,7 @@ export async function fetchSiteConfig(): Promise<SiteConfig> {
 export async function fetchTradersGlobal(): Promise<TradersGlobal> {
   const res = await fetch('https://fx.mahinge.com/api/globals/traders-global?depth=2&draft=false&locale=undefined&trash=false');
 
-  const content = await res.json() as TradersGlobal
+  const content = await res.json()
   //const content = data.content
   if (!content) {
     console.warn('No content found for that page');
@@ -243,10 +243,7 @@ keywords={metadata.keywords.join(',')}
               <TraderBio sectionIntro='' sectionTitle='' trader={trader} />
             ))}
           </div>
-          { content && (
-         <RichText content={content} client:idle />
-        )
-         }
+          
     </div>
     </BaseLayout>
   
