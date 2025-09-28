@@ -12,11 +12,11 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 import { fetchSiteConfig, fetchTraders, fetchTradersGlobal } from '~/lib/qs-esm';
 
 
-const tradersDetail = await fetchTradersGlobal()
-const content = tradersDetail.content
+//const tradersDetail = await fetchTradersGlobal()
+//const content = tradersDetail.content
 const site = await fetchSiteConfig()
 const traders = await fetchTraders()
-
+/*
 const data = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -93,6 +93,7 @@ const data = {
     }
   }
 }
+*/
 
 export const metadata = {
   title: `Best Forex Traders in Kenya ${new Date().getFullYear()} | Profiles & Strategies`,
@@ -102,11 +103,11 @@ export const metadata = {
     canonical: 'https://fx.mahinge.com/best-forex-traders',
   },
    
-    authors: [{ name: tradersDetail.authorName, url: 'https://fx.mahinge.com/about/patrick-mahinge' }],
+    //authors: [{ name: tradersDetail.authorName, url: 'https://fx.mahinge.com/about/patrick-mahinge' }],
     
   openGraph: {
     type: 'article',
-    publishedTime: tradersDetail.createdAt ? new Date(tradersDetail.createdAt).toISOString() : new Date().toISOString(),
+    //publishedTime: tradersDetail.createdAt ? new Date(tradersDetail.createdAt).toISOString() : new Date().toISOString(),
     modifiedTime: new Date().toISOString(),
     authors: ['Patrick Mahinge'],
     //siteName: siteConfig.siteTitle,
@@ -119,7 +120,7 @@ export const metadata = {
     siteName: site.siteTitle,
     images: [
       {
-        url: typeof tradersDetail.featuredImage === 'object' && tradersDetail.featuredImage?.url ? tradersDetail.featuredImage.url : '/default-image.jpg',
+       // url: typeof tradersDetail.featuredImage === 'object' && tradersDetail.featuredImage?.url ? tradersDetail.featuredImage.url : '/default-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Best Forex Traders in Kenya',
