@@ -127,10 +127,7 @@ if (schemaData && !schemaData?.['@id']) {
     <meta name="title" content={homeTitle} />
     <meta name="description" content={homeDescription} />
     <slot name='opengraph' />
-    <Font cssVariable='--font-roboto' preload />
-    <Font cssVariable='--font-source-sans-3' preload />
-    <Font cssVariable='--font-eb-garamond' preload />
-    <Font cssVariable='--font-playfair-display' preload />
+    
     
     
     <SEO
@@ -271,6 +268,10 @@ if (schemaData && !schemaData?.['@id']) {
       <div class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-primary-500/10 to-accent-500/10 rounded-full blur-xl"></div>
       <div class="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-xl"></div>
     </div>
+    <Font cssVariable='--font-roboto' preload />
+    <Font cssVariable='--font-source-sans-3' preload />
+    <Font cssVariable='--font-eb-garamond' preload />
+    <Font cssVariable='--font-playfair-display' preload />
 
     <style>
       ::-webkit-scrollbar { width: 8px; }
