@@ -242,7 +242,10 @@ keywords={metadata.keywords.join(',')}
               <TraderBio sectionIntro='' sectionTitle='' trader={trader} />
             ))}
           </div>
-          <RichText content={tradersDetail.content} client:idle />
+
+         { tradersDetail.content && (
+         <RichText content={tradersDetail.content} client:idle />)
+         }
     </div>
     </BaseLayout>
   
