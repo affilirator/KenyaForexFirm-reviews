@@ -22,6 +22,7 @@ const traderTitle = tradersDetail.title
 if (!traderTitle) {
     throw new Error('Not found')
 }
+const content = tradersDetail.content
 /*
 const data = {
   "@context": "https://schema.org",
@@ -200,7 +201,7 @@ keywords={keywords.join(',')}
               <TraderBio sectionIntro='' sectionTitle='' trader={trader} />
             ))}
           </div>
-          
+          <RichText content={content} client:load />
     </div>
     </BaseLayout>
   
