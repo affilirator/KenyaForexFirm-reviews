@@ -59,8 +59,8 @@ const supportingBrokers = allBrokers.docs.filter(broker =>
     title={`${supportingBrokers.length} of Our Top-Rated Forex Brokers Accept ${data.title || data.name}`}
     description={`All brokers below accept ${data.name || data.name} for deposits and withdrawals.`}
   />
-  <section class='prose '>
-    <RichText content={data.content} />
+  <section class='dark'>
+    <RichText content={data.content} client:load />
   </section>
 
   <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={data.name || data.name} />
