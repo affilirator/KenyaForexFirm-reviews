@@ -11,6 +11,7 @@ import type { ForexTrader, SiteConfig, TradersGlobal } from '~/types/payload-typ
 import BaseLayout from '~/layouts/BaseLayout.astro';
 
 const tradersDetail = await fetchTradersGlobal()
+
 const site = await fetchSiteConfig()
 const traders = await fetchTraders()
 
@@ -68,7 +69,7 @@ export async function fetchTraders(): Promise<ForexTrader[]> {
   return traders.docs;
   
 }
-
+const content = tradersDetail.content
 const data = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -190,7 +191,7 @@ const metaKeywords = metadata.keywords.map(
 ---
 <BaseLayout title={metadata.title} 
 description={metadata.description}
-schemaData={data}
+
 keywords={metadata.keywords.join(',')}
 >
 
@@ -242,8 +243,8 @@ keywords={metadata.keywords.join(',')}
               <TraderBio sectionIntro='' sectionTitle='' trader={trader} />
             ))}
           </div>
-          { tradersDetail.content && (
-         <RichText content={tradersDetail.content} client:idle />
+          { content && (
+         <RichText content={content} client:idle />
         )
          }
     </div>
