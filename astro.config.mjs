@@ -11,7 +11,10 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://fx.kenyaforexfirm.com',
-  integrations: [tailwind(), icon(), react(), sitemap()],
+  integrations: [tailwind({
+      // Apply base styles before Astro's styles
+      applyBaseStyles: false,
+    }),, icon(), react(), sitemap()],
   trailingSlash: 'always',
 
   build: {
@@ -112,9 +115,10 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        // This alias is crucial for shadcn/ui to work correctly
-        "@": path.resolve(__dirname, "./src"),
-        "~": path.resolve(__dirname, "./src"),
+        // This alias is crucial for Shadcn UI and clean imports.
+        // It lets you import with `@/components/ui/button` instead of `../../components/ui/button`.
+        '@': './src',
+        '~': './src',
       },
     },
     build: {
