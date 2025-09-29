@@ -23,9 +23,9 @@ import {
 
 const { trader } = Astro.props
 ---
-<HeroSlot class="mb-4">
+<HeroSlot class="mb-4 min-h-screen">
   <h1 id={`${trader.name.toLowerCase().replace(/\s+/g, '-')}`} slot="title"
-            class="text-4xl font-display font-bold mb-2">{trader.name}'s Forex Trading Journey & Accomplishments
+            class="text-4xl font-display font-bold">{trader.name}'s Forex Trading Journey & Accomplishments
             </h1>
              <Image src={trader.photo?.url || '/default.jpg'} alt={trader.name || 'Trader'} width={600} height={600} class="rounded-xl" slot="image" />
              <RichText content={trader.bio} slot='description' />
@@ -37,7 +37,7 @@ const { trader } = Astro.props
           ))}
              </span>
              <Fragment slot="badge">
-            <p class="mb-3 font-ui text-sm">{trader.experienceYears}+ years of experience as a {trader.tradingStyle} trader </p>
+            <p class=" font-ui text-sm">{trader.experienceYears}+ years of experience as a {trader.tradingStyle} trader </p>
               </Fragment>
 
 
