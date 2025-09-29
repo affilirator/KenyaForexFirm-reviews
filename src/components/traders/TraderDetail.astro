@@ -5,7 +5,10 @@
 import {Image} from 'astro:assets';
 import type { ForexTrader } from '~/types/payload-types'
 import RichText from '~/components/common/RichText';
-import HeroSlot from '../slots/HeroSlot.astro';
+
+interface Props {
+  trader: ForexTrader;
+}
 
 import {
   Accordion,
@@ -15,13 +18,8 @@ import {
 } from "@/components/ui/accordion"
 
 
-const  trader  = Astro.props as ForexTrader
+const { trader } = Astro.props
 ---
-<HeroSlot>
-  <Image src={trader.photo?.url || '/default.jpg'} alt={trader.name || 'Trader'} width={300} height={300} class="rounded-xl" slot="image" />
-  
-
-</HeroSlot>
       
          <h1 id={`${trader.name.toLowerCase().replace(/\s+/g, '-')}`} 
             class="text-4xl font-bold mb-4">{trader.name} - Forex Trading Journey & Accomplishments
