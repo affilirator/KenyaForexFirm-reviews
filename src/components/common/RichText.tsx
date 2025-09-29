@@ -81,7 +81,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
               className={cn(
                 'space-y-2 md:space-y-3 my-4 md:my-6',
                 ListTag === 'ol' ? 'list-decimal' : 'list-disc',
-                'list-outside ml-6 md:ml-8',
+                'list-outside ml-6 md:ml-8 text-primary/50',
                 indent > 0 && `ml-${Math.min(6 + indent * 4, 20)} md:ml-${Math.min(8 + indent * 6, 24)}`
               )}
               role="list"
