@@ -31,12 +31,12 @@ const directionClasses = {
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div 
       class={cn(
-        "flex flex-col items-center gap-8 md:gap-12", 
+        "flex flex-col items-start gap-8 md:gap-12", 
         directionClasses[imagePosition]
       )}
     >
       {Astro.slots.has('image') && (
-        <div class="w-full md:w-1/2 flex-shrink-0">
+        <div class="w-full md:w-1/2 flex-shrink-0 items-end">
           <slot name="image" />
         </div>
       )}

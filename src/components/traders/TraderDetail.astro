@@ -29,9 +29,9 @@ const { trader } = Astro.props
             </h1>
              <Image src={trader.photo?.url || '/default.jpg'} 
              alt={trader.name || 'Trader'} 
-             width={400} 
+             width={600} 
              height={400} 
-             class="rounded-xl" 
+             class="rounded-xl w-full" 
              slot="image" 
              />
              <RichText content={trader.bio} slot='description' />
@@ -70,7 +70,7 @@ const { trader } = Astro.props
             <div class="max-w-none">
               
               <section class="mb-8">
-        <h3 class="font-bold font-display">Key Achievements</h3>
+        <h4 class="font-bold font-display">Key Achievements</h4>
         
         {trader.achievements && (
           <ul class="space-y-2">
