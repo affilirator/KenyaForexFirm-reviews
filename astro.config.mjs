@@ -28,7 +28,7 @@ export default defineConfig({
             cssVariable: "--font-roboto",
             weights: [400, 500, 700, ] ,
             styles: ["normal", "italic", 'oblique', ],
-            subsets: ["cyrillic-ext", "cyrillic", "greek-ext", "greek", "vietnamese", "latin-ext", "latin"],
+            subsets: ["latin-ext", "latin"],
         },
          {
             provider: fontProviders.google(),
@@ -36,7 +36,7 @@ export default defineConfig({
             cssVariable: "--font-source-sans-3",
             weights: [400, 500, 700, ] ,
             styles: ["normal", "italic", 'oblique', ],
-            subsets: ["cyrillic-ext", "cyrillic", "greek-ext", "greek", "vietnamese", "latin-ext", "latin"],
+            subsets: ["latin-ext", "latin"],
         },
         {
         name: "EB Garamond",

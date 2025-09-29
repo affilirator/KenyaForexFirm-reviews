@@ -36,7 +36,7 @@ const { trader, sectionTitle, sectionIntro} = Astro.props
         <h2>{sectionTitle}</h2>
         <p>{sectionIntro}</p>
 
-        <div class="flex flex-col md:flex-row gap-8">
+        <div class="flex flex-col md:flex-row gap-8 dark">
           <div class="md:w-1/3">
             <Image src={typeof trader.photo === 'string' ? trader.photo : trader.photo?.url || '/default.jpg'} alt={'photo of' + trader.name + ' whois one of the best forex traders in Kenya' || 'Trader'} width={300} height={300} class="rounded-xl" />
 
@@ -64,7 +64,7 @@ const { trader, sectionTitle, sectionIntro} = Astro.props
             <p class="text-xl  mb-6">{trader.tradingStyle} Trader | {trader.experienceYears} Years</p>
             <div class="max-w-none">
               <RichText content={trader.bio} />
-                <a href={`/forex-trading/top-traders/${trader.name.toLowerCase().replace(/\s+/g, '-')}/`} class="text-emerald-600 btn-primary">
+                <a href={`/forex-trading/top-traders/${trader.name.toLowerCase().replace(/\s+/g, '-')}/`} class=" btn-primary">
                         Learn More about {trader.name}
                 </a>       
             </div>
