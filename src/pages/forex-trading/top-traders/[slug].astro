@@ -99,7 +99,7 @@ export async function getStaticPaths() {
       name: trader.name,
       description: typeof trader.bio === 'string' ? trader.bio : 'Professional forex trader',
       sameAs: trader.socialLinks?.map((link: any) => link.url),
-      "identifier": `${traderUrl}/#profile`,
+     // "identifier": `${traderUrl}/#profile`,
       image: typeof trader.photo === 'object' && trader.photo?.url ? trader.photo.url : '/default-image.jpg',
       jobTitle: "Forex Trader",
      // worksFor: trader.forexBroker && typeof trader.forexBroker === 'object' ? { "@type": "Organization", "name": trader.forexBroker.name } : undefined,
@@ -130,7 +130,7 @@ export async function getStaticPaths() {
 
 ---
 <BaseLayout title={title} description={description} >
-      <div class="max-w-4xl mx-auto px-4 py-16">
+      <div class="dark max-w-4xl mx-auto px-4 py-16">
         <TraderDetail trader={trader} />
         {trader.mainArticle && (
           

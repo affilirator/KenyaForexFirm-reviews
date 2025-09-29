@@ -1,6 +1,7 @@
-const siteRes = await fetch('https://fx.mahinge.com/api/globals/site-config');
+import { fetchSiteConfig } from "../qs-esm";
 
-const site = await siteRes.json()
+
+const site = await fetchSiteConfig()
 const siteName = site.siteTitle || 'MahingeFX';
 export const personSchema = {
     "@context": 'https://schema.org',

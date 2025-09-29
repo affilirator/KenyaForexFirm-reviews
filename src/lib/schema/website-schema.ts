@@ -1,13 +1,12 @@
+import { fetchSiteConfig } from "../qs-esm";
 
+const site = await fetchSiteConfig()
 
-const res = await fetch('https://fx.mahinge.com/api/globals/site-config')
-
-const site = await res.json()
 export const websiteSchema = {
     '@context': 'https://schema.org',
     "@id": site.siteUrl + '/#website',
     '@type': 'WebSite',
-    name: 'MahingeFx',
+    name: 'Kenya Forex Firm',
     url: site.siteUrl,
     description: site.siteDescription,
     //inLanguage: site.languages.map((lang) => lang.code),
