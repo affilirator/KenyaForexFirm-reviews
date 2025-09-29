@@ -19,9 +19,13 @@ const  trader  = Astro.props as ForexTrader
 ---
 <HeroSlot>
   <Image src={trader.photo?.url || '/default.jpg'} alt={trader.name || 'Trader'} width={300} height={300} class="rounded-xl" slot="image" />
-  <h1 id={`${trader.name.toLowerCase().replace(/\s+/g, '-')}`} slot="title"
-            class="text-4xl font-bold mb-4">{trader.name} - Forex Trading Journey & Accomplishments
+  <span slot="title">
+    <h1 id={`${trader.name.toLowerCase().replace(/\s+/g, '-')}`} 
+            class="text-4xl font-bold mb-4"> {trader.name} - Forex Trading Journey & Accomplishments
             </h1>
+    
+  </span>
+  
             <span slot="meta">
               {trader.socialLinks?.map((link: any, index: number) => (
             <a  href={link.url} class="text-blue-600 hover:underline">
@@ -29,6 +33,10 @@ const  trader  = Astro.props as ForexTrader
             </a>
           ))}
             </span>
+            <span slot="description">
+              <RichText content={trader.bio} />
+            </span>
+             
 
 </HeroSlot>
       
@@ -55,7 +63,7 @@ const  trader  = Astro.props as ForexTrader
            
             <p class="text-xl mb-6">{trader.tradingStyle} Trader | {trader.experienceYears} Years</p>
             <div class="max-w-none">
-              <RichText content={trader.bio} />
+             
               <section class="mb-8">
         <h3 class="text-2xl font-bold mb-4">Key Achievements</h3>
         
