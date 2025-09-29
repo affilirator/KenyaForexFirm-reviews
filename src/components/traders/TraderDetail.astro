@@ -1,7 +1,7 @@
 ---
 // components/TraderDetail.tsx
 //'use client';
-import { useState } from 'react';
+
 import {Image} from 'astro:assets';
 import type { ForexTrader } from '~/types/payload-types'
 import RichText from '~/components/common/RichText';
@@ -14,11 +14,11 @@ import {
 } from "@/components/ui/accordion"
 
 
-const { trader } = Astro.props
+const  trader  = Astro.props as ForexTrader
 ---
       
          <h1 id={`${trader.name.toLowerCase().replace(/\s+/g, '-')}`} 
-            class="text-4xl font-bold mb-4">{trader.name} Forex Trading Journey & Accomplishments
+            class="text-4xl font-bold mb-4">{trader.name} - Forex Trading Journey & Accomplishments
             </h1>
         <div class="flex flex-col md:flex-row gap-8">
           <div class="md:w-1/3">
