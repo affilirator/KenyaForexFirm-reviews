@@ -7,7 +7,7 @@ import { site } from '../../data/site';
 
 // Filter CMA approved brokers
 const { docs: allBrokers } = await getReviews();
-const brokers = allBrokers.filter(broker => broker.cmaApproved);
+const brokers = allBrokers.filter((broker) => broker.cmaApproved);
 
 // SEO optimization
 const title = `CMA Approved Forex Brokers ${new Date().getFullYear()} - Kenya`;
@@ -15,47 +15,64 @@ const description = `Discover CMA approved forex brokers in Kenya. Trade safely 
 
 // Schema markup
 const schemaData = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": title,
-  "description": description,
-  "url": `${site.url}/brokers/cma-approved/`,
-  "mainEntity": {
-    "@type": "ItemList",
-    "numberOfItems": brokers.length,
-    "itemListElement": brokers.map((broker, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": {
-        "@type": "FinancialService",
-        "name": broker.brokerName,
-        "url": `${site.url}/brokers/${broker.slug}/`,
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": broker.brokerRating,
-          "bestRating": 10
-        }
-      }
-    }))
-  }
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description: description,
+  url: `${site.url}/brokers/cma-approved/`,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: brokers.length,
+    itemListElement: brokers.map((broker, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'FinancialService',
+        name: broker.brokerName,
+        url: `${site.url}/brokers/${broker.slug}/`,
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: broker.brokerRating,
+          bestRating: 10,
+        },
+      },
+    })),
+  },
 };
 ---
 
-<BaseLayout title={title} description={description} schemaData={schemaData}>
+<BaseLayout
+  title={title}
+  description={description}
+  schemaData={schemaData}
+>
   <!-- Hero Section with SEO Content -->
-  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+  <section
+    class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950"
+  >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
           CMA Approved Forex Brokers in Kenya
         </h1>
-        <p class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed mb-8">
-          Trade with confidence using Capital Markets Authority (CMA) approved forex brokers. These licensed brokers offer regulatory protection, secure trading environments, and compliance with Kenyan financial laws.
+        <p
+          class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed mb-8"
+        >
+          Trade with confidence using Capital Markets Authority (CMA) approved
+          forex brokers. These licensed brokers offer regulatory protection,
+          secure trading environments, and compliance with Kenyan financial
+          laws.
         </p>
-        <div class="bg-emerald-900/20 border border-emerald-700/30 rounded-lg p-6 max-w-3xl mx-auto">
-          <h2 class="text-lg font-semibold text-emerald-400 mb-2">✓ CMA Protection Benefits</h2>
+        <div
+          class="bg-emerald-900/20 border border-emerald-700/30 rounded-lg p-6 max-w-3xl mx-auto"
+        >
+          <h2 class="text-lg font-semibold text-emerald-400 mb-2">
+            ✓ CMA Protection Benefits
+          </h2>
           <p class="text-neutral-300 text-sm">
-            CMA approved brokers must maintain segregated client funds, provide investor compensation, and adhere to strict regulatory standards for your protection.
+            CMA approved brokers must maintain segregated client funds, provide
+            investor compensation, and adhere to strict regulatory standards for
+            your protection.
           </p>
         </div>
       </div>
@@ -63,7 +80,7 @@ const schemaData = {
   </section>
 
   <!-- Broker List -->
-  <BrokerList 
+  <BrokerList
     brokers={brokers}
     title={`${brokers.length} CMA Approved Brokers Found`}
     description="All brokers listed below are verified as CMA approved and suitable for Kenyan traders."
@@ -73,43 +90,60 @@ const schemaData = {
   <section class="py-16 bg-neutral-900">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="prose prose-invert max-w-none">
-        <h2 class="text-3xl font-display font-bold text-white mb-8">Why Choose CMA Approved Forex Brokers?</h2>
-        
+        <h2 class="text-3xl font-display font-bold text-white mb-8">
+          Why Choose CMA Approved Forex Brokers?
+        </h2>
+
         <div class="grid md:grid-cols-2 gap-8 mb-12">
           <div class="card-glass p-6">
-            <h3 class="text-xl font-semibold text-white mb-4">Regulatory Protection</h3>
+            <h3 class="text-xl font-semibold text-white mb-4">
+              Regulatory Protection
+            </h3>
             <p class="text-neutral-300">
-              CMA approved brokers operate under strict regulatory oversight, ensuring your funds are protected through segregated accounts and investor compensation schemes.
+              CMA approved brokers operate under strict regulatory oversight,
+              ensuring your funds are protected through segregated accounts and
+              investor compensation schemes.
             </p>
           </div>
-          
+
           <div class="card-glass p-6">
             <h3 class="text-xl font-semibold text-white mb-4">Local Support</h3>
             <p class="text-neutral-300">
-              Access customer support in local languages, M-Pesa payment options, and understanding of Kenyan trading regulations and tax requirements.
+              Access customer support in local languages, M-Pesa payment
+              options, and understanding of Kenyan trading regulations and tax
+              requirements.
             </p>
           </div>
-          
+
           <div class="card-glass p-6">
-            <h3 class="text-xl font-semibold text-white mb-4">Compliance Assurance</h3>
+            <h3 class="text-xl font-semibold text-white mb-4">
+              Compliance Assurance
+            </h3>
             <p class="text-neutral-300">
-              CMA licensed brokers must comply with capital adequacy requirements, regular audits, and transparent reporting standards.
+              CMA licensed brokers must comply with capital adequacy
+              requirements, regular audits, and transparent reporting standards.
             </p>
           </div>
-          
+
           <div class="card-glass p-6">
-            <h3 class="text-xl font-semibold text-white mb-4">Dispute Resolution</h3>
+            <h3 class="text-xl font-semibold text-white mb-4">
+              Dispute Resolution
+            </h3>
             <p class="text-neutral-300">
-              Access to formal complaint procedures and dispute resolution mechanisms through the Capital Markets Authority.
+              Access to formal complaint procedures and dispute resolution
+              mechanisms through the Capital Markets Authority.
             </p>
           </div>
         </div>
 
-        <h2 class="text-3xl font-display font-bold text-white mb-6">CMA Approval Requirements</h2>
+        <h2 class="text-3xl font-display font-bold text-white mb-6">
+          CMA Approval Requirements
+        </h2>
         <p class="text-neutral-300 mb-6">
-          The Capital Markets Authority of Kenya requires forex brokers to meet stringent criteria before granting approval:
+          The Capital Markets Authority of Kenya requires forex brokers to meet
+          stringent criteria before granting approval:
         </p>
-        
+
         <ul class="list-disc pl-6 mb-8 text-neutral-300 space-y-2">
           <li>Minimum capital requirements of KES 50 million</li>
           <li>Segregation of client funds from company operational funds</li>
@@ -119,46 +153,71 @@ const schemaData = {
           <li>Compliance with anti-money laundering (AML) regulations</li>
         </ul>
 
-        <h2 class="text-3xl font-display font-bold text-white mb-6">How to Verify CMA Approval</h2>
+        <h2 class="text-3xl font-display font-bold text-white mb-6">
+          How to Verify CMA Approval
+        </h2>
         <p class="text-neutral-300 mb-6">
-          Always verify a broker's CMA approval status before opening an account:
+          Always verify a broker's CMA approval status before opening an
+          account:
         </p>
-        
+
         <ol class="list-decimal pl-6 mb-8 text-neutral-300 space-y-2">
           <li>Check the CMA website's list of licensed dealers</li>
           <li>Verify the broker's license number and validity period</li>
           <li>Confirm the broker's registered business address in Kenya</li>
-          <li>Look for the CMA logo and license details on the broker's website</li>
+          <li>
+            Look for the CMA logo and license details on the broker's website
+          </li>
         </ol>
 
-        <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-6 mb-8">
-          <h3 class="text-lg font-semibold text-yellow-400 mb-2">⚠️ Important Notice</h3>
+        <div
+          class="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-6 mb-8"
+        >
+          <h3 class="text-lg font-semibold text-yellow-400 mb-2">
+            ⚠️ Important Notice
+          </h3>
           <p class="text-neutral-300 text-sm">
-            While CMA approval provides regulatory protection, forex trading still involves substantial risk of loss. Only trade with money you can afford to lose and ensure you understand the risks involved.
+            While CMA approval provides regulatory protection, forex trading
+            still involves substantial risk of loss. Only trade with money you
+            can afford to lose and ensure you understand the risks involved.
           </p>
         </div>
 
-        <h2 class="text-3xl font-display font-bold text-white mb-6">Frequently Asked Questions</h2>
-        
+        <h2 class="text-3xl font-display font-bold text-white mb-6">
+          Frequently Asked Questions
+        </h2>
+
         <div class="space-y-6">
           <div>
-            <h3 class="text-lg font-semibold text-white mb-2">What does CMA approval mean for traders?</h3>
+            <h3 class="text-lg font-semibold text-white mb-2">
+              What does CMA approval mean for traders?
+            </h3>
             <p class="text-neutral-300">
-              CMA approval means the broker operates under Kenyan regulatory oversight, with segregated client funds, investor protection, and compliance with local financial laws.
+              CMA approval means the broker operates under Kenyan regulatory
+              oversight, with segregated client funds, investor protection, and
+              compliance with local financial laws.
             </p>
           </div>
-          
+
           <div>
-            <h3 class="text-lg font-semibold text-white mb-2">Are CMA approved brokers safer than international brokers?</h3>
+            <h3 class="text-lg font-semibold text-white mb-2">
+              Are CMA approved brokers safer than international brokers?
+            </h3>
             <p class="text-neutral-300">
-              CMA approved brokers offer local regulatory protection and easier dispute resolution. However, reputable international brokers with strong regulation (FCA, CySEC) can also be safe options.
+              CMA approved brokers offer local regulatory protection and easier
+              dispute resolution. However, reputable international brokers with
+              strong regulation (FCA, CySEC) can also be safe options.
             </p>
           </div>
-          
+
           <div>
-            <h3 class="text-lg font-semibold text-white mb-2">Can I trade with non-CMA brokers as a Kenyan resident?</h3>
+            <h3 class="text-lg font-semibold text-white mb-2">
+              Can I trade with non-CMA brokers as a Kenyan resident?
+            </h3>
             <p class="text-neutral-300">
-              While not prohibited, the CMA recommends using approved brokers for better protection. If using international brokers, choose those with strong regulatory oversight.
+              While not prohibited, the CMA recommends using approved brokers
+              for better protection. If using international brokers, choose
+              those with strong regulatory oversight.
             </p>
           </div>
         </div>

@@ -14,136 +14,179 @@ const author = broker.author?.[0];
 
 // Convert camelCase to proper capitalization
 const formatFeature = (feature: string) => {
-  return feature.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+  return feature
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, (str) => str.toUpperCase());
 };
 
 // Determine safety level class based on score
-let safetyLevelClass = "bg-red-500/20 text-red-400";
-let safetyText = "Limited Protection";
+let safetyLevelClass = 'bg-red-500/20 text-red-400';
+let safetyText = 'Limited Protection';
 
 if (safetyScore >= 8) {
-  safetyLevelClass = "bg-green-500/20 text-green-400";
-  safetyText = "Excellent Protection";
+  safetyLevelClass = 'bg-green-500/20 text-green-400';
+  safetyText = 'Excellent Protection';
 } else if (safetyScore >= 6) {
-  safetyLevelClass = "bg-yellow-500/20 text-yellow-400";
-  safetyText = "Good Protection";
+  safetyLevelClass = 'bg-yellow-500/20 text-yellow-400';
+  safetyText = 'Good Protection';
 }
 ---
 
-<div class="group relative bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-primary-500/30 hover:shadow-lg hover:shadow-primary-900/10 transition-all duration-300">
+<div
+  class="group relative bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-primary-500/30 hover:shadow-lg hover:shadow-primary-900/10 transition-all duration-300"
+>
   <!-- Rank badge -->
-  <div class="absolute top-4 left-4 w-10 h-10 rounded-full bg-neutral-900/80 backdrop-blur-sm flex items-center justify-center border border-neutral-700/50 shadow-lg z-10">
+  <div
+    class="absolute top-4 left-4 w-10 h-10 rounded-full bg-neutral-900/80 backdrop-blur-sm flex items-center justify-center border border-neutral-700/50 shadow-lg z-10"
+  >
     <span class="text-lg font-bold text-primary-400">#{rank}</span>
   </div>
-  
+
   <!-- Safety score badge -->
-  <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-neutral-900/80 backdrop-blur-sm flex items-center gap-2 border border-neutral-700/50 shadow-lg z-10">
-    <span class={`w-2 h-2 rounded-full ${safetyScore >= 8 ? 'bg-green-400' : safetyScore >= 6 ? 'bg-yellow-400' : 'bg-red-400'}`}></span>
+  <div
+    class="absolute top-4 right-4 px-3 py-1 rounded-full bg-neutral-900/80 backdrop-blur-sm flex items-center gap-2 border border-neutral-700/50 shadow-lg z-10"
+  >
+    <span
+      class={`w-2 h-2 rounded-full ${safetyScore >= 8 ? 'bg-green-400' : safetyScore >= 6 ? 'bg-yellow-400' : 'bg-red-400'}`}
+    ></span>
     <span class="text-lg font-bold text-white">{safetyScore.toFixed(1)}</span>
   </div>
-  
+
   <div class="p-6">
     <!-- Broker header -->
     <div class="flex items-center gap-4 mb-6">
       <div class="flex-shrink-0">
-        {typeof broker.logo === 'object' && broker.logo?.url ? (
-          <Image 
-            src={broker.logo.url} 
-            inferSize
-            alt={`${broker.brokerName} logo`} 
-            class="w-16 h-16 object-contain rounded-lg bg-white p-1 shadow-md"
-          />
-        ) : typeof broker.logo === 'string' ? (
-          <Image 
-            src={broker.logo} 
-            inferSize
-            alt={`${broker.brokerName} logo`} 
-            class="w-16 h-16 object-contain rounded-lg bg-white p-1 shadow-md"
-          />
-        ) : (
-          <div class="w-16 h-16 bg-neutral-700 rounded-lg flex items-center justify-center">
-            <span class="text-xl font-bold text-neutral-400">{broker.brokerName.substring(0, 2)}</span>
-          </div>
-        )}
+        {
+          typeof broker.logo === 'object' && broker.logo?.url ? (
+            <Image
+              src={broker.logo.url}
+              inferSize
+              alt={`${broker.brokerName} logo`}
+              class="w-16 h-16 object-contain rounded-lg bg-white p-1 shadow-md"
+            />
+          ) : typeof broker.logo === 'string' ? (
+            <Image
+              src={broker.logo}
+              inferSize
+              alt={`${broker.brokerName} logo`}
+              class="w-16 h-16 object-contain rounded-lg bg-white p-1 shadow-md"
+            />
+          ) : (
+            <div class="w-16 h-16 bg-neutral-700 rounded-lg flex items-center justify-center">
+              <span class="text-xl font-bold text-neutral-400">
+                {broker.brokerName.substring(0, 2)}
+              </span>
+            </div>
+          )
+        }
       </div>
-      
+
       <div>
-        <h3 class="text-xl font-bold text-white group-hover:text-primary-400 transition-colors">
-          <a href={`/brokers/${broker.slug}/`} class="hover:text-primary-400">
+        <h3
+          class="text-xl font-bold text-white group-hover:text-primary-400 transition-colors"
+        >
+          <a
+            href={`/brokers/${broker.slug}/`}
+            class="hover:text-primary-400"
+          >
             {broker.brokerName}
           </a>
         </h3>
         <div class="flex items-center mt-1">
-          <span class={`${safetyLevelClass} px-2 py-0.5 rounded-full text-xs font-medium`}>
+          <span
+            class={`${safetyLevelClass} px-2 py-0.5 rounded-full text-xs font-medium`}
+          >
             {safetyText}
           </span>
         </div>
       </div>
     </div>
-    
+
     <!-- Broker details -->
     <div class="grid grid-cols-2 gap-4 mb-6">
       <!-- Regulation info -->
       <div class="bg-neutral-700/20 p-3 rounded-lg">
         <div class="regulations text-xs text-neutral-400 mb-1">Regulation</div>
-        {(broker.regulations && broker.regulations.length > 0) || (broker.regulators && broker.regulators.length > 0) ? (
-          <div class="flex flex-wrap gap-1">
-            {broker.regulations && broker.regulations.slice(0, 2).map((reg) => (
-              <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-white">
-                {reg.shortName || reg.name}
-              </span>
-            ))}
-            {broker.regulators && broker.regulators.slice(0, 2).map((reg) => (
-              <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-white">
-                {reg}
-              </span>
-            ))}
-            {((broker.regulations && broker.regulations.length > 2) || (broker.regulators && broker.regulators.length > 2)) && (
-              <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-white">
-                +{(broker.regulations?.length || 0) + (broker.regulators?.length || 0) - 2}
-              </span>
-            )}
-          </div>
-        ) : (
-          <div class="text-sm text-neutral-500">Not specified</div>
-        )}
+        {
+          (broker.regulations && broker.regulations.length > 0) ||
+          (broker.regulators && broker.regulators.length > 0) ? (
+            <div class="flex flex-wrap gap-1">
+              {broker.regulations &&
+                broker.regulations
+                  .slice(0, 2)
+                  .map((reg) => (
+                    <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-white">
+                      {reg.shortName || reg.name}
+                    </span>
+                  ))}
+              {broker.regulators &&
+                broker.regulators
+                  .slice(0, 2)
+                  .map((reg) => (
+                    <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-white">
+                      {reg}
+                    </span>
+                  ))}
+              {((broker.regulations && broker.regulations.length > 2) ||
+                (broker.regulators && broker.regulators.length > 2)) && (
+                <span class="bg-neutral-700/50 px-2 py-0.5 rounded text-xs text-white">
+                  +
+                  {(broker.regulations?.length || 0) +
+                    (broker.regulators?.length || 0) -
+                    2}
+                </span>
+              )}
+            </div>
+          ) : (
+            <div class="text-sm text-neutral-500">Not specified</div>
+          )
+        }
       </div>
-      
+
       <!-- Leverage info -->
       <div class="bg-neutral-700/20 p-3 rounded-lg">
         <div class="text-xs text-neutral-400 mb-1">Max Leverage</div>
         <div class="text-sm font-medium text-white">
-          {broker.maxLeverage || "Not specified"}
+          {broker.maxLeverage || 'Not specified'}
         </div>
       </div>
     </div>
-    
+
     <!-- Features -->
-    {broker.features && broker.features.length > 0 && (
-      <div class="mb-6">
-        <div class="text-xs text-neutral-400 mb-2">Key Features</div>
-        <div class="flex flex-wrap gap-2">
-          {broker.features.slice(0, 3).map((feature) => (
-            <span class="bg-neutral-700/30 text-neutral-300 px-3 py-1 rounded-full text-xs">
-              {formatFeature(feature)}
-            </span>
-          ))}
+    {
+      broker.features && broker.features.length > 0 && (
+        <div class="mb-6">
+          <div class="text-xs text-neutral-400 mb-2">Key Features</div>
+          <div class="flex flex-wrap gap-2">
+            {broker.features.slice(0, 3).map((feature) => (
+              <span class="bg-neutral-700/30 text-neutral-300 px-3 py-1 rounded-full text-xs">
+                {formatFeature(feature)}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-    )}
-    
+      )
+    }
+
     <!-- Footer -->
-    <div class="flex items-center justify-between pt-4 border-t border-neutral-700/30">
-      {author && (
-        <div class="flex items-center text-xs text-neutral-400">
-          <span>Reviewed by:</span>
-          <a href={`/authors/${author.slug}`} class="ml-1 text-primary-400 hover:underline">
-            {author.name}
-          </a>
-        </div>
-      )}
-      
-      <a 
+    <div
+      class="flex items-center justify-between pt-4 border-t border-neutral-700/30"
+    >
+      {
+        author && (
+          <div class="flex items-center text-xs text-neutral-400">
+            <span>Reviewed by:</span>
+            <a
+              href={`/authors/${author.slug}`}
+              class="ml-1 text-primary-400 hover:underline"
+            >
+              {author.name}
+            </a>
+          </div>
+        )
+      }
+
+      <a
         href={`/brokers/${broker.slug}`}
         class="inline-block bg-neutral-700/30 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
       >

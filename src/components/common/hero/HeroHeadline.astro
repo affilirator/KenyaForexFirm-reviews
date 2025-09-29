@@ -1,27 +1,30 @@
 ---
 interface Props {
-    spanOne: string;
-    spanTwo: string;
-    spanThree: string;
+  spanOne: string;
+  spanTwo: string;
+  spanThree: string;
 }
-const {
-    spanOne,
-    spanTwo,
-    spanThree
-} = Astro.props
+const { spanOne, spanTwo, spanThree } = Astro.props;
 ---
- <!-- Main headline with gradient text -->
-      <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight">
-        <span class="block bg-gradient-to-r from-primary-400 via-accent-400 to-primary-400 bg-clip-text text-transparent animate-gradient-x">
-            {spanOne}
-          Kenya's #1
-        </span>
-        <span class="block text-white mt-2">
-          Forex Broker
-          {spanTwo}
-        </span>
-        <span class="block bg-gradient-to-r from-accent-400 via-primary-400 to-accent-400 bg-clip-text text-transparent animate-gradient-x">
-          Review Platform
-          {spanThree}
-        </span>
-      </h1>
+
+<!-- Main headline with gradient text -->
+<h1
+  class="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight"
+>
+  <span
+    class="block bg-gradient-to-r from-primary-400 via-accent-400 to-primary-400 bg-clip-text text-transparent animate-gradient-x"
+  >
+    {spanOne}
+    Kenya's #1
+  </span>
+  <span class="block text-white mt-2">
+    Forex Broker
+    {spanTwo}
+  </span>
+  <span
+    class="block bg-gradient-to-r from-accent-400 via-primary-400 to-accent-400 bg-clip-text text-transparent animate-gradient-x"
+  >
+    Review Platform
+    {spanThree}
+  </span>
+</h1>

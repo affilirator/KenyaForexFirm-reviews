@@ -36,9 +36,30 @@ export interface Image {
   url: string;
   thumbnailURL: string;
   sizes: {
-    small: { url: string; width: number; height: number; mimeType: string; filesize: number; filename: string };
-    tablet: { url: string; width: number; height: number; mimeType: string; filesize: number; filename: string };
-    large: { url: string; width: number; height: number; mimeType: string; filesize: number; filename: string };
+    small: {
+      url: string;
+      width: number;
+      height: number;
+      mimeType: string;
+      filesize: number;
+      filename: string;
+    };
+    tablet: {
+      url: string;
+      width: number;
+      height: number;
+      mimeType: string;
+      filesize: number;
+      filename: string;
+    };
+    large: {
+      url: string;
+      width: number;
+      height: number;
+      mimeType: string;
+      filesize: number;
+      filename: string;
+    };
   };
   filename: string;
   mimeType: string;

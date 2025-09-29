@@ -10,14 +10,19 @@ const API_BASE_URL = 'https://api.kenyaforexfirm.com/api';
  */
 export async function fetchAsicRegulation(): Promise<AsicRegulationGlobal> {
   try {
-    const response = await fetch(`${API_BASE_URL}/globals/asic-regulation?depth=1`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/globals/asic-regulation?depth=1`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch ASIC regulation data: ${response.statusText}`);
+      throw new Error(
+        `Failed to fetch ASIC regulation data: ${response.statusText}`
+      );
     }
 
     return await response.json();

@@ -19,27 +19,31 @@ const percentage = Math.min(Math.max((score / max) * 100, 0), 100);
 ---
 
 <style>
-.rating-container {
-  @apply my-4;
-}
-.label {
-  @apply font-medium mb-1;
-}
-.bar {
-  @apply w-full h-4 bg-gray-200 rounded overflow-hidden;
-}
-.fill {
-  @apply h-full bg-blue-500;
-}
-.score {
-  @apply text-sm text-gray-700 mt-1;
-}
+  .rating-container {
+    @apply my-4;
+  }
+  .label {
+    @apply font-medium mb-1;
+  }
+  .bar {
+    @apply w-full h-4 bg-gray-200 rounded overflow-hidden;
+  }
+  .fill {
+    @apply h-full bg-blue-500;
+  }
+  .score {
+    @apply text-sm text-gray-700 mt-1;
+  }
 </style>
 
 <div class="rating-container">
   <div class="label">{category}</div>
   <div class="bar">
-    <div class="fill" style={`width: ${percentage}%`} />
+    <div
+      class="fill"
+      style={`width: ${percentage}%`}
+    >
+    </div>
   </div>
   <div class="score">{score} / {max}</div>
 </div>

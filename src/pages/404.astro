@@ -10,40 +10,41 @@ const topBrokers = brokers
   .slice(0, 3);
 
 // SEO metadata
-const title = "Page Not Found - Kenya Forex Firm";
-const description = "Sorry, the page you're looking for doesn't exist. Explore our top forex broker reviews and trading resources for Kenyan traders.";
+const title = 'Page Not Found - Kenya Forex Firm';
+const description =
+  "Sorry, the page you're looking for doesn't exist. Explore our top forex broker reviews and trading resources for Kenyan traders.";
 
 // Schema for 404 page
 const schemaData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": title,
-  "description": description,
-  "Publisher": {
-    "@type": "Organization",
-    "@id": `${site.organization.url}/#organization`
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description: description,
+  Publisher: {
+    '@type': 'Organization',
+    '@id': `${site.organization.url}/#organization`,
   },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
       {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": `${site.url}/`
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `${site.url}/`,
       },
       {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Page Not Found",
-        "item": "https://fx.kenyaforexfirm.com/404/"
-      }
-    ]
-  }
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Page Not Found',
+        item: 'https://fx.kenyaforexfirm.com/404/',
+      },
+    ],
+  },
 };
 ---
 
-<BaseLayout 
+<BaseLayout
   title={title}
   description={description}
   schemaData={schemaData}
@@ -53,8 +54,12 @@ const schemaData = {
     <div class="max-w-4xl mx-auto px-4 py-16 text-center">
       <!-- Error Message -->
       <div class="mb-8">
-        <div class="text-8xl font-display font-bold text-gradient mb-4">404</div>
-        <h1 class="text-3xl font-display font-bold text-white mb-4">Page Not Found</h1>
+        <div class="text-8xl font-display font-bold text-gradient mb-4">
+          404
+        </div>
+        <h1 class="text-3xl font-display font-bold text-white mb-4">
+          Page Not Found
+        </h1>
         <p class="text-neutral-300 mb-8">
           Sorry, the page you're looking for doesn't exist or has been moved.
         </p>
@@ -62,12 +67,20 @@ const schemaData = {
 
       <!-- Search & Navigation -->
       <div class="card-glass p-6 mb-8">
-        <h2 class="text-xl font-display font-medium text-white mb-4">Find what you're looking for</h2>
+        <h2 class="text-xl font-display font-medium text-white mb-4">
+          Find what you're looking for
+        </h2>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/" class="btn-primary">
+          <a
+            href="/"
+            class="btn-primary"
+          >
             Return Home
           </a>
-          <a href='/review/best-forex-brokers/' class="bg-neutral-700/50 hover:bg-neutral-600/50 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300">
+          <a
+            href="/review/best-forex-brokers/"
+            class="bg-neutral-700/50 hover:bg-neutral-600/50 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
+          >
             Browse Brokers
           </a>
         </div>
@@ -75,24 +88,41 @@ const schemaData = {
 
       <!-- Recommended Content -->
       <div class="mb-8">
-        <h2 class="text-xl font-display font-medium text-white mb-4">Top Rated Brokers</h2>
+        <h2 class="text-xl font-display font-medium text-white mb-4">
+          Top Rated Brokers
+        </h2>
         <div class="grid sm:grid-cols-3 gap-4">
-          {topBrokers.map(broker => (
-            <a href={`${site.reviewsIndexSlug}/${broker.slug}/`} class="card-glass p-4 hover:border-primary-400/30 transition-all">
-              <div class="font-semibold text-white mb-1">{broker.brokerName}</div>
-              <div class="text-primary-400 text-sm mb-2">Rating: {broker.brokerRating}/10</div>
-              <div class="text-xs text-neutral-400">
-                {broker.cmaRegulated ? "CMA Approved" : "International Broker"}
-              </div>
-            </a>
-          ))}
+          {
+            topBrokers.map((broker) => (
+              <a
+                href={`${site.reviewsIndexSlug}/${broker.slug}/`}
+                class="card-glass p-4 hover:border-primary-400/30 transition-all"
+              >
+                <div class="font-semibold text-white mb-1">
+                  {broker.brokerName}
+                </div>
+                <div class="text-primary-400 text-sm mb-2">
+                  Rating: {broker.brokerRating}/10
+                </div>
+                <div class="text-xs text-neutral-400">
+                  {broker.cmaRegulated
+                    ? 'CMA Approved'
+                    : 'International Broker'}
+                </div>
+              </a>
+            ))
+          }
         </div>
       </div>
 
       <!-- Support Contact -->
       <div>
         <p class="text-neutral-400 text-sm">
-          Need help? <a href="/contact" class="text-primary-400 hover:underline">Contact our support team</a>
+          Need help? <a
+            href="/contact"
+            class="text-primary-400 hover:underline"
+            >Contact our support team</a
+          >
         </p>
       </div>
     </div>

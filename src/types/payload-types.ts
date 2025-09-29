@@ -133,8 +133,12 @@ export interface Config {
     'review-criteria': ReviewCriteriaSelect<false> | ReviewCriteriaSelect<true>;
     'market-news': MarketNewsSelect<false> | MarketNewsSelect<true>;
     'trading-classes': TradingClassesSelect<false> | TradingClassesSelect<true>;
-    'trading-strategies': TradingStrategiesSelect<false> | TradingStrategiesSelect<true>;
-    'forex-instruments': ForexInstrumentsSelect<false> | ForexInstrumentsSelect<true>;
+    'trading-strategies':
+      | TradingStrategiesSelect<false>
+      | TradingStrategiesSelect<true>;
+    'forex-instruments':
+      | ForexInstrumentsSelect<false>
+      | ForexInstrumentsSelect<true>;
     signals: SignalsSelect<false> | SignalsSelect<true>;
     brokers: BrokersSelect<false> | BrokersSelect<true>;
     comments: CommentsSelect<false> | CommentsSelect<true>;
@@ -146,13 +150,23 @@ export interface Config {
     'blog-comments': BlogCommentsSelect<false> | BlogCommentsSelect<true>;
     'course-reviews': CourseReviewsSelect<false> | CourseReviewsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
-    'trading-sessions': TradingSessionsSelect<false> | TradingSessionsSelect<true>;
+    'trading-sessions':
+      | TradingSessionsSelect<false>
+      | TradingSessionsSelect<true>;
     'error-logs': ErrorLogsSelect<false> | ErrorLogsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
-    'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
-    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+    'form-submissions':
+      | FormSubmissionsSelect<false>
+      | FormSubmissionsSelect<true>;
+    'payload-locked-documents':
+      | PayloadLockedDocumentsSelect<false>
+      | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences':
+      | PayloadPreferencesSelect<false>
+      | PayloadPreferencesSelect<true>;
+    'payload-migrations':
+      | PayloadMigrationsSelect<false>
+      | PayloadMigrationsSelect<true>;
   };
   db: {
     defaultIDType: string;
@@ -165,7 +179,9 @@ export interface Config {
   globalsSelect: {
     'site-config': SiteConfigSelect<false> | SiteConfigSelect<true>;
     'traders-global': TradersGlobalSelect<false> | TradersGlobalSelect<true>;
-    'fx-review-criteria': FxReviewCriteriaSelect<false> | FxReviewCriteriaSelect<true>;
+    'fx-review-criteria':
+      | FxReviewCriteriaSelect<false>
+      | FxReviewCriteriaSelect<true>;
   };
   locale: null;
   user: User & {
@@ -204,14 +220,24 @@ export interface User {
   username: string;
   profileUrl?: string | null;
   experienceLevel?: ('beginner' | 'intermediate' | 'advanced') | null;
-  marketsTraded?: ('forex' | 'stocks' | 'crypto' | 'commodities' | 'indices')[] | null;
+  marketsTraded?:
+    | ('forex' | 'stocks' | 'crypto' | 'commodities' | 'indices')[]
+    | null;
   bio?: string | null;
   image?: (string | null) | Media;
   capital?: number | null;
   riskTolerance?: ('low' | 'medium' | 'high') | null;
   goals?: string | null;
   signals?: (string | Signal)[] | null;
-  role: ('admin' | 'member' | 'guest' | 'student' | 'instructor' | 'partner' | 'author')[];
+  role: (
+    | 'admin'
+    | 'member'
+    | 'guest'
+    | 'student'
+    | 'instructor'
+    | 'partner'
+    | 'author'
+  )[];
   subscriptionPlan?: ('free' | 'premium') | null;
   updatedAt: string;
   createdAt: string;
@@ -386,7 +412,14 @@ export interface Platform {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -793,7 +826,14 @@ export interface ForexInstrument {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -836,7 +876,14 @@ export interface ForexInstrument {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -857,7 +904,14 @@ export interface ForexInstrument {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -872,7 +926,14 @@ export interface ForexInstrument {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -888,7 +949,9 @@ export interface ForexInstrument {
   /**
    * Category of the forex instrument.
    */
-  category?: ('Major' | 'Minor' | 'Exotic' | 'Cryptocurrency' | 'Commodity' | 'Index') | null;
+  category?:
+    | ('Major' | 'Minor' | 'Exotic' | 'Cryptocurrency' | 'Commodity' | 'Index')
+    | null;
   featuredImage: string | Media;
   updatedAt: string;
   createdAt: string;
@@ -969,7 +1032,14 @@ export interface TradingClass {
               [k: string]: unknown;
             }[];
             direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            format:
+              | 'left'
+              | 'start'
+              | 'center'
+              | 'right'
+              | 'end'
+              | 'justify'
+              | '';
             indent: number;
             version: number;
           };
@@ -1005,7 +1075,14 @@ export interface TradingClass {
               [k: string]: unknown;
             }[];
             direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            format:
+              | 'left'
+              | 'start'
+              | 'center'
+              | 'right'
+              | 'end'
+              | 'justify'
+              | '';
             indent: number;
             version: number;
           };
@@ -1134,7 +1211,9 @@ export interface MarketNew {
     };
     [k: string]: unknown;
   } | null;
-  categories?: ('Economic Data' | 'Geopolitical' | 'Central Bank' | 'Other')[] | null;
+  categories?:
+    | ('Economic Data' | 'Geopolitical' | 'Central Bank' | 'Other')[]
+    | null;
   newsModules?:
     | (
         | {
@@ -1148,7 +1227,14 @@ export interface MarketNew {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -1243,7 +1329,14 @@ export interface TradingStrategy {
         id?: string | null;
       }[]
     | null;
-  timeframe?: ('Scalping (Minutes)' | 'Day Trading (Hours)' | 'Swing (Days)' | 'Position (Weeks+)') | null;
+  timeframe?:
+    | (
+        | 'Scalping (Minutes)'
+        | 'Day Trading (Hours)'
+        | 'Swing (Days)'
+        | 'Position (Weeks+)'
+      )
+    | null;
   overview: {
     root: {
       type: string;
@@ -1261,7 +1354,16 @@ export interface TradingStrategy {
   };
   toolsRequired?:
     | {
-        type?: ('indicator' | 'chartPattern' | 'candlePattern' | 'forexAccount' | 'platform' | 'other') | null;
+        type?:
+          | (
+              | 'indicator'
+              | 'chartPattern'
+              | 'candlePattern'
+              | 'forexAccount'
+              | 'platform'
+              | 'other'
+            )
+          | null;
         /**
          * Recommended broker for this strategy.
          */
@@ -1290,7 +1392,14 @@ export interface TradingStrategy {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -1311,7 +1420,14 @@ export interface TradingStrategy {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -1329,7 +1445,14 @@ export interface TradingStrategy {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -1350,7 +1473,14 @@ export interface TradingStrategy {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -1459,7 +1589,14 @@ export interface Broker {
               [k: string]: unknown;
             }[];
             direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            format:
+              | 'left'
+              | 'start'
+              | 'center'
+              | 'right'
+              | 'end'
+              | 'justify'
+              | '';
             indent: number;
             version: number;
           };
@@ -1560,7 +1697,14 @@ export interface Review {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -1597,7 +1741,14 @@ export interface Review {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -1617,7 +1768,14 @@ export interface Review {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -1648,7 +1806,14 @@ export interface Review {
               [k: string]: unknown;
             }[];
             direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            format:
+              | 'left'
+              | 'start'
+              | 'center'
+              | 'right'
+              | 'end'
+              | 'justify'
+              | '';
             indent: number;
             version: number;
           };
@@ -1813,7 +1978,14 @@ export interface ForexTrader {
    */
   socialLinks?:
     | {
-        platform: 'x' | 'linkedin' | 'instagram' | 'facebook' | 'youtube' | 'xmlFeed' | 'other';
+        platform:
+          | 'x'
+          | 'linkedin'
+          | 'instagram'
+          | 'facebook'
+          | 'youtube'
+          | 'xmlFeed'
+          | 'other';
         url: string;
         /**
          * Link to the social profile, e.g., "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -1930,7 +2102,12 @@ export interface Post {
   id: string;
   title: string;
   slug: string;
-  category: 'Analysis' | 'Tips' | 'News' | 'Trading Sessions' | 'Getting Started';
+  category:
+    | 'Analysis'
+    | 'Tips'
+    | 'News'
+    | 'Trading Sessions'
+    | 'Getting Started';
   tags?:
     | {
         tag: string;
@@ -2125,7 +2302,14 @@ export interface Form {
                   [k: string]: unknown;
                 }[];
                 direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                format:
+                  | 'left'
+                  | 'start'
+                  | 'center'
+                  | 'right'
+                  | 'end'
+                  | 'justify'
+                  | '';
                 indent: number;
                 version: number;
               };
@@ -2262,7 +2446,14 @@ export interface Form {
               [k: string]: unknown;
             }[];
             direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            format:
+              | 'left'
+              | 'start'
+              | 'center'
+              | 'right'
+              | 'end'
+              | 'justify'
+              | '';
             indent: number;
             version: number;
           };
@@ -4174,5 +4365,3 @@ export interface FxReviewCriteriaSelect<T extends boolean = true> {
 export interface Auth {
   [k: string]: unknown;
 }
-
-

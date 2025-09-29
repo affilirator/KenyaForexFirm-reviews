@@ -5,28 +5,35 @@ import ContactForm from '~/components/contact/ContactForm.astro';
 import ContactInfo from '~/components/contact/ContactInfo.astro';
 import ContactFAQ from '~/components/contact/ContactFAQ.astro';
 import PartnershipCTA from '~/components/contact/PartnershipCTA.astro';
-import { contactHero, contactInfo, brokerCTA, traderCTA, contactFAQs, schemaData } from '~/data/contactData';
+import {
+  contactHero,
+  contactInfo,
+  brokerCTA,
+  traderCTA,
+  contactFAQs,
+  schemaData,
+} from '~/data/contactData';
 import { site } from '~/data/site';
 
 // Formspree form ID - replace with your actual ID
-const formspreeId = "xrgwlkpz";
+const formspreeId = 'xrgwlkpz';
 
 const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": `${site.organization.url}/#organization`,
-  "name": site.siteName,
-  "image": `${site.url}${site.logoPath}`,
-  "telephone": contactInfo.phone,
-  "email": contactInfo.email,
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": contactInfo.address.street,
-    "addressLocality": contactInfo.address.city,
-    "addressCountry": contactInfo.address.country
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${site.organization.url}/#organization`,
+  name: site.siteName,
+  image: `${site.url}${site.logoPath}`,
+  telephone: contactInfo.phone,
+  email: contactInfo.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: contactInfo.address.street,
+    addressLocality: contactInfo.address.city,
+    addressCountry: contactInfo.address.country,
   },
-  "openingHours": "Mo,Tu,We,Th,Fr 09:00-17:00",
-  "url": site.url
+  openingHours: 'Mo,Tu,We,Th,Fr 09:00-17:00',
+  url: site.url,
 };
 ---
 
@@ -36,7 +43,7 @@ const localBusinessSchema = {
   schemaData={schemaData}
 >
   <!-- Hero Section -->
-  <ContactHero 
+  <ContactHero
     title={contactHero.title}
     subtitle={contactHero.subtitle}
   />
@@ -50,7 +57,7 @@ const localBusinessSchema = {
 
       <!-- Contact Information -->
       <div class="space-y-8">
-        <ContactInfo 
+        <ContactInfo
           email={contactInfo.email}
           phone={contactInfo.phone}
           address={contactInfo.address}
@@ -58,14 +65,17 @@ const localBusinessSchema = {
         />
 
         <!-- Structured Data for Local Business -->
-        <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)}></script>
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(localBusinessSchema)}
+        />
       </div>
     </div>
 
     <!-- Target Audience CTAs -->
     <div class="grid md:grid-cols-2 gap-8 mb-16">
       <!-- Broker CTA -->
-      <PartnershipCTA 
+      <PartnershipCTA
         title={brokerCTA.title}
         description={brokerCTA.description}
         buttonText={brokerCTA.buttonText}
@@ -73,7 +83,7 @@ const localBusinessSchema = {
       />
 
       <!-- Trader CTA -->
-      <PartnershipCTA 
+      <PartnershipCTA
         title={traderCTA.title}
         description={traderCTA.description}
         buttonText={traderCTA.buttonText}
@@ -89,30 +99,33 @@ const localBusinessSchema = {
       <ContactFAQ faqs={contactFAQs} />
 
       <!-- FAQ Schema -->
-      <script type="application/ld+json" set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": contactFAQs.map(faq => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer
-          }
-        }))
-      })}></script>
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: contactFAQs.map((faq) => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: faq.answer,
+            },
+          })),
+        })}
+      />
     </div>
 
     <!-- Map Section -->
     <div class="card-glass p-4 overflow-hidden rounded-2xl">
       <div class="aspect-w-16 aspect-h-9">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.347059868733!2d36.81711!3d-1.28333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d62d4fccdd%3A0xb88a4487a56c8c1d!2sNairobi%20City%2C%20Kenya!5e0!3m2!1sen!2sus!4v1656520247684!5m2!1sen!2sus" 
-          width="100%" 
-          height="100%" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy" 
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.347059868733!2d36.81711!3d-1.28333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d62d4fccdd%3A0xb88a4487a56c8c1d!2sNairobi%20City%2C%20Kenya!5e0!3m2!1sen!2sus!4v1656520247684!5m2!1sen!2sus"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           title="Kenya Forex Firm Office Location"
           class="contact-map"

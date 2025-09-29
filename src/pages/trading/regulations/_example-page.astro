@@ -20,11 +20,11 @@ const regulator = {
         children: [
           {
             text: 'The Financial Conduct Authority (FCA) is one of the most respected financial regulators in the world. This guide explores how the FCA regulates forex brokers and what this means for traders.',
-          }
-        ]
-      }
+          },
+        ],
+      },
     ],
-    tableOfContents: true
+    tableOfContents: true,
   },
   aboutRegulator: {
     sectionTitle: 'About the Financial Conduct Authority',
@@ -35,12 +35,12 @@ const regulator = {
         children: [
           {
             text: 'The Financial Conduct Authority (FCA) is the financial regulatory body in the United Kingdom. It operates independently from the UK government and is financed by charging fees to members of the financial services industry.',
-          }
-        ]
-      }
+          },
+        ],
+      },
     ],
     establishedDate: '2013-04-01',
-    officialWebsite: 'https://www.fca.org.uk/'
+    officialWebsite: 'https://www.fca.org.uk/',
   },
   // Additional sections would be included here
   pageSettings: {
@@ -54,9 +54,9 @@ const regulator = {
         children: [
           {
             text: 'This guide is written by financial regulation experts with over 10 years of experience in the forex industry.',
-          }
-        ]
-      }
+          },
+        ],
+      },
     ],
     authoritativeness: [
       {
@@ -64,9 +64,9 @@ const regulator = {
         children: [
           {
             text: 'All information is sourced directly from official FCA documentation and verified by certified financial analysts.',
-          }
-        ]
-      }
+          },
+        ],
+      },
     ],
     trustworthiness: [
       {
@@ -74,30 +74,30 @@ const regulator = {
         children: [
           {
             text: 'We regularly update this guide to reflect the latest regulatory changes and maintain accuracy.',
-          }
-        ]
-      }
+          },
+        ],
+      },
     ],
     sources: [
       {
         sourceName: 'FCA Official Website',
         sourceUrl: 'https://www.fca.org.uk/',
-        description: 'Primary source for regulatory information'
+        description: 'Primary source for regulatory information',
       },
       {
         sourceName: 'FCA Handbook',
         sourceUrl: 'https://www.handbook.fca.org.uk/',
-        description: 'Detailed regulatory rules and guidance'
-      }
-    ]
-  }
+        description: 'Detailed regulatory rules and guidance',
+      },
+    ],
+  },
 };
 ---
-<BaseLayout 
-title={regulator.meta.title}
-description={regulator.meta.description}
-noindex={true}
->
-<RegulatorPage regulator={regulator} />
-  </BaseLayout>
 
+<BaseLayout
+  title={regulator.meta.title}
+  description={regulator.meta.description}
+  noindex={true}
+>
+  <RegulatorPage regulator={regulator} />
+</BaseLayout>

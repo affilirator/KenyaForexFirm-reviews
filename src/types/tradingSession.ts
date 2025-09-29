@@ -42,8 +42,8 @@ export interface TradingSession {
     };
     [k: string]: unknown;
   };
-  author: string ;
-  quiz?: string ;
+  author: string;
+  quiz?: string;
   image?: string;
   tips?: {
     root: {

@@ -5,18 +5,20 @@ interface Props {
   showBorder?: boolean;
 }
 
-const { 
-  trustText = "Trusted by 10,000+ Kenyan traders",
-  indicators = ["CMA Approved", "ISO Certified", "5★ Rated", "Kenya Focused"],
-  showBorder = true
+const {
+  trustText = 'Trusted by 10,000+ Kenyan traders',
+  indicators = ['CMA Approved', 'ISO Certified', '5★ Rated', 'Kenya Focused'],
+  showBorder = true,
 } = Astro.props;
 ---
 
 <div class={`mt-16 pt-8 ${showBorder ? 'border-t border-neutral-800/50' : ''}`}>
   <p class="text-neutral-400 text-sm mb-6">{trustText}</p>
   <div class="flex flex-wrap justify-center items-center gap-8 opacity-60">
-    {indicators.map((indicator) => (
-      <div class="text-neutral-500 font-semibold">{indicator}</div>
-    ))}
+    {
+      indicators.map((indicator) => (
+        <div class="text-neutral-500 font-semibold">{indicator}</div>
+      ))
+    }
   </div>
 </div>

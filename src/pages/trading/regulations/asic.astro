@@ -11,17 +11,19 @@ let error = null;
 try {
   // Debug the data first
   //await debugRegulatorData('asic-regulation');
-  
+
   // Then fetch for the component
   regulatorData = await fetchRegulatorGlobal('asic-regulation');
-  
+
   // Log content sections specifically
   //console.log('Content Sections in component:', regulatorData.contentSections);
   //console.log('Content Sections length:', regulatorData.contentSections ? regulatorData.contentSections.length : 0);
-  
+
   // If contentSections is undefined or null, initialize it as an empty array
   if (!regulatorData.contentSections) {
-    console.warn('Content sections is null or undefined, initializing as empty array');
+    console.warn(
+      'Content sections is null or undefined, initializing as empty array'
+    );
     regulatorData.contentSections = [];
   }
 } catch (err) {
@@ -30,4 +32,7 @@ try {
 }
 ---
 
-<RegulatorPageTemplate regulatorData={regulatorData} error={error} />
+<RegulatorPageTemplate
+  regulatorData={regulatorData}
+  error={error}
+/>

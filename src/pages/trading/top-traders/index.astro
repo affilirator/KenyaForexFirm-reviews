@@ -1,5 +1,4 @@
 ---
-
 import TraderBio from '~/components/traders/TraderBio.astro';
 
 import RichText from '~/components/common/RichText';
@@ -7,22 +6,29 @@ import RichText from '~/components/common/RichText';
 import { personSchema } from '~/lib/schema/person-schema';
 import { websiteSchema } from '~/lib/schema/website-schema';
 import { orgSchema } from '~/lib/schema/org-schema';
-import type { ForexTrader, SiteConfig, TradersGlobal } from '~/types/payload-types';
+import type {
+  ForexTrader,
+  SiteConfig,
+  TradersGlobal,
+} from '~/types/payload-types';
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import { fetchSiteConfig, fetchTraders, fetchTradersGlobal } from '~/lib/qs-esm';
-
+import {
+  fetchSiteConfig,
+  fetchTraders,
+  fetchTradersGlobal,
+} from '~/lib/qs-esm';
 
 //const tradersDetail = await fetchTradersGlobal()
 //const content = tradersDetail.content
-const site = await fetchSiteConfig()
-const traders = await fetchTraders()
-const apiTitle = site.siteTitle
-const tradersDetail = await fetchTradersGlobal()
-const traderTitle = tradersDetail.title
+const site = await fetchSiteConfig();
+const traders = await fetchTraders();
+const apiTitle = site.siteTitle;
+const tradersDetail = await fetchTradersGlobal();
+const traderTitle = tradersDetail.title;
 if (!traderTitle) {
-    throw new Error('Not found')
+  throw new Error('Not found');
 }
-const content = tradersDetail.content
+const content = tradersDetail.content;
 /*
 const data = {
   "@context": "https://schema.org",
@@ -143,26 +149,34 @@ const metaKeywords = metadata.keywords.map(
     (keyword) => keyword.trim()
 )
 */
-const title =  `Best Forex Traders in Kenya ${new Date().getFullYear()} | Profiles & Strategies`
-  const description =  'Meet Kenya\'s top forex traders: Bios, achievements, and broker insights from Patrick Mahinge.'
-  const keywords = ['best forex traders in Kenya', 'top forex traders Kenya', 'forex trading experts Kenya', 'Kenya forex trader profiles', 'successful forex traders Kenya', 'forex trading strategies Kenya', 'Patrick Mahinge forex traders', 'Kenya forex market leaders']
+const title = `Best Forex Traders in Kenya ${new Date().getFullYear()} | Profiles & Strategies`;
+const description =
+  "Meet Kenya's top forex traders: Bios, achievements, and broker insights from Patrick Mahinge.";
+const keywords = [
+  'best forex traders in Kenya',
+  'top forex traders Kenya',
+  'forex trading experts Kenya',
+  'Kenya forex trader profiles',
+  'successful forex traders Kenya',
+  'forex trading strategies Kenya',
+  'Patrick Mahinge forex traders',
+  'Kenya forex market leaders',
+];
 ---
-<BaseLayout title={title}
-description={description}
 
-keywords={keywords.join(',')}
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords.join(',')}
 >
+  <div class="max-w-7xl mx-auto px-4 py-16">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl font-bold mb-4">Best Forex Traders in Kenya</h1>
+      <p class="text-lg">Curated by Patrick Mahinge—real pros, real results.</p>
+    </div>
 
-    <div class=" max-w-7xl mx-auto px-4 py-16">
-     
-
-      <div class="text-center mb-16">
-        <h1 class="text-4xl font-bold  mb-4">Best Forex Traders in Kenya</h1>
-        <p class="text-lg ">Curated by Patrick Mahinge—real pros, real results.</p>
-     
-      </div>
-
-      {/* 
+    {
+      /* 
       
       {traders.length > 0 ? (
         <>
@@ -194,14 +208,22 @@ keywords={keywords.join(',')}
           <h2 className="text-2xl font-semibold text-gray-700 mb-4">No Traders Found</h2>
           <p class="text-gray-600">We're currently building our database of Kenya's top forex traders. Check back soon!</p>
         </div>
-      )}*/}
-      <div class="mt-4 mx-auto">
-            {traders.map((trader: any) => (
-              
-              <TraderBio sectionIntro='' sectionTitle='' trader={trader} />
-            ))}
-          </div>
-          <RichText content={content} client:load />
+      )}*/
+    }
+    <div class="mt-4 mx-auto">
+      {
+        traders.map((trader: any) => (
+          <TraderBio
+            sectionIntro=""
+            sectionTitle=""
+            trader={trader}
+          />
+        ))
+      }
     </div>
-    </BaseLayout>
-  
+    <RichText
+      content={content}
+      client:load
+    />
+  </div>
+</BaseLayout>

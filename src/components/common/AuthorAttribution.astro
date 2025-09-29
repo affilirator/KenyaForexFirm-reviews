@@ -11,29 +11,41 @@ const { author, showImage = true } = Astro.props;
 ---
 
 <div class="flex items-center gap-3">
-  {showImage && author.authorImage && (
-    <a href={`/authors/${author.slug}/`} rel="author" class="flex-shrink-0">
-      <Image
-        src={author.authorImage.url} 
-        alt={author.name} 
-        class="w-10 h-10 rounded-full object-cover"
-        format='webp'
-        width="40"
-        height="40"
-        loading={'lazy'}
-        decoding={'auto'}
-      />
-    </a>
-  )}
+  {
+    showImage && author.authorImage && (
+      <a
+        href={`/authors/${author.slug}/`}
+        rel="author"
+        class="flex-shrink-0"
+      >
+        <Image
+          src={author.authorImage.url}
+          alt={author.name}
+          class="w-10 h-10 rounded-full object-cover"
+          format="webp"
+          width="40"
+          height="40"
+          loading={'lazy'}
+          decoding={'auto'}
+        />
+      </a>
+    )
+  }
   <div>
     <div class="text-sm">
       <span class="text-neutral-400">Written by</span>
-      <a href={`/authors/${author.slug}/`} rel='author' class="text-primary-400 hover:underline ml-1 font-medium">
+      <a
+        href={`/authors/${author.slug}/`}
+        rel="author"
+        class="text-primary-400 hover:underline ml-1 font-medium"
+      >
         {author.name}
       </a>
     </div>
-    {author.jobTitle && (
-      <div class="text-xs text-neutral-500">{author.jobTitle}</div>
-    )}
+    {
+      author.jobTitle && (
+        <div class="text-xs text-neutral-500">{author.jobTitle}</div>
+      )
+    }
   </div>
 </div>

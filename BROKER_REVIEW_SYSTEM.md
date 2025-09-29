@@ -11,36 +11,43 @@ The system consists of modular components that can be combined to create compreh
 ## Core Components - frontend
 
 ### 1. BrokerHeader.astro
+
 - Displays broker logo, name, rating, and key metrics
 - Includes quick action sidebar with CTA buttons
 - Shows key features and badges (CMA approved, etc.)
 
 ### 2. BrokerNavigation.astro
+
 - Sticky navigation with scroll spy functionality
 - Customizable sections
 - Smooth scrolling to sections
 
 ### 3. BrokerOverview.astro
+
 - Auto-generates overview content based on broker data
 - Accepts custom content via props
 - Highlights key broker features and benefits
 
 ### 4. BrokerRegulation.astro
+
 - Displays regulatory licenses and safety features
 - Shows compliance badges and certifications
 - Handles multiple regulation entries
 
 ### 5. BrokerProsAndCons.astro
+
 - Auto-generates pros/cons from broker data
 - Accepts custom pros/cons lists
 - Visual green/red styling for advantages/disadvantages
 
 ### 6. BrokerVerdict.astro
+
 - Final assessment with rating breakdown
 - Auto-generates verdict or accepts custom content
 - Includes CTA buttons for user actions
 
 ### 7. RiskWarning.astro
+
 - Compliance risk warning footer
 - Customizable warning text
 - Required for financial service reviews
@@ -48,12 +55,14 @@ The system consists of modular components that can be combined to create compreh
 ## Dynamic Page System
 
 ### Main Dynamic Page: `/src/pages/brokers/[slug].astro`
+
 - Fetches broker data from PayloadCMS by slug
 - Generates static paths for all published brokers
 - Includes comprehensive SEO optimization
 - Implements full schema markup for EEAT
 
 ### API Integration: `/src/lib/qs-esm.ts`
+
 - `getReviews()` - Fetch all published broker reviews
 - `getReviewById(id)` - Fetch single broker by ID
 - `getReviewBySlug(slug)` - Fetch single broker by slug
@@ -61,6 +70,7 @@ The system consists of modular components that can be combined to create compreh
 ## SEO & EEAT Features
 
 ### Schema Markup
+
 - Review schema with author credentials
 - Breadcrumb navigation schema
 - FAQ schema for common questions
@@ -68,12 +78,14 @@ The system consists of modular components that can be combined to create compreh
 - Financial service schema for broker
 
 ### EEAT Compliance
+
 - **Expertise**: Author credentials and job titles
 - **Experience**: Detailed review methodology
 - **Authoritativeness**: Organization information and contact details
 - **Trustworthiness**: Regulatory information and risk warnings
 
 ### SEO Optimization
+
 - Dynamic meta titles and descriptions
 - Proper heading structure (H1, H2, H3)
 - Internal linking to related pages
@@ -83,6 +95,7 @@ The system consists of modular components that can be combined to create compreh
 ## Usage Examples
 
 ### Basic Dynamic Page
+
 ```astro
 ---
 import { getReviewBySlug } from '../../lib/qs-esm';
@@ -101,14 +114,21 @@ const broker = await getReviewBySlug(slug);
 ```
 
 ### Custom Content Override
+
 ```astro
 ---
-const customPros = ["Custom advantage 1", "Custom advantage 2"];
-const customVerdict = "<p>Custom verdict content...</p>";
+const customPros = ['Custom advantage 1', 'Custom advantage 2'];
+const customVerdict = '<p>Custom verdict content...</p>';
 ---
 
-<BrokerProsAndCons broker={broker} pros={customPros} />
-<BrokerVerdict broker={broker} verdict={customVerdict} />
+<BrokerProsAndCons
+  broker={broker}
+  pros={customPros}
+/>
+<BrokerVerdict
+  broker={broker}
+  verdict={customVerdict}
+/>
 ```
 
 ## Data Structure
@@ -135,18 +155,23 @@ interface BrokerProps {
 ## Customization
 
 ### Adding New Sections
+
 1. Create new component in `/src/components/review/`
 2. Add section to navigation array
 3. Include component in main page template
 
 ### Custom Schema
+
 Use `/src/utils/schemaGenerator.ts` to generate additional schema types:
+
 - `generateBrokerReviewSchema(broker)`
 - `generateBreadcrumbSchema(broker)`
 - `generateFAQSchema(broker)`
 
 ### Styling
+
 All components use Tailwind CSS with the existing design system:
+
 - Neutral color palette with primary/accent gradients
 - Backdrop blur effects and glass morphism
 - Responsive grid layouts

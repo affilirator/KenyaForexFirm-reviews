@@ -9,85 +9,113 @@ interface Props {
 const { author, showReviews = false } = Astro.props;
 ---
 
-<div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-primary-500/30 transition-all">
+<div
+  class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-primary-500/30 transition-all"
+>
   <div class="p-6">
     <div class="flex items-center gap-4 mb-4">
-      {author.authorImage && (
-        <div class="flex-shrink-0">
-          <img 
-            src={author.authorImage.url} 
-            alt={author.name} 
-            class="w-16 h-16 object-cover rounded-full"
-          />
-        </div>
-      )}
+      {
+        author.authorImage && (
+          <div class="flex-shrink-0">
+            <img
+              src={author.authorImage.url}
+              alt={author.name}
+              class="w-16 h-16 object-cover rounded-full"
+            />
+          </div>
+        )
+      }
       <div>
         <h3 class="text-xl font-bold text-white">
-          <a href={`/authors/${author.slug}`} class="hover:text-primary-400">
+          <a
+            href={`/authors/${author.slug}`}
+            class="hover:text-primary-400"
+          >
             {author.name}
           </a>
         </h3>
         <div class="flex items-center gap-2 mt-1">
-          {author.jobTitle && (
-            <span class="text-neutral-400 text-sm">
-              {author.jobTitle}
-            </span>
-          )}
-          {author.credentials && (
-            <span class="bg-primary-500/20 text-primary-400 px-2 py-0.5 rounded text-xs font-medium">
-              {author.credentials}
-            </span>
-          )}
+          {
+            author.jobTitle && (
+              <span class="text-neutral-400 text-sm">{author.jobTitle}</span>
+            )
+          }
+          {
+            author.credentials && (
+              <span class="bg-primary-500/20 text-primary-400 px-2 py-0.5 rounded text-xs font-medium">
+                {author.credentials}
+              </span>
+            )
+          }
         </div>
       </div>
     </div>
-    
+
     <p class="text-neutral-300 text-sm mb-4 line-clamp-3">
       {author.bio}
     </p>
-    
-    {author.knowsAbout && author.knowsAbout.length > 0 && (
-      <div class="mb-4">
-        <div class="text-sm font-medium text-neutral-300 mb-2">Expertise:</div>
-        <div class="flex flex-wrap gap-2">
-          {author.knowsAbout.slice(0, 3).map(expertise => (
-            <span class="bg-neutral-700/30 text-neutral-300 px-3 py-1 rounded-full text-xs">
-              {expertise.fieldName}
-            </span>
-          ))}
+
+    {
+      author.knowsAbout && author.knowsAbout.length > 0 && (
+        <div class="mb-4">
+          <div class="text-sm font-medium text-neutral-300 mb-2">
+            Expertise:
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {author.knowsAbout.slice(0, 3).map((expertise) => (
+              <span class="bg-neutral-700/30 text-neutral-300 px-3 py-1 rounded-full text-xs">
+                {expertise.fieldName}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-    )}
-    
-    {showReviews && author.reviews && author.reviews.docs.length > 0 && (
-      <div>
-        <div class="text-sm font-medium text-neutral-300 mb-2">Recent Reviews:</div>
-        <div class="space-y-2">
-          {author.reviews.docs.slice(0, 3).map(review => (
-            <a 
-              href={`/brokers/${review.slug}`}
-              class="block bg-neutral-700/20 p-2 rounded hover:bg-neutral-700/30 transition-colors"
-            >
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-white">{review.brokerName}</span>
-                <span class="text-xs bg-primary-500/20 text-primary-400 px-2 py-0.5 rounded">
-                  {review.brokerRating.toFixed(1)}
-                </span>
-              </div>
-            </a>
-          ))}
+      )
+    }
+
+    {
+      showReviews && author.reviews && author.reviews.docs.length > 0 && (
+        <div>
+          <div class="text-sm font-medium text-neutral-300 mb-2">
+            Recent Reviews:
+          </div>
+          <div class="space-y-2">
+            {author.reviews.docs.slice(0, 3).map((review) => (
+              <a
+                href={`/brokers/${review.slug}`}
+                class="block bg-neutral-700/20 p-2 rounded hover:bg-neutral-700/30 transition-colors"
+              >
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-white">{review.brokerName}</span>
+                  <span class="text-xs bg-primary-500/20 text-primary-400 px-2 py-0.5 rounded">
+                    {review.brokerRating.toFixed(1)}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
-    )}
-    
+      )
+    }
+
     <div class="mt-4 flex justify-end">
-      <a 
+      <a
         href={`/authors/${author.slug}`}
         class="text-primary-400 hover:text-primary-300 text-sm font-medium flex items-center gap-1"
       >
         View Profile
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          ></path>
         </svg>
       </a>
     </div>

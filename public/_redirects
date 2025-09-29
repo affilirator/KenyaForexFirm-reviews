@@ -16,6 +16,7 @@
 /brokers/high-leverage/ /review/best-forex-brokers/high-leverage/ 301
 /brokers/safety-regulation-ranking/ /review/best-forex-brokers/most-regulated/ 301
 /forex-trading/* /trading/:splat 301
+/old-brokers/ /review/best-forex-brokers/ 301
 #/brokers/ /review/best-forex-brokers/:splat 301
 /*[^/]$ /$1/:splat 301
 /*[^/.]$ /$1/ 301

@@ -1,28 +1,38 @@
 import type { BrokerProps } from '../types';
 
 // Filter brokers by regulation
-export function filterByRegulation(brokers: BrokerProps[], regulator: string): BrokerProps[] {
-  return brokers.filter(broker => 
-    broker.regulation?.some(reg => 
-      reg.shortName.toLowerCase() === regulator.toLowerCase() ||
-      reg.name.toLowerCase().includes(regulator.toLowerCase())
+export function filterByRegulation(
+  brokers: BrokerProps[],
+  regulator: string
+): BrokerProps[] {
+  return brokers.filter((broker) =>
+    broker.regulation?.some(
+      (reg) =>
+        reg.shortName.toLowerCase() === regulator.toLowerCase() ||
+        reg.name.toLowerCase().includes(regulator.toLowerCase())
     )
   );
 }
 
 // Filter brokers by payment method
-export function filterByPaymentMethod(brokers: BrokerProps[], method: string): BrokerProps[] {
-  return brokers.filter(broker =>
-    broker.paymentMethods?.some(payment =>
+export function filterByPaymentMethod(
+  brokers: BrokerProps[],
+  method: string
+): BrokerProps[] {
+  return brokers.filter((broker) =>
+    broker.paymentMethods?.some((payment) =>
       payment.toLowerCase().includes(method.toLowerCase())
     )
   );
 }
 
 // Filter brokers by platform
-export function filterByPlatform(brokers: BrokerProps[], platform: string): BrokerProps[] {
-  return brokers.filter(broker =>
-    broker.platforms?.some(p =>
+export function filterByPlatform(
+  brokers: BrokerProps[],
+  platform: string
+): BrokerProps[] {
+  return brokers.filter((broker) =>
+    broker.platforms?.some((p) =>
       p.toLowerCase().includes(platform.toLowerCase())
     )
   );
@@ -31,8 +41,8 @@ export function filterByPlatform(brokers: BrokerProps[], platform: string): Brok
 // Get unique values for generating static paths
 export function getUniqueRegulators(brokers: BrokerProps[]): string[] {
   const regulators = new Set<string>();
-  brokers.forEach(broker => {
-    broker.regulation?.forEach(reg => {
+  brokers.forEach((broker) => {
+    broker.regulation?.forEach((reg) => {
       regulators.add(reg.shortName.toLowerCase());
     });
   });
@@ -41,8 +51,8 @@ export function getUniqueRegulators(brokers: BrokerProps[]): string[] {
 
 export function getUniquePaymentMethods(brokers: BrokerProps[]): string[] {
   const methods = new Set<string>();
-  brokers.forEach(broker => {
-    broker.paymentMethods?.forEach(method => {
+  brokers.forEach((broker) => {
+    broker.paymentMethods?.forEach((method) => {
       methods.add(method.toLowerCase().replace(/[^a-z0-9]/g, '-'));
     });
   });
@@ -51,8 +61,8 @@ export function getUniquePaymentMethods(brokers: BrokerProps[]): string[] {
 
 export function getUniquePlatforms(brokers: BrokerProps[]): string[] {
   const platforms = new Set<string>();
-  brokers.forEach(broker => {
-    broker.platforms?.forEach(platform => {
+  brokers.forEach((broker) => {
+    broker.platforms?.forEach((platform) => {
       platforms.add(platform.toLowerCase().replace(/[^a-z0-9]/g, '-'));
     });
   });

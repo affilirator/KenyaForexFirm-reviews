@@ -5,8 +5,14 @@ import CoreValues from '../components/about/CoreValues.astro';
 import TeamGrid from '../components/about/TeamGrid.astro';
 import MethodologyList from '../components/about/MethodologyList.astro';
 import CertificationBadges from '../components/about/CertificationBadges.astro';
-import { aboutHero, coreValues, team, methodology, certifications, schemaData } from '../data/aboutData';
-
+import {
+  aboutHero,
+  coreValues,
+  team,
+  methodology,
+  certifications,
+  schemaData,
+} from '../data/aboutData';
 ---
 
 <BaseLayout
@@ -15,7 +21,7 @@ import { aboutHero, coreValues, team, methodology, certifications, schemaData } 
   schemaData={schemaData}
 >
   <!-- Hero Section -->
-  <AboutHero 
+  <AboutHero
     title={aboutHero.title}
     subtitle={aboutHero.subtitle}
     description={aboutHero.description}
@@ -39,8 +45,9 @@ import { aboutHero, coreValues, team, methodology, certifications, schemaData } 
         Our Review Methodology
       </h2>
       <p class="text-lg text-neutral-300 max-w-4xl mx-auto text-center mb-8">
-        We follow a rigorous, data-driven approach to evaluate forex brokers. Our methodology ensures comprehensive, 
-        unbiased assessments focused on the needs of Kenyan traders.
+        We follow a rigorous, data-driven approach to evaluate forex brokers.
+        Our methodology ensures comprehensive, unbiased assessments focused on
+        the needs of Kenyan traders.
       </p>
       <MethodologyList items={methodology} />
     </div>
@@ -59,9 +66,13 @@ import { aboutHero, coreValues, team, methodology, certifications, schemaData } 
         Have Questions?
       </h2>
       <p class="text-neutral-300 mb-6">
-        Our team is ready to assist you with any questions about forex brokers or our review process.
+        Our team is ready to assist you with any questions about forex brokers
+        or our review process.
       </p>
-      <a href="/contact" class="btn-primary inline-block">
+      <a
+        href="/contact"
+        class="btn-primary inline-block"
+      >
         Contact Our Team
       </a>
     </div>

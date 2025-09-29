@@ -6,49 +6,62 @@
 const regulatoryNews = [
   {
     id: 1,
-    title: "CMA Kenya Introduces New Forex Trading Guidelines",
-    date: "2025-06-15",
-    summary: "The Capital Markets Authority of Kenya has announced new guidelines for forex brokers operating in the country, focusing on enhanced client fund protection and transparency requirements.",
-    source: "CMA Kenya"
+    title: 'CMA Kenya Introduces New Forex Trading Guidelines',
+    date: '2025-06-15',
+    summary:
+      'The Capital Markets Authority of Kenya has announced new guidelines for forex brokers operating in the country, focusing on enhanced client fund protection and transparency requirements.',
+    source: 'CMA Kenya',
   },
   {
     id: 2,
-    title: "Global Regulatory Bodies Strengthen Cross-Border Cooperation",
-    date: "2025-05-22",
-    summary: "Major financial regulators including FCA, ASIC, and CySEC have signed a new agreement to strengthen cross-border cooperation in monitoring forex brokers and protecting international traders.",
-    source: "International Organization of Securities Commissions"
+    title: 'Global Regulatory Bodies Strengthen Cross-Border Cooperation',
+    date: '2025-05-22',
+    summary:
+      'Major financial regulators including FCA, ASIC, and CySEC have signed a new agreement to strengthen cross-border cooperation in monitoring forex brokers and protecting international traders.',
+    source: 'International Organization of Securities Commissions',
   },
   {
     id: 3,
-    title: "New EU Regulations Impact Leverage Limits for Retail Traders",
-    date: "2025-04-10",
-    summary: "The European Securities and Markets Authority (ESMA) has implemented stricter leverage limits for retail forex traders, affecting brokers operating across the European Union.",
-    source: "ESMA"
-  }
+    title: 'New EU Regulations Impact Leverage Limits for Retail Traders',
+    date: '2025-04-10',
+    summary:
+      'The European Securities and Markets Authority (ESMA) has implemented stricter leverage limits for retail forex traders, affecting brokers operating across the European Union.',
+    source: 'ESMA',
+  },
 ];
 ---
 
-<div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden">
+<div
+  class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden"
+>
   <div class="p-6">
     <h3 class="text-xl font-bold text-white mb-4">Regulatory News & Updates</h3>
-    
+
     <div class="space-y-4">
-      {regulatoryNews.map(news => (
-        <div class="border-b border-neutral-700/50 pb-4 last:border-0 last:pb-0">
-          <h4 class="text-lg font-medium text-white">{news.title}</h4>
-          <div class="flex items-center gap-2 text-xs text-neutral-400 mt-1 mb-2">
-            <span>{new Date(news.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
-            <span>•</span>
-            <span>{news.source}</span>
+      {
+        regulatoryNews.map((news) => (
+          <div class="border-b border-neutral-700/50 pb-4 last:border-0 last:pb-0">
+            <h4 class="text-lg font-medium text-white">{news.title}</h4>
+            <div class="flex items-center gap-2 text-xs text-neutral-400 mt-1 mb-2">
+              <span>
+                {new Date(news.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </span>
+              <span>•</span>
+              <span>{news.source}</span>
+            </div>
+            <p class="text-sm text-neutral-300">{news.summary}</p>
           </div>
-          <p class="text-sm text-neutral-300">{news.summary}</p>
-        </div>
-      ))}
+        ))
+      }
     </div>
-    
+
     <div class="mt-4 text-center">
-      <a 
-        href="#" 
+      <a
+        href="#"
         class="inline-block text-primary-400 hover:text-primary-300 text-sm font-medium"
       >
         View All Regulatory News

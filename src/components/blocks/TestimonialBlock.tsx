@@ -1,37 +1,37 @@
-import React from 'react'
+import React from 'react';
 //import {Image} from 'astro:assets'
-import { Star, Quote } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
+import { Star, Quote } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel'
+} from '@/components/ui/carousel';
 
 interface Testimonial {
-  quote: string
+  quote: string;
   author: {
-    name: string
-    title?: string
-    company?: string
-    avatar?: { url: string; alt?: string }
-  }
-  rating?: number
-  featured?: boolean
+    name: string;
+    title?: string;
+    company?: string;
+    avatar?: { url: string; alt?: string };
+  };
+  rating?: number;
+  featured?: boolean;
 }
 
 interface TestimonialBlockProps {
-  title?: string
-  subtitle?: string
-  testimonials: Testimonial[]
-  layout?: 'carousel' | 'grid-2' | 'grid-3' | 'featured' | 'masonry'
-  showRatings?: boolean
-  showAvatars?: boolean
-  autoplay?: boolean
-  backgroundColor?: 'default' | 'muted' | 'primary-light' | 'dark'
+  title?: string;
+  subtitle?: string;
+  testimonials: Testimonial[];
+  layout?: 'carousel' | 'grid-2' | 'grid-3' | 'featured' | 'masonry';
+  showRatings?: boolean;
+  showAvatars?: boolean;
+  autoplay?: boolean;
+  backgroundColor?: 'default' | 'muted' | 'primary-light' | 'dark';
 }
 
 const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
@@ -47,20 +47,17 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
-const TestimonialCard: React.FC<{ 
-  testimonial: Testimonial
-  showRatings: boolean
-  showAvatars: boolean
-  featured?: boolean
+const TestimonialCard: React.FC<{
+  testimonial: Testimonial;
+  showRatings: boolean;
+  showAvatars: boolean;
+  featured?: boolean;
 }> = ({ testimonial, showRatings, showAvatars, featured = false }) => {
   return (
-    <Card className={cn(
-      'h-full',
-      featured && 'border-primary shadow-lg'
-    )}>
+    <Card className={cn('h-full', featured && 'border-primary shadow-lg')}>
       <CardContent className="p-6 space-y-4">
         <div className="relative">
           <Quote className="h-8 w-8 text-primary/20 absolute -top-2 -left-2" />
@@ -83,7 +80,7 @@ const TestimonialCard: React.FC<{
               />
             </div>
           )}
-          
+
           <div>
             <div className="font-semibold">{testimonial.author.name}</div>
             {(testimonial.author.title || testimonial.author.company) && (
@@ -97,8 +94,8 @@ const TestimonialCard: React.FC<{
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
   title,
@@ -108,26 +105,29 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
   showRatings = true,
   showAvatars = true,
   autoplay = true,
-  backgroundColor = 'muted'
+  backgroundColor = 'muted',
 }) => {
   const backgroundClasses = {
     default: 'bg-background',
     muted: 'bg-muted/50',
     'primary-light': 'bg-primary/5',
-    dark: 'bg-slate-900 text-white'
-  }
+    dark: 'bg-slate-900 text-white',
+  };
 
   const layoutClasses = {
     'grid-2': 'grid-cols-1 md:grid-cols-2',
     'grid-3': 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
-    'masonry': 'columns-1 md:columns-2 lg:columns-3'
-  }
+    masonry: 'columns-1 md:columns-2 lg:columns-3',
+  };
 
-  const featuredTestimonial = testimonials.find(t => t.featured) || testimonials[0]
-  const regularTestimonials = testimonials.filter(t => !t.featured)
+  const featuredTestimonial =
+    testimonials.find((t) => t.featured) || testimonials[0];
+  const regularTestimonials = testimonials.filter((t) => !t.featured);
 
   return (
-    <section className={cn('py-16 md:py-24', backgroundClasses[backgroundColor])}>
+    <section
+      className={cn('py-16 md:py-24', backgroundClasses[backgroundColor])}
+    >
       <div className="container px-4 md:px-6">
         {(title || subtitle) && (
           <div className="text-center mb-12">
@@ -152,7 +152,10 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
           >
             <CarouselContent>
               {testimonials.map((testimonial, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <CarouselItem
+                  key={index}
+                  className="md:basis-1/2 lg:basis-1/3"
+                >
                   <TestimonialCard
                     testimonial={testimonial}
                     showRatings={showRatings}
@@ -176,7 +179,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
                 featured={true}
               />
             </div>
-            
+
             {regularTestimonials.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {regularTestimonials.slice(0, 3).map((testimonial, index) => (
@@ -209,7 +212,10 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
         {layout === 'masonry' && (
           <div className={cn('gap-6 space-y-6', layoutClasses[layout])}>
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="break-inside-avoid mb-6">
+              <div
+                key={index}
+                className="break-inside-avoid mb-6"
+              >
                 <TestimonialCard
                   testimonial={testimonial}
                   showRatings={showRatings}
@@ -222,5 +228,5 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
         )}
       </div>
     </section>
-  )
-}
+  );
+};

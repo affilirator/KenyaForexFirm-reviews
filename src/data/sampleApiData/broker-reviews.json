@@ -5,11 +5,7 @@
       "updatedAt": "2025-07-16T04:15:03.996Z",
       "brokerWebsite": "superforex",
       "bonusInfo": {
-        "typeOfBonus": [
-          "noDepositBonus",
-          "depositBonus",
-          "topUpBonus"
-        ]
+        "typeOfBonus": ["noDepositBonus", "depositBonus", "topUpBonus"]
       },
       "minDeposit": 1,
       "tenant": "683f46937e7deb35fd6bca89",
@@ -184,9 +180,7 @@
         "commodities",
         "energies"
       ],
-      "countriesNotAllowed": [
-        "Information Unavailable"
-      ],
+      "countriesNotAllowed": ["Information Unavailable"],
       "brokerPaymentMethods": [
         "mPesa",
         "bankTransfer",
@@ -202,9 +196,7 @@
         "bitcoin",
         "litecoin"
       ],
-      "tradingPlatforms": [
-        "proprietary"
-      ],
+      "tradingPlatforms": ["proprietary"],
       "spread": 2,
       "commission": 0.5,
       "brokerAssets": [
@@ -613,9 +605,7 @@
         }
       },
       "fundingMethods": [],
-      "features": [
-        "centAccounts"
-      ],
+      "features": ["centAccounts"],
       "regulators": [],
       "markets": [],
       "countriesNotAllowed": [],
@@ -848,9 +838,7 @@
         }
       },
       "features": [],
-      "regulators": [
-        "IFSC"
-      ],
+      "regulators": ["IFSC"],
       "countriesNotAllowed": [
         "United States",
         "Canada",

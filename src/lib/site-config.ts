@@ -1,11 +1,21 @@
-'use server'
+'use server';
 // lib/payload.ts
 import { getPayloadClient } from '@/payload/get-payload';
 
-import type { SiteConfig, TradingSession, Broker, TradersGlobal, ForexTrader, TradingStrategy, Page, ForexInstrument } from '@/payload-types';
+import type {
+  SiteConfig,
+  TradingSession,
+  Broker,
+  TradersGlobal,
+  ForexTrader,
+  TradingStrategy,
+  Page,
+  ForexInstrument,
+} from '@/payload-types';
 import { redirect } from 'next/navigation';
 
-const API_URL = process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000';
+const API_URL =
+  process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000';
 const payload = await getPayloadClient();
 
 // Helper function for fetching data
@@ -22,7 +32,7 @@ export async function fetchTraders(): Promise<ForexTrader[]> {
     depth: 2,
     limit: 100,
     //where: {country: {equals: 'Kenya'}}
-  })
+  });
   if (traders.docs.length === 0) {
     redirect('https://fx.mahinge.com');
   }
@@ -38,15 +48,18 @@ export async function fetchTraders(): Promise<ForexTrader[]> {
   }
     */
   return traders.docs;
-  
 }
 
 export async function fetchTraderBySlug(slug: string): Promise<ForexTrader> {
   if (!slug) throw new Error('No slug provided');
   if (typeof slug !== 'string') throw new Error('Slug must be a string');
   if (slug.length === 0) throw new Error('Slug cannot be empty');
-  if (slug.length > 100) throw new Error('Slug cannot be longer than 100 characters');
-  if (slug.match(/[^a-z0-9-]/)) throw new Error('Slug must contain only lowercase letters, numbers, and hyphens');
+  if (slug.length > 100)
+    throw new Error('Slug cannot be longer than 100 characters');
+  if (slug.match(/[^a-z0-9-]/))
+    throw new Error(
+      'Slug must contain only lowercase letters, numbers, and hyphens'
+    );
 
   const trader = await payload.find({
     collection: 'forex-traders',
@@ -58,12 +71,10 @@ export async function fetchTraderBySlug(slug: string): Promise<ForexTrader> {
     throw new Error('No trader found');
   }
   return trader.docs[0];
-  
-  
 }
 
 export async function fetchPageBySlug(slug: string): Promise<Page> {
-  const pages = await fetch('https://fx.mahinge.com/api/pages')
+  const pages = await fetch('https://fx.mahinge.com/api/pages');
   if (pages.docs.length === 0) {
     throw new Error('No pages found');
   }
@@ -105,7 +116,6 @@ export async function fetchTradersGlobal(): Promise<TradersGlobal> {
     throw new Error('No traders global content found');
   }
   return content;
-  
 }
 
 export async function fetchTradingStyle(): Promise<TradingStrategy[]> {
@@ -135,15 +145,14 @@ export async function fetchStrategies(): Promise<TradingStrategy[]> {
 }
 
 export async function fetchSiteConfig(): Promise<SiteConfig> {
-  const siteConfig = await fetch('https://fx.mahinge.com/api/globals/site-config');
+  const siteConfig = await fetch(
+    'https://fx.mahinge.com/api/globals/site-config'
+  );
   if (!siteConfig) {
     throw new Error('No site config found');
   }
   return siteConfig;
 }
-
-
-
 
 export async function fetchTradingSessions(): Promise<TradingSession[]> {
   const sessions = await payload.find({
@@ -155,7 +164,6 @@ export async function fetchTradingSessions(): Promise<TradingSession[]> {
     throw new Error('No trading sessions found');
   }
   return sessions.docs;
-  
 }
 
 export async function fetchBrokers(options = {}): Promise<{ docs: Broker[] }> {
@@ -169,7 +177,6 @@ export async function fetchBrokers(options = {}): Promise<{ docs: Broker[] }> {
     throw new Error('No brokers found');
   }
   return fxBrokers;
-  
 }
 
 export async function fetchBrokerBySlug(slug: string): Promise<Broker> {

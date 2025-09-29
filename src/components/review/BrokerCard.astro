@@ -7,42 +7,60 @@ interface Props {
 }
 
 const { broker, index } = Astro.props;
-const logoUrl = typeof broker.logo === 'string' ? broker.logo : broker.logo?.url;
+const logoUrl =
+  typeof broker.logo === 'string' ? broker.logo : broker.logo?.url;
 const scaledRating = broker.brokerRating / 2;
 const fullStars = Math.floor(scaledRating);
 ---
 
-<section class="card-glass group relative hover:border-primary-400/30 overflow-hidden"
-     data-broker-id={broker.id}>
-
+<section
+  class="card-glass group relative hover:border-primary-400/30 overflow-hidden"
+  data-broker-id={broker.id}
+>
   <div class="absolute top-4 right-4 z-10">
-    <div class="bg-gradient-to-r from-primary-500 to-accent-500 text-white text-sm font-bold px-3 py-1.5 rounded-full">
+    <div
+      class="bg-gradient-to-r from-primary-500 to-accent-500 text-white text-sm font-bold px-3 py-1.5 rounded-full"
+    >
       #{index + 1}
     </div>
   </div>
 
   <div class="p-6">
     <header class="flex items-center gap-4 mb-6">
-      <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center">
-        {logoUrl ? (
-          <img src={logoUrl} alt={`${broker.brokerName} logo`} class="w-full h-full object-contain rounded-2xl" />
-        ) : (
-          <span class="text-white font-bold text-xl">{broker.brokerName.charAt(0)}</span>
-        )}
+      <div
+        class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center"
+      >
+        {
+          logoUrl ? (
+            <img
+              src={logoUrl}
+              alt={`${broker.brokerName} logo`}
+              class="w-full h-full object-contain rounded-2xl"
+            />
+          ) : (
+            <span class="text-white font-bold text-xl">
+              {broker.brokerName.charAt(0)}
+            </span>
+          )
+        }
       </div>
 
       <div class="flex-1">
         <h3 class="text-xl font-bold text-white mb-2">{broker.brokerName}</h3>
         <div class="flex items-center gap-2">
           <div class="flex text-yellow-400">
-            {"★".repeat(fullStars)}
+            {'★'.repeat(fullStars)}
           </div>
-          <span class="text-neutral-300 text-sm">{broker.brokerRating.toFixed(1)}</span>
-          {broker.cmaRegulated && (
-            <span class="bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full text-xs">
-              CMA Approved
-            </span>
-          )}
+          <span class="text-neutral-300 text-sm"
+            >{broker.brokerRating.toFixed(1)}</span
+          >
+          {
+            broker.cmaRegulated && (
+              <span class="bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full text-xs">
+                CMA Approved
+              </span>
+            )
+          }
         </div>
       </div>
     </header>
@@ -55,7 +73,11 @@ const fullStars = Math.floor(scaledRating);
       <div class="bg-neutral-800/40 rounded-xl p-3 text-center">
         <div class="text-xs text-neutral-400 mb-1">Spread</div>
         <div class="text-lg font-bold text-white">
-          {typeof broker.spread === 'number' ? `${broker.spread}` : broker.spread}
+          {
+            typeof broker.spread === 'number'
+              ? `${broker.spread}`
+              : broker.spread
+          }
         </div>
       </div>
       <div class="bg-neutral-800/40 rounded-xl p-3 text-center">
@@ -65,10 +87,15 @@ const fullStars = Math.floor(scaledRating);
     </div>
 
     <div class="flex gap-3 pt-4 border-t border-neutral-700/30">
-      <a href={`/brokers/${broker.slug}/`} class="btn-primary flex-1 text-center">
+      <a
+        href={`/brokers/${broker.slug}/`}
+        class="btn-primary flex-1 text-center"
+      >
         View Review
       </a>
-      <button class="bg-neutral-700/50 hover:bg-neutral-600/50 text-neutral-200 hover:text-white font-semibold py-3 px-6 rounded-lg">
+      <button
+        class="bg-neutral-700/50 hover:bg-neutral-600/50 text-neutral-200 hover:text-white font-semibold py-3 px-6 rounded-lg"
+      >
         Compare
       </button>
     </div>

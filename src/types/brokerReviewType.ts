@@ -11,15 +11,15 @@ export type CatRatingItem = {
 };
 
 export type CatRatings = {
-  researchEducation:   CatRatingItem;
-  customerService:     CatRatingItem;
-  userReviewsTrust:    CatRatingItem;
+  researchEducation: CatRatingItem;
+  customerService: CatRatingItem;
+  userReviewsTrust: CatRatingItem;
   safetyAndRegulation: CatRatingItem;
-  feesAndCommissions:  CatRatingItem;
-  marketAccess:        CatRatingItem;
-  mobileTrading:       CatRatingItem;
-  tradingPlatforms:    CatRatingItem;
-  overallExperience:   CatRatingItem;
+  feesAndCommissions: CatRatingItem;
+  marketAccess: CatRatingItem;
+  mobileTrading: CatRatingItem;
+  tradingPlatforms: CatRatingItem;
+  overallExperience: CatRatingItem;
 };
 
 export interface Broker {

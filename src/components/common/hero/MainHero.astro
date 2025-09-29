@@ -1,10 +1,10 @@
 ---
-import HeroCTA from "./HeroCTA.astro"
-import HeroHeadline from "./HeroHeadline.astro"
-import HeroIndexSlot from "./HeroIndexSlot.astro"
-import HeroSubtitle from "./HeroSubtitle.astro"
-import HeroTrustIndicators from "./HeroTrustIndicators.astro"
-import ScrollIndicator from "./ScrollIndicator.astro"
+import HeroCTA from './HeroCTA.astro';
+import HeroHeadline from './HeroHeadline.astro';
+import HeroIndexSlot from './HeroIndexSlot.astro';
+import HeroSubtitle from './HeroSubtitle.astro';
+import HeroTrustIndicators from './HeroTrustIndicators.astro';
+import ScrollIndicator from './ScrollIndicator.astro';
 //const {HeroTitle, HeroSubtitle, HeroCTA, HeroTrust, ScrollIndicator} = Astro.props
 
 interface Button {
@@ -12,55 +12,55 @@ interface Button {
   href: string;
   type?: 'primary' | 'secondary';
   icon?: string;
-  
 }
 
 interface Headline {
-    spanOne: string;
-    spanTwo: string;
-    spanThree: string;
+  spanOne: string;
+  spanTwo: string;
+  spanThree: string;
 }
 
 interface TrustIndicators {
-    trustText?: string;
-    indicators?: string[];
-    showBorder?: boolean;
+  trustText?: string;
+  indicators?: string[];
+  showBorder?: boolean;
 }
 
-
- 
-
-const {
-    
-} = Astro.props
+const {} = Astro.props;
 ---
-<HeroIndexSlot >
-    <span slot="HeroHeadline">
-        <HeroHeadline spanOne="Welcome to " spanTwo=" - Your Trusted " spanThree=" for Forex Brokers in Kenya!" />
-    </span>
-    <span slot="HeroSubtitle">
-       <HeroSubtitle
-       mainText="We Do Not Just Try"
-       emphasisText="Welcone"
-       afterEmphasisText="you will like ua"
-        />
-    </span>
-    <span slot="HeroCTA">
-        <HeroCTA
-        buttons={
-            [
-                { text: "Get Started", href: "/get-started", type: "primary", icon: 'mdi:circle' },
-                { text: "Learn More", href: "/learn-more", type: "secondary" }
-            ]
 
-        }
-         />
-    </span>
-    <span slot="HeroTrustIndicators">
-        <HeroTrustIndicators />
-    </span>
-    <span slot="ScrollIndicator">
-        <ScrollIndicator />
-    </span>
-
+<HeroIndexSlot>
+  <span slot="HeroHeadline">
+    <HeroHeadline
+      spanOne="Welcome to "
+      spanTwo=" - Your Trusted "
+      spanThree=" for Forex Brokers in Kenya!"
+    />
+  </span>
+  <span slot="HeroSubtitle">
+    <HeroSubtitle
+      mainText="We Do Not Just Try"
+      emphasisText="Welcone"
+      afterEmphasisText="you will like ua"
+    />
+  </span>
+  <span slot="HeroCTA">
+    <HeroCTA
+      buttons={[
+        {
+          text: 'Get Started',
+          href: '/get-started',
+          type: 'primary',
+          icon: 'mdi:circle',
+        },
+        { text: 'Learn More', href: '/learn-more', type: 'secondary' },
+      ]}
+    />
+  </span>
+  <span slot="HeroTrustIndicators">
+    <HeroTrustIndicators />
+  </span>
+  <span slot="ScrollIndicator">
+    <ScrollIndicator />
+  </span>
 </HeroIndexSlot>

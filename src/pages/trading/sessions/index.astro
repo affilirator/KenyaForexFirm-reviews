@@ -9,139 +9,153 @@ import { Clock, TrendingUp, Globe } from 'lucide-react';
 import type { TradingSession } from '@/types/tradingSession';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 
-
-
 export async function fetchSessions() {
-    try {
-      const apiUrl = 'https://fx.mahinge.com';
-        const response = await fetch(`${apiUrl}/api/trading-sessions`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+  try {
+    const apiUrl = 'https://fx.mahinge.com';
+    const response = await fetch(`${apiUrl}/api/trading-sessions`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-        if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
-        }
-
-        const data = await response.json();
-
-        if (!data || typeof data !== 'object' || !Array.isArray(data.docs)) {
-            throw new Error('Invalid data structure received');
-        }
-
-        return data.docs;
-
-    } catch (error) {
-        if (error instanceof Error) {
-            console.error('Error fetching forex regulators:', error.message);
-        } else {
-            console.error('An unexpected error occurred:', error);
-        }
-        // Return an empty array as a fallback value in case of an error
-        return [];
+    if (!response.ok) {
+      throw new Error(
+        `Network response was not ok: ${response.status} ${response.statusText}`
+      );
     }
+
+    const data = await response.json();
+
+    if (!data || typeof data !== 'object' || !Array.isArray(data.docs)) {
+      throw new Error('Invalid data structure received');
+    }
+
+    return data.docs;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error('Error fetching forex regulators:', error.message);
+    } else {
+      console.error('An unexpected error occurred:', error);
+    }
+    // Return an empty array as a fallback value in case of an error
+    return [];
+  }
 }
 
+const res = await fetch('https://fx.mahinge.com/api/trading-sessions', {
+  headers: {
+    //'Authorization': 'Bearer ' + import.meta.env.API_TOKEN || '',
+    'Content-Type': 'application/json',
+  },
+});
+const data = await res.json();
 
+// Debug: Log the API response to debug
+console.log('API Response:', data);
 
-    const res = await fetch('https://fx.mahinge.com/api/trading-sessions', {
-      headers: {
-        //'Authorization': 'Bearer ' + import.meta.env.API_TOKEN || '',
-        'Content-Type': 'application/json'
-      }
-    }) 
-    const data = await res.json()
-    
-    // Debug: Log the API response to debug
-    console.log('API Response:', data)
-    
-    // Handle API errors
-    if (data.errors) {
-        console.error('API Error:', data.errors)
-    }
-    
-    // Fallback mock data if API fails
-    const mockSessions = [
-      {
-        id: '1',
-        name: 'Sydney Session',
-        slug: 'sydney',
-        kenyaOpenTime: '12:00 AM',
-        kenyaCloseTime: '9:00 AM',
-        localOpenTime: '10:00 AM',
-        localCloseTime: '7:00 PM',
-        timezone: 'AEDT (UTC+11)',
-        volatility: 'medium',
-        majorPairs: [{ pair: 'AUD/USD' }, { pair: 'NZD/USD' }]
-      },
-      {
-        id: '2',
-        name: 'Tokyo Session',
-        slug: 'tokyo',
-        kenyaOpenTime: '2:00 AM',
-        kenyaCloseTime: '11:00 AM',
-        localOpenTime: '9:00 AM',
-        localCloseTime: '6:00 PM',
-        timezone: 'JST (UTC+9)',
-        volatility: 'high',
-        majorPairs: [{ pair: 'USD/JPY' }, { pair: 'EUR/JPY' }]
-      },
-      {
-        id: '3',
-        name: 'London Session',
-        slug: 'london',
-        kenyaOpenTime: '10:00 AM',
-        kenyaCloseTime: '7:00 PM',
-        localOpenTime: '8:00 AM',
-        localCloseTime: '5:00 PM',
-        timezone: 'GMT (UTC+0)',
-        volatility: 'very-high',
-        majorPairs: [{ pair: 'GBP/USD' }, { pair: 'EUR/USD' }]
-      },
-      {
-        id: '4',
-        name: 'New York Session',
-        slug: 'new-york',
-        kenyaOpenTime: '3:00 PM',
-        kenyaCloseTime: '12:00 AM',
-        localOpenTime: '8:00 AM',
-        localCloseTime: '5:00 PM',
-        timezone: 'EST (UTC-5)',
-        volatility: 'very-high',
-        majorPairs: [{ pair: 'USD/CAD' }, { pair: 'EUR/USD' }]
-      }
-    ];
-    
-    const sessions = await fetchSessions() || data.docs || mockSessions;
-    const title = 'Forex Trading Sessions in Kenyan Time'
-    const description = 'Master the timing of global forex markets from Kenya. Learn when each session opens and closes in East Africa Time (EAT) for optimal trading opportunities.'
-    const modDate = new Date().toISOString()
+// Handle API errors
+if (data.errors) {
+  console.error('API Error:', data.errors);
+}
+
+// Fallback mock data if API fails
+const mockSessions = [
+  {
+    id: '1',
+    name: 'Sydney Session',
+    slug: 'sydney',
+    kenyaOpenTime: '12:00 AM',
+    kenyaCloseTime: '9:00 AM',
+    localOpenTime: '10:00 AM',
+    localCloseTime: '7:00 PM',
+    timezone: 'AEDT (UTC+11)',
+    volatility: 'medium',
+    majorPairs: [{ pair: 'AUD/USD' }, { pair: 'NZD/USD' }],
+  },
+  {
+    id: '2',
+    name: 'Tokyo Session',
+    slug: 'tokyo',
+    kenyaOpenTime: '2:00 AM',
+    kenyaCloseTime: '11:00 AM',
+    localOpenTime: '9:00 AM',
+    localCloseTime: '6:00 PM',
+    timezone: 'JST (UTC+9)',
+    volatility: 'high',
+    majorPairs: [{ pair: 'USD/JPY' }, { pair: 'EUR/JPY' }],
+  },
+  {
+    id: '3',
+    name: 'London Session',
+    slug: 'london',
+    kenyaOpenTime: '10:00 AM',
+    kenyaCloseTime: '7:00 PM',
+    localOpenTime: '8:00 AM',
+    localCloseTime: '5:00 PM',
+    timezone: 'GMT (UTC+0)',
+    volatility: 'very-high',
+    majorPairs: [{ pair: 'GBP/USD' }, { pair: 'EUR/USD' }],
+  },
+  {
+    id: '4',
+    name: 'New York Session',
+    slug: 'new-york',
+    kenyaOpenTime: '3:00 PM',
+    kenyaCloseTime: '12:00 AM',
+    localOpenTime: '8:00 AM',
+    localCloseTime: '5:00 PM',
+    timezone: 'EST (UTC-5)',
+    volatility: 'very-high',
+    majorPairs: [{ pair: 'USD/CAD' }, { pair: 'EUR/USD' }],
+  },
+];
+
+const sessions = (await fetchSessions()) || data.docs || mockSessions;
+const title = 'Forex Trading Sessions in Kenyan Time';
+const description =
+  'Master the timing of global forex markets from Kenya. Learn when each session opens and closes in East Africa Time (EAT) for optimal trading opportunities.';
+const modDate = new Date().toISOString();
 ---
-<BaseLayout title={title} description={description} modDate={modDate}>
-    <div class="container mx-auto px-4 py-24">
-      <header class="text-center mb-12">
-        <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
-          Forex Trading Sessions in Kenya Time
-        </h1>
-        <p class="text-xl text-muted-foreground dark:invert max-w-3xl mx-auto">
-          Master the timing of global forex markets from Kenya. Learn when each session opens and closes in East Africa Time (EAT) for optimal trading opportunities.
-        </p>
-      </header>
 
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2 mb-12">
-        {sessions.map((session: TradingSession) => (
+<BaseLayout
+  title={title}
+  description={description}
+  modDate={modDate}
+>
+  <div class="container mx-auto px-4 py-24">
+    <header class="text-center mb-12">
+      <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
+        Forex Trading Sessions in Kenya Time
+      </h1>
+      <p class="text-xl text-muted-foreground dark:invert max-w-3xl mx-auto">
+        Master the timing of global forex markets from Kenya. Learn when each
+        session opens and closes in East Africa Time (EAT) for optimal trading
+        opportunities.
+      </p>
+    </header>
+
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2 mb-12">
+      {
+        sessions.map((session: TradingSession) => (
           <a href={`/forex-trading/sessions/${session.slug}/`}>
             <Card className="h-full hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div class="flex items-center justify-between">
-                  <CardTitle className="font-display text-2xl">{session.name}</CardTitle>
-                  <Badge variant={
-                    session.volatility === 'very-high' ? 'destructive' :
-                    session.volatility === 'high' ? 'default' :
-                    session.volatility === 'medium' ? 'secondary' : 'outline'
-                  }>
+                  <CardTitle className="font-display text-2xl">
+                    {session.name}
+                  </CardTitle>
+                  <Badge
+                    variant={
+                      session.volatility === 'very-high'
+                        ? 'destructive'
+                        : session.volatility === 'high'
+                          ? 'default'
+                          : session.volatility === 'medium'
+                            ? 'secondary'
+                            : 'outline'
+                    }
+                  >
                     {session.volatility.replace('-', ' ')} volatility
                   </Badge>
                 </div>
@@ -149,7 +163,9 @@ export async function fetchSessions() {
               <CardContent className="space-y-4">
                 <div class="flex items-center gap-2 text-sm">
                   <Clock className="h-4 w-4" />
-                  <span>{session.kenyaOpenTime} - {session.kenyaCloseTime} EAT</span>
+                  <span>
+                    {session.kenyaOpenTime} - {session.kenyaCloseTime} EAT
+                  </span>
                 </div>
                 <div class="flex items-center gap-2 text-sm">
                   <Globe className="h-4 w-4" />
@@ -158,7 +174,10 @@ export async function fetchSessions() {
                 {session.majorPairs && session.majorPairs.length > 0 && (
                   <div class="flex flex-wrap gap-1">
                     {session.majorPairs.slice(0, 3).map((pair, index) => (
-                      <Badge variant="outline" className="text-xs">
+                      <Badge
+                        variant="outline"
+                        className="text-xs"
+                      >
                         {pair.pair}
                       </Badge>
                     ))}
@@ -167,52 +186,69 @@ export async function fetchSessions() {
               </CardContent>
             </Card>
           </a>
-        ))}
-      </div>
+        ))
+      }
+    </div>
 
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle className="font-display text-2xl flex items-center gap-2">
-            <TrendingUp className="h-6 w-6" />
-            Trading Sessions Overview
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div class="overflow-x-auto">
-            <table class="w-full border-collapse">
-              <thead>
-                <tr class="border-b">
-                  <th class="text-left p-3 font-semibold">Session</th>
-                  <th class="text-left p-3 font-semibold">Kenya Time (EAT)</th>
-                  <th class="text-left p-3 font-semibold">Local Time</th>
-                  <th class="text-left p-3 font-semibold">Volatility</th>
-                  <th class="text-left p-3 font-semibold">Best Pairs</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sessions.map((session: TradingSession) => (
+    <Card className="mb-8">
+      <CardHeader>
+        <CardTitle className="font-display text-2xl flex items-center gap-2">
+          <TrendingUp className="h-6 w-6" />
+          Trading Sessions Overview
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="border-b">
+                <th class="text-left p-3 font-semibold">Session</th>
+                <th class="text-left p-3 font-semibold">Kenya Time (EAT)</th>
+                <th class="text-left p-3 font-semibold">Local Time</th>
+                <th class="text-left p-3 font-semibold">Volatility</th>
+                <th class="text-left p-3 font-semibold">Best Pairs</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                sessions.map((session: TradingSession) => (
                   <tr class="border-b hover:bg-muted/50">
                     <td class="p-3 font-medium">{session.name}</td>
-                    <td class="p-3">{session.kenyaOpenTime} - {session.kenyaCloseTime}</td>
-                    <td class="p-3">{session.localOpenTime} - {session.localCloseTime}</td>
                     <td class="p-3">
-                      <Badge variant={
-                        session.volatility === 'very-high' ? 'destructive' :
-                        session.volatility === 'high' ? 'default' :
-                        session.volatility === 'medium' ? 'secondary' : 'outline'
-                      } className="text-xs">
+                      {session.kenyaOpenTime} - {session.kenyaCloseTime}
+                    </td>
+                    <td class="p-3">
+                      {session.localOpenTime} - {session.localCloseTime}
+                    </td>
+                    <td class="p-3">
+                      <Badge
+                        variant={
+                          session.volatility === 'very-high'
+                            ? 'destructive'
+                            : session.volatility === 'high'
+                              ? 'default'
+                              : session.volatility === 'medium'
+                                ? 'secondary'
+                                : 'outline'
+                        }
+                        className="text-xs"
+                      >
                         {session.volatility.replace('-', ' ')}
                       </Badge>
                     </td>
                     <td class="p-3">
-                      {session.majorPairs?.slice(0, 2).map(pair => pair.pair).join(', ')}
+                      {session.majorPairs
+                        ?.slice(0, 2)
+                        .map((pair) => pair.pair)
+                        .join(', ')}
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  </BaseLayout>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </CardContent>
+    </Card>
+  </div>
+</BaseLayout>

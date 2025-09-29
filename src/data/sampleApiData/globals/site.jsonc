@@ -14,13 +14,13 @@
     "addressLocality": "Westlands",
     "addressRegion": "Nairobi",
     "postalCode": "00400",
-    "addressCountry": "Kenya"
+    "addressCountry": "Kenya",
   },
   "contactPoint": {
     "telephone": "+254710251380",
     "email": "support@kenyaforexfirm.com",
     "contactType": "Customer Service",
-    "contactHours": []
+    "contactHours": [],
   },
   "credentials": [],
   "sameAs": [
@@ -28,43 +28,43 @@
       "platform": "Facebook",
       "url": "https://www.facebook.com/KenyaForexFirm/",
       "displayName": "@KenyaForexFirm",
-      "id": "687918cd340977313f795ecf"
+      "id": "687918cd340977313f795ecf",
     },
     {
       "platform": "Twitter",
       "url": "https://x.com/kenyaforexfirm",
       "displayName": "@kenyaforexfirm",
-      "id": "6879190d340977313f795ed0"
+      "id": "6879190d340977313f795ed0",
     },
     {
       "platform": "LinkedIn",
       "url": "https://ke.linkedin.com/company/kenya-forex-firm",
       "displayName": "@kenyaforexfirm",
-      "id": "68791c62340977313f795ed1"
+      "id": "68791c62340977313f795ed1",
     },
     {
       "platform": "YouTube",
       "url": "https://www.youtube.com/@kenyaforexfirm",
       "displayName": "@kenyaforexfirm",
-      "id": "68791ce10871982737a2c859"
-    }
+      "id": "68791ce10871982737a2c859",
+    },
   ],
   "keywords": [
     {
       "keyword": "Forex trading in Kenya",
-      "id": "68791cff0871982737a2c85a"
-    }
+      "id": "68791cff0871982737a2c85a",
+    },
   ],
   "alternateNames": [],
   "areaServed": [
     {
       "area": "Kenya",
-      "id": "68791d0b0871982737a2c85b"
+      "id": "68791d0b0871982737a2c85b",
     },
     {
       "area": "Nairobi",
-      "id": "68791d110871982737a2c85c"
-    }
+      "id": "68791d110871982737a2c85c",
+    },
   ],
   "_status": "published",
   "legalName": "Kenya Forex Firm",
@@ -84,7 +84,7 @@
             "mimeType": "image/webp",
             "filesize": 3954,
             "filename": "Logo-2-Kenya-Forex-Firm-775.webp",
-            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/small/Logo-2-Kenya-Forex-Firm-775.webp"
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/small/Logo-2-Kenya-Forex-Firm-775.webp",
           },
           "tablet": {
             "width": 250,
@@ -92,7 +92,7 @@
             "mimeType": "image/webp",
             "filesize": 3954,
             "filename": "Logo-2-Kenya-Forex-Firm-1020.webp",
-            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/tablet/Logo-2-Kenya-Forex-Firm-1020.webp"
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/tablet/Logo-2-Kenya-Forex-Firm-1020.webp",
           },
           "large": {
             "width": 250,
@@ -100,8 +100,8 @@
             "mimeType": "image/webp",
             "filesize": 3954,
             "filename": "Logo-2-Kenya-Forex-Firm-1627.webp",
-            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/large/Logo-2-Kenya-Forex-Firm-1627.webp"
-          }
+            "url": "https://ajira.pro.s3.us-east-1.amazonaws.com/media/683f46937e7deb35fd6bca89/images/large/Logo-2-Kenya-Forex-Firm-1627.webp",
+          },
         },
         "tenant": "683f46937e7deb35fd6bca89",
         "url": "https://api.kenyaforexfirm.com/api/media/file/Logo-2-Kenya-Forex-Firm.png",
@@ -115,10 +115,10 @@
         "focalY": 50,
         "id": "687928722118c1e124fde4d6",
         "slug": "kenya-forex-firm-logo",
-        "caption": "kenya-forex-firm-logo"
+        "caption": "kenya-forex-firm-logo",
       },
-      "id": "6879284ac0ae6bec738c1c2c"
-    }
+      "id": "6879284ac0ae6bec738c1c2c",
+    },
   ],
   "employees": {
     "number": 5,
@@ -126,26 +126,24 @@
       {
         "slug": "patrick-mahinge",
         "name": "Patrick Mahinge",
-        "id": "6850b776788b53611ad7ae0d"
-      }
-    ]
+        "id": "6850b776788b53611ad7ae0d",
+      },
+    ],
   },
   "legalPages": {
     "aboutPage": "https://fx.kenyaforexfirm.com/about",
     "ContactPage": "https://kenyaforexfirm.com/contact/",
     "ethicsPolicy": "https://kenyaforexfirm.com/about/ethics/",
     "termsOfService": "https://kenyaforexfirm.com/terms/",
-    "publishingPrinciples": "https://kenyaforexfirm.com/about/editorial-guidelines/"
+    "publishingPrinciples": "https://kenyaforexfirm.com/about/editorial-guidelines/",
   },
   "priceRange": "$$",
   "isSubsidiary": true,
-  "parentOrganization": {
-
-  },
+  "parentOrganization": {},
   "defaultAuthor": {
     "slug": "patrick-mahinge",
     "name": "Patrick Mahinge",
-    "id": "6850b776788b53611ad7ae0d"
+    "id": "6850b776788b53611ad7ae0d",
   },
-  "id": "687916ddcc5534fd4f98db24"
+  "id": "687916ddcc5534fd4f98db24",
 }

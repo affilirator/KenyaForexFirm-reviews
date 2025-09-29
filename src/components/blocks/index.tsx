@@ -1,8 +1,8 @@
-export { HeroBlock } from './HeroBlock'
-export { StatsBlock } from './StatsBlock'
-export { TestimonialBlock } from './TestimonialBlock'
-export { FeatureComparisonBlock } from './FeatureComparisonBlock'
-export { CallToActionBlock } from './CallToActionBlock'
-export { EmphasisBlock } from './EmphasisBlock'
-export { ContentOverviewBlock } from './ContentOverviewBlock'
-export { ConclusionBlock } from './ConclusionBlock'
+export { HeroBlock } from './HeroBlock';
+export { StatsBlock } from './StatsBlock';
+export { TestimonialBlock } from './TestimonialBlock';
+export { FeatureComparisonBlock } from './FeatureComparisonBlock';
+export { CallToActionBlock } from './CallToActionBlock';
+export { EmphasisBlock } from './EmphasisBlock';
+export { ContentOverviewBlock } from './ContentOverviewBlock';
+export { ConclusionBlock } from './ConclusionBlock';

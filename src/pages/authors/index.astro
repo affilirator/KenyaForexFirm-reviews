@@ -12,9 +12,9 @@ const authors = authorsData?.docs || [];
 // Group authors by expertise
 const expertiseGroups = new Map<string, Author[]>();
 
-authors.forEach(author => {
+authors.forEach((author) => {
   if (author.knowsAbout && author.knowsAbout.length > 0) {
-    author.knowsAbout.forEach(expertise => {
+    author.knowsAbout.forEach((expertise) => {
       const field = expertise.fieldName;
       if (!expertiseGroups.has(field)) {
         expertiseGroups.set(field, []);
@@ -27,50 +27,59 @@ authors.forEach(author => {
 });
 
 // Sort expertise groups by number of authors (descending)
-const sortedExpertiseGroups = Array.from(expertiseGroups.entries())
-  .sort((a, b) => b[1].length - a[1].length);
+const sortedExpertiseGroups = Array.from(expertiseGroups.entries()).sort(
+  (a, b) => b[1].length - a[1].length
+);
 
 // Create schema data for SEO
 const schemaData = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": `Expert Authors and Financial Analysts - ${site.name}`,
-  "description": `Meet our team of financial experts and forex analysts at ${site.name}. Learn from their expertise and read their in-depth broker reviews.`,
-  "url": new URL(Astro.request.url).href,
-  "mainEntity": {
-    "@type": "ItemList",
-    "itemListElement": authors.map((author, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": {
-        "@type": "Person",
-        "name": author.name,
-        "jobTitle": author.jobTitle,
-        "url": `${site.url}/authors/${author.slug}`
-      }
-    }))
-  }
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `Expert Authors and Financial Analysts - ${site.name}`,
+  description: `Meet our team of financial experts and forex analysts at ${site.name}. Learn from their expertise and read their in-depth broker reviews.`,
+  url: new URL(Astro.request.url).href,
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: authors.map((author, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Person',
+        name: author.name,
+        jobTitle: author.jobTitle,
+        url: `${site.url}/authors/${author.slug}`,
+      },
+    })),
+  },
 };
 ---
 
 <BaseLayout
   title={`Expert Authors and Financial Analysts | ${site.name}`}
   description={`Meet our team of financial experts and forex analysts at ${site.name}. Learn from their expertise and read their in-depth broker reviews.`}
-  schemaData={schemaData}>
-  
+  schemaData={schemaData}
+>
   <Navigation />
 
-  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+  <section
+    class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950"
+  >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <div class="inline-block mb-4 px-4 py-1 rounded-full bg-primary-500/10 border border-primary-500/20">
+        <div
+          class="inline-block mb-4 px-4 py-1 rounded-full bg-primary-500/10 border border-primary-500/20"
+        >
           <span class="text-primary-400 text-sm font-medium">Our Team</span>
         </div>
         <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-          Meet Our <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Financial Experts</span>
+          Meet Our <span
+            class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent"
+            >Financial Experts</span
+          >
         </h1>
         <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
-          Our team of experienced financial analysts and forex experts provide in-depth reviews and market insights.
+          Our team of experienced financial analysts and forex experts provide
+          in-depth reviews and market insights.
         </p>
       </div>
     </div>
@@ -80,120 +89,133 @@ const schemaData = {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-12">
         <h2 class="text-2xl font-bold text-white mb-8">Our Expert Team</h2>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {authors.map(author => (
-            <a 
-              href={`/authors/${author.slug}`}
-              class="group bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-primary-500/30 hover:shadow-lg hover:shadow-primary-900/10 transition-all duration-300"
-            >
-              <div class="p-6">
-                <div class="flex items-center gap-4 mb-4">
-                  {author.authorImage ? (
-                    <img 
-                      src={author.authorImage.url} 
-                      alt={author.name} 
-                      class="w-16 h-16 object-cover rounded-full border-2 border-neutral-700/50"
-                    />
-                  ) : (
-                    <div class="w-16 h-16 bg-neutral-700 rounded-full flex items-center justify-center">
-                      <span class="text-xl font-bold text-neutral-400">{author.name.substring(0, 2)}</span>
+          {
+            authors.map((author) => (
+              <a
+                href={`/authors/${author.slug}`}
+                class="group bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden hover:border-primary-500/30 hover:shadow-lg hover:shadow-primary-900/10 transition-all duration-300"
+              >
+                <div class="p-6">
+                  <div class="flex items-center gap-4 mb-4">
+                    {author.authorImage ? (
+                      <img
+                        src={author.authorImage.url}
+                        alt={author.name}
+                        class="w-16 h-16 object-cover rounded-full border-2 border-neutral-700/50"
+                      />
+                    ) : (
+                      <div class="w-16 h-16 bg-neutral-700 rounded-full flex items-center justify-center">
+                        <span class="text-xl font-bold text-neutral-400">
+                          {author.name.substring(0, 2)}
+                        </span>
+                      </div>
+                    )}
+
+                    <div>
+                      <h3 class="text-lg font-bold text-white group-hover:text-primary-400 transition-colors">
+                        {author.name}
+                      </h3>
+                      {author.jobTitle && (
+                        <div class="text-sm text-neutral-400">
+                          {author.jobTitle}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {author.knowsAbout && author.knowsAbout.length > 0 && (
+                    <div class="mb-4">
+                      <div class="flex flex-wrap gap-2">
+                        {author.knowsAbout.slice(0, 3).map((expertise) => (
+                          <span class="bg-neutral-700/30 text-neutral-300 px-2 py-0.5 rounded-full text-xs">
+                            {expertise.fieldName}
+                          </span>
+                        ))}
+                        {author.knowsAbout.length > 3 && (
+                          <span class="bg-neutral-700/30 text-neutral-300 px-2 py-0.5 rounded-full text-xs">
+                            +{author.knowsAbout.length - 3}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   )}
-                  
-                  <div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-primary-400 transition-colors">
-                      {author.name}
-                    </h3>
-                    {author.jobTitle && (
-                      <div class="text-sm text-neutral-400">{author.jobTitle}</div>
+
+                  <div class="text-sm text-neutral-300 line-clamp-2 mb-4">
+                    {author.bio}
+                  </div>
+
+                  <div class="flex items-center justify-between text-xs text-neutral-400">
+                    {author.yearsExperience && (
+                      <span>{author.yearsExperience}+ Years Experience</span>
+                    )}
+
+                    {author.reviews && (
+                      <span>{author.reviews.docs.length} Reviews</span>
                     )}
                   </div>
                 </div>
-                
-                {author.knowsAbout && author.knowsAbout.length > 0 && (
-                  <div class="mb-4">
-                    <div class="flex flex-wrap gap-2">
-                      {author.knowsAbout.slice(0, 3).map(expertise => (
-                        <span class="bg-neutral-700/30 text-neutral-300 px-2 py-0.5 rounded-full text-xs">
-                          {expertise.fieldName}
-                        </span>
-                      ))}
-                      {author.knowsAbout.length > 3 && (
-                        <span class="bg-neutral-700/30 text-neutral-300 px-2 py-0.5 rounded-full text-xs">
-                          +{author.knowsAbout.length - 3}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                )}
-                
-                <div class="text-sm text-neutral-300 line-clamp-2 mb-4">
-                  {author.bio}
-                </div>
-                
-                <div class="flex items-center justify-between text-xs text-neutral-400">
-                  {author.yearsExperience && (
-                    <span>{author.yearsExperience}+ Years Experience</span>
-                  )}
-                  
-                  {author.reviews && (
-                    <span>{author.reviews.docs.length} Reviews</span>
-                  )}
-                </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            ))
+          }
         </div>
       </div>
-      
-      {sortedExpertiseGroups.length > 0 && (
-        <div>
-          <h2 class="text-2xl font-bold text-white mb-8">Expertise Areas</h2>
-          
-          <div class="space-y-8">
-            {sortedExpertiseGroups.slice(0, 5).map(([expertise, experts]) => (
-              <div>
-                <h3 class="text-xl font-medium text-white mb-4">{expertise}</h3>
-                
-                <div class="flex flex-wrap gap-3">
-                  {experts.map(expert => (
-                    <a 
-                      href={`/authors/${expert.slug}`}
-                      class="flex items-center gap-2 bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-700/30 rounded-lg px-3 py-2 transition-colors"
-                    >
-                      {expert.authorImage ? (
-                        <img 
-                          src={expert.authorImage.url} 
-                          alt={expert.name} 
-                          class="w-8 h-8 object-cover rounded-full"
-                        />
-                      ) : (
-                        <div class="w-8 h-8 bg-neutral-700 rounded-full flex items-center justify-center">
-                          <span class="text-xs font-bold text-neutral-400">{expert.name.substring(0, 2)}</span>
-                        </div>
-                      )}
-                      <span class="text-sm text-white">{expert.name}</span>
-                    </a>
-                  ))}
+
+      {
+        sortedExpertiseGroups.length > 0 && (
+          <div>
+            <h2 class="text-2xl font-bold text-white mb-8">Expertise Areas</h2>
+
+            <div class="space-y-8">
+              {sortedExpertiseGroups.slice(0, 5).map(([expertise, experts]) => (
+                <div>
+                  <h3 class="text-xl font-medium text-white mb-4">
+                    {expertise}
+                  </h3>
+
+                  <div class="flex flex-wrap gap-3">
+                    {experts.map((expert) => (
+                      <a
+                        href={`/authors/${expert.slug}`}
+                        class="flex items-center gap-2 bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-700/30 rounded-lg px-3 py-2 transition-colors"
+                      >
+                        {expert.authorImage ? (
+                          <img
+                            src={expert.authorImage.url}
+                            alt={expert.name}
+                            class="w-8 h-8 object-cover rounded-full"
+                          />
+                        ) : (
+                          <div class="w-8 h-8 bg-neutral-700 rounded-full flex items-center justify-center">
+                            <span class="text-xs font-bold text-neutral-400">
+                              {expert.name.substring(0, 2)}
+                            </span>
+                          </div>
+                        )}
+                        <span class="text-sm text-white">{expert.name}</span>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
     </div>
   </section>
-  
+
   <section class="py-12 bg-neutral-900">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <h2 class="text-2xl font-bold text-white mb-4">Join Our Expert Team</h2>
         <p class="text-neutral-300 mb-6">
-          Are you a financial expert or forex analyst? We're always looking for knowledgeable professionals to join our team.
+          Are you a financial expert or forex analyst? We're always looking for
+          knowledgeable professionals to join our team.
         </p>
-        <a 
-          href="/contact" 
+        <a
+          href="/contact"
           class="inline-block bg-primary-600 hover:bg-primary-500 text-white px-6 py-3 rounded-lg text-sm font-medium transition-colors"
         >
           Contact Us

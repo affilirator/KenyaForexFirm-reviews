@@ -23,9 +23,7 @@
         "cons": [],
         "rating": 6.7
       },
-      "meta": {
-
-      },
+      "meta": {},
       "relatedBrokers": {
         "docs": [],
         "hasNextPage": false
@@ -45,9 +43,7 @@
       },
       "title": "Airtel Money",
       "slug": "airtel-money-kenya",
-      "meta": {
-
-      },
+      "meta": {},
       "author": {
         "slug": "patrick-mahinge",
         "name": "Patrick Mahinge",
@@ -77,9 +73,7 @@
       },
       "title": "PayPal",
       "slug": "paypal",
-      "meta": {
-
-      },
+      "meta": {},
       "relatedBrokers": {
         "docs": [],
         "hasNextPage": false
@@ -104,9 +98,7 @@
       },
       "title": "Neteller",
       "slug": "neteller",
-      "meta": {
-
-      },
+      "meta": {},
       "relatedBrokers": {
         "docs": [
           {
@@ -7521,9 +7513,7 @@
         "cons": [],
         "rating": 6.7
       },
-      "meta": {
-
-      }
+      "meta": {}
     }
   ],
   "hasNextPage": false,

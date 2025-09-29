@@ -7,7 +7,7 @@ import { site } from '~/data/site';
 
 // Filter CMA approved brokers
 const { docs: allBrokers } = await getReviews();
-const brokers = allBrokers.filter(broker => broker.cmaRegulated);
+const brokers = allBrokers.filter((broker) => broker.cmaRegulated);
 
 // SEO optimization
 const title = `CMA-Regulated Forex Brokers ${new Date().getFullYear()} - Kenya`;
@@ -15,41 +15,45 @@ const description = `Discover CMA approved forex brokers in Kenya. Trade safely 
 
 // Schema markup
 const schemaData = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": title,
-  "dateCreated": "2025-07-07",
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  dateCreated: '2025-07-07',
   lastReviewed: new Date().toISOString(),
-  "dateModified": new Date().toLocaleDateString('en-US', {
+  dateModified: new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   }),
-  "description": description,
-  "url": `${site.url}/brokers/cma-approved/`,
-  "mainEntity": {
-    "@type": "ItemList",
-    "numberOfItems": brokers.length,
-    "itemListElement": brokers.map((broker, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": {
-        "@type": "FinancialService",
-        "name": broker.brokerName,
-        "url": `${site.url}/brokers/${broker.slug}/`,
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": broker.brokerRating,
-          "bestRating": 10
-        }
-      }
-    }))
-  }
+  description: description,
+  url: `${site.url}/brokers/cma-approved/`,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: brokers.length,
+    itemListElement: brokers.map((broker, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'FinancialService',
+        name: broker.brokerName,
+        url: `${site.url}/brokers/${broker.slug}/`,
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: broker.brokerRating,
+          bestRating: 10,
+        },
+      },
+    })),
+  },
 };
 ---
 
-<BaseLayout title={title} description={description} schemaData={schemaData}>
-  <BrokerList 
+<BaseLayout
+  title={title}
+  description={description}
+  schemaData={schemaData}
+>
+  <BrokerList
     brokers={brokers}
     title="Best CMA-Regulated Forex Brokers in Kenya"
     description="Trade with confidence using CMA-regulated forex brokers. These brokers are licensed by Kenya's Capital Markets Authority, ensuring regulatory compliance and trader protection."

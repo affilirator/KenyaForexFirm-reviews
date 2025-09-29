@@ -4,32 +4,33 @@ interface Props {
   subtitle?: string;
 }
 
-const { 
-  title = "Why Trust Our Reviews?",
-  subtitle = "Our expert team conducts thorough analysis using rigorous testing methodologies to provide you with unbiased, data-driven broker reviews."
+const {
+  title = 'Why Trust Our Reviews?',
+  subtitle = 'Our expert team conducts thorough analysis using rigorous testing methodologies to provide you with unbiased, data-driven broker reviews.',
 } = Astro.props;
 
 const features = [
   {
-    icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
-    title: "CMA Compliant",
-    description: "All reviewed brokers are verified for Kenya regulatory compliance"
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+    title: 'CMA Compliant',
+    description:
+      'All reviewed brokers are verified for Kenya regulatory compliance',
   },
   {
-    icon: "M13 10V3L4 14h7v7l9-11h-7z",
-    title: "Real Testing", 
-    description: "Live account testing with real money deposits and trades"
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+    title: 'Real Testing',
+    description: 'Live account testing with real money deposits and trades',
   },
   {
-    icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4",
-    title: "Data Driven",
-    description: "Comprehensive analysis using 50+ evaluation criteria"
+    icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4',
+    title: 'Data Driven',
+    description: 'Comprehensive analysis using 50+ evaluation criteria',
   },
   {
-    icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
-    title: "Local Focus",
-    description: "Specialized knowledge of the Kenyan trading landscape"
-  }
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+    title: 'Local Focus',
+    description: 'Specialized knowledge of the Kenyan trading landscape',
+  },
 ];
 ---
 
@@ -37,7 +38,9 @@ const features = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
       <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-        <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
+        <span
+          class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent"
+        >
           {title}
         </span>
       </h2>
@@ -47,17 +50,31 @@ const features = [
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {features.map(feature => (
-        <div class="text-center group">
-          <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon}></path>
-            </svg>
+      {
+        features.map((feature) => (
+          <div class="text-center group">
+            <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d={feature.icon}
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">
+              {feature.title}
+            </h3>
+            <p class="text-neutral-400">{feature.description}</p>
           </div>
-          <h3 class="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-          <p class="text-neutral-400">{feature.description}</p>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>

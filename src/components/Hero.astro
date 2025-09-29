@@ -1,67 +1,116 @@
 ---
-const {
-    spanOne,
-    spanTwo,
-    spanThree
-} = Astro.props
+const { spanOne, spanTwo, spanThree } = Astro.props;
 ---
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+<section
+  class="relative min-h-screen flex items-center justify-center overflow-hidden"
+>
   <!-- Animated background elements -->
   <div class="absolute inset-0">
     <!-- Gradient mesh background -->
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-900/20 via-neutral-900 to-accent-900/20"></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-primary-900/20 via-neutral-900 to-accent-900/20"
+    >
+    </div>
 
     <!-- Floating geometric shapes -->
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-primary-500/5 to-accent-500/5 rounded-full blur-3xl animate-pulse-slow"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-accent-500/5 to-primary-500/5 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: -2s;"></div>
+    <div
+      class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-primary-500/5 to-accent-500/5 rounded-full blur-3xl animate-pulse-slow"
+    >
+    </div>
+    <div
+      class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-accent-500/5 to-primary-500/5 rounded-full blur-3xl animate-pulse-slow"
+      style="animation-delay: -2s;"
+    >
+    </div>
 
     <!-- Animated grid lines -->
     <div class="absolute inset-0 opacity-10">
-      <div class="h-full w-full bg-gradient-to-r from-transparent via-primary-500/20 to-transparent transform -skew-y-12"></div>
-      <div class="absolute top-0 h-full w-full bg-gradient-to-r from-transparent via-accent-500/20 to-transparent transform skew-y-12"></div>
+      <div
+        class="h-full w-full bg-gradient-to-r from-transparent via-primary-500/20 to-transparent transform -skew-y-12"
+      >
+      </div>
+      <div
+        class="absolute top-0 h-full w-full bg-gradient-to-r from-transparent via-accent-500/20 to-transparent transform skew-y-12"
+      >
+      </div>
     </div>
   </div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
     <div class="text-center">
       <!-- Main headline with gradient text -->
-      <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight">
-        <span class="block bg-gradient-to-r from-primary-400 via-accent-400 to-primary-400 bg-clip-text text-transparent animate-gradient-x">
+      <h1
+        class="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight"
+      >
+        <span
+          class="block bg-gradient-to-r from-primary-400 via-accent-400 to-primary-400 bg-clip-text text-transparent animate-gradient-x"
+        >
           Kenya's #1
         </span>
-        <span class="block text-white mt-2">
-          Forex Broker
-        </span>
-        <span class="block bg-gradient-to-r from-accent-400 via-primary-400 to-accent-400 bg-clip-text text-transparent animate-gradient-x">
+        <span class="block text-white mt-2"> Forex Broker </span>
+        <span
+          class="block bg-gradient-to-r from-accent-400 via-primary-400 to-accent-400 bg-clip-text text-transparent animate-gradient-x"
+        >
           Review Platform
         </span>
       </h1>
 
       <!-- Subtitle -->
-      <p class="text-xl md:text-2xl text-neutral-300 max-w-4xl mx-auto mb-8 leading-relaxed">
-        Expert analysis, unbiased reviews, and comprehensive rankings of forex brokers
-        <span class="text-primary-400 font-semibold">specifically for Kenyan traders</span>.
-        Make informed decisions with our data-driven insights.
+      <p
+        class="text-xl md:text-2xl text-neutral-300 max-w-4xl mx-auto mb-8 leading-relaxed"
+      >
+        Expert analysis, unbiased reviews, and comprehensive rankings of forex
+        brokers
+        <span class="text-primary-400 font-semibold"
+          >specifically for Kenyan traders</span
+        >. Make informed decisions with our data-driven insights.
       </p>
 
       <!-- Feature highlights -->
       <div class="flex flex-wrap justify-center gap-4 mb-12">
-        <div class="flex items-center bg-neutral-800/30 backdrop-blur-sm rounded-full px-4 py-2 border border-neutral-700/50">
-          <svg class="w-5 h-5 text-primary-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        <div
+          class="flex items-center bg-neutral-800/30 backdrop-blur-sm rounded-full px-4 py-2 border border-neutral-700/50"
+        >
+          <svg
+            class="w-5 h-5 text-primary-400 mr-2"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clip-rule="evenodd"
+            ></path>
           </svg>
-          <span class="text-sm font-medium text-neutral-200">CMA Regulated</span>
+          <span class="text-sm font-medium text-neutral-200">CMA Regulated</span
+          >
         </div>
-        <div class="flex items-center bg-neutral-800/30 backdrop-blur-sm rounded-full px-4 py-2 border border-neutral-700/50">
-          <svg class="w-5 h-5 text-accent-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+        <div
+          class="flex items-center bg-neutral-800/30 backdrop-blur-sm rounded-full px-4 py-2 border border-neutral-700/50"
+        >
+          <svg
+            class="w-5 h-5 text-accent-400 mr-2"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
             <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          <span class="text-sm font-medium text-neutral-200">Expert Reviews</span>
+          <span class="text-sm font-medium text-neutral-200"
+            >Expert Reviews</span
+          >
         </div>
-        <div class="flex items-center bg-neutral-800/30 backdrop-blur-sm rounded-full px-4 py-2 border border-neutral-700/50">
-          <svg class="w-5 h-5 text-primary-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+        <div
+          class="flex items-center bg-neutral-800/30 backdrop-blur-sm rounded-full px-4 py-2 border border-neutral-700/50"
+        >
+          <svg
+            class="w-5 h-5 text-primary-400 mr-2"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
+            ></path>
           </svg>
           <span class="text-sm font-medium text-neutral-200">Real Data</span>
         </div>
@@ -74,8 +123,18 @@ const {
           class="group relative bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/25 flex items-center"
         >
           <span>Compare Brokers Now</span>
-          <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          <svg
+            class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7l5 5m0 0l-5 5m5-5H6"
+            ></path>
           </svg>
         </a>
 
@@ -83,8 +142,18 @@ const {
           href="/guides"
           class="group border-2 border-neutral-600 hover:border-primary-400 text-neutral-300 hover:text-primary-400 font-semibold py-4 px-8 rounded-xl transition-all duration-300 hover:bg-neutral-800/30 backdrop-blur-sm flex items-center"
         >
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          <svg
+            class="w-5 h-5 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+            ></path>
           </svg>
           <span>Trading Guides</span>
         </a>
@@ -92,8 +161,12 @@ const {
 
       <!-- Trust indicators -->
       <div class="mt-16 pt-8 border-t border-neutral-800/50">
-        <p class="text-neutral-400 text-sm mb-6">Trusted by 10,000+ Kenyan traders</p>
-        <div class="flex flex-wrap justify-center items-center gap-8 opacity-60">
+        <p class="text-neutral-400 text-sm mb-6">
+          Trusted by 10,000+ Kenyan traders
+        </p>
+        <div
+          class="flex flex-wrap justify-center items-center gap-8 opacity-60"
+        >
           <div class="text-neutral-500 font-semibold">CMA Approved</div>
           <div class="text-neutral-500 font-semibold">ISO Certified</div>
           <div class="text-neutral-500 font-semibold">5★ Rated</div>
@@ -104,9 +177,21 @@ const {
   </div>
 
   <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-    <svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+  <div
+    class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+  >
+    <svg
+      class="w-6 h-6 text-neutral-400"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+      ></path>
     </svg>
   </div>
 </section>

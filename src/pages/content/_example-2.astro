@@ -7,17 +7,19 @@ import BrokerRegulation from '~/components/review/BrokerRegulation.astro';
 import BrokerProsAndCons from '~/components/review/BrokerProsAndCons.astro';
 import BrokerVerdict from '~/components/review/BrokerVerdict.astro';
 import RiskWarning from '~/components/review/RiskWarning.astro';
-import { generateBrokerReviewSchema, generateBreadcrumbSchema, generateFAQSchema } from '~/utils/schemaGenerator';
+import {
+  generateBrokerReviewSchema,
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+} from '~/utils/schemaGenerator';
 import { getReviewBySlug } from '~/lib/qs-esm';
 import { site } from '~/data/site';
 
 // Example broker data (this would normally come from PayloadCMS)
-const broker = await getReviewBySlug('fxpesa')
+const broker = await getReviewBySlug('fxpesa');
 if (!broker) {
-    throw new Error('Broker not found');
+  throw new Error('Broker not found');
 }
-
-
 
 const title = `${broker.brokerName} Review ${new Date().getFullYear()} - Expert Analysis for Kenyan Traders`;
 const description = `Comprehensive ${broker.brokerName} review for Kenyan traders. Expert analysis of regulation, spreads, platforms, and features. CMA approved broker with $${broker.minDeposit} minimum deposit.`;
@@ -38,92 +40,149 @@ const combinedSchema = [reviewSchema, breadcrumbSchema, faqSchema];
 >
   <BrokerHeader broker={broker} />
   <BrokerNavigation />
-  
+
   <main class="py-12 bg-gradient-to-b from-neutral-900 to-neutral-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <BrokerOverview broker={broker} content={broker.content} />
+      <BrokerOverview
+        broker={broker}
+        content={broker.content}
+      />
       <BrokerRegulation broker={broker} />
-      
+
       <!-- Account Types Section -->
-      <section id="accounts" class="mb-16">
+      <section
+        id="accounts"
+        class="mb-16"
+      >
         <h2 class="text-3xl font-display font-bold text-white mb-6">
           Account Types Offered by {broker.brokerName}
         </h2>
         <div class="grid lg:grid-cols-3 gap-6">
-          {broker.account?.map((account, index) => (
-            <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-semibold text-white">{account.accountName}</h3>
-                {index === 0 && (
-                  <span class="bg-primary-500/20 text-primary-400 px-2 py-1 rounded-full text-xs font-medium">
-                    Popular
-                  </span>
-                )}
+          {
+            broker.account?.map((account, index) => (
+              <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-xl font-semibold text-white">
+                    {account.accountName}
+                  </h3>
+                  {index === 0 && (
+                    <span class="bg-primary-500/20 text-primary-400 px-2 py-1 rounded-full text-xs font-medium">
+                      Popular
+                    </span>
+                  )}
+                </div>
+                <div class="space-y-3 mb-6">
+                  <div class="flex justify-between">
+                    <span class="text-neutral-400">Min Deposit:</span>
+                    <span class="text-white font-medium">
+                      ${account.minDeposit}
+                    </span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-neutral-400">Commission:</span>
+                    <span class="text-white font-medium">
+                      {account.commission}%
+                    </span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-neutral-400">Spread:</span>
+                    <span class="text-white font-medium">
+                      {account.spread} pips
+                    </span>
+                  </div>
+                </div>
+                <a
+                  href={`${site.organization.url}/goto/${broker.slug}/`}
+                  class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 block"
+                >
+                  Open {account.accountName}
+                </a>
               </div>
-              <div class="space-y-3 mb-6">
-                <div class="flex justify-between">
-                  <span class="text-neutral-400">Min Deposit:</span>
-                  <span class="text-white font-medium">${account.minDeposit}</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-neutral-400">Commission:</span>
-                  <span class="text-white font-medium">{account.commission}%</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-neutral-400">Spread:</span>
-                  <span class="text-white font-medium">{account.spread} pips</span>
-                </div>
-              </div>
-              <a href={`${site.organization.url}/goto/${broker.slug}/`} class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 block">
-                Open {account.accountName}
-              </a>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </section>
 
       <!-- Platforms Section -->
-      <section id="platforms" class="mb-16">
+      <section
+        id="platforms"
+        class="mb-16"
+      >
         <h2 class="text-3xl font-display font-bold text-white mb-6">
           Trading Platforms
         </h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {broker.brokerPlatforms?.map(platform => (
-            <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
-              <h3 class="text-xl font-semibold text-white mb-4">{platform.name}</h3>
-              <div class="space-y-3">
-                <div class="flex items-center">
-                  <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                  <span class="text-neutral-300">Advanced charting</span>
-                </div>
-                <div class="flex items-center">
-                  <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                  <span class="text-neutral-300">Expert advisors</span>
-                </div>
-                <div class="flex items-center">
-                  <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                  <span class="text-neutral-300">Mobile trading</span>
+          {
+            broker.brokerPlatforms?.map((platform) => (
+              <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+                <h3 class="text-xl font-semibold text-white mb-4">
+                  {platform.name}
+                </h3>
+                <div class="space-y-3">
+                  <div class="flex items-center">
+                    <svg
+                      class="w-5 h-5 text-green-400 mr-3"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-neutral-300">Advanced charting</span>
+                  </div>
+                  <div class="flex items-center">
+                    <svg
+                      class="w-5 h-5 text-green-400 mr-3"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-neutral-300">Expert advisors</span>
+                  </div>
+                  <div class="flex items-center">
+                    <svg
+                      class="w-5 h-5 text-green-400 mr-3"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-neutral-300">Mobile trading</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </section>
 
       <!-- Spreads & Fees Section -->
-      <section id="spreads" class="mb-16">
+      <section
+        id="spreads"
+        class="mb-16"
+      >
         <h2 class="text-3xl font-display font-bold text-white mb-6">
           Spreads & Fees
         </h2>
         <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
-            <h3 class="text-xl font-semibold text-white mb-4">Typical Spreads</h3>
+          <div
+            class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50"
+          >
+            <h3 class="text-xl font-semibold text-white mb-4">
+              Typical Spreads
+            </h3>
             <div class="space-y-3">
               <div class="flex justify-between">
                 <span class="text-neutral-400">EUR/USD:</span>
@@ -139,7 +198,9 @@ const combinedSchema = [reviewSchema, breadcrumbSchema, faqSchema];
               </div>
             </div>
           </div>
-          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+          <div
+            class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50"
+          >
             <h3 class="text-xl font-semibold text-white mb-4">Fees</h3>
             <div class="space-y-3">
               <div class="flex justify-between">
@@ -160,26 +221,44 @@ const combinedSchema = [reviewSchema, breadcrumbSchema, faqSchema];
       </section>
 
       <!-- Payment Methods Section -->
-      <section id="payments" class="mb-16">
+      <section
+        id="payments"
+        class="mb-16"
+      >
         <h2 class="text-3xl font-display font-bold text-white mb-6">
           Payment Methods
         </h2>
-        <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+        <div
+          class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50"
+        >
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {broker.brokerPaymentMethods?.map(method => (
-              <div class="flex items-center p-3 bg-neutral-800/50 rounded-lg">
-                <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="text-white font-medium">{method}</span>
-              </div>
-            ))}
+            {
+              broker.brokerPaymentMethods?.map((method) => (
+                <div class="flex items-center p-3 bg-neutral-800/50 rounded-lg">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="text-white font-medium">{method}</span>
+                </div>
+              ))
+            }
           </div>
         </div>
       </section>
 
       <BrokerProsAndCons broker={broker} />
-      <BrokerVerdict broker={broker} verdict={broker.quickVerdict} />
+      <BrokerVerdict
+        broker={broker}
+        verdict={broker.quickVerdict}
+      />
     </div>
   </main>
 

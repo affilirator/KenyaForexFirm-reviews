@@ -8,45 +8,80 @@ interface Props {
 }
 
 const { broker, content } = Astro.props;
-const description = broker.description
-const quikVerdict = broker.quickVerdict
-const metaDescription = broker.meta?.description
-const overview = description || quikVerdict || metaDescription || ''
+const description = broker.description;
+const quikVerdict = broker.quickVerdict;
+const metaDescription = broker.meta?.description;
+const overview = description || quikVerdict || metaDescription || '';
 ---
 
-<section id="overview" class="mb-16 mx-auto container">
+<section
+  id="overview"
+  class="mb-16 mx-auto container"
+>
   <h2 class="text-3xl font-display font-bold text-white mb-6">
     {broker.brokerName} Overview
   </h2>
 
   <div class="prose prose-invert max-w-5xl">
-    <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-8 border border-neutral-700/50 mb-8">
-      <div id="mainContent" class=" text-lg text-neutral-300 leading-relaxed">
+    <div
+      class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-8 border border-neutral-700/50 mb-8"
+    >
+      <div
+        id="mainContent"
+        class="text-lg text-neutral-300 leading-relaxed"
+      >
         {overview}
       </div>
-      
-      
-        
-        <div class="text-lg text-neutral-300 leading-relaxed" />
-      
-          <p class="text-lg text-neutral-300 leading-relaxed mb-6">
-            {broker.brokerName} is a {broker.category || 'forex and CFD'} broker {broker.baseDetails?.founded ? `established in ${broker.baseDetails?.founded}` : 'serving traders globally'}.
-            {broker.baseDetails?.headquarters && ` The company is headquartered in ${broker.baseDetails?.headquarters}`} and offers comprehensive trading services
-            {broker.cmaRegulated ? ' with CMA approval for Kenyan clients' : ' to international clients'}.
-          </p>
 
-          <p class="text-lg text-neutral-300 leading-relaxed mb-6">
-            What sets {broker.brokerName} apart is its commitment to providing {broker.minDeposit && broker.minDeposit <= 100 ? 'accessible forex trading services with low minimum deposits' : 'professional trading services'}
-            {broker.brokerPlatforms && broker.brokerPlatforms.length > 0 && ` across ${broker.brokerPlatforms.length} trading platforms`}.
-            {broker.regulations && broker.regulations.length > 0 && ` ${broker.brokerName} maintains strong regulatory compliance with ${broker.regulations.length} regulatory licenses`}.
-          </p>
+      <div class="text-lg text-neutral-300 leading-relaxed"></div>
 
-          <p class="text-lg text-neutral-300 leading-relaxed">
-            For Kenyan traders specifically, {broker.brokerName} provides 
-            {broker.brokerPaymentMethods?.includes('mpesa') ? 'M-Pesa payment support, making deposits and withdrawals convenient for local clients' : 'various payment methods suitable for international clients'}.
-            {broker.islamicAccount && ' The broker also offers swap-free Islamic accounts for traders following Shariah principles'}.
-          </p>
-        
+      <p class="text-lg text-neutral-300 leading-relaxed mb-6">
+        {broker.brokerName} is a {broker.category || 'forex and CFD'} broker {
+          broker.baseDetails?.founded
+            ? `established in ${broker.baseDetails?.founded}`
+            : 'serving traders globally'
+        }.
+        {
+          broker.baseDetails?.headquarters &&
+            ` The company is headquartered in ${broker.baseDetails?.headquarters}`
+        } and offers comprehensive trading services
+        {
+          broker.cmaRegulated
+            ? ' with CMA approval for Kenyan clients'
+            : ' to international clients'
+        }.
+      </p>
+
+      <p class="text-lg text-neutral-300 leading-relaxed mb-6">
+        What sets {broker.brokerName} apart is its commitment to providing {
+          broker.minDeposit && broker.minDeposit <= 100
+            ? 'accessible forex trading services with low minimum deposits'
+            : 'professional trading services'
+        }
+        {
+          broker.brokerPlatforms &&
+            broker.brokerPlatforms.length > 0 &&
+            ` across ${broker.brokerPlatforms.length} trading platforms`
+        }.
+        {
+          broker.regulations &&
+            broker.regulations.length > 0 &&
+            ` ${broker.brokerName} maintains strong regulatory compliance with ${broker.regulations.length} regulatory licenses`
+        }.
+      </p>
+
+      <p class="text-lg text-neutral-300 leading-relaxed">
+        For Kenyan traders specifically, {broker.brokerName} provides
+        {
+          broker.brokerPaymentMethods?.includes('mpesa')
+            ? 'M-Pesa payment support, making deposits and withdrawals convenient for local clients'
+            : 'various payment methods suitable for international clients'
+        }.
+        {
+          broker.islamicAccount &&
+            ' The broker also offers swap-free Islamic accounts for traders following Shariah principles'
+        }.
+      </p>
     </div>
   </div>
 </section>

@@ -6,16 +6,27 @@ interface Props {
 const { recipientEmail } = Astro.props;
 ---
 
-<form id="contactForm" class="card-glass p-8" action={`https://formspree.io/f/${recipientEmail}`} method="POST">
+<form
+  id="contactForm"
+  class="card-glass p-8"
+  action={`https://formspree.io/f/${recipientEmail}`}
+  method="POST"
+>
   <div class="mb-8">
-    <h2 class="text-2xl font-display font-bold text-white mb-2">Send Us a Message</h2>
+    <h2 class="text-2xl font-display font-bold text-white mb-2">
+      Send Us a Message
+    </h2>
     <p class="text-neutral-400">We'll get back to you within 24 hours</p>
   </div>
 
   <div class="grid md:grid-cols-2 gap-6 mb-6">
     <!-- Name -->
     <div>
-      <label for="name" class="block text-sm font-medium text-neutral-300 mb-2">Your Name *</label>
+      <label
+        for="name"
+        class="block text-sm font-medium text-neutral-300 mb-2"
+        >Your Name *</label
+      >
       <input
         type="text"
         id="name"
@@ -28,7 +39,11 @@ const { recipientEmail } = Astro.props;
 
     <!-- Email -->
     <div>
-      <label for="email" class="block text-sm font-medium text-neutral-300 mb-2">Email Address *</label>
+      <label
+        for="email"
+        class="block text-sm font-medium text-neutral-300 mb-2"
+        >Email Address *</label
+      >
       <input
         type="email"
         id="email"
@@ -43,7 +58,11 @@ const { recipientEmail } = Astro.props;
   <div class="grid md:grid-cols-2 gap-6 mb-6">
     <!-- Organization -->
     <div>
-      <label for="organization" class="block text-sm font-medium text-neutral-300 mb-2">Organization</label>
+      <label
+        for="organization"
+        class="block text-sm font-medium text-neutral-300 mb-2"
+        >Organization</label
+      >
       <input
         type="text"
         id="organization"
@@ -55,14 +74,23 @@ const { recipientEmail } = Astro.props;
 
     <!-- Inquiry Type -->
     <div>
-      <label for="inquiryType" class="block text-sm font-medium text-neutral-300 mb-2">Inquiry Type *</label>
+      <label
+        for="inquiryType"
+        class="block text-sm font-medium text-neutral-300 mb-2"
+        >Inquiry Type *</label
+      >
       <select
         id="inquiryType"
         name="inquiryType"
         required
         class="w-full bg-neutral-800/50 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500"
       >
-        <option value="" disabled selected>Select an option</option>
+        <option
+          value=""
+          disabled
+          selected
+          >Select an option</option
+        >
         <option value="broker-partnership">Broker Partnership</option>
         <option value="review-request">Review Request</option>
         <option value="advertising">Advertising Inquiry</option>
@@ -74,7 +102,11 @@ const { recipientEmail } = Astro.props;
 
   <!-- Message -->
   <div class="mb-6">
-    <label for="message" class="block text-sm font-medium text-neutral-300 mb-2">Your Message *</label>
+    <label
+      for="message"
+      class="block text-sm font-medium text-neutral-300 mb-2"
+      >Your Message *</label
+    >
     <textarea
       id="message"
       name="message"
@@ -95,7 +127,11 @@ const { recipientEmail } = Astro.props;
         class="mt-1 bg-neutral-800 border-neutral-700 text-primary-500 focus:ring-primary-500"
       />
       <span class="ml-2 text-sm text-neutral-400">
-        I agree to the <a href="/privacy" class="text-primary-400 hover:underline">Privacy Policy</a> and consent to having my data processed.
+        I agree to the <a
+          href="/privacy"
+          class="text-primary-400 hover:underline"
+          >Privacy Policy</a
+        > and consent to having my data processed.
       </span>
     </label>
   </div>
@@ -116,14 +152,14 @@ const { recipientEmail } = Astro.props;
   const form = document.getElementById('contactForm');
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     // Basic validation passed, show loading state
     const submitButton = form.querySelector('button[type="submit"]');
     if (submitButton) {
       submitButton.textContent = 'Sending...';
       submitButton.disabled = true;
     }
-    
+
     // Submit the form
     form.submit();
   });

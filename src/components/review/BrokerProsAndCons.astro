@@ -10,65 +10,110 @@ interface Props {
 const { broker, pros, cons } = Astro.props;
 
 // Extract pros and cons from broker data or use provided ones
-const brokerPros = broker.pros?.map(p => p.pro) || [];
-const brokerCons = broker.cons?.map(c => c.con) || [];
+const brokerPros = broker.pros?.map((p) => p.pro) || [];
+const brokerCons = broker.cons?.map((c) => c.con) || [];
 
 const finalPros = pros || brokerPros;
 const finalCons = cons || brokerCons;
 ---
 
-<section id="pros-cons" class="mb-16">
+<section
+  id="pros-cons"
+  class="mb-16"
+>
   <h2 class="text-3xl font-display font-bold text-white mb-6">
     {broker.brokerName} Pros & Cons
   </h2>
 
   <div class="grid md:grid-cols-2 gap-8">
     <!-- Pros -->
-    <div class="bg-gradient-to-br from-green-900/20 to-green-800/20 backdrop-blur-sm rounded-2xl p-6 border border-green-700/30">
+    <div
+      class="bg-gradient-to-br from-green-900/20 to-green-800/20 backdrop-blur-sm rounded-2xl p-6 border border-green-700/30"
+    >
       <h3 class="text-xl font-semibold text-green-400 mb-4 flex items-center">
-        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+        <svg
+          class="w-6 h-6 mr-2"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+            clip-rule="evenodd"
+          ></path>
         </svg>
         Advantages
       </h3>
-      {finalPros.length > 0 ? (
-        <ul class="space-y-3">
-          {finalPros.map(pro => (
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-              </svg>
-              <span class="text-neutral-300">{pro}</span>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p class="text-neutral-400">No specific advantages identified</p>
-      )}
+      {
+        finalPros.length > 0 ? (
+          <ul class="space-y-3">
+            {finalPros.map((pro) => (
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-neutral-300">{pro}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-neutral-400">No specific advantages identified</p>
+        )
+      }
     </div>
 
     <!-- Cons -->
-    <div class="bg-gradient-to-br from-red-900/20 to-red-800/20 backdrop-blur-sm rounded-2xl p-6 border border-red-700/30">
+    <div
+      class="bg-gradient-to-br from-red-900/20 to-red-800/20 backdrop-blur-sm rounded-2xl p-6 border border-red-700/30"
+    >
       <h3 class="text-xl font-semibold text-red-400 mb-4 flex items-center">
-        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <svg
+          class="w-6 h-6 mr-2"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
         </svg>
         Disadvantages
       </h3>
-      {finalCons.length > 0 ? (
-        <ul class="space-y-3">
-          {finalCons.map(con => (
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-red-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-              </svg>
-              <span class="text-neutral-300">{con}</span>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p class="text-neutral-400">No significant disadvantages identified</p>
-      )}
+      {
+        finalCons.length > 0 ? (
+          <ul class="space-y-3">
+            {finalCons.map((con) => (
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-red-400 mr-3 mt-0.5 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-neutral-300">{con}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-neutral-400">
+            No significant disadvantages identified
+          </p>
+        )
+      }
     </div>
   </div>
 </section>

@@ -9,11 +9,13 @@ import type { RegulatorPage } from '../types/regulator';
 export function generateRegulatorMetadata(regulatorData: RegulatorPage) {
   return {
     title: regulatorData.title,
-    description: regulatorData.heroSection.subheading || 
+    description:
+      regulatorData.heroSection.subheading ||
       `Learn about ${regulatorData.title} - regulations, requirements, and benefits for forex traders.`,
     openGraph: {
       title: regulatorData.title,
-      description: regulatorData.heroSection.subheading || 
+      description:
+        regulatorData.heroSection.subheading ||
         `Learn about ${regulatorData.title} - regulations, requirements, and benefits for forex traders.`,
       type: 'article',
       url: `/regulators/${regulatorData.slug}`,
@@ -22,7 +24,8 @@ export function generateRegulatorMetadata(regulatorData: RegulatorPage) {
     twitter: {
       card: 'summary_large_image',
       title: regulatorData.title,
-      description: regulatorData.heroSection.subheading || 
+      description:
+        regulatorData.heroSection.subheading ||
         `Learn about ${regulatorData.title} - regulations, requirements, and benefits for forex traders.`,
       image: regulatorData.heroSection.heroImage?.url || '',
     },
@@ -38,9 +41,11 @@ export function formatRegulatorData(regulatorData: RegulatorPage) {
   return {
     ...regulatorData,
     // Example transformation: ensure all sections have IDs
-    sections: regulatorData.sections.map(section => ({
+    sections: regulatorData.sections.map((section) => ({
       ...section,
-      sectionId: section.sectionId || section.sectionTitle.toLowerCase().replace(/\s+/g, '-'),
+      sectionId:
+        section.sectionId ||
+        section.sectionTitle.toLowerCase().replace(/\s+/g, '-'),
     })),
   };
 }

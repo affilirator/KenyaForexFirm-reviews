@@ -8,54 +8,64 @@ interface Props {
   direction?: 'column' | 'row';
 }
 
-const { 
-  background = "bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950",
-  maxWidth = "max-w-7xl",
-  padding = "pt-24 pb-12",
-  gap = "gap-8",
-  alignment = "center",
-  direction = "md:flex-row"
+const {
+  background = 'bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950',
+  maxWidth = 'max-w-7xl',
+  padding = 'pt-24 pb-12',
+  gap = 'gap-8',
+  alignment = 'center',
+  direction = 'md:flex-row',
 } = Astro.props;
 ---
 
 <section class={`${padding} ${background}`}>
   <div class={`${maxWidth} mx-auto px-4 sm:px-6 lg:px-8`}>
-    <div class={`flex flex-col ${direction} ${gap} items-${alignment} md:items-start`}>
+    <div
+      class={`flex flex-col ${direction} ${gap} items-${alignment} md:items-start`}
+    >
       <!-- Left/Image Slot -->
-      {Astro.slots.has('image') && (
-        <div class="flex-shrink-0">
-          <slot name="image" />
-        </div>
-      )}
-      
+      {
+        Astro.slots.has('image') && (
+          <div class="flex-shrink-0">
+            <slot name="image" />
+          </div>
+        )
+      }
+
       <!-- Right/Content Slot -->
       <div class="flex-grow text-center md:text-left">
         <!-- Badge/Credentials Slot -->
-        {Astro.slots.has('badge') && (
-          <div class="mb-2">
-            <slot name="badge" />
-          </div>
-        )}
-        
+        {
+          Astro.slots.has('badge') && (
+            <div class="mb-2">
+              <slot name="badge" />
+            </div>
+          )
+        }
+
         <!-- Title Slot -->
         <slot name="title" />
-        
+
         <!-- Subtitle Slot -->
         <slot name="subtitle" />
-        
+
         <!-- Meta Info Slot -->
-        {Astro.slots.has('meta') && (
-          <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-neutral-400">
-            <slot name="meta" />
-          </div>
-        )}
-        
+        {
+          Astro.slots.has('meta') && (
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-neutral-400">
+              <slot name="meta" />
+            </div>
+          )
+        }
+
         <!-- Description Slot -->
-        {Astro.slots.has('description') && (
-          <div class="mt-4">
-            <slot name="description" />
-          </div>
-        )}
+        {
+          Astro.slots.has('description') && (
+            <div class="mt-4">
+              <slot name="description" />
+            </div>
+          )
+        }
       </div>
     </div>
   </div>

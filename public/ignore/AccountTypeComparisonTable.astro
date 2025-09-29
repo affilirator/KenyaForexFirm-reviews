@@ -36,10 +36,14 @@ const getDealingDeskLabel = (presence: 'ndd' | 'dd') => {
 
 const getTransparencyLabel = (level: 'high' | 'very_high' | 'full') => {
   switch (level) {
-    case 'high': return 'High';
-    case 'very_high': return 'Very High';
-    case 'full': return 'Full Market Transparency';
-    default: return 'N/A';
+    case 'high':
+      return 'High';
+    case 'very_high':
+      return 'Very High';
+    case 'full':
+      return 'Full Market Transparency';
+    default:
+      return 'N/A';
   }
 };
 
@@ -50,11 +54,34 @@ const comparisonFeatures = [
   { label: 'Typical Spreads', field: 'spreads' },
   { label: 'Liquidity Source', field: 'liquiditySource' },
   { label: 'Execution Speed', field: 'executionSpeed' },
-  { label: 'Dealing Desk', field: 'dealingDeskPresence', render: getDealingDeskLabel },
-  { label: 'Transparency', field: 'transparencyLevel', render: getTransparencyLabel },
-  { label: 'Suitable For', field: 'suitableFor', render: (val: Array<{ targetAudience: string }>) => val.map(item => item.targetAudience).join(', ') },
-  { label: 'Advantages', field: 'pros', render: (val: Array<{ advantage: string }>) => val.map(item => item.advantage).join('; ') },
-  { label: 'Disadvantages', field: 'cons', render: (val: Array<{ disadvantage: string }>) => val.map(item => item.disadvantage).join('; ') },
+  {
+    label: 'Dealing Desk',
+    field: 'dealingDeskPresence',
+    render: getDealingDeskLabel,
+  },
+  {
+    label: 'Transparency',
+    field: 'transparencyLevel',
+    render: getTransparencyLabel,
+  },
+  {
+    label: 'Suitable For',
+    field: 'suitableFor',
+    render: (val: Array<{ targetAudience: string }>) =>
+      val.map((item) => item.targetAudience).join(', '),
+  },
+  {
+    label: 'Advantages',
+    field: 'pros',
+    render: (val: Array<{ advantage: string }>) =>
+      val.map((item) => item.advantage).join('; '),
+  },
+  {
+    label: 'Disadvantages',
+    field: 'cons',
+    render: (val: Array<{ disadvantage: string }>) =>
+      val.map((item) => item.disadvantage).join('; '),
+  },
 ];
 ---
 
@@ -63,49 +90,71 @@ const comparisonFeatures = [
     <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white">
       Compare Forex Account Types
       <p class="mt-1 text-sm font-normal text-gray-500">
-        A side-by-side comparison of the key features of different forex trading account models.
+        A side-by-side comparison of the key features of different forex trading
+        account models.
       </p>
     </caption>
     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
       <tr>
-        <th scope="col" class="py-3 px-6 rounded-tl-lg">Feature</th>
-        {sortedAccounts.map((account) => (
-          <th scope="col" class="py-3 px-6 text-center">
-            {account.title}
-            <div class="text-xs font-normal text-gray-500">{account.type.toUpperCase()}</div>
-          </th>
-        ))}
+        <th
+          scope="col"
+          class="py-3 px-6 rounded-tl-lg"
+          >Feature</th
+        >
+        {
+          sortedAccounts.map((account) => (
+            <th
+              scope="col"
+              class="py-3 px-6 text-center"
+            >
+              {account.title}
+              <div class="text-xs font-normal text-gray-500">
+                {account.type.toUpperCase()}
+              </div>
+            </th>
+          ))
+        }
       </tr>
     </thead>
     <tbody>
-      {comparisonFeatures.map((feature) => (
-        <tr class="bg-white border-b hover:bg-gray-50">
-          <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-            {feature.label}
-          </th>
-          {sortedAccounts.map((account) => (
-            <td class="py-4 px-6 text-center">
-              {feature.render
-                ? feature.render(account[feature.field as keyof AccountType])
-                : account[feature.field as keyof AccountType]}
-            </td>
-          ))}
-        </tr>
-      ))}
+      {
+        comparisonFeatures.map((feature) => (
+          <tr class="bg-white border-b hover:bg-gray-50">
+            <th
+              scope="row"
+              class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
+            >
+              {feature.label}
+            </th>
+            {sortedAccounts.map((account) => (
+              <td class="py-4 px-6 text-center">
+                {feature.render
+                  ? feature.render(account[feature.field as keyof AccountType])
+                  : account[feature.field as keyof AccountType]}
+              </td>
+            ))}
+          </tr>
+        ))
+      }
     </tbody>
     <tfoot>
       <tr class="bg-gray-50">
         <td class="py-4 px-6 rounded-bl-lg"></td>
-        {sortedAccounts.map((account) => (
-          <td class="py-4 px-6 text-center">
-            <a href={`/account-types/${account.id}`} class="
+        {
+          sortedAccounts.map((account) => (
+            <td class="py-4 px-6 text-center">
+              <a
+                href={`/account-types/${account.id}`}
+                class="
               inline-block px-4 py-2 bg-blue-600 text-white font-semibold rounded-md
               hover:bg-blue-700 transition-colors duration-200 text-sm
-            ">
-              View Details
-            </a>
-          </td>
-        ))}
+            "
+              >
+                View Details
+              </a>
+            </td>
+          ))
+        }
       </tr>
     </tfoot>
   </table>

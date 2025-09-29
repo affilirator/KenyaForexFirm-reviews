@@ -18,14 +18,17 @@ export async function debugRegulatorData(slug) {
     }
 
     const data = await response.json();
-    
+
     // Log the entire data structure
     console.log('Full regulator data:', JSON.stringify(data, null, 2));
-    
+
     // Specifically check contentSections
     console.log('Content Sections:', data.contentSections);
-    console.log('Content Sections length:', data.contentSections ? data.contentSections.length : 0);
-    
+    console.log(
+      'Content Sections length:',
+      data.contentSections ? data.contentSections.length : 0
+    );
+
     return data;
   } catch (error) {
     console.error(`Error fetching regulator data for ${slug}:`, error);

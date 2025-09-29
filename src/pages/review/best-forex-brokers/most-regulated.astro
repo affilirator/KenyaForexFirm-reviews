@@ -16,9 +16,8 @@ import { getRegulators } from '~/lib/regulators-api';
 import { getAuthors } from '~/lib/api-service';
 //import SafetyCriteria from '~/components/review/SafetyCriteria.astro';
 
-
-const authorDocs = await getAuthors()
-const author = authorDocs.docs[0]
+const authorDocs = await getAuthors();
+const author = authorDocs.docs[0];
 
 // Fetch all brokers
 const brokersData = await getReviews();
@@ -26,8 +25,9 @@ const brokersData = await getReviews();
 const brokers = brokersData?.docs || [];
 
 // Filter to only regulated brokers and limit to 10
-const regulatedBrokers = brokers.filter(broker => broker.isRegulated === true).slice(0, 10);
-
+const regulatedBrokers = brokers
+  .filter((broker) => broker.isRegulated === true)
+  .slice(0, 10);
 
 // Sort regulated brokers by safety and regulation rating
 const rankedBrokers = [...regulatedBrokers].sort((a, b) => {
@@ -37,67 +37,71 @@ const rankedBrokers = [...regulatedBrokers].sort((a, b) => {
 });
 
 const schemaData = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "@id": Astro.request.url,
-  "name": `Safest Forex Brokers in Kenya - ${site.name}`,
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': Astro.request.url,
+  name: `Safest Forex Brokers in Kenya - ${site.name}`,
   lastReviewed: new Date().toISOString(),
   author: {
     '@type': 'Person',
-    "@id": `${site.url}/authors/${author.slug}/`,
+    '@id': `${site.url}/authors/${author.slug}/`,
     name: author.name,
     description: author.bio,
     worksFor: {
-      "@type": "Organization",
-      "@id": `${site.url}/#organization`,
-      "name": site.name,
-      "url": site.url
+      '@type': 'Organization',
+      '@id': `${site.url}/#organization`,
+      name: site.name,
+      url: site.url,
     },
-    jobTitle: author.jobTitle || 'Founder of Kenya Forex Firm - CMT Charterholder',
-    
-    knowsAbout: author.knowsAbout?.map(expertise => expertise.fieldName) || [],
+    jobTitle:
+      author.jobTitle || 'Founder of Kenya Forex Firm - CMT Charterholder',
+
+    knowsAbout:
+      author.knowsAbout?.map((expertise) => expertise.fieldName) || [],
     url: `${site.url}/authors/${author.slug}/`,
     sameAs: [
       author.socialMediaProfiles?.facebookUrl,
       author.socialMediaProfiles?.twitterUrl,
-      ...(author.socialMediaProfiles?.otherProfiles?.map(profile => profile.profileUrl) || [])
-    ].filter(Boolean) 
+      ...(author.socialMediaProfiles?.otherProfiles?.map(
+        (profile) => profile.profileUrl
+      ) || []),
+    ].filter(Boolean),
   },
-  "description": `Top forex brokers ranked by safety and regulation for ${site.address.country} traders`,
-  "url": new URL(Astro.request.url),
-  "mainEntity": {
-    "@type": "ItemList",
-    "numberOfItems": 10,
-    "itemListElement": []
-  }
+  description: `Top forex brokers ranked by safety and regulation for ${site.address.country} traders`,
+  url: new URL(Astro.request.url),
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: 10,
+    itemListElement: [],
+  },
 };
 // Update schema data with ranked brokers
 schemaData.mainEntity.itemListElement = rankedBrokers.map((broker, index) => ({
-  "@type": "ListItem",
-  "position": index + 1,
-  "item": {
-    "@type": "Organization",
-    "name": broker.brokerName,
-    "url": `${site.url}/brokers/${broker.slug}/`,
-    "description": `Safety score: ${(broker.catRatings?.safetyAndRegulation?.catScore || 0).toFixed(1)}/10`,
+  '@type': 'ListItem',
+  position: index + 1,
+  item: {
+    '@type': 'Organization',
+    name: broker.brokerName,
+    url: `${site.url}/brokers/${broker.slug}/`,
+    description: `Safety score: ${(broker.catRatings?.safetyAndRegulation?.catScore || 0).toFixed(1)}/10`,
     review: {
-      "@type": "Review",
-      "author": {
-        
-        "@id": `${site.url}/authors/${author.slug}/`,
-        
+      '@type': 'Review',
+      author: {
+        '@id': `${site.url}/authors/${author.slug}/`,
       },
-      "reviewBody": broker.description || `Comprehensive review of ${broker.brokerName}.`,
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": (broker.catRatings?.safetyAndRegulation?.catScore || 0).toFixed(1),
-        "bestRating": "10",
-        "worstRating": "0",
-        reviewAspect: 'Forex Broker Safety and Regulation in Kenya'
-
-      }
-    }
-  }
+      reviewBody:
+        broker.description || `Comprehensive review of ${broker.brokerName}.`,
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: (
+          broker.catRatings?.safetyAndRegulation?.catScore || 0
+        ).toFixed(1),
+        bestRating: '10',
+        worstRating: '0',
+        reviewAspect: 'Forex Broker Safety and Regulation in Kenya',
+      },
+    },
+  },
 }));
 schemaData.mainEntity.numberOfItems = rankedBrokers.length;
 
@@ -106,42 +110,59 @@ const regulatorsData = await getRegulators();
 const regulators = regulatorsData?.docs || [];
 
 // Sort regulators by trust score
-const sortedRegulators = [...regulators].sort((a, b) => b.trustScore - a.trustScore);
+const sortedRegulators = [...regulators].sort(
+  (a, b) => b.trustScore - a.trustScore
+);
 
 // Fetch authors data
 const authorsData = await getAuthors();
 const authors = authorsData?.docs || [];
 
 // Find authors with expertise in regulation
-const regulationExperts = authors.filter(author => 
-  author.knowsAbout?.some(expertise => 
-    expertise.fieldName.toLowerCase().includes('regulation') || 
-    expertise.fieldName.toLowerCase().includes('regulatory')
+const regulationExperts = authors.filter((author) =>
+  author.knowsAbout?.some(
+    (expertise) =>
+      expertise.fieldName.toLowerCase().includes('regulation') ||
+      expertise.fieldName.toLowerCase().includes('regulatory')
   )
 );
 
 // Get the main author for this page (first regulation expert or first author)
-const pageAuthor = regulationExperts.length > 0 ? regulationExperts[0] : (authors.length > 0 ? authors[0] : undefined);
+const pageAuthor =
+  regulationExperts.length > 0
+    ? regulationExperts[0]
+    : authors.length > 0
+      ? authors[0]
+      : undefined;
 ---
 
 <BaseLayout
   title={`Safest Forex Brokers in ${site.address.country} (${site.currentYear}) - Safety & Regulation Rankings`}
   description={`Compare the safest and most regulated forex brokers for ${site.address.country}n traders. Expert rankings based on regulatory compliance, fund security, and risk management.`}
   schemaData={schemaData}
-  author={pageAuthor}>
-  
-  
-  <section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+  author={pageAuthor}
+>
+  <section
+    class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950"
+  >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <div class="inline-block mb-4 px-4 py-1 rounded-full bg-primary-500/10 border border-primary-500/20">
-          <span class="text-primary-400 text-sm font-medium">Safety Rankings {site.currentYear}</span>
+        <div
+          class="inline-block mb-4 px-4 py-1 rounded-full bg-primary-500/10 border border-primary-500/20"
+        >
+          <span class="text-primary-400 text-sm font-medium"
+            >Safety Rankings {site.currentYear}</span
+          >
         </div>
         <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-          <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Safest</span> Regulated Forex Brokers in Kenya
+          <span
+            class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent"
+            >Safest</span
+          > Regulated Forex Brokers in Kenya
         </h1>
         <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
-          Compare the top forex brokers in Kenya ranked by safety and regulatory compliance. Find the most secure brokers for your trading needs.
+          Compare the top forex brokers in Kenya ranked by safety and regulatory
+          compliance. Find the most secure brokers for your trading needs.
         </p>
       </div>
     </div>
@@ -149,14 +170,17 @@ const pageAuthor = regulationExperts.length > 0 ? regulationExperts[0] : (author
 
   <section class="py-12 bg-gradient-to-b from-neutral-950 to-neutral-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-center justify-between mb-8">
+      <div
+        class="flex flex-col md:flex-row md:items-center justify-between mb-8"
+      >
         <div>
           <h2 class="text-2xl font-bold text-white mb-2">Safety Rankings</h2>
           <p class="text-neutral-400">
-            <span>{rankedBrokers.length}</span> of the best forex brokers in Kenya ranked by safety and regulation
+            <span>{rankedBrokers.length}</span> of the best forex brokers in Kenya
+            ranked by safety and regulation
           </p>
         </div>
-        
+
         <div class="mt-4 md:mt-0 flex items-center gap-3">
           <div class="flex items-center gap-1">
             <span class="w-3 h-3 rounded-full bg-green-400"></span>
@@ -172,53 +196,84 @@ const pageAuthor = regulationExperts.length > 0 ? regulationExperts[0] : (author
           </div>
         </div>
       </div>
-      
-     
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {rankedBrokers.map((broker, index) => (
-          <SafetyBrokerCard broker={broker} rank={index + 1} />
-        ))}
+        {
+          rankedBrokers.map((broker, index) => (
+            <SafetyBrokerCard
+              broker={broker}
+              rank={index + 1}
+            />
+          ))
+        }
       </div>
-      
-      {rankedBrokers.length === 0 && (
-        <div class="text-center py-12">
-          <p class="text-xl text-neutral-300">No brokers found at the moment.</p>
-          <p class="text-neutral-400 mt-2">Please check back later or explore our <a href="/brokers" class="text-primary-400 hover:underline">full list of brokers</a>.</p>
-        </div>
-      )}
+
+      {
+        rankedBrokers.length === 0 && (
+          <div class="text-center py-12">
+            <p class="text-xl text-neutral-300">
+              No brokers found at the moment.
+            </p>
+            <p class="text-neutral-400 mt-2">
+              Please check back later or explore our{' '}
+              <a
+                href="/brokers"
+                class="text-primary-400 hover:underline"
+              >
+                full list of brokers
+              </a>
+              .
+            </p>
+          </div>
+        )
+      }
     </div>
-     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
-        <div class="lg:col-span-2">
-          <SafetyCriteria />
-        </div>
-        
-        <div>
-          <SafetyStats brokers={brokers} regulators={regulators} />
-        </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+      <div class="lg:col-span-2">
+        <SafetyCriteria />
       </div>
+
+      <div>
+        <SafetyStats
+          brokers={brokers}
+          regulators={regulators}
+        />
+      </div>
+    </div>
   </section>
 
   <section class="py-12 bg-neutral-900 relative overflow-hidden">
     <!-- Background pattern -->
     <div class="absolute inset-0 opacity-5">
-      <div class="absolute inset-0 bg-repeat opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIj48Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMSIvPjwvZz48L3N2Zz4=');"></div>
+      <div
+        class="absolute inset-0 bg-repeat opacity-10"
+        style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIj48Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMSIvPjwvZz48L3N2Zz4=');"
+      >
+      </div>
     </div>
-    
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold text-white mb-4">Why Safety and Regulation Matter</h2>
+        <h2 class="text-3xl font-bold text-white mb-4">
+          Why Safety and Regulation Matter
+        </h2>
         <p class="text-lg text-neutral-300 max-w-3xl mx-auto">
-          Understanding the importance of choosing properly regulated brokers for your trading security
+          Understanding the importance of choosing properly regulated brokers
+          for your trading security
         </p>
       </div>
-      
+
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div class="lg:col-span-2">
-          <div class="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-2xl p-6">
+          <div
+            class="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-2xl p-6"
+          >
             <div class="prose prose-invert max-w-none">
               <p>
-                When choosing a forex broker, safety and regulation should be top priorities. Regulated brokers are supervised by financial authorities that enforce rules designed to protect traders and maintain market integrity.
+                When choosing a forex broker, safety and regulation should be
+                top priorities. Regulated brokers are supervised by financial
+                authorities that enforce rules designed to protect traders and
+                maintain market integrity.
               </p>
               <h3>Benefits of Trading with Regulated Brokers</h3>
               <ul>
@@ -229,67 +284,117 @@ const pageAuthor = regulationExperts.length > 0 ? regulationExperts[0] : (author
                 <li>Regular audits and compliance checks</li>
               </ul>
               <p>
-                <strong>Important:</strong> Always verify a broker's regulatory status directly with the relevant authority before depositing funds.
+                <strong>Important:</strong> Always verify a broker's regulatory status
+                directly with the relevant authority before depositing funds.
               </p>
             </div>
-            
+
             <div class="mt-6 pt-6 border-t border-neutral-700/30">
-              <a 
-                href="/regulators" 
+              <a
+                href="/regulators"
                 class="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 font-medium"
               >
                 Learn more about regulatory authorities
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  ></path>
                 </svg>
               </a>
             </div>
           </div>
         </div>
-        
+
         <div>
           <RegulatoryComparison />
         </div>
       </div>
     </div>
   </section>
-  
+
   <!-- Regulatory Authorities Section -->
-  <section class="py-16 bg-gradient-to-b from-neutral-900 to-neutral-950 relative">
+  <section
+    class="py-16 bg-gradient-to-b from-neutral-900 to-neutral-950 relative"
+  >
     <!-- Background pattern -->
     <div class="absolute inset-0 overflow-hidden">
-      <svg class="absolute left-0 top-0 h-full w-full" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        class="absolute left-0 top-0 h-full w-full"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <defs>
-          <pattern id="regulatorPattern" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-            <rect width="100%" height="100%" fill="none"/>
-            <circle cx="20" cy="20" r="1" fill="currentColor" class="text-primary-500/5"/>
+          <pattern
+            id="regulatorPattern"
+            width="40"
+            height="40"
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(45)"
+          >
+            <rect
+              width="100%"
+              height="100%"
+              fill="none"
+            ></rect>
+            <circle
+              cx="20"
+              cy="20"
+              r="1"
+              fill="currentColor"
+              class="text-primary-500/5"
+            ></circle>
           </pattern>
         </defs>
-        <rect width="100%" height="100%" fill="url(#regulatorPattern)"/>
+        <rect
+          width="100%"
+          height="100%"
+          fill="url(#regulatorPattern)"
+        ></rect>
       </svg>
     </div>
-    
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="text-center mb-12">
-        <div class="inline-block mb-4 px-4 py-1 rounded-full bg-primary-500/10 border border-primary-500/20">
-          <span class="text-primary-400 text-sm font-medium">Regulatory Framework</span>
+        <div
+          class="inline-block mb-4 px-4 py-1 rounded-full bg-primary-500/10 border border-primary-500/20"
+        >
+          <span class="text-primary-400 text-sm font-medium"
+            >Regulatory Framework</span
+          >
         </div>
         <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-          Understanding <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Regulatory Authorities</span>
+          Understanding <span
+            class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent"
+            >Regulatory Authorities</span
+          >
         </h2>
         <p class="text-xl text-neutral-300 max-w-3xl mx-auto">
-          Learn about the different regulatory bodies that oversee forex brokers and how they protect traders.
+          Learn about the different regulatory bodies that oversee forex brokers
+          and how they protect traders.
         </p>
       </div>
-      
+
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
         <div class="lg:col-span-2">
           <!-- Regulator Tiers -->
-          <div class="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-2xl overflow-hidden p-6">
+          <div
+            class="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-2xl overflow-hidden p-6"
+          >
             <RegulatorTiers regulators={sortedRegulators} />
           </div>
         </div>
-        
+
         <div>
           <!-- Regulatory News -->
           <RegulatoryNews />
@@ -297,82 +402,133 @@ const pageAuthor = regulationExperts.length > 0 ? regulationExperts[0] : (author
       </div>
     </div>
   </section>
-  
+
   <!-- Featured Regulators Section -->
   <section class="py-16 bg-neutral-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
         <div>
-          <div class="inline-block mb-2 px-3 py-1 rounded-full bg-neutral-800 border border-neutral-700/50">
+          <div
+            class="inline-block mb-2 px-3 py-1 rounded-full bg-neutral-800 border border-neutral-700/50"
+          >
             <span class="text-neutral-400 text-xs font-medium">Top Rated</span>
           </div>
-          <h2 class="text-2xl md:text-3xl font-bold text-white">Featured Regulatory Authorities</h2>
+          <h2 class="text-2xl md:text-3xl font-bold text-white">
+            Featured Regulatory Authorities
+          </h2>
         </div>
-        
+
         <div class="mt-4 md:mt-0">
-          <a 
-            href="/regulators" 
+          <a
+            href="/regulators"
             class="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 font-medium"
           >
             View all regulators
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              ></path>
             </svg>
           </a>
         </div>
       </div>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {sortedRegulators.slice(0, 3).map(regulator => (
-          <RegulatorCard regulator={regulator} />
-        ))}
+        {
+          sortedRegulators
+            .slice(0, 3)
+            .map((regulator) => <RegulatorCard regulator={regulator} />)
+        }
       </div>
     </div>
   </section>
-  
+
   <!-- Regulation Experts Section -->
-  {regulationExperts.length > 0 && (
-    <section class="py-16 bg-gradient-to-b from-neutral-950 to-neutral-900 relative">
-      <!-- Background pattern -->
-      <div class="absolute inset-0 overflow-hidden">
-        <div class="absolute inset-0 opacity-5">
-          <svg width="100%" height="100%">
-            <pattern id="expertPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
-              <rect x="0" y="0" width="4" height="4" fill="currentColor" class="text-primary-400" />
-            </pattern>
-            <rect x="0" y="0" width="100%" height="100%" fill="url(#expertPattern)" />
-          </svg>
-        </div>
-      </div>
-      
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center mb-10">
-          <div class="inline-block mb-4 px-4 py-1 rounded-full bg-primary-500/10 border border-primary-500/20">
-            <span class="text-primary-400 text-sm font-medium">Expert Analysis</span>
+  {
+    regulationExperts.length > 0 && (
+      <section class="py-16 bg-gradient-to-b from-neutral-950 to-neutral-900 relative">
+        <div class="absolute inset-0 overflow-hidden">
+          <div class="absolute inset-0 opacity-5">
+            <svg
+              width="100%"
+              height="100%"
+            >
+              <pattern
+                id="expertPattern"
+                x="0"
+                y="0"
+                width="40"
+                height="40"
+                patternUnits="userSpaceOnUse"
+                patternTransform="rotate(30)"
+              >
+                <rect
+                  x="0"
+                  y="0"
+                  width="4"
+                  height="4"
+                  fill="currentColor"
+                  class="text-primary-400"
+                />
+              </pattern>
+              <rect
+                x="0"
+                y="0"
+                width="100%"
+                height="100%"
+                fill="url(#expertPattern)"
+              />
+            </svg>
           </div>
-          <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">
-            Meet Our <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Regulation Experts</span>
-          </h2>
-          <p class="text-neutral-300 max-w-3xl mx-auto">
-            Our team of financial regulation specialists provides expert analysis and insights on broker safety and regulatory compliance.
-          </p>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {regulationExperts.slice(0, 3).map(author => (
-            <AuthorCard author={author} showReviews={true} />
-          ))}
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="text-center mb-10">
+            <div class="inline-block mb-4 px-4 py-1 rounded-full bg-primary-500/10 border border-primary-500/20">
+              <span class="text-primary-400 text-sm font-medium">
+                Expert Analysis
+              </span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">
+              Meet Our{' '}
+              <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
+                Regulation Experts
+              </span>
+            </h2>
+            <p class="text-neutral-300 max-w-3xl mx-auto">
+              Our team of financial regulation specialists provides expert
+              analysis and insights on broker safety and regulatory compliance.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {regulationExperts.slice(0, 3).map((author) => (
+              <AuthorCard
+                author={author}
+                showReviews={true}
+              />
+            ))}
+          </div>
+
+          <div class="mt-10 text-center">
+            <a
+              href="/authors"
+              class="inline-block bg-neutral-800/50 hover:bg-neutral-700/50 text-white px-6 py-3 rounded-lg text-sm font-medium transition-colors border border-neutral-700/50 backdrop-blur-sm"
+            >
+              Meet Our Full Team
+            </a>
+          </div>
         </div>
-        
-        <div class="mt-10 text-center">
-          <a 
-            href="/authors" 
-            class="inline-block bg-neutral-800/50 hover:bg-neutral-700/50 text-white px-6 py-3 rounded-lg text-sm font-medium transition-colors border border-neutral-700/50 backdrop-blur-sm"
-          >
-            Meet Our Full Team
-          </a>
-        </div>
-      </div>
-    </section>
-  )}
+      </section>
+    )
+  }
 </BaseLayout>

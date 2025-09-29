@@ -31,8 +31,7 @@ export const RegulatorCard: React.FC<RegulatorCardProps> = ({
             <img
               src={logo}
               alt={`${shortName} ${name} logo`}
-              
-              style={{ objectFit: "contain" }}
+              style={{ objectFit: 'contain' }}
               className="rounded-md"
             />
           </div>

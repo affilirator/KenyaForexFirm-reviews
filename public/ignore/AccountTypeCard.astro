@@ -29,16 +29,19 @@ const getTypeColor = (type: string) => {
 };
 ---
 
-<a href={`/account-types/${account.id}`} class="
-  block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300
+<a
+  href={`/account-types/${account.id}`}
+  class="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300
   p-6 border border-gray-200
-  flex flex-col h-full
-">
+  flex flex-col h-full"
+>
   <div class="flex justify-between items-start mb-4">
     <h3 class="text-2xl font-bold text-gray-900 leading-tight">
       {account.title}
     </h3>
-    <span class={`px-3 py-1 rounded-full text-xs font-semibold ${getTypeColor(account.type)}`}>
+    <span
+      class={`px-3 py-1 rounded-full text-xs font-semibold ${getTypeColor(account.type)}`}
+    >
       {account.type.toUpperCase()}
     </span>
   </div>
@@ -47,25 +50,34 @@ const getTypeColor = (type: string) => {
     {account.shortDescription}
   </p>
 
-  <div class="space-y-2 text-sm text-gray-700 mt-auto pt-4 border-t border-gray-100">
+  <div
+    class="space-y-2 text-sm text-gray-700 mt-auto pt-4 border-t border-gray-100"
+  >
     <p>
-      <strong class="font-medium">Spreads:</strong> {account.spreads}
+      <strong class="font-medium">Spreads:</strong>
+      {account.spreads}
     </p>
     <p>
-      <strong class="font-medium">Revenue Model:</strong> {account.revenueModel}
+      <strong class="font-medium">Revenue Model:</strong>
+      {account.revenueModel}
     </p>
     <p>
       <strong class="font-medium">Suitable For:</strong>
-      {account.suitableFor.map((item, index) => (
-        <>
-          {item.targetAudience}{index < account.suitableFor.length - 1 ? ', ' : ''}
-        </>
-      ))}
+      {
+        account.suitableFor.map((item, index) => (
+          <>
+            {item.targetAudience}
+            {index < account.suitableFor.length - 1 ? ', ' : ''}
+          </>
+        ))
+      }
     </p>
   </div>
 
   <div class="mt-6 text-center">
-    <span class="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors duration-200">
+    <span
+      class="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors duration-200"
+    >
       Learn More
     </span>
   </div>

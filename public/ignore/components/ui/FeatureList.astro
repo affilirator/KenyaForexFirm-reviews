@@ -7,7 +7,12 @@ interface Props {
   itemClasses?: string; // Additional classes for each list item
 }
 
-const { items, keyName, listStyle = 'disc', itemClasses = 'text-gray-700' } = Astro.props;
+const {
+  items,
+  keyName,
+  listStyle = 'disc',
+  itemClasses = 'text-gray-700',
+} = Astro.props;
 
 const getDisplayValue = (item: any) => {
   if (typeof item === 'string') {
@@ -18,9 +23,5 @@ const getDisplayValue = (item: any) => {
 ---
 
 <ul class={`list-${listStyle} list-inside space-y-2`}>
-  {items.map((item) => (
-    <li class={itemClasses}>
-      {getDisplayValue(item)}
-    </li>
-  ))}
+  {items.map((item) => <li class={itemClasses}>{getDisplayValue(item)}</li>)}
 </ul>

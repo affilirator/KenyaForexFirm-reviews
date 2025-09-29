@@ -1,13 +1,12 @@
 ---
+
 ---
+
 <div class="table-container">
   <table class="data-table">
-    
-    <slot name="caption" >
-        <caption>
-            HTML Table
-        </caption>
-        </slot>
+    <slot name="caption">
+      <caption> HTML Table </caption>
+    </slot>
 
     <thead class="table-header">
       <slot name="header" />
@@ -20,10 +19,27 @@
 
 <style>
   /* Basic styling for the table */
- .table-container { border: 1px solid #ccc; border-radius: 4px; overflow-x: auto; }
- .data-table { width: 100%; border-collapse: collapse; }
- .table-header { background-color: #f2f2f2; text-align: left; }
- .data-table th,.data-table td { padding: 12px 15px; }
- .table-body tr:nth-child(even) { background-color: #f9f9f9; }
- .table-body tr:hover { background-color: #f1f1f1; }
+  .table-container {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .table-header {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  .data-table th,
+  .data-table td {
+    padding: 12px 15px;
+  }
+  .table-body tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  .table-body tr:hover {
+    background-color: #f1f1f1;
+  }
 </style>

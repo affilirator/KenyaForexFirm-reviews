@@ -1,34 +1,58 @@
 ---
-import BaseLayout from "~/layouts/BaseLayout.astro";
-import HeaderSlot from "~/components/slots/HeaderSlot.astro";
-import MainHero from "~/components/common/hero/MainHero.astro";
-import TopSlot from "~/components/slots/TopSlot.astro";
-
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import HeaderSlot from '~/components/slots/HeaderSlot.astro';
+import MainHero from '~/components/common/hero/MainHero.astro';
+import TopSlot from '~/components/slots/TopSlot.astro';
 ---
-<BaseLayout title="" description="">
-    <TopSlot>
-        <Fragment slot="image">
-            <p>Compare forex brokers side-by-side with detailed analysis of spreads, regulation, features, and costs. Make informed decisions with our comprehensive comparison tool.</p>
-        </Fragment>
-    </TopSlot>
-    <MainHero />
-    <HeaderSlot>
-        <Fragment slot="headerImage">
-            <div class="flex flex-grow">
-            <h4>
-                KenyaForexFirm - Your Trusted Source for Forex Brokers in Kenya!
-            </h4>
-            <ol class="flex flex-auto">
-                <li>Home</li>
-                <li>/</li>
-                <li>Forex Brokers in Kenya</li>
-            </ol>
-            </div>
-            </Fragment>
-        <span slot="topMeta">Welcome to KenyaForexFirm - Your Trusted Source for Forex Brokers in Kenya!</span>
-        <h1 slot="mainHeading">Discover the Best Forex Brokers in Kenya with KenyaForexFirm</h1>
-        <span slot="subtitle">Your Gateway to Expert Forex Broker Reviews, Rankings, and Insights Tailored for Kenyan Traders</span>
-        
-        <span slot="introDesc">At KenyaForexFirm, we are dedicated to helping Kenyan traders navigate the complex world of forex trading. Our expert reviews and comprehensive rankings provide you with the insights you need to choose the best forex brokers that align with your trading goals. Whether you're a beginner or an experienced trader, our platform offers unbiased comparisons, regulatory information, and valuable resources to enhance your trading journey. Explore our site to find trusted forex brokers and make informed decisions with confidence.</span>
-    </HeaderSlot>
+
+<BaseLayout
+  title=""
+  description=""
+>
+  <TopSlot>
+    <Fragment slot="image">
+      <p>
+        Compare forex brokers side-by-side with detailed analysis of spreads,
+        regulation, features, and costs. Make informed decisions with our
+        comprehensive comparison tool.
+      </p>
+    </Fragment>
+  </TopSlot>
+  <MainHero />
+  <HeaderSlot>
+    <Fragment slot="headerImage">
+      <div class="flex flex-grow">
+        <h4>
+          KenyaForexFirm - Your Trusted Source for Forex Brokers in Kenya!
+        </h4>
+        <ol class="flex flex-auto">
+          <li>Home</li>
+          <li>/</li>
+          <li>Forex Brokers in Kenya</li>
+        </ol>
+      </div>
+    </Fragment>
+    <span slot="topMeta"
+      >Welcome to KenyaForexFirm - Your Trusted Source for Forex Brokers in
+      Kenya!</span
+    >
+    <h1 slot="mainHeading">
+      Discover the Best Forex Brokers in Kenya with KenyaForexFirm
+    </h1>
+    <span slot="subtitle"
+      >Your Gateway to Expert Forex Broker Reviews, Rankings, and Insights
+      Tailored for Kenyan Traders</span
+    >
+
+    <span slot="introDesc"
+      >At KenyaForexFirm, we are dedicated to helping Kenyan traders navigate
+      the complex world of forex trading. Our expert reviews and comprehensive
+      rankings provide you with the insights you need to choose the best forex
+      brokers that align with your trading goals. Whether you're a beginner or
+      an experienced trader, our platform offers unbiased comparisons,
+      regulatory information, and valuable resources to enhance your trading
+      journey. Explore our site to find trusted forex brokers and make informed
+      decisions with confidence.</span
+    >
+  </HeaderSlot>
 </BaseLayout>

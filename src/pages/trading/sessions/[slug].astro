@@ -1,20 +1,17 @@
 ---
-import BaseLayout from "~/layouts/BaseLayout.astro";
-import type { TradingSession } from "~/types/tradingSession";
-
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import type { TradingSession } from '~/types/tradingSession';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Clock, Globe, TrendingUp, ArrowLeft } from 'lucide-react';
 import RichText from '@/components/common/RichText';
-import type { Author } from "~/types/author";
+import type { Author } from '~/types/author';
 
+import { getDefaultAuthor } from '~/lib/author-service';
 
-
-import { getDefaultAuthor } from "~/lib/author-service";
-
-import {site} from '~/data/site'
+import { site } from '~/data/site';
 const siteConfig = site;
 
 interface Props {
@@ -28,25 +25,22 @@ export async function getStaticPaths() {
       headers: {
         //'Authorization': 'Bearer ' + process.env.API_TOKEN || '',
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    }) 
-    const data = await res.json()
-    
-    return data.docs.map((session: TradingSession) => (
-        { 
-            params: {slug: session.slug as string},
-            props: {session} 
-    }
-    
-    ));
+        Accept: 'application/json',
+      },
+    });
+    const data = await res.json();
+
+    return data.docs.map((session: TradingSession) => ({
+      params: { slug: session.slug as string },
+      props: { session },
+    }));
   } catch (error) {
     console.error('Static params generation failed:', error);
     return [];
   }
 }
 
-const { session, author }: Props = Astro.props
+const { session, author }: Props = Astro.props;
 
 // Get default author if none is provided
 let pageAuthor: Author | undefined = author;
@@ -55,141 +49,190 @@ if (!pageAuthor) {
 }
 
 const currentDate = new Date();
-    const authorName = author?.name || 'MahingeFX Team';
-    const authorImage = "https://fx.mahinge.com/images/Patrick-Mahinge.webp"; // Placeholder
-    const sessionImage = session.image || '/images/default-blog.png';
+const authorName = author?.name || 'MahingeFX Team';
+const authorImage = 'https://fx.mahinge.com/images/Patrick-Mahinge.webp'; // Placeholder
+const sessionImage = session.image || '/images/default-blog.png';
 
 const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    "@id": 'https://fx.mahinge.com/forex-trading-sessions/' + session.slug + '#session',
-    "url": 'https://fx.mahinge.com/forex-trading-sessions/' + session.slug,
-    headline: session.name + ' Forex Trading Session in Kenyan Time',
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id':
+    'https://fx.mahinge.com/forex-trading-sessions/' +
+    session.slug +
+    '#session',
+  url: 'https://fx.mahinge.com/forex-trading-sessions/' + session.slug,
+  headline: session.name + ' Forex Trading Session in Kenyan Time',
+  name: session.name + ' Forex Trading Session in Kenyan Time',
+  description: `A comprehensive guide on the ${session.name} forex trading session in Kenyan time.`,
+  image: sessionImage,
+  author: {
+    '@type': 'Person',
+    '@id': `/#patrick-mahinge`,
+    //"@id": siteConfig.siteUrl + '/about/#' + authorName.replace(/\s+/g, '-').toLowerCase(),
+    name: authorName,
+    image: authorImage,
+    url: `https://fx.mahinge.com/about/patrick-mahinge`,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://fx.mahinge.com/forex-trading-sessions/' + session.slug,
     name: session.name + ' Forex Trading Session in Kenyan Time',
+    headline: session.name + ' Forex Trading Session in Kenyan Time',
     description: `A comprehensive guide on the ${session.name} forex trading session in Kenyan time.`,
-    image: sessionImage,
-    author: {
-      '@type': 'Person',
-      "@id": `/#patrick-mahinge` ,
-      //"@id": siteConfig.siteUrl + '/about/#' + authorName.replace(/\s+/g, '-').toLowerCase(),
-      name: authorName,
-      image: authorImage,
-      url: `https://fx.mahinge.com/about/patrick-mahinge` 
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'https://fx.mahinge.com/forex-trading-sessions/' + session.slug,
-      name: session.name + ' Forex Trading Session in Kenyan Time',
-      headline: session.name + ' Forex Trading Session in Kenyan Time',
-      description: `A comprehensive guide on the ${session.name} forex trading session in Kenyan time.`,
-      primaryImageOfPage: 'https://fx.mahinge.com/forex-trading-sessions/' + sessionImage,
-      url: 'https://fx.mahinge.com/forex-trading-sessions/' + session.slug,
-      publisher: {
+    primaryImageOfPage:
+      'https://fx.mahinge.com/forex-trading-sessions/' + sessionImage,
+    url: 'https://fx.mahinge.com/forex-trading-sessions/' + session.slug,
+    publisher: {
       '@type': 'Organization',
       '@id': '/#organization',
       //name: 'MahingeFX',
-
     },
   },
-    datePublished: session.createdAt ? new Date(session.createdAt).toISOString() : new Date().toISOString(),
-    dateModified: new Date().toISOString(),
-  };
+  datePublished: session.createdAt
+    ? new Date(session.createdAt).toISOString()
+    : new Date().toISOString(),
+  dateModified: new Date().toISOString(),
+};
 
-  const title = `${session.name} Trading Session in Kenyan Time`
-  const description = `Complete guide to ${session.name} forex trading session in Kenyan time. Learn optimal trading strategies, volatility patterns, and best currency pairs.`
+const title = `${session.name} Trading Session in Kenyan Time`;
+const description = `Complete guide to ${session.name} forex trading session in Kenyan time. Learn optimal trading strategies, volatility patterns, and best currency pairs.`;
 ---
-<BaseLayout title={title} description={description}
+
+<BaseLayout
+  title={title}
+  description={description}
   schemaData={jsonLd}
   author={author}
 >
-<div class="space-x-4 font-sans mx-auto px-4 py-12 ">
-     
+  <div class="space-x-4 font-sans mx-auto px-4 py-12">
+    <div class="grid lg:grid-cols-3 gap-8 mb-12">
+      <div class="lg:col-span-2">
+        <div class="mb-8">
+          <Button
+            variant="ghost"
+            asChild
+            className="mb-4"
+          >
+            <a href="/forex-trading/sessions/">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Trading Sessions
+            </a>
+          </Button>
 
-      <div class="grid lg:grid-cols-3 gap-8 mb-12">
-        <div class="lg:col-span-2">
-           <div class="mb-8">
-        <Button variant="ghost" asChild className="mb-4">
-          <a href="/forex-trading/sessions/">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Trading Sessions
-          </a>
-        </Button>
-        
-        <header class="mb-8">
-          <div class="inline-flex items-center mb-4">
-            <h1 class="font-display  text-foreground text-4xl md:text-5xl font-bold">{session.name} Forex Trading Session in Kenyan Time</h1>
-            <Badge variant={
-              session.volatility === 'very-high' ? 'destructive' :
-              session.volatility === 'high' ? 'default' :
-              session.volatility === 'medium' ? 'secondary' : 'outline'
-            } className="text-sm">
-              {session.volatility.replace('-', ' ')} volatility
-            </Badge>
-          </div>
-          <div class="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
-                            <div class="flex items-center gap-2">
-                               <a href={`/about/patrick-mahinge`} rel='author' class="group flex items-center gap-2">
-                                <img 
-                                  src={authorImage} 
-                                  alt={authorName} 
-                                  class="h-8 w-8 rounded-full object-cover"
-                                />
-                                <span class="group-hover:text-primary transition-colors">{authorName}</span>
-                              </a>
-                            </div>
-                            <span>&bull;</span>
-                            <time datetime={currentDate.toISOString()}>
-                          {currentDate.toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                          })}
-                        </time>
-                          </div>
-        </header>
-      </div>
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="font-display text-2xl">Session Overview</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <RichText content={session.description} client:load className=" " />
-            </CardContent>
-          </Card>
+          <header class="mb-8">
+            <div class="inline-flex items-center mb-4">
+              <h1
+                class="font-display text-foreground text-4xl md:text-5xl font-bold"
+              >
+                {session.name} Forex Trading Session in Kenyan Time
+              </h1>
+              <Badge
+                variant={session.volatility === 'very-high'
+                  ? 'destructive'
+                  : session.volatility === 'high'
+                    ? 'default'
+                    : session.volatility === 'medium'
+                      ? 'secondary'
+                      : 'outline'}
+                className="text-sm"
+              >
+                {session.volatility.replace('-', ' ')} volatility
+              </Badge>
+            </div>
+            <div
+              class="mt-4 flex items-center gap-4 text-sm text-muted-foreground"
+            >
+              <div class="flex items-center gap-2">
+                <a
+                  href={`/about/patrick-mahinge`}
+                  rel="author"
+                  class="group flex items-center gap-2"
+                >
+                  <img
+                    src={authorImage}
+                    alt={authorName}
+                    class="h-8 w-8 rounded-full object-cover"
+                  />
+                  <span class="group-hover:text-primary transition-colors"
+                    >{authorName}</span
+                  >
+                </a>
+              </div>
+              <span>&bull;</span>
+              <time datetime={currentDate.toISOString()}>
+                {
+                  currentDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })
+                }
+              </time>
+            </div>
+          </header>
+        </div>
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="font-display text-2xl"
+              >Session Overview</CardTitle
+            >
+          </CardHeader>
+          <CardContent>
+            <RichText
+              content={session.description}
+              client:load
+              className=" "
+            />
+          </CardContent>
+        </Card>
 
-          {session.tips && (
+        {
+          session.tips && (
             <Card className="mb-8">
               <CardHeader>
                 <CardTitle className="font-ui text-2xl">Trading Tips</CardTitle>
               </CardHeader>
               <CardContent>
-                <RichText content={session.tips} className="prose prose-lg dark:prose-invert max-w-none" />
+                <RichText
+                  content={session.tips}
+                  className="prose prose-lg dark:prose-invert max-w-none"
+                />
               </CardContent>
             </Card>
-          )}
-        </div>
+          )
+        }
+      </div>
 
-        <div class="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Clock className="h-5 w-5" />
-                Session Times
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <p class="font-semibold text-sm text-muted-foreground">Kenya Time (EAT)</p>
-                <p class="text-lg font-bold">{session.kenyaOpenTime} - {session.kenyaCloseTime}</p>
-              </div>
-              <div>
-                <p class="font-semibold text-sm text-muted-foreground">Local Time ({session.timezone})</p>
-                <p class="text-lg">{session.localOpenTime} - {session.localCloseTime}</p>
-              </div>
-            </CardContent>
-          </Card>
+      <div class="space-y-6">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Clock className="h-5 w-5" />
+              Session Times
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <p class="font-semibold text-sm text-muted-foreground">
+                Kenya Time (EAT)
+              </p>
+              <p class="text-lg font-bold">
+                {session.kenyaOpenTime} - {session.kenyaCloseTime}
+              </p>
+            </div>
+            <div>
+              <p class="font-semibold text-sm text-muted-foreground">
+                Local Time ({session.timezone})
+              </p>
+              <p class="text-lg">
+                {session.localOpenTime} - {session.localCloseTime}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
 
-          {session.majorPairs && session.majorPairs.length > 0 && (
+        {
+          session.majorPairs && session.majorPairs.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -218,9 +261,11 @@ const jsonLd = {
                 </div>
               </CardContent>
             </Card>
-          )}
+          )
+        }
 
-          {session.characteristics && session.characteristics.length > 0 && (
+        {
+          session.characteristics && session.characteristics.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Key Characteristics</CardTitle>
@@ -229,16 +274,18 @@ const jsonLd = {
                 <ul class="space-y-2">
                   {session.characteristics.map((char, index) => (
                     <li class="flex items-start gap-2">
-                      <span class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                      <span class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
                       <span class="text-sm">{char.characteristic}</span>
                     </li>
                   ))}
                 </ul>
               </CardContent>
             </Card>
-          )}
+          )
+        }
 
-          {session.bestFor && session.bestFor.length > 0 && (
+        {
+          session.bestFor && session.bestFor.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Best Trading Strategies</CardTitle>
@@ -246,15 +293,19 @@ const jsonLd = {
               <CardContent>
                 <div class="space-y-2">
                   {session.bestFor.map((strategy, index) => (
-                    <Badge variant="secondary" className="mr-2 mb-2">
+                    <Badge
+                      variant="secondary"
+                      className="mr-2 mb-2"
+                    >
                       {strategy.strategy}
                     </Badge>
                   ))}
                 </div>
               </CardContent>
             </Card>
-          )}
-        </div>
+          )
+        }
       </div>
     </div>
+  </div>
 </BaseLayout>

@@ -8,14 +8,17 @@ interface Props {
 const { regulators } = Astro.props;
 
 // Group regulators by region
-const regulatorsByRegion = regulators.reduce((acc, regulator) => {
-  const region = regulator.region || 'Other';
-  if (!acc[region]) {
-    acc[region] = [];
-  }
-  acc[region].push(regulator);
-  return acc;
-}, {} as Record<string, Regulator[]>);
+const regulatorsByRegion = regulators.reduce(
+  (acc, regulator) => {
+    const region = regulator.region || 'Other';
+    if (!acc[region]) {
+      acc[region] = [];
+    }
+    acc[region].push(regulator);
+    return acc;
+  },
+  {} as Record<string, Regulator[]>
+);
 
 // Get top regions by number of regulators
 const topRegions = Object.entries(regulatorsByRegion)
@@ -24,69 +27,96 @@ const topRegions = Object.entries(regulatorsByRegion)
   .map(([region]) => region);
 
 // Calculate average trust score
-const averageTrustScore = regulators.length > 0
-  ? Math.round(regulators.reduce((sum, reg) => sum + reg.trustScore, 0) / regulators.length)
-  : 0;
+const averageTrustScore =
+  regulators.length > 0
+    ? Math.round(
+        regulators.reduce((sum, reg) => sum + reg.trustScore, 0) /
+          regulators.length
+      )
+    : 0;
 
 // Find regulator with highest trust score
-const highestTrustScoreRegulator = regulators.length > 0
-  ? regulators.reduce((highest, current) => 
-      current.trustScore > highest.trustScore ? current : highest, 
-      regulators[0])
-  : null;
+const highestTrustScoreRegulator =
+  regulators.length > 0
+    ? regulators.reduce(
+        (highest, current) =>
+          current.trustScore > highest.trustScore ? current : highest,
+        regulators[0]
+      )
+    : null;
 ---
 
-<div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden">
+<div
+  class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden"
+>
   <div class="p-6">
-    <h3 class="text-xl font-bold text-white mb-4">Regulatory Compliance Overview</h3>
-    
+    <h3 class="text-xl font-bold text-white mb-4">
+      Regulatory Compliance Overview
+    </h3>
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div class="bg-neutral-700/30 p-4 rounded-lg">
         <div class="text-sm text-neutral-400 mb-1">Total Regulatory Bodies</div>
         <div class="text-3xl font-bold text-white">{regulators.length}</div>
-        <div class="text-xs text-neutral-400 mt-1">Across {Object.keys(regulatorsByRegion).length} regions</div>
+        <div class="text-xs text-neutral-400 mt-1">
+          Across {Object.keys(regulatorsByRegion).length} regions
+        </div>
       </div>
-      
+
       <div class="bg-neutral-700/30 p-4 rounded-lg">
         <div class="text-sm text-neutral-400 mb-1">Average Trust Score</div>
         <div class="text-3xl font-bold text-white">{averageTrustScore}/100</div>
-        <div class="text-xs text-neutral-400 mt-1">Based on our regulatory assessment</div>
-      </div>
-    </div>
-    
-    <div class="mb-6">
-      <div class="text-sm font-medium text-white mb-2">Top Regulatory Regions</div>
-      <div class="flex flex-wrap gap-2">
-        {topRegions.map(region => (
-          <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-xs">
-            {region}
-          </span>
-        ))}
-      </div>
-    </div>
-    
-    {highestTrustScoreRegulator && (
-      <div>
-        <div class="text-sm font-medium text-white mb-2">Highest Rated Regulator</div>
-        <div class="bg-neutral-700/20 p-3 rounded-lg flex items-center gap-3">
-          {highestTrustScoreRegulator.logo && (
-            <img 
-              src={highestTrustScoreRegulator.logo.url} 
-              alt={highestTrustScoreRegulator.name} 
-              class="w-10 h-10 object-contain bg-white rounded p-1"
-            />
-          )}
-          <div>
-            <div class="text-sm font-medium text-white">{highestTrustScoreRegulator.name}</div>
-            <div class="text-xs text-neutral-400">{highestTrustScoreRegulator.country}</div>
-          </div>
-          <div class="ml-auto">
-            <span class="bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded text-xs font-medium">
-              {highestTrustScoreRegulator.trustScore}/100
-            </span>
-          </div>
+        <div class="text-xs text-neutral-400 mt-1">
+          Based on our regulatory assessment
         </div>
       </div>
-    )}
+    </div>
+
+    <div class="mb-6">
+      <div class="text-sm font-medium text-white mb-2">
+        Top Regulatory Regions
+      </div>
+      <div class="flex flex-wrap gap-2">
+        {
+          topRegions.map((region) => (
+            <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-xs">
+              {region}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+
+    {
+      highestTrustScoreRegulator && (
+        <div>
+          <div class="text-sm font-medium text-white mb-2">
+            Highest Rated Regulator
+          </div>
+          <div class="bg-neutral-700/20 p-3 rounded-lg flex items-center gap-3">
+            {highestTrustScoreRegulator.logo && (
+              <img
+                src={highestTrustScoreRegulator.logo.url}
+                alt={highestTrustScoreRegulator.name}
+                class="w-10 h-10 object-contain bg-white rounded p-1"
+              />
+            )}
+            <div>
+              <div class="text-sm font-medium text-white">
+                {highestTrustScoreRegulator.name}
+              </div>
+              <div class="text-xs text-neutral-400">
+                {highestTrustScoreRegulator.country}
+              </div>
+            </div>
+            <div class="ml-auto">
+              <span class="bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded text-xs font-medium">
+                {highestTrustScoreRegulator.trustScore}/100
+              </span>
+            </div>
+          </div>
+        </div>
+      )
+    }
   </div>
 </div>

@@ -7,24 +7,27 @@ import SEOContent from '../../../components/SEOContent.astro';
 import { Image } from 'astro:assets';
 import { site } from '../../../data/site';
 import TopSlot from '~/components/slots/TopSlot.astro';
-import { getFundingMethodBySlug, getAllFundingMethods, getReviews } from '../../../lib/qs-esm';
-const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/OrangeIconLogo.webp'
+import {
+  getFundingMethodBySlug,
+  getAllFundingMethods,
+  getReviews,
+} from '../../../lib/qs-esm';
+const fallbackCdnUrl =
+  'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/OrangeIconLogo.webp';
 
-const endpoint = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media'
+const endpoint =
+  'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media';
 export async function getStaticPaths() {
   try {
     const fundingMethods = await getAllFundingMethods();
-    
-    
+
     return fundingMethods.docs.map((method) => ({
       params: { method: method.slug },
-      props: { methodSlug: method.slug }
+      props: { methodSlug: method.slug },
     }));
   } catch (error) {
     console.error('Failed to generate static paths:', error);
-    return [
-      { params: { method: 'mpesa' }, props: { methodSlug: 'mpesa' } }
-    ];
+    return [{ params: { method: 'mpesa' }, props: { methodSlug: 'mpesa' } }];
   }
 }
 
@@ -35,92 +38,125 @@ if (!fundingMethod) {
   // Fallback data
   fundingMethod = {
     id: methodSlug,
-    image:{
-      url: fallbackCdnUrl
+    image: {
+      url: fallbackCdnUrl,
     },
-    title: methodSlug.charAt(0).toUpperCase() + methodSlug.slice(1).replace('-', ' '),
-    name: methodSlug.charAt(0).toUpperCase() + methodSlug.slice(1).replace('-', ' '),
+    title:
+      methodSlug.charAt(0).toUpperCase() +
+      methodSlug.slice(1).replace('-', ' '),
+    name:
+      methodSlug.charAt(0).toUpperCase() +
+      methodSlug.slice(1).replace('-', ' '),
     slug: methodSlug,
     description: `Payment method for ${methodSlug}`,
-    status: 'published'
+    status: 'published',
   };
 }
 
 const allBrokers = await getReviews();
 
-const supportingBrokers = allBrokers.docs.filter(broker => 
-  broker.brokerPaymentMethods?.some(method => 
-    method.toLowerCase() === methodSlug.toLowerCase() ||
-    method.toLowerCase() === fundingMethod?.name.toLowerCase()
+const supportingBrokers = allBrokers.docs.filter((broker) =>
+  broker.brokerPaymentMethods?.some(
+    (method) =>
+      method.toLowerCase() === methodSlug.toLowerCase() ||
+      method.toLowerCase() === fundingMethod?.name.toLowerCase()
   )
 );
-
-
 
 const title = `Best Forex Brokers That Accept ${fundingMethod?.title || fundingMethod?.name} in Kenya (${new Date().getFullYear()})`;
 const description = `Find top forex brokers accepting ${fundingMethod?.title || fundingMethod?.name} payments in Kenya.`;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+>
   <TopSlot>
-    
     <span slot="image">
-
-      <img src={fundingMethod.image?.filename ? `https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/${fundingMethod.image.filename}` : (fundingMethod.image?.url || fallbackCdnUrl)}
-      alt={`${fundingMethod?.title || fundingMethod?.name} Logo`} 
-      height={48}
-      width={48}
-      class="h-12 w-auto mx-auto md:mx-0 rounded-full object-cover" />
-      
+      <img
+        src={fundingMethod.image?.filename
+          ? `https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/${fundingMethod.image.filename}`
+          : fundingMethod.image?.url || fallbackCdnUrl}
+        alt={`${fundingMethod?.title || fundingMethod?.name} Logo`}
+        height={48}
+        width={48}
+        class="h-12 w-auto mx-auto md:mx-0 rounded-full object-cover"
+      />
     </span>
 
-    <h1 slot="title" class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-      Best Forex Brokers That Accept {fundingMethod?.title || fundingMethod?.name} in Kenya
+    <h1
+      slot="title"
+      class="text-4xl md:text-5xl font-display font-bold text-white mb-6"
+    >
+      Best Forex Brokers That Accept {
+        fundingMethod?.title || fundingMethod?.name
+      } in Kenya
     </h1>
-    <p slot="subtitle" class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
-      {fundingMethod?.description || `Discover forex brokers that accept ${fundingMethod?.title || fundingMethod?.name} payments.`}
+    <p
+      slot="subtitle"
+      class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed"
+    >
+      {
+        fundingMethod?.description ||
+          `Discover forex brokers that accept ${fundingMethod?.title || fundingMethod?.name} payments.`
+      }
     </p>
   </TopSlot>
 
-
-  <section class="py-12 ">
+  <section class="py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        {fundingMethod.processingTime && (
-          <div class="text-center p-6  rounded-lg">
-            <h3 class="font-semibold  mb-2">Processing Time</h3>
-            <p class="text-neutral-600">{fundingMethod.processingTime}</p>
-          </div>
-        )}
-        {fundingMethod?.fees && (
-          <div class="text-center p-6 bg-neutral-900 rounded-lg">
-            <h3 class="font-semibold text-neutral-100 mb-2">Fees</h3>
-            <p class="text-neutral-600">{fundingMethod?.fees}</p>
-          </div>
-        )}
-        {fundingMethod?.minAmount && (
-          <div class="text-center p-6 bg-neutral-900 rounded-lg">
-            <h3 class="font-semibold text-neutral-100 mb-2">Min Amount</h3>
-            <p class="text-neutral-600">${fundingMethod?.minAmount}</p>
-          </div>
-        )}
-        {fundingMethod?.maxAmount && (
-          <div class="text-center p-6 bg-neutral-900 rounded-lg">
-            <h3 class="font-semibold text-neutral-100 mb-2">Max Amount</h3>
-            <p class="text-neutral-600">${fundingMethod.maxAmount}</p>
-          </div>
-        )}
+        {
+          fundingMethod.processingTime && (
+            <div class="text-center p-6  rounded-lg">
+              <h3 class="font-semibold  mb-2">Processing Time</h3>
+              <p class="text-neutral-600">{fundingMethod.processingTime}</p>
+            </div>
+          )
+        }
+        {
+          fundingMethod?.fees && (
+            <div class="text-center p-6 bg-neutral-900 rounded-lg">
+              <h3 class="font-semibold text-neutral-100 mb-2">Fees</h3>
+              <p class="text-neutral-600">{fundingMethod?.fees}</p>
+            </div>
+          )
+        }
+        {
+          fundingMethod?.minAmount && (
+            <div class="text-center p-6 bg-neutral-900 rounded-lg">
+              <h3 class="font-semibold text-neutral-100 mb-2">Min Amount</h3>
+              <p class="text-neutral-600">${fundingMethod?.minAmount}</p>
+            </div>
+          )
+        }
+        {
+          fundingMethod?.maxAmount && (
+            <div class="text-center p-6 bg-neutral-900 rounded-lg">
+              <h3 class="font-semibold text-neutral-100 mb-2">Max Amount</h3>
+              <p class="text-neutral-600">${fundingMethod.maxAmount}</p>
+            </div>
+          )
+        }
       </div>
     </div>
   </section>
 
-  <BrokerList 
+  <BrokerList
     brokers={supportingBrokers}
     title={`${supportingBrokers.length} of Our Top-Rated Forex Brokers Accept ${fundingMethod.title || fundingMethod.name}`}
     description={`All brokers below accept ${fundingMethod.title || fundingMethod.name} for deposits and withdrawals.`}
   />
 
-  <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={fundingMethod.title || fundingMethod.name} />
+  <BrokerDetails
+    brokers={supportingBrokers}
+    filterType="payment"
+    filterName={fundingMethod.title || fundingMethod.name}
+  />
 
-  <SEOContent type="payment" name={fundingMethod.title || fundingMethod.name} brokerCount={supportingBrokers.length} />
+  <SEOContent
+    type="payment"
+    name={fundingMethod.title || fundingMethod.name}
+    brokerCount={supportingBrokers.length}
+  />
 </BaseLayout>

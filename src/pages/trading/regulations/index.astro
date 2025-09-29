@@ -5,7 +5,7 @@ import type { Regulator } from '~/types/regulator';
 import { REGULATOR_GLOBALS } from '~/lib/regulatorGlobals';
 
 // Convert the regulator globals to the Regulator type
-const regulators: Regulator[] = REGULATOR_GLOBALS.map(reg => ({
+const regulators: Regulator[] = REGULATOR_GLOBALS.map((reg) => ({
   name: `${reg.name} - ${reg.country} Financial Regulator`,
   shortName: reg.name,
   country: reg.country,
@@ -18,14 +18,25 @@ const regulators: Regulator[] = REGULATOR_GLOBALS.map(reg => ({
 }));
 
 const title = 'Forex Regulators - Complete Guide to Forex Regulation';
-const description = 'Learn about the top forex regulators worldwide. Compare regulatory frameworks, requirements, and find regulated brokers.';
+const description =
+  'Learn about the top forex regulators worldwide. Compare regulatory frameworks, requirements, and find regulated brokers.';
 ---
 
-<Layout title={title} description={description}>
-  <div class="bg-gradient-to-br from-neutral-100 via-neutral-100 to-primary-400/10 py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-    <div class="absolute inset-0 bg-cyber-grid bg-[length:40px_40px] opacity-30"></div>
+<Layout
+  title={title}
+  description={description}
+>
+  <div
+    class="bg-gradient-to-br from-neutral-100 via-neutral-100 to-primary-400/10 py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+  >
+    <div
+      class="absolute inset-0 bg-cyber-grid bg-[length:40px_40px] opacity-30"
+    >
+    </div>
     <div class="max-w-7xl mx-auto relative z-10">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 leading-tight font-display mb-6">
+      <h1
+        class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 leading-tight font-display mb-6"
+      >
         Forex Regulators
       </h1>
       <p class="text-xl md:text-2xl text-neutral-700 font-serif max-w-3xl">
@@ -37,9 +48,7 @@ const description = 'Learn about the top forex regulators worldwide. Compare reg
   <div class="py-16 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {regulators.map((regulator) => (
-          <RegulatorCard regulator={regulator} />
-        ))}
+        {regulators.map((regulator) => <RegulatorCard regulator={regulator} />)}
       </div>
     </div>
   </div>

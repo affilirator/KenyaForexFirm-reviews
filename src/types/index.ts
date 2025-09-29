@@ -1,11 +1,15 @@
-import type { ReviewContentAuthor } from "./author";
-import type { CatRatings, CategoryReference } from "./catRatingsInterface";
-import type { Broker, ForexInstrument, Media, TradingStrategy } from "./payload-types";
+import type { ReviewContentAuthor } from './author';
+import type { CatRatings, CategoryReference } from './catRatingsInterface';
+import type {
+  Broker,
+  ForexInstrument,
+  Media,
+  TradingStrategy,
+} from './payload-types';
 interface Regulator {
   name: string;
   shortName: string;
   country: string;
-
 }
 
 export interface ForexTrader {
@@ -123,7 +127,14 @@ export interface ForexTrader {
    */
   socialLinks?:
     | {
-        platform: 'x' | 'linkedin' | 'instagram' | 'facebook' | 'youtube' | 'xmlFeed' | 'other';
+        platform:
+          | 'x'
+          | 'linkedin'
+          | 'instagram'
+          | 'facebook'
+          | 'youtube'
+          | 'xmlFeed'
+          | 'other';
         url: string;
         /**
          * Link to the social profile, e.g., "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -153,17 +164,17 @@ interface BrokerRegulation {
 }
 
 export interface FundingMethod {
-    id: string;
-    name: string;
-    slug: string;
-    description?: string;
-    processingTime?: string;
-    fees?: string;
-    minAmount?: number;
-    maxAmount?: number;
-    supportedCountries?: string[];
-    logo?: BrokerImage;
-    status: string;
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  processingTime?: string;
+  fees?: string;
+  minAmount?: number;
+  maxAmount?: number;
+  supportedCountries?: string[];
+  logo?: BrokerImage;
+  status: string;
 }
 
 export interface IndexBrokerProps {
@@ -181,7 +192,7 @@ export type AccountType = {
   accountName: string;
   commission?: number;
   spread?: number;
-}
+};
 
 /**
  * "accountName": "Premier Account",
@@ -198,7 +209,7 @@ export type Regulation = {
   shortName: string;
   country: string;
   id: string;
-}
+};
 
 export type BrokerReview = {
   id: string;
@@ -212,23 +223,23 @@ export type BrokerReview = {
   minDeposit?: number;
   spread?: string;
   logo?: string;
-}
+};
 
 export type Logo = {
   filename: string;
   id: string;
   url: string;
-}
+};
 
 export type BrokerPros = {
   id: string;
   pro: string;
-}
+};
 
 export type BrokerCons = {
   id: string;
   con: string;
-}
+};
 
 export type BrokerRatings = {
   feesAndCommissions: number;
@@ -240,7 +251,7 @@ export type BrokerRatings = {
   overallExperience: number;
   mobileTrading: number;
   marketAccess: number;
-}
+};
 
 export type BrokerBaseDetails = {
   founded?: number;
@@ -251,32 +262,32 @@ export type BrokerBaseDetails = {
   website?: string;
   address?: string;
   headquarters?: string;
-}
+};
 
 export type MetaImage = {
   url: string;
   alt?: string;
   filename?: string;
   id?: string;
-}
+};
 
 export type BrokerMeta = {
   title?: string;
   description?: string;
   image?: MetaImage;
-}
+};
 
 export type BrokerPlatform = {
   name: string;
   slug: string;
   id: string;
-}
+};
 
 export type ImageSizes = {
   small: ImageSize;
   tablet: ImageSize;
   large: ImageSize;
-}
+};
 
 export type ImageSize = {
   width: number;
@@ -285,7 +296,7 @@ export type ImageSize = {
   filesize: number;
   filename: string;
   url: string;
-}
+};
 
 export type BrokerImage = {
   createdAt?: string;
@@ -308,8 +319,7 @@ export type BrokerImage = {
   id?: string;
   slug?: string;
   caption?: string;
-}
-
+};
 
 export type ReviewContent = {
   docs: Array<{
@@ -317,7 +327,7 @@ export type ReviewContent = {
     id: string;
   }>;
   hasNextPage: boolean;
-}
+};
 
 export type BrokerProps = {
   id: string;
@@ -341,7 +351,7 @@ export type BrokerProps = {
   features?: string[];
   //platforms?: string[];
   brokerPlatforms?: BrokerPlatform[];
-  
+
   brokerPaymentMethods?: string[];
   fundingMethods?: FundingMethod[];
   selectedAssets?: string[];
@@ -382,4 +392,4 @@ export type BrokerProps = {
   categoryRating?: any[];
   contactDetails?: any[];
   restrictedCountries?: string[];
-}
+};

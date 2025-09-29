@@ -1,11 +1,9 @@
 {
-    "name": "kff-reviews",
-    "compatibility_date": "2025-06-19",
-    "compatibility_flags": [
-        
-    ],
-    "assets": {
-        "directory": "./dist",
-        "not_found_handling": "404-page"
-    }
+  "name": "kff-reviews",
+  "compatibility_date": "2025-06-19",
+  "compatibility_flags": [],
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+  },
 }

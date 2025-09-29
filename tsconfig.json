@@ -1,17 +1,12 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [
-    ".astro/types.d.ts",
-    "**/*"
-  ],
-  "exclude": [
-    "dist"
-  ],
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
   "compilerOptions": {
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"
-      },
+      }
     ],
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -25,45 +20,19 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "src/*"
-      ],
-      "@/*": [
-        "src/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      "@data/*": [
-        "src/data/*"
-      ],
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@layouts/*": [
-        "src/layouts/*"
-      ],
-      "@assets/*": [
-        "src/assets/*"
-      ],
-      "@styles/*": [
-        "src/styles/*"
-      ],
-      "@pages/*": [
-        "src/pages/*"
-      ],
-      "@types/*": [
-        "src/types/*"
-      ],
-      "@content/*": [
-        "src/content/*"
-      ],
-      "@lib/*": [
-        "src/lib/*"
-      ],
-      "@onboarding/*": [
-        "src/pages/lp/onboarding/*"
-      ]
+      "~/*": ["src/*"],
+      "@/*": ["src/*"],
+      "@utils/*": ["src/utils/*"],
+      "@data/*": ["src/data/*"],
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@assets/*": ["src/assets/*"],
+      "@styles/*": ["src/styles/*"],
+      "@pages/*": ["src/pages/*"],
+      "@types/*": ["src/types/*"],
+      "@content/*": ["src/content/*"],
+      "@lib/*": ["src/lib/*"],
+      "@onboarding/*": ["src/pages/lp/onboarding/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"

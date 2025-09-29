@@ -1,75 +1,82 @@
 ---
 // src/components/HeroCard.astro
-import { cn } from "@/lib/utils"; // Assuming you have the cn utility from shadcn/ui
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
-} from "@/components/ui/card";
+import { cn } from '@/lib/utils'; // Assuming you have the cn utility from shadcn/ui
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 export interface Props {
   imagePosition?: 'left' | 'right';
   class?: string;
 }
 
-const { 
-  imagePosition = 'left',
-  class: className,
-} = Astro.props;
+const { imagePosition = 'left', class: className } = Astro.props;
 
 // Determine flex direction based on image position
 const directionClasses = {
-  left: "md:flex-row",
-  right: "md:flex-row-reverse"
+  left: 'md:flex-row',
+  right: 'md:flex-row-reverse',
 };
 ---
 
-<section class={cn("w-full", className)}>
+<section class={cn('w-full', className)}>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div 
+    <div
       class={cn(
-        "flex flex-col-reverse md:flex-col items-start gap-8 md:gap-12", 
+        'flex flex-col-reverse md:flex-col items-start gap-8 md:gap-12',
         directionClasses[imagePosition]
       )}
     >
-      {Astro.slots.has('image') && (
-        <div class="w-full md:w-1/2 flex-shrink-0 items-end">
-          <slot name="image" />
-        </div>
-      )}
-      
+      {
+        Astro.slots.has('image') && (
+          <div class="w-full md:w-1/2 flex-shrink-0 items-end">
+            <slot name="image" />
+          </div>
+        )
+      }
+
       <div class="w-full md:w-1/2 flex-grow">
-        <Card className="border-none bg-transparent shadow-none text-center md:text-left">
+        <Card
+          className="border-none bg-transparent shadow-none text-center md:text-left"
+        >
           <CardHeader>
-            {Astro.slots.has('badge') && (
-              <div class="mb-2 flex justify-center md:justify-start">
-                <slot name="badge" />
-              </div>
-            )}
-            
+            {
+              Astro.slots.has('badge') && (
+                <div class="mb-2 flex justify-center md:justify-start">
+                  <slot name="badge" />
+                </div>
+              )
+            }
+
             <CardTitle>
               <slot name="title" />
             </CardTitle>
-            
+
             <CardDescription>
               <slot name="subtitle" />
             </CardDescription>
           </CardHeader>
-          
-          {Astro.slots.has('description') && (
-            <CardContent className="p-0">
-              <slot name="description" />
-            </CardContent>
-          )}
 
-          {Astro.slots.has('meta') && (
-            <CardFooter className="flex-wrap justify-center p-0 pt-4 md:justify-start">
-              <slot name="meta" />
-            </CardFooter>
-          )}
+          {
+            Astro.slots.has('description') && (
+              <CardContent className="p-0">
+                <slot name="description" />
+              </CardContent>
+            )
+          }
+
+          {
+            Astro.slots.has('meta') && (
+              <CardFooter className="flex-wrap justify-center p-0 pt-4 md:justify-start">
+                <slot name="meta" />
+              </CardFooter>
+            )
+          }
         </Card>
       </div>
     </div>

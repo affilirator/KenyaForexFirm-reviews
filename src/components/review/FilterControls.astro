@@ -2,21 +2,34 @@
 // src/components/FilterControls.astro
 ---
 
-<div class="bg-gradient-to-r from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 mb-8">
+<div
+  class="bg-gradient-to-r from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 mb-8"
+>
   <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
     <!-- Search -->
     <div class="lg:col-span-2">
-      <label class="block text-sm font-medium text-neutral-300 mb-2">Search Brokers</label>
-      <input type="text" id="brokerSearch" placeholder="Search by name, regulation, or features..."
-             class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white placeholder-neutral-400 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+      <label class="block text-sm font-medium text-neutral-300 mb-2"
+        >Search Brokers</label
+      >
+      <input
+        type="text"
+        id="brokerSearch"
+        placeholder="Search by name, regulation, or features..."
+        class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white placeholder-neutral-400 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+      />
     </div>
 
     <!-- Regulation Filter
      Try to refactor and match with data from payloadcms
       -->
     <div>
-      <label class="block text-sm font-medium text-neutral-300 mb-2">Regulation</label>
-      <select id="regulationFilter" class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+      <label class="block text-sm font-medium text-neutral-300 mb-2"
+        >Regulation</label
+      >
+      <select
+        id="regulationFilter"
+        class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+      >
         <option value="">All Regulators</option>
         <option value="cma-approved">CMA Approved Only</option>
         <option value="cysec">CySEC</option>
@@ -27,8 +40,13 @@
 
     <!-- Min Deposit Filter -->
     <div>
-      <label class="block text-sm font-medium text-neutral-300 mb-2">Min Deposit</label>
-      <select id="depositFilter" class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+      <label class="block text-sm font-medium text-neutral-300 mb-2"
+        >Min Deposit</label
+      >
+      <select
+        id="depositFilter"
+        class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+      >
         <option value="">Any Amount</option>
         <option value="0-10">$1 - $10</option>
         <option value="10-100">$10 - $100</option>
@@ -41,8 +59,13 @@
   <!-- Sort Options -->
   <div class="grid md:grid-cols-3 gap-4 mb-6">
     <div>
-      <label class="block text-sm font-medium text-neutral-300 mb-2">Sort By</label>
-      <select id="sortFilter" class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+      <label class="block text-sm font-medium text-neutral-300 mb-2"
+        >Sort By</label
+      >
+      <select
+        id="sortFilter"
+        class="w-full bg-neutral-800/50 border border-neutral-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+      >
         <option value="rating">Highest Rated</option>
         <option value="spread">Lowest Spread</option>
         <option value="deposit">Lowest Min Deposit</option>
@@ -54,9 +77,21 @@
   <div class="mt-6 pt-6 border-t border-neutral-700/50">
     <p class="text-sm font-medium text-neutral-300 mb-3">Quick Filters:</p>
     <div class="flex flex-wrap gap-2">
-      <button class="quick-filter" data-filter="cma-approved">CMA Approved</button>
-      <button class="quick-filter" data-filter="low-deposit">Low Min Deposit</button>
-      <button class="quick-filter" data-filter="islamic">Islamic Accounts</button>
+      <button
+        class="quick-filter"
+        data-filter="cma-approved"
+        >CMA Approved</button
+      >
+      <button
+        class="quick-filter"
+        data-filter="low-deposit"
+        >Low Min Deposit</button
+      >
+      <button
+        class="quick-filter"
+        data-filter="islamic"
+        >Islamic Accounts</button
+      >
     </div>
   </div>
 </div>
@@ -65,7 +100,7 @@
   .quick-filter {
     @apply bg-neutral-700/50 hover:bg-primary-600 text-neutral-300 hover:text-white px-3 py-1 rounded-full text-sm transition-colors duration-300;
   }
-  
+
   .quick-filter.active {
     @apply bg-gradient-to-r from-primary-600 to-accent-600 text-white;
   }

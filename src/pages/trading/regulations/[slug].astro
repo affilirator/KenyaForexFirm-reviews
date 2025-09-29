@@ -6,16 +6,16 @@ import { getAuthorBySlug } from '~/lib/authors-api';
 import type { RegulatorPage, Regulator } from '~/types/regulator';
 import Layout from '~/layouts/BaseLayout.astro';
 import RegulatorCard from '~/components/regulators/RegCardTwo';
-import { 
-  RegulatorHero, 
-  RegulatorSection, 
-  RegulatorFAQ, 
-  RegulatorConclusion, 
+import {
+  RegulatorHero,
+  RegulatorSection,
+  RegulatorFAQ,
+  RegulatorConclusion,
   RegulatorRelatedContent,
   RegulatorRequirements,
   RegulatorBenefits,
   RegulatorBrokers,
-  TopRegulatedBrokers
+  TopRegulatedBrokers,
 } from '~/components/regulators';
 import ErrorDisplay from '~/components/common/ErrorDisplay.astro';
 
@@ -23,28 +23,31 @@ import ErrorDisplay from '~/components/common/ErrorDisplay.astro';
 export async function getStaticPaths() {
   const regulatorsResponse = await getRegulators();
   const regulators = regulatorsResponse.docs || [];
-  
+
   // Create paths with author data for each regulator
-  const paths = await Promise.all(regulators.map(async regulator => {
-    // Get author data if available
-    let author = null;
-    if (regulator.author && regulator.author.slug) {
-      author = await getAuthorBySlug(regulator.author.slug);
-    }
-    
-    return {
-      params: { slug: regulator.slug },
-      props: { regulator, author }
-    };
-  }));
-  
+  const paths = await Promise.all(
+    regulators.map(async (regulator) => {
+      // Get author data if available
+      let author = null;
+      if (regulator.author && regulator.author.slug) {
+        author = await getAuthorBySlug(regulator.author.slug);
+      }
+
+      return {
+        params: { slug: regulator.slug },
+        props: { regulator, author },
+      };
+    })
+  );
+
   return paths;
 }
 
 const { slug } = Astro.params;
 const { regulator, author } = Astro.props;
 
-const {name,
+const {
+  name,
   shortName,
   description,
   country,
@@ -53,7 +56,7 @@ const {name,
   logo,
   trustScore,
   //slug,
-} = regulator
+} = regulator;
 
 // Transform the data to the format expected by our components
 let regulatorData: RegulatorPage | null = null;
@@ -67,173 +70,199 @@ try {
 }
 
 // Set page metadata
-const metadata = regulatorData ? generateRegulatorMetadata(regulatorData) : null;
+const metadata = regulatorData
+  ? generateRegulatorMetadata(regulatorData)
+  : null;
 const pageTitle = metadata?.title || 'Regulator Information';
-const pageDescription = metadata?.description || 'Learn about this financial regulator';
+const pageDescription =
+  metadata?.description || 'Learn about this financial regulator';
 
 // Prepare schema markup data
 const siteUrl = import.meta.env.SITE || 'https://fx.kenyaforexfirm.com';
 const canonicalUrl = `${siteUrl}/regulators/${slug}`;
-const publishDate = regulator?.createdAt ? new Date(regulator.createdAt).toISOString() : new Date().toISOString();
-const modifiedDate = regulator?.updatedAt ? new Date(regulator.updatedAt).toISOString() : publishDate;
-const heroImage = regulatorData?.heroSection?.heroImage?.src || `${siteUrl}/images/regulators/default-regulator.jpg`;
+const publishDate = regulator?.createdAt
+  ? new Date(regulator.createdAt).toISOString()
+  : new Date().toISOString();
+const modifiedDate = regulator?.updatedAt
+  ? new Date(regulator.updatedAt).toISOString()
+  : publishDate;
+const heroImage =
+  regulatorData?.heroSection?.heroImage?.src ||
+  `${siteUrl}/images/regulators/default-regulator.jpg`;
 
 // Author information from API
-const authorName = author?.name || regulator?.author?.name || 'Kenya Forex Firm';
-const authorUrl = author ? `${siteUrl}/authors/${author.slug}` : `${siteUrl}/about-us`;
+const authorName =
+  author?.name || regulator?.author?.name || 'Kenya Forex Firm';
+const authorUrl = author
+  ? `${siteUrl}/authors/${author.slug}`
+  : `${siteUrl}/about-us`;
 const authorBio = author?.bio || '';
 const authorImage = author?.meta?.image?.url || '';
 
 // Schema markup for Article
 const schemaMarkup = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": pageTitle,
-  "description": pageDescription,
-  "image": heroImage,
-  "dateCreated": publishDate,
-  "datePublished": publishDate,
-  "dateModified": new Date().toISOString(),
-  "author": {
-    "@type": author ? "Person" : "Organization",
-    "name": authorName,
-    "url": authorUrl,
-    ...(authorBio && { "description": authorBio }),
-    ...(authorImage && { "image": authorImage })
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: pageTitle,
+  description: pageDescription,
+  image: heroImage,
+  dateCreated: publishDate,
+  datePublished: publishDate,
+  dateModified: new Date().toISOString(),
+  author: {
+    '@type': author ? 'Person' : 'Organization',
+    name: authorName,
+    url: authorUrl,
+    ...(authorBio && { description: authorBio }),
+    ...(authorImage && { image: authorImage }),
   },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Kenya Forex Firm",
-    "logo": {
-      "@type": "ImageObject",
-      "url": `${siteUrl}/images/logo.png`
-    }
+  publisher: {
+    '@type': 'Organization',
+    name: 'Kenya Forex Firm',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteUrl}/images/logo.png`,
+    },
   },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": canonicalUrl
-  }
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
 };
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+>
   <!-- Schema.org Article markup -->
-  <script type="application/ld+json" set:html={JSON.stringify(schemaMarkup)} />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(schemaMarkup)}
+  />
   <script src="/src/scripts/regulatorPage.js"></script>
-  {error && (
-    <ErrorDisplay 
-      title="Error Loading Regulator Data"
-      message="We encountered an error while loading the regulator information. Please try again later."
-      backLink={{ text: "View All Regulators", url: "/regulators" }}
-    />
-  )}
-
-  
-
-  {regulatorData && (
-    <>
-      <!-- Hero Section -->
-      <RegulatorHero
-        heading={regulatorData.heroSection.heading}
-        subheading={regulatorData.heroSection.subheading}
-        introduction={regulatorData.heroSection.introduction}
-        heroImage={regulatorData.heroSection.heroImage}
-        showTableOfContents={true}
+  {
+    error && (
+      <ErrorDisplay
+        title="Error Loading Regulator Data"
+        message="We encountered an error while loading the regulator information. Please try again later."
+        backLink={{ text: 'View All Regulators', url: '/regulators' }}
       />
+    )
+  }
 
-      <!-- Main Content Sections -->
-      {regulatorData.sections.map((section, index) => {
-        // Add TopRegulatedBrokers after the first section
-        const isFirstSection = index === 0;
-        let sectionContent;
-        
-        // Check if this is a requirements section
-        if (section.sectionId === 'requirements') {
-          sectionContent = (
-            <RegulatorRequirements
-              sectionTitle={section.sectionTitle}
-              sectionId={section.sectionId}
-              content={section.content}
-            />
-          );
-        }
-        // Check if this is a benefits section
-        else if (section.sectionId === 'benefits') {
-          sectionContent = (
-            <RegulatorBenefits
-              sectionTitle={section.sectionTitle}
-              sectionId={section.sectionId}
-              content={section.content}
-              benefitsList={section.keyPoints?.map(item => ({
-                title: item.point.split(':')[0] || item.point,
-                description: { root: { children: [{ children: [{ text: item.point.split(':')[1] || '' }], type: 'paragraph' }], type: 'root' } }
-              }))}
-            />
-          );
-        }
-        // Default section rendering
-        else {
-          sectionContent = (
-            <RegulatorSection
-              sectionTitle={section.sectionTitle}
-              sectionId={section.sectionId}
-              content={section.content}
-              featuredImage={section.featuredImage}
-              imagePosition={section.imagePosition}
-              keyPoints={section.keyPoints}
-            />
-          );
-        }
-        
-        return (
-          <>
-            {sectionContent}
-            {isFirstSection && regulator.website && (
-              <TopRegulatedBrokers
-                regulatorWebsite={regulator.website}
-                regulatorName={regulator.shortName}
-                sectionId="top-regulated-brokers"
+  {
+    regulatorData && (
+      <>
+        <RegulatorHero
+          heading={regulatorData.heroSection.heading}
+          subheading={regulatorData.heroSection.subheading}
+          introduction={regulatorData.heroSection.introduction}
+          heroImage={regulatorData.heroSection.heroImage}
+          showTableOfContents={true}
+        />
+
+        {regulatorData.sections.map((section, index) => {
+          // Add TopRegulatedBrokers after the first section
+          const isFirstSection = index === 0;
+          let sectionContent;
+
+          // Check if this is a requirements section
+          if (section.sectionId === 'requirements') {
+            sectionContent = (
+              <RegulatorRequirements
+                sectionTitle={section.sectionTitle}
+                sectionId={section.sectionId}
+                content={section.content}
               />
-            )}
-          </>
-        );
-      })}
+            );
+          }
+          // Check if this is a benefits section
+          else if (section.sectionId === 'benefits') {
+            sectionContent = (
+              <RegulatorBenefits
+                sectionTitle={section.sectionTitle}
+                sectionId={section.sectionId}
+                content={section.content}
+                benefitsList={section.keyPoints?.map((item) => ({
+                  title: item.point.split(':')[0] || item.point,
+                  description: {
+                    root: {
+                      children: [
+                        {
+                          children: [{ text: item.point.split(':')[1] || '' }],
+                          type: 'paragraph',
+                        },
+                      ],
+                      type: 'root',
+                    },
+                  },
+                }))}
+              />
+            );
+          }
+          // Default section rendering
+          else {
+            sectionContent = (
+              <RegulatorSection
+                sectionTitle={section.sectionTitle}
+                sectionId={section.sectionId}
+                content={section.content}
+                featuredImage={section.featuredImage}
+                imagePosition={section.imagePosition}
+                keyPoints={section.keyPoints}
+              />
+            );
+          }
 
-      <!-- FAQ Section -->
-      {regulatorData.faqSection && (
-        <RegulatorFAQ
-          sectionTitle={regulatorData.faqSection.sectionTitle}
-          sectionId={regulatorData.faqSection.sectionId}
-          introduction={regulatorData.faqSection.introduction}
-          faqItems={regulatorData.faqSection.faqItems}
-        />
-      )}
+          return (
+            <>
+              {sectionContent}
+              {isFirstSection && regulator.website && (
+                <TopRegulatedBrokers
+                  regulatorWebsite={regulator.website}
+                  regulatorName={regulator.shortName}
+                  sectionId="top-regulated-brokers"
+                />
+              )}
+            </>
+          );
+        })}
 
-      <!-- Conclusion Section -->
-      {regulatorData.conclusionSection && (
-        <RegulatorConclusion
-          sectionTitle={regulatorData.conclusionSection.sectionTitle}
-          sectionId={regulatorData.conclusionSection.sectionId}
-          content={regulatorData.conclusionSection.content}
-        />
-      )}
+        {regulatorData.faqSection && (
+          <RegulatorFAQ
+            sectionTitle={regulatorData.faqSection.sectionTitle}
+            sectionId={regulatorData.faqSection.sectionId}
+            introduction={regulatorData.faqSection.introduction}
+            faqItems={regulatorData.faqSection.faqItems}
+          />
+        )}
 
-      <!-- Regulated Brokers Section -->
-      {regulatorData.relationships?.regulatedBrokers && regulatorData.relationships.regulatedBrokers.length > 0 && (
-        <RegulatorBrokers
-          sectionTitle="Regulated Brokers"
-          sectionId="regulated-brokers"
-          brokers={regulatorData.relationships.regulatedBrokers}
-        />
-      )}
+        {regulatorData.conclusionSection && (
+          <RegulatorConclusion
+            sectionTitle={regulatorData.conclusionSection.sectionTitle}
+            sectionId={regulatorData.conclusionSection.sectionId}
+            content={regulatorData.conclusionSection.content}
+          />
+        )}
 
-      <!-- Related Content -->
-      {regulatorData.relatedContent && regulatorData.relatedContent.articles.length > 0 && (
-        <RegulatorRelatedContent
-          sectionTitle={regulatorData.relatedContent.sectionTitle}
-          articles={regulatorData.relatedContent.articles}
-        />
-      )}
-    </>
-  )}
+        {regulatorData.relationships?.regulatedBrokers &&
+          regulatorData.relationships.regulatedBrokers.length > 0 && (
+            <RegulatorBrokers
+              sectionTitle="Regulated Brokers"
+              sectionId="regulated-brokers"
+              brokers={regulatorData.relationships.regulatedBrokers}
+            />
+          )}
+
+        {regulatorData.relatedContent &&
+          regulatorData.relatedContent.articles.length > 0 && (
+            <RegulatorRelatedContent
+              sectionTitle={regulatorData.relatedContent.sectionTitle}
+              articles={regulatorData.relatedContent.articles}
+            />
+          )}
+      </>
+    )
+  }
 </Layout>

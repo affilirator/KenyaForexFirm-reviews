@@ -27,7 +27,15 @@ interface TradingConditionsSectionProps {
   content: any;
 }
 
-const SectionHeader = ({ icon, title, rating }: { icon: React.ReactNode; title: string; rating?: number }) => (
+const SectionHeader = ({
+  icon,
+  title,
+  rating,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  rating?: number;
+}) => (
   <div className="flex items-center justify-between mb-6">
     <div className="flex items-center gap-3">
       {icon}
@@ -35,8 +43,13 @@ const SectionHeader = ({ icon, title, rating }: { icon: React.ReactNode; title: 
     </div>
     {rating && (
       <div className="flex items-center gap-2">
-        <StarRating rating={rating} size="sm" />
-        <span className="text-sm font-medium text-muted-foreground">({rating.toFixed(1)})</span>
+        <StarRating
+          rating={rating}
+          size="sm"
+        />
+        <span className="text-sm font-medium text-muted-foreground">
+          ({rating.toFixed(1)})
+        </span>
       </div>
     )}
   </div>
@@ -46,13 +59,16 @@ export default function TradingConditionsSection({
   title,
   rating,
   spreads,
-  execution, 
+  execution,
   leverage,
   content,
 }: TradingConditionsSectionProps) {
   return (
-    <section id="trading-conditions" className="mb-12">
-      <SectionHeader 
+    <section
+      id="trading-conditions"
+      className="mb-12"
+    >
+      <SectionHeader
         icon={<TrendingUp className="h-8 w-8 text-blue-600" />}
         title={title}
         rating={rating}
@@ -115,8 +131,8 @@ export default function TradingConditionsSection({
             )}
             <div className="flex justify-between">
               <span>Requotes</span>
-              <Badge variant={execution?.requotes ? "destructive" : "default"}>
-                {execution?.requotes ? "Yes" : "No"}
+              <Badge variant={execution?.requotes ? 'destructive' : 'default'}>
+                {execution?.requotes ? 'Yes' : 'No'}
               </Badge>
             </div>
           </CardContent>

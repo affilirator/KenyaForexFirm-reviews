@@ -2,101 +2,116 @@
 // components/TraderDetail.tsx
 //'use client';
 
-import {Image} from 'astro:assets';
-import type { ForexTrader } from '~/types/payload-types'
+import { Image } from 'astro:assets';
+import type { ForexTrader } from '~/types/payload-types';
 import RichText from '~/components/common/RichText';
-import HeroSlot from '~/components/slots/HeroSlot.astro'
+import HeroSlot from '~/components/slots/HeroSlot.astro';
 
 interface Props {
   trader: ForexTrader;
 }
-
-
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from '@/components/ui/accordion';
 
-
-const { trader } = Astro.props
+const { trader } = Astro.props;
 ---
+
 <HeroSlot class="mb-4 p-6 min-h-screen">
-  <h1 id={`${trader.name.toLowerCase().replace(/\s+/g, '-')}`} slot="title"
-            class="text-4xl font-display font-bold">{trader.name}'s Forex Trading Journey & Accomplishments
-            </h1>
-             <Image src={trader.photo?.url || '/default.jpg'} 
-             alt={trader.name || 'Trader'} 
-             width={600} 
-             height={400} 
-             class="rounded-xl w-full" 
-             slot="image" 
-             />
-             <RichText content={trader.bio} slot='description' />
-             <span slot="meta">
-             {trader.socialLinks?.map((link: any, index: number) => (
-            <a  href={link.url} class="btn-secondary hover:underline">
-              {link.platform}
-            </a>
-          ))}
-             </span>
-             <Fragment slot="badge">
-            <p class=" font-ui text-sm">{trader.experienceYears}+ years of experience as a {trader.tradingStyle} trader </p>
-              </Fragment>
-
-
-
+  <h1
+    id={`${trader.name.toLowerCase().replace(/\s+/g, '-')}`}
+    slot="title"
+    class="text-4xl font-display font-bold"
+  >
+    {trader.name}'s Forex Trading Journey & Accomplishments
+  </h1>
+  <Image
+    src={trader.photo?.url || '/default.jpg'}
+    alt={trader.name || 'Trader'}
+    width={600}
+    height={400}
+    class="rounded-xl w-full"
+    slot="image"
+  />
+  <RichText
+    content={trader.bio}
+    slot="description"
+  />
+  <span slot="meta">
+    {
+      trader.socialLinks?.map((link: any, index: number) => (
+        <a
+          href={link.url}
+          class="btn-secondary hover:underline"
+        >
+          {link.platform}
+        </a>
+      ))
+    }
+  </span>
+  <Fragment slot="badge">
+    <p class="font-ui text-sm">
+      {trader.experienceYears}+ years of experience as a {trader.tradingStyle} trader
+    </p>
+  </Fragment>
 </HeroSlot>
 
+<div class="flex flex-col md:flex-row gap-8 max-w-4xl mx-auto">
+  <div class="md:w-1/3">
+    {/* Trader Connect */}
 
-      
-         
-        <div class="flex flex-col md:flex-row gap-8 max-w-4xl mx-auto">
-          <div class="md:w-1/3">
-           
-            {/* Trader Connect */}
-
-            {trader.forexBroker && (
-              <div class="mt-4 p-4  rounded-lg">
-                <h4 class="font-bold font-display">Forex Broker Recommendation</h4>
-                <p class="text-sm font-ui">{typeof trader.forexBroker === 'object' ? trader.forexBroker.name : trader.forexBroker} - Regulated & Kenyan-friendly</p>
-              </div>
-            )}
-          </div>
-          <div class="md:w-2/3">
-           
-            <div class="max-w-none">
-              
-              <section class="">
-        <h4 class="font-bold font-display">Key Achievements</h4>
-        
-        {trader.achievements && (
-          <ul class="space-y-2">
-            {trader.achievements.map((ach: any, index: number) => (
-              <li class="pl-4 font-ui border-l-2 border-emerald-300">
-                {ach.achievement} ({ach.year})
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-       
-              
-            </div>
-          </div>
+    {
+      trader.forexBroker && (
+        <div class="mt-4 p-4  rounded-lg">
+          <h4 class="font-bold font-display">Forex Broker Recommendation</h4>
+          <p class="text-sm font-ui">
+            {typeof trader.forexBroker === 'object'
+              ? trader.forexBroker.name
+              : trader.forexBroker}{' '}
+            - Regulated & Kenyan-friendly
+          </p>
         </div>
-            
-      {trader.strategies && trader.strategies.length > 0 && (
-        <section>
-          <h2 class="text-2xl font-bold mb-4">Signature Strategies</h2>
-          <div class="grid md:grid-cols-2 gap-6">
-            {trader.strategies.map((strat: any, index: number) => (
-              <div  class="p-4 border rounded-lg">
-                <h3 class="font-semibold">{typeof strat === 'object' ? strat.name : strat}</h3>
-              </div>
-            ))}
+      )
+    }
+  </div>
+  <div class="md:w-2/3">
+    <div class="max-w-none">
+      <section class="">
+        <h4 class="font-bold font-display">Key Achievements</h4>
+
+        {
+          trader.achievements && (
+            <ul class="space-y-2">
+              {trader.achievements.map((ach: any, index: number) => (
+                <li class="pl-4 font-ui border-l-2 border-emerald-300">
+                  {ach.achievement} ({ach.year})
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </section>
+    </div>
+  </div>
+</div>
+
+{
+  trader.strategies && trader.strategies.length > 0 && (
+    <section>
+      <h2 class="text-2xl font-bold mb-4">Signature Strategies</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {trader.strategies.map((strat: any, index: number) => (
+          <div class="p-4 border rounded-lg">
+            <h3 class="font-semibold">
+              {typeof strat === 'object' ? strat.name : strat}
+            </h3>
           </div>
-        </section>
-      )}
+        ))}
+      </div>
+    </section>
+  )
+}

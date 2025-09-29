@@ -11,79 +11,74 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://fx.kenyaforexfirm.com',
-  integrations: [tailwind({
+  integrations: [
+    tailwind({
       // Apply base styles before Astro's styles
       applyBaseStyles: false,
-    }),, icon(), react(), sitemap()],
+    }),
+    ,
+    icon(),
+    react(),
+    sitemap(),
+  ],
   trailingSlash: 'always',
 
   build: {
     inlineStylesheets: 'never',
   },
   experimental: {
-        fonts: [
-          {
-            provider: fontProviders.google(),
-            name: "Roboto",
-            cssVariable: "--font-roboto",
-            weights: [400, 500, 700, ] ,
-            styles: ["normal", "italic", 'oblique', ],
-            subsets: ["latin-ext", "latin"],
-        },
-         {
-            provider: fontProviders.google(),
-            name: "Source Sans 3",
-            cssVariable: "--font-source-sans-3",
-            weights: [400, 500, 700, ] ,
-            styles: ["normal", "italic", 'oblique', ],
-            subsets: ["latin-ext", "latin"],
-        },
-        {
-        name: "EB Garamond",
-        cssVariable: "--font-eb-garamond",
-        provider: "local",
-        // Weight and style are not specified so Astro
-        // will try to infer them for each variant
-        variants: [
-          {
-            src: [
-              "./src/assets/fonts/eb-garamond-v31-latin-500.woff2",
-              "./src/assets/fonts/eb-garamond-v31-latin-700.woff2",
-              "./src/assets/fonts/eb-garamond-v31-latin-800.woff2",
-              "src/assets/fonts/eb-garamond-v31-latin-regular.woff2"
-            ]
-          },
-          
-        ]
+    fonts: [
+      {
+        provider: fontProviders.google(),
+        name: 'Roboto',
+        cssVariable: '--font-roboto',
+        weights: [400, 500, 700],
+        styles: ['normal', 'italic', 'oblique'],
+        subsets: ['latin-ext', 'latin'],
       },
-       {
-        name: "Playfair Display",
-        cssVariable: "--font-playfair-display",
-        provider: "local",
+      {
+        provider: fontProviders.google(),
+        name: 'Source Sans 3',
+        cssVariable: '--font-source-sans-3',
+        weights: [400, 500, 700],
+        styles: ['normal', 'italic', 'oblique'],
+        subsets: ['latin-ext', 'latin'],
+      },
+      {
+        name: 'EB Garamond',
+        cssVariable: '--font-eb-garamond',
+        provider: 'local',
         // Weight and style are not specified so Astro
         // will try to infer them for each variant
         variants: [
           {
-            
             src: [
-              "./src/assets/fonts/playfair-display-v39-latin-500.woff2",
-              
+              './src/assets/fonts/eb-garamond-v31-latin-500.woff2',
+              './src/assets/fonts/eb-garamond-v31-latin-700.woff2',
+              './src/assets/fonts/eb-garamond-v31-latin-800.woff2',
+              'src/assets/fonts/eb-garamond-v31-latin-regular.woff2',
             ],
-            src: [
-              "./src/assets/fonts/playfair-display-v39-latin-700.woff2",
-              
-            ],
-            src: [
-              
-              "./src/assets/fonts/playfair-display-v39-latin-regular.woff2",
-              
-            ]
           },
-          
-        ]
-      }
-      ]
-    },
+        ],
+      },
+      {
+        name: 'Playfair Display',
+        cssVariable: '--font-playfair-display',
+        provider: 'local',
+        // Weight and style are not specified so Astro
+        // will try to infer them for each variant
+        variants: [
+          {
+            src: ['./src/assets/fonts/playfair-display-v39-latin-500.woff2'],
+            src: ['./src/assets/fonts/playfair-display-v39-latin-700.woff2'],
+            src: [
+              './src/assets/fonts/playfair-display-v39-latin-regular.woff2',
+            ],
+          },
+        ],
+      },
+    ],
+  },
 
   image: {
     remotePatterns: [
@@ -101,19 +96,18 @@ export default defineConfig({
       },
     ],
     domains: ['kenyaforexfirm.com, mahinge.com'], // Add your actual external image domains
-   service: {
-     //entrypoint:  'astro/assets/services/sharp',
-     config: {
-       // ... service-specific config. Optional.
-     }
-   },
+    service: {
+      //entrypoint:  'astro/assets/services/sharp',
+      config: {
+        // ... service-specific config. Optional.
+      },
+    },
     // Replace with your actual external image domains
- },
+  },
 
   output: 'static',
 
   vite: {
-   
     build: {
       cssCodeSplit: true,
       rollupOptions: {
@@ -121,15 +115,13 @@ export default defineConfig({
           manualChunks: {
             vendor: ['astro-seo'],
             uiComponents: [
-            'react',
-            'react-dom',
-            // Add UI-related libraries if applicable
-          ],
+              'react',
+              'react-dom',
+              // Add UI-related libraries if applicable
+            ],
           },
         },
       },
     },
   },
-
-  
 });

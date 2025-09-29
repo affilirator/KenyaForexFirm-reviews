@@ -3,7 +3,17 @@ interface Props {
   sections?: string[];
 }
 
-const { sections = ['overview', 'regulation', 'accounts', 'platforms', 'spreads', 'payments', 'pros-cons'] } = Astro.props;
+const {
+  sections = [
+    'overview',
+    'regulation',
+    'accounts',
+    'platforms',
+    'spreads',
+    'payments',
+    'pros-cons',
+  ],
+} = Astro.props;
 
 const sectionLabels = {
   overview: 'Overview',
@@ -13,35 +23,39 @@ const sectionLabels = {
   spreads: 'Spreads & Fees',
   payments: 'Payments',
   education: 'Education',
-  'pros-cons': 'Pros & Cons'
+  'pros-cons': 'Pros & Cons',
 };
 ---
 
-<section class="bg-neutral-900 border-b border-neutral-800/50 sticky top-16 z-40">
+<section
+  class="bg-neutral-900 border-b border-neutral-800/50 sticky top-16 z-40"
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <nav class="flex space-x-8 overflow-x-auto py-4">
-      {sections.map((section, index) => (
-        <a 
-          href={`#${section}`} 
-          class={`tab-link whitespace-nowrap pb-2 font-medium transition-colors duration-300 ${
-            index === 0 
-              ? 'text-primary-400 border-b-2 border-primary-400' 
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          {sectionLabels[section] || section}
-        </a>
-      ))}
+      {
+        sections.map((section, index) => (
+          <a
+            href={`#${section}`}
+            class={`tab-link whitespace-nowrap pb-2 font-medium transition-colors duration-300 ${
+              index === 0
+                ? 'text-primary-400 border-b-2 border-primary-400'
+                : 'text-neutral-400 hover:text-white'
+            }`}
+          >
+            {sectionLabels[section] || section}
+          </a>
+        ))
+      }
     </nav>
   </div>
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const tabLinks = document.querySelectorAll('.tab-link');
 
     function setActiveTab(activeLink) {
-      tabLinks.forEach(link => {
+      tabLinks.forEach((link) => {
         link.classList.remove('text-primary-400', 'border-primary-400');
         link.classList.add('text-neutral-400');
         link.style.borderColor = 'transparent';
@@ -52,8 +66,8 @@ const sectionLabels = {
       activeLink.style.borderColor = 'rgb(56, 189, 248)';
     }
 
-    tabLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
+    tabLinks.forEach((link) => {
+      link.addEventListener('click', function (e) {
         e.preventDefault();
         setActiveTab(this);
 
@@ -64,7 +78,7 @@ const sectionLabels = {
           const offsetTop = targetElement.offsetTop - 120;
           window.scrollTo({
             top: offsetTop,
-            behavior: 'smooth'
+            behavior: 'smooth',
           });
         }
       });
@@ -75,7 +89,7 @@ const sectionLabels = {
     function handleScroll() {
       const scrollPos = window.scrollY + 150;
 
-      sections.forEach(section => {
+      sections.forEach((section) => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
         const sectionId = section.getAttribute('id');

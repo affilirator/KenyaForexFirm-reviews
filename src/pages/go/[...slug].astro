@@ -18,22 +18,29 @@ interface CloakedLinkData {
 
 // This function runs AT BUILD TIME
 export async function getStaticPaths() {
-  const PAYLOAD_API_URL = 'https://api.kenyaforexfirm.com' //|| import.meta.env.PAYLOAD_PUBLIC_SERVER_URL; // Ensure this is set in .env
+  const PAYLOAD_API_URL = 'https://api.kenyaforexfirm.com'; //|| import.meta.env.PAYLOAD_PUBLIC_SERVER_URL; // Ensure this is set in .env
 
   let allCloakedLinks: CloakedLinkData[] = [];
   try {
     // Fetch ALL cloaked links from your Payload CMS API
     // You might need pagination if you have many links: /api/cloakedLinks?limit=1000
-    const apiResponse = await fetch(`${PAYLOAD_API_URL}/api/cloaked-links?limit=1000`);
+    const apiResponse = await fetch(
+      `${PAYLOAD_API_URL}/api/cloaked-links?limit=1000`
+    );
 
     if (apiResponse.ok) {
       const data = await apiResponse.json();
       allCloakedLinks = data.docs as CloakedLinkData[];
     } else {
-      console.error(`Error fetching cloaked links for getStaticPaths: ${apiResponse.status} ${apiResponse.statusText}`);
+      console.error(
+        `Error fetching cloaked links for getStaticPaths: ${apiResponse.status} ${apiResponse.statusText}`
+      );
     }
   } catch (error) {
-    console.error('Error in getStaticPaths while fetching cloaked links:', error);
+    console.error(
+      'Error in getStaticPaths while fetching cloaked links:',
+      error
+    );
   }
 
   // Map each cloaked link to a path object required by getStaticPaths
@@ -55,11 +62,18 @@ const { cloakedLink } = Astro.props;
 
 let redirectUrl: string | null = null;
 
-if (cloakedLink && cloakedLink.destinationURLs && cloakedLink.destinationURLs.length > 0) {
+if (
+  cloakedLink &&
+  cloakedLink.destinationURLs &&
+  cloakedLink.destinationURLs.length > 0
+) {
   const destinations = cloakedLink.destinationURLs;
 
   // --- Logic to select a destination URL (Weighted Redirect Example) ---
-  const totalWeight = destinations.reduce((sum, dest) => sum + (dest.weight || 0), 0);
+  const totalWeight = destinations.reduce(
+    (sum, dest) => sum + (dest.weight || 0),
+    0
+  );
 
   if (totalWeight === 0) {
     const randomIndex = Math.floor(Math.random() * destinations.length);
@@ -71,10 +85,10 @@ if (cloakedLink && cloakedLink.destinationURLs && cloakedLink.destinationURLs.le
         redirectUrl = dest.url;
         break;
       }
-      randomNumber -= (dest.weight || 0);
+      randomNumber -= dest.weight || 0;
     }
     if (!redirectUrl) {
-        redirectUrl = destinations[0].url;
+      redirectUrl = destinations[0].url;
     }
   }
   // --- End selection logic ---
@@ -93,16 +107,20 @@ if (cloakedLink && cloakedLink.destinationURLs && cloakedLink.destinationURLs.le
   Astro.response.statusText = 'Not Found';
 }
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Link Not Found</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>404 - Link Not Found</h1>
     <p>The link you are looking for does not exist or has expired.</p>
     <p><a href="/">Go to Homepage</a></p>
-</body>
+  </body>
 </html>

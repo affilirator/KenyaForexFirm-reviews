@@ -11,7 +11,7 @@ export async function getAllAuthors(): Promise<Author[]> {
   if (authorsCache) {
     return authorsCache;
   }
-  
+
   try {
     const authorsData = await getAuthors();
     authorsCache = authorsData?.docs || [];
@@ -33,9 +33,11 @@ export async function getDefaultAuthor(): Promise<Author | undefined> {
 /**
  * Get author by slug
  */
-export async function getAuthorBySlugCached(slug: string): Promise<Author | null> {
+export async function getAuthorBySlugCached(
+  slug: string
+): Promise<Author | null> {
   const authors = await getAllAuthors();
-  return authors.find(author => author.slug === slug) || null;
+  return authors.find((author) => author.slug === slug) || null;
 }
 
 /**
@@ -43,5 +45,5 @@ export async function getAuthorBySlugCached(slug: string): Promise<Author | null
  */
 export async function getAuthorByIdCached(id: string): Promise<Author | null> {
   const authors = await getAllAuthors();
-  return authors.find(author => author.id === id) || null;
+  return authors.find((author) => author.id === id) || null;
 }

@@ -1,133 +1,196 @@
 ---
-import BaseLayout from "~/layouts/BaseLayout.astro"
+import BaseLayout from '~/layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import TopSlot from "~/components/slots/TopSlot.astro";
-import BrokerList from "~/components/BrokerList.astro";
-import BrokerDetails from "~/components/BrokerDetails.astro";
-import SEOContent from "~/components/SEOContent.astro";
-import { getReviews } from "~/lib/qs-esm";
-import type { BrokerProps } from "~/types";
-import RichText from "~/components/common/RichText";
+import TopSlot from '~/components/slots/TopSlot.astro';
+import BrokerList from '~/components/BrokerList.astro';
+import BrokerDetails from '~/components/BrokerDetails.astro';
+import SEOContent from '~/components/SEOContent.astro';
+import { getReviews } from '~/lib/qs-esm';
+import type { BrokerProps } from '~/types';
+import RichText from '~/components/common/RichText';
 
-const Response = await fetch('https://api.kenyaforexfirm.com/api/funding-methods/685630291c520ff162aba6b4?depth=3&draft=false&locale=en&trash=false')
+const Response = await fetch(
+  'https://api.kenyaforexfirm.com/api/funding-methods/685630291c520ff162aba6b4?depth=3&draft=false&locale=en&trash=false'
+);
 
-const data = await Response.json() 
-const prosAndCons = data.prosAndCons
+const data = await Response.json();
+const prosAndCons = data.prosAndCons;
 
-const fallbackCdnUrl = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/OrangeIconLogo.webp'
+const fallbackCdnUrl =
+  'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/OrangeIconLogo.webp';
 
 const allBrokers = await getReviews();
 
-const supportingBrokers = allBrokers.docs.filter(broker => 
-  broker.brokerPaymentMethods?.some(method => 
-    method.toLowerCase() === 'mpesa'.toLowerCase() //||
+const supportingBrokers = allBrokers.docs.filter((broker) =>
+  broker.brokerPaymentMethods?.some(
+    (method) => method.toLowerCase() === 'mpesa'.toLowerCase() //||
     //method.toLowerCase() === data?.name.toLowerCase()
   )
 );
 ---
-<BaseLayout title={data.title} description={data.title} >
-    <TopSlot>
-    
+
+<BaseLayout
+  title={data.title}
+  description={data.title}
+>
+  <TopSlot>
     <span slot="image">
-
-      <Image src={data.image?.filename ? `https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/${data.image.filename}` : (data.image?.url || fallbackCdnUrl)}
-      alt={`${data?.title || data?.name} Logo`} 
-      inferSize
-      class="h-48 w-auto mx-auto md:mx-0 rounded-full object-cover" />
-      
+      <Image
+        src={data.image?.filename
+          ? `https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/${data.image.filename}`
+          : data.image?.url || fallbackCdnUrl}
+        alt={`${data?.title || data?.name} Logo`}
+        inferSize
+        class="h-48 w-auto mx-auto md:mx-0 rounded-full object-cover"
+      />
     </span>
-    
-        <p slot='badge'>Expert Review</p>
-         <span slot='meta'> 
-        <p>
-            By Patrick Mahinge
-        </p>
 
+    <p slot="badge">Expert Review</p>
+    <span slot="meta">
+      <p>By Patrick Mahinge</p>
     </span>
-   
 
-    <h1 slot="title" class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+    <h1
+      slot="title"
+      class="text-4xl md:text-5xl font-display font-bold text-white mb-6"
+    >
       Best Forex Brokers That Accept {data?.name || data?.name} in Kenya
     </h1>
 
-    <p slot="subtitle" class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
-      {data?.description || `Discover forex brokers that accept ${data?.name || data?.name} payments.`}
+    <p
+      slot="subtitle"
+      class="text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed"
+    >
+      {
+        data?.description ||
+          `Discover forex brokers that accept ${data?.name || data?.name} payments.`
+      }
     </p>
   </TopSlot>
-    <BrokerList 
+  <BrokerList
     brokers={supportingBrokers}
     title={`${supportingBrokers.length} of Our Top-Rated Forex Brokers Accept ${data.title || data.name}`}
     description={`All brokers below accept ${data.name || data.name} for deposits and withdrawals.`}
   />
-  <section class='dark px-4 max-w-5xl mx-auto'>
-    <RichText content={data.content} client:load />
+  <section class="dark px-4 max-w-5xl mx-auto">
+    <RichText
+      content={data.content}
+      client:load
+    />
   </section>
 
-  <BrokerDetails brokers={supportingBrokers} filterType="payment" filterName={data.name || data.name} />
+  <BrokerDetails
+    brokers={supportingBrokers}
+    filterType="payment"
+    filterName={data.name || data.name}
+  />
 
-  <SEOContent type="payment" name={data.name } brokerCount={supportingBrokers.length} />
+  <SEOContent
+    type="payment"
+    name={data.name}
+    brokerCount={supportingBrokers.length}
+  />
   <section class="py-16 bg-neutral-900">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="prose prose-invert max-w-none">
-      <h2 class="text-3xl font-display font-bold text-white mb-8">{data.title}</h2>
-      
-      <div class="grid md:grid-cols-2 gap-6 mb-12">
-        {data.benefits.map(benefit => (
-          <div class="card-glass p-6">
-            <h3 class="text-xl font-semibold text-white mb-3">{benefit.title}</h3>
-            <p class="text-neutral-300">{benefit.benefit}</p>
-          </div>
-        ))}
-      </div>
-      </div>
-      </div>
-      </section>
-  {prosAndCons && (
-    <section class="py-16 bg-neutral-900">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-display font-bold text-white mb-12 text-center">
-          {data.title} Pros and Cons
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-invert max-w-none">
+        <h2 class="text-3xl font-display font-bold text-white mb-8">
+          {data.title}
         </h2>
-        <div class="grid lg:grid-cols-2 gap-8">
-          <div class="card-glass p-8">
-            <h3 class="text-2xl font-semibold text-emerald-400 mb-6 flex items-center">
-              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              Pros
-            </h3>
-            <ul class="space-y-4">
-              {prosAndCons.pros?.map((item) => (
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-neutral-300">{item.pro}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div class="card-glass p-8">
-            <h3 class="text-2xl font-semibold text-red-400 mb-6 flex items-center">
-              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-              </svg>
-              Cons
-            </h3>
-            <ul class="space-y-4">
-              {prosAndCons.cons?.map((item) => (
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-red-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-neutral-300">{item.cons}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-12">
+          {
+            data.benefits.map((benefit) => (
+              <div class="card-glass p-6">
+                <h3 class="text-xl font-semibold text-white mb-3">
+                  {benefit.title}
+                </h3>
+                <p class="text-neutral-300">{benefit.benefit}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
-    </section>
-  )}
+    </div>
+  </section>
+  {
+    prosAndCons && (
+      <section class="py-16 bg-neutral-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-display font-bold text-white mb-12 text-center">
+            {data.title} Pros and Cons
+          </h2>
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div class="card-glass p-8">
+              <h3 class="text-2xl font-semibold text-emerald-400 mb-6 flex items-center">
+                <svg
+                  class="w-6 h-6 mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Pros
+              </h3>
+              <ul class="space-y-4">
+                {prosAndCons.pros?.map((item) => (
+                  <li class="flex items-start">
+                    <svg
+                      class="w-5 h-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-neutral-300">{item.pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="card-glass p-8">
+              <h3 class="text-2xl font-semibold text-red-400 mb-6 flex items-center">
+                <svg
+                  class="w-6 h-6 mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Cons
+              </h3>
+              <ul class="space-y-4">
+                {prosAndCons.cons?.map((item) => (
+                  <li class="flex items-start">
+                    <svg
+                      class="w-5 h-5 text-red-400 mr-3 mt-0.5 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-neutral-300">{item.cons}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
 </BaseLayout>
-

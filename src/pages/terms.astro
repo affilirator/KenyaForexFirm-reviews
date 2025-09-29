@@ -4,7 +4,12 @@ import LegalHero from '../components/legal/LegalHero.astro';
 import LegalSection from '../components/legal/LegalSection.astro';
 import TableOfContents from '../components/legal/TableOfContents.astro';
 import ContactInfo from '../components/legal/ContactInfo.astro';
-import { termsHero, termsSections, contactInfo, schemaData } from '../data/termsData';
+import {
+  termsHero,
+  termsSections,
+  contactInfo,
+  schemaData,
+} from '../data/termsData';
 import { site } from '../data/site';
 ---
 
@@ -14,7 +19,7 @@ import { site } from '../data/site';
   schemaData={schemaData}
 >
   <!-- Hero Section -->
-  <LegalHero 
+  <LegalHero
     title={termsHero.title}
     subtitle={termsHero.subtitle}
     lastUpdated={termsHero.lastUpdated}
@@ -25,239 +30,578 @@ import { site } from '../data/site';
     <TableOfContents sections={termsSections} />
 
     <!-- Agreement to Terms -->
-    <LegalSection title="Agreement to Terms" id="agreement">
+    <LegalSection
+      title="Agreement to Terms"
+      id="agreement"
+    >
       <p class="terms-intro">
-        These Terms of Service constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and {site.siteName} ("we," "us," or "our"), concerning your access to and use of the <a href={site.url} class="text-primary-400">{site.url}</a> website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the "Site").
+        These Terms of Service constitute a legally binding agreement made
+        between you, whether personally or on behalf of an entity ("you") and {
+          site.siteName
+        } ("we," "us," or "our"), concerning your access to and use of the <a
+          href={site.url}
+          class="text-primary-400"
+          >{site.url}</a
+        > website as well as any other media form, media channel, mobile website
+        or mobile application related, linked, or otherwise connected thereto (collectively,
+        the "Site").
       </p>
       <p>
-        You agree that by accessing the Site, you have read, understood, and agree to be bound by all of these Terms of Service. If you do not agree with all of these Terms of Service, then you are expressly prohibited from using the Site and you must discontinue use immediately.
+        You agree that by accessing the Site, you have read, understood, and
+        agree to be bound by all of these Terms of Service. If you do not agree
+        with all of these Terms of Service, then you are expressly prohibited
+        from using the Site and you must discontinue use immediately.
       </p>
       <p>
-        Supplemental terms and conditions or documents that may be posted on the Site from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Terms of Service at any time and for any reason.
+        Supplemental terms and conditions or documents that may be posted on the
+        Site from time to time are hereby expressly incorporated herein by
+        reference. We reserve the right, in our sole discretion, to make changes
+        or modifications to these Terms of Service at any time and for any
+        reason.
       </p>
       <p>
-        We will alert you about any changes by updating the "Last updated" date of these Terms of Service, and you waive any right to receive specific notice of each such change.
+        We will alert you about any changes by updating the "Last updated" date
+        of these Terms of Service, and you waive any right to receive specific
+        notice of each such change.
       </p>
     </LegalSection>
 
     <!-- Intellectual Property Rights -->
-    <LegalSection title="Intellectual Property Rights" id="intellectual-property">
+    <LegalSection
+      title="Intellectual Property Rights"
+      id="intellectual-property"
+    >
       <p>
-        Unless otherwise indicated, the Site is our proprietary property and all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics on the Site (collectively, the "Content") and the trademarks, service marks, and logos contained therein (the "Marks") are owned or controlled by us or licensed to us, and are protected by copyright and trademark laws and various other intellectual property rights.
+        Unless otherwise indicated, the Site is our proprietary property and all
+        source code, databases, functionality, software, website designs, audio,
+        video, text, photographs, and graphics on the Site (collectively, the
+        "Content") and the trademarks, service marks, and logos contained
+        therein (the "Marks") are owned or controlled by us or licensed to us,
+        and are protected by copyright and trademark laws and various other
+        intellectual property rights.
       </p>
       <p>
-        The Content and the Marks are provided on the Site "AS IS" for your information and personal use only. Except as expressly provided in these Terms of Service, no part of the Site and no Content or Marks may be copied, reproduced, aggregated, republished, uploaded, posted, publicly displayed, encoded, translated, transmitted, distributed, sold, licensed, or otherwise exploited for any commercial purpose whatsoever, without our express prior written permission.
+        The Content and the Marks are provided on the Site "AS IS" for your
+        information and personal use only. Except as expressly provided in these
+        Terms of Service, no part of the Site and no Content or Marks may be
+        copied, reproduced, aggregated, republished, uploaded, posted, publicly
+        displayed, encoded, translated, transmitted, distributed, sold,
+        licensed, or otherwise exploited for any commercial purpose whatsoever,
+        without our express prior written permission.
       </p>
       <p>
-        Provided that you are eligible to use the Site, you are granted a limited license to access and use the Site and to download or print a copy of any portion of the Content to which you have properly gained access solely for your personal, non-commercial use. We reserve all rights not expressly granted to you in and to the Site, the Content and the Marks.
+        Provided that you are eligible to use the Site, you are granted a
+        limited license to access and use the Site and to download or print a
+        copy of any portion of the Content to which you have properly gained
+        access solely for your personal, non-commercial use. We reserve all
+        rights not expressly granted to you in and to the Site, the Content and
+        the Marks.
       </p>
     </LegalSection>
 
     <!-- User Representations -->
-    <LegalSection title="User Representations" id="user-representations">
-      <p>
-        By using the Site, you represent and warrant that:
-      </p>
+    <LegalSection
+      title="User Representations"
+      id="user-representations"
+    >
+      <p>By using the Site, you represent and warrant that:</p>
       <ol class="list-decimal pl-6 mb-4">
-        <li>All registration information you submit will be true, accurate, current, and complete;</li>
-        <li>You will maintain the accuracy of such information and promptly update such registration information as necessary;</li>
-        <li>You have the legal capacity and you agree to comply with these Terms of Service;</li>
+        <li>
+          All registration information you submit will be true, accurate,
+          current, and complete;
+        </li>
+        <li>
+          You will maintain the accuracy of such information and promptly update
+          such registration information as necessary;
+        </li>
+        <li>
+          You have the legal capacity and you agree to comply with these Terms
+          of Service;
+        </li>
         <li>You are not a minor in the jurisdiction in which you reside;</li>
-        <li>You will not access the Site through automated or non-human means, whether through a bot, script, or otherwise;</li>
-        <li>You will not use the Site for any illegal or unauthorized purpose;</li>
-        <li>Your use of the Site will not violate any applicable law or regulation.</li>
+        <li>
+          You will not access the Site through automated or non-human means,
+          whether through a bot, script, or otherwise;
+        </li>
+        <li>
+          You will not use the Site for any illegal or unauthorized purpose;
+        </li>
+        <li>
+          Your use of the Site will not violate any applicable law or
+          regulation.
+        </li>
       </ol>
       <p>
-        If you provide any information that is untrue, inaccurate, not current, or incomplete, we have the right to suspend or terminate your account and refuse any and all current or future use of the Site (or any portion thereof).
+        If you provide any information that is untrue, inaccurate, not current,
+        or incomplete, we have the right to suspend or terminate your account
+        and refuse any and all current or future use of the Site (or any portion
+        thereof).
       </p>
     </LegalSection>
 
     <!-- Prohibited Activities -->
-    <LegalSection title="Prohibited Activities" id="prohibited-activities">
+    <LegalSection
+      title="Prohibited Activities"
+      id="prohibited-activities"
+    >
       <p>
-        You may not access or use the Site for any purpose other than that for which we make the Site available. The Site may not be used in connection with any commercial endeavors except those that are specifically endorsed or approved by us.
+        You may not access or use the Site for any purpose other than that for
+        which we make the Site available. The Site may not be used in connection
+        with any commercial endeavors except those that are specifically
+        endorsed or approved by us.
       </p>
-      <p>
-        As a user of the Site, you agree not to:
-      </p>
+      <p>As a user of the Site, you agree not to:</p>
       <ol class="list-decimal pl-6 mb-4">
-        <li>Systematically retrieve data or other content from the Site to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us.</li>
-        <li>Trick, defraud, or mislead us and other users, especially in any attempt to learn sensitive account information such as user passwords.</li>
-        <li>Circumvent, disable, or otherwise interfere with security-related features of the Site.</li>
-        <li>Disparage, tarnish, or otherwise harm, in our opinion, us and/or the Site.</li>
-        <li>Use any information obtained from the Site in order to harass, abuse, or harm another person.</li>
-        <li>Make improper use of our support services or submit false reports of abuse or misconduct.</li>
-        <li>Use the Site in a manner inconsistent with any applicable laws or regulations.</li>
-        <li>Upload or transmit (or attempt to upload or to transmit) viruses, Trojan horses, or other material, including excessive use of capital letters and spamming, that interferes with any party's uninterrupted use and enjoyment of the Site or modifies, impairs, disrupts, alters, or interferes with the use, features, functions, operation, or maintenance of the Site.</li>
-        <li>Engage in any automated use of the system, such as using scripts to send comments or messages, or using any data mining, robots, or similar data gathering and extraction tools.</li>
-        <li>Delete the copyright or other proprietary rights notice from any Content.</li>
-        <li>Attempt to impersonate another user or person or use the username of another user.</li>
+        <li>
+          Systematically retrieve data or other content from the Site to create
+          or compile, directly or indirectly, a collection, compilation,
+          database, or directory without written permission from us.
+        </li>
+        <li>
+          Trick, defraud, or mislead us and other users, especially in any
+          attempt to learn sensitive account information such as user passwords.
+        </li>
+        <li>
+          Circumvent, disable, or otherwise interfere with security-related
+          features of the Site.
+        </li>
+        <li>
+          Disparage, tarnish, or otherwise harm, in our opinion, us and/or the
+          Site.
+        </li>
+        <li>
+          Use any information obtained from the Site in order to harass, abuse,
+          or harm another person.
+        </li>
+        <li>
+          Make improper use of our support services or submit false reports of
+          abuse or misconduct.
+        </li>
+        <li>
+          Use the Site in a manner inconsistent with any applicable laws or
+          regulations.
+        </li>
+        <li>
+          Upload or transmit (or attempt to upload or to transmit) viruses,
+          Trojan horses, or other material, including excessive use of capital
+          letters and spamming, that interferes with any party's uninterrupted
+          use and enjoyment of the Site or modifies, impairs, disrupts, alters,
+          or interferes with the use, features, functions, operation, or
+          maintenance of the Site.
+        </li>
+        <li>
+          Engage in any automated use of the system, such as using scripts to
+          send comments or messages, or using any data mining, robots, or
+          similar data gathering and extraction tools.
+        </li>
+        <li>
+          Delete the copyright or other proprietary rights notice from any
+          Content.
+        </li>
+        <li>
+          Attempt to impersonate another user or person or use the username of
+          another user.
+        </li>
         <li>Sell or otherwise transfer your profile.</li>
-        <li>Upload or transmit (or attempt to upload or to transmit) any material that acts as a passive or active information collection or transmission mechanism.</li>
-        <li>Interfere with, disrupt, or create an undue burden on the Site or the networks or services connected to the Site.</li>
-        <li>Harass, annoy, intimidate, or threaten any of our employees or agents engaged in providing any portion of the Site to you.</li>
-        <li>Copy or adapt the Site's software, including but not limited to Flash, PHP, HTML, JavaScript, or other code.</li>
+        <li>
+          Upload or transmit (or attempt to upload or to transmit) any material
+          that acts as a passive or active information collection or
+          transmission mechanism.
+        </li>
+        <li>
+          Interfere with, disrupt, or create an undue burden on the Site or the
+          networks or services connected to the Site.
+        </li>
+        <li>
+          Harass, annoy, intimidate, or threaten any of our employees or agents
+          engaged in providing any portion of the Site to you.
+        </li>
+        <li>
+          Copy or adapt the Site's software, including but not limited to Flash,
+          PHP, HTML, JavaScript, or other code.
+        </li>
       </ol>
     </LegalSection>
 
     <!-- User Generated Content -->
-    <LegalSection title="User Generated Content" id="user-content">
+    <LegalSection
+      title="User Generated Content"
+      id="user-content"
+    >
       <p>
-        The Site may invite you to chat, contribute to, or participate in blogs, message boards, online forums, and other functionality, and may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or on the Site, including but not limited to text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or other material (collectively, "Contributions").
+        The Site may invite you to chat, contribute to, or participate in blogs,
+        message boards, online forums, and other functionality, and may provide
+        you with the opportunity to create, submit, post, display, transmit,
+        perform, publish, distribute, or broadcast content and materials to us
+        or on the Site, including but not limited to text, writings, video,
+        audio, photographs, graphics, comments, suggestions, or personal
+        information or other material (collectively, "Contributions").
       </p>
       <p>
-        Contributions may be viewable by other users of the Site and through third-party websites. As such, any Contributions you transmit may be treated as non-confidential and non-proprietary. When you create or make available any Contributions, you thereby represent and warrant that:
+        Contributions may be viewable by other users of the Site and through
+        third-party websites. As such, any Contributions you transmit may be
+        treated as non-confidential and non-proprietary. When you create or make
+        available any Contributions, you thereby represent and warrant that:
       </p>
       <ol class="list-decimal pl-6 mb-4">
-        <li>The creation, distribution, transmission, public display, or performance, and the accessing, downloading, or copying of your Contributions do not and will not infringe the proprietary rights, including but not limited to the copyright, patent, trademark, trade secret, or moral rights of any third party.</li>
-        <li>You are the creator and owner of or have the necessary licenses, rights, consents, releases, and permissions to use and to authorize us, the Site, and other users of the Site to use your Contributions in any manner contemplated by the Site and these Terms of Service.</li>
-        <li>You have the written consent, release, and/or permission of each and every identifiable individual person in your Contributions to use the name or likeness of each and every such identifiable individual person to enable inclusion and use of your Contributions in any manner contemplated by the Site and these Terms of Service.</li>
+        <li>
+          The creation, distribution, transmission, public display, or
+          performance, and the accessing, downloading, or copying of your
+          Contributions do not and will not infringe the proprietary rights,
+          including but not limited to the copyright, patent, trademark, trade
+          secret, or moral rights of any third party.
+        </li>
+        <li>
+          You are the creator and owner of or have the necessary licenses,
+          rights, consents, releases, and permissions to use and to authorize
+          us, the Site, and other users of the Site to use your Contributions in
+          any manner contemplated by the Site and these Terms of Service.
+        </li>
+        <li>
+          You have the written consent, release, and/or permission of each and
+          every identifiable individual person in your Contributions to use the
+          name or likeness of each and every such identifiable individual person
+          to enable inclusion and use of your Contributions in any manner
+          contemplated by the Site and these Terms of Service.
+        </li>
         <li>Your Contributions are not false, inaccurate, or misleading.</li>
-        <li>Your Contributions are not unsolicited or unauthorized advertising, promotional materials, pyramid schemes, chain letters, spam, mass mailings, or other forms of solicitation.</li>
-        <li>Your Contributions are not obscene, lewd, lascivious, filthy, violent, harassing, libelous, slanderous, or otherwise objectionable (as determined by us).</li>
-        <li>Your Contributions do not ridicule, mock, disparage, intimidate, or abuse anyone.</li>
-        <li>Your Contributions are not used to harass or threaten (in the legal sense of those terms) any other person and to promote violence against a specific person or class of people.</li>
-        <li>Your Contributions do not violate any applicable law, regulation, or rule.</li>
-        <li>Your Contributions do not violate the privacy or publicity rights of any third party.</li>
+        <li>
+          Your Contributions are not unsolicited or unauthorized advertising,
+          promotional materials, pyramid schemes, chain letters, spam, mass
+          mailings, or other forms of solicitation.
+        </li>
+        <li>
+          Your Contributions are not obscene, lewd, lascivious, filthy, violent,
+          harassing, libelous, slanderous, or otherwise objectionable (as
+          determined by us).
+        </li>
+        <li>
+          Your Contributions do not ridicule, mock, disparage, intimidate, or
+          abuse anyone.
+        </li>
+        <li>
+          Your Contributions are not used to harass or threaten (in the legal
+          sense of those terms) any other person and to promote violence against
+          a specific person or class of people.
+        </li>
+        <li>
+          Your Contributions do not violate any applicable law, regulation, or
+          rule.
+        </li>
+        <li>
+          Your Contributions do not violate the privacy or publicity rights of
+          any third party.
+        </li>
       </ol>
     </LegalSection>
 
     <!-- Review Guidelines -->
-    <LegalSection title="Review Guidelines" id="reviews">
+    <LegalSection
+      title="Review Guidelines"
+      id="reviews"
+    >
       <p>
-        Our Site provides forex broker reviews and comparisons. When contributing reviews or comments about brokers, you agree to:
+        Our Site provides forex broker reviews and comparisons. When
+        contributing reviews or comments about brokers, you agree to:
       </p>
       <ol class="list-decimal pl-6 mb-4">
-        <li>Provide honest, accurate information based on your actual experience with the broker.</li>
+        <li>
+          Provide honest, accurate information based on your actual experience
+          with the broker.
+        </li>
         <li>Not post false or misleading information about brokers.</li>
-        <li>Not post reviews in exchange for payment or other incentives from brokers.</li>
-        <li>Not attempt to manipulate broker ratings through multiple submissions.</li>
-        <li>Not post content that is defamatory, abusive, or violates any broker's legal rights.</li>
+        <li>
+          Not post reviews in exchange for payment or other incentives from
+          brokers.
+        </li>
+        <li>
+          Not attempt to manipulate broker ratings through multiple submissions.
+        </li>
+        <li>
+          Not post content that is defamatory, abusive, or violates any broker's
+          legal rights.
+        </li>
       </ol>
       <p>
-        We reserve the right to remove any review content that violates these guidelines or our general Terms of Service.
+        We reserve the right to remove any review content that violates these
+        guidelines or our general Terms of Service.
       </p>
     </LegalSection>
 
     <!-- Third-Party Websites and Content -->
-    <LegalSection title="Third-Party Websites and Content" id="third-party-websites">
+    <LegalSection
+      title="Third-Party Websites and Content"
+      id="third-party-websites"
+    >
       <p>
-        The Site may contain (or you may be sent via the Site) links to other websites ("Third-Party Websites") as well as articles, photographs, text, graphics, pictures, designs, music, sound, video, information, applications, software, and other content or items belonging to or originating from third parties ("Third-Party Content").
+        The Site may contain (or you may be sent via the Site) links to other
+        websites ("Third-Party Websites") as well as articles, photographs,
+        text, graphics, pictures, designs, music, sound, video, information,
+        applications, software, and other content or items belonging to or
+        originating from third parties ("Third-Party Content").
       </p>
       <p>
-        Such Third-Party Websites and Third-Party Content are not investigated, monitored, or checked for accuracy, appropriateness, or completeness by us, and we are not responsible for any Third-Party Websites accessed through the Site or any Third-Party Content posted on, available through, or installed from the Site, including the content, accuracy, offensiveness, opinions, reliability, privacy practices, or other policies of or contained in the Third-Party Websites or the Third-Party Content.
+        Such Third-Party Websites and Third-Party Content are not investigated,
+        monitored, or checked for accuracy, appropriateness, or completeness by
+        us, and we are not responsible for any Third-Party Websites accessed
+        through the Site or any Third-Party Content posted on, available
+        through, or installed from the Site, including the content, accuracy,
+        offensiveness, opinions, reliability, privacy practices, or other
+        policies of or contained in the Third-Party Websites or the Third-Party
+        Content.
       </p>
       <p>
-        Inclusion of, linking to, or permitting the use or installation of any Third-Party Websites or any Third-Party Content does not imply approval or endorsement thereof by us. If you decide to leave the Site and access the Third-Party Websites or to use or install any Third-Party Content, you do so at your own risk, and you should be aware these Terms of Service no longer govern.
+        Inclusion of, linking to, or permitting the use or installation of any
+        Third-Party Websites or any Third-Party Content does not imply approval
+        or endorsement thereof by us. If you decide to leave the Site and access
+        the Third-Party Websites or to use or install any Third-Party Content,
+        you do so at your own risk, and you should be aware these Terms of
+        Service no longer govern.
       </p>
     </LegalSection>
 
     <!-- Site Management -->
-    <LegalSection title="Site Management" id="site-management">
-      <p>
-        We reserve the right, but not the obligation, to:
-      </p>
+    <LegalSection
+      title="Site Management"
+      id="site-management"
+    >
+      <p>We reserve the right, but not the obligation, to:</p>
       <ol class="list-decimal pl-6 mb-4">
         <li>Monitor the Site for violations of these Terms of Service.</li>
-        <li>Take appropriate legal action against anyone who, in our sole discretion, violates the law or these Terms of Service, including without limitation, reporting such user to law enforcement authorities.</li>
-        <li>In our sole discretion and without limitation, refuse, restrict access to, limit the availability of, or disable (to the extent technologically feasible) any of your Contributions or any portion thereof.</li>
-        <li>In our sole discretion and without limitation, notice, or liability, to remove from the Site or otherwise disable all files and content that are excessive in size or are in any way burdensome to our systems.</li>
-        <li>Otherwise manage the Site in a manner designed to protect our rights and property and to facilitate the proper functioning of the Site.</li>
+        <li>
+          Take appropriate legal action against anyone who, in our sole
+          discretion, violates the law or these Terms of Service, including
+          without limitation, reporting such user to law enforcement
+          authorities.
+        </li>
+        <li>
+          In our sole discretion and without limitation, refuse, restrict access
+          to, limit the availability of, or disable (to the extent
+          technologically feasible) any of your Contributions or any portion
+          thereof.
+        </li>
+        <li>
+          In our sole discretion and without limitation, notice, or liability,
+          to remove from the Site or otherwise disable all files and content
+          that are excessive in size or are in any way burdensome to our
+          systems.
+        </li>
+        <li>
+          Otherwise manage the Site in a manner designed to protect our rights
+          and property and to facilitate the proper functioning of the Site.
+        </li>
       </ol>
     </LegalSection>
 
     <!-- Disclaimer -->
-    <LegalSection title="Disclaimer" id="disclaimer">
+    <LegalSection
+      title="Disclaimer"
+      id="disclaimer"
+    >
       <p>
-        THE SITE IS PROVIDED ON AN AS-IS AND AS-AVAILABLE BASIS. YOU AGREE THAT YOUR USE OF THE SITE AND OUR SERVICES WILL BE AT YOUR SOLE RISK. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, IN CONNECTION WITH THE SITE AND YOUR USE THEREOF, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+        THE SITE IS PROVIDED ON AN AS-IS AND AS-AVAILABLE BASIS. YOU AGREE THAT
+        YOUR USE OF THE SITE AND OUR SERVICES WILL BE AT YOUR SOLE RISK. TO THE
+        FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR
+        IMPLIED, IN CONNECTION WITH THE SITE AND YOUR USE THEREOF, INCLUDING,
+        WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS
+        FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
       </p>
       <p>
-        WE MAKE NO WARRANTIES OR REPRESENTATIONS ABOUT THE ACCURACY OR COMPLETENESS OF THE SITE'S CONTENT OR THE CONTENT OF ANY WEBSITES LINKED TO THE SITE AND WE WILL ASSUME NO LIABILITY OR RESPONSIBILITY FOR ANY (1) ERRORS, MISTAKES, OR INACCURACIES OF CONTENT AND MATERIALS, (2) PERSONAL INJURY OR PROPERTY DAMAGE, OF ANY NATURE WHATSOEVER, RESULTING FROM YOUR ACCESS TO AND USE OF THE SITE, (3) ANY UNAUTHORIZED ACCESS TO OR USE OF OUR SECURE SERVERS AND/OR ANY AND ALL PERSONAL INFORMATION AND/OR FINANCIAL INFORMATION STORED THEREIN.
+        WE MAKE NO WARRANTIES OR REPRESENTATIONS ABOUT THE ACCURACY OR
+        COMPLETENESS OF THE SITE'S CONTENT OR THE CONTENT OF ANY WEBSITES LINKED
+        TO THE SITE AND WE WILL ASSUME NO LIABILITY OR RESPONSIBILITY FOR ANY
+        (1) ERRORS, MISTAKES, OR INACCURACIES OF CONTENT AND MATERIALS, (2)
+        PERSONAL INJURY OR PROPERTY DAMAGE, OF ANY NATURE WHATSOEVER, RESULTING
+        FROM YOUR ACCESS TO AND USE OF THE SITE, (3) ANY UNAUTHORIZED ACCESS TO
+        OR USE OF OUR SECURE SERVERS AND/OR ANY AND ALL PERSONAL INFORMATION
+        AND/OR FINANCIAL INFORMATION STORED THEREIN.
       </p>
       <p>
-        WE DO NOT WARRANT, ENDORSE, GUARANTEE, OR ASSUME RESPONSIBILITY FOR ANY PRODUCT OR SERVICE ADVERTISED OR OFFERED BY A THIRD PARTY THROUGH THE SITE, ANY HYPERLINKED WEBSITE, OR ANY WEBSITE OR MOBILE APPLICATION FEATURED IN ANY BANNER OR OTHER ADVERTISING, AND WE WILL NOT BE A PARTY TO OR IN ANY WAY BE RESPONSIBLE FOR MONITORING ANY TRANSACTION BETWEEN YOU AND ANY THIRD-PARTY PROVIDERS OF PRODUCTS OR SERVICES.
+        WE DO NOT WARRANT, ENDORSE, GUARANTEE, OR ASSUME RESPONSIBILITY FOR ANY
+        PRODUCT OR SERVICE ADVERTISED OR OFFERED BY A THIRD PARTY THROUGH THE
+        SITE, ANY HYPERLINKED WEBSITE, OR ANY WEBSITE OR MOBILE APPLICATION
+        FEATURED IN ANY BANNER OR OTHER ADVERTISING, AND WE WILL NOT BE A PARTY
+        TO OR IN ANY WAY BE RESPONSIBLE FOR MONITORING ANY TRANSACTION BETWEEN
+        YOU AND ANY THIRD-PARTY PROVIDERS OF PRODUCTS OR SERVICES.
       </p>
     </LegalSection>
 
     <!-- Limitations of Liability -->
-    <LegalSection title="Limitations of Liability" id="limitations">
+    <LegalSection
+      title="Limitations of Liability"
+      id="limitations"
+    >
       <p>
-        IN NO EVENT WILL WE OR OUR DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFIT, LOST REVENUE, LOSS OF DATA, OR OTHER DAMAGES ARISING FROM YOUR USE OF THE SITE, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+        IN NO EVENT WILL WE OR OUR DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE TO
+        YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL,
+        EXEMPLARY, INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES, INCLUDING LOST
+        PROFIT, LOST REVENUE, LOSS OF DATA, OR OTHER DAMAGES ARISING FROM YOUR
+        USE OF THE SITE, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH
+        DAMAGES.
       </p>
     </LegalSection>
 
     <!-- Indemnification -->
-    <LegalSection title="Indemnification" id="indemnification">
+    <LegalSection
+      title="Indemnification"
+      id="indemnification"
+    >
       <p>
-        You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys' fees and expenses, made by any third party due to or arising out of: (1) your Contributions; (2) use of the Site; (3) breach of these Terms of Service; (4) any breach of your representations and warranties set forth in these Terms of Service; (5) your violation of the rights of a third party, including but not limited to intellectual property rights; or (6) any overt harmful act toward any other user of the Site with whom you connected via the Site.
+        You agree to defend, indemnify, and hold us harmless, including our
+        subsidiaries, affiliates, and all of our respective officers, agents,
+        partners, and employees, from and against any loss, damage, liability,
+        claim, or demand, including reasonable attorneys' fees and expenses,
+        made by any third party due to or arising out of: (1) your
+        Contributions; (2) use of the Site; (3) breach of these Terms of
+        Service; (4) any breach of your representations and warranties set forth
+        in these Terms of Service; (5) your violation of the rights of a third
+        party, including but not limited to intellectual property rights; or (6)
+        any overt harmful act toward any other user of the Site with whom you
+        connected via the Site.
       </p>
       <p>
-        Notwithstanding the foregoing, we reserve the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify us, and you agree to cooperate, at your expense, with our defense of such claims. We will use reasonable efforts to notify you of any such claim, action, or proceeding which is subject to this indemnification upon becoming aware of it.
+        Notwithstanding the foregoing, we reserve the right, at your expense, to
+        assume the exclusive defense and control of any matter for which you are
+        required to indemnify us, and you agree to cooperate, at your expense,
+        with our defense of such claims. We will use reasonable efforts to
+        notify you of any such claim, action, or proceeding which is subject to
+        this indemnification upon becoming aware of it.
       </p>
     </LegalSection>
 
     <!-- Term and Termination -->
-    <LegalSection title="Term and Termination" id="term-termination">
+    <LegalSection
+      title="Term and Termination"
+      id="term-termination"
+    >
       <p>
-        These Terms of Service shall remain in full force and effect while you use the Site. WITHOUT LIMITING ANY OTHER PROVISION OF THESE TERMS OF SERVICE, WE RESERVE THE RIGHT TO, IN OUR SOLE DISCRETION AND WITHOUT NOTICE OR LIABILITY, DENY ACCESS TO AND USE OF THE SITE (INCLUDING BLOCKING CERTAIN IP ADDRESSES), TO ANY PERSON FOR ANY REASON OR FOR NO REASON, INCLUDING WITHOUT LIMITATION FOR BREACH OF ANY REPRESENTATION, WARRANTY, OR COVENANT CONTAINED IN THESE TERMS OF SERVICE OR OF ANY APPLICABLE LAW OR REGULATION.
+        These Terms of Service shall remain in full force and effect while you
+        use the Site. WITHOUT LIMITING ANY OTHER PROVISION OF THESE TERMS OF
+        SERVICE, WE RESERVE THE RIGHT TO, IN OUR SOLE DISCRETION AND WITHOUT
+        NOTICE OR LIABILITY, DENY ACCESS TO AND USE OF THE SITE (INCLUDING
+        BLOCKING CERTAIN IP ADDRESSES), TO ANY PERSON FOR ANY REASON OR FOR NO
+        REASON, INCLUDING WITHOUT LIMITATION FOR BREACH OF ANY REPRESENTATION,
+        WARRANTY, OR COVENANT CONTAINED IN THESE TERMS OF SERVICE OR OF ANY
+        APPLICABLE LAW OR REGULATION.
       </p>
       <p>
-        If we terminate or suspend your account for any reason, you are prohibited from registering and creating a new account under your name, a fake or borrowed name, or the name of any third party, even if you may be acting on behalf of the third party. In addition to terminating or suspending your account, we reserve the right to take appropriate legal action, including without limitation pursuing civil, criminal, and injunctive redress.
+        If we terminate or suspend your account for any reason, you are
+        prohibited from registering and creating a new account under your name,
+        a fake or borrowed name, or the name of any third party, even if you may
+        be acting on behalf of the third party. In addition to terminating or
+        suspending your account, we reserve the right to take appropriate legal
+        action, including without limitation pursuing civil, criminal, and
+        injunctive redress.
       </p>
     </LegalSection>
 
     <!-- Modifications and Interruptions -->
-    <LegalSection title="Modifications and Interruptions" id="modifications">
+    <LegalSection
+      title="Modifications and Interruptions"
+      id="modifications"
+    >
       <p>
-        We reserve the right to change, modify, or remove the contents of the Site at any time or for any reason at our sole discretion without notice. However, we have no obligation to update any information on our Site. We also reserve the right to modify or discontinue all or part of the Site without notice at any time.
+        We reserve the right to change, modify, or remove the contents of the
+        Site at any time or for any reason at our sole discretion without
+        notice. However, we have no obligation to update any information on our
+        Site. We also reserve the right to modify or discontinue all or part of
+        the Site without notice at any time.
       </p>
       <p>
-        We will not be liable to you or any third party for any modification, price change, suspension, or discontinuance of the Site.
+        We will not be liable to you or any third party for any modification,
+        price change, suspension, or discontinuance of the Site.
       </p>
       <p>
-        We cannot guarantee the Site will be available at all times. We may experience hardware, software, or other problems or need to perform maintenance related to the Site, resulting in interruptions, delays, or errors. We reserve the right to change, revise, update, suspend, discontinue, or otherwise modify the Site at any time or for any reason without notice to you.
+        We cannot guarantee the Site will be available at all times. We may
+        experience hardware, software, or other problems or need to perform
+        maintenance related to the Site, resulting in interruptions, delays, or
+        errors. We reserve the right to change, revise, update, suspend,
+        discontinue, or otherwise modify the Site at any time or for any reason
+        without notice to you.
       </p>
       <p>
-        You agree that we have no liability whatsoever for any loss, damage, or inconvenience caused by your inability to access or use the Site during any downtime or discontinuance of the Site. Nothing in these Terms of Service will be construed to obligate us to maintain and support the Site or to supply any corrections, updates, or releases in connection therewith.
+        You agree that we have no liability whatsoever for any loss, damage, or
+        inconvenience caused by your inability to access or use the Site during
+        any downtime or discontinuance of the Site. Nothing in these Terms of
+        Service will be construed to obligate us to maintain and support the
+        Site or to supply any corrections, updates, or releases in connection
+        therewith.
       </p>
     </LegalSection>
 
     <!-- Governing Law -->
-    <LegalSection title="Governing Law" id="governing-law">
+    <LegalSection
+      title="Governing Law"
+      id="governing-law"
+    >
       <p>
-        These Terms shall be governed by and defined following the laws of Kenya. {site.siteName} and yourself irrevocably consent that the courts of Kenya shall have exclusive jurisdiction to resolve any dispute which may arise in connection with these terms.
+        These Terms shall be governed by and defined following the laws of
+        Kenya. {site.siteName} and yourself irrevocably consent that the courts of
+        Kenya shall have exclusive jurisdiction to resolve any dispute which may
+        arise in connection with these terms.
       </p>
     </LegalSection>
 
     <!-- Dispute Resolution -->
-    <LegalSection title="Dispute Resolution" id="dispute-resolution">
+    <LegalSection
+      title="Dispute Resolution"
+      id="dispute-resolution"
+    >
       <p>
-        To expedite resolution and control the cost of any dispute, controversy, or claim related to these Terms of Service (each "Dispute" and collectively, the "Disputes") brought by either you or us (individually, a "Party" and collectively, the "Parties"), the Parties agree to first attempt to negotiate any Dispute informally for at least thirty (30) days before initiating arbitration. Such informal negotiations commence upon written notice from one Party to the other Party.
+        To expedite resolution and control the cost of any dispute, controversy,
+        or claim related to these Terms of Service (each "Dispute" and
+        collectively, the "Disputes") brought by either you or us (individually,
+        a "Party" and collectively, the "Parties"), the Parties agree to first
+        attempt to negotiate any Dispute informally for at least thirty (30)
+        days before initiating arbitration. Such informal negotiations commence
+        upon written notice from one Party to the other Party.
       </p>
       <p>
-        If the Parties are unable to resolve a Dispute through informal negotiations, the Dispute shall be finally and exclusively resolved through binding arbitration. The arbitration shall be commenced and conducted under the Commercial Arbitration Rules of the Nairobi Centre for International Arbitration. Your arbitration fees and your share of arbitrator compensation shall be governed by the Nairobi Centre for International Arbitration rules.
+        If the Parties are unable to resolve a Dispute through informal
+        negotiations, the Dispute shall be finally and exclusively resolved
+        through binding arbitration. The arbitration shall be commenced and
+        conducted under the Commercial Arbitration Rules of the Nairobi Centre
+        for International Arbitration. Your arbitration fees and your share of
+        arbitrator compensation shall be governed by the Nairobi Centre for
+        International Arbitration rules.
       </p>
       <p>
-        The arbitrator is bound by the terms of these Terms of Service. All issues are for the arbitrator to decide, including issues relating to the scope and enforceability of this arbitration provision. The arbitrator can award the same damages and relief on an individual basis that a court can award to an individual under these Terms of Service and applicable law.
+        The arbitrator is bound by the terms of these Terms of Service. All
+        issues are for the arbitrator to decide, including issues relating to
+        the scope and enforceability of this arbitration provision. The
+        arbitrator can award the same damages and relief on an individual basis
+        that a court can award to an individual under these Terms of Service and
+        applicable law.
       </p>
     </LegalSection>
 
     <!-- Corrections -->
-    <LegalSection title="Corrections" id="corrections">
+    <LegalSection
+      title="Corrections"
+      id="corrections"
+    >
       <p>
-        There may be information on the Site that contains typographical errors, inaccuracies, or omissions, including descriptions, pricing, availability, and various other information. We reserve the right to correct any errors, inaccuracies, or omissions and to change or update the information on the Site at any time, without prior notice.
+        There may be information on the Site that contains typographical errors,
+        inaccuracies, or omissions, including descriptions, pricing,
+        availability, and various other information. We reserve the right to
+        correct any errors, inaccuracies, or omissions and to change or update
+        the information on the Site at any time, without prior notice.
       </p>
     </LegalSection>
 
     <!-- Contact Us -->
-    <LegalSection title="Contact Us" id="contact">
+    <LegalSection
+      title="Contact Us"
+      id="contact"
+    >
       <p>
-        In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us:
+        In order to resolve a complaint regarding the Site or to receive further
+        information regarding use of the Site, please contact us:
       </p>
     </LegalSection>
 
     <!-- Contact Information -->
-    <ContactInfo 
+    <ContactInfo
       email={contactInfo.email}
       companyName={contactInfo.companyName}
       address={contactInfo.address}

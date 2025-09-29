@@ -18,13 +18,15 @@ export const REGULATOR_GLOBALS = [
   { slug: 'mas-regulation', name: 'MAS', country: 'Singapore' },
   { slug: 'bafin-regulation', name: 'BaFin', country: 'Germany' },
   { slug: 'finma-regulation', name: 'FINMA', country: 'Switzerland' },
-  { slug: 'nfa-regulation', name: 'NFA/CFTC', country: 'United States' }
+  { slug: 'nfa-regulation', name: 'NFA/CFTC', country: 'United States' },
 ];
 
 /**
  * Fetch regulator global data by slug
  */
-export async function fetchRegulatorGlobal(slug: string): Promise<AsicRegulationGlobal> {
+export async function fetchRegulatorGlobal(
+  slug: string
+): Promise<AsicRegulationGlobal> {
   try {
     // Increased depth parameter to ensure nested content is included
     const response = await fetch(`${API_BASE_URL}/globals/${slug}?depth=3`, {

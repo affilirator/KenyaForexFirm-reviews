@@ -1,12 +1,9 @@
 ---
 import type { AuthorSocialMedia } from '../../types/author';
 
-
 interface Props {
   socialMedia: AuthorSocialMedia;
   name: string;
-  
-  
 }
 
 const { socialMedia, name } = Astro.props;
@@ -30,14 +27,15 @@ const socialIcons = {
   </svg>`,
   default: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-  </svg>`
+  </svg>`,
 };
 
 // Get icon for a social profile
 const getIcon = (profileName: string) => {
   const name = profileName.toLowerCase();
   if (name.includes('facebook')) return socialIcons.facebook;
-  if (name.includes('twitter') || name.includes('x.com')) return socialIcons.twitter;
+  if (name.includes('twitter') || name.includes('x.com'))
+    return socialIcons.twitter;
   if (name.includes('linkedin')) return socialIcons.linkedin;
   if (name.includes('instagram')) return socialIcons.instagram;
   if (name.includes('slack')) return socialIcons.slack;
@@ -53,31 +51,36 @@ if (socialMedia.twitterUrl) {
   allProfiles.push({ name: 'Twitter', url: socialMedia.twitterUrl });
 }
 if (socialMedia.otherProfiles) {
-  socialMedia.otherProfiles.forEach(profile => {
+  socialMedia.otherProfiles.forEach((profile) => {
     allProfiles.push({ name: profile.profileName, url: profile.profileUrl });
   });
 }
 ---
 
-{allProfiles.length > 0 && (
-  <div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden">
-    <div class="p-6">
-      <h2 class="text-xl font-bold text-white mb-4">Connect with {name}</h2>
-      
-      <div class="flex flex-wrap gap-3">
-        {allProfiles.map(profile => (
-          <a 
-            href={profile.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="flex items-center gap-2 bg-neutral-700/30 hover:bg-neutral-700/50 text-neutral-300 hover:text-white px-4 py-2 rounded-lg transition-colors"
-            aria-label={`Follow on ${profile.name}`}
-          >
-            <span class="text-primary-400" set:html={getIcon(profile.name)} />
-            <span>{profile.name}</span>
-          </a>
-        ))}
+{
+  allProfiles.length > 0 && (
+    <div class="bg-neutral-800/50 border border-neutral-700/50 rounded-xl overflow-hidden">
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-white mb-4">Connect with {name}</h2>
+
+        <div class="flex flex-wrap gap-3">
+          {allProfiles.map((profile) => (
+            <a
+              href={profile.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 bg-neutral-700/30 hover:bg-neutral-700/50 text-neutral-300 hover:text-white px-4 py-2 rounded-lg transition-colors"
+              aria-label={`Follow on ${profile.name}`}
+            >
+              <span
+                class="text-primary-400"
+                set:html={getIcon(profile.name)}
+              />
+              <span>{profile.name}</span>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-)}
+  )
+}

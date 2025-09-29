@@ -1,5 +1,4 @@
 ---
-
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Linkedin, Twitter, ExternalLink } from 'lucide-react';
@@ -16,59 +15,89 @@ interface AuthorBioProps {
   };
 }
 
-const { 
-  name, 
-  image, 
-  bio, 
-  profileUrl,
-  socialLinks 
-} = Astro.props
-
+const { name, image, bio, profileUrl, socialLinks } = Astro.props;
 ---
-    <Card className="mt-12">
-      <CardContent className="p-6">
-        <div class="flex flex-col sm:flex-row gap-4">
-          <div class="h-20 w-20 mx-auto sm:mx-0 relative flex shrink-0 overflow-hidden rounded-full">
-            {image ? (
-              <img src={image} alt={name} class="aspect-square h-full w-full" />
-            ) : (
-              <div class="flex h-full w-full items-center justify-center rounded-full bg-neutral-700 text-lg text-white">
-                {name.split(' ').map(n => n[0]).join('')}
-              </div>
-            )}
-          </div>
-          
-          <div class="flex-1 text-center sm:text-left">
-            <h3 class="font-headline text-xl font-bold mb-2">About {name}</h3>
-            <p class="text-muted-foreground mb-4">{bio}</p>
-            
-            <div class="flex flex-wrap justify-center sm:justify-start gap-3">
-              {profileUrl && (
-                <Button variant="outline" size="sm" asChild>
-                  <a href={profileUrl}>
-                    View Profile <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              )}
-              
-              {socialLinks?.linkedin && (
-                <Button variant="ghost" size="sm" asChild>
-                  <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
-                    <Linkedin className="h-4 w-4" />
-                  </a>
-                </Button>
-              )}
-              
-              {socialLinks?.twitter && (
-                <Button variant="ghost" size="sm" asChild>
-                  <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-                    <Twitter className="h-4 w-4" />
-                  </a>
-                </Button>
-              )}
+
+<Card className="mt-12">
+  <CardContent className="p-6">
+    <div class="flex flex-col sm:flex-row gap-4">
+      <div
+        class="h-20 w-20 mx-auto sm:mx-0 relative flex shrink-0 overflow-hidden rounded-full"
+      >
+        {
+          image ? (
+            <img
+              src={image}
+              alt={name}
+              class="aspect-square h-full w-full"
+            />
+          ) : (
+            <div class="flex h-full w-full items-center justify-center rounded-full bg-neutral-700 text-lg text-white">
+              {name
+                .split(' ')
+                .map((n) => n[0])
+                .join('')}
             </div>
-          </div>
+          )
+        }
+      </div>
+
+      <div class="flex-1 text-center sm:text-left">
+        <h3 class="font-headline text-xl font-bold mb-2">About {name}</h3>
+        <p class="text-muted-foreground mb-4">{bio}</p>
+
+        <div class="flex flex-wrap justify-center sm:justify-start gap-3">
+          {
+            profileUrl && (
+              <Button
+                variant="outline"
+                size="sm"
+                asChild
+              >
+                <a href={profileUrl}>
+                  View Profile <ExternalLink className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+            )
+          }
+
+          {
+            socialLinks?.linkedin && (
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+              >
+                <a
+                  href={socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin className="h-4 w-4" />
+                </a>
+              </Button>
+            )
+          }
+
+          {
+            socialLinks?.twitter && (
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+              >
+                <a
+                  href={socialLinks.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Twitter className="h-4 w-4" />
+                </a>
+              </Button>
+            )
+          }
         </div>
-      </CardContent>
-    </Card>
-  
+      </div>
+    </div>
+  </CardContent>
+</Card>

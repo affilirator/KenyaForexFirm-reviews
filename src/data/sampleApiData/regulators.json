@@ -49,9 +49,7 @@
       "status": "published",
       "tenant": "683f46937e7deb35fd6bca89",
       "standoutFeatures": [],
-      "meta": {
-
-      },
+      "meta": {},
       "disputeResolution": true,
       "segregatedAccounts": true,
       "leverage": {
@@ -110,9 +108,7 @@
       "status": "draft",
       "tenant": "683f46937e7deb35fd6bca89",
       "standoutFeatures": [],
-      "meta": {
-
-      },
+      "meta": {},
       "logo": {
         "createdAt": "2025-07-11T10:31:39.686Z",
         "updatedAt": "2025-07-11T10:31:39.686Z",
@@ -211,9 +207,7 @@
       "status": "draft",
       "tenant": "683f46937e7deb35fd6bca89",
       "standoutFeatures": [],
-      "meta": {
-
-      },
+      "meta": {},
       "logo": {
         "createdAt": "2025-07-11T10:29:09.682Z",
         "updatedAt": "2025-07-11T10:29:09.682Z",

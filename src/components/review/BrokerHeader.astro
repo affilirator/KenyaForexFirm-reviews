@@ -9,139 +9,242 @@ interface Props {
 }
 
 const { broker } = Astro.props;
-const image = typeof broker.image === 'string' ? broker.image : broker.image?.url;
-const metaImage = typeof broker.meta?.image === 'string' ? broker.meta?.image : broker.meta?.image?.url;
-const logoImage = typeof broker.logo === 'string' ? broker.logo : broker.logo?.url;
-const logoUrl = logoImage || metaImage || image
+const image =
+  typeof broker.image === 'string' ? broker.image : broker.image?.url;
+const metaImage =
+  typeof broker.meta?.image === 'string'
+    ? broker.meta?.image
+    : broker.meta?.image?.url;
+const logoImage =
+  typeof broker.logo === 'string' ? broker.logo : broker.logo?.url;
+const logoUrl = logoImage || metaImage || image;
 const scaledRating = broker.brokerRating / 2;
 const fullStars = Math.floor(scaledRating);
 const hasHalfStar = scaledRating % 1 >= 0.5;
-const titleFromName = `${broker.brokerName} Review`
-const safeTitle = broker.title || broker.meta?.title || titleFromName
+const titleFromName = `${broker.brokerName} Review`;
+const safeTitle = broker.title || broker.meta?.title || titleFromName;
 ---
 
-<section class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+<section
+  class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950"
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
         <div class="flex flex-col sm:flex-row sm:items-center mb-6">
-          <div class="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mb-4 sm:mb-0 sm:mr-6 flex-shrink-0">
-            {logoUrl ? (
-              <Image src={logoUrl} 
-              alt={`logo of ${broker.brokerName} forex broker in Kenya`} 
-              height={96}
-              width={96}
-              priority
-              loading={'eager'}
-              class="w-full h-auto object-cover rounded-2xl" />
-            ) : (
-              <span class="text-white font-bold text-xl sm:text-2xl">{broker.brokerName.charAt(0)}</span>
-            )}
+          <div
+            class="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mb-4 sm:mb-0 sm:mr-6 flex-shrink-0"
+          >
+            {
+              logoUrl ? (
+                <Image
+                  src={logoUrl}
+                  alt={`logo of ${broker.brokerName} forex broker in Kenya`}
+                  height={96}
+                  width={96}
+                  priority
+                  loading={'eager'}
+                  class="w-full h-auto object-cover rounded-2xl"
+                />
+              ) : (
+                <span class="text-white font-bold text-xl sm:text-2xl">
+                  {broker.brokerName.charAt(0)}
+                </span>
+              )
+            }
           </div>
           <div class="flex-1 min-w-0">
-            <h1 class="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white mb-2">
-              {safeTitle} {new Date().getFullYear()}
+            <h1
+              class="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white mb-2"
+            >
+              {safeTitle}
+              {new Date().getFullYear()}
             </h1>
             <div class="flex items-center mb-2">
               <div class="flex text-yellow-400 mr-3">
-                {"★".repeat(fullStars)}
-                {hasHalfStar && "☆"}
+                {'★'.repeat(fullStars)}
+                {hasHalfStar && '☆'}
               </div>
-              <span class="text-white font-semibold text-lg">{broker.brokerRating.toFixed(1)}/10</span>
+              <span class="text-white font-semibold text-lg"
+                >{broker.brokerRating.toFixed(1)}/10</span
+              >
             </div>
-            <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-neutral-400">
-              {broker.baseDetails?.founded && <span>Est. {broker.baseDetails.founded}</span>}
-              {broker.baseDetails?.headquarters && (
-                <>
-                  <span class="hidden sm:inline">•</span>
-                  <span>{broker.baseDetails.headquarters}</span>
-                </>
-              )}
-              {broker.cmaRegulated && (
-                <>
-                  <span class="hidden sm:inline">•</span>
-                  <span class="text-green-400 font-medium">CMA Regulated</span>
-                </>
-              )}
+            <div
+              class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-neutral-400"
+            >
+              {
+                broker.baseDetails?.founded && (
+                  <span>Est. {broker.baseDetails.founded}</span>
+                )
+              }
+              {
+                broker.baseDetails?.headquarters && (
+                  <>
+                    <span class="hidden sm:inline">•</span>
+                    <span>{broker.baseDetails.headquarters}</span>
+                  </>
+                )
+              }
+              {
+                broker.cmaRegulated && (
+                  <>
+                    <span class="hidden sm:inline">•</span>
+                    <span class="text-green-400 font-medium">
+                      CMA Regulated
+                    </span>
+                  </>
+                )
+              }
             </div>
           </div>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-8">
-          <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50">
+          <div
+            class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50"
+          >
             <div class="text-sm text-neutral-400 mb-1">Min Deposit</div>
-            <div class="text-lg sm:text-2xl font-bold text-white">${broker.minDeposit || 'N/A'}</div>
-          </div>
-          <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50">
-            <div class="text-sm text-neutral-400 mb-1">Max Leverage</div>
-            <div class="text-2xl font-bold text-white">{broker.maxLeverage || broker.leverage || 'N/A'}</div>
-          </div>
-          <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50">
-            <div class="text-sm text-neutral-400 mb-1">Spread</div>
-            <div class="text-2xl font-bold text-white">
-              {typeof broker.spread === 'number' ? `${broker.spread} pips` : broker.spread || 'Variable'}
+            <div class="text-lg sm:text-2xl font-bold text-white">
+              ${broker.minDeposit || 'N/A'}
             </div>
           </div>
-          <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50">
+          <div
+            class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50"
+          >
+            <div class="text-sm text-neutral-400 mb-1">Max Leverage</div>
+            <div class="text-2xl font-bold text-white">
+              {broker.maxLeverage || broker.leverage || 'N/A'}
+            </div>
+          </div>
+          <div
+            class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50"
+          >
+            <div class="text-sm text-neutral-400 mb-1">Spread</div>
+            <div class="text-2xl font-bold text-white">
+              {
+                typeof broker.spread === 'number'
+                  ? `${broker.spread} pips`
+                  : broker.spread || 'Variable'
+              }
+            </div>
+          </div>
+          <div
+            class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-sm rounded-xl p-4 border border-neutral-700/50"
+          >
             <div class="text-sm text-neutral-400 mb-1">Platforms</div>
-            <div class="text-2xl font-bold text-white">{broker.brokerPlatforms?.length || 'Multiple'}</div>
+            <div class="text-2xl font-bold text-white">
+              {broker.brokerPlatforms?.length || 'Multiple'}
+            </div>
           </div>
         </div>
-        
+
         <AuthorInfo />
       </div>
 
       <div class="lg:col-span-1">
-        <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-neutral-700/50 lg:sticky lg:top-24">
+        <div
+          class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-neutral-700/50 lg:sticky lg:top-24"
+        >
           <h3 class="text-xl font-semibold text-white mb-4">Quick Actions</h3>
-          
+
           <div class="space-y-3 mb-6">
-            <a href={`${site.organization.url}/goto/${broker.slug}/`} class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center block">
+            <a
+              href={`${site.organization.url}/goto/${broker.slug}/`}
+              class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center block"
+            >
               Visit {broker.brokerName}
             </a>
-            <a href={`${site.organization.url}/goto/${broker.slug}/`} class="w-full bg-gradient-to-r from-neutral-600 to-primary-600/50 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center block">
+            <a
+              href={`${site.organization.url}/goto/${broker.slug}/`}
+              class="w-full bg-gradient-to-r from-neutral-600 to-primary-600/50 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center block"
+            >
               Open Demo Account
             </a>
-            <a href='/review/best-forex-brokers/compare/'  class="w-full bg-gradient-to-r from-neutral-600 to-primary-600/50 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center block">
+            <a
+              href="/review/best-forex-brokers/compare/"
+              class="w-full bg-gradient-to-r from-neutral-600 to-primary-600/50 hover:from-primary-500 hover:to-accent-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-center block"
+            >
               Compare with Others
             </a>
           </div>
 
           <div class="border-t border-neutral-700/50 pt-4">
-            <h4 class="text-sm font-medium text-neutral-300 mb-3">Key Features</h4>
+            <h4 class="text-sm font-medium text-neutral-300 mb-3">
+              Key Features
+            </h4>
             <ul class="space-y-2 text-sm text-neutral-400">
-              {broker.cmaRegulated && (
-                <li class="flex items-center">
-                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                  CMA Regulated
-                </li>
-              )}
-              {broker.brokerPaymentMethods?.includes('mPesa') && (
-                <li class="flex items-center">
-                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                  M-Pesa Support
-                </li>
-              )}
-              {broker.islamicAccount && (
-                <li class="flex items-center">
-                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                  Islamic Account
-                </li>
-              )}
-              {broker.bonusAvailable && (
-                <li class="flex items-center">
-                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                  Bonus Available
-                </li>
-              )}
+              {
+                broker.cmaRegulated && (
+                  <li class="flex items-center">
+                    <svg
+                      class="w-4 h-4 text-green-400 mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    CMA Regulated
+                  </li>
+                )
+              }
+              {
+                broker.brokerPaymentMethods?.includes('mPesa') && (
+                  <li class="flex items-center">
+                    <svg
+                      class="w-4 h-4 text-green-400 mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    M-Pesa Support
+                  </li>
+                )
+              }
+              {
+                broker.islamicAccount && (
+                  <li class="flex items-center">
+                    <svg
+                      class="w-4 h-4 text-green-400 mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    Islamic Account
+                  </li>
+                )
+              }
+              {
+                broker.bonusAvailable && (
+                  <li class="flex items-center">
+                    <svg
+                      class="w-4 h-4 text-green-400 mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    Bonus Available
+                  </li>
+                )
+              }
             </ul>
           </div>
         </div>

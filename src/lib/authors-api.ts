@@ -9,12 +9,14 @@
  */
 export async function getAuthorBySlug(slug: string) {
   try {
-    const response = await fetch(`https://api.kenyaforexfirm.com/api/authors?where[slug][equals]=${slug}&limit=1`);
-    
+    const response = await fetch(
+      `https://api.kenyaforexfirm.com/api/authors?where[slug][equals]=${slug}&limit=1`
+    );
+
     if (!response.ok) {
       throw new Error(`Failed to fetch author: ${response.status}`);
     }
-    
+
     const data = await response.json();
     return data.docs && data.docs.length > 0 ? data.docs[0] : null;
   } catch (error) {

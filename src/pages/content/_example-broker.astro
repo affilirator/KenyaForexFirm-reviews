@@ -7,33 +7,58 @@ import BrokerRegulation from '~/components/review/BrokerRegulation.astro';
 import BrokerProsAndCons from '~/components/review/BrokerProsAndCons.astro';
 import BrokerVerdict from '~/components/review/BrokerVerdict.astro';
 import RiskWarning from '~/components/review/RiskWarning.astro';
-import { generateBrokerReviewSchema, generateBreadcrumbSchema, generateFAQSchema } from '~/utils/schemaGenerator';
+import {
+  generateBrokerReviewSchema,
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+} from '~/utils/schemaGenerator';
 
 // Example broker data (this would normally come from PayloadCMS)
 const broker = {
-  id: "example-1",
-  brokerName: "Example Forex Broker",
-  slug: "example-broker",
+  id: 'example-1',
+  brokerName: 'Example Forex Broker',
+  slug: 'example-broker',
   brokerRating: 8.5,
   minDeposit: 100,
-  maxLeverage: "500:1",
+  maxLeverage: '500:1',
   spread: 1.2,
-  commission: "No commission",
+  commission: 'No commission',
   founded: 2015,
-  headquarters: "Cyprus",
+  headquarters: 'Cyprus',
   cmaApproved: true,
   bonusAvailable: true,
   islamicAccount: true,
-  category: "Forex & CFD Broker",
-  logo: "/favicon.svg",
+  category: 'Forex & CFD Broker',
+  logo: '/favicon.svg',
   regulation: [
-    { name: "Cyprus Securities and Exchange Commission", shortName: "CySEC", country: "Cyprus", id: "1" },
-    { name: "Financial Conduct Authority", shortName: "FCA", country: "United Kingdom", id: "2" }
+    {
+      name: 'Cyprus Securities and Exchange Commission',
+      shortName: 'CySEC',
+      country: 'Cyprus',
+      id: '1',
+    },
+    {
+      name: 'Financial Conduct Authority',
+      shortName: 'FCA',
+      country: 'United Kingdom',
+      id: '2',
+    },
   ],
-  platforms: ["MetaTrader 4", "MetaTrader 5", "WebTrader"],
-  accountTypes: ["Standard Account", "ECN Account", "Islamic Account"],
-  paymentMethods: ["M-Pesa", "Bank Transfer", "Credit Cards", "Skrill", "Neteller"],
-  features: ["24/7 Support", "Educational Resources", "Copy Trading", "VPS Hosting"]
+  platforms: ['MetaTrader 4', 'MetaTrader 5', 'WebTrader'],
+  accountTypes: ['Standard Account', 'ECN Account', 'Islamic Account'],
+  paymentMethods: [
+    'M-Pesa',
+    'Bank Transfer',
+    'Credit Cards',
+    'Skrill',
+    'Neteller',
+  ],
+  features: [
+    '24/7 Support',
+    'Educational Resources',
+    'Copy Trading',
+    'VPS Hosting',
+  ],
 };
 
 const title = `${broker.brokerName} Review ${new Date().getFullYear()} - Expert Analysis for Kenyan Traders`;
@@ -47,20 +72,20 @@ const combinedSchema = [reviewSchema, breadcrumbSchema, faqSchema];
 
 // Custom pros and cons for this example
 const customPros = [
-  "CMA approved for Kenyan traders",
-  "Low minimum deposit ($100)",
-  "Multiple regulatory licenses",
-  "M-Pesa payment support",
-  "Islamic account available",
-  "24/7 multilingual support",
-  "Comprehensive educational resources"
+  'CMA approved for Kenyan traders',
+  'Low minimum deposit ($100)',
+  'Multiple regulatory licenses',
+  'M-Pesa payment support',
+  'Islamic account available',
+  '24/7 multilingual support',
+  'Comprehensive educational resources',
 ];
 
 const customCons = [
-  "Limited cryptocurrency options",
-  "Higher spreads on exotic pairs",
-  "Withdrawal fees may apply",
-  "Platform customization limited"
+  'Limited cryptocurrency options',
+  'Higher spreads on exotic pairs',
+  'Withdrawal fees may apply',
+  'Platform customization limited',
 ];
 
 const customVerdict = `
@@ -78,92 +103,143 @@ const customVerdict = `
 >
   <BrokerHeader broker={broker} />
   <BrokerNavigation />
-  
+
   <main class="py-12 bg-gradient-to-b from-neutral-900 to-neutral-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <BrokerOverview broker={broker} />
       <BrokerRegulation broker={broker} />
-      
+
       <!-- Account Types Section -->
-      <section id="accounts" class="mb-16">
+      <section
+        id="accounts"
+        class="mb-16"
+      >
         <h2 class="text-3xl font-display font-bold text-white mb-6">
           Account Types
         </h2>
         <div class="grid lg:grid-cols-3 gap-6">
-          {broker.accountTypes.map((accountType, index) => (
-            <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-semibold text-white">{accountType}</h3>
-                {index === 0 && (
-                  <span class="bg-primary-500/20 text-primary-400 px-2 py-1 rounded-full text-xs font-medium">
-                    Popular
-                  </span>
-                )}
+          {
+            broker.accountTypes.map((accountType, index) => (
+              <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50 hover:border-primary-500/50 transition-all duration-500">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-xl font-semibold text-white">
+                    {accountType}
+                  </h3>
+                  {index === 0 && (
+                    <span class="bg-primary-500/20 text-primary-400 px-2 py-1 rounded-full text-xs font-medium">
+                      Popular
+                    </span>
+                  )}
+                </div>
+                <div class="space-y-3 mb-6">
+                  <div class="flex justify-between">
+                    <span class="text-neutral-400">Min Deposit:</span>
+                    <span class="text-white font-medium">
+                      ${broker.minDeposit}
+                    </span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-neutral-400">Max Leverage:</span>
+                    <span class="text-white font-medium">
+                      {broker.maxLeverage}
+                    </span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-neutral-400">Spread:</span>
+                    <span class="text-white font-medium">
+                      {broker.spread} pips
+                    </span>
+                  </div>
+                </div>
+                <button class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                  Open {accountType}
+                </button>
               </div>
-              <div class="space-y-3 mb-6">
-                <div class="flex justify-between">
-                  <span class="text-neutral-400">Min Deposit:</span>
-                  <span class="text-white font-medium">${broker.minDeposit}</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-neutral-400">Max Leverage:</span>
-                  <span class="text-white font-medium">{broker.maxLeverage}</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-neutral-400">Spread:</span>
-                  <span class="text-white font-medium">{broker.spread} pips</span>
-                </div>
-              </div>
-              <button class="w-full bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
-                Open {accountType}
-              </button>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </section>
 
       <!-- Platforms Section -->
-      <section id="platforms" class="mb-16">
+      <section
+        id="platforms"
+        class="mb-16"
+      >
         <h2 class="text-3xl font-display font-bold text-white mb-6">
           Trading Platforms
         </h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {broker.platforms.map(platform => (
-            <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
-              <h3 class="text-xl font-semibold text-white mb-4">{platform}</h3>
-              <div class="space-y-3">
-                <div class="flex items-center">
-                  <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                  <span class="text-neutral-300">Advanced charting</span>
-                </div>
-                <div class="flex items-center">
-                  <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                  <span class="text-neutral-300">Expert advisors</span>
-                </div>
-                <div class="flex items-center">
-                  <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                  <span class="text-neutral-300">Mobile trading</span>
+          {
+            broker.platforms.map((platform) => (
+              <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+                <h3 class="text-xl font-semibold text-white mb-4">
+                  {platform}
+                </h3>
+                <div class="space-y-3">
+                  <div class="flex items-center">
+                    <svg
+                      class="w-5 h-5 text-green-400 mr-3"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-neutral-300">Advanced charting</span>
+                  </div>
+                  <div class="flex items-center">
+                    <svg
+                      class="w-5 h-5 text-green-400 mr-3"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-neutral-300">Expert advisors</span>
+                  </div>
+                  <div class="flex items-center">
+                    <svg
+                      class="w-5 h-5 text-green-400 mr-3"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-neutral-300">Mobile trading</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </section>
 
       <!-- Spreads & Fees Section -->
-      <section id="spreads" class="mb-16">
+      <section
+        id="spreads"
+        class="mb-16"
+      >
         <h2 class="text-3xl font-display font-bold text-white mb-6">
           Spreads & Fees
         </h2>
         <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
-            <h3 class="text-xl font-semibold text-white mb-4">Typical Spreads</h3>
+          <div
+            class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50"
+          >
+            <h3 class="text-xl font-semibold text-white mb-4">
+              Typical Spreads
+            </h3>
             <div class="space-y-3">
               <div class="flex justify-between">
                 <span class="text-neutral-400">EUR/USD:</span>
@@ -179,7 +255,9 @@ const customVerdict = `
               </div>
             </div>
           </div>
-          <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+          <div
+            class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50"
+          >
             <h3 class="text-xl font-semibold text-white mb-4">Fees</h3>
             <div class="space-y-3">
               <div class="flex justify-between">
@@ -200,26 +278,48 @@ const customVerdict = `
       </section>
 
       <!-- Payment Methods Section -->
-      <section id="payments" class="mb-16">
+      <section
+        id="payments"
+        class="mb-16"
+      >
         <h2 class="text-3xl font-display font-bold text-white mb-6">
           Payment Methods
         </h2>
-        <div class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50">
+        <div
+          class="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl p-6 border border-neutral-700/50"
+        >
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {broker.paymentMethods.map(method => (
-              <div class="flex items-center p-3 bg-neutral-800/50 rounded-lg">
-                <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="text-white font-medium">{method}</span>
-              </div>
-            ))}
+            {
+              broker.paymentMethods.map((method) => (
+                <div class="flex items-center p-3 bg-neutral-800/50 rounded-lg">
+                  <svg
+                    class="w-5 h-5 text-green-400 mr-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="text-white font-medium">{method}</span>
+                </div>
+              ))
+            }
           </div>
         </div>
       </section>
 
-      <BrokerProsAndCons broker={broker} pros={customPros} cons={customCons} />
-      <BrokerVerdict broker={broker} verdict={customVerdict} />
+      <BrokerProsAndCons
+        broker={broker}
+        pros={customPros}
+        cons={customCons}
+      />
+      <BrokerVerdict
+        broker={broker}
+        verdict={customVerdict}
+      />
     </div>
   </main>
 

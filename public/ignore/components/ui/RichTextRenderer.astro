@@ -5,13 +5,16 @@ interface Props {
   className?: string; // Optional class for the main div
 }
 
-const { htmlContent, className = 'prose max-w-none text-gray-700' } = Astro.props;
+const { htmlContent, className = 'prose max-w-none text-gray-700' } =
+  Astro.props;
 ---
 
-{htmlContent ? (
-  <div class={className}>
-    <Fragment set:html={htmlContent} />
-  </div>
-) : (
-  <p class="text-gray-500 italic">No detailed description available.</p>
-)}
+{
+  htmlContent ? (
+    <div class={className}>
+      <Fragment set:html={htmlContent} />
+    </div>
+  ) : (
+    <p class="text-gray-500 italic">No detailed description available.</p>
+  )
+}

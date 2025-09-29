@@ -5,24 +5,26 @@ import { getReviews } from '~/lib/qs-esm';
 
 // Fetch the data from your Payload CMS API
 const allBrokers = await getReviews();
-const catRatings = allBrokers.docs
-//const {catScore} = 
+const catRatings = allBrokers.docs;
+//const {catScore} =
 
 // Optional: Function to format category names (e.g., "researchEducation" -> "Research Education")
 function formatCategoryName(name: string): string {
   return name
-    .replace(/([A-Z])/g, ' $1')  // Add space before capital letters
-    .replace(/^./, (str) => str.toUpperCase())  // Capitalize the first letter
+    .replace(/([A-Z])/g, ' $1') // Add space before capital letters
+    .replace(/^./, (str) => str.toUpperCase()) // Capitalize the first letter
     .trim();
 }
 ---
 
 <!-- Template: Render the data as HTML -->
 <div>
-  {Object.entries(catRatings).map(([category, { catScore }]) => (
-    <div>
-      <h2>{formatCategoryName(category)}</h2>
-      <p>Score: {catScore}</p>
-    </div>
-  ))}
+  {
+    Object.entries(catRatings).map(([category, { catScore }]) => (
+      <div>
+        <h2>{formatCategoryName(category)}</h2>
+        <p>Score: {catScore}</p>
+      </div>
+    ))
+  }
 </div>

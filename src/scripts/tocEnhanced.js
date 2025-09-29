@@ -1,6 +1,6 @@
 /**
  * Enhanced Table of Contents Script
- * 
+ *
  * This script creates a more user-friendly table of contents with:
  * - Active section highlighting
  * - Smooth scrolling
@@ -10,16 +10,16 @@
 document.addEventListener('DOMContentLoaded', () => {
   const tocContainer = document.getElementById('table-of-contents');
   if (!tocContainer) return;
-  
+
   // Get all section headings
   const headings = document.querySelectorAll('h2[id]');
   const toc = [];
-  
+
   // Create TOC entries
   headings.forEach((heading) => {
     const id = heading.getAttribute('id');
     const text = heading.textContent?.trim();
-    
+
     if (id && text) {
       toc.push(`
         <a href="#${id}" class="toc-item" data-target="${id}">
@@ -31,55 +31,63 @@ document.addEventListener('DOMContentLoaded', () => {
       `);
     }
   });
-  
+
   // Add TOC to the container
   if (toc.length > 0) {
     tocContainer.innerHTML = toc.join('');
-    
+
     // Add intersection observer to highlight active sections
     const tocLinks = document.querySelectorAll('.toc-item');
-    
+
     if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const id = entry.target.getAttribute('id');
-          const tocLink = document.querySelector(`.toc-item[data-target="${id}"]`);
-          
-          if (entry.isIntersecting && tocLink) {
-            // Remove active class from all links
-            tocLinks.forEach(link => link.classList.remove('text-primary-600', 'font-medium'));
-            
-            // Add active class to current link
-            tocLink.classList.add('text-primary-600', 'font-medium');
-          }
-        });
-      }, { rootMargin: '-20% 0px -80% 0px' });
-      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const id = entry.target.getAttribute('id');
+            const tocLink = document.querySelector(
+              `.toc-item[data-target="${id}"]`
+            );
+
+            if (entry.isIntersecting && tocLink) {
+              // Remove active class from all links
+              tocLinks.forEach((link) =>
+                link.classList.remove('text-primary-600', 'font-medium')
+              );
+
+              // Add active class to current link
+              tocLink.classList.add('text-primary-600', 'font-medium');
+            }
+          });
+        },
+        { rootMargin: '-20% 0px -80% 0px' }
+      );
+
       // Observe all section headings
-      headings.forEach(heading => {
+      headings.forEach((heading) => {
         observer.observe(heading);
       });
     }
-    
+
     // Add smooth scrolling
-    tocLinks.forEach(link => {
+    tocLinks.forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const targetId = link.getAttribute('data-target');
         const targetElement = document.getElementById(targetId);
-        
+
         if (targetElement) {
           window.scrollTo({
             top: targetElement.offsetTop - 100,
-            behavior: 'smooth'
+            behavior: 'smooth',
           });
-          
+
           // Update URL hash without scrolling
           history.pushState(null, null, `#${targetId}`);
         }
       });
     });
   } else {
-    tocContainer.innerHTML = '<p class="text-neutral-500 text-sm italic">No sections available</p>';
+    tocContainer.innerHTML =
+      '<p class="text-neutral-500 text-sm italic">No sections available</p>';
   }
 });

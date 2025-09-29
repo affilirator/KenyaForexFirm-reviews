@@ -447,9 +447,7 @@
         "version": 1
       }
     },
-    "capitalRequirements": {
-
-    },
+    "capitalRequirements": {},
     "clientMoneyProtection": {
       "protectionLimit": "899887"
     },

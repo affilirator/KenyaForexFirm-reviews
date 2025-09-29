@@ -1,21 +1,21 @@
 ---
 interface Props {
-    mainText: string;
-    emphasisText?: string;
-    afterEmphasisText?: string;
-
+  mainText: string;
+  emphasisText?: string;
+  afterEmphasisText?: string;
 }
-const {
-    mainText,
-    emphasisText,
-    afterEmphasisText
-} = Astro.props
+const { mainText, emphasisText, afterEmphasisText } = Astro.props;
 ---
-<!-- Subtitle -->
-<p class="text-xl md:text-2xl text-neutral-300 max-w-4xl mx-auto mb-8 leading-relaxed">
-    {mainText}
-    {emphasisText && (<span class="text-primary-400 font-semibold"> {emphasisText} </span>)}
-    {afterEmphasisText && ({afterEmphasisText}) }
-</p>
 
-      
+<!-- Subtitle -->
+<p
+  class="text-xl md:text-2xl text-neutral-300 max-w-4xl mx-auto mb-8 leading-relaxed"
+>
+  {mainText}
+  {
+    emphasisText && (
+      <span class="text-primary-400 font-semibold"> {emphasisText} </span>
+    )
+  }
+  {afterEmphasisText && { afterEmphasisText }}
+</p>
