@@ -1,0 +1,139 @@
+---
+import { fetchTraderBySlug, fetchSiteConfig } from '@/lib/qs-esm';
+import TraderDetail from '@/components/traders/TraderDetail.astro';
+//import { Metadata } from 'next';
+//import { notFound } from 'next/navigation';
+import { personSchema } from '@/lib/schema/person-schema';
+import { orgSchema } from '@/lib/schema/org-schema';
+import RichText from '@/components/common/RichText';
+import type { ForexTrader } from '~/types/payload-types';
+
+//type Props = { params: { slug: string } };
+interface Props {
+    trader: ForexTrader;
+}
+/*
+export async function generateMetadata({ params }: Props) {
+  try {
+   
+    const siteConfig = await fetchSiteConfig();
+    const trader = await fetchTraderBySlug(params.slug)
+    
+    if (!trader) {
+      return {
+        title: 'Trader Not Found | Kenya Forex Firm',
+        description: 'The requested trader profile could not be found.',
+      };
+    }
+
+    const siteUrl =  siteConfig.siteUrl;
+    const traderUrl = `${siteUrl}/forex-trading/top-traders/${trader.slug}`;
+
+   
+    return {
+      title: `${trader.name} | Top Forex Trader Kenya ${new Date().getFullYear()} | MahingeFX`,
+      keywords: siteConfig.keywords,
+      authors: [{ name: siteConfig.authorName, url: "https://fx.mahinge.com/about/patrick-mahinge" }],
+      creator: siteConfig.authorName,
+      publisher: siteConfig.siteTitle,
+      alternates: {
+        canonical: traderUrl,
+      },
+      description: `${typeof trader.shortBio === 'string' ? trader.shortBio.slice(0, 160) : 'Professional forex trader'}... Insights from Patrick Mahinge.`,
+      openGraph: { title: trader.name,
+        images: [typeof trader.photo === 'object' && 
+          trader.photo?.url ? trader.photo.url : '/default-image.jpg' ] }
+    };
+  } catch (error) {
+    return {
+      title: 'Trader Profile | Kenya Forex Firm',
+      description: 'Professional forex trader profile.',
+    };
+  }
+}
+  */
+
+
+export async function getStaticPaths() {
+  try {
+    const res = await fetch('https://fx.mahinge.com/api/forex-traders', {
+      headers: {
+        //'Authorization': 'Bearer ' + process.env.API_TOKEN || '',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    }) 
+    const data = await res.json()
+    
+    return data.docs.map((trader: ForexTrader) => (
+        { 
+            params: {slug: trader.slug},
+            props: {trader} 
+    }
+    
+    ));
+  } catch (error) {
+    console.error('Static params generation failed:', error);
+    return [];
+  }
+}
+
+  const { trader } = Astro.props;
+
+  const siteUrl =  'https://fx.kenyaforexfirm.com';
+  const traderUrl = `${siteUrl}/forex-trading/top-traders/${trader.slug}`;
+  const siteConfig = await fetchSiteConfig();
+
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    '@id': `${traderUrl}/#profile`,
+    author: {
+     // ...personSchema
+    },
+    url: traderUrl,
+    'mainEntity': {
+      '@type': 'Person',
+      '@id': traderUrl,
+      name: trader.name,
+      description: typeof trader.bio === 'string' ? trader.bio : 'Professional forex trader',
+      sameAs: trader.socialLinks?.map((link: any) => link.url),
+      "identifier": `${traderUrl}/#profile`,
+      image: typeof trader.photo === 'object' && trader.photo?.url ? trader.photo.url : '/default-image.jpg',
+      jobTitle: "Forex Trader",
+     // worksFor: trader.forexBroker && typeof trader.forexBroker === 'object' ? { "@type": "Organization", "name": trader.forexBroker.name } : undefined,
+      "url": traderUrl
+    },
+    'headline': trader.name + ' Forex Trading Career, Net Worth, and Advice',
+    'description': trader.name + ' Forex Trading Career, Net Worth, and Advice',
+    'image': typeof trader.photo === 'object' && trader.photo?.url ? trader.photo.url : '/default-image.jpg',
+    
+    'publisher': {
+      //'@type': 'Organization',
+      ...orgSchema
+      
+      
+    },
+    'dateModified': new Date().toISOString(),
+    "dateCreated": trader.createdAt,
+    "datePublished": trader.createdAt,
+    'inLanguage': 'en-US',
+    'potentialAction': {
+      '@type': 'ReadAction',
+      'target': [traderUrl],
+    },
+  };
+
+---
+      <div class="max-w-4xl mx-auto px-4 py-16">
+        <TraderDetail trader={trader} />
+        {trader.mainArticle && (
+          <>
+            <h2 class="text-2xl font-bold mt-12 mb-4">{trader.name}'s Forex Trading Journey</h2>
+            <RichText content={trader.mainArticle} />
+          </>
+        )}
+       
+      </div>
+    </>
+  

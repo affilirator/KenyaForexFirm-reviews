@@ -28,7 +28,6 @@ export default {
   				'900': '#171717',
   				'950': '#0a0a0a'
   			},
-
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -63,13 +62,29 @@ export default {
   			}
   		},
   		fontFamily: {
-			 body: ['PT Sans', 'sans-serif'],
-        headline: ['Playfair Display', 'serif'],
-        code: ['monospace'],
-  			sans: ["var(--font-source-sans-3)"],
-  			display: ["var(--font-playfair-display)"],
-  			ui: ["var(--font-roboto)"],
-  			serif: ["var(--font-eb-garamond)"],
+  			body: [
+  				'PT Sans',
+  				'sans-serif'
+  			],
+  			headline: [
+  				'Playfair Display',
+  				'serif'
+  			],
+  			code: [
+  				'monospace'
+  			],
+  			sans: [
+  				'var(--font-source-sans-3)'
+  			],
+  			display: [
+  				'var(--font-playfair-display)'
+  			],
+  			ui: [
+  				'var(--font-roboto)'
+  			],
+  			serif: [
+  				'var(--font-eb-garamond)'
+  			]
   		},
   		backgroundImage: {
   			'cyber-grid': 'linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)'
@@ -78,9 +93,30 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		keyframes: {
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
+  		},
+  		animation: {
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
   		}
   	}
-
   },
   
   plugins: [require('@tailwindcss/typography'), require("tailwindcss-animate")],

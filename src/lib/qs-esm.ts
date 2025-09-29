@@ -97,6 +97,43 @@ const fundingQuery = {
   sort: '-brokerRating'
 };
 
+
+
+export async function fetchTraderBySlug(slug: string): Promise<ForexTrader> {
+  const queryString = stringify({
+      where: {
+        slug: { equals: slug },
+        //status: { equals: 'published' }
+      },
+      depth: 3
+    }, { addQueryPrefix: true });
+  if (!slug) throw new Error('No slug provided');
+  if (typeof slug !== 'string') throw new Error('Slug must be a string');
+  if (slug.length === 0) throw new Error('Slug cannot be empty');
+  if (slug.length > 100) throw new Error('Slug cannot be longer than 100 characters');
+  if (slug.match(/[^a-z0-9-]/)) throw new Error('Slug must contain only lowercase letters, numbers, and hyphens');
+
+  const res = await fetch(`https://fx.mahinge.com/api/forex-traders${queryString}`)
+  const trader = await res.json();
+  
+ /* await payload.find({
+    collection: 'forex-traders',
+    where: { slug: { equals: slug } },
+    depth: 2,
+    limit: 1,
+  });
+  */
+
+
+  if (trader.docs.length === 0) {
+    throw new Error('No trader found');
+  }
+  return trader.docs[0];
+  
+  
+}
+
+
 export const getMpesaForexBrokers = async (): Promise<{ docs: BrokerProps[] }> => {
   try {
     const queryString = stringify(mpesaQuery, { addQueryPrefix: true });
