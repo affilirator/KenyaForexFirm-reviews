@@ -7,7 +7,13 @@ interface RichTextProps {
   content: any
   className?: string
 }
-
+/**
+ * @description - Renders rich text from payload cms
+ * @prop content
+ * @prop className
+ * @param param0 
+ * @returns 
+ */
 const RichText: React.FC<RichTextProps> = ({ content, className }) => {
   if (!content) return null
 
