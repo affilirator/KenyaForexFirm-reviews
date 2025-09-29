@@ -46,7 +46,7 @@ let schemaData = Astro.props.schemaData;
 
 const charset = 'UTF-8';
 
-const homeTitle = `${site.name} ${site.currentYear} - Expert Forex Broker Analysis & Rankings"`
+const homeTitle = `Expert Forex Broker Reviews, Analysis & Rankings in Kenya"`
 const homeDescription = "Comprehensive forex broker reviews and rankings for Kenyan traders. Expert analysis, regulatory information, and unbiased comparisons to help you choose the best forex broker."
 // Get default author if none is provided
 let pageAuthor: Author | undefined = author;
@@ -117,6 +117,10 @@ if (schemaData && !schemaData?.['@id']) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <link rel="stylesheet" href="https://fxmedia.kenyaforexfirm.com/fonts.css" />
