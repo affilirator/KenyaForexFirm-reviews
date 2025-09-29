@@ -133,9 +133,12 @@ export async function getStaticPaths() {
       <div class="dark  mx-auto px-4 py-16">
         <TraderDetail trader={trader} />
         {trader.mainArticle && (
-          
-            <h2 class="text-2xl font-bold mt-12 mb-4">{trader.name}'s Forex Trading Journey</h2>
-            <RichText content={trader.mainArticle} className='max-w-4xl p-6 mx-auto' />
+          <article class=" mt-4 max-w-4xl p-6 mx-auto">
+             <h2 class="text-2xl font-bold font-display mt-2 mb-2">{trader.name}'s Forex Trading Journey</h2>
+            <RichText content={trader.mainArticle} className='' />
+
+          </article>
+           
           
         )}
        
