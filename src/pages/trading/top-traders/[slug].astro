@@ -90,7 +90,7 @@ export async function getStaticPaths() {
     '@type': 'ProfilePage',
     '@id': `${traderUrl}/#profile`,
     author: {
-     // ...personSchema
+      ...personSchema
     },
     url: traderUrl,
     'mainEntity': {
@@ -111,7 +111,7 @@ export async function getStaticPaths() {
     
     'publisher': {
       //'@type': 'Organization',
-     // ...orgSchema
+     ...orgSchema
       
       
     },
