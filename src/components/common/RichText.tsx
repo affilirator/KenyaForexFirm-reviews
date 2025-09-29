@@ -55,7 +55,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
               key={i} 
               className={cn(
                 headingClasses[HeadingTag as keyof typeof headingClasses],
-                'scroll-mt-20'
+                'scroll-mt-20 font-display'
               )}
               role="heading"
               aria-level={parseInt(HeadingTag.slice(1))}
