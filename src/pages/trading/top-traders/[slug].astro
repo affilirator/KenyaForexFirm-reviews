@@ -86,23 +86,23 @@ export async function getStaticPaths() {
   const siteConfig = await fetchSiteConfig();
 
   const articleSchema = {
-    '~context': 'https://schema.org',
-    '~type': 'ProfilePage',
-    '~id': `${traderUrl}/#profile`,
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    '@id': `${traderUrl}/#profile`,
     author: {
       ...personSchema
     },
     url: traderUrl,
     'mainEntity': {
-      '~type': 'Person',
-      '~id': traderUrl,
+      '@type': 'Person',
+      '@id': traderUrl,
       name: trader.name,
       description: typeof trader.bio === 'string' ? trader.bio : 'Professional forex trader',
       sameAs: trader.socialLinks?.map((link: any) => link.url),
      // "identifier": `${traderUrl}/#profile`,
       image: typeof trader.photo === 'object' && trader.photo?.url ? trader.photo.url : '/default-image.jpg',
       jobTitle: "Forex Trader",
-     // worksFor: trader.forexBroker && typeof trader.forexBroker === 'object' ? { "~type": "Organization", "name": trader.forexBroker.name } : undefined,
+     // worksFor: trader.forexBroker && typeof trader.forexBroker === 'object' ? { "@type": "Organization", "name": trader.forexBroker.name } : undefined,
       "url": traderUrl
     },
     'headline': trader.name + ' Forex Trading Career, Net Worth, and Advice',
@@ -110,7 +110,7 @@ export async function getStaticPaths() {
     'image': typeof trader.photo === 'object' && trader.photo?.url ? trader.photo.url : '/default-image.jpg',
     
     'publisher': {
-      //'~type': 'Organization',
+      //'@type': 'Organization',
      ...orgSchema
       
       
@@ -120,7 +120,7 @@ export async function getStaticPaths() {
     "datePublished": trader.createdAt,
     'inLanguage': 'en-US',
     'potentialAction': {
-      '~type': 'ReadAction',
+      '@type': 'ReadAction',
       'target': [traderUrl],
     },
   };
