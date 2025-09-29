@@ -1,11 +1,11 @@
 ---
-import { fetchTraderBySlug, fetchSiteConfig } from '@/lib/qs-esm';
-import TraderDetail from '@/components/traders/TraderDetail.astro';
+import { fetchTraderBySlug, fetchSiteConfig } from '~/lib/qs-esm';
+import TraderDetail from '~/components/traders/TraderDetail.astro';
 //import { Metadata } from 'next';
 //import { notFound } from 'next/navigation';
-import { personSchema } from '@/lib/schema/person-schema';
-import { orgSchema } from '@/lib/schema/org-schema';
-import RichText from '@/components/common/RichText';
+import { personSchema } from '~/lib/schema/person-schema';
+import { orgSchema } from '~/lib/schema/org-schema';
+import RichText from '~/components/common/RichText';
 import type { ForexTrader } from '~/types/payload-types';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 
@@ -81,28 +81,28 @@ export async function getStaticPaths() {
 
   const { trader } = Astro.props;
 
-  const siteUrl =  'https://fx.kenyaforexfirm.com';
-  const traderUrl = `${siteUrl}/forex-trading/top-traders/${trader.slug}`;
+  const siteUrl =  import.meta.env.SITE || 'https://fx.kenyaforexfirm.com';
+  const traderUrl = `${siteUrl}/trading/top-traders/${trader.slug}/`;
   const siteConfig = await fetchSiteConfig();
 
   const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ProfilePage',
-    '@id': `${traderUrl}/#profile`,
+    '~context': 'https://schema.org',
+    '~type': 'ProfilePage',
+    '~id': `${traderUrl}/#profile`,
     author: {
       ...personSchema
     },
     url: traderUrl,
     'mainEntity': {
-      '@type': 'Person',
-      '@id': traderUrl,
+      '~type': 'Person',
+      '~id': traderUrl,
       name: trader.name,
       description: typeof trader.bio === 'string' ? trader.bio : 'Professional forex trader',
       sameAs: trader.socialLinks?.map((link: any) => link.url),
      // "identifier": `${traderUrl}/#profile`,
       image: typeof trader.photo === 'object' && trader.photo?.url ? trader.photo.url : '/default-image.jpg',
       jobTitle: "Forex Trader",
-     // worksFor: trader.forexBroker && typeof trader.forexBroker === 'object' ? { "@type": "Organization", "name": trader.forexBroker.name } : undefined,
+     // worksFor: trader.forexBroker && typeof trader.forexBroker === 'object' ? { "~type": "Organization", "name": trader.forexBroker.name } : undefined,
       "url": traderUrl
     },
     'headline': trader.name + ' Forex Trading Career, Net Worth, and Advice',
@@ -110,7 +110,7 @@ export async function getStaticPaths() {
     'image': typeof trader.photo === 'object' && trader.photo?.url ? trader.photo.url : '/default-image.jpg',
     
     'publisher': {
-      //'@type': 'Organization',
+      //'~type': 'Organization',
      ...orgSchema
       
       
@@ -120,7 +120,7 @@ export async function getStaticPaths() {
     "datePublished": trader.createdAt,
     'inLanguage': 'en-US',
     'potentialAction': {
-      '@type': 'ReadAction',
+      '~type': 'ReadAction',
       'target': [traderUrl],
     },
   };
@@ -129,11 +129,14 @@ export async function getStaticPaths() {
  const description = trader.name + ' Forex Trading Career, Net Worth, and Advice'
 
 ---
-<BaseLayout title={title} description={description} >
-      <div class="dark  mx-auto px-4 py-16">
+<BaseLayout title={title} 
+description={description} 
+schemaData={articleSchema}
+>
+      <div class="dark mt-2 md:mt-8  mx-auto px-4 py-16">
         <TraderDetail trader={trader} />
         {trader.mainArticle && (
-          <article class=" mt-4 max-w-4xl p-6 mx-auto">
+          <article class=" mt-4 max-w-4xl p-6 mx-auto border border-accent/50">
              <h2 class="text-2xl font-bold font-display mt-2 mb-2">{trader.name}'s Forex Trading Journey</h2>
             <RichText content={trader.mainArticle} className='' />
 
