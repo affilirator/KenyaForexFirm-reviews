@@ -103,14 +103,19 @@ export async function getStaticPaths() {
      // worksFor: trader.forexBroker && typeof trader.forexBroker === 'object' ? { "@type": "Organization", "name": trader.forexBroker.name } : undefined,
       "url": traderUrl
     },
-    author: {
-      ...personSchema
-    },
+    
     url: traderUrl,
    
     'headline': trader.name + ' Forex Trading Career, Net Worth, and Advice',
     'description': trader.name + ' Forex Trading Career, Net Worth, and Advice',
     'image': typeof trader.photo === 'object' && trader.photo?.url ? trader.photo.url : '/default-image.jpg',
+    'dateModified': new Date().toISOString(),
+    "dateCreated": trader.createdAt,
+    "datePublished": trader.createdAt,
+    'inLanguage': 'en-US',
+    author: {
+      ...personSchema
+    },
     
     'publisher': {
       //'@type': 'Organization',
@@ -118,10 +123,7 @@ export async function getStaticPaths() {
       
       
     },
-    'dateModified': new Date().toISOString(),
-    "dateCreated": trader.createdAt,
-    "datePublished": trader.createdAt,
-    'inLanguage': 'en-US',
+    
     'potentialAction': {
       '@type': 'ReadAction',
       'target': [traderUrl],
