@@ -23,7 +23,7 @@ import {
 
 const { trader } = Astro.props
 ---
-<HeroSlot class="mb-4 min-h-screen">
+<HeroSlot class="mb-4 p-6 min-h-screen">
   <h1 id={`${trader.name.toLowerCase().replace(/\s+/g, '-')}`} slot="title"
             class="text-4xl font-display font-bold">{trader.name}'s Forex Trading Journey & Accomplishments
             </h1>
@@ -69,7 +69,7 @@ const { trader } = Astro.props
            
             <div class="max-w-none">
               
-              <section class="mb-8">
+              <section class="">
         <h4 class="font-bold font-display">Key Achievements</h4>
         
         {trader.achievements && (
