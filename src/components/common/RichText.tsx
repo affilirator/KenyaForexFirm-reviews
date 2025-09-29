@@ -227,7 +227,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
               key={i} 
               className={cn(
                 'px-4 py-3 text-left text-sm md:text-base',
-                node.headerCell && 'bg-muted/50 font-semibold text-foreground border-b-2 border-border'
+                node.headerCell && 'bg-muted/50 font-ui font-semibold text-foreground border-b-2 border-border'
               )}
               role={node.headerCell ? 'columnheader' : 'cell'}
             >
@@ -255,6 +255,8 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
     <article 
       className={cn(
         'prose prose-lg max-w-none',
+        'space-y-8',
+        'max-w-5xl',
         'prose-headings:scroll-mt-20',
         'prose-a:text-primary prose-a:no-underline hover:prose-a:underline',
         'prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded',
