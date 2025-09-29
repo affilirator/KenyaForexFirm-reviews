@@ -7,6 +7,7 @@ import { personSchema } from '@/lib/schema/person-schema';
 import { orgSchema } from '@/lib/schema/org-schema';
 import RichText from '@/components/common/RichText';
 import type { ForexTrader } from '~/types/payload-types';
+import BaseLayout from '~/layouts/BaseLayout.astro';
 
 //type Props = { params: { slug: string } };
 interface Props {
@@ -110,7 +111,7 @@ export async function getStaticPaths() {
     
     'publisher': {
       //'@type': 'Organization',
-      ...orgSchema
+     // ...orgSchema
       
       
     },
@@ -124,16 +125,20 @@ export async function getStaticPaths() {
     },
   };
 
+  const title = trader.name + ' Forex Trading Career, Net Worth, and Advice'
+ const description = trader.name + ' Forex Trading Career, Net Worth, and Advice'
+
 ---
+<BaseLayout title={title} description={description} >
       <div class="max-w-4xl mx-auto px-4 py-16">
         <TraderDetail trader={trader} />
         {trader.mainArticle && (
-          <>
+          
             <h2 class="text-2xl font-bold mt-12 mb-4">{trader.name}'s Forex Trading Journey</h2>
             <RichText content={trader.mainArticle} />
-          </>
+          
         )}
        
       </div>
-    </>
-  
+    
+  </BaseLayout>
