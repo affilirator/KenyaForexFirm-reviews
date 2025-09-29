@@ -85,26 +85,29 @@ export async function getStaticPaths() {
   const traderUrl = `${siteUrl}/trading/top-traders/${trader.slug}/`;
   const siteConfig = await fetchSiteConfig();
 
+  const image = typeof trader.photo === 'object' && trader.photo?.url ? trader.photo.url : undefined
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
     '@id': `${traderUrl}/#profile`,
-    author: {
-      ...personSchema
-    },
-    url: traderUrl,
-    'mainEntity': {
+     'mainEntity': {
       '@type': 'Person',
       '@id': traderUrl,
       name: trader.name,
       description: typeof trader.bio === 'string' ? trader.bio : 'Professional forex trader',
       sameAs: trader.socialLinks?.map((link: any) => link.url),
      // "identifier": `${traderUrl}/#profile`,
-      image: typeof trader.photo === 'object' && trader.photo?.url ? trader.photo.url : '/default-image.jpg',
+      image: image,
       jobTitle: "Forex Trader",
      // worksFor: trader.forexBroker && typeof trader.forexBroker === 'object' ? { "@type": "Organization", "name": trader.forexBroker.name } : undefined,
       "url": traderUrl
     },
+    author: {
+      ...personSchema
+    },
+    url: traderUrl,
+   
     'headline': trader.name + ' Forex Trading Career, Net Worth, and Advice',
     'description': trader.name + ' Forex Trading Career, Net Worth, and Advice',
     'image': typeof trader.photo === 'object' && trader.photo?.url ? trader.photo.url : '/default-image.jpg',

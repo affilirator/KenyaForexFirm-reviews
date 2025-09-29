@@ -43,9 +43,9 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
         case 'heading':
           const HeadingTag = node.tag as keyof JSX.IntrinsicElements
           const headingClasses = {
-            h1: 'text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent mt-12 mb-6 leading-tight',
-            h2: 'text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mt-10 mb-5 leading-tight',
-            h3: 'text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground mt-8 mb-4 leading-tight',
+            h1: 'text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent mt-12 mb-2 leading-tight',
+            h2: 'text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground mt-5 mb-5 leading-tight',
+            h3: 'text-2xl md:text-3xl lg:text-4xl font-display font-semibold text-foreground mt-4 mb-4 leading-tight',
             h4: 'text-xl md:text-2xl lg:text-3xl font-semibold text-foreground mt-6 mb-3',
             h5: 'text-lg md:text-xl lg:text-2xl font-semibold text-foreground mt-6 mb-3',
             h6: 'text-base md:text-lg lg:text-xl font-semibold text-foreground mt-4 mb-2'
@@ -66,7 +66,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
         
         case 'paragraph':
           return (
-            <p className="text-base md:text-lg leading-relaxed md:leading-relaxed text-foreground/90 my-4 md:my-6">
+            <p className="text-base md:text-lg font-sans leading-relaxed md:leading-relaxed text-foreground/90 my-4 md:my-4">
               {children}
             </p>
           )
@@ -94,7 +94,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
           return (
             <li 
               key={i} 
-              className="text-base md:text-lg leading-relaxed text-foreground/90 pl-2"
+              className="text-base md:text-lg font-ui leading-relaxed text-foreground/90 pl-2"
               role="listitem"
             >
               {children}
@@ -105,7 +105,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
           return (
             <blockquote 
               key={i} 
-              className="border-l-4 border-primary/30 bg-muted/30 dark:bg-muted/20 pl-6 pr-4 py-4 my-6 md:my-8 rounded-r-lg italic text-foreground/80"
+              className="border-l-4 border-primary/30 font-ui bg-muted/30 dark:bg-muted/20 pl-6 pr-4 py-4 my-6 md:my-8 rounded-r-lg italic text-foreground/80"
               role="blockquote"
             >
               <div className="text-base md:text-lg leading-relaxed">
@@ -123,7 +123,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
               key={i}
               href={escapeHTML(url)}
               className={cn(
-                'text-primary hover:text-primary/80 underline decoration-2 underline-offset-2',
+                'text-primary font-ui hover:text-primary/80 underline decoration-2 underline-offset-2',
                 'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm'
               )}
               target={node.fields?.newTab || isExternal ? '_blank' : '_self'}
@@ -132,7 +132,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
             >
               {children}
               {isExternal && (
-                <span className="ml-1 text-xs" aria-hidden="true">↗</span>
+                <span className="ml-1 -space-y-1 text-xs" aria-hidden="true">↗</span>
               )}
             </a>
           )
@@ -145,6 +145,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
             <hr 
               key={i} 
               className="my-8 md:my-12 border-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"
+              color='#cc32d2'
               role="separator"
             />
           )
@@ -164,9 +165,11 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
                 width={imageData.width || node.width}
                 height={imageData.height || node.height}
                 loading="lazy"
+                fetchPriority='auto'
+                decoding='auto'
               />
               {altText && altText !== 'Image' && (
-                <figcaption className="text-sm text-foreground/60 text-center mt-2 italic">
+                <figcaption className="text-sm font-ui text-foreground/60 text-center mt-2 italic">
                   {altText}
                 </figcaption>
               )}
@@ -180,7 +183,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
           // Handle relationship nodes (e.g., broker references)
           if (node.value && typeof node.value === 'object') {
             return (
-              <div key={i} className="my-6 p-4 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-lg">
+              <div key={i} className="max-w-4xl my-6 p-4 bg-gradient-to-r from-accent to-primary/10 border border-primary/20 rounded-lg">
                 <div className="flex items-center gap-3">
                   {node.value.logo?.url && (
                     <img 
