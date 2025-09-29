@@ -44,7 +44,7 @@ export const EmphasisBlock: React.FC<EmphasisBlockProps> = ({
     <div className={cn('p-6 rounded-lg my-6', styleClasses[style])}>
       <div className="flex gap-3">
         {IconComponent && (
-          <IconComponent className={cn('h-6 w-6 mt-1 flex-shrink-0', iconColors[style])} />
+          <IconComponent className={cn('h-6 w-6 mt-4 flex-shrink-0 items-center', iconColors[style])} />
         )}
         <div className="flex-1">
           <RichText content={content} />
