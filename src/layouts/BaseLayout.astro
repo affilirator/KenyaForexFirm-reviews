@@ -190,6 +190,22 @@ if (schemaData && !schemaData?.['@id']) {
       content={homeDescription}
     />
     <slot name="opengraph" />
+    <Font
+      cssVariable="--font-roboto"
+      preload
+    />
+    <Font
+      cssVariable="--font-source-sans-3"
+      preload
+    />
+    <Font
+      cssVariable="--font-eb-garamond"
+      preload
+    />
+    <Font
+      cssVariable="--font-playfair-display"
+      preload
+    />
 
     <SEO
       title={title}
@@ -369,22 +385,7 @@ if (schemaData && !schemaData?.['@id']) {
       >
       </div>
     </div>
-    <Font
-      cssVariable="--font-roboto"
-      preload
-    />
-    <Font
-      cssVariable="--font-source-sans-3"
-      preload
-    />
-    <Font
-      cssVariable="--font-eb-garamond"
-      preload
-    />
-    <Font
-      cssVariable="--font-playfair-display"
-      preload
-    />
+    
 
     <style>
       ::-webkit-scrollbar {
