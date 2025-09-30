@@ -29,52 +29,72 @@ export default defineConfig({
   experimental: {
     fonts: [
       {
-        provider: fontProviders.fontsource(),
-        name: 'Roboto Variable',
+        provider: 'local',
+        name: 'Roboto',
         cssVariable: '--font-roboto',
-        
-        styles: ['normal'],
-        subsets: ['latin'],
-        fallbacks: ['sans-serif'],
+        //weights: [400, 500, 700],
+        //styles: ['normal', 'italic', 'oblique'],
+        //subsets: ['latin-ext', 'latin'],
+        variants: [
+          {
+            src: ['./src/assets/fonts/roboto-v48-latin-700.woff2'],
+            src: ['./src/assets/fonts/roboto-v48-latin-regular.woff2'],
+          }
+        ]
       },
       {
-        provider: fontProviders.fontsource(),
-        name: 'Source Sans 3 Variable',
+        provider: 'local',
+        name: 'Source Sans 3',
         cssVariable: '--font-source-sans-3',
-       
-        styles: ['normal'],
-        subsets: ['latin'],
-        fallbacks: ['sans-serif'],
+        //weights: [400, 500, 700],
+        //styles: ['normal', 'italic', 'oblique'],
+       // subsets: ['latin-ext', 'latin'],
+        variants: [
+          {
+            src: ['./src/assets/fonts/source-sans-3-v18-latin-700.woff2'],
+            src: ['./src/assets/fonts/source-sans-3-v18-latin-regular.woff2'],
+
+          }
+        ]
+
       },
       {
-        name: 'Inter',
-        cssVariable: '--font-inter',
-        provider: fontProviders.fontsource(),
-        // Specify weights that are actually used
-        //weights: [500, 700],
-        // Specify styles that are actually used
-        
-        styles: ['normal'],
-        // Download only font files for characters used on the page
-        subsets: ['latin'],
-        fallbacks: ['sans-serif'],
-      },
-      {
-        name: 'EB Garamond Variable',
+        name: 'EB Garamond',
         cssVariable: '--font-eb-garamond',
-        provider: fontProviders.fontsource(),
-        
-        fallbacks: ['serif'],
+        provider: 'local',
         // Weight and style are not specified so Astro
         // will try to infer them for each variant
+        variants: [
+          {
+            
+            src: [
+              
+              './src/assets/fonts/eb-garamond-v31-latin-700.woff2',
+             
+            ],
+            src: [
+              
+              'src/assets/fonts/eb-garamond-v31-latin-regular.woff2',
+            ],
+          },
+        ],
       },
+    
       {
-        name: 'Playfair Display Variable',
+        name: 'Playfair Display',
         cssVariable: '--font-playfair-display',
-        provider: fontProviders.fontsource(),
-        fallbacks: ['serif'],
+        provider: 'local',
         // Weight and style are not specified so Astro
         // will try to infer them for each variant
+        variants: [
+          {
+            
+            src: ['./src/assets/fonts/playfair-display-v39-latin-700.woff2'],
+            src: [
+              './src/assets/fonts/playfair-display-v39-latin-regular.woff2',
+            ],
+          },
+        ],
       },
     ],
   },
