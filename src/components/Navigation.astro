@@ -34,7 +34,7 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header>
+<header transition:persist>
   <div class="skip-links sr-only">
     <a
       href="#main-content"
@@ -44,7 +44,7 @@ const currentPath = Astro.url.pathname;
     >
     <a
       href="#edit-search-term"
-      class=" sr-only focusable skip-to-search"
+      class="sr-only focusable skip-to-search"
       >Skip to search box</a
     >
   </div>
