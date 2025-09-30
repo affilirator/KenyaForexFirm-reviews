@@ -35,7 +35,7 @@ export default defineConfig({
         // weights: [500 700],
         styles: ['normal'],
         subsets: ['latin'],
-        fallbacks: ["sans-serif"]
+        fallbacks: ['sans-serif'],
       },
       {
         provider: fontProviders.fontsource(),
@@ -44,7 +44,7 @@ export default defineConfig({
         weights: [500, 700],
         styles: ['normal'],
         subsets: ['latin'],
-        fallbacks: ["sans-serif"]
+        fallbacks: ['sans-serif'],
       },
       {
         name: 'Inter',
@@ -56,25 +56,23 @@ export default defineConfig({
         styles: ['normal'],
         // Download only font files for characters used on the page
         subsets: ['latin'],
-        fallbacks: ["sans-serif"]
+        fallbacks: ['sans-serif'],
       },
       {
         name: 'EB Garamond Variable',
         cssVariable: '--font-eb-garamond',
         provider: fontProviders.fontsource(),
-        fallbacks: ["serif"],
+        fallbacks: ['serif'],
         // Weight and style are not specified so Astro
         // will try to infer them for each variant
-        variants: [{}],
       },
       {
         name: 'Playfair Display Variable',
         cssVariable: '--font-playfair-display',
         provider: fontProviders.fontsource(),
-        fallbacks: ["serif"],
+        fallbacks: ['serif'],
         // Weight and style are not specified so Astro
         // will try to infer them for each variant
-        variants: [{}],
       },
     ],
   },
