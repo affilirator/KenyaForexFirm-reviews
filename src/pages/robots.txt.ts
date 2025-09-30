@@ -12,7 +12,7 @@ Disallow: /admin/
 Disallow: /content/
 
 # Sitemap
-Sitemap: ${new URL('sitemap.xml', import.meta.env.SITE).href}
+Sitemap: ${new URL('sitemap-index.xml', import.meta.env.SITE).href}
 `.trim();
 
   return new Response(robotsTxt, {

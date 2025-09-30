@@ -356,6 +356,9 @@ export type BrokerProps = {
   fundingMethods?: FundingMethod[];
   selectedAssets?: string[];
   brokerAssets?: string[];
+  updatedAt: string;
+  createdAt: string;
+  status: string;
   quickVerdict?: string;
   countriesNotAllowed?: string[];
   languages?: string[];
