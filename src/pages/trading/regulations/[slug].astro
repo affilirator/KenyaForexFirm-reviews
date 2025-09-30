@@ -136,7 +136,6 @@ const schemaMarkup = {
   description={pageDescription}
   schemaData={schemaMarkup}
 >
-  <Navigation />
   <script src="/src/scripts/regulatorPage.js"></script>
   {
     error && (
@@ -147,135 +146,135 @@ const schemaMarkup = {
       />
     )
   }
-  <section
-    class="dark"
-    id="regulator-page"
-  >
-    {
-      regulatorData && (
-        <>
-          <RegulatorHero
-            heading={regulatorData.heroSection.heading}
-            subheading={regulatorData.heroSection.subheading}
-            introduction={regulatorData.heroSection.introduction}
-            heroImage={regulatorData.heroSection.heroImage}
-            showTableOfContents={true}
-          />
+  {
+    regulatorData && (
+      <>
+        <RegulatorHero
+          heading={regulatorData.heroSection.heading}
+          subheading={regulatorData.heroSection.subheading}
+          introduction={regulatorData.heroSection.introduction}
+          heroImage={regulatorData.heroSection.heroImage}
+          showTableOfContents={true}
+        />
+        <Navigation />
 
-          {regulatorData.capitalRequirement?.capitalCurrency && (
-            <RegulatorRequirements
-              sectionTitle={
-                regulatorData.capitalRequirement.capitalCurrency || 'USD'
-              }
-              sectionId="requirements"
-              content={regulatorData.capitalRequirement.explanation || ''}
-            />
-          )}
+        <main class="py-12 bg-gradient-to-b from-neutral-900 to-neutral-950">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {regulatorData.capitalRequirement?.capitalCurrency && (
+              <RegulatorRequirements
+                sectionTitle={
+                  regulatorData.capitalRequirement.capitalCurrency || 'USD'
+                }
+                sectionId="requirements"
+                content={regulatorData.capitalRequirement.explanation || ''}
+              />
+            )}
 
-          {regulatorData.sections.map((section, index) => {
-            // Add TopRegulatedBrokers after the first section
-            const isFirstSection = index === 0;
-            let sectionContent;
+            {regulatorData.sections.map((section, index) => {
+              // Add TopRegulatedBrokers after the first section
+              const isFirstSection = index === 0;
+              let sectionContent;
 
-            // Check if this is a requirements section
-            if (section.sectionId === 'requirements') {
-              sectionContent = (
-                <RegulatorRequirements
-                  sectionTitle={section.sectionTitle}
-                  sectionId={section.sectionId}
-                  content={section.content}
-                />
-              );
-            }
-            // Check if this is a benefits section
-            else if (section.sectionId === 'benefits') {
-              sectionContent = (
-                <RegulatorBenefits
-                  sectionTitle={section.sectionTitle}
-                  sectionId={section.sectionId}
-                  content={section.content}
-                  benefitsList={section.keyPoints?.map((item) => ({
-                    title: item.point.split(':')[0] || item.point,
-                    description: {
-                      root: {
-                        children: [
-                          {
-                            children: [
-                              { text: item.point.split(':')[1] || '' },
-                            ],
-                            type: 'paragraph',
-                          },
-                        ],
-                        type: 'root',
-                      },
-                    },
-                  }))}
-                />
-              );
-            }
-            // Default section rendering
-            else {
-              sectionContent = (
-                <RegulatorSection
-                  sectionTitle={section.sectionTitle}
-                  sectionId={section.sectionId}
-                  content={section.content}
-                  featuredImage={section.featuredImage}
-                  imagePosition={section.imagePosition}
-                  keyPoints={section.keyPoints}
-                />
-              );
-            }
-
-            return (
-              <>
-                {sectionContent}
-                {isFirstSection && regulator.website && (
-                  <TopRegulatedBrokers
-                    regulatorWebsite={regulator.website}
-                    regulatorName={regulator.shortName}
-                    sectionId="top-regulated-brokers"
+              // Check if this is a requirements section
+              if (section.sectionId === 'requirements') {
+                sectionContent = (
+                  <RegulatorRequirements
+                    sectionTitle={section.sectionTitle}
+                    sectionId={section.sectionId}
+                    content={section.content}
                   />
-                )}
-              </>
-            );
-          })}
+                );
+              }
+              // Check if this is a benefits section
+              else if (section.sectionId === 'benefits') {
+                sectionContent = (
+                  <RegulatorBenefits
+                    sectionTitle={section.sectionTitle}
+                    sectionId={section.sectionId}
+                    content={section.content}
+                    benefitsList={section.keyPoints?.map((item) => ({
+                      title: item.point.split(':')[0] || item.point,
+                      description: {
+                        root: {
+                          children: [
+                            {
+                              children: [
+                                { text: item.point.split(':')[1] || '' },
+                              ],
+                              type: 'paragraph',
+                            },
+                          ],
+                          type: 'root',
+                        },
+                      },
+                    }))}
+                  />
+                );
+              }
+              // Default section rendering
+              else {
+                sectionContent = (
+                  <RegulatorSection
+                    sectionTitle={section.sectionTitle}
+                    sectionId={section.sectionId}
+                    content={section.content}
+                    featuredImage={section.featuredImage}
+                    imagePosition={section.imagePosition}
+                    keyPoints={section.keyPoints}
+                  />
+                );
+              }
 
-          {regulatorData.faqSection && (
-            <RegulatorFAQ
-              sectionTitle={regulatorData.faqSection.sectionTitle}
-              sectionId={regulatorData.faqSection.sectionId}
-              introduction={regulatorData.faqSection.introduction}
-              faqItems={regulatorData.faqSection.faqItems}
-            />
-          )}
+              return (
+                <>
+                  {sectionContent}
+                  {isFirstSection && regulator.website && (
+                    <TopRegulatedBrokers
+                      regulatorWebsite={regulator.website}
+                      regulatorName={regulator.shortName}
+                      sectionId="top-regulated-brokers"
+                    />
+                  )}
+                </>
+              );
+            })}
 
-          {regulatorData.conclusionSection && (
-            <RegulatorConclusion
-              sectionTitle={regulatorData.conclusionSection.sectionTitle}
-              sectionId={regulatorData.conclusionSection.sectionId}
-              content={regulatorData.conclusionSection.content}
-            />
-          )}
-
-          {regulatorData.relationships?.regulatedBrokers &&
-            regulatorData.relationships.regulatedBrokers.length > 0 && (
-              <RegulatorBrokers
-                sectionTitle="Regulated Brokers"
-                sectionId="regulated-brokers"
-                brokers={regulatorData.relationships.regulatedBrokers}
+            {regulatorData.faqSection && (
+              <RegulatorFAQ
+                sectionTitle={regulatorData.faqSection.sectionTitle}
+                sectionId={regulatorData.faqSection.sectionId}
+                introduction={regulatorData.faqSection.introduction}
+                faqItems={regulatorData.faqSection.faqItems}
               />
             )}
 
-          {regulatorData.relatedContent &&
-            regulatorData.relatedContent.articles.length > 0 && (
-              <RegulatorRelatedContent
-                sectionTitle={regulatorData.relatedContent.sectionTitle}
-                articles={regulatorData.relatedContent.articles}
+            {regulatorData.conclusionSection && (
+              <RegulatorConclusion
+                sectionTitle={regulatorData.conclusionSection.sectionTitle}
+                sectionId={regulatorData.conclusionSection.sectionId}
+                content={regulatorData.conclusionSection.content}
               />
             )}
-        </>
-      )
-    }
-  </section>
+
+            {regulatorData.relationships?.regulatedBrokers &&
+              regulatorData.relationships.regulatedBrokers.length > 0 && (
+                <RegulatorBrokers
+                  sectionTitle="Regulated Brokers"
+                  sectionId="regulated-brokers"
+                  brokers={regulatorData.relationships.regulatedBrokers}
+                />
+              )}
+
+            {regulatorData.relatedContent &&
+              regulatorData.relatedContent.articles.length > 0 && (
+                <RegulatorRelatedContent
+                  sectionTitle={regulatorData.relatedContent.sectionTitle}
+                  articles={regulatorData.relatedContent.articles}
+                />
+              )}
+          </div>
+        </main>
+      </>
+    )
+  }
 </Layout>
