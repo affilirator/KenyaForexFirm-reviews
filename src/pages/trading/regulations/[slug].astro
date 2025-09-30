@@ -34,7 +34,11 @@ export async function getStaticPaths() {
       }
 
       return {
-        params: { slug: regulator.slug },
+        params: {
+          slug:
+            regulator.shortName.trim().toLowerCase().replace(/\s+/g, '-') ||
+            regulator.slug,
+        },
         props: { regulator, author },
       };
     })
