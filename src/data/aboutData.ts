@@ -1,4 +1,5 @@
 import { site } from './site';
+//default site data
 
 export const aboutHero = {
   title: 'About',
