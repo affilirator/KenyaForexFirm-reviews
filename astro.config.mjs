@@ -29,53 +29,47 @@ export default defineConfig({
   experimental: {
     fonts: [
       {
-        provider: fontProviders.google(),
-        name: 'Roboto',
+        provider: fontProviders.fontsource(),
+        name: 'Roboto Variable',
         cssVariable: '--font-roboto',
-        weights: [400, 500, 700],
-        styles: ['normal', 'italic', 'oblique'],
-        subsets: ['latin-ext', 'latin'],
+        // weights: [500 700],
+        styles: ['normal'],
+        subsets: ['latin'],
       },
       {
-        provider: fontProviders.google(),
-        name: 'Source Sans 3',
+        provider: fontProviders.fontsource(),
+        name: 'Source Sans 3 Variable',
         cssVariable: '--font-source-sans-3',
-        weights: [400, 500, 700],
-        styles: ['normal', 'italic', 'oblique'],
-        subsets: ['latin-ext', 'latin'],
+        weights: [500, 700],
+        styles: ['normal'],
+        subsets: ['latin'],
       },
       {
-        name: 'EB Garamond',
+        name: 'Inter',
+        cssVariable: '--font-inter',
+        provider: fontProviders.fontsource(),
+        // Specify weights that are actually used
+        //weights: [500, 700],
+        // Specify styles that are actually used
+        styles: ['normal'],
+        // Download only font files for characters used on the page
+        subsets: ['latin'],
+      },
+      {
+        name: 'EB Garamond Variable',
         cssVariable: '--font-eb-garamond',
-        provider: 'local',
+        provider: fontProviders.fontsource(),
         // Weight and style are not specified so Astro
         // will try to infer them for each variant
-        variants: [
-          {
-            src: [
-              './src/assets/fonts/eb-garamond-v31-latin-500.woff2',
-              './src/assets/fonts/eb-garamond-v31-latin-700.woff2',
-              './src/assets/fonts/eb-garamond-v31-latin-800.woff2',
-              'src/assets/fonts/eb-garamond-v31-latin-regular.woff2',
-            ],
-          },
-        ],
+        variants: [{}],
       },
       {
-        name: 'Playfair Display',
+        name: 'Playfair Display Variable',
         cssVariable: '--font-playfair-display',
-        provider: 'local',
+        provider: fontProviders.fontsource(),
         // Weight and style are not specified so Astro
         // will try to infer them for each variant
-        variants: [
-          {
-            src: ['./src/assets/fonts/playfair-display-v39-latin-500.woff2'],
-            src: ['./src/assets/fonts/playfair-display-v39-latin-700.woff2'],
-            src: [
-              './src/assets/fonts/playfair-display-v39-latin-regular.woff2',
-            ],
-          },
-        ],
+        variants: [{}],
       },
     ],
   },
