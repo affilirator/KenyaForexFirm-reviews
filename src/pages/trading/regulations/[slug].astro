@@ -158,9 +158,9 @@ const schemaMarkup = {
         />
 
          <RegulatorRequirements
-                sectionTitle={regulatorData.capitalRequirement.capitalCurrency}
+                sectionTitle={regulatorData.capitalRequirement.capitalCurrency || 'USD'}
                 sectionId='requirements'
-                content={regulatorData.capitalRequirement.explanation}
+                content={regulatorData.capitalRequirement.explanation || ''}
               />
 
         {regulatorData.sections.map((section, index) => {
