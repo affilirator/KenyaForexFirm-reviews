@@ -35,6 +35,19 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header>
+  <div class="skip-links sr-only">
+    <a
+      href="#main-content"
+      id="skip-main-content"
+      class="sr-only"
+      >Skip to main content</a
+    >
+    <a
+      href="#edit-search-term"
+      class=" sr-only focusable skip-to-search"
+      >Skip to search box</a
+    >
+  </div>
   <nav
     class="fixed top-0 left-0 right-0 z-50 bg-neutral-950/90 backdrop-blur-md border-b border-neutral-800/50"
     role="navigation"
