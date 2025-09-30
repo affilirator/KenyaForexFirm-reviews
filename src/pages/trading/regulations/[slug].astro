@@ -1,5 +1,6 @@
 ---
 import { getRegulators, getRegulatorBySlug } from '~/lib/regulators-api';
+import Navigation from '~/components/regulators/Navigation.astro';
 import { transformRegulatorData } from '~/lib/regulatorTransformer';
 import { generateRegulatorMetadata } from '~/lib/regulatorUtils';
 import { getAuthorBySlug } from '~/lib/authors-api';
@@ -135,6 +136,7 @@ const schemaMarkup = {
   description={pageDescription}
   schemaData={schemaMarkup}
 >
+  <Navigation />
   <script src="/src/scripts/regulatorPage.js"></script>
   {
     error && (
