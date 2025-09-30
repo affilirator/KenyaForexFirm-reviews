@@ -318,7 +318,7 @@ if (schemaData && !schemaData?.['@id']) {
   </head>
 
   <body
-    class="bg-gradient-to-t from-neutral-950/50 via-transparent to-neutral-950/50 antialiased dark:bg-background flex flex-col overflow-x-hidden"
+    class="bg-gradient-to-t from-neutral-950 via-accent to-neutral-950 antialiased flex flex-col overflow-x-hidden"
   >
     <div
       class="fixed inset-0 bg-cyber-grid opacity-20 pointer-events-none"
@@ -341,10 +341,9 @@ if (schemaData && !schemaData?.['@id']) {
 
       {
         pageAuthor && (
-          <div class="max-w-4xl bg-neutral-950 border-t border-neutral-800/50 mx-auto px-4 sm:px-6 lg:px-8 py-8 ">
+          <div class="container max-w-4xl bg-neutral-950 border-t border-neutral-800/50 mx-auto px-4 sm:px-6 lg:px-8 py-8 ">
             <AuthorAttribution
               author={pageAuthor}
-              transition:name="attribution"
               transition:animate="slide"
             />
           </div>
