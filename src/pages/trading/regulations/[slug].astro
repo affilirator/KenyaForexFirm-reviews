@@ -83,7 +83,7 @@ const pageDescription =
 
 // Prepare schema markup data
 const siteUrl = import.meta.env.SITE || 'https://fx.kenyaforexfirm.com';
-const canonicalUrl = `${siteUrl}/regulators/${slug}`;
+const canonicalUrl = `${siteUrl}/trading/regulations/${slug}/`;
 const publishDate = regulator?.createdAt
   ? new Date(regulator.createdAt).toISOString()
   : new Date().toISOString();
@@ -122,11 +122,6 @@ const schemaMarkup = {
   },
   publisher: {
     '@type': 'Organization',
-    name: 'Kenya Forex Firm',
-    logo: {
-      '@type': 'ImageObject',
-      url: `${siteUrl}/images/logo.png`,
-    },
   },
   mainEntityOfPage: {
     '@type': 'WebPage',
@@ -138,12 +133,8 @@ const schemaMarkup = {
 <Layout
   title={pageTitle}
   description={pageDescription}
+  schemaData={schemaMarkup}
 >
-  <!-- Schema.org Article markup -->
-  <script
-    type="application/ld+json"
-    set:html={JSON.stringify(schemaMarkup)}
-  />
   <script src="/src/scripts/regulatorPage.js"></script>
   {
     error && (
