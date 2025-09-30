@@ -157,11 +157,15 @@ const schemaMarkup = {
           showTableOfContents={true}
         />
 
-         <RegulatorRequirements
-                sectionTitle={regulatorData.capitalRequirement.capitalCurrency || 'USD'}
-                sectionId='requirements'
-                content={regulatorData.capitalRequirement.explanation || ''}
-              />
+        {regulatorData.capitalRequirement?.capitalCurrency && (
+          <RegulatorRequirements
+            sectionTitle={
+              regulatorData.capitalRequirement.capitalCurrency || 'USD'
+            }
+            sectionId="requirements"
+            content={regulatorData.capitalRequirement.explanation || ''}
+          />
+        )}
 
         {regulatorData.sections.map((section, index) => {
           // Add TopRegulatedBrokers after the first section
