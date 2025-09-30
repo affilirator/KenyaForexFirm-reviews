@@ -32,7 +32,7 @@ export default defineConfig({
         provider: fontProviders.fontsource(),
         name: 'Roboto Variable',
         cssVariable: '--font-roboto',
-        // weights: [500 700],
+        
         styles: ['normal'],
         subsets: ['latin'],
         fallbacks: ['sans-serif'],
@@ -41,7 +41,7 @@ export default defineConfig({
         provider: fontProviders.fontsource(),
         name: 'Source Sans 3 Variable',
         cssVariable: '--font-source-sans-3',
-        weights: [500, 700],
+       
         styles: ['normal'],
         subsets: ['latin'],
         fallbacks: ['sans-serif'],
@@ -53,6 +53,7 @@ export default defineConfig({
         // Specify weights that are actually used
         //weights: [500, 700],
         // Specify styles that are actually used
+        
         styles: ['normal'],
         // Download only font files for characters used on the page
         subsets: ['latin'],
@@ -62,6 +63,7 @@ export default defineConfig({
         name: 'EB Garamond Variable',
         cssVariable: '--font-eb-garamond',
         provider: fontProviders.fontsource(),
+        
         fallbacks: ['serif'],
         // Weight and style are not specified so Astro
         // will try to infer them for each variant

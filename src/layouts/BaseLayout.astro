@@ -142,15 +142,28 @@ if (schemaData && !schemaData?.['@id']) {
     <link
       rel="preconnect"
       href="https://fxmedia.kenyaforexfirm.com"
+      crossorigin
     />
     <link
       rel="preconnect"
       href="https://fonts.gstatic.com"
       crossorigin
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
-      rel="stylesheet"
+    <Font
+      cssVariable="--font-roboto"
+      preload
+    />
+    <Font
+      cssVariable="--font-source-sans-3"
+      preload
+    />
+    <Font
+      cssVariable="--font-eb-garamond"
+      preload
+    />
+    <Font
+      cssVariable="--font-playfair-display"
+      preload
     />
     <link
       rel="icon"
@@ -188,22 +201,7 @@ if (schemaData && !schemaData?.['@id']) {
       content={homeDescription}
     />
     <slot name="opengraph" />
-    <Font
-      cssVariable="--font-roboto"
-      preload
-    />
-    <Font
-      cssVariable="--font-source-sans-3"
-      preload
-    />
-    <Font
-      cssVariable="--font-eb-garamond"
-      preload
-    />
-    <Font
-      cssVariable="--font-playfair-display"
-      preload
-    />
+    
 
     <SEO
       title={title}

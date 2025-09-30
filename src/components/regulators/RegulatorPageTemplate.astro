@@ -43,7 +43,7 @@ const pageDescription = regulatorData?.meta?.description || 'Learn about this fi
 
   {regulatorData && (
     <>
-      <!-- Hero Section -->
+      {/* Hero Section -->*/} 
       <RegulatorHero
         heading={regulatorData.hero.heading}
         subheading={regulatorData.hero.subheading}
@@ -52,7 +52,7 @@ const pageDescription = regulatorData?.meta?.description || 'Learn about this fi
         showTableOfContents={regulatorData.hero.tableOfContents}
       />
 
-      <!-- About Regulator Section -->
+      {/*  <!-- About Regulator Section --> */}
       {regulatorData.aboutRegulator && (
         <RegulatorSection
           sectionTitle={regulatorData.aboutRegulator.sectionTitle}
