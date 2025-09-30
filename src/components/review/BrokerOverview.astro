@@ -54,19 +54,18 @@ const overview = description || quikVerdict || metaDescription || '';
 
       <p class="text-lg text-neutral-300 leading-relaxed mb-6">
         What sets {broker.brokerName} apart is its commitment to providing {
-          broker.minDeposit && broker.minDeposit <= 100
+          broker.minDeposit && broker.minDeposit < 100
             ? 'accessible forex trading services with low minimum deposits'
             : 'professional trading services'
-        }
-        {
-          broker.brokerPlatforms &&
-            broker.brokerPlatforms.length > 0 &&
-            ` across ${broker.brokerPlatforms.length} trading platforms`
+        }{
+          broker.brokerPlatforms && broker.brokerPlatforms.length > 0
+            ? ` across ${broker.brokerPlatforms.length} trading platforms`
+            : ''
         }.
         {
-          broker.regulations &&
-            broker.regulations.length > 0 &&
-            ` ${broker.brokerName} maintains strong regulatory compliance with ${broker.regulations.length} regulatory licenses`
+          broker.regulations && broker.regulations.length > 0
+            ? ` ${broker.brokerName} maintains strong regulatory compliance with ${broker.regulations.length} regulatory licenses`
+            : ''
         }.
       </p>
 

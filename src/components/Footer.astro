@@ -3,7 +3,7 @@ import { site } from '~/data/site';
 ---
 
 <footer class="bg-neutral-950 border-t border-neutral-800/50 py-16 relative">
-  <!-- Back to Top Button -->
+  {/* Back to top button  */}
   <button
     id="back-to-top"
     aria-label="Scroll back to top"
@@ -250,12 +250,14 @@ import { site } from '~/data/site';
     const scrollToTop = () => {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     };
 
     // Event listeners
-    window.addEventListener('scroll', toggleButtonVisibility, { passive: true });
+    window.addEventListener('scroll', toggleButtonVisibility, {
+      passive: true,
+    });
     backToTopButton.addEventListener('click', scrollToTop);
 
     // Initial check
