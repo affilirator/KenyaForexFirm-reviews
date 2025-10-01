@@ -1,7 +1,7 @@
 ---
 import { site } from '~/data/site';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { getReviews } from '../lib/qs-esm';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getReviews } from '~/lib/qs-esm';
 
 // Get top brokers for recommendations
 const { docs: brokers } = await getReviews();
