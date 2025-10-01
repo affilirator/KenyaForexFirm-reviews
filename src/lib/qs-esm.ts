@@ -22,6 +22,7 @@ const queryConfig = {
   },
   depth: 2,
   sort: '-brokerRating',
+  //locale: 'en',
 };
 
 // A more complex query object

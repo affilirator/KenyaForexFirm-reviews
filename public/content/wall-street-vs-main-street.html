@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall Street vs. Main Street: An Interactive Guide</title>
+    <!-- Chosen Palette: Professional Blue & Gold -->
+    <!-- Application Structure Plan: A tab-based SPA with four sections (Overview, The Playbook, History Lessons, Your Strategy). This structure deconstructs the linear article into an explorable dashboard, allowing users to non-linearly engage with the concepts. Key interactions include toggling content in 'The Playbook', an interactive timeline in 'History Lessons' that updates a details pane and chart, and a filterable scatter plot in 'Your Strategy' to demonstrate market dynamics. This design prioritizes user-driven exploration over passive reading for better comprehension. -->
+    <!-- Visualization & Content Choices: 1. Scale Disparity (Inform) -> Large Number Cards (HTML/JS) -> Simple, high-impact comparison. 2. Dark Pools (Proportion) -> Donut Chart (Chart.js) -> Clear part-to-whole relationship. 3. Stop Hunt (Process) -> HTML/CSS Diagram -> Visualizes steps without complex libraries. 4. Historical Events (Compare/Change) -> Interactive Bar Chart (Chart.js) -> Updates on timeline click to show specific event impact (e.g., Melvin Capital loss). 5. Trading Frequency (Relationship) -> Interactive Scatter Plot (Chart.js) -> Allows user to filter/change data to see how volatility affects the correlation, fostering active learning. Justification: Each choice uses the simplest effective method to achieve its goal, focusing on interactivity and clarity. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+            color: #212529;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        .nav-link.active {
+            border-bottom-color: #F9A72B;
+            color: #005A9C;
+            font-weight: 700;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .timeline-item.active {
+            background-color: #EBF4FF;
+        }
+        .giant-text {
+            font-weight: 900;
+            font-size: 3rem;
+            line-height: 1;
+            color: #005A9C;
+        }
+        @media (min-width: 768px) {
+            .giant-text {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center my-8">
+            <h1 class="text-4xl md:text-5xl font-black text-[#005A9C] uppercase tracking-wide">Wall Street vs. Main Street</h1>
+            <p class="mt-2 text-lg md:text-xl max-w-3xl mx-auto text-gray-600">An Interactive Guide for the Retail Trader by Patrick Mahinge, CFA</p>
+        </header>
+
+        <nav class="flex justify-center border-b border-gray-300 mb-8">
+            <a href="#" class="nav-link active py-4 px-6 text-gray-700 hover:text-[#005A9C]" data-target="overview">Overview</a>
+            <a href="#" class="nav-link py-4 px-6 text-gray-700 hover:text-[#005A9C]" data-target="playbook">The Playbook</a>
+            <a href="#" class="nav-link py-4 px-6 text-gray-700 hover:text-[#005A9C]" data-target="history">History Lessons</a>
+            <a href="#" class="nav-link py-4 px-6 text-gray-700 hover:text-[#005A9C]" data-target="strategy">Your Strategy</a>
+        </nav>
+
+        <main>
+            <section id="overview" class="content-section active">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-4">Understanding the Arena: A Game of Scale</h2>
+                    <p class="text-gray-700 mb-8">
+                        Welcome to the global financial market. As a retail trader, your first step toward success is acknowledging the immense disparity in resources between you and institutional players. This isn't about being intimidated; it's about being strategic. You cannot win by playing their game of capital and speed. You win by playing your game of patience, discipline, and intelligent risk management. This guide is designed to help you understand their playbook, learn from the past, and build a strategy that gives you a fighting chance.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-[#005A9C]">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Hedge Fund Industry AUM</h3>
+                            <p class="giant-text">$5 Trillion</p>
+                            <p class="mt-2 text-sm text-gray-600">Their collective capital allows them to influence market direction and create liquidity events at will.</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-[#F9A72B]">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Average Retail Account</h3>
+                            <p class="giant-text">&lt;$5,000</p>
+                            <p class="mt-2 text-sm text-gray-600">Your advantage isn't capital; it's flexibility and the absence of quarterly performance pressure.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="playbook" class="content-section">
+                <div class="text-center max-w-4xl mx-auto mb-8">
+                    <h2 class="text-3xl font-bold mb-4">The Institutional Playbook</h2>
+                    <p class="text-gray-700">Hedge funds and other large institutions utilize tactics that leverage their immense capital and access to information. Recognizing these plays is crucial to avoid becoming collateral damage. Explore the two common strategies below.</p>
+                </div>
+                <div class="text-center mb-8">
+                    <button id="showStopHunt" class="bg-[#005A9C] text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-[#004175] transition-colors">Anatomy of a Stop Hunt</button>
+                    <button id="showDarkPools" class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg shadow-md hover:bg-gray-300 transition-colors">Trading in Dark Pools</button>
+                </div>
+                <div id="playbook-content-area" class="bg-white rounded-lg shadow-md p-6 min-h-[450px]">
+                </div>
+            </section>
+
+            <section id="history" class="content-section">
+                <div class="text-center max-w-4xl mx-auto mb-8">
+                    <h2 class="text-3xl font-bold mb-4">Lessons from Market Scars</h2>
+                    <p class="text-gray-700">History provides invaluable, albeit expensive, lessons. Past market crises reveal the unwritten rules of the game and highlight the systemic risks created by institutional actions. As a CFA, I urge you to study these events not as trivia, but as essential case studies in risk. Select an event to learn more.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-1">
+                        <div id="timeline-nav" class="bg-white rounded-lg shadow-md">
+                        </div>
+                    </div>
+                    <div id="history-details" class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                        <h3 id="history-title" class="text-2xl font-bold text-[#005A9C] mb-2"></h3>
+                        <p id="history-description" class="text-gray-700 mb-4"></p>
+                        <p id="history-lesson" class="font-semibold text-gray-800 bg-yellow-100 p-3 rounded-lg"></p>
+                        <div id="history-chart-container" class="chart-container mt-4">
+                            <canvas id="historyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="strategy" class="content-section">
+                 <div class="text-center max-w-4xl mx-auto mb-8">
+                    <h2 class="text-3xl font-bold mb-4">Your Counter-Strategy</h2>
+                    <p class="text-gray-700">You don't out-muscle the giants—you out-think and out-wait them. Your edge lies in discipline, a long-term perspective, and an unwavering commitment to risk management. This is how you survive and thrive.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-semibold text-center text-[#005A9C] mb-4">The Retail Trader's Survival Pyramid</h3>
+                        <p class="text-sm text-center mb-6 text-gray-600">Success is built on a solid foundation. Neglect the base, and the entire structure crumbles under pressure. Each level is non-negotiable.</p>
+                         <div class="w-full max-w-xs mx-auto flex flex-col space-y-1">
+                             <div class="h-20 w-1/2 mx-auto flex items-center justify-center text-center font-semibold text-white bg-[#005A9C]" style="clip-path: polygon(50% 0%, 100% 100%, 0% 100%);">Continuous Learning</div>
+                             <div class="h-20 w-3/4 mx-auto flex items-center justify-center text-center font-semibold text-white bg-[#005A9C]" style="clip-path: polygon(50% 0%, 100% 100%, 0% 100%);">Long-Term Strategy</div>
+                             <div class="h-20 w-full mx-auto flex items-center justify-center text-center font-bold text-white bg-[#F9A72B]" style="clip-path: polygon(50% 0%, 100% 100%, 0% 100%);">Unbreakable Risk Management</div>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-semibold text-center text-[#005A9C] mb-2">The Hyper-Trading Trap</h3>
+                        <p class="text-sm text-center mb-4 text-gray-600">There's a strong negative correlation between high trading frequency and profitability for retail investors. Your edge is not speed. Toggle the simulation to see how high market volatility exacerbates this effect.</p>
+                         <div class="text-center mb-4">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="volatility-toggle" class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#005A9C]"></div>
+                                <span class="ml-3 text-sm font-medium text-gray-900">Add High Market Volatility</span>
+                            </label>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="frequencySuccessChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const contentSections = document.querySelectorAll('.content-section');
+        let charts = {};
+
+        const playbookContent = {
+            stopHunt: `
+                <h3 class="text-2xl font-bold text-center text-[#005A9C] mb-4">Anatomy of a Stop Hunt</h3>
+                <p class="text-sm text-center mb-6 max-w-2xl mx-auto text-gray-600">A classic maneuver where large players push the price to a level where numerous retail stop-loss orders are clustered, creating a surge of sell-side liquidity for them to enter a position at a more favorable price.</p>
+                <div class="space-y-4 max-w-md mx-auto">
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg"><div class="bg-[#F9A72B] text-white rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center font-bold mr-4">1</div><p class="text-left">Retail traders place predictable stop-loss orders below a key support level.</p></div>
+                    <div class="text-center text-2xl text-[#005A9C] font-bold">&darr;</div>
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg"><div class="bg-[#F9A72B] text-white rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center font-bold mr-4">2</div><p class="text-left">An institutional algorithm detects this large cluster of sell orders (liquidity).</p></div>
+                    <div class="text-center text-2xl text-[#005A9C] font-bold">&darr;</div>
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg"><div class="bg-[#F9A72B] text-white rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center font-bold mr-4">3</div><p class="text-left">The fund initiates large sell orders to momentarily push the price down, triggering the stops.</p></div>
+                    <div class="text-center text-2xl text-[#005A9C] font-bold">&darr;</div>
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg"><div class="bg-[#F9A72B] text-white rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center font-bold mr-4">4</div><p class="text-left">As retail traders are forced to sell, the fund absorbs this liquidity, buying up the asset at a discount before the price rebounds.</p></div>
+                </div>`,
+            darkPools: `
+                <h3 class="text-2xl font-bold text-center text-[#005A9C] mb-4">Trading in Dark Pools</h3>
+                <p class="text-sm text-center mb-6 max-w-2xl mx-auto text-gray-600">A significant portion of all stock trades occur on "dark pools," private exchanges hidden from public view. This allows institutions to execute massive trades without immediately impacting the public market price, effectively hiding their intentions from retail traders.</p>
+                <div class="chart-container"><canvas id="darkPoolsChart"></canvas></div>`
+        };
+
+        const historyData = [
+            { id: 'gamestop', title: '2021: The GameStop Saga', description: 'A coordinated effort by retail traders on social media drove GameStop\'s stock price up exponentially, causing a historic short squeeze against hedge funds like Melvin Capital, which lost over 50% of its value in a single month.', lesson: 'Lesson: Collective retail action can be powerful, but the system\'s plumbing may be changed mid-game to protect institutional players, as seen when brokers restricted buying.', chart: { type: 'bar', label: 'Melvin Capital Estimated Value ($B)', labels: ['Start of Jan 2021', 'End of Jan 2021'], data: [12.5, 6] }},
+            { id: 'flashcrash', title: '2010: The Flash Crash', description: 'The stock market inexplicably plummeted nearly 1,000 points and recovered in minutes. The event was exacerbated by high-frequency trading (HFT) algorithms reacting to a large institutional sell order, revealing the market\'s fragility.', lesson: 'Lesson: You are not competing against human traders; you are competing against algorithms that operate at the speed of light. Speed is not your edge.', chart: null },
+            { id: 'ltcm', title: '1998: LTCM Bailout', description: 'The near-collapse of Long-Term Capital Management, a massively leveraged hedge fund run by Nobel laureates, threatened the entire global financial system. The Federal Reserve orchestrated a $3.6 billion bailout by its major banking rivals.', lesson: 'Lesson: The concept of "Too Big to Fail" was solidified. Large, interconnected institutions may receive a safety net that is completely unavailable to retail traders.', chart: null }
+        ];
+
+        function activateSection(targetId) {
+            contentSections.forEach(section => {
+                section.classList.toggle('active', section.id === targetId);
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.dataset.target === targetId);
+            });
+
+            if (targetId === 'playbook' && !document.getElementById('darkPoolsChart')) {
+                document.getElementById('showDarkPools').click();
+            }
+            if (targetId === 'history' && !document.querySelector('.timeline-item.active')) {
+                document.querySelector('.timeline-item').click();
+            }
+            if (targetId === 'strategy' && !charts.frequency) {
+                createFrequencyChart();
+            }
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = e.target.dataset.target;
+                activateSection(targetId);
+            });
+        });
+
+        const playbookContentArea = document.getElementById('playbook-content-area');
+        document.getElementById('showStopHunt').addEventListener('click', () => {
+            playbookContentArea.innerHTML = playbookContent.stopHunt;
+        });
+        document.getElementById('showDarkPools').addEventListener('click', () => {
+            playbookContentArea.innerHTML = playbookContent.darkPools;
+            createDarkPoolsChart();
+        });
+
+        function createDarkPoolsChart() {
+            if (charts.darkPools) charts.darkPools.destroy();
+            const ctx = document.getElementById('darkPoolsChart').getContext('2d');
+            charts.darkPools = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Dark Pool Volume', 'Public Exchange Volume'],
+                    datasets: [{
+                        data: [45, 55],
+                        backgroundColor: ['#005A9C', '#F9A72B'],
+                        borderColor: '#F8F9FA',
+                        borderWidth: 4
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }}}
+            });
+        }
+        
+        const timelineNav = document.getElementById('timeline-nav');
+        historyData.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'timeline-item p-4 cursor-pointer hover:bg-gray-100 border-b last:border-b-0';
+            if (index === 0) div.classList.add('active');
+            div.dataset.id = item.id;
+            div.innerHTML = `<h4 class="font-bold text-lg">${item.title}</h4>`;
+            div.addEventListener('click', () => {
+                document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('active'));
+                div.classList.add('active');
+                updateHistoryDetails(item.id);
+            });
+            timelineNav.appendChild(div);
+        });
+
+        const historyChartContainer = document.getElementById('history-chart-container');
+        function updateHistoryDetails(id) {
+            const data = historyData.find(item => item.id === id);
+            document.getElementById('history-title').textContent = data.title;
+            document.getElementById('history-description').textContent = data.description;
+            document.getElementById('history-lesson').textContent = data.lesson;
+            
+            if (data.chart) {
+                historyChartContainer.style.display = 'block';
+                if (charts.history) charts.history.destroy();
+                const ctx = document.getElementById('historyChart').getContext('2d');
+                charts.history = new Chart(ctx, {
+                    type: data.chart.type,
+                    data: {
+                        labels: data.chart.labels,
+                        datasets: [{ label: data.chart.label, data: data.chart.data, backgroundColor: ['#005A9C', '#F9A72B'] }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true }}, plugins: { legend: { display: false }}}
+                });
+            } else {
+                historyChartContainer.style.display = 'none';
+            }
+        }
+        
+        const volatilityToggle = document.getElementById('volatility-toggle');
+        volatilityToggle.addEventListener('change', () => {
+            createFrequencyChart(volatilityToggle.checked);
+        });
+
+        function generateScatterData(isVolatile) {
+            const data = [];
+            const volatilityFactor = isVolatile ? 1.5 : 0;
+            const baseSlope = -0.7;
+            const slope = baseSlope - (volatilityFactor * 0.3);
+
+            for (let i = 0; i < 50; i++) {
+                const frequency = Math.random() * 100;
+                const noise = (Math.random() * 30 - 15) * (1 + volatilityFactor);
+                const success = 80 + (frequency * slope) + noise;
+                data.push({ x: frequency, y: Math.max(0, Math.min(100, success)) });
+            }
+            return data;
+        }
+
+        function createFrequencyChart(isVolatile = false) {
+            if (charts.frequency) charts.frequency.destroy();
+            const ctx = document.getElementById('frequencySuccessChart').getContext('2d');
+            charts.frequency = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Retail Trader Profile',
+                        data: generateScatterData(isVolatile),
+                        backgroundColor: '#005A9C'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { title: { display: true, text: 'Trading Frequency (Trades per day)' }},
+                        y: { title: { display: true, text: 'Probability of Success (%)' }}
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        activateSection('overview');
+    });
+    </script>
+</body>
+</html>
