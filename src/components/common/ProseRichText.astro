@@ -1,23 +1,15 @@
 ---
-import { getSafetyRegulation } from '~/lib/review-criteria/safety-regulation';
-//import RichTextRenderer from './RichTextRenderer.tsx';
 import RichText from '~/components/common/RichText';
+import PinterestHover from '~/components/social/PinterestHover.astro';
 interface Props {
   content: string;
   className?: string;
   title?: string;
-  description?: string; 
-  weight?: number
+  description?: string;
+  weight?: number;
 }
 
-const {
-    title,
-    content,
-    className,
-    description,
-    weight,
-
-} = Astro.props;
+const { title, content, className, description, weight } = Astro.props;
 
 //const data = await getSafetyRegulation();
 ---
@@ -27,11 +19,9 @@ const {
 >
   <div class="mb-6">
     <h2 class="text-2xl font-bold text-white mb-2">{title}</h2>
-    
-    
   </div>
-
-  <div class="prose prose-invert max-w-none">
+  <PinterestHover />
+  <div class="">
     <RichText content={content} />
   </div>
 </div>
