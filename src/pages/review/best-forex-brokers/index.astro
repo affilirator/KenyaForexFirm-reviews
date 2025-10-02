@@ -46,8 +46,6 @@ const page = await pageRes.json();
   description={`Compare the top forex brokers available to ${site.address.country}n traders. Expert reviews, regulation info, spreads, and features to help you choose the best broker for trading.`}
   schemaData={schemaData}
 >
-  
-
   <section
     class="pt-24 pb-12 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950"
   >
@@ -91,14 +89,11 @@ const page = await pageRes.json();
       </div>
     </div>
   </section>
-  <section class="bg-card py-16 md:py-24 mx-auto px-4 md:px-6">
-   
-      <RichText
-        content={page.content}
-        
-      />
-   
-  </section>
+  <div
+    class="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-2xl p-6 lg:p-8"
+  >
+    <RichText content={page.content} />
+  </div>
 
   <style>
     .broker-card.hidden {
