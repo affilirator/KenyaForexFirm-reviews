@@ -11,6 +11,9 @@ import sitemap from '@astrojs/sitemap';
 
 import cloudflare from '@astrojs/cloudflare';
 
+// Import polyfill for Cloudflare Workers
+import './src/polyfills/message-channel.ts';
+
 export default defineConfig({
   site: 'https://fx.kenyaforexfirm.com',
 
@@ -128,6 +131,9 @@ export default defineConfig({
   output: 'static',
 
   vite: {
+    define: {
+      global: 'globalThis',
+    },
     build: {
       cssCodeSplit: true,
       rollupOptions: {
@@ -137,7 +143,6 @@ export default defineConfig({
             uiComponents: [
               'react',
               'react-dom',
-              // Add UI-related libraries if applicable
             ],
           },
         },
@@ -146,14 +151,14 @@ export default defineConfig({
   },
 
   adapter: cloudflare({
-    // Optional: Platform proxy for local dev (mocks Cloudflare env)
     platformProxy: {
       enabled: true,
       persist: true,
     },
-    // Optional: For advanced routing (generates one function per route)
-    functionPerRoute: true,
-    // Optional: Directory mode for custom middleware
-    mode: 'directory', // Outputs to /functions/ for easier editing
+    mode: 'advanced',
+    runtime: {
+      mode: 'local',
+      type: 'pages',
+    },
   }),
 });
