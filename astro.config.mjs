@@ -9,8 +9,11 @@ import react from '@astrojs/react';
 
 import sitemap from '@astrojs/sitemap';
 
+import cloudflare from '@astrojs/cloudflare';
+
 export default defineConfig({
   site: 'https://fx.kenyaforexfirm.com',
+
   integrations: [
     tailwind({
       // Apply base styles before Astro's styles
@@ -21,11 +24,13 @@ export default defineConfig({
     react(),
     sitemap(),
   ],
+
   trailingSlash: 'always',
 
   build: {
     inlineStylesheets: 'never',
   },
+
   experimental: {
     fonts: [
       {
@@ -133,4 +138,6 @@ export default defineConfig({
       },
     },
   },
+
+  adapter: cloudflare(),
 });
