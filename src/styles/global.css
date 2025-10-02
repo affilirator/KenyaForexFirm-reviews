@@ -83,7 +83,7 @@
 
 @layer components {
   .richtext p {
-    @apply: text-base md:text-lg font-sans leading-relaxed md:leading-relaxed text-foreground/90 my-4 md:my-4;
+    @apply text-base md:text-lg font-sans leading-relaxed md:leading-relaxed text-foreground/90 my-4 md:my-4;
   }
   .btn-primary {
     @apply bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-ui font-semibold py-3 px-6 rounded-lg;
@@ -144,7 +144,6 @@
 }
 
 /* source-sans-3-latin-wght-normal */
-
 
 @layer base {
   * {
