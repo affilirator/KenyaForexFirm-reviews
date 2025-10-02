@@ -75,6 +75,16 @@
     display: inline-block;
     line-height: 0; /* Prevents extra space below the image */
   }
+  richtext .img {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 0.5rem; /* Optional: rounds image corners for aesthetics */
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Optional: adds subtle shadow */
+    transition: transform 0.2s; /* Optional: smooth zoom effect on hover */
+  }
 
   .pinterest-button {
     position: absolute;
