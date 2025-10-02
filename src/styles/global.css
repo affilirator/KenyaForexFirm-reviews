@@ -88,6 +88,13 @@
   .btn-primary {
     @apply bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white font-ui font-semibold py-3 px-6 rounded-lg;
   }
+  .main-main {
+    @apply flex-grow w-full relative z-10 min-h-screen bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 text-neutral-100;
+  }
+  .author-attribution {
+    @apply container bg-neutral-950 border-t border-neutral-800/50 mx-auto px-4 sm:px-6 lg:px-8 py-8;
+    
+  }
 
   .card-glass {
     @apply bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 backdrop-blur-sm rounded-2xl border border-neutral-700/50;
@@ -110,6 +117,7 @@
   .contain-layout {
     contain: layout;
   }
+  
 
   .contain-paint {
     contain: paint;
