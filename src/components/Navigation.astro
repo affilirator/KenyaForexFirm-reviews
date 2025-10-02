@@ -34,7 +34,41 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header transition:persist>
+<style>
+  .main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background-color: rgba(23, 23, 23, 0.9); /* neutral-950 with 90% opacity */
+    backdrop-filter: blur(4px); /* backdrop-blur-md */
+    border-bottom: 1px solid rgba(38, 38, 38, 0.5); /* border-neutral-800/50 */
+  }
+  .submenu-item {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.25rem; /* 4px, equivalent to mt-1 */
+    width: 12rem; /* 192px, equivalent to w-48 */
+    background-color: rgba(23, 23, 23, 0.95); /* neutral-900 with 95% opacity */
+    backdrop-filter: blur(4px); /* backdrop-blur-md */
+    border-radius: 0.5rem; /* rounded-lg */
+    border: 1px solid rgba(108, 108, 108, 0.5); /* neutral-700 with 50% opacity */
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+    opacity: 0;
+    visibility: invisible;
+  }
+
+  .submenu-item.group:hover {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>
+
+<header>
   <div class="skip-links sr-only">
     <a
       href="#main-content"
@@ -49,7 +83,7 @@ const currentPath = Astro.url.pathname;
     >
   </div>
   <nav
-    class="fixed top-0 left-0 right-0 z-50 bg-neutral-950/90 backdrop-blur-md border-b border-neutral-800/50"
+    class="main-nav font-ui"
     role="navigation"
     aria-label="Main navigation"
   >
@@ -117,7 +151,7 @@ const currentPath = Astro.url.pathname;
                 </a>
 
                 {item.submenu && (
-                  <div class="absolute top-full left-0 mt-1 w-48 bg-neutral-900/95 backdrop-blur-md rounded-lg border border-neutral-700/50 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible">
+                  <div class="submenu-item group-hover:opacity-100 group-hover:visible">
                     <div class="py-2">
                       {item.submenu.map((subItem) => (
                         <a
