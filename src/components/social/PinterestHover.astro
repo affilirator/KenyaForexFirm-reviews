@@ -3,7 +3,8 @@
 // to images in your main content area. It doesn't render any HTML itself,
 // but injects a script and global styles into the page.
 ---
-<script is:inline>
+
+<script>
   /**
    * This script runs on the client to add the Pinterest button to images.
    * It waits for Astro's `page-load` event, which ensures it runs on initial
@@ -13,25 +14,27 @@
     // Select the main content area where your images from Markdown/MDX are rendered.
     // IMPORTANT: You might need to change 'main' to a more specific selector
     // that matches your site's structure, like '#content' or '.post-body'.
-    const contentArea = document.querySelector('richtext');
+    const contentArea = document.querySelector('article');
     if (!contentArea) {
-      console.warn('PinterestHover: Could not find content area to apply script.');
+      console.warn(
+        'PinterestHover: Could not find content area to apply script.'
+      );
       return;
     }
 
     // Find all image elements within that content area.
     const images = contentArea.querySelectorAll('img');
 
-    images.forEach(img => {
+    images.forEach((img) => {
       // If the image has already been wrapped by our script, skip it to prevent duplicates.
       if (img.closest('.pinterest-wrapper')) {
         return;
       }
-      
+
       // 1. Create a wrapper div to enable relative positioning for the Pinterest button.
       const wrapper = document.createElement('div');
       wrapper.classList.add('pinterest-wrapper');
-      
+
       // 2. Place the wrapper where the image was, and move the image inside it.
       // This "wraps" the image without altering the layout.
       img.parentNode?.insertBefore(wrapper, img);
@@ -46,7 +49,7 @@
       const imageUrl = encodeURIComponent(img.src);
       // Use the image's alt text as the description, falling back to the page's title.
       const description = encodeURIComponent(img.alt || document.title);
-      
+
       pinButton.href = `https://www.pinterest.com/pin/create/button/?url=${pageUrl}&media=${imageUrl}&description=${description}`;
       pinButton.setAttribute('target', '_blank');
       pinButton.setAttribute('rel', 'noopener noreferrer');
@@ -84,12 +87,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     /* Animation properties for a smooth fade-in effect */
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
-    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, visibility 0.2s;
+    transition:
+      opacity 0.2s ease-in-out,
+      transform 0.2s ease-in-out,
+      visibility 0.2s;
     cursor: pointer;
   }
 

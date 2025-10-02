@@ -24,10 +24,9 @@ const { title, content, className, description, weight } = Astro.props;
     </h2>
   </div>
   <PinterestHover />
-  <RichTextRenderer content={content} />
+  
   <RichText
     content={content}
-    client:load
     className="dark text-neutral-200 font-sans richtext"
   />
 </div>
