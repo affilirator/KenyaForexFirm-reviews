@@ -3,7 +3,6 @@
 // to images in your main content area. It doesn't render any HTML itself,
 // but injects a script and global styles into the page.
 ---
-
 <script>
   /**
    * This script runs on the client to add the Pinterest button to images.
@@ -11,34 +10,35 @@
    * page load and after every page transition when using View Transitions.
    */
   document.addEventListener('astro:page-load', () => {
-    // Select the main content area where your images from Markdown/MDX are rendered.
-    // IMPORTANT: You might need to change 'main' to a more specific selector
-    // that matches your site's structure, like '#content' or '.post-body'.
-    const contentArea = document.querySelector('article');
+    // Select the main content area where your images are rendered.
+    const contentArea = document.querySelector('main');
     if (!contentArea) {
-      console.warn(
-        'PinterestHover: Could not find content area to apply script.'
-      );
+      console.warn('PinterestHover: Could not find content area to apply script.');
       return;
     }
 
     // Find all image elements within that content area.
     const images = contentArea.querySelectorAll('img');
 
-    images.forEach((img) => {
-      // If the image has already been wrapped by our script, skip it to prevent duplicates.
+    images.forEach(img => {
+      // If the image or its parent picture element is already wrapped, skip it.
       if (img.closest('.pinterest-wrapper')) {
         return;
       }
 
+      // **IMPROVEMENT**: Check if the image is inside a <picture> element.
+      // If so, we wrap the entire <picture> tag to keep responsive images intact.
+      // Otherwise, we just wrap the <img> tag.
+      const pictureElement = img.closest('picture');
+      const elementToWrap = pictureElement || img;
+      
       // 1. Create a wrapper div to enable relative positioning for the Pinterest button.
       const wrapper = document.createElement('div');
       wrapper.classList.add('pinterest-wrapper');
-
-      // 2. Place the wrapper where the image was, and move the image inside it.
-      // This "wraps" the image without altering the layout.
-      img.parentNode?.insertBefore(wrapper, img);
-      wrapper.appendChild(img);
+      
+      // 2. Place the wrapper where the element was, and move the element inside it.
+      elementToWrap.parentNode.insertBefore(wrapper, elementToWrap);
+      wrapper.appendChild(elementToWrap);
 
       // 3. Create the Pinterest button anchor tag.
       const pinButton = document.createElement('a');
@@ -46,10 +46,15 @@
 
       // 4. Construct the dynamic Pinterest share URL.
       const pageUrl = encodeURIComponent(window.location.href);
-      const imageUrl = encodeURIComponent(img.src);
+
+      // Create a new URL object to resolve the image src against the page's URL.
+      // This ensures Pinterest receives an absolute URL.
+      const absoluteImageUrl = new URL(img.src, window.location.href).href;
+      const imageUrl = encodeURIComponent(absoluteImageUrl);
+      
       // Use the image's alt text as the description, falling back to the page's title.
       const description = encodeURIComponent(img.alt || document.title);
-
+      
       pinButton.href = `https://www.pinterest.com/pin/create/button/?url=${pageUrl}&media=${imageUrl}&description=${description}`;
       pinButton.setAttribute('target', '_blank');
       pinButton.setAttribute('rel', 'noopener noreferrer');
@@ -71,41 +76,28 @@
 <style is:global>
   .pinterest-wrapper {
     position: relative;
-    /* This keeps the wrapper the exact size of the image */
+    /* This keeps the wrapper the exact size of the image/picture element */
     display: inline-block;
-    line-height: 0; /* Prevents extra space below the image */
-  }
-  richtext .img {
-    width: 50%;
-    height: 50%;
-    object-fit: cover;
-    border-radius: 0.5rem; /* Optional: rounds image corners for aesthetics */
-    box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Optional: adds subtle shadow */
-    transition: transform 0.2s; /* Optional: smooth zoom effect on hover */
+    line-height: 0; /* Prevents extra space below the element */
   }
 
   .pinterest-button {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    z-index: 101;
+    z-index: 10;
     background-color: #e60023; /* Official Pinterest Red */
     border-radius: 9999px;
     padding: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    
     /* Animation properties for a smooth fade-in effect */
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
-    transition:
-      opacity 0.2s ease-in-out,
-      transform 0.2s ease-in-out,
-      visibility 0.2s;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, visibility 0.2s;
     cursor: pointer;
   }
 
@@ -120,3 +112,4 @@
     background-color: #ad081b; /* Darker red on hover for feedback */
   }
 </style>
+

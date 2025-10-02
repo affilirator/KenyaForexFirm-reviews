@@ -198,8 +198,8 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
                 src={imageUrl}
                 alt={altText}
                 className="w-full h-auto rounded-lg shadow-lg dark:shadow-2xl transition-transform duration-300 hover:scale-[1.02]"
-                width={imageData.width / 2 || node.width}
-                height={imageData.height / 2 || node.height}
+                width={600}
+                height={360 || imageData.height / 2 || node.height}
                 loading="lazy"
                 fetchPriority="auto"
                 decoding="auto"
