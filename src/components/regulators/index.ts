@@ -12,5 +12,5 @@ export { default as RegulatorEEAT } from './RegulatorEEAT.astro';
 export { default as RegulatorBrokers } from './RegulatorBrokers.astro';
 export { default as RegulatorCard } from './RegulatorCard.astro';
 export { default as RegulatorPageTemplate } from './RegulatorPageTemplate.astro';
-export { default as RichTextRenderer } from './RichTextRenderer.astro';
+export { default as RichTextRenderer } from '~/components/common/RichTextRenderer.astro';
 export { default as TopRegulatedBrokers } from './TopRegulatedBrokers.astro';
