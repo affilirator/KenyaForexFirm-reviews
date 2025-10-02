@@ -95,6 +95,12 @@ export default defineConfig({
   },
 
   image: {
+    service: {
+      entrypoint: '@astrojs/image/sharp',
+      config: {
+        // ... service-specific config. Optional.
+      },
+    },
     remotePatterns: [
       {
         protocol: 'https',
@@ -139,5 +145,15 @@ export default defineConfig({
     },
   },
 
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    // Optional: Platform proxy for local dev (mocks Cloudflare env)
+    platformProxy: {
+      enabled: true,
+      persist: true,
+    },
+    // Optional: For advanced routing (generates one function per route)
+    functionPerRoute: true,
+    // Optional: Directory mode for custom middleware
+    mode: 'directory', // Outputs to /functions/ for easier editing
+  }),
 });
