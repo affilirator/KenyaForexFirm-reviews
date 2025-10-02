@@ -80,7 +80,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
 
         case 'paragraph':
           return (
-            <p className="text-base md:text-lg font-sans leading-relaxed md:leading-relaxed text-foreground/90 my-4 md:my-4">
+            <p className="">
               {children}
             </p>
           );
@@ -199,9 +199,9 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
                 alt={altText}
                 className="w-full h-auto rounded-lg shadow-lg dark:shadow-2xl transition-transform duration-300 hover:scale-[1.02]"
                 width={600}
-                height={360 || imageData.height / 2 || node.height}
+                height={360}
                 loading="lazy"
-                fetchPriority="auto"
+                fetchPriority="low"
                 decoding="auto"
               />
               {altText && altText !== 'Image' && (
