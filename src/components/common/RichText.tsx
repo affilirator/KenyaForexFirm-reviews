@@ -198,8 +198,8 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
                 src={imageUrl}
                 alt={altText}
                 className="w-full h-auto rounded-lg shadow-lg dark:shadow-2xl transition-transform duration-300 hover:scale-[1.02]"
-                width={imageData.width/2 || node.width}
-                height={imageData.height/2 || node.height}
+                width={imageData.width / 2 || node.width}
+                height={imageData.height / 2 || node.height}
                 loading="lazy"
                 fetchPriority="auto"
                 decoding="auto"
@@ -316,14 +316,13 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
   return (
     <article
       className={cn(
-        'prose prose-lg max-w-none',
         'space-y-8',
         'max-w-5xl',
         'prose-headings:scroll-mt-20',
         'prose-a:text-primary prose-a:no-underline hover:prose-a:underline',
         'prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded',
         'prose-pre:bg-muted prose-pre:border',
-        'dark:prose-invert',
+
         className
       )}
       role="article"
