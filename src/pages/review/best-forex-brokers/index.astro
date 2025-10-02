@@ -8,6 +8,7 @@ import { site } from '~/data/site';
 import { getReviews } from '~/lib/qs-esm';
 import { staticBrokers } from '~/data/brokers';
 import RichText from '~/components/common/RichText';
+import ProseRichText from '~/components/common/ProseRichText.astro';
 
 const title = `Top 10 Forex Brokers in Kenya: Your Blueprint for Profitable Trading`;
 const description = `Discover Kenya's top forex brokers for 2025! Our in-depth guide ranks regulated platforms by spreads, features, Mpesa integration & safety. Find your ideal broker today.`;
@@ -90,12 +91,9 @@ const page = await pageRes.json();
     </div>
   </section>
   <div class="border border-neutral-700/50 rounded-2xl p-6 lg:p-8">
-    <h2 class="dark text-neutral-200 p-6 mx-auto">
-      How to Choose the Best Forex Brokers in Kenya</h2>
-    <RichText
+    <ProseRichText
+      title="How to Choose the Best Forex Brokers in Kenya"
       content={page.content}
-      client:visible
-      className="dark text-neutral-200 p-6 mx-auto"
     />
   </div>
 
