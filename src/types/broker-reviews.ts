@@ -1,6 +1,7 @@
 import type { ReviewContentAuthor } from './author';
 import type { CategoryReference } from './catRatingsInterface';
 import type { BrokerImage } from './index';
+import type { BrokerProps } from '~/types';
 
 export interface BrokerPlatform {
   name: string;
@@ -181,7 +182,7 @@ export interface BrokerReview {
 }
 
 export interface BrokerReviewsResponse {
-  docs: BrokerReview[];
+  docs: BrokerProps[];
   hasNextPage: boolean;
   hasPrevPage: boolean;
   limit: number;

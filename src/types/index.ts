@@ -330,7 +330,7 @@ export type ReviewContent = {
 };
 
 export type BrokerProps = {
-  id: string;
+  id?: string;
   brokerName: string;
   maxLeverage?: string;
   brokerRating: number;

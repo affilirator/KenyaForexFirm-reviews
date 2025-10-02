@@ -6,6 +6,8 @@ import {
   getBrokersByRegulatorWebsite,
   getBrokersByRegulatorName,
 } from '../../lib/broker-regulator-service';
+import type { BrokerProps } from '~/types';
+import type { BrokerReviewsResponse } from '~/types/broker-reviews';
 
 interface Props {
   regulatorWebsite: string;
@@ -20,7 +22,7 @@ const {
 } = Astro.props;
 
 // Fetch top 5 brokers regulated by this regulator
-let brokers = [];
+let brokers: BrokerProps[] = [];
 let error = null;
 
 try {
