@@ -318,6 +318,8 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
       className={cn(
         'space-y-8',
         'max-w-5xl',
+        'richtext',
+        'border border-neutral-700/50 rounded-2xl',
         'prose-headings:scroll-mt-20',
         'prose-a:text-primary prose-a:no-underline hover:prose-a:underline',
         'prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded',
