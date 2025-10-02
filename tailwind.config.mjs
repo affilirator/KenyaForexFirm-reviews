@@ -63,7 +63,7 @@ export default {
       },
       fontFamily: {
         body: ['PT Sans', 'sans-serif'],
-        headline: ['Playfair Display', 'serif'],
+        headline: ['var(--font-playfair-display)'],
         code: ['monospace'],
         sans: ['var(--font-source-sans-3)'],
         display: ['var(--font-playfair-display)'],

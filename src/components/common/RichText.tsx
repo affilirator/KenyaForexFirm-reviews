@@ -80,7 +80,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
 
         case 'paragraph':
           return (
-            <p className="">
+            <p className="content-p">
               {children}
             </p>
           );

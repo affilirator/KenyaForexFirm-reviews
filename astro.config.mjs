@@ -39,8 +39,8 @@ export default defineConfig({
           {
             src: ['./src/assets/fonts/roboto-v48-latin-700.woff2'],
             src: ['./src/assets/fonts/roboto-v48-latin-regular.woff2'],
-          }
-        ]
+          },
+        ],
       },
       {
         provider: 'local',
@@ -48,15 +48,13 @@ export default defineConfig({
         cssVariable: '--font-source-sans-3',
         //weights: [400, 500, 700],
         //styles: ['normal', 'italic', 'oblique'],
-       // subsets: ['latin-ext', 'latin'],
+        // subsets: ['latin-ext', 'latin'],
         variants: [
           {
             src: ['./src/assets/fonts/source-sans-3-v18-latin-700.woff2'],
             src: ['./src/assets/fonts/source-sans-3-v18-latin-regular.woff2'],
-
-          }
-        ]
-
+          },
+        ],
       },
       {
         name: 'EB Garamond',
@@ -66,20 +64,12 @@ export default defineConfig({
         // will try to infer them for each variant
         variants: [
           {
-            
-            src: [
-              
-              './src/assets/fonts/eb-garamond-v31-latin-700.woff2',
-             
-            ],
-            src: [
-              
-              'src/assets/fonts/eb-garamond-v31-latin-regular.woff2',
-            ],
+            src: ['./src/assets/fonts/eb-garamond-v31-latin-700.woff2'],
+            src: ['src/assets/fonts/eb-garamond-v31-latin-regular.woff2'],
           },
         ],
       },
-    
+
       {
         name: 'Playfair Display',
         cssVariable: '--font-playfair-display',
@@ -88,8 +78,8 @@ export default defineConfig({
         // will try to infer them for each variant
         variants: [
           {
-            
             src: ['./src/assets/fonts/playfair-display-v39-latin-700.woff2'],
+            src: ['./src/assets/fonts/playfair-display-v40-latin-600.woff2'],
             src: [
               './src/assets/fonts/playfair-display-v39-latin-regular.woff2',
             ],
