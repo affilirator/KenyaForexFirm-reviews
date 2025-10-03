@@ -33,7 +33,7 @@ if (typeof MessageChannel === 'undefined') {
     }
 
     close() {
-      // No-op for this polyfill
+      // No-op for this polyfill feature/serverSideRendering
     }
   };
 }
