@@ -13,9 +13,11 @@ function getTypeIcon(type: string) {
     case 'depositBonus':
       return '💰';
     case 'referral':
-      return '🗣️';
+      return '🤝🏻';
+    case 'competition':
+      return '🏆';
     default:
-      return '🛍️';
+      return '🎁';
   }
 }
 
@@ -29,7 +31,7 @@ function getStatusColor(status: string) {
 {
   promotions.length > 0 && (
     <section class="mb-12">
-      <h2 class="font-bold text-white mb-6">
+      <h2 class="text-2xl font-bold text-white mb-6">
         {broker?.brokerName} Current Promotions & Bonuses
       </h2>
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

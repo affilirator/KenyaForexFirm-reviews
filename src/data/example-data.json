@@ -1,6 +1,6 @@
 {
-  "createdAt": "2025-10-05T05:27:47.774Z",
-  "updatedAt": "2025-10-05T05:43:36.717Z",
+  "createdAt": "2025-10-04T03:45:27.085Z",
+  "updatedAt": "2025-10-05T02:16:08.228Z",
   "tenant": {
     "admins": {
       "tenant": "68cf4222333a857d39ca2512",
@@ -11,204 +11,14 @@
     },
     "id": "683f46937e7deb35fd6bca89"
   },
-  "title": "Overview of FXPesa Bonus and Promotions",
-  "category": "Overview",
+  "title": "XM Forex Promotions and Bonuses",
   "details": [
     {
       "blockType": "promoDetails",
-      "title": "FXPesa Welcome Bonus",
-      "description": " This bonus is best suited for experienced traders who have a robust, proven strategy and a deep understanding of margin management. It should be seen as a temporary tool for specific strategic objectives, not as a permanent boost to your account size.",
+      "title": "Deposit Bonus (50% + 20%)",
+      "description": "50% extra bonus on the deposit amount up to $500, plus an additional 20% bonus on the deposit amount beyond $500.",
       "promotionalAmount": {
-        "rewardType": "percentage"
-      },
-      "status": "active",
-      "promotionPeriod": [
-        {
-          "indefinite": true,
-          "period": {
-
-          },
-          "id": "68e20256c4bb6593c36e7a31"
-        }
-      ],
-      "type": "depositBonus",
-      "content": {
-        "root": {
-          "children": [
-            {
-              "children": [
-                {
-                  "detail": 0,
-                  "format": 0,
-                  "mode": "normal",
-                  "style": "",
-                  "text": "The core terms are straightforward:",
-                  "type": "text",
-                  "version": 1
-                }
-              ],
-              "direction": "ltr",
-              "format": "",
-              "indent": 0,
-              "type": "paragraph",
-              "version": 1,
-              "textFormat": 0,
-              "textStyle": ""
-            },
-            {
-              "children": [
-                {
-                  "children": [
-                    {
-                      "detail": 0,
-                      "format": 1,
-                      "mode": "normal",
-                      "style": "",
-                      "text": "Eligibility:",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 0,
-                      "mode": "normal",
-                      "style": "",
-                      "text": " It is for your first deposit only.",
-                      "type": "text",
-                      "version": 1
-                    }
-                  ],
-                  "direction": "ltr",
-                  "format": "",
-                  "indent": 0,
-                  "type": "listitem",
-                  "version": 1,
-                  "textFormat": 1,
-                  "value": 1
-                },
-                {
-                  "children": [
-                    {
-                      "detail": 0,
-                      "format": 1,
-                      "mode": "normal",
-                      "style": "",
-                      "text": "Minimum Deposit:",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 0,
-                      "mode": "normal",
-                      "style": "",
-                      "text": " You must deposit a minimum of $100. ",
-                      "type": "text",
-                      "version": 1
-                    }
-                  ],
-                  "direction": "ltr",
-                  "format": "",
-                  "indent": 0,
-                  "type": "listitem",
-                  "version": 1,
-                  "textFormat": 1,
-                  "value": 2
-                },
-                {
-                  "children": [
-                    {
-                      "detail": 0,
-                      "format": 1,
-                      "mode": "normal",
-                      "style": "",
-                      "text": "Platform:",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 0,
-                      "mode": "normal",
-                      "style": "",
-                      "text": " The offer is exclusively for the MetaTrader 5 (MT5) platform. ",
-                      "type": "text",
-                      "version": 1
-                    }
-                  ],
-                  "direction": "ltr",
-                  "format": "",
-                  "indent": 0,
-                  "type": "listitem",
-                  "version": 1,
-                  "textFormat": 1,
-                  "value": 3
-                },
-                {
-                  "children": [
-                    {
-                      "detail": 0,
-                      "format": 1,
-                      "mode": "normal",
-                      "style": "",
-                      "text": "Crediting Time:",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 0,
-                      "mode": "normal",
-                      "style": "",
-                      "text": " The bonus is credited to your account relatively quickly, within a window of 30 minutes to a maximum of one business day. ",
-                      "type": "text",
-                      "version": 1
-                    }
-                  ],
-                  "direction": "ltr",
-                  "format": "",
-                  "indent": 0,
-                  "type": "listitem",
-                  "version": 1,
-                  "textFormat": 1,
-                  "value": 4
-                }
-              ],
-              "direction": "ltr",
-              "format": "",
-              "indent": 0,
-              "type": "list",
-              "version": 1,
-              "listType": "bullet",
-              "start": 1,
-              "tag": "ul"
-            },
-            {
-              "children": [],
-              "direction": null,
-              "format": "",
-              "indent": 0,
-              "type": "paragraph",
-              "version": 1,
-              "textFormat": 0,
-              "textStyle": ""
-            }
-          ],
-          "direction": "ltr",
-          "format": "",
-          "indent": 0,
-          "type": "root",
-          "version": 1
-        }
-      },
-      "id": "68e201fac4bb6593c36e7a30"
-    },
-    {
-      "blockType": "promoDetails",
-      "title": "The \"Come Back King\" Bonus",
-      "description": "A re-engagement tool, specifically designed to lure dormant clients back into active trading. It targets accounts that have been \"Inactive,\" meaning there have been no trades or transactions for a period of at least 30 days.",
-      "promotionalAmount": {
-        "rewardType": "percentage"
+        "rewardType": "indefinite"
       },
       "status": "active",
       "promotionPeriod": [],
@@ -223,27 +33,7 @@
                   "format": 0,
                   "mode": "normal",
                   "style": "",
-                  "text": "The Comeback Kings offer from FXPesa is a 30% bonus on a new deposit of at least $100, with the total bonus credit capped at $150.",
-                  "type": "text",
-                  "version": 1
-                }
-              ],
-              "direction": "ltr",
-              "format": "",
-              "indent": 0,
-              "type": "paragraph",
-              "version": 1,
-              "textFormat": 0,
-              "textStyle": ""
-            },
-            {
-              "children": [
-                {
-                  "detail": 0,
-                  "format": 0,
-                  "mode": "normal",
-                  "style": "",
-                  "text": "For example, a deposit of $500 would yield the maximum $150 bonus. The crucial differentiator here, and what makes this bonus so alluring, is that under specific conditions, ",
+                  "text": "XM’s main cash‑back incentive is a ",
                   "type": "text",
                   "version": 1
                 },
@@ -252,7 +42,7 @@
                   "format": 1,
                   "mode": "normal",
                   "style": "",
-                  "text": "it can be converted into real, withdrawable cash",
+                  "text": "two-tier deposit bonus",
                   "type": "text",
                   "version": 1
                 },
@@ -261,7 +51,25 @@
                   "format": 0,
                   "mode": "normal",
                   "style": "",
-                  "text": ".",
+                  "text": ". Every qualifying deposit (minimum ",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 1,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "$5",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": ") triggers an instant credit.",
                   "type": "text",
                   "version": 1
                 }
@@ -281,7 +89,200 @@
                   "format": 0,
                   "mode": "normal",
                   "style": "",
-                  "text": "This potential for redemption makes it more valuable than simple trading credit, but this value is locked behind a formidable challenge",
+                  "text": "For example, depositing $1,000 would yield a $500 bonus (50% of $1,000) plus another $100 (20% of the remaining $500), for a total $600 bonus credit. All bonus funds go into your trading account balance, effectively increasing your margin. ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 1,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Important:",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": " This bonus is ",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 1,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "non‑withdrawable",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": ". ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 1,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "If you withdraw real funds, XM will deduct the same proportion of bonus credit. (In effect, the bonus “vanishes” as you take profits out.) Kenyan traders (outside Cyprus) are eligible, since XM only excludes EU/AUS clients for this promo.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1,
+          "textFormat": 1
+        }
+      },
+      "link": "https://kenyaforexfirm.com/goto/xm/",
+      "image": {
+        "alt": "XM Forex offers a 50% deposit bonus for Kenyan clients",
+        "cdnUrl": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgbpf0xv.webp",
+        "filename": "kenya-forex-firm-mgbpf0xv.webp",
+        "id": "68e0922bfd887beeb27db821",
+        "url": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgbpf0xv.webp"
+      },
+      "id": "68e09a45166ae9d3634b7266"
+    },
+    {
+      "blockType": "promoDetails",
+      "title": "Zero‑Fee Transactions",
+      "description": "XM waives all fees on deposits and withdrawals for Kenyans.",
+      "promotionalAmount": {
+        "rewardType": "indefinite"
+      },
+      "status": "active",
+      "promotionPeriod": [],
+      "type": "depositBonus",
+      "content": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Under its ",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 2,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "“Zero Fees”",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": " promotion, credit‑card and e‑wallet transfers incur ",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 1,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "no charges",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": ", and wire transfers above $200 are fee‑free. ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "In practice this means Kenyans using M-Pesa, Skrill, Neteller, Visa/MasterCard, etc., pay ",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 1,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "no extra fees",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": " to fund or withdraw from XM – a valuable perk given that local payment fees can eat into trading capital.",
                   "type": "text",
                   "version": 1
                 }
@@ -302,15 +303,22 @@
           "version": 1
         }
       },
-      "terms": "https://eq-cdn.equiti-me.com/website/documents/kenya-fxpesa-comeback-king-bonus-program_2024.pdf",
-      "id": "68e20301c4bb6593c36e7a32"
+      "link": "https://kenyaforexfirm.com/goto/xm/",
+      "image": {
+        "alt": "XM Forex offers a 50% deposit bonus for Kenyan clients",
+        "cdnUrl": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgbpf0xv.webp",
+        "filename": "kenya-forex-firm-mgbpf0xv.webp",
+        "id": "68e0922bfd887beeb27db821",
+        "url": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgbpf0xv.webp"
+      },
+      "id": "68e0a1b4dea0cb00b2e11294"
     },
     {
       "blockType": "promoDetails",
-      "title": "The Refer-a-Friend Program",
-      "description": "The program is broken down into five distinct tiers, creating a clear path to maximizing the potential payout. It is important to note that the trading volume requirement applies only to trades on FX and Metals.",
+      "title": "Refer‑a‑Friend (up to $80)",
+      "description": "XM’s referral program lets you earn up to $150 cash per friend who signs up and trades.",
       "promotionalAmount": {
-        "rewardType": "fixed"
+        "rewardType": "indefinite"
       },
       "status": "active",
       "promotionPeriod": [],
@@ -325,7 +333,27 @@
                   "format": 0,
                   "mode": "normal",
                   "style": "",
-                  "text": "This program, while potentially lucrative, introduces a significant ethical consideration. Because the referrer's reward is directly tied to the deposit size and trading volume of their friend, it creates a potential conflict of interest. ",
+                  "text": "For each successfully referred trader (who opens and verifies an account and trades at least 1 standard lot), you receive a fixed bonus (tiered up to $150). These referral bonuses are added to your XM “MyWallet” and are fully withdrawable. ",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "This means if you know other Kenyan traders, you can effectively subsidize your own trading with these cash rewards.",
                   "type": "text",
                   "version": 1
                 }
@@ -346,34 +374,141 @@
           "version": 1
         }
       },
-      "link": "https://www.fxpesa.com/ke-en/refer-a-friend/",
+      "link": "https://kenyaforexfirm.com/goto/xm/",
       "image": {
-        "alt": "FXPesa bonus and promotions for Kenya",
-        "cdnUrl": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgd9ff6s.webp",
-        "filename": "kenya-forex-firm-mgd9ff6s.webp",
-        "id": "68e201a850c91f7c7142340b",
-        "url": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgd9ff6s.webp"
+        "alt": "XM Forex offers a 50% deposit bonus for Kenyan clients",
+        "cdnUrl": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgbpf0xv.webp",
+        "filename": "kenya-forex-firm-mgbpf0xv.webp",
+        "id": "68e0922bfd887beeb27db821",
+        "url": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgbpf0xv.webp"
       },
-      "id": "68e20524c4bb6593c36e7a33"
+      "id": "68e0a3d2dea0cb00b2e11295"
+    },
+    {
+      "blockType": "promoDetails",
+      "title": "Copy‑Trading Competitions",
+      "description": "XM frequently runs trading contests on its copy‑trading platform (with prize pools often exceeding $100,000) open to Kenyan clients.",
+      "promotionalAmount": {
+        "rewardType": "indefinite"
+      },
+      "status": "active",
+      "promotionPeriod": [
+        {
+          "indefinite": true,
+          "period": {
+
+          },
+          "id": "68e0a6fab45b2f17bd434146"
+        }
+      ],
+      "type": "competition",
+      "content": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "These contests (daily or weekly) can award cash or trading credits based on performance. While not a “bonus” in the sign-up sense, it’s another way to earn extra credit by competing.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      },
+      "id": "68e0a6abb45b2f17bd434145"
+    },
+    {
+      "blockType": "promoDetails",
+      "title": "Loyalty Program (XMP Points)",
+      "description": "Beyond cash bonuses, XM operates a loyalty program where every trade earns XM Points (XMP)",
+      "promotionalAmount": {
+        "rewardType": "indefinite"
+      },
+      "status": "active",
+      "promotionPeriod": [
+        {
+          "indefinite": true,
+          "period": {
+
+          },
+          "id": "68e0a7e6b45b2f17bd434148"
+        }
+      ],
+      "type": "referral",
+      "content": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "These points accumulate as you trade and can be redeemed for real cash or bonus credit. There are four status tiers (Executive, Gold, Diamond, Elite) that increase points per lot traded. For frequent Kenyan traders, XMP rewards effectively give back a small commission rebate on every trade. (For example, every 1 standard lot traded may earn 5–15 XMP, depending on status, which can be converted to ~$5–$15 cash.).",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      },
+      "id": "68e0a78db45b2f17bd434147"
     }
   ],
   "offeredBy": {
-    "title": "FxPesa Review - A Deep Dive into Kenya's First CMA-Regulated Forex Broker",
-    "brokerName": "FXPesa",
-    "brokerRating": 7.8,
-    "slug": "fxpesa",
-    "id": "6850b81881d45ff392e42761"
+    "title": "XM Review - Unbiased Forex Broker Review",
+    "brokerName": "XM",
+    "brokerRating": 8,
+    "slug": "xm-forex",
+    "id": "6851077551388e130fba71de"
   },
-  "link": "https://kenyaforexfirm.com/goto/fxpesa/",
-  "keyConditions": {
-
-  },
+  "link": "https://kenyaforexfirm.com",
   "promoImage": {
-    "alt": "FXPesa bonus and promotions for Kenya",
-    "cdnUrl": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgd9ff6s.webp",
-    "filename": "kenya-forex-firm-mgd9ff6s.webp",
-    "id": "68e201a850c91f7c7142340b",
-    "url": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgd9ff6s.webp"
+    "alt": "XM Forex offers a 50% deposit bonus for Kenyan clients",
+    "cdnUrl": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgbpf0xv.webp",
+    "filename": "kenya-forex-firm-mgbpf0xv.webp",
+    "id": "68e0922bfd887beeb27db821",
+    "url": "https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/r2media/kenya-forex-firm-mgbpf0xv.webp"
   },
-  "id": "68e201d37740fa9898322f7d"
+  "description": "XM forex promotion and bonuses",
+  "keyConditions": {
+    "exclusions": "XM’s bonuses exclude clients under the EU (CySEC), Australian (ASIC), and Dubai (DFSA) entities. Kenyan traders are served by XM’s Belize or Cyprus entities, so they are generally eligible.",
+    "withdrawalRules": "XM never lets you withdraw the bonus credit itself – only profits earned from it. For no‑deposit profits, XM will require a minimum deposit (often equal to the bonus) before any withdrawal. For deposit bonuses, withdrawing any real-money funds will proportionally cancel the bonus.",
+    "expiration": "XM’s bonuses are time‑limited. The $30 bonus must be claimed within 30 days of account opening, and any profits must be withdrawn or lost before it expires.",
+    "tradingVolume": "Both bonuses typically require reaching certain trading volume thresholds. For example, the “no deposit bonuses often require traders to trade huge volumes… e.g. 1.0 lot per $1 bonus”. XM’s official terms also tie bonus withdrawal to trading activity."
+  },
+  "category": "Overview",
+  "id": "68e0985754d3371372608c1c"
 }
