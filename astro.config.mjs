@@ -25,7 +25,11 @@ export default defineConfig({
     ,
     icon(),
     react(),
-    sitemap(),
+    sitemap({
+    changefreq: 'weekly',
+    priority: 0.7,
+    lastmod: new Date(),
+  }),
   ],
 
   trailingSlash: 'always',
