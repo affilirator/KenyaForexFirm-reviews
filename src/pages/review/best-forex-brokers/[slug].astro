@@ -1,0 +1,164 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import BrokerHeader from '~/components/review/BrokerHeader.astro';
+import BrokerNavigation from '~/components/review/BrokerNavigation.astro';
+import BrokerOverview from '~/components/review/BrokerOverview.astro';
+import BrokerRegulation from '~/components/review/BrokerRegulation.astro';
+import BrokerProsAndCons from '~/components/review/BrokerProsAndCons.astro';
+import BrokerVerdict from '~/components/review/BrokerVerdict.astro';
+import BrokerPromotions from '~/components/review/BrokerPromotions.astro';
+import RiskWarning from '~/components/review/RiskWarning.astro';
+import { fetchPromotionByslug, getReviews } from '~/lib/qs-esm';
+import { getAuthorByIdCached } from '~/lib/author-service';
+import { site } from '~/data/site';
+
+export async function getStaticPaths() {
+  const { docs: brokers } = await getReviews();
+  return brokers.map((broker) => ({
+    params: { slug: broker.slug },
+    props: { broker },
+  }));
+}
+
+const { broker } = Astro.props;
+if (!broker) return Astro.redirect('/404');
+const promoSlug = broker.slug;
+const promoDetails = await fetchPromotionByslug(promoSlug);
+const neededDetails = promoDetails?.details || [];
+// Get author information
+let author = null;
+if (broker.author && broker.author.length > 0) {
+  author = await getAuthorByIdCached(broker.author[0].id);
+}
+
+const logoUrl =
+  typeof broker.logo === 'string' ? broker.logo : broker.logo?.url;
+const title = `${broker.brokerName} Review ${new Date().getFullYear()} - Expert Analysis for Kenyan Traders`;
+const description = `Comprehensive ${broker.brokerName} review for Kenyan traders. ${broker.cmaRegulated ? 'CMA approved broker' : 'International broker'} with ${broker.minDeposit ? `$${broker.minDeposit} minimum deposit` : 'competitive conditions'}.`;
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  itemReviewed: {
+    '@type': 'Product',
+    name: broker.brokerName,
+    description: broker.description || broker.quickVerdict || undefined,
+    review: {
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        '@id': 'https://fx.kenyaforexfirm.com/authors/patrick-mahinge',
+        name: author?.name || 'Patrick Mahinge',
+      },
+      publisher: {
+        '@type': 'Organization',
+        '@id': `${site.url}/#organization`,
+      },
+      datePublished: new Date().toISOString().split('T')[0],
+      dateModified: new Date().toISOString().split('T')[0],
+      description:
+        broker.quickVerdict ||
+        broker.description ||
+        `Comprehensive review of ${broker.brokerName}.`,
+      reviewBody:
+        broker.quickVerdict ||
+        broker.description ||
+        `Comprehensive review of ${broker.brokerName}.`,
+      name: `${broker.brokerName} Review in Kenya`,
+      positiveNotes: {
+        '@type': 'ItemList',
+        itemListElement: broker.pros
+          ? broker.pros.map((pro, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name:
+                typeof pro === 'string'
+                  ? pro
+                  : pro.pro || (pro as any).text || String(pro),
+            }))
+          : undefined,
+      },
+      negativeNotes: {
+        '@type': 'ItemList',
+        itemListElement: broker.cons
+          ? broker.cons.map((con, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name:
+                typeof con === 'string'
+                  ? con
+                  : con.con || (con as any).text || String(con),
+            }))
+          : undefined,
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: broker.brokerRating,
+        bestRating: 10,
+        worstRating: 1,
+      },
+    },
+  },
+  author: {
+    '@type': 'Person',
+    name: author?.name || 'Patrick Mahinge',
+    jobTitle: author?.jobTitle || 'Senior Financial Analyst',
+    url: author ? `${site.url}/authors/${author.slug}` : undefined,
+    worksFor: { '@type': 'Organization', name: site.siteName, url: site.url },
+  },
+  publisher: { '@type': 'Organization', name: site.siteName, url: site.url },
+  datePublished: new Date().toISOString().split('T')[0],
+  //  "reviewRating": { "@type": "Rating", "ratingValue": broker.brokerRating, "bestRating": 10 }
+
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `${site.url}/brokers/${broker.slug}/`,
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Broker Reviews',
+          item: `${site.url}/brokers/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: `${broker.brokerName} Review`,
+          item: `${site.url}/brokers/${broker.slug}/`,
+        },
+      ],
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={logoUrl}
+  schemaData={schemaData}
+  author={author || undefined}
+>
+  <BrokerHeader broker={broker} />
+
+  <BrokerNavigation />
+
+  <main class="py-12 bg-gradient-to-b from-neutral-900 to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <BrokerOverview broker={broker} />
+      <BrokerRegulation broker={broker} />
+
+      <BrokerProsAndCons broker={broker} />
+      <BrokerPromotions
+        promotions={neededDetails}
+        broker={broker}
+      />
+      <BrokerVerdict broker={broker} />
+    </div>
+  </main>
+
+  <RiskWarning />
+</BaseLayout>
