@@ -113,6 +113,8 @@ const schemaData = {
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': `${site.url}/brokers/${broker.slug}/`,
+    headline: `${broker.brokerName} Review in Kenya - ${new Date().getFullYear()}`,
+    dateModified: new Date().toISOString(),
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
