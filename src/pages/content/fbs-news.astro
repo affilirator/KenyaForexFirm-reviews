@@ -1,0 +1,49 @@
+---
+// src/pages/news.astro
+import newsData from '../data/fbs-news.json';
+
+const { title, date, excerpt, imageUrl, url } = Astro.props;  // If using as component
+---
+
+<html lang="en">
+  <head>
+    <title>FBS News Feed</title>
+  </head>
+  <body>
+    <h1>Latest FBS News</h1>
+    <p><em>News sourced from <a href="https://fbs.com/news/">FBS.com</a> – visit original for full details.</em></p>
+
+    <div class="news-grid">
+      {newsData.map((item) => (
+        <article class="news-card">
+          {item.imageUrl && (
+            <a href={item.url} target="_blank" rel="noopener noreferrer">
+              <img src={item.imageUrl} alt={item.title} loading="lazy" />
+            </a>
+          )}
+          <div class="card-content">
+            <time datetime={item.date}>{new Date(item.date).toLocaleDateString()}</time>
+            <h2>
+              <a href={item.url} target="_blank" rel="noopener noreferrer">
+                {item.title}
+              </a>
+            </h2>
+            <p>{item.excerpt}</p>
+            <a href={item.url} target="_blank" rel="noopener noreferrer" class="read-more">
+              Read full article on FBS.com →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <style>
+      .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+      .news-card { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+      .card-content { padding: 1rem; }
+      img { width: 100%; height: auto; }
+      a { color: #007bff; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+    </style>
+  </body>
+</html>

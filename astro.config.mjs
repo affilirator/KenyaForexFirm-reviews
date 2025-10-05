@@ -135,22 +135,29 @@ export default defineConfig({
       // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
       // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
       alias: import.meta.env.PROD && {
-        "react-dom/server": "react-dom/server.edge",
+        'react-dom/server': 'react-dom/server.edge',
       },
     },
     define: {
       global: 'globalThis',
     },
+    plugins: [
+      {
+        name: 'fetch-fbs-news',
+        configureServer() {}, // No-op for dev
+        buildStart() {
+          // Run fetch before build
+          import('./src/scripts/fetch-fbs-news.ts');
+        },
+      },
+    ],
     build: {
       cssCodeSplit: true,
       rollupOptions: {
         output: {
           manualChunks: {
             vendor: ['astro-seo'],
-            uiComponents: [
-              'react',
-              'react-dom',
-            ],
+            uiComponents: ['react', 'react-dom'],
           },
         },
       },
