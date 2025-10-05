@@ -97,6 +97,35 @@ const fundingQuery = {
   sort: '-brokerRating',
 };
 
+export async function fetchPromotionByslug(slug: string) {
+  const queryString = stringify(
+    {
+      select: {
+        content: false,
+        blog: false,
+      },
+      where: {
+       // slug: { equals: 'offeredBy.slug' },
+        category: { equals: 'Overview' },
+        'offeredBy.slug': { equals: slug },
+      },
+      depth: 2,
+    },
+    { addQueryPrefix: true }
+  );
+
+  const res = await fetch(
+    `${PAYLOAD_API_URL}/api/broker-promotions${queryString}`
+  );
+  const broker = await res.json();
+
+  if (broker.docs.length === 0) {
+    console.warn('No promotions found');
+    return [];
+  }
+  return broker.docs[0];
+}
+
 export async function fetchTraderBySlug(slug: string): Promise<ForexTrader> {
   const queryString = stringify(
     {

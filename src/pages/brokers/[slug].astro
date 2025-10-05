@@ -7,7 +7,7 @@ import BrokerRegulation from '../../components/review/BrokerRegulation.astro';
 import BrokerProsAndCons from '../../components/review/BrokerProsAndCons.astro';
 import BrokerVerdict from '../../components/review/BrokerVerdict.astro';
 import RiskWarning from '../../components/review/RiskWarning.astro';
-import { getReviews } from '../../lib/qs-esm';
+import { fetchPromotionByslug, getReviews } from '../../lib/qs-esm';
 import { getAuthorByIdCached } from '../../lib/author-service';
 import { site } from '../../data/site';
 
@@ -21,7 +21,8 @@ export async function getStaticPaths() {
 
 const { broker } = Astro.props;
 if (!broker) return Astro.redirect('/404');
-
+const promoSlug = broker.slug;
+const promoDetails = await fetchPromotionByslug(promoSlug);
 // Get author information
 let author = null;
 if (broker.author && broker.author.length > 0) {
@@ -140,6 +141,7 @@ const schemaData = {
   author={author || undefined}
 >
   <BrokerHeader broker={broker} />
+  <p>{promoDetails.title}</p>
   <BrokerNavigation />
 
   <main class="py-12 bg-gradient-to-b from-neutral-900 to-neutral-950">
