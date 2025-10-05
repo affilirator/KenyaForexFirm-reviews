@@ -141,16 +141,7 @@ export default defineConfig({
     define: {
       global: 'globalThis',
     },
-    plugins: [
-      {
-        name: 'fetch-fbs-news',
-        configureServer() {}, // No-op for dev
-        buildStart() {
-          // Run fetch before build
-          import('./src/scripts/fetch-fbs-news.ts');
-        },
-      },
-    ],
+    
     build: {
       cssCodeSplit: true,
       rollupOptions: {
