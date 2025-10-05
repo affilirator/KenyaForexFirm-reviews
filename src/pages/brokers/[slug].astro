@@ -141,7 +141,21 @@ const schemaData = {
   author={author || undefined}
 >
   <BrokerHeader broker={broker} />
-  <p>{promoDetails.title}</p>
+  {
+    promoDetails && (
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+        <a
+          href={promoDetails.url}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+          class="block bg-yellow-500 text-black text-center font-semibold py-3 px-4 rounded-lg hover:bg-yellow-600 transition-colors"
+        >
+          {promoDetails.title} - Click to Claim
+        </a>
+      </div>
+    )
+  }
+
   <BrokerNavigation />
 
   <main class="py-12 bg-gradient-to-b from-neutral-900 to-neutral-950">
