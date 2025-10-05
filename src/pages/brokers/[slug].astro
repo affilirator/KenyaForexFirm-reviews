@@ -6,6 +6,7 @@ import BrokerOverview from '../../components/review/BrokerOverview.astro';
 import BrokerRegulation from '../../components/review/BrokerRegulation.astro';
 import BrokerProsAndCons from '../../components/review/BrokerProsAndCons.astro';
 import BrokerVerdict from '../../components/review/BrokerVerdict.astro';
+import BrokerPromotions from '../../components/review/BrokerPromotions.astro';
 import RiskWarning from '../../components/review/RiskWarning.astro';
 import { fetchPromotionByslug, getReviews } from '../../lib/qs-esm';
 import { getAuthorByIdCached } from '../../lib/author-service';
@@ -23,6 +24,7 @@ const { broker } = Astro.props;
 if (!broker) return Astro.redirect('/404');
 const promoSlug = broker.slug;
 const promoDetails = await fetchPromotionByslug(promoSlug);
+const neededDetails = promoDetails?.details || [];
 // Get author information
 let author = null;
 if (broker.author && broker.author.length > 0) {
@@ -162,6 +164,7 @@ const schemaData = {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <BrokerOverview broker={broker} />
       <BrokerRegulation broker={broker} />
+      <BrokerPromotions promotions={neededDetails} />
       <BrokerProsAndCons broker={broker} />
       <BrokerVerdict broker={broker} />
     </div>
