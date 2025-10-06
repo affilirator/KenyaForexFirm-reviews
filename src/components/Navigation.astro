@@ -1,6 +1,7 @@
 ---
 import { site } from '~/data/site';
 import SearchDialog from './SearchDialog.astro';
+import Search from './Search.astro';
 
 const navItems = [
   { label: 'Home', href: '/', description: 'Homepage' },
@@ -170,14 +171,7 @@ const currentPath = Astro.url.pathname;
           }
         </div>
 
-        <!-- Search and CTA -->
-        <div id="search"></div>
-        <script type="module">
-          import { PagefindUI } from '@pagefind/default-ui';
-          window.addEventListener('DOMContentLoaded', (event) => {
-            new PagefindUI({ element: '#search', showSubResults: true });
-          });
-        </script>
+        <Search />
         <div class="hidden md:flex items-center space-x-3">
           <button
             type="button"

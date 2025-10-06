@@ -1,0 +1,12 @@
+---
+export const prerender = false;
+---
+
+<!-- Search and CTA -->
+<div id="search"></div>
+<script is:inline type="module">
+  import { PagefindUI } from '@pagefind/default-ui';
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({ element: '#search', showSubResults: true });
+  });
+</script>
