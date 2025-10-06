@@ -21,19 +21,32 @@
             class="text-neutral-400 hover:text-white"
             id="close-search"
           >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
             </svg>
           </button>
         </div>
-        <div id="search-results" class="mt-4"></div>
+        <div
+          id="search-results"
+          class="mt-4"
+        >
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-<script src="/pagefind/pagefind-ui.js" is:inline></script>
+
 
 <script is:inline>
   function openSearch() {
@@ -53,12 +66,12 @@
     const closeSearch = document.getElementById('close-search');
 
     // Initialize Pagefind UI
-    new PagefindUI({ 
+    new PagefindUI({
       element: '#search-results',
       showSubResults: true,
       showImages: false,
       pageSize: 5,
-    
+      debounceTimeoutMs: 500,
     });
 
     // Dialog controls
