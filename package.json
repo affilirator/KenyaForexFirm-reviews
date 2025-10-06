@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist",
     "newsfetch": "tsc src/scripts/fetch-fbs-news.ts && node src/scripts/fetch-fbs-news.js",
     "preview": "astro preview",
     "astro": "astro",
@@ -44,6 +44,7 @@
     "escape-html": "^1.0.3",
     "fs": "0.0.1-security",
     "lucide-react": "^0.544.0",
+    "pagefind": "^1.4.0",
     "path": "^0.12.7",
     "qs-esm": "^7.0.2",
     "react": "^19.1.1",

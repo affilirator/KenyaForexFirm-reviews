@@ -22,7 +22,6 @@ export default defineConfig({
       // Apply base styles before Astro's styles
       applyBaseStyles: false,
     }),
-    ,
     icon(),
     react(),
     sitemap({
