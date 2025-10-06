@@ -72,6 +72,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
                 'scroll-mt-20 font-display'
               )}
               role="heading"
+              data-pagefind-body
               aria-level={parseInt(HeadingTag.slice(1))}
             >
               {children}
@@ -80,7 +81,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
 
         case 'paragraph':
           return (
-            <p className="content-p">
+            <p className="content-p" data-pagefind-ignore="all">
               {children}
             </p>
           );
@@ -114,6 +115,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
               key={i}
               className="text-base md:text-lg font-ui leading-relaxed text-foreground/90 pl-2"
               role="listitem"
+              data-pagefind-ignore="all"
             >
               {children}
             </li>
@@ -125,6 +127,7 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
               key={i}
               className="border-l-4 border-primary/30 font-ui bg-muted/30 dark:bg-muted/20 pl-6 pr-4 py-4 my-6 md:my-8 rounded-r-lg italic text-foreground/80"
               role="blockquote"
+              data-pagefind-ignore="all"
             >
               <div className="text-base md:text-lg leading-relaxed">
                 {children}
