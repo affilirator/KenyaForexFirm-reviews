@@ -1,10 +1,10 @@
 ---
 //import pagefind
 // Search Dialog Component
-//export const prerender = false;
-//const { q } = Astro.props;
+export const prerender = false;
+const { q } = Astro.props;
 
-//const q = Astro.url.searchParams.get("q") ?? undefined;
+const q = Astro.url.searchParams.get('q') ?? undefined;
 ---
 
 <div
@@ -12,12 +12,12 @@
   class="fixed inset-0 z-50 hidden"
 >
   <div
-    class="fixed inset-0"
+    class="fixed inset-0 text-white bg-black/50 backdrop-blur-sm"
     id="search-overlay"
   >
   </div>
   <div class="fixed inset-x-4 top-20 mx-auto max-w-2xl">
-    <div class="rounded-lg border border-neutral-700 shadow-xl">
+    <div class="bg-neutral-900 text-white rounded-lg border border-neutral-700 shadow-xl">
       <div class="p-4">
         <div class="flex justify-end mb-4">
           <button
