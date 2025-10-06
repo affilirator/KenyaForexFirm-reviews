@@ -15,172 +15,66 @@
   <div class="fixed inset-x-4 top-20 mx-auto max-w-2xl">
     <div class="bg-neutral-900 rounded-lg border border-neutral-700 shadow-xl">
       <div class="p-4">
-        <div class="relative">
-          <svg
-            class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            ></path>
-          </svg>
-          <input
-            type="text"
-            placeholder="Search brokers, reviews, guides..."
-            class="w-full pl-10 pr-4 py-3 bg-neutral-800 border border-neutral-600 rounded-lg text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            id="search-input"
-          />
+        <div class="flex justify-end mb-4">
           <button
             type="button"
-            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-white"
+            class="text-neutral-400 hover:text-white"
             id="close-search"
           >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              ></path>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
         </div>
-        <div
-          id="search-results"
-          class="mt-4 max-h-96 overflow-y-auto hidden"
-        >
-          <div class="text-sm text-neutral-400 mb-2">Search results</div>
-          <div id="results-list"></div>
-        </div>
+        <div id="search-results" class="mt-4"></div>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-  const searchDialog = document.getElementById('search-dialog');
-  const searchInput = document.getElementById('search-input');
-  const searchOverlay = document.getElementById('search-overlay');
-  const closeSearch = document.getElementById('close-search');
-  const searchResults = document.getElementById('search-results');
-  const resultsList = document.getElementById('results-list');
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<script src="/pagefind/pagefind-ui.js" is:inline></script>
 
-  let pagefind: any;
-
-  // Initialize Pagefind
-  async function initPagefind() {
-    try {
-      // @ts-ignore
-      //import * as pagefind from 'pagefind';
-      await initPagefind();
-
-      //pagefind = await import('/pagefind/pagefind.js');
-    } catch (error) {
-      console.error('Failed to load Pagefind:', error);
-    }
-  }
-
-  async function performSearch(query: string) {
-    if (!query.trim()) {
-      searchResults?.classList.add('hidden');
-      return;
-    }
-
-    if (!pagefind) {
-      await initPagefind();
-    }
-
-    try {
-      const search = await pagefind.search(query);
-      const results = await Promise.all(
-        search.results.slice(0, 5).map((r: any) => r.data())
-      );
-
-      if (results.length > 0) {
-        resultsList!.innerHTML = results
-          .map(
-            (item: any) => `
-          <a href="${item.url}" class="block p-3 hover:bg-neutral-800 rounded-lg border-b border-neutral-700 last:border-b-0">
-            <div class="text-white font-medium">${item.meta.title || item.url}</div>
-            <div class="text-neutral-400 text-sm">${item.excerpt}</div>
-          </a>
-        `
-          )
-          .join('');
-        searchResults?.classList.remove('hidden');
-      } else {
-        resultsList!.innerHTML =
-          '<div class="p-3 text-neutral-400">No results found</div>';
-        searchResults?.classList.remove('hidden');
-      }
-    } catch (error) {
-      console.error('Search error:', error);
-      resultsList!.innerHTML =
-        '<div class="p-3 text-neutral-400">Search unavailable</div>';
-      searchResults?.classList.remove('hidden');
-    }
-  }
-
+<script is:inline>
   function openSearch() {
+    const searchDialog = document.getElementById('search-dialog');
     searchDialog?.classList.remove('hidden');
-    searchInput?.focus();
     document.body.style.overflow = 'hidden';
   }
 
   function closeSearchDialog() {
+    const searchDialog = document.getElementById('search-dialog');
     searchDialog?.classList.add('hidden');
     document.body.style.overflow = '';
-    if (searchInput) (searchInput as HTMLInputElement).value = '';
-    searchResults?.classList.add('hidden');
   }
 
-  // Open search with Ctrl/Cmd + K
-  document.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-      e.preventDefault();
-      openSearch();
-    }
-    if (e.key === 'Escape') {
-      closeSearchDialog();
-    }
-  });
+  window.addEventListener('DOMContentLoaded', () => {
+    const searchOverlay = document.getElementById('search-overlay');
+    const closeSearch = document.getElementById('close-search');
 
-  searchOverlay?.addEventListener('click', closeSearchDialog);
-  closeSearch?.addEventListener('click', closeSearchDialog);
+    // Initialize Pagefind UI
+    new PagefindUI({ 
+      element: '#search-results',
+      showSubResults: true,
+      showImages: false
+    });
 
-  // Search input handler with debounce
-  let searchTimeout: number;
-  searchInput?.addEventListener('input', (e) => {
-    const query = (e.target as HTMLInputElement).value;
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => performSearch(query), 300);
-  });
+    // Dialog controls
+    searchOverlay?.addEventListener('click', closeSearchDialog);
+    closeSearch?.addEventListener('click', closeSearchDialog);
 
-  // Handle Enter key to navigate to first result
-  searchInput?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const firstResult = resultsList?.querySelector('a');
-      if (firstResult) {
-        window.location.href = (firstResult as HTMLAnchorElement).href;
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        openSearch();
       }
-    }
+      if (e.key === 'Escape') {
+        closeSearchDialog();
+      }
+    });
+
+    // Export function for search button
+    window.openSearch = openSearch;
   });
-
-  // Initialize Pagefind when component loads
-  initPagefind();
-
-  // Export function for search button
-  if (typeof window !== 'undefined') {
-    (window as any).openSearch = openSearch;
-  }
 </script>
