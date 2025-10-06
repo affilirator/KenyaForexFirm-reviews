@@ -37,6 +37,17 @@
     --sidebar-accent-foreground: 60 9.1% 97.8%;
     --sidebar-border: 12 6.5% 15.1%;
     --sidebar-ring: 24.6 95% 53.1%;
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: 24.6 95% 53.1%;
+    --pagefind-ui-text: 60 9.1% 97.8%;
+    --pagefind-ui-background: #ffffff;
+    --pagefind-ui-border: 20 5.9% 90%;
+    --pagefind-ui-tag: #eeeeee;
+    --pagefind-ui-border-width: 2px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: font-sans;
   }
 
   html {
@@ -78,6 +89,11 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --pagefind-ui-primary: 24.6 95% 53.1%;
+    --pagefind-ui-text: 0 0% 100%;
+    --pagefind-ui-background: #152028;
+    --pagefind-ui-border: #152028;
+    --pagefind-ui-tag: 173 58% 39%;
   }
 }
 
@@ -93,7 +109,6 @@
   }
   .author-attribution {
     @apply container bg-neutral-950 border-t border-neutral-800/50 mx-auto px-4 sm:px-6 lg:px-8 py-8;
-    
   }
 
   .card-glass {
@@ -117,7 +132,6 @@
   .contain-layout {
     contain: layout;
   }
-  
 
   .contain-paint {
     contain: paint;
