@@ -173,6 +173,7 @@ const currentPath = Astro.url.pathname;
         <!-- Search and CTA -->
         <div id="search"></div>
         <script type="module">
+          import { PagefindUI } from '@pagefind/default-ui';
           window.addEventListener('DOMContentLoaded', (event) => {
             new PagefindUI({ element: '#search', showSubResults: true });
           });
