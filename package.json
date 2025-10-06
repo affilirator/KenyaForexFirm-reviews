@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
     "build": "astro build && pagefind --site dist",
+    "postBuild": "npx -y pagefind --site ./dist",
     "newsfetch": "tsc src/scripts/fetch-fbs-news.ts && node src/scripts/fetch-fbs-news.js",
     "preview": "astro preview",
     "astro": "astro",

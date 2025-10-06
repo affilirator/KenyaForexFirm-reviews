@@ -163,6 +163,8 @@ if (schemaData && !schemaData?.['@id']) {
       name="generator"
       content={Astro.generator}
     />
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
 
     <link
       rel="privacy-policy"
@@ -338,6 +340,7 @@ if (schemaData && !schemaData?.['@id']) {
 
     <main
       id="main-content"
+      data-pagefind-body
       transition:animate="slide"
       lang="en"
       class="main-main font-sans"

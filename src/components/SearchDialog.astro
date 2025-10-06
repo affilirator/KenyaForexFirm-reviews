@@ -66,7 +66,12 @@
     </div>
   </div>
 </div>
-<script src="/pagefind/pagefind-ui.js"></script>
+<script
+  is:inline
+  src="/pagefind/pagefind-ui.js"
+></script>
+{
+  /* 
 
 <script>
   const searchDialog = document.getElementById('search-dialog');
@@ -76,17 +81,7 @@
   const searchResults = document.getElementById('search-results');
   const resultsList = document.getElementById('results-list');
 
-  let pagefind: any;
-
-  // Initialize Pagefind
-  async function initPagefind() {
-    try {
-      // @ts-ignore
-      pagefind = await import('/pagefind/pagefind.js');
-    } catch (error) {
-      console.error('Failed to load Pagefind:', error);
-    }
-  }
+  
 
   async function performSearch(query: string) {
     if (!query.trim()) {
@@ -94,12 +89,9 @@
       return;
     }
 
-    if (!pagefind) {
-      await initPagefind();
-    }
 
     try {
-      const search = await pagefind.search(query);
+     // const search = await pagefind.search(query);
       const results = await Promise.all(
         search.results.slice(0, 5).map((r: any) => r.data())
       );
@@ -182,3 +174,5 @@
     (window as any).openSearch = openSearch;
   }
 </script>
+*/
+}
