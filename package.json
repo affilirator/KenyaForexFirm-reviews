@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
-    "build": "astro build && npx -y pagefind --site ./dist",
+    "build": "astro build",
+    "postbuild": "npx pagefind --site dist --root-selector main",
+    "deploy": "wrangler deploy --env production",
     "newsfetch": "tsc src/scripts/fetch-fbs-news.ts && node src/scripts/fetch-fbs-news.js",
     "preview": "astro preview",
     "astro": "astro",
