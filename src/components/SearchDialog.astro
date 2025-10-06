@@ -27,6 +27,10 @@
             </svg>
           </button>
         </div>
+        <div id="search-results" class="mt-4 max-h-96 overflow-y-auto hidden">
+          <div class="text-sm text-neutral-400 mb-2">Search results</div>
+          <div id="results-list"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -37,6 +41,53 @@
   const searchInput = document.getElementById('search-input');
   const searchOverlay = document.getElementById('search-overlay');
   const closeSearch = document.getElementById('close-search');
+  const searchResults = document.getElementById('search-results');
+  const resultsList = document.getElementById('results-list');
+
+  let searchData: any[] = [];
+
+  // Load search data
+  async function loadSearchData() {
+    try {
+      const response = await fetch('/api/search-data.json');
+      searchData = await response.json();
+    } catch (error) {
+      // Fallback static data
+      searchData = [
+        { title: 'Best Forex Brokers', url: '/review/best-forex-brokers/', type: 'page' },
+        { title: 'CMA Regulated Brokers', url: '/review/best-forex-brokers/cma-regulated/', type: 'page' },
+        { title: 'High Leverage Brokers', url: '/review/best-forex-brokers/high-leverage/', type: 'page' },
+        { title: 'M-Pesa Brokers', url: '/review/best-forex-brokers/mpesa/', type: 'page' },
+        { title: 'MT4 Brokers', url: '/brokers/platform/metatrader-4', type: 'page' },
+        { title: 'Regulators', url: '/regulators', type: 'page' },
+        { title: 'Our Experts', url: '/authors/', type: 'page' }
+      ];
+    }
+  }
+
+  function performSearch(query: string) {
+    if (!query.trim()) {
+      searchResults?.classList.add('hidden');
+      return;
+    }
+
+    const results = searchData.filter(item => 
+      item.title.toLowerCase().includes(query.toLowerCase())
+    ).slice(0, 5);
+
+    if (results.length > 0) {
+      resultsList!.innerHTML = results.map(item => `
+        <a href="${item.url}" class="block p-3 hover:bg-neutral-800 rounded-lg border-b border-neutral-700 last:border-b-0">
+          <div class="text-white font-medium">${item.title}</div>
+          <div class="text-neutral-400 text-sm capitalize">${item.type}</div>
+        </a>
+      `).join('');
+      searchResults?.classList.remove('hidden');
+    } else {
+      resultsList!.innerHTML = '<div class="p-3 text-neutral-400">No results found</div>';
+      searchResults?.classList.remove('hidden');
+    }
+  }
 
   function openSearch() {
     searchDialog?.classList.remove('hidden');
@@ -47,6 +98,8 @@
   function closeSearchDialog() {
     searchDialog?.classList.add('hidden');
     document.body.style.overflow = '';
+    if (searchInput) searchInput.value = '';
+    searchResults?.classList.add('hidden');
   }
 
   // Open search with Ctrl/Cmd + K
@@ -62,6 +115,25 @@
 
   searchOverlay?.addEventListener('click', closeSearchDialog);
   closeSearch?.addEventListener('click', closeSearchDialog);
+
+  // Search input handler
+  searchInput?.addEventListener('input', (e) => {
+    const query = (e.target as HTMLInputElement).value;
+    performSearch(query);
+  });
+
+  // Handle Enter key to navigate to first result
+  searchInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const firstResult = resultsList?.querySelector('a');
+      if (firstResult) {
+        window.location.href = (firstResult as HTMLAnchorElement).href;
+      }
+    }
+  });
+
+  // Load search data when component loads
+  loadSearchData();
 
   // Export function for search button
   if (typeof window !== 'undefined') {
