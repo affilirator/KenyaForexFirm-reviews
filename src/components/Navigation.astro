@@ -1,5 +1,6 @@
 ---
 import { site } from '~/data/site';
+import SearchDialog from './SearchDialog.astro';
 
 const navItems = [
   { label: 'Home', href: '/', description: 'Homepage' },
@@ -169,8 +170,18 @@ const currentPath = Astro.url.pathname;
           }
         </div>
 
-        <!-- CTA Button -->
-        <div class="hidden md:block">
+        <!-- Search and CTA -->
+        <div class="hidden md:flex items-center space-x-3">
+          <button
+            type="button"
+            class="p-2 text-neutral-400 hover:text-white hover:bg-neutral-800/50 rounded-lg"
+            onclick="window.openSearch?.()"
+            aria-label="Open search"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
           <a
             href="/review/best-forex-brokers/compare/"
             class="bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white px-6 py-2 rounded-lg font-medium"
@@ -179,30 +190,42 @@ const currentPath = Astro.url.pathname;
           </a>
         </div>
 
-        <!-- Mobile menu button -->
-        <button
-          type="button"
-          class="md:hidden bg-neutral-800 p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-700"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
-          id="mobile-menu-button"
-        >
-          <span class="sr-only">Open main menu</span>
-          <svg
-            class="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
+        <!-- Mobile search and menu -->
+        <div class="md:hidden flex items-center space-x-2">
+          <button
+            type="button"
+            class="bg-neutral-800 p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-700"
+            onclick="window.openSearch?.()"
+            aria-label="Open search"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-        </button>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="bg-neutral-800 p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-700"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            id="mobile-menu-button"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -253,6 +276,8 @@ const currentPath = Astro.url.pathname;
     </div>
   </nav>
 </header>
+
+<SearchDialog />
 
 <script>
   const button = document.getElementById('mobile-menu-button');

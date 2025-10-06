@@ -10,6 +10,8 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 Disallow: /content/
+Disallow: /app/
+Disallow: /dashboard/
 
 # Sitemap
 Sitemap: ${new URL('sitemap-index.xml', import.meta.env.SITE).href}
