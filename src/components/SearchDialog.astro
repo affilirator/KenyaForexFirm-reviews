@@ -65,9 +65,15 @@ export const prerender = false;
     document.body.style.overflow = '';
   }
 
-  window.addEventListener('DOMContentLoaded', () => {
+  function initializeSearch() {
     const searchOverlay = document.getElementById('search-overlay');
     const closeSearch = document.getElementById('close-search');
+    const searchResults = document.getElementById('search-results');
+
+    // Clear existing content
+    if (searchResults) {
+      searchResults.innerHTML = '';
+    }
 
     // Initialize Pagefind UI
     new PagefindUI({
@@ -82,18 +88,24 @@ export const prerender = false;
     searchOverlay?.addEventListener('click', closeSearchDialog);
     closeSearch?.addEventListener('click', closeSearchDialog);
 
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        openSearch();
-      }
-      if (e.key === 'Escape') {
-        closeSearchDialog();
-      }
-    });
-
     // Export function for search button
     window.openSearch = openSearch;
+  }
+
+  // Initialize on page load
+  window.addEventListener('DOMContentLoaded', initializeSearch);
+  
+  // Re-initialize on navigation (Astro client-side routing)
+  document.addEventListener('astro:page-load', initializeSearch);
+
+  // Keyboard shortcuts (global)
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+    if (e.key === 'Escape') {
+      closeSearchDialog();
+    }
   });
 </script>
