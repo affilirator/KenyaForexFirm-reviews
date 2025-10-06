@@ -82,7 +82,7 @@
   async function initPagefind() {
     try {
       // @ts-ignore
-      pagefind = await import('/pagefind/pagefind-ui.js');
+      pagefind = await import('/pagefind/pagefind.js');
     } catch (error) {
       console.error('Failed to load Pagefind:', error);
     }
