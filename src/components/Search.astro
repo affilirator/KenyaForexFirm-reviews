@@ -1,11 +1,13 @@
 ---
-export const prerender = false;
+//export const prerender = false;
 ---
 
 <!-- Search and CTA -->
-
-
-<div id="search" class="z-90 bg-slate-700 text-white"></div>
+<div
+  id="search"
+  class="z-390 bg-slate-900 text-white"
+>
+</div>
 <script is:inline>
   window.addEventListener('DOMContentLoaded', (event) => {
     new PagefindUI({ element: '#search', showSubResults: true });
