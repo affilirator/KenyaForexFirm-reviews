@@ -104,7 +104,10 @@ const description = `Complete guide to ${session.name} forex trading session in 
   schemaData={jsonLd}
   author={author}
 >
-  <div class="space-x-4 font-sans mx-auto px-4 py-12">
+  <div
+    data-pagefind-body
+    class="space-x-4 font-sans mx-auto px-4 py-12"
+  >
     <div class="grid lg:grid-cols-3 gap-8 mb-12">
       <div class="lg:col-span-2">
         <div class="mb-8">
@@ -180,7 +183,6 @@ const description = `Complete guide to ${session.name} forex trading session in 
           <CardContent>
             <RichText
               content={session.description}
-              
               className=" "
             />
           </CardContent>
