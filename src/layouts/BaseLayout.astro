@@ -3,6 +3,7 @@ import { SEO } from 'astro-seo';
 import { site } from '@data/site';
 import { ClientRouter } from 'astro:transitions';
 import Navigation from '../components/Navigation.astro';
+import * as pagefind from 'pagefind';
 import Footer from '../components/Footer.astro';
 import AuthorAttribution from '../components/common/AuthorAttribution.astro';
 import { getDefaultAuthor } from '../lib/author-service';
@@ -165,7 +166,7 @@ if (schemaData && !schemaData?.['@id']) {
     />
     <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script is:inline src="/pagefind/pagefind-ui.js"></script>
-<link href="@pagefind/default-ui/css/ui.css" rel="stylesheet" />
+
 
     <link
       rel="privacy-policy"

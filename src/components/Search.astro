@@ -1,12 +1,14 @@
 ---
-export const prerender = false;
+//export const prerender = false;
 ---
 
 <!-- Search and CTA -->
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
 <div id="search"></div>
-<script is:inline type="module">
-  import { PagefindUI } from '@pagefind/default-ui';
-  window.addEventListener('DOMContentLoaded', (event) => {
-    new PagefindUI({ element: '#search', showSubResults: true });
-  });
+<script type="module">
+    
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
 </script>
