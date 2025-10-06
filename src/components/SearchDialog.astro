@@ -67,7 +67,6 @@
   </div>
 </div>
 
-
 <script>
   const searchDialog = document.getElementById('search-dialog');
   const searchInput = document.getElementById('search-input');
@@ -82,7 +81,10 @@
   async function initPagefind() {
     try {
       // @ts-ignore
-      pagefind = await import('/pagefind/pagefind.js');
+      //import * as pagefind from 'pagefind';
+      await initPagefind();
+
+      //pagefind = await import('/pagefind/pagefind.js');
     } catch (error) {
       console.error('Failed to load Pagefind:', error);
     }
