@@ -115,18 +115,26 @@ const fullYear = new Date().getFullYear();
   title={broker.name}
   description={broker.summary}
 >
-  <div class="bg-background dark">
+  <div class="bg-foreground">
     <div class="container mx-auto px-4 md:px-6 py-6 md:py-12">
       <Breadcrumb className="mb-8">
         <BreadcrumbList>
-          <BreadcrumbItem
-            ><BreadcrumbLink asChild><a href="/">Home</a></BreadcrumbLink
-            ></BreadcrumbItem
-          >
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <a href="/">Home</a>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
           <BreadcrumbSeparator />
-          <BreadcrumbItem
-            ><BreadcrumbLink asChild
-              ><a href="/best-forex-brokers">Brokers</a></BreadcrumbLink
+           <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <a href="/reviews/">Reviews</a>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild
+              ><a href="/reviews/best-forex-brokers">
+                Forex Brokers</a></BreadcrumbLink
             ></BreadcrumbItem
           >
           <BreadcrumbSeparator />
@@ -136,7 +144,7 @@ const fullYear = new Date().getFullYear();
         </BreadcrumbList>
       </Breadcrumb>
 
-      <main class="grid lg:grid-cols-12 gap-6 lg:gap-12">
+      <section class="grid lg:grid-cols-12 gap-6 lg:gap-12">
         <article class="lg:col-span-8">
           <header
             class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-6 md:mb-8"
@@ -334,7 +342,7 @@ const fullYear = new Date().getFullYear();
                   // Map section types to broker ratings
                   const getRatingForSection = (blockType: string) => {
                     switch (blockType) {
-                      case 'safety-regulation':
+                      case 'safety-regulation': 
                         return broker.rating?.trust;
                       case 'trading-conditions':
                         return broker.rating?.fees;
@@ -380,7 +388,7 @@ const fullYear = new Date().getFullYear();
         </article>
         <aside class="lg:col-span-4 space-y-6 lg:space-y-8">
           <div class="lg:sticky lg:top-24">
-            <Card>
+            <Card> 
               <CardHeader>
                 <CardTitle className="text-lg md:text-xl"
                   >Key Information</CardTitle
@@ -471,7 +479,7 @@ const fullYear = new Date().getFullYear();
             </div>
           </div>
         </aside>
-      </main>
+      </section>
     </div>
   </div>
 </BaseLayout>

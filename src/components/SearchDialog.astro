@@ -57,6 +57,12 @@ export const prerender = false;
     const searchDialog = document.getElementById('search-dialog');
     searchDialog?.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
+    
+    // Focus on search input after a brief delay
+    setTimeout(() => {
+      const searchInput = document.querySelector('#search-results input[type="search"]');
+      searchInput?.focus();
+    }, 100);
   }
 
   function closeSearchDialog() {

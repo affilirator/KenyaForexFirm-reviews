@@ -125,7 +125,9 @@ const modDate = new Date().toISOString();
 >
   <div class="container mx-auto px-4 py-24">
     <header class="text-center mb-12">
-      <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
+      <h1
+        class="text-neutral-200 font-display text-4xl md:text-5xl font-bold mb-4"
+      >
         Forex Trading Sessions in Kenya Time
       </h1>
       <p class="text-xl text-muted-foreground dark:invert max-w-3xl mx-auto">
@@ -138,7 +140,7 @@ const modDate = new Date().toISOString();
     <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2 mb-12">
       {
         sessions.map((session: TradingSession) => (
-          <a href={`/forex-trading/sessions/${session.slug}/`}>
+          <a href={`/trading/sessions/${session.slug}/`}>
             <Card className="h-full hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div class="flex items-center justify-between">
