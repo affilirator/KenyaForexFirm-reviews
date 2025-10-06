@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
-    "build": "astro build && pagefind --site dist",
-    "postbuild": "npx -y pagefind --site ./dist",
+    "build": "astro build && npx -y pagefind --site ./dist",
+    
     "newsfetch": "tsc src/scripts/fetch-fbs-news.ts && node src/scripts/fetch-fbs-news.js",
     "preview": "astro preview",
     "astro": "astro",
