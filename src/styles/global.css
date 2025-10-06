@@ -40,7 +40,7 @@
     --pagefind-ui-scale: 1;
     --pagefind-ui-primary: 24.6 95% 53.1%;
     --pagefind-ui-text: 60 9.1% 97.8%;
-    --pagefind-ui-background: #ffffff;
+    --pagefind-ui-background: 24.6 95% 53.1%;
     --pagefind-ui-border: 20 5.9% 90%;
     --pagefind-ui-tag: #eeeeee;
     --pagefind-ui-border-width: 2px;
@@ -90,7 +90,7 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
     --pagefind-ui-primary: 24.6 95% 53.1%;
-    --pagefind-ui-text: #393939;
+    --pagefind-ui-text: #e9e2e2;
     --pagefind-ui-background: #152028;
     --pagefind-ui-border: 20.5 90.2% 48.2%;
     --pagefind-ui-tag: 173 58% 39%;
