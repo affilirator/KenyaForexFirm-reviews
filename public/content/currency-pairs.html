@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Kenyan Forex Trader's Compass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 640px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .big-stat-number {
+            font-weight: 900;
+            font-size: 4rem;
+            line-height: 1;
+            color: #4D96FF;
+        }
+        .timeline {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            top: 20px;
+            bottom: 20px;
+            background-color: #cbd5e1;
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 20px;
+            text-align: right;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 20px;
+            text-align: left;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: -8px;
+            background-color: white;
+            border: 4px solid #4D96FF;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-item:nth-child(even)::after {
+            left: -8px;
+        }
+        .timeline-content {
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            display: inline-block;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-2">The Kenyan Forex Trader's Compass</h1>
+            <p class="text-lg text-slate-600">Navigating Currency Pairs from the Heart of East Africa</p>
+        </header>
+
+        <section class="text-center mb-16">
+            <div class="bg-white rounded-lg shadow-md p-6 max-w-sm mx-auto">
+                <p class="text-slate-600 text-lg">Daily Global Forex Market Volume</p>
+                <p class="big-stat-number">$6.6T</p>
+                <p class="text-slate-500 text-sm">Source: Bank for International Settlements (BIS) Triennial Survey</p>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-800">The Three Tiers of the Currency Kingdom</h2>
+                <p class="text-md text-slate-600 mt-2 max-w-3xl mx-auto">Not all currency pairs are created equal. Understanding their classification by liquidity and volatility is crucial for risk management and strategy selection.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-2">Majors</h3>
+                    <p class="text-6xl mb-4">🦁</p>
+                    <p class="text-slate-600">Highest liquidity and lowest spreads. All pairs include the USD. Ideal for beginners. (e.g., EUR/USD, GBP/USD)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-2">Minors (Crosses)</h3>
+                     <p class="text-6xl mb-4">🦓</p>
+                    <p class="text-slate-600">Higher volatility and wider spreads. Pairs of major currencies, excluding the USD. (e.g., EUR/GBP, AUD/JPY)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-2">Exotics</h3>
+                     <p class="text-6xl mb-4">🐆</p>
+                    <p class="text-slate-600">Extreme volatility and very wide spreads. A major currency vs. an emerging economy's currency. For experts only. (e.g., USD/ZAR)</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 mt-8">
+                <h3 class="text-2xl font-bold text-slate-800 text-center mb-4">Global Currency Market Share</h3>
+                 <p class="text-center text-slate-600 mb-4">The US Dollar is involved in the vast majority of all forex transactions, making it the undisputed king of the market. Understanding which currencies are traded most helps in selecting pairs with high liquidity.</p>
+                <div class="chart-container">
+                    <canvas id="marketShareChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-800">When to Trade: A Nairobi (EAT) Perspective</h2>
+                <p class="text-md text-slate-600 mt-2 max-w-3xl mx-auto">Your location is a strategic advantage. The market's most volatile and opportune moments happen during your afternoon and evening.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content bg-white shadow-md">
+                        <h3 class="font-bold text-lg text-slate-700">Tokyo Session</h3>
+                        <p class="text-sm text-slate-500">2:00 AM - 11:00 AM EAT</p>
+                        <p class="text-xs text-slate-600 mt-1">Calm waves, good for JPY pairs.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content bg-white shadow-md">
+                        <h3 class="font-bold text-lg text-slate-700">London Session</h3>
+                        <p class="text-sm text-slate-500">10:00 AM - 7:00 PM EAT</p>
+                         <p class="text-xs text-slate-600 mt-1">The market heart beats fastest.</p>
+                    </div>
+                </div>
+                 <div class="timeline-item">
+                    <div class="timeline-content bg-[#FFD93D] shadow-lg">
+                        <h3 class="font-bold text-lg text-slate-800">Overlap: London/Tokyo</h3>
+                        <p class="text-sm text-slate-600">10:00 AM - 11:00 AM EAT</p>
+                        <p class="text-xs text-slate-700 mt-1">Liquidity starts to pour in.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content bg-white shadow-md">
+                        <h3 class="font-bold text-lg text-slate-700">New York Session</h3>
+                        <p class="text-sm text-slate-500">3:00 PM - 12:00 AM EAT</p>
+                        <p class="text-xs text-slate-600 mt-1">Dominated by US news and data.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                     <div class="timeline-content bg-[#FF6B6B] shadow-lg">
+                        <h3 class="font-bold text-lg text-white">PRIME OVERLAP: London/NY</h3>
+                        <p class="text-sm text-yellow-100">3:00 PM - 7:00 PM EAT</p>
+                        <p class="text-xs text-white mt-1">Maximum volatility and opportunity.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 mt-8">
+                <h3 class="text-2xl font-bold text-slate-800 text-center mb-4">Peak Volatility During Overlaps</h3>
+                <p class="text-center text-slate-600 mb-4">The London/New York overlap is the most active period in the forex market. This chart shows the average price movement in pips for key pairs during this prime trading window, highlighting where the biggest opportunities lie.</p>
+                <div class="chart-container">
+                    <canvas id="volatilityChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-800">Leverage: The Double-Edged Sword</h2>
+                <p class="text-md text-slate-600 mt-2 max-w-3xl mx-auto">Leverage magnifies both profits and losses. Its misuse is the primary reason many traders fail. Brokers offer different leverage for different pairs based on risk.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-8 flex flex-col justify-center items-center">
+                    <p class="text-slate-600 text-lg text-center">of retail traders lose money trading Forex & CFDs</p>
+                    <p class="big-stat-number my-2">76%</p>
+                    <p class="text-slate-500 text-sm text-center">Source: Financial Conduct Authority (FCA) UK</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold text-slate-800 text-center mb-4">Leverage vs. Required Margin</h3>
+                    <p class="text-center text-slate-600 mb-4 text-sm">This shows how much of your own capital (margin) is needed to open a $100,000 position. Notice how the margin requirement increases for riskier exotic pairs as brokers offer less leverage.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="leverageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center pt-8 border-t border-slate-300">
+             <h3 class="text-2xl font-bold text-slate-800">Patrick's Parting Wisdom</h3>
+            <p class="text-slate-600 max-w-3xl mx-auto mt-2">Respect the market, understand your chosen pair's personality, and always prioritize risk management. Your success is built on discipline, not luck. Happy trading!</p>
+        </footer>
+
+    </div>
+
+    <script>
+    const setup = () => {
+        const vibrantPalette = {
+            red: '#FF6B6B',
+            yellow: '#FFD93D',
+            green: '#6BCB77',
+            blue: '#4D96FF',
+            purple: '#7e57c2',
+            orange: '#ffa726'
+        };
+
+        const tooltipTitleCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        const wrapLabel = (label, maxLength = 16) => {
+            if (label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        };
+        
+        const marketShareCtx = document.getElementById('marketShareChart');
+        if (marketShareCtx) {
+            new Chart(marketShareCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'Other'],
+                    datasets: [{
+                        label: 'Market Share by Currency',
+                        data: [88.3, 32.3, 16.8, 12.8, 6.8, 43.0],
+                        backgroundColor: [
+                            vibrantPalette.blue,
+                            vibrantPalette.green,
+                            vibrantPalette.red,
+                            vibrantPalette.purple,
+                            vibrantPalette.orange,
+                            vibrantPalette.yellow,
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                           callbacks: {
+                               title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) { return label.join(' '); }
+                                    return label;
+                                },
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                           }
+                        }
+                    }
+                }
+            });
+        }
+        
+        const volatilityCtx = document.getElementById('volatilityChart');
+        if (volatilityCtx) {
+            const volatilityLabels = ['EUR/USD', 'GBP/USD', 'USD/JPY', 'AUD/JPY', 'GBP/JPY'].map(label => wrapLabel(label));
+            new Chart(volatilityCtx, {
+                type: 'bar',
+                data: {
+                    labels: volatilityLabels,
+                    datasets: [{
+                        label: 'Average Pip Movement (London/NY Overlap)',
+                        data: [70, 92, 56, 98, 140],
+                        backgroundColor: [
+                            vibrantPalette.blue,
+                            vibrantPalette.green,
+                            vibrantPalette.yellow,
+                            vibrantPalette.orange,
+                            vibrantPalette.red
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                             grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: tooltipTitleCallback.plugins.tooltip
+                    }
+                }
+            });
+        }
+
+        const leverageCtx = document.getElementById('leverageChart');
+        if (leverageCtx) {
+            const leverageLabels = ['Majors (1:500)', 'Minors (1:200)', 'Exotics (1:50)'].map(label => wrapLabel(label));
+            new Chart(leverageCtx, {
+                type: 'bar',
+                data: {
+                    labels: leverageLabels,
+                    datasets: [{
+                        label: 'Required Margin ($)',
+                        data: [200, 500, 2000],
+                        backgroundColor: vibrantPalette.red,
+                        stack: 'Stack 0',
+                        borderRadius: 4
+                    }, {
+                        label: 'Leveraged Amount ($)',
+                        data: [99800, 99500, 98000],
+                        backgroundColor: vibrantPalette.blue,
+                        stack: 'Stack 0',
+                         borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                             grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            stacked: true,
+                             grid: {
+                                display: false
+                            },
+                             ticks: {
+                                callback: function(value) {
+                                    return '$' + value / 1000 + 'k';
+                                }
+                            }
+                        }
+                    },
+                     plugins: {
+                        tooltip: {
+                            ...tooltipTitleCallback.plugins.tooltip,
+                            callbacks: {
+                                ...tooltipTitleCallback.plugins.tooltip.callbacks,
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', setup);
+    </script>
+</body>
+</html>
