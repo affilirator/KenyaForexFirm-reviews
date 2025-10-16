@@ -1,4 +1,5 @@
 /brokers/cma-approved/* /brokers/cma-regulated/:splat 301
+/regulators/* /forex-trading/regulations/:splat 301
 /brokers/funding/m-pesa/* /review/best-forex-brokers/mpesa/:splat 301
 /regulators/asic-regulation/ /forex-trading/regulations/asic/ 301
 /regulators/fsca-regulation/ /forex-trading/regulations/fsca/ 301
@@ -11,7 +12,7 @@
 /regulators/jfsa-regulation/ /forex-trading/regulations/jfsa/ 301
 /regulators/mas-regulation/ /forex-trading/regulations/mas/ 301
 /regulators/nfa-regulation/ /forex-trading/regulations/nfa/ 301
-/regulators/* /forex-trading/regulations/:splat 301
+
 /brokers/cma-regulated/ /review/best-forex-brokers/cma-regulated/ 301
 /brokers/high-leverage/ /review/best-forex-brokers/high-leverage/ 301
 /brokers/safety-regulation-ranking/ /review/best-forex-brokers/most-regulated/ 301
