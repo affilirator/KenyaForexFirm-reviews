@@ -174,12 +174,14 @@ export const certifications = [
 export const schemaData = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
+  headline: 'About Us',
   name: 'About Forex Broker Reviews Kenya',
   description:
-    'Learn about our expert team, methodology, and commitment to providing unbiased forex broker reviews for Kenyan traders',
+    'Kenya Forex Firm is Kenya’s leading authority on forex and CFD broker reviews, trading education, and market analysis. Founded and operated by certified financial analysts and trading educators, we provide unbiased, data-driven insights to help Kenyan traders make informed decisions. Our mission is to bring transparency, accuracy, and professionalism to online trading by reviewing regulated brokers, comparing trading costs, and publishing evidence-based research backed by real trading experience.',
   url: `${site.url}/about/`,
   mainEntity: {
     '@type': 'Organization',
+    '@id': `${site.url}/#organization`,
     name: site.siteName,
     foundingDate: '2014',
     founders: [

@@ -1,0 +1,23 @@
+{
+  "FOREX_SYMBOLS": [
+    "EUR/USD",
+    "USD/JPY",
+    "GBP/USD",
+    "AUD/USD",
+    "USD/CAD",
+    "USD/CHF",
+    "NZD/USD"
+  ],
+  "KEYWORDS": {
+    "euro": "EUR/USD",
+    "dollar": "USD/JPY",
+    "yen": "USD/JPY",
+    "pound": "GBP/USD",
+    "sterling": "GBP/USD",
+    "aussie": "AUD/USD",
+    "loonie": "USD/CAD",
+    "swissie": "USD/CHF",
+    "kiwi": "NZD/USD"
+  },
+  "lastModified": "2025-10-31T05:00:00Z"
+}
