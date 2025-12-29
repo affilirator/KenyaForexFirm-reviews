@@ -292,16 +292,16 @@ if (schemaData && !schemaData?.['@id']) {
           />
         )
     }
-    <ClientRouter />
+
     <Font cssVariable="--font-roboto" />
     <Font cssVariable="--font-source-sans-3" />
     <Font cssVariable="--font-eb-garamond" />
     <Font cssVariable="--font-playfair-display" />
+    <ClientRouter />
   </head>
 
   <body
     data-pagefind-body
-    transition:animate="slide"
     class="antialiased flex flex-col bg-gradient-to-tr from-neutral-950 via-slate-900 to-stone-700 text-neutral-100 overflow-x-hidden"
   >
     {/* Skip Link for Accessibility */}
@@ -313,7 +313,7 @@ if (schemaData && !schemaData?.['@id']) {
     </a>
 
     {/* Navigation outside main content container */}
-    <Navigation />
+    <Navigation transition:navigate />
 
     <main
       id="main-content"
@@ -323,15 +323,15 @@ if (schemaData && !schemaData?.['@id']) {
     </main>
 
     {/* Set footer outside main content container */}
-    <Footer>
+    <Footer
+      transition:persist
+      transition:footer
+    >
       {/* Footer has a slot in the top part to allow injection of components */}
       {
         pageAuthor && (
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-neutral-800/50">
-            <AuthorAttribution
-              author={pageAuthor}
-              transition:animate="slide"
-            />
+            <AuthorAttribution author={pageAuthor} />
           </div>
         )
       }

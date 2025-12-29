@@ -71,231 +71,222 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <header>
-  <div class="skip-links sr-only">
-    <a
-      href="#main-content"
-      id="skip-main-content"
-      class="sr-only"
-      >Skip to main content</a
-    >
-    <a
-      href="#edit-search-term"
-      class="sr-only focusable skip-to-search"
-      >Skip to search box</a
-    >
-  </div>
-  <nav
-    class="main-nav font-ui"
-    role="navigation"
-    aria-label="Main navigation"
+  <a
+    href="#edit-search-term"
+    class="sr-only focusable skip-to-search"
+    >Skip to search box</a
   >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
-        <div class="flex-shrink-0">
-          <a
-            href="/"
-            class="flex items-center space-x-2 group"
-            aria-label={`${site.siteName} homepage`}
-          >
-            <div
-              class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center"
-            >
-              <svg
-                class="w-5 h-5 text-white"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  d="M12 2L2 7v10c0 5.55 3.84 10 10 10s10-4.45 10-10V7l-10-5z"
-                ></path>
-              </svg>
-            </div>
-            <span class="text-xl font-display font-bold text-gradient">
-              {site.siteName}
-            </span>
-          </a>
-        </div>
-
-        <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center space-x-1">
-          {
-            navItems.map((item) => (
-              <div class="relative group">
-                <a
-                  href={item.href}
-                  class={`px-4 py-2 rounded-lg text-sm font-medium relative ${
-                    currentPath === item.href ||
-                    currentPath.startsWith(item.href + '/')
-                      ? 'text-primary-400 bg-primary-500/10'
-                      : 'text-neutral-300 hover:text-primary-400 hover:bg-neutral-800/30'
-                  }`}
-                  aria-current={currentPath === item.href ? 'page' : undefined}
-                >
-                  {item.label}
-                  {item.submenu && (
-                    <svg
-                      class="w-4 h-4 ml-1 inline"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  )}
-                </a>
-
-                {item.submenu && (
-                  <div class="submenu-item group-hover:opacity-100 group-hover:visible">
-                    <div class="py-2">
-                      {item.submenu.map((subItem) => (
-                        <a
-                          href={subItem.href}
-                          class="block px-4 py-2 text-sm text-neutral-300 hover:text-primary-400 hover:bg-neutral-800/50"
-                        >
-                          {subItem.label}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))
-          }
-        </div>
-
-        <div class="hidden md:flex items-center space-x-3">
-          <button
-            type="button"
-            class="p-2 text-neutral-400 hover:text-white hover:bg-neutral-800/50 rounded-lg"
-            onclick="window.openSearch?.()"
-            aria-label="Open search"
+</header>
+<nav
+  class="main-nav font-ui"
+  role="navigation"
+  aria-label="Main navigation"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a
+          href="/"
+          class="flex items-center space-x-2 group"
+          aria-label={`${site.siteName} homepage`}
+        >
+          <div
+            class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center"
           >
             <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              ></path>
-            </svg>
-          </button>
-          <a
-            href="/review/best-forex-brokers/compare/"
-            class="bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white px-6 py-2 rounded-lg font-medium"
-          >
-            Find Broker
-          </a>
-        </div>
-
-        <!-- Mobile search and menu -->
-        <div class="md:hidden flex items-center space-x-2">
-          <button
-            type="button"
-            class="bg-neutral-800 p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-700"
-            onclick="window.openSearch?.()"
-            aria-label="Open search"
-          >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              ></path>
-            </svg>
-          </button>
-          <button
-            type="button"
-            class="bg-neutral-800 p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-700"
-            aria-controls="mobile-menu"
-            aria-expanded="false"
-            id="mobile-menu-button"
-          >
-            <span class="sr-only">Open main menu</span>
-            <svg
-              class="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
+              class="w-5 h-5 text-white"
+              fill="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
+              <path d="M12 2L2 7v10c0 5.55 3.84 10 10 10s10-4.45 10-10V7l-10-5z"
               ></path>
             </svg>
-          </button>
-        </div>
+          </div>
+          <span class="text-xl font-display font-bold text-gradient">
+            {site.siteName}
+          </span>
+        </a>
       </div>
-    </div>
 
-    <!-- Mobile menu -->
-    <div
-      class="md:hidden hidden"
-      id="mobile-menu"
-    >
-      <div
-        class="px-4 pt-2 pb-3 space-y-1 bg-neutral-900/95 backdrop-blur-md border-t border-neutral-800/50"
-      >
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-1">
         {
           navItems.map((item) => (
-            <div>
+            <div class="relative group">
               <a
                 href={item.href}
-                class={`block px-3 py-2 rounded-lg text-base font-medium ${
-                  currentPath === item.href
+                class={`px-4 py-2 rounded-lg text-sm font-medium relative ${
+                  currentPath === item.href ||
+                  currentPath.startsWith(item.href + '/')
                     ? 'text-primary-400 bg-primary-500/10'
-                    : 'text-neutral-300 hover:text-primary-400 hover:bg-neutral-800/50'
+                    : 'text-neutral-300 hover:text-primary-400 hover:bg-neutral-800/30'
                 }`}
                 aria-current={currentPath === item.href ? 'page' : undefined}
               >
                 {item.label}
+                {item.submenu && (
+                  <svg
+                    class="w-4 h-4 ml-1 inline"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                )}
               </a>
+
               {item.submenu && (
-                <div class="ml-4 mt-1 space-y-1">
-                  {item.submenu.map((subItem) => (
-                    <a
-                      href={subItem.href}
-                      class="block px-3 py-1 text-sm text-neutral-400 hover:text-primary-400"
-                    >
-                      {subItem.label}
-                    </a>
-                  ))}
+                <div class="submenu-item group-hover:opacity-100 group-hover:visible">
+                  <div class="py-2">
+                    {item.submenu.map((subItem) => (
+                      <a
+                        href={subItem.href}
+                        class="block px-4 py-2 text-sm text-neutral-300 hover:text-primary-400 hover:bg-neutral-800/50"
+                      >
+                        {subItem.label}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
           ))
         }
+      </div>
+
+      <div class="hidden md:flex items-center space-x-3">
+        <button
+          type="button"
+          class="p-2 text-neutral-400 hover:text-white hover:bg-neutral-800/50 rounded-lg"
+          onclick="window.openSearch?.()"
+          aria-label="Open search"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            ></path>
+          </svg>
+        </button>
         <a
-          href="/brokers"
-          class="block bg-gradient-to-r from-primary-600 to-accent-600 text-white px-3 py-2 rounded-lg text-base font-medium mt-4 text-center"
+          href="/review/best-forex-brokers/compare/"
+          class="bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-500 hover:to-accent-500 text-white px-6 py-2 rounded-lg font-medium"
         >
           Find Broker
         </a>
       </div>
+
+      <!-- Mobile search and menu -->
+      <div class="md:hidden flex items-center space-x-2">
+        <button
+          type="button"
+          class="bg-neutral-800 p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-700"
+          onclick="window.openSearch?.()"
+          aria-label="Open search"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            ></path>
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="bg-neutral-800 p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-700"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          id="mobile-menu-button"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
     </div>
-  </nav>
-</header>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    class="md:hidden hidden"
+    id="mobile-menu"
+  >
+    <div
+      class="px-4 pt-2 pb-3 space-y-1 bg-neutral-900/95 backdrop-blur-md border-t border-neutral-800/50"
+    >
+      {
+        navItems.map((item) => (
+          <div>
+            <a
+              href={item.href}
+              class={`block px-3 py-2 rounded-lg text-base font-medium ${
+                currentPath === item.href
+                  ? 'text-primary-400 bg-primary-500/10'
+                  : 'text-neutral-300 hover:text-primary-400 hover:bg-neutral-800/50'
+              }`}
+              aria-current={currentPath === item.href ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+            {item.submenu && (
+              <div class="ml-4 mt-1 space-y-1">
+                {item.submenu.map((subItem) => (
+                  <a
+                    href={subItem.href}
+                    class="block px-3 py-1 text-sm text-neutral-400 hover:text-primary-400"
+                  >
+                    {subItem.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        ))
+      }
+      <a
+        href="/brokers"
+        class="block bg-gradient-to-r from-primary-600 to-accent-600 text-white px-3 py-2 rounded-lg text-base font-medium mt-4 text-center"
+      >
+        Find Broker
+      </a>
+    </div>
+  </div>
+</nav>
 
 <SearchDialog />
 
