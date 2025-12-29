@@ -83,6 +83,7 @@ const page = await pageRes.json();
           brokers.map((broker, index) => (
             <BrokerCard
               broker={broker}
+              id={index.toString()}
               index={index}
             />
           ))
@@ -90,12 +91,11 @@ const page = await pageRes.json();
       </div>
     </div>
   </section>
-  
-    <ProseRichText
-      title="How to Choose the Best Forex Brokers in Kenya"
-      content={page.content}
-    />
-  
+
+  <ProseRichText
+    title="How to Choose the Best Forex Brokers in Kenya"
+    content={page.content}
+  />
 
   <style>
     .broker-card.hidden {

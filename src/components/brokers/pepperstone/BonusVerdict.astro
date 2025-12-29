@@ -1,0 +1,60 @@
+---
+import { TrendingUp } from 'lucide-react';
+import Section from './Section.astro';
+---
+
+{/* Section 3: Strategic Analysis */}
+<Section
+  id="dilemma"
+  title="Strategic Analysis: The Trader's Dilemma"
+  icon={TrendingUp}
+>
+  <p class="leading-relaxed mb-6">
+    So, should the lack of a bonus be a deal-breaker? Let's look at this
+    visually. I've mapped a typical "Bonus-Focused Broker" against "Pepperstone"
+    across five axes critical for your survival.
+  </p>
+
+  {/*<ComparisonRadarChart />*/}
+
+  <div class="mt-10 space-y-6">
+    <h3 class="text-xl font-bold text-slate-800">The Decision Matrix</h3>
+    <p class="leading-relaxed">
+      As your mentor, here is how I would advise you to choose:
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div
+        class="p-6 bg-slate-50 rounded-xl border border-slate-200 opacity-75 grayscale transition-all hover:grayscale-0 hover:opacity-100"
+      >
+        <div
+          class="font-bold text-slate-500 mb-2 uppercase text-xs tracking-wider"
+        >
+          Scenario A
+        </div>
+        <h4 class="font-bold text-slate-800 mb-2">Prioritize a Bonus IF:</h4>
+        <p class="text-sm text-slate-600">
+          You are in a pure "gambling" phase or testing the waters with a tiny
+          amount of money you are fully prepared to lose. You care more about
+          the thrill of a larger initial balance than the cost of trading or the
+          safety of your funds.
+        </p>
+      </div>
+
+      <div class="p-6 bg-blue-50 rounded-xl border border-blue-200 shadow-md">
+        <div
+          class="font-bold text-blue-600 mb-2 uppercase text-xs tracking-wider"
+        >
+          Scenario B
+        </div>
+        <h4 class="font-bold text-blue-900 mb-2">Prioritize Pepperstone IF:</h4>
+        <p class="text-sm text-blue-800">
+          You treat trading as a <strong>business</strong>. You understand that
+          low spreads (operational costs), professional platforms (tools), and
+          CMA regulation (insurance) are the factors that determine if you will
+          still be trading in 2027.
+        </p>
+      </div>
+    </div>
+  </div>
+</Section>

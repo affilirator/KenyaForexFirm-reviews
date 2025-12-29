@@ -1,0 +1,108 @@
+---
+import { Users } from 'lucide-react';
+import InsightBox from './InsightBox.astro';
+import Section from './Section.astro';
+---
+
+{/* New Section: Refer a Friend */}
+<Section
+  id="referral"
+  title="The Community Bonus: Refer a Friend"
+  icon={Users}
+>
+  <p class="leading-relaxed mb-6">
+    Now, there is <em>one</em> exception to the "no bonus" rule. It's not about how
+    much you deposit, but about who you bring into the ecosystem. This is Pepperstone's
+    **Refer a Friend** program, and for 2026, it remains one of the few legitimate
+    ways to earn cash rewards.
+  </p>
+  <p class="leading-relaxed mb-6">
+    Unlike the shady "affiliate schemes" you might see on Instagram, this is
+    straightforward: **You refer a friend, they trade, you both get paid.** And
+    crucially, it is paid in **Cash**, not trading credit.
+  </p>
+
+  <div
+    class="bg-blue-900 text-white rounded-xl p-6 mb-8 relative overflow-hidden shadow-lg"
+  >
+    <div
+      class="absolute top-0 right-0 w-32 h-32 bg-blue-500 opacity-20 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2"
+    >
+    </div>
+
+    <h4 class="text-lg font-bold mb-4 relative z-10">
+      How the Reward Structure Works
+    </h4>
+    <div class="space-y-4 relative z-10">
+      <div
+        class="flex items-center justify-between bg-white/10 p-3 rounded-lg border border-white/10"
+      >
+        <div>
+          <div class="text-xs text-blue-200 uppercase tracking-wide">
+            Tier 1
+          </div>
+          <div class="font-medium text-sm">
+            Friend Deposits $500 + Trades 2.5 Lots
+          </div>
+        </div>
+        <div class="text-xl font-bold text-emerald-400">$50 Each</div>
+      </div>
+
+      <div
+        class="flex items-center justify-between bg-white/10 p-3 rounded-lg border border-white/10"
+      >
+        <div>
+          <div class="text-xs text-blue-200 uppercase tracking-wide">
+            Tier 2
+          </div>
+          <div class="font-medium text-sm">
+            Friend Deposits $1,000 + Trades 5 Lots
+          </div>
+        </div>
+        <div class="text-xl font-bold text-emerald-400">$100 Each</div>
+      </div>
+
+      <div
+        class="flex items-center justify-between bg-white/20 p-3 rounded-lg border border-white/30 shadow-inner"
+      >
+        <div>
+          <div class="text-xs text-blue-200 uppercase tracking-wide">
+            Tier 3 (The Pro Tier)
+          </div>
+          <div class="font-medium text-sm">
+            Friend Deposits $10,000 + Trades 20 Lots
+          </div>
+        </div>
+        <div class="text-xl font-bold text-emerald-400">$250 Each</div>
+      </div>
+    </div>
+  </div>
+
+  <InsightBox
+    title="Patrick's Advice: Don't Be 'That' Guy"
+    type="success"
+  >
+    <p class="mb-2">
+      This program is excellent for building a small trading circle. If you have
+      a friend who is <strong>already serious</strong>{' '}
+      about trading, referring them is a win-win. You essentially get your first
+      few trades covered by the house.
+    </p>
+    <p>
+      However,{' '}
+      <strong>
+        do not use this to push uninterested friends into trading.
+      </strong>{' '}
+      The requirement for them to trade volume (e.g., 2.5 lots) means they need to
+      actually engage with the market. If they don't know what they are doing, they
+      will lose their deposit just to get you a $50 reward. That is not mentorship;
+      that is exploitation. Only refer those who are ready to learn.
+    </p>
+  </InsightBox>
+
+  <p class="text-sm text-slate-500 italic mt-4">
+    *Pro Tip: Ensure your friend enters your email address in the 'How did you
+    hear of us' section during their account application. The volume
+    requirements must be met within 90 days.
+  </p>
+</Section>

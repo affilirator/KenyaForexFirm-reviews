@@ -1,0 +1,192 @@
+---
+import {
+  AlertTriangle,
+  ExternalLink,
+  MousePointerClick,
+  ShieldCheck,
+} from 'lucide-react';
+import authorImg from '~/assets/images/Patrick-Mahinge.webp';
+import BonusSection from '../pepperstone/BonusSection.astro';
+import Hero from './Hero.astro';
+const author = 'Patrick Mahinge';
+const newDate = new Date();
+
+const date = newDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Hero
+  AUTHOR_={author}
+  LAST_UPDATED={date}
+/>
+
+<div
+  class="bg-slate-50 max-w-7xl mx-auto px-4 sm:px-6 -mt-12 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12"
+>
+  {/* Main Content Column */}
+  <div class="lg:col-span-8">
+    <BonusSection />
+    <slot />
+  </div>
+  {/* Sidebar Column */}
+  <div class="lg:col-span-4 space-y-8">
+    {/* Sticky Container */}
+    <div class="sticky top-24 space-y-8">
+      {
+        /* Table of Contents - Dynamic & Floating 
+      <div
+        class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 hidden lg:block"
+      >
+        <h4
+          class="font-bold text-slate-400 text-xs uppercase tracking-wide mb-4 flex items-center gap-2"
+        >
+          <Menu size={14} /> Article Contents
+        </h4>
+        <nav class="space-y-1">
+          <button
+            onClick={() => scrollToSection('policy')}
+            class={`block w-full text-left px-3 py-2 text-sm rounded transition-all border-l-2 ${activeSection === 'policy' ? 'border-brand-accent bg-brand-50 text-brand-900 font-bold' : 'border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+          >
+            The "No Bonus" Policy
+          </button>
+          <button
+            onClick={() => scrollToSection('value')}
+            class={`block w-full text-left px-3 py-2 text-sm rounded transition-all border-l-2 ${activeSection === 'value' ? 'border-brand-accent bg-brand-50 text-brand-900 font-bold' : 'border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+          >
+            Real Value Proposition
+          </button>
+          <button
+            onClick={() => scrollToSection('strategy')}
+            class={`block w-full text-left px-3 py-2 text-sm rounded transition-all border-l-2 ${activeSection === 'strategy' ? 'border-brand-accent bg-brand-50 text-brand-900 font-bold' : 'border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+          >
+            Strategic Analysis
+          </button>
+          <button
+            onClick={() => scrollToSection('decision')}
+            class={`block w-full text-left px-3 py-2 text-sm rounded transition-all border-l-2 ${activeSection === 'decision' ? 'border-brand-accent bg-brand-50 text-brand-900 font-bold' : 'border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+          >
+            Which Trader Are You?
+          </button>
+          <button
+            onClick={() => scrollToSection('verdict')}
+            class={`block w-full text-left px-3 py-2 text-sm rounded transition-all border-l-2 ${activeSection === 'verdict' ? 'border-brand-accent bg-brand-50 text-brand-900 font-bold' : 'border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+          >
+            Final Verdict
+          </button>
+        </nav>
+      </div>
+      */
+      }
+
+      {/* CTA Box */}
+      <div
+        class="bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden group"
+      >
+        <div class="bg-brand-900 p-4 text-center">
+          <span
+            class="text-emerald-400 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-1"
+          >
+            <ShieldCheck size={12} /> Recommended
+          </span>
+        </div>
+        <div class="p-6">
+          <div class="flex justify-center mb-4">
+            <img
+              src="https://picsum.photos/id/102/80/80"
+              alt="Pepperstone Logo"
+              class="w-20 h-20 rounded-xl object-contain border border-slate-100 shadow-sm"
+            />
+          </div>
+          <h3
+            class="font-serif font-bold text-2xl text-slate-900 text-center mb-1"
+          >
+            Pepperstone
+          </h3>
+          <p class="text-center text-slate-500 text-sm mb-6">
+            Kenya's Premium Execution Broker
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div
+              class="flex justify-between text-sm border-b border-slate-50 pb-2"
+            >
+              <span class="text-slate-500">Spread (EUR/USD)</span>
+              <span class="font-bold text-slate-900"> 0.0 - 1.0 pips </span>
+            </div>
+            <div
+              class="flex justify-between text-sm border-b border-slate-50 pb-2"
+            >
+              <span class="text-slate-500">Execution Speed</span>
+              <span class="font-bold text-emerald-600"> ~65ms (Fastest) </span>
+            </div>
+            <div
+              class="flex justify-between text-sm border-b border-slate-50 pb-2"
+            >
+              <span class="text-slate-500">Regulation</span>
+              <span class="font-bold text-slate-900 flex items-center gap-1">
+                <ShieldCheck
+                  size={14}
+                  className="text-emerald-500"
+                />{' '}
+                CMA
+              </span>
+            </div>
+          </div>
+
+          <a
+            href="#"
+            class="w-full bg-brand-accent hover:bg-emerald-600 text-white text-center font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-900/20 mb-3 group-hover:scale-[1.02] duration-200 flex items-center justify-center gap-2"
+          >
+            Open Account <MousePointerClick size={18} />
+          </a>
+          <a
+            href="/broker/pepperstone-ke"
+            class="block w-full bg-slate-50 hover:bg-slate-100 text-slate-600 font-bold py-3 rounded-xl transition text-center text-sm"
+          >
+            Read Full Review
+          </a>
+
+          <div
+            class="mt-4 flex items-center justify-center gap-2 text-[10px] text-slate-400 bg-slate-50 p-2 rounded"
+          >
+            <AlertTriangle size={10} />
+            74-89% of retail investor accounts lose money.
+          </div>
+        </div>
+      </div>
+
+      {/* Author Mini Bio */}
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex items-center gap-4 mb-4">
+          <img
+            src={authorImg.src}
+            alt={author}
+            class="w-14 h-14 rounded-full border border-slate-100"
+          />
+          <div>
+            <h4 class="font-serif font-bold text-slate-900">Patrick Mahinge</h4>
+            <p
+              class="text-xs text-slate-500 font-bold uppercase tracking-wider"
+            >
+              Editor-in-Chief
+            </p>
+          </div>
+        </div>
+        <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+          With over 12 years in the markets, Patrick is dedicated to dismantling
+          marketing hype and protecting Kenyan capital through data-driven
+          analysis.
+        </p>
+        <a
+          href="/about"
+          class="text-brand-accent text-sm font-bold hover:underline flex items-center gap-1"
+        >
+          View Full Profile <ExternalLink size={12} />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,14 @@ export default {
   theme: {
     extend: {
       colors: {
+        brand: {
+          900: '#0f172a',
+          800: '#1e293b',
+          700: '#334155',
+          accent: '#059669', // Emerald green
+          warning: '#b45309',
+          danger: '#dc2626',
+        },
         primary: {
           400: '#38bdf8',
           500: '#0ea5e9',

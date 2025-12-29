@@ -1,4 +1,5 @@
 ---
+import '~/styles/global.css';
 import { SEO } from 'astro-seo';
 import { site } from '@data/site';
 import { ClientRouter } from 'astro:transitions';
@@ -125,7 +126,6 @@ if (schemaData && !schemaData?.['@id']) {
   lang="en"
   dir="ltr"
   class="!scroll-smooth"
-  
   prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# "
 >
   <head>
@@ -164,9 +164,14 @@ if (schemaData && !schemaData?.['@id']) {
       name="generator"
       content={Astro.generator}
     />
-    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-<script is:inline src="/pagefind/pagefind-ui.js"></script>
-
+    <link
+      href="/pagefind/pagefind-ui.css"
+      rel="stylesheet"
+    />
+    <script
+      is:inline
+      src="/pagefind/pagefind-ui.js"
+    ></script>
 
     <link
       rel="privacy-policy"
@@ -326,7 +331,8 @@ if (schemaData && !schemaData?.['@id']) {
     <Font cssVariable="--font-playfair-display" />
   </head>
 
-  <body data-pagefind-body
+  <body
+    data-pagefind-body
     class="bg-gradient-to-t from-neutral-950 via-accent to-neutral-950 antialiased flex flex-col overflow-x-hidden"
   >
     <div
@@ -335,14 +341,13 @@ if (schemaData && !schemaData?.['@id']) {
     >
     </div>
     <div
-      class="fixed inset-0  bg-gradient-to-t from-neutral-950/50 via-transparent to-neutral-950/50 pointer-events-none"
+      class="fixed inset-0 bg-gradient-to-t from-neutral-950/50 via-transparent to-neutral-950/50 pointer-events-none"
     >
     </div>
     <Navigation />
 
     <main
       id="main-content"
-      
       transition:animate="slide"
       lang="en"
       class="main-main font-sans"
@@ -350,15 +355,12 @@ if (schemaData && !schemaData?.['@id']) {
       <slot />
     </main>
     {
-        pageAuthor && (
-          <div class="author-attribution">
-            <AuthorAttribution
-              author={pageAuthor}
-              
-            />
-          </div>
-        )
-      }
+      pageAuthor && (
+        <div class="author-attribution">
+          <AuthorAttribution author={pageAuthor} />
+        </div>
+      )
+    }
 
     <Footer />
 

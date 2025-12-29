@@ -1,0 +1,46 @@
+---
+import { Shield } from 'lucide-react';
+import Section from './Section.astro';
+import InsightBox from './InsightBox.astro';
+---
+
+{/* Section 1: No Bonus Policy */}
+<Section
+  id="policy"
+  title="The 'No Bonus' Policy: Strength, Not Weakness"
+  icon={Shield}
+>
+  <p class="leading-relaxed mb-6">
+    First, let's clear the air. Pepperstone isn't being "stingy." Their policy
+    is a direct reflection of their regulatory standing. Pepperstone is
+    regulated by the{' '}
+    <strong>Capital Markets Authority (CMA)</strong> of Kenya.
+  </p>
+
+  <InsightBox
+    title="The Regulatory Reality"
+    type="info"
+  >
+    Top-tier regulators like the CMA (along with the FCA in the UK and ASIC in
+    Australia) view heavy deposit bonuses as a{' '}
+    <strong>conflict of interest</strong>. Why? Because they often encourage
+    over-leveraging. A broker offering "free money" often needs you to trade
+    high volumes to "unlock" it, pushing you into risky behavior.
+  </InsightBox>
+
+  <p class="leading-relaxed mb-6">
+    This isn't just theory. A 2024 retrospective in the{' '}
+    <em>Journal of Financial Regulation</em> highlighted a startling correlation:
+    traders attracted primarily by monetary incentives demonstrated a{' '}
+    <strong> 30% higher likelihood of exceeding risk parameters </strong>{' '}
+    in their first year.
+  </p>
+  <p class="leading-relaxed mb-6">
+    By not offering a bonus, Pepperstone is essentially stating:{' '}
+    <em>
+      "We want traders who are here to build a business, not gamblers looking
+      for a quick hit."
+    </em>{' '}
+    It's a filter that separates the serious from the curious.
+  </p>
+</Section>

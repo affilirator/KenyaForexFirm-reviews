@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type JSX } from 'react';
 import escapeHTML from 'escape-html';
 import { cn } from '@/lib/utils';
 import BlockRenderer from '../blocks/BlockRenderer';
@@ -81,7 +81,10 @@ const RichText: React.FC<RichTextProps> = ({ content, className }) => {
 
         case 'paragraph':
           return (
-            <p className="content-p" data-pagefind-ignore="all">
+            <p
+              className="content-p"
+              data-pagefind-ignore="all"
+            >
               {children}
             </p>
           );

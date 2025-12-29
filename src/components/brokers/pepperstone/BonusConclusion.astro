@@ -1,0 +1,60 @@
+---
+import { Award, Zap } from 'lucide-react';
+import Section from './Section.astro';
+const year = 2026;
+---
+
+{/* Conclusion */}
+<Section
+  id="verdict"
+  title="The Final Verdict"
+  icon={Award}
+>
+  <div
+    class="bg-slate-900 text-white p-8 md:p-10 rounded-2xl shadow-2xl relative overflow-hidden"
+  >
+    <div
+      class="absolute top-0 right-0 w-64 h-64 bg-blue-600 opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"
+    >
+    </div>
+
+    <h3 class="text-2xl font-bold mb-4 relative z-10">
+      From a Pro's Perspective
+    </h3>
+    <p class="text-slate-300 leading-relaxed mb-6 relative z-10">
+      In the regulated Kenyan market of {year}, the absence of flashy bonuses is
+      not a bug—it's a feature. It is a hallmark of a legitimate, client-focused
+      ecosystem.
+    </p>
+    <p class="text-slate-300 leading-relaxed mb-8 relative z-10">
+      My conclusion is simple: For the vast majority of beginner and
+      intermediate traders in Kenya aiming for consistency, the alternative
+      value features provided by Pepperstone—
+      <strong> tight spreads, top platforms, and robust CMA regulation </strong>
+      —represent a far more valuable package than any one-time deposit bonus.
+    </p>
+
+    <div
+      class="bg-white/10 p-6 rounded-xl border border-white/20 relative z-10 backdrop-blur-sm"
+    >
+      <div class="flex gap-4">
+        <div class="p-3 bg-blue-600 rounded-lg h-fit">
+          <Zap
+            className="text-white"
+            size={24}
+          />
+        </div>
+        <div>
+          <h4 class="font-bold text-white mb-2">Patrick's Challenge to You</h4>
+          <p class="text-slate-200 text-sm">
+            Stop asking "What bonus will I get?" and start asking{' '}
+            <strong>
+              "Which broker provides the ecosystem for my skill to grow?"
+            </strong>{' '}
+            The answer to the second question is where the real profit lies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>

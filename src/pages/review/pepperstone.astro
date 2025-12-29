@@ -1,0 +1,30 @@
+---
+import BonusSection from '~/components/brokers/pepperstone/BonusSection.astro';
+import LayoutSchema from '~/layouts/LayoutSchema.astro';
+import Main from '~/components/brokers/Layout/Main.astro';
+import { BROKERS as brokers } from '~/constants/constants';
+import { getReviewBySlug } from '~/lib/qs-esm';
+
+const pepperstone = await getReviewBySlug('pepperstone-markets');
+if (pepperstone) {
+  console.log('Found Pepperstone', pepperstone.meta);
+}
+
+const referenceBroker = brokers.find(
+  (broker) => broker.id === 'pepperstone-ke'
+);
+
+if (!referenceBroker) {
+  throw new Error('No broker to reference');
+}
+const year = new Date().getFullYear();
+const title = `Pepperstone Markets Review - Kenya (✅ ${year} Updated)`;
+const description = `Most unbiased expert review of Pepperstone Markets in Kenya`;
+---
+
+<LayoutSchema
+  title={title}
+  description={description}
+>
+  <Main />
+</LayoutSchema>
