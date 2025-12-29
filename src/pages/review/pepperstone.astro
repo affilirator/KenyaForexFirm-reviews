@@ -15,7 +15,7 @@ const referenceBroker = brokers.find(
 );
 
 if (!referenceBroker) {
-  throw new Error('No broker to reference');
+  throw new Error('No broker to reference. Check constants.tsx');
 }
 const year = new Date().getFullYear();
 const title = `Pepperstone Markets Review - Kenya (✅ ${year} Updated)`;
