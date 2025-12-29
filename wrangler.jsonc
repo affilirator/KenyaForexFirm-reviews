@@ -1,12 +1,26 @@
 {
-  "name": "kff-reviews",
-  "compatibility_date": "2025-05-05",
- // "compatibility_date": "2025-01-15",
-  "main": "./dist/_worker.js/index.js",
-  "compatibility_flags": ["nodejs_compat", "nodejs_als"],
-  "assets": {
-    "directory": "./dist",
-    "not_found_handling": "404-page",
-    "binding": "ASSETS"
-  },
+	"name": "kff-reviews",
+	"compatibility_date": "2025-10-05",
+	// "compatibility_date": "2025-01-15",
+	"main": "./dist/_worker.js/index.js",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"nodejs_als",
+		"global_fetch_strictly_public",
+	],
+	"observability": {
+		"enabled": true,
+	},
+	"assets": {
+		"directory": "./dist",
+		"not_found_handling": "404-page",
+		"binding": "ASSETS",
+	},
+	"kv_namespaces": [
+		{
+			"binding": "FXREVIEWS_SESSION",
+			"id": "43c93e38568347efa9ce03ea7d48459e",
+			"remote": true
+		}
+	],
 }

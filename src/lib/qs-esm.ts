@@ -105,7 +105,7 @@ export async function fetchPromotionByslug(slug: string) {
         blog: false,
       },
       where: {
-       // slug: { equals: 'offeredBy.slug' },
+        // slug: { equals: 'offeredBy.slug' },
         category: { equals: 'Overview' },
         'offeredBy.slug': { equals: slug },
       },
@@ -147,7 +147,7 @@ export async function fetchTraderBySlug(slug: string): Promise<ForexTrader> {
       'Slug must contain only lowercase letters, numbers, and hyphens'
     );
 
-  const res = await fetch(
+  const res: any = await fetch(
     `https://fx.mahinge.com/api/forex-traders${queryString}`
   );
   const trader = await res.json();

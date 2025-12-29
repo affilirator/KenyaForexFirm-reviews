@@ -17,6 +17,11 @@ import './src/polyfills/message-channel.ts';
 export default defineConfig({
   site: 'https://fx.kenyaforexfirm.com',
   trailingSlash: 'always',
+  env: {
+    schema: {
+      // ...
+    },
+  },
 
   integrations: [
     tailwind({
@@ -158,6 +163,7 @@ export default defineConfig({
   },
 
   adapter: cloudflare({
+    sessionKVBindingName: 'FXREVIEWS_SESSION',
     platformProxy: {
       enabled: true,
       persist: true,
