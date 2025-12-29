@@ -8,7 +8,9 @@ interface Props {
 }
 
 const { author, showImage = true } = Astro.props;
-const image = author.authorImage?.url || 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/kenyaforexfirm-opengraph.webp';
+const image =
+  author.authorImage?.url ||
+  'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/kenyaforexfirm-opengraph.webp';
 ---
 
 <div class="flex items-center gap-3">
@@ -20,7 +22,10 @@ const image = author.authorImage?.url || 'https://fxmedia.kenyaforexfirm.com/ken
         class="flex-shrink-0"
       >
         <Image
-          src={image || 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/kenyaforexfirm-opengraph.webp'}
+          src={
+            image ||
+            'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/kenyaforexfirm-opengraph.webp'
+          }
           alt={author.name}
           class="w-10 h-10 rounded-full object-cover"
           format="webp"
@@ -34,7 +39,7 @@ const image = author.authorImage?.url || 'https://fxmedia.kenyaforexfirm.com/ken
   }
   <div>
     <div class="text-sm">
-      <span class="text-neutral-400">Written by</span>
+      <span class="text-neutral-100">Written by</span>
       <a
         href={`/authors/${author.slug}/`}
         rel="author"

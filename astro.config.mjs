@@ -16,6 +16,7 @@ import './src/polyfills/message-channel.ts';
 
 export default defineConfig({
   site: 'https://fx.kenyaforexfirm.com',
+  trailingSlash: 'always',
 
   integrations: [
     tailwind({
@@ -25,13 +26,11 @@ export default defineConfig({
     icon(),
     react(),
     sitemap({
-    changefreq: 'weekly',
-    priority: 0.7,
-    lastmod: new Date(),
-  }),
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+    }),
   ],
-
-  trailingSlash: 'always',
 
   build: {
     inlineStylesheets: 'never',
@@ -144,7 +143,7 @@ export default defineConfig({
     define: {
       global: 'globalThis',
     },
-    
+
     build: {
       cssCodeSplit: true,
       rollupOptions: {

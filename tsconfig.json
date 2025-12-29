@@ -8,10 +8,10 @@
         "name": "@astrojs/ts-plugin"
       }
     ],
-    "module": "es6",
+    "module": "esnext",
     "moduleResolution": "bundler",
     "lib": ["DOM", "ES2024"],
-    "target": "es6",
+    "target": "esnext",
     "esModuleInterop": true,
     "allowJs": true,
     "skipLibCheck": true,

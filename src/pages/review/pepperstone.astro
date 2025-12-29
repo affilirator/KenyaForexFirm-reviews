@@ -1,6 +1,6 @@
 ---
 import BonusSection from '~/components/brokers/pepperstone/BonusSection.astro';
-import LayoutSchema from '~/layouts/LayoutSchema.astro';
+import LayoutSchema from '~/layouts/BaseLayout.astro';
 import Main from '~/components/brokers/Layout/Main.astro';
 import { BROKERS as brokers } from '~/constants/constants';
 import { getReviewBySlug } from '~/lib/qs-esm';
@@ -26,5 +26,7 @@ const description = `Most unbiased expert review of Pepperstone Markets in Kenya
   title={title}
   description={description}
 >
-  <Main />
+  <Main>
+    {/* Add more content here. Appears outside the main 2-column layout */}
+  </Main>
 </LayoutSchema>

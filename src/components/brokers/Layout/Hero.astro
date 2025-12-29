@@ -1,13 +1,14 @@
 ---
+import { ArrowLeft, Calendar, BookOpen } from 'lucide-react';
+import bgImg from '~/assets/images/best-forex-brokers-kenyaforexfirm.png';
+import { getImage } from 'astro:assets';
+
 interface Props {
   AUTHOR_: string;
   LAST_UPDATED: string;
 }
-import { ArrowLeft, Calendar, BookOpen } from 'lucide-react';
-const { AUTHOR_, LAST_UPDATED } = Astro.props;
-import bgImg from '~/assets/images/best-forex-brokers-kenyaforexfirm.png';
 
-import { getImage } from 'astro:assets';
+const { AUTHOR_, LAST_UPDATED } = Astro.props;
 const optimizedBackground = await getImage({ src: bgImg, format: 'webp' });
 ---
 

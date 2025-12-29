@@ -1,23 +1,19 @@
 ---
-import '~/styles/global.css';
 import { SEO } from 'astro-seo';
+import { fetchSiteConfig } from '~/lib/qs-esm';
 import { site } from '@data/site';
 import { ClientRouter } from 'astro:transitions';
 import Navigation from '../components/Navigation.astro';
-import * as pagefind from 'pagefind';
+import { Font } from 'astro:assets';
 import Footer from '../components/Footer.astro';
 import AuthorAttribution from '../components/common/AuthorAttribution.astro';
 import { getDefaultAuthor } from '../lib/author-service';
-import '@fontsource/playfair-display/400.css';
-import '@fontsource/playfair-display/500.css';
-import '@fontsource/playfair-display/600.css';
-import '@fontsource/playfair-display/700.css';
-import '@fontsource/source-sans-pro';
 import type { Author } from '../types/author';
 import '../styles/global.css';
 import '../styles/toc.css';
 import { organizationSchema } from '~/data/organizationSchema';
-import { Font } from 'astro:assets';
+
+const site_settings = await fetchSiteConfig();
 
 export interface Props {
   title: string;
@@ -38,17 +34,17 @@ const {
   description,
   pubDate = '2025-07-07',
   modDate = new Date().toISOString(),
-  type = 'article',
-  image = 'https://fxmedia.kenyaforexfirm.com/kenyaforexfirm-api/kenyaforexfirm-opengraph.webp',
+  type = 'website',
+  image = `${site.url}/best-forex-brokers-kenyaforexfirm.png`,
   noindex = false,
+  // schemaData = organizationSchema,
   author,
 } = Astro.props;
 
 let schemaData = Astro.props.schemaData;
-
 const charset = 'UTF-8';
 
-const homeTitle = `Expert Forex Broker Reviews, Analysis & Rankings in Kenya"`;
+const homeTitle = `${site.name} ${site.currentYear} - Expert Forex Broker Analysis & Rankings"`;
 const homeDescription =
   'Comprehensive forex broker reviews and rankings for Kenyan traders. Expert analysis, regulatory information, and unbiased comparisons to help you choose the best forex broker.';
 // Get default author if none is provided
@@ -57,9 +53,9 @@ if (!pageAuthor) {
   pageAuthor = await getDefaultAuthor();
 }
 
-const canonicalURL = `${site.url}${Astro.url.pathname}`;
+const canonicalURL = `${site.url}${Astro.url.pathname}/`;
 
-const schemaTypes = ['CollectionPage', 'WebPage', 'Review', 'AboutPage'];
+const schemaTypes = ['CollectionPage', 'WebPage', 'AboutPage', 'Review'];
 
 if (!schemaData) {
   schemaData = organizationSchema;
@@ -87,52 +83,66 @@ if (schemaData && !schemaData?.['@id']) {
     !schemaData.author ||
     (pageAuthor &&
       `${schemaData.author?.['@id']}` !==
-        `${site.url}/authors/${pageAuthor?.slug}`)
+        `${site.url}/authors/${pageAuthor?.slug}/`)
   ) {
     schemaData.author = {
       '@type': 'Person',
       name: pageAuthor?.name || 'Patrick Mahinge',
-      url: pageAuthor ? `${site.url}/authors/${pageAuthor.slug}` : undefined,
-      '@id': pageAuthor ? `${site.url}/authors/${pageAuthor.slug}` : undefined,
+      url: pageAuthor ? `${site.url}/authors/${pageAuthor.slug}/` : undefined,
+      '@id': pageAuthor ? `${site.url}/authors/${pageAuthor.slug}/` : undefined,
     };
   }
 }
 ---
 
-{
-  /* 
-<script is:inline>
-	const getThemePreference = () => {
-		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-			return localStorage.getItem('theme');
-		}
-		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-	};
-	const isDark = getThemePreference() === 'dark';
-	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
- 
-	if (typeof localStorage !== 'undefined') {
-		const observer = new MutationObserver(() => {
-			const isDark = document.documentElement.classList.contains('dark');
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
-		});
-		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-	}
-</script>
-*/
-}
-
+<!doctype html>
 <html
   lang="en"
   dir="ltr"
   class="!scroll-smooth"
-  prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# "
 >
   <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <meta
+      name="generator"
+      content={Astro.generator}
+    />
+    <link
+      rel="stylesheet"
+      href="/fonts/fonts.css"
+    />
+    <link
+      rel="privacy-policy"
+      href="/privacy/"
+    />
+    <link
+      rel="terms-of-service"
+      href="/terms/"
+    />
+    <link
+      rel="canonical"
+      href={canonicalURL}
+    />
+    <link
+      rel="me"
+      href="/authors/patrick-mahinge/"
+    />
+    <meta
+      name="title"
+      content={homeTitle}
+    />
+    <meta
+      name="description"
+      content={homeDescription}
     />
 
     <link
@@ -154,16 +164,6 @@ if (schemaData && !schemaData?.['@id']) {
       href="https://fonts.gstatic.com"
       crossorigin
     />
-
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/favicon.svg"
-    />
-    <meta
-      name="generator"
-      content={Astro.generator}
-    />
     <link
       href="/pagefind/pagefind-ui.css"
       rel="stylesheet"
@@ -172,32 +172,6 @@ if (schemaData && !schemaData?.['@id']) {
       is:inline
       src="/pagefind/pagefind-ui.js"
     ></script>
-
-    <link
-      rel="privacy-policy"
-      href="/privacy/"
-    />
-    <link
-      rel="terms-of-service"
-      href="/terms/"
-    />
-    <link
-      rel="canonical"
-      href={canonicalURL}
-    />
-
-    <link
-      rel="me"
-      href="/authors/patrick-mahinge/"
-    />
-    <meta
-      name="title"
-      content={homeTitle}
-    />
-    <meta
-      name="description"
-      content={homeDescription}
-    />
     <slot name="opengraph" />
 
     <SEO
@@ -211,7 +185,7 @@ if (schemaData && !schemaData?.['@id']) {
           type === 'article'
             ? {
                 authors: pageAuthor
-                  ? [`${site.url}/authors/${pageAuthor.slug}`]
+                  ? [`${site.url}/authors/${pageAuthor.slug}/`]
                   : undefined,
                 publishedTime: pubDate ? pubDate : undefined,
                 modifiedTime: modDate ? modDate : undefined,
@@ -235,13 +209,7 @@ if (schemaData && !schemaData?.['@id']) {
         meta: [{ name: 'theme-color', content: '#0ea5e9' }],
       }}
     />
-
-    {
-      /*  {schemaData && (
-      <script is:inline type="application/ld+json" set:html={JSON.stringify(schemaData)} />
-    )}
-      */
-    }
+    {/* Add page Schema */}
 
     {
       schemaData && !schemaData?.['@type'].includes('Article') && (
@@ -333,47 +301,41 @@ if (schemaData && !schemaData?.['@id']) {
 
   <body
     data-pagefind-body
-    class="bg-gradient-to-t from-neutral-950 via-accent to-neutral-950 antialiased flex flex-col overflow-x-hidden"
+    transition:animate="slide"
+    class="antialiased flex flex-col bg-gradient-to-tr from-neutral-950 via-slate-900 to-stone-700 text-neutral-100 overflow-x-hidden"
   >
-    <div
-      class="fixed inset-0 bg-cyber-grid opacity-20 pointer-events-none"
-      style="background-size: 50px 50px;"
+    {/* Skip Link for Accessibility */}
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-accent focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
     >
-    </div>
-    <div
-      class="fixed inset-0 bg-gradient-to-t from-neutral-950/50 via-transparent to-neutral-950/50 pointer-events-none"
-    >
-    </div>
+      Skip to main content
+    </a>
+
+    {/* Navigation outside main content container */}
     <Navigation />
 
     <main
       id="main-content"
-      transition:animate="slide"
-      lang="en"
-      class="main-main font-sans"
+      class="flex-grow relative z-10 main-main font-sans"
     >
       <slot />
     </main>
-    {
-      pageAuthor && (
-        <div class="author-attribution">
-          <AuthorAttribution author={pageAuthor} />
-        </div>
-      )
-    }
 
-    <Footer />
-
-    <div class="fixed inset-0 pointer-events-none overflow-hidden">
-      <div
-        class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-primary-500/10 to-accent-500/10 rounded-full blur-xl"
-      >
-      </div>
-      <div
-        class="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-xl"
-      >
-      </div>
-    </div>
+    {/* Set footer outside main content container */}
+    <Footer>
+      {/* Footer has a slot in the top part to allow injection of components */}
+      {
+        pageAuthor && (
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-neutral-800/50">
+            <AuthorAttribution
+              author={pageAuthor}
+              transition:animate="slide"
+            />
+          </div>
+        )
+      }
+    </Footer>
 
     <style>
       ::-webkit-scrollbar {
